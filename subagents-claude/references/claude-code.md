@@ -31,7 +31,7 @@ Model resolution order: env override → per-invocation `model` param → agent-
 | standard | `sonnet` (Sonnet 5) | default workers |
 | frontier | `opus` (Opus 5) / session's top model | hard review, judging; the parent usually already runs here |
 
-Reasoning effort where exposed (`effort` param / `/effort`): `low`–`medium` for mechanical work, `high`+ for verification and judging. **Name model and effort explicitly on every dispatch** — don't let a fleet of explorers silently inherit an expensive parent model.
+Reasoning effort: the Agent tool has **no per-dispatch `effort` parameter** — an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in exactly two places: `effort` frontmatter in a saved agent file (`.claude/agents/*.md`), and the `effort` option on the Workflow tool's `agent()` call. Where it is settable: `low`–`medium` for mechanical work, `high`+ for verification and judging. On a plain dispatch the `model` param is the only lever — **name it explicitly every time**; don't let a fleet of explorers silently inherit an expensive parent model.
 
 ## Cautions
 
@@ -39,4 +39,4 @@ Reasoning effort where exposed (`effort` param / `/effort`): `low`–`medium` fo
 - Explore/Plan agents skip CLAUDE.md — don't assume a subagent knows project conventions; put what matters in the brief.
 - Worktree isolation: the Agent tool supports `isolation: "worktree"` for parallel writers (auto-cleaned when unchanged). Use it instead of hand-rolled `git worktree` when available.
 - Ledger location: use the session scratchpad directory if the environment names one; else a gitignored path.
-- Skill install: `~/.claude/skills/subagents/` (personal) or `.claude/skills/subagents/` (project). To make invocation manual-only, add `disable-model-invocation: true` to SKILL.md frontmatter (Claude-only field; inert elsewhere).
+- Skill install: `~/.claude/skills/subagents/` (personal) or `.claude/skills/subagents/` (project). Invocation is manual-only by default: SKILL.md ships with `disable-model-invocation: true` (a Claude-only field, inert elsewhere), so trigger it with `/subagents`. Delete that line to let the model auto-invoke the skill.

@@ -35,7 +35,7 @@ Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest being worked against>
 Done when: <one falsifiable sentence>
 Return format: the agent report below, ≤1–2k tokens; put bulk output in <scratch path>
-Model / effort: <explicit tier + effort — named on every dispatch>
+Model / effort: <tier named on every dispatch; effort only via a real control — agent-file frontmatter or Workflow `agent()`>
 ```
 
 ## Agent report — required return shape

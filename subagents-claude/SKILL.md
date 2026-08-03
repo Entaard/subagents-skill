@@ -1,7 +1,8 @@
 ---
 name: subagents
-description: Plan and run efficient subagent orchestration for any complicated task — parallel research, multi-part implementation, large migrations, independent review and verification. Use whenever the user says subagents, fan out, parallelize, delegate, orchestrate, multi-agent, or swarm; when a task splits into three or more independent parts; when noisy exploration would flood the main context; or when independent verification is needed. Manual mode (default) proposes an orchestration plan — agent count, parallelism cap, model tiers, reasoning efforts, cost estimate — and waits for explicit approval. Auto mode decides and reports. Deciding not to spawn any subagent is a valid outcome.
+description: Plan and run efficient subagent orchestration for any complicated task — parallel research, multi-part implementation, large migrations, independent review and verification. Use whenever the user says subagents, fan out, parallelize, delegate, orchestrate, multi-agent, or swarm; when a large task splits into several independent parts, each worth a dedicated agent; when noisy exploration would flood the main context; or when independent verification is needed. Manual mode (default) proposes an orchestration plan — agent count, parallelism cap, model tiers, reasoning efforts, cost estimate — and waits for explicit approval. Auto mode decides and reports. Deciding not to spawn any subagent is a valid outcome.
 argument-hint: "[auto|manual|plan] <task>"
+disable-model-invocation: true
 ---
 
 # Subagent orchestration
@@ -121,7 +122,7 @@ Briefing rules:
 
 - The agent starts with **zero context**. Vague briefs are the number-one cause of duplicated and missed work. Name files, name boundaries, name the output shape.
 - **Hand off via artifacts, never via transcript.** Everything you paste into a dispatch — and everything it prints back — stays resident in your context and is re-read every later turn. Point at files; require summaries back.
-- Name the **model tier and reasoning effort explicitly on every dispatch** — never silently inherit. Current model names live in `references/claude-code.md`.
+- Name the **model tier explicitly on every dispatch** — never silently inherit. Set reasoning effort only through a control the harness actually exposes (`references/claude-code.md` lists them); an effort level written into prompt text changes nothing.
 
 | Unit property | Tier | Effort |
 | --- | --- | --- |

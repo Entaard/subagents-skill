@@ -21,15 +21,33 @@ Verified against code.claude.com docs 2026-08. Model names and limits drift — 
 
 The *useful* fan-out is far below the hard cap — keep the skill's default (4) unless the task is a genuinely wide sweep.
 
-## Models and effort (as of 2026-08 — verify with `/model`)
+## Models and effort
 
-Model resolution order: env override → per-invocation `model` param → agent-file frontmatter → inherit from the main conversation.
+Which setting wins, when several are present: env override → per-invocation `model` param → agent-file frontmatter → inherit from the main conversation.
+
+### Resolving a tier to a model — do this at plan time
+
+The core skill reasons in tiers because tiers outlive model releases. A dispatch takes a model name, and the user approving a plan can only audit a name. So every tier has to be resolved to a concrete value before it reaches a plan row or a call.
+
+Resolve from the live session, not from memory. Take the first source that answers:
+
+1. **The `model` parameter on the Agent tool schema you currently have loaded.** Authoritative: its accepted values are exactly what a dispatch can pass, and they change when the available models change.
+2. **The model list in your environment or system context**, or what `/model` shows the user.
+3. **The snapshot table below** — a cached answer, and the first thing to go stale.
+
+Then map by role rather than by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strongest reasoning model → frontier. Names change every few months; those three roles have been stable, which is why the tier vocabulary is worth keeping.
+
+Two rules for staying honest. If the harness offers a model the table does not list, the harness wins. Place it by role. If you cannot tell which role a model fills, do not guess inside a plan the user is about to approve. Name it, and say plainly what you are unsure about.
+
+Snapshot as of 2026-08 (verify against source 1 before relying on it):
 
 | Tier (core skill) | Model param | Notes |
 | --- | --- | --- |
 | fast | `haiku` (Haiku 4.5) | exploration, mechanical work, high volume |
 | standard | `sonnet` (Sonnet 5) | default workers |
 | frontier | `opus` (Opus 5) / session's top model | hard review, judging; the parent usually already runs here |
+
+The parent's own model belongs in the plan header. The user is reading a cost estimate, and the model doing synthesis and triage is part of it.
 
 Reasoning effort: the Agent tool has **no per-dispatch `effort` parameter** — an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in exactly two places: `effort` frontmatter in a saved agent file (`.claude/agents/*.md`), and the `effort` option on the Workflow tool's `agent()` call. Where it is settable: `low`–`medium` for mechanical work, `high`+ for verification and judging. On a plain dispatch the `model` param is the only lever — **name it explicitly every time**; don't let a fleet of explorers silently inherit an expensive parent model.
 

@@ -35,13 +35,33 @@ Precedence for model/effort: the custom agent file's own values win; otherwise e
 
 **Sandbox/approval inheritance:** subagents inherit the parent turn's **live** sandbox and approval settings, and live overrides (`/permissions`, `--yolo`) take precedence over a custom agent file's static `sandbox_mode`. A "read-only reviewer" is only as read-only as the parent turn — state the no-source-edit rule in the brief regardless.
 
-## Models and effort (as of 2026-08 — verify against the Models doc)
+## Models and effort
+
+### Resolving a tier to a model — do this at plan time
+
+The core skill reasons in tiers because tiers outlive model releases. A spawn names a model, and the user approving a plan can only audit a name. So resolve every tier to a concrete model before it reaches a plan row or a dispatch.
+
+This is sharper in Codex than in a tool-call harness. You delegate in natural language, so a dispatch that names no model quietly takes `default_subagent_model` from config. Naming the tier only is not a small imprecision. It hides which model actually runs.
+
+Resolve from the live session, not from memory. Take the first source that answers:
+
+1. **`/model` in this session, or the current Models doc.** Authoritative for what exists now.
+2. **`default_subagent_model` and `default_subagent_reasoning_effort` in `~/.codex/config.toml` or the project `.codex/`.** Read these even when you plan to override them: they are what an unnamed dispatch would get, so they tell you what you are actually changing.
+3. **The snapshot table below** — a cached answer, and the first thing to go stale.
+
+Then map by role rather than by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strongest reasoning model → frontier. Names change every few months; those three roles have been stable, which is why the tier vocabulary is worth keeping.
+
+Two rules for staying honest. If the Models doc lists a model the table does not, the doc wins. Place it by role. If you cannot tell which role a model fills, do not guess inside a plan the user is about to approve. Name it, and say plainly what you are unsure about.
+
+Snapshot as of 2026-08 (verify against source 1 before relying on it):
 
 | Tier (core skill) | Model | Notes |
 | --- | --- | --- |
 | fast | `gpt-5.6-luna` (or `gpt-5.3-codex-spark` for near-instant iteration) | narrow, high-volume, latency-sensitive |
 | standard | `gpt-5.6-terra` | parallel workers returning distilled results |
 | frontier | `gpt-5.6` / `gpt-5.6-sol` | demanding reasoning, correctness/security review |
+
+The parent's own model and effort belong in the plan header. The user is reading a cost estimate, and the model doing synthesis and triage is part of it.
 
 Reasoning efforts: `low`, `medium` (default), `high`, `xhigh`, `max`, `ultra`. Note **`ultra` enables proactive delegation** — Codex may spawn subagents on its own initiative. If this skill is in manual mode, don't run the parent at `ultra`, or its proactive delegation will bypass your plan gate; `high`/`max` keeps delegation on your terms.
 

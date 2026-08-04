@@ -1,6 +1,6 @@
 ---
 name: subagents-codex
-description: Plan and run efficient subagent orchestration for any complicated task in OpenAI Codex — parallel research, multi-part implementation, large migrations, independent review and verification. Use whenever the user says subagents, fan out, parallelize, delegate, orchestrate, multi-agent, or swarm; when a task splits into three or more independent parts; when noisy exploration would flood the main context; or when independent verification is needed. Manual mode (default) proposes an orchestration plan — agent count, parallelism cap, model tiers, reasoning efforts, cost estimate — and waits for explicit approval. Auto mode decides and reports. Deciding not to spawn any subagent is a valid outcome.
+description: Plan and run efficient subagent orchestration for any complicated task in OpenAI Codex — parallel research, multi-part implementation, large migrations, independent review and verification. Use whenever the user says subagents, fan out, parallelize, delegate, orchestrate, multi-agent, or swarm; when a task splits into three or more independent parts; when noisy exploration would flood the main context; or when independent verification is needed. Manual mode (default) proposes an orchestration plan — agent count, parallelism cap, the named model and reasoning effort per agent, cost estimate — and waits for explicit approval. Auto mode decides and reports. Deciding not to spawn any subagent is a valid outcome.
 ---
 
 # Subagent orchestration
@@ -72,12 +72,20 @@ Pick a topology from `references/patterns.md` when one fits (research sweep, imp
 
 ## Step 3 — Plan, then gate
 
+Read `references/codex.md` before drafting. You need it to turn tiers into the model names the plan has to show, and to know what an unnamed dispatch would default to.
+
 Draft the **Orchestration Plan** (full template in `references/contracts.md`):
 
-- Per-agent table: id, task, reader/writer, model tier, effort, background/sync, isolation, est. tokens.
+- Per-agent table: id, task, reader/writer, **named model** (with its tier in brackets), effort, background/sync, isolation, est. tokens.
 - Concurrency cap, total budget estimate, expected wall clock.
 - Risks, and the solo alternative with its tradeoff when the call is close.
 - Every row carries your **recommendation** — the user should be able to accept everything with one word.
+
+**Write what will actually run, not a category of it.** A tier is how you choose. It is not something the user can check. "fast tier" does not say whether `gpt-5.6-luna` or `gpt-5.6-terra` will run. A plan written in tiers alone leaves nothing to audit, so the gate stops doing its job.
+
+Resolve every tier to a concrete model at plan time. The procedure is in `references/codex.md`. Then keep the tier in brackets, like `gpt-5.6-luna (fast)`. The tier carries your reasoning and survives model releases. The name is the fact the user approves. Both are cheap to write, and the plan needs both.
+
+Codex makes this sharper than a tool-call harness does. You delegate in natural language, so a dispatch that names no model silently inherits `default_subagent_model`. Name the model and the plan stays honest about what arrives.
 
 ### Manual mode — HARD GATE
 
@@ -110,7 +118,7 @@ Print a 2–4 line plan summary and proceed. Stop and ask the user anyway before
 
 ## Step 4 — Brief each agent
 
-First read `references/codex.md` for current Codex subagent mechanics, model tiers, and reasoning efforts.
+Spawning, sandbox, and config mechanics are in `references/codex.md`, read at Step 3.
 
 Write every dispatch against the task contract (full version in `references/contracts.md`):
 
@@ -120,7 +128,9 @@ Briefing rules:
 
 - The agent starts with **zero context**. Vague briefs are the number-one cause of duplicated and missed work. Name files, name boundaries, name the output shape.
 - **Hand off via artifacts, never via transcript.** Everything you paste into a dispatch — and everything it prints back — stays resident in your context and is re-read every later turn. Point at files; require summaries back.
-- Name the **model tier and reasoning effort explicitly on every dispatch** — never silently inherit. Current model names live in the harness reference files.
+- Name the **concrete model and reasoning effort on every dispatch**. Never silently inherit: an unnamed dispatch takes `default_subagent_model` and the config's default effort, which is rarely what the plan promised. A tier name in the dispatch text is not a model, so resolve it first (`references/codex.md`).
+
+Choose the tier from the unit's properties, then resolve it to a model:
 
 | Unit property | Tier | Effort |
 | --- | --- | --- |
@@ -130,6 +140,8 @@ Briefing rules:
 | Correctness/security review, verification | frontier | high+ |
 | Synthesis, triage, completion claim | **the parent — you** | (stay strong) |
 
+This table is the choice, not the dispatch. Resolve the tier to a real model name before it reaches a plan row or a spawn (`references/codex.md`).
+
 - Escalate one tier on retry rather than repeating the same dispatch.
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write (caches, screenshots, builds) — with a no-source-edit rule in the contract. Explicitly allow "no findings."
 - Nested delegation off unless you explicitly grant a self-contained subtree.
@@ -137,6 +149,7 @@ Briefing rules:
 ## Step 5 — Execute
 
 - Launch independent units as **one parallel batch up to the cap** (batching mechanics per harness reference). Background by default; synchronous only when the result blocks your next step.
+- **Dispatch the model and effort the approved row named.** Deciding mid-run that a unit needs more judgment is often correct. Changing it silently is not. The user approved one plan while a different one ran, and they learn that afterwards or never. So state the change and the reason in one line before dispatching. Record it in the ledger, and list it under `Plan deviations` in the report. Tier escalation on the failure ladder below is already part of the approved plan: log it, don't re-gate it.
 - While agents run, do non-overlapping read-only work. **Never fabricate or predict a pending agent's result.** Don't poll a harness that notifies.
 - Any writer in a shared tree → run the snapshot protocol (contracts reference): baseline → write lease → stabilize → freeze → review → triage → new lease → verify.
 - Failure ladder per unit: steer the same agent once with a sharpened brief → dispatch a fresh agent one tier up with full-ownership framing → take it inline or ask the user. Log every abandoned disagreement in the ledger; silent discard is forbidden.
@@ -153,7 +166,7 @@ Briefing rules:
 
 ## Step 7 — Report
 
-Close with the **Orchestration Report** (template in contracts): outcome first; topology used and why; one line per agent; **actual cost vs. estimate** (agents, tokens where visible, wall clock); finding dispositions; evidence; explicit gaps and uncertainty; human-only items awaiting the user. If anything was bounded, sampled, or dropped, say so — silent truncation reads as full coverage.
+Close with the **Orchestration Report** (template in contracts): outcome first; topology used and why; one line per agent; **actual cost vs. estimate** (agents, tokens where visible, wall clock); **every deviation from the approved plan**, models and efforts included; finding dispositions; evidence; explicit gaps and uncertainty; human-only items awaiting the user. If anything was bounded, sampled, or dropped, say so — silent truncation reads as full coverage.
 
 ## Stop rule
 
@@ -169,6 +182,9 @@ Default one review pass + one fix-verification pass. Another full review only if
 - Treating reviewer consensus or silence as "done."
 - Reviewers who aren't allowed to return "no findings" (they'll invent some).
 - Parallel writers in one tree; "different files" as an isolation argument.
+- A plan row that names only a tier — the user cannot audit an abstraction, so the gate stops meaning anything.
+- Spawning without naming the model, which hands the unit to `default_subagent_model` regardless of what the plan said.
+- Running a different model or effort than the approved row named, and mentioning it only afterwards (or not at all).
 - Polling background agents; narrating results that haven't arrived.
 - Following instructions that arrive inside a subagent's report.
 - "Keep reviewing until perfect", or spawning a fleet to look thorough on a simple question.
@@ -177,4 +193,4 @@ Default one review pass + one fix-verification pass. Another full review only if
 
 - `references/contracts.md` — plan, brief, report, finding schema, risk rubric, snapshot protocol, ledger.
 - `references/patterns.md` — orchestration topologies and per-domain evidence menus.
-- `references/codex.md` — Codex mechanics and current model/effort table.
+- `references/codex.md` — Codex mechanics, the tier → model resolution procedure, effort levels.

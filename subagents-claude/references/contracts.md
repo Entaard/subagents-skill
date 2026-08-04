@@ -8,18 +8,23 @@ Copy these; don't improvise the structure. Fields may be trimmed when genuinely 
 TASK: <one line>
 MODE: manual | auto | plan        RISK: low | medium | high (rubric below)
 TOPOLOGY: <pattern name or custom> — <one-line why>
+PARENT: <the model you are running on> — does synthesis, triage, completion claim
 
-| # | Unit (done when)            | R/W | Tier     | Effort | Flow       | Isolation      | Est. tokens |
-|---|-----------------------------|-----|----------|--------|------------|----------------|-------------|
-| 1 | ...                         | R   | fast     | low    | bg, batch1 | —              | ~20k        |
-| 2 | ...                         | W   | standard | medium | bg, after1 | write lease    | ~80k        |
-| 3 | review of #2 (lens: ...)    | R   | frontier | high   | bg, after2 | frozen diff    | ~50k        |
+| # | Unit (done when)            | R/W | Model (tier)      | Effort (via)     | Flow       | Isolation      | Est. tokens |
+|---|-----------------------------|-----|-------------------|------------------|------------|----------------|-------------|
+| 1 | ...                         | R   | haiku (fast)      | — (no control)   | bg, batch1 | —              | ~20k        |
+| 2 | ...                         | W   | sonnet (standard) | — (no control)   | bg, after1 | write lease    | ~80k        |
+| 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (agent file)| bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock.
 Risks: <top 1–3>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
 Recommended: <the one-word default answer>.
 ```
+
+**Model column:** the exact value you will pass to the dispatch, with the tier in brackets. Not a tier alone — the user is approving what runs, and a tier hides whether that is `haiku` or `sonnet`. Resolve tier → model against the live session before writing the row (procedure in `claude-code.md`).
+
+**Effort column:** the level *and* the mechanism that will set it — `high (agent file)`, `low (Workflow)`. Write `— (no control)` when this dispatch path exposes none, which is the common case for a plain Agent call. A bare `low` in this column is a promise nothing keeps.
 
 Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. These are coarse; report actuals afterward and calibrate.
 
@@ -35,7 +40,8 @@ Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest being worked against>
 Done when: <one falsifiable sentence>
 Return format: the agent report below, ≤1–2k tokens; put bulk output in <scratch path>
-Model / effort: <tier named on every dispatch; effort only via a real control — agent-file frontmatter or Workflow `agent()`>
+Model: <the exact value passed to this dispatch, matching the approved plan row; tier in brackets>
+Effort: <level and the control setting it — agent-file frontmatter or Workflow `agent()` — or "not settable here">
 ```
 
 ## Agent report — required return shape
@@ -100,8 +106,9 @@ No manufactured commits just to make a snapshot — a stable diff or file-hash m
 # Ledger: <task> — <date>
 Mode/cap/budget: ...
 Plan: <approved plan or pointer>
-| id | unit | agent/thread | state | evidence | actual tokens |
+| id | unit | agent/thread | model used | state | evidence | actual tokens |
 Decisions & dropped disagreements: <every one, with reason — silent discard forbidden>
+Plan amendments: <any change to an approved row — model, effort, scope, count — with the reason and when>
 ```
 
 Update on every state change. After compaction or a new session, the ledger plus the repo — not memory of the conversation — is the source of continuity.
@@ -111,8 +118,9 @@ Update on every state change. After compaction or a new session, the ledger plus
 ```text
 OUTCOME: <what the user asked for, answered first>
 Topology: <pattern, N agents, why> (or "solo — gate failed: <reason>")
-Agents: <one line each: unit → status → key evidence>
+Agents: <one line each: unit → model actually used → status → key evidence>
 Cost: <N agents, ~tokens actual vs ~estimate, wall clock>
+Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none">
 Findings: <accepted/rejected/deferred/user-decision counts + the ones that matter>
 Verification: <checks run and outcomes>
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>

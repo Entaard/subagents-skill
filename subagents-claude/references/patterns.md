@@ -49,7 +49,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** debugging or analysis where anchoring is the enemy — the first plausible theory tends to win regardless of truth.
 **Flow:** one agent per hypothesis, each briefed to prove its own *and actively disprove the others'* from evidence. Parent adjudicates on evidence quality.
-**Rules:** hierarchical subagents approximate this; if the harness offers true peer-to-peer agent teams (see harness reference), that's the native fit — at meaningfully higher token cost.
+**Rules:** hierarchical subagents approximate this. True peer-to-peer agent teams are the native fit, at meaningfully higher token cost — but they are an env-var opt-in set outside a running session, so that route is a user decision, not one you can take mid-run (see harness reference).
 
 ## 9. Completeness critic (final pass)
 
@@ -65,7 +65,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **Software (default):** compile/lint/typecheck; focused then full tests; a runnable reproduction per bug fix; regression test per accepted finding; perf measurement where a budget exists; diff-scope check.
 
-**Every domain, before work starts:** mark each acceptance criterion **machine-verifiable / agent-observable-but-subjective / human-only**. A unit can be technically complete while explicitly awaiting a human judgment — report that as `Awaiting human`, and never let a reviewer's silence stand in for it. Domain menus beyond the ones below (game development, hardware, ML training) belong in a project-level reference; this skill stays generic.
+**Every domain, before work starts:** mark each acceptance criterion **machine-verifiable / agent-observable-but-subjective / human-only**. A unit can be technically complete while explicitly awaiting a human judgment — report that as `Awaiting human`, and never let a reviewer's silence stand in for it. Domain menus beyond these belong in a project-level reference.
 
 **Research / writing:** every load-bearing claim carries a source fetched this run (marked fetched vs. snippet); conflicting sources surfaced, not averaged; recency checked against today's date; a completeness critic pass before delivery.
 

@@ -17,13 +17,26 @@ rsync -av --delete --exclude='calibration.md' "$src" "$dest"
 if [ ! -f "${dest}calibration.md" ]; then
   cp "${src}calibration.md" "${dest}calibration.md"
   echo "Seeded calibration log     -> ${dest}calibration.md"
+else
+  # The rows in an existing calibration.md are user data, so we leave the file alone. But the text
+  # ABOVE the table is skill-authored guidance, and that does change between versions. Without this
+  # notice, a guidance change would never reach anyone who already installed. Reconciling is the
+  # user's call: only they can tell a seed row from one of their own.
+  header_src="$(sed -n '1,/^| date |/p' "${src}calibration.md")"
+  header_dest="$(sed -n '1,/^| date |/p' "${dest}calibration.md")"
+  if [ "$header_src" != "$header_dest" ]; then
+    echo
+    echo "NOTE: calibration.md guidance changed in this version. Your copy was left untouched,"
+    echo "      because it holds your accumulated rows. To see what moved above the table:"
+    echo "        diff ${src}calibration.md ${dest}calibration.md"
+  fi
 fi
 
 # Agent files have to live in ~/.claude/agents/; Claude Code does not discover them inside a skill
 # directory. No --delete here — other agents in that directory are not this script's to remove.
 #
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
-# any project, based on their `description` field. Both descriptions are written to say they are
+# any project, based on their `description` field. All three descriptions are written to say they are
 # dispatched by name from an approved orchestration plan, and to send ordinary lookups to the
 # built-in Explore agent instead, so they should not capture routine work. Delete them from
 # ~/.claude/agents/ if you would rather they not exist outside this skill.
@@ -32,8 +45,8 @@ agents_dest="$HOME/.claude/agents/"
 
 mkdir -p "$agents_dest"
 
-# 'explorer' and 'verifier' are generic enough to collide with an agent you already wrote.
-# Back up anything we are about to replace rather than overwriting it silently.
+# 'explorer', 'verifier' and 'web-researcher' are generic enough to collide with an agent you
+# already wrote. Back up anything we are about to replace rather than overwriting it silently.
 for f in "$agents_src"*.md; do
   name="$(basename "$f")"
   existing="$agents_dest$name"
@@ -48,3 +61,21 @@ rsync -av "$agents_src" "$agents_dest"
 echo
 echo "Installed subagents skill  -> $dest"
 echo "Installed subagent agents  -> $agents_dest"
+echo
+cat <<'TIP'
+Optional, for long orchestration runs:
+
+  The model cannot see context usage or trigger /compact — both are yours. To compact earlier,
+  set CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>.
+
+  To re-anchor a run after a compaction, add a hook in ~/.claude/settings.json that echoes the
+  ledger path back into the session:
+
+    "hooks": {
+      "SessionStart": [
+        { "matcher": "compact",
+          "hooks": [ { "type": "command",
+                       "command": "echo 'Orchestration ledger: check the session scratchpad for subagents-ledger.md'" } ] }
+      ]
+    }
+TIP

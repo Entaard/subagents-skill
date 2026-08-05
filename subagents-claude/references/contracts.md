@@ -22,11 +22,11 @@ Solo alternative: <what one strong agent inline would cost/miss — include when
 Recommended: <the one-word default answer>.
 ```
 
-**Model column:** the exact value you will pass to the dispatch, with the tier in brackets. Not a tier alone — the user is approving what runs, and a tier hides whether that is `haiku` or `sonnet`. Resolve tier → model against the live session before writing the row (procedure in `claude-code.md`).
+**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`).
 
-**Effort column:** the level *and* the mechanism that will set it. Dispatching by agent type gets you a real one — `low (explorer)`, `high (verifier)` — because effort is frontmatter in those files. Write `— (no control)` for a plain Agent call, which exposes no effort parameter. A bare `low` in this column is a promise nothing keeps.
+**Effort column:** the level *and* the mechanism setting it. A saved-agent dispatch gets a real one — `low (explorer)`, `high (verifier)`, `medium (web-researcher)` — because effort is frontmatter there. Write `— (no control)` for a plain Agent call. A bare `low` is a promise nothing keeps.
 
-Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. **These bands are priors, and known to run low — check `../calibration.md` first.** Anything that fetches primary sources from the web, or reads a large corpus before reasoning over it, has run 2–5× the band on real tasks. Where a calibration row covers the task class, quote its actuals in the plan instead of the band, and say which row you used. Then append this run's actuals at Step 7 — including the ones that landed, so the file records hits as well as misses.
+Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
 
 ## Task brief (Step 4) — every dispatch
 
@@ -44,7 +44,10 @@ Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest being worked against>
 Done when: <one falsifiable sentence>
 Return format: the agent report below, ≤1–2k tokens; put bulk output in <scratch path>
-Model: <the exact value passed to this dispatch, matching the approved plan row; tier in brackets>
+               (omit the scratch path for a unit that cannot write — `explorer` and
+               `web-researcher` distill instead; a scratch path in their brief is a briefing error)
+Model: <the exact value passed to this dispatch, matching the approved plan row; tier in brackets.
+        On a saved-agent dispatch, its frontmatter model is that value unless you deliberately override>
 Effort: <level and the control setting it — agent-file frontmatter or Workflow `agent()` — or "not settable here">
 ```
 
@@ -104,6 +107,8 @@ Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; s
 
 No manufactured commits just to make a snapshot — a stable diff or file-hash manifest is enough. Non-git projects: record the task-owned file list with before/after hashes.
 
+Two lease cases the seven steps don't cover. If the parent takes a writer unit inline, the lease **moves to the parent** — it does not lapse, and no other writer starts. If the run pauses to ask the user, the lease **freezes** where it is. Log either in the ledger, because a lease whose holder is unrecorded is the same as no lease.
+
 ## Ledger (scratch file, e.g. `<scratch>/subagents-ledger.md`)
 
 ```text
@@ -123,7 +128,8 @@ Update on every state change. After compaction or a new session, the ledger plus
 OUTCOME: <what the user asked for, answered first>
 Topology: <pattern, N agents, why> (or "solo — gate failed: <reason>")
 Agents: <one line each: unit → model actually used → status → key evidence>
-Cost: <N agents, ~tokens actual vs ~estimate, wall clock>
+Cost: <N agents, ~tokens actual vs ~estimate, wall clock — say so if no token counts were visible,
+       in which case the agent-count and wall-clock rails were the ones in force>
 Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none">
 Findings: <accepted/rejected/deferred/user-decision counts + the ones that matter>
 Verification: <checks run and outcomes>
@@ -134,4 +140,4 @@ Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective/product checkpoints, if any>
 ```
 
-Then append one row to `../calibration.md` — the run's actuals, whether or not the estimate held.
+Then append one row to `../calibration.md` — the run's actuals, whether or not the estimate held, plus the lesson a future run needs in the note column: a negative coordination verdict, a failure-ladder stall and what unstuck it, or a gate call you would reverse.

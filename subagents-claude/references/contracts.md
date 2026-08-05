@@ -12,9 +12,9 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 
 | # | Unit (done when)            | R/W | Model (tier)      | Effort (via)     | Flow       | Isolation      | Est. tokens |
 |---|-----------------------------|-----|-------------------|------------------|------------|----------------|-------------|
-| 1 | ...                         | R   | haiku (fast)      | — (no control)   | bg, batch1 | —              | ~20k        |
+| 1 | ...                         | R   | haiku (fast)      | low (explorer)   | bg, batch1 | —              | ~20k        |
 | 2 | ...                         | W   | sonnet (standard) | — (no control)   | bg, after1 | write lease    | ~80k        |
-| 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (agent file)| bg, after2 | frozen diff    | ~50k        |
+| 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)  | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock.
 Risks: <top 1–3>.
@@ -24,9 +24,9 @@ Recommended: <the one-word default answer>.
 
 **Model column:** the exact value you will pass to the dispatch, with the tier in brackets. Not a tier alone — the user is approving what runs, and a tier hides whether that is `haiku` or `sonnet`. Resolve tier → model against the live session before writing the row (procedure in `claude-code.md`).
 
-**Effort column:** the level *and* the mechanism that will set it — `high (agent file)`, `low (Workflow)`. Write `— (no control)` when this dispatch path exposes none, which is the common case for a plain Agent call. A bare `low` in this column is a promise nothing keeps.
+**Effort column:** the level *and* the mechanism that will set it. Dispatching by agent type gets you a real one — `low (explorer)`, `high (verifier)` — because effort is frontmatter in those files. Write `— (no control)` for a plain Agent call, which exposes no effort parameter. A bare `low` in this column is a promise nothing keeps.
 
-Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. These are coarse; report actuals afterward and calibrate.
+Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. **These bands are priors, and known to run low — check `../calibration.md` first.** Anything that fetches primary sources from the web, or reads a large corpus before reasoning over it, has run 2–5× the band on real tasks. Where a calibration row covers the task class, quote its actuals in the plan instead of the band, and say which row you used. Then append this run's actuals at Step 7 — including the ones that landed, so the file records hits as well as misses.
 
 ## Task brief (Step 4) — every dispatch
 
@@ -36,6 +36,10 @@ Objective: <one sentence>
 Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank; no transcript>
 Scope and relevant files: <explicit>
 Allowed writes: <none | exact paths | worktree path>
+Allowed tools: <the tool scope this objective needs — e.g. "read + search only, no network, no shell"
+               | "repo tools + Bash for the test command only" | "inherit". Reviewers and explorers:
+               deny network and shell unless the objective names a use for them. Read-only writes plus
+               open network access is not read-only.>
 Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest being worked against>
 Done when: <one falsifiable sentence>
@@ -123,6 +127,11 @@ Cost: <N agents, ~tokens actual vs ~estimate, wall clock>
 Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none">
 Findings: <accepted/rejected/deferred/user-decision counts + the ones that matter>
 Verification: <checks run and outcomes>
+Coordination check: <what depended on the agents being independent — a disagreement, a refutation, a
+                     cross-angle finding — or "nothing; one agent at this budget would likely have
+                     matched it". Answer honestly; "the fan-out bought nothing" is a real result.>
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective/product checkpoints, if any>
 ```
+
+Then append one row to `../calibration.md` — the run's actuals, whether or not the estimate held.

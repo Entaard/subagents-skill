@@ -31,6 +31,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 **When:** finding *all* of something — bugs, dead code, inconsistencies — where a fixed agent count under-covers the tail.
 **Flow:** rounds of small finder batches with distinct angles; dedupe new findings against **everything seen** (not just confirmed — else rejected findings resurface forever); stop after 2 consecutive dry rounds or at budget.
 **Rules:** budget rail applies; report says "dry after N rounds," never "found everything."
+**Not governed by the stop rule's round bound.** That bound covers re-reviewing one artifact. This is discovery over an unknown-size space, and it terminates on dry rounds — a fixed count here is just an undercount of the tail.
 
 ## 6. Adversarial verification
 
@@ -64,7 +65,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **Software (default):** compile/lint/typecheck; focused then full tests; a runnable reproduction per bug fix; regression test per accepted finding; perf measurement where a budget exists; diff-scope check.
 
-**Game development:** a playable scene or checkpoint per increment; expected player-visible behavior stated up front; frame-time/memory budget where relevant; screenshots or captures for visual work; input and edge-case checks; debug overlays for hard-to-observe state. Mark each criterion **machine-verifiable / agent-observable-but-subjective / human-only**. Agents may prepare playtest checklists and captures; *game feel, pacing, fun are human-only* — a phase can be technically complete while explicitly awaiting a human playtest. (Engine-specific review lenses — e.g. Godot lifecycle/signals/resources — belong in a separate project-level reference; keep this skill generic.)
+**Every domain, before work starts:** mark each acceptance criterion **machine-verifiable / agent-observable-but-subjective / human-only**. A unit can be technically complete while explicitly awaiting a human judgment — report that as `Awaiting human`, and never let a reviewer's silence stand in for it. Domain menus beyond the ones below (game development, hardware, ML training) belong in a project-level reference; this skill stays generic.
 
 **Research / writing:** every load-bearing claim carries a source fetched this run (marked fetched vs. snippet); conflicting sources surfaced, not averaged; recency checked against today's date; a completeness critic pass before delivery.
 

@@ -61,4 +61,5 @@ Uncertainty: <what you could not confirm from a source, and what would settle it
 
 Budget from the skill's `calibration.md`, not from the exploration band: fetch-heavy research has run 70–120k
 tokens per agent on real tasks. If this unit must leave notes in a scratch file, it cannot — use a
-plain dispatch for that unit and accept the loss of the effort control.
+plain dispatch for that unit. Hand-batched, that costs you the effort control; under the Workflow
+backend it does not, since `agent()` sets effort on any row.

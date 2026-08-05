@@ -88,7 +88,12 @@ Draft the **Orchestration Plan** (full template in `references/contracts.md`):
 
 **Write what will actually run, not a category of it.** A tier is how you choose; the user can only audit a name. Resolve every tier to a concrete model at plan time (procedure in `references/claude-code.md`), then keep the tier in brackets: `haiku (fast)`. Effort follows the same rule — state the control that will set it, and write `—` where this dispatch path has none. A number that nothing applies is worse than a blank.
 
-**Optional backend for pipeline-shaped work.** For a uniform transform over many known items — a migration, a sweep over a discovered work-list — a scripted runner where the harness offers one (`Workflow`: `pipeline()`, `parallel()`, a real budget, resumable runs) buys a spend rail and a checkpointer this skill otherwise approximates in prose. Name it in the plan as the backend. **Not the default:** it needs the user's explicit opt-in, a running script can't be steered (costing the failure ladder its cheapest rung), and only you can drive it — subagents never get the tool.
+**Choose the execution backend, and put it in the plan.** Two ways to run an approved plan:
+
+- **Hand-batched** (default) — one `Agent` call per row, batched per wave. Keeps every mid-run lever: steering a running agent, triaging a report as it lands, asking the user, taking a unit inline.
+- **Via `Workflow`** — the approved rows become a script the harness executes (translation in `references/claude-code.md`). Buys live per-agent token display, resumable runs, and the one that matters most here: `agent({effort})` makes the Effort column real on **every** row instead of `— (no control)` on all but the three saved agents. It buys a *hard* spend rail only if the user has set a token target — without one `budget.remaining()` is `Infinity` and the rail stays prose, same as hand-batched; say which case you are in rather than selling the rail unconditionally. Costs the entire steering layer — no mid-run user input, no `SendMessage` steering, no mid-run triage. A running script cannot be redirected; recovery is edit-and-resume, which is a respawn, not a steer.
+
+Offer the Workflow backend only when the harness actually exposes the tool **and** the shape fits — a uniform transform over many known items, or roughly ≥8 units — where keeping N reports out of your context outweighs the ability to intervene. Below that the savings are small (reports are capped at 1–2k each) and intervention is worth more. Either way it needs the user's explicit opt-in, and only you can drive it: subagents never get the tool. No `Workflow` tool in this session → there is no backend choice to offer; say so once and plan hand-batched.
 
 ### Manual mode — HARD GATE
 
@@ -103,6 +108,18 @@ Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min.
 3. solo      — no subagents; I do it inline
 4. plan-only — save the plan, run nothing
 ```
+
+When the backend is a real choice — the tool exists, and the work is pipeline-shaped or roughly ≥8 units — it belongs *in* the forced choice, not in prose the user has already scrolled past. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
+
+```
+Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-only" to save it and run nothing.
+1. go — via Workflow  — scripted; real effort on every row, no mid-run steering
+2. go — hand-batched  — one Agent call per row; every mid-run lever kept
+3. adjust             — change cap / models / efforts / budget / topology / backend
+4. solo               — no subagents; I do it inline
+```
+
+Workflow leads here because reaching this block *is* the finding that the shape fits — hand-batched is the default across all plans, not the recommendation within this one. Say which you recommend and why in the plan's `Recommended:` line, since "go" alone no longer names a single option.
 
 - On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`.
 - Do not treat an unrelated next message as approval; if the reply doesn't address the plan, ask again.
@@ -120,13 +137,15 @@ Print a 2–4 line plan summary and proceed. Stop and ask the user anyway before
 - ambiguity that changes the decomposition (don't guess the user's intent at fan-out scale);
 - delegating work likely to hit permission prompts in an unattended run.
 
+Every rail above assumes you can interrupt. Under the `Workflow` backend you cannot — a running script takes no user input — so in auto mode either plan hand-batched, or size the run so no rail is expected to fire and say which in the launch note.
+
 ## Step 4 — Brief each agent
 
 Spawning, batching, and limit mechanics are in `references/claude-code.md`, read at Step 3.
 
 Write every dispatch against the task contract (full version in `references/contracts.md`):
 
-> Role · Objective · Inputs (file paths, never conversation history) · Scope · Allowed writes · **Allowed tools** · Must not do · Baseline/snapshot · Done when · **Model** · **Effort** · Return format (status, result, evidence, files changed, checks run, uncertainty — ≤1–2k tokens; details to files).
+> Role · Objective · Inputs (file paths, never conversation history) · Scope · Allowed writes · **Allowed tools** · **Per-unit caps** · Must not do · Baseline/snapshot · Done when · **Model** · **Effort** · Return format (status, result, evidence, files changed, checks run, uncertainty — ≤1–2k tokens; details to files).
 
 Briefing rules:
 
@@ -134,6 +153,7 @@ Briefing rules:
 - **Hand off via artifacts, never via transcript.** Everything you paste into a dispatch — and everything it prints back — stays resident in your context and is re-read every later turn. Point at files; require summaries back.
 - **Name the model on every plain dispatch**, so nothing silently inherits the parent's. On a saved-agent dispatch the frontmatter model *is* the named value; overriding it can invalidate that file's `effort` too, so do it only as a deliberate, logged deviation. Set reasoning effort only through a control the harness actually exposes (`references/claude-code.md` lists them).
 - **Scope the tools, not just the writes.** `Allowed writes` bounds what a unit can change and says nothing about what it can *reach*. Name the tool scope — network, shell, MCP — and keep it to what the objective needs. An agent that can't write source but can still fetch URLs and run shell is not contained. Per-unit capability scoping is the one thing a monolithic loop structurally cannot do — but it is only *enforced* by a saved agent file. On a plain dispatch this line is an instruction, like effort in prompt text: write it, and don't mistake it for a constraint.
+- **Know what can actually cap a unit.** `maxTurns` in a saved agent file is the only per-unit budget rail that exists — this skill's own rail is per-task and made of prose, so nothing bounds a single unit that loops. It lives in frontmatter, which means **a dispatch without a saved agent file has no per-unit cap at all** — and that gap is not backend-specific: `agent()` under Workflow takes a model, an effort and an isolation, but no turn cap either. It is a standing limit of the skill, not something to write into a brief and hope. Where a role recurs often enough to earn an agent file, set `maxTurns` from its shape; leave it unset where the shape is unknown, because a cap guessed too low truncates an agent silently and it cannot report what it never reached. A unit that hits its cap is `blocked`, not failed, and charges no rung on the failure ladder. `references/claude-code.md` lists the rest of what an agent file can actually bind (`permissionMode`, `skills`, `mcpServers`, `hooks`): reach for one whenever a constraint has to hold rather than ask.
 
 Choose the tier from the unit's properties, then resolve it to a model:
 
@@ -145,7 +165,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Correctness/security review, verification | frontier | high+ |
 | Synthesis, triage, completion claim | **the parent — you** | — |
 
-That effort column is a target, reachable only where a real control exists — treat it as unset everywhere else. Three saved agent files make it reachable for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only). Dispatch by agent type and the effort is real — write `low (explorer)`, not a dash. Everything else stays a plain dispatch with no effort control. `references/claude-code.md` holds their exact scopes, their limits, and the bar for adding another.
+That effort column is a target, reachable only where a real control exists — treat it as unset everywhere else. Three saved agent files make it reachable for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only). Dispatch by agent type and the effort is real — write `low (explorer)`, not a dash. The `Workflow` backend is the other place it becomes real, on every row at once (Step 3). A plain Agent call is the one path with no lever at all. `references/claude-code.md` holds their exact scopes, their limits, and the bar for adding another.
 
 - Escalate one tier on retry rather than repeating the same dispatch.
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write (caches, screenshots, builds) — with a no-source-edit rule in the contract. Explicitly allow "no findings."
@@ -153,10 +173,11 @@ That effort column is a target, reachable only where a real control exists — t
 
 ## Step 5 — Execute
 
+- **If the approved backend is `Workflow`, most of this step belongs to the script, not to you.** Write it from the plan (translation in the harness reference), launch it, keep the ledger, and go to Step 6. There is no batching to do and no steering available: the ladder's first rung is gone outright, and its second survives only as edit-and-resume — a failed unit comes back in the return value, so your moves are re-running that row with a sharpened brief or a higher tier, or taking it inline. Everything below describes the hand-batched path.
 - Launch independent units as **one parallel batch up to the cap** (batching mechanics per harness reference). Background by default; synchronous only when the result blocks your next step.
 - **Dispatch the model the approved row named.** Deciding mid-run that a unit needs more judgment is often correct. Changing its model silently is not. The user approved one plan while a different one ran, and they learn that afterwards or never. So state the change and the reason in one line before dispatching. Record it in the ledger, and list it under `Plan deviations` in the report. Tier escalation on the failure ladder below is already part of the approved plan: log it, don't re-gate it.
 - While agents run, do non-overlapping read-only work. **Never fabricate or predict a pending agent's result.** Don't poll a harness that notifies.
-- Any writer in a shared tree → run the snapshot protocol (contracts reference): baseline → write lease → stabilize → freeze → review → triage → new lease → verify.
+- Any writer in a shared tree → run the snapshot protocol (contracts reference): baseline → write lease → stabilize → freeze → review → triage → new lease → verify. **`/rewind` will not undo what a subagent wrote** (harness reference, Cautions), so that baseline is the only way back — take it before the writer starts, not after something looks wrong.
 - Failure ladder per unit: steer the same agent with a sharpened brief → dispatch a fresh agent one tier up, framed as full owner → take it inline or ask the user. **Count signatures, not attempts.** From the second failure on, compare the signature — same file, symbol, error class — with the last. A different one means the unit is learning the problem's shape: spend the next rung. An **identical** one means the loop is stuck, not slow, so skip to the last rung. Scope-`blocked` is neither: a higher tier grants no extra tool, so fix the brief or re-route, and charge no rung. Log every abandoned disagreement; silent discard is forbidden.
 - Keep a **ledger file** in scratch space (template in contracts): unit ids, briefs, states, evidence pointers, costs. The ledger — not your context — is the recovery map after compaction or a new session.
 - **Compaction can land at any moment.** Bring the ledger current before launching a wave and after each integration; after a compaction, re-read it before dispatching anything new.

@@ -17,14 +17,17 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 | 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)  | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock.
-Risks: <top 1–3>.
+Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Hand-batched unless the shape fits>.
+Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
+        track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
-Recommended: <the one-word default answer>.
+Recommended: <the default answer. Name the option, not just "go", whenever the backend block puts two
+              options behind that word>.
 ```
 
-**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`).
+**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
-**Effort column:** the level *and* the mechanism setting it. A saved-agent dispatch gets a real one — `low (explorer)`, `high (verifier)`, `medium (web-researcher)` — because effort is frontmatter there. Write `— (no control)` for a plain Agent call. A bare `low` is a promise nothing keeps.
+**Effort column:** the level *and* the mechanism setting it. A saved-agent dispatch gets a real one — `low (explorer)`, `high (verifier)`, `medium (web-researcher)` — because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. Write `— (no control)` only for a **hand-batched plain Agent call**, which is the one path with no lever. A bare `low` is a promise nothing keeps.
 
 Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
 
@@ -40,6 +43,9 @@ Allowed tools: <the tool scope this objective needs — e.g. "read + search only
                | "repo tools + Bash for the test command only" | "inherit". Reviewers and explorers:
                deny network and shell unless the objective names a use for them. Read-only writes plus
                open network access is not read-only.>
+Per-unit caps: <`maxTurns` / `permissionMode` where a saved agent file sets them, else "none — plain
+               dispatch". Unlike the two lines above, these BIND. A unit that hits `maxTurns` returns
+               `blocked`, not failed, and charges no rung on the failure ladder.>
 Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest being worked against>
 Done when: <one falsifiable sentence>
@@ -97,7 +103,7 @@ Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; s
 
 ## Shared-tree snapshot protocol (any writer present)
 
-1. **Baseline** — record starting revision, dirty files, task-owned files. Unrelated dirty changes are never the agent's work and must survive.
+1. **Baseline** — record starting revision, dirty files, task-owned files. Unrelated dirty changes are never the agent's work and must survive. **This is the only recovery map for delegated writes.** `/rewind` checkpoints the tree before each user prompt but does not track subagent edits (harness reference, Cautions), so once a writer has run there is no automatic snapshot to fall back on. Baselining is the substitute, not a formality.
 2. **Write lease** — one named writer; everyone else source-read-only.
 3. **Stabilize** — writer finishes; run focused checks; capture the diff or changed-file manifest.
 4. **Freeze** — no source changes while reviewers inspect the candidate.

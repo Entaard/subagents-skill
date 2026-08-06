@@ -5,7 +5,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 ## 1. Research / review sweep (fan-out, map–reduce)
 
 **When:** broad question answerable from many independent angles — codebase audit, literature/doc research, multi-dimension code review.
-**Flow:** decompose into 3–8 *non-overlapping* angles (by subsystem, by lens, by source type — never "agent 1 and agent 2 both research X"). Launch one batch, readers only, background. Parent synthesizes; conflicting claims go to verification, not a coin flip.
+**Flow:** decompose into 4–8 *non-overlapping* angles (by subsystem, by lens, by source type — never "agent 1 and agent 2 both research X"). Launch one batch, readers only, background. Parent synthesizes; conflicting claims go to verification, not a coin flip.
 **Rules:** each brief names what the *other* agents cover so nobody duplicates; reports carry citations/file refs; parent never pastes full reports onward — synthesize and drop.
 
 ## 2. Implement → review → fix (single increment)

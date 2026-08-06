@@ -59,7 +59,10 @@ Uncertainty: <what you could not confirm from a source, and what would settle it
 
 ## Note for the parent
 
-Budget from the skill's `calibration.md`, not from the exploration band: fetch-heavy research has run 70–120k
-tokens per agent on real tasks. If this unit must leave notes in a scratch file, it cannot — use a
-plain dispatch for that unit. Hand-batched, that costs you the effort control; under the Workflow
-backend it does not, since `agent()` sets effort on any row.
+Budget from the skill's `calibration.md`, but never from a single past run's per-agent average — that
+average encodes the brief style that produced it, not the task class. **Brief style dominates cost for
+this unit.** Briefs naming their exact target URLs have repeatedly come back under 40k per agent, and
+as low as 13.7k; open-ended "go find primary sources" briefs on the same task class fetched their way
+past 90k. Name the URLs and the cheap end is reachable. If this unit must leave notes in a scratch file, it cannot — use a plain
+dispatch for that unit. Hand-batched, that costs you the effort control; under the Workflow backend it
+does not, since `agent()` sets effort on any row.

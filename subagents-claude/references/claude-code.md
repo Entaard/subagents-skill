@@ -16,28 +16,30 @@ Verified against code.claude.com docs 2026-08. Model names and limits drift — 
 | `web-researcher` | `sonnet` | `medium` | `WebSearch`, `WebFetch`, `Read` | outside sources only; no shell, no repo edits, **cannot write** |
 
   Dispatch by agent type and the plan's Effort column becomes real. **Under the hand-batched backend** everything outside these three is a plain dispatch with no effort control (the Workflow backend is the exception — see "Models and effort") — including any *reader* that must produce a scratch file, since `explorer` and `web-researcher` cannot write one. `verifier` can: shell redirection to a path its brief names is the one write it is allowed. Don't dispatch the built-in `Explore` while the plan row reads `low (explorer)`: that is exactly the unbacked effort claim the column exists to prevent.
-- `~/.claude/agents/` is **global**: Claude Code watches it and auto-delegates on the `description` field, in every project. All three descriptions say "dispatched by name from an approved orchestration plan" and redirect ordinary lookups to `Explore`, so they don't quietly capture routine work. Keep that framing in any role you add — and don't add one until it has recurred across several real tasks.
+- `~/.claude/agents/` is **global**: Claude Code watches it and auto-delegates on the `description` field, in every project ("the subagent is available in every project on your machine"). All three descriptions say "dispatched by name from an approved orchestration plan" and redirect ordinary lookups to `Explore`, so they don't quietly capture routine work. Keep that framing in any role you add — and don't add one until it has recurred across several real tasks. There is **no per-agent switch for auto-delegation alone**: `permissions.deny: ["Agent(<name>)"]` is the only hard lever, and it blocks explicit dispatch too. Description wording is the whole of the soft control.
 - **Boot cost.** A `tools:`-scoped agent boots several times cheaper than `general-purpose`: the allow-list drops the unlisted tool schemas from startup. Every dispatch pays that floor before doing any work — measure it here, and see `../calibration.md`. Custom agents also load the whole CLAUDE.md hierarchy plus a git snapshot, which only the built-in `Explore` and `Plan` skip, so a heavy global `~/.claude/CLAUDE.md` taxes every custom dispatch.
 - **Never dispatch a reviewer or verifier as a `fork`-type agent.** A fork inherits the parent's entire context, which silently destroys the clean-context property Step 6 depends on.
 - Continuation: `SendMessage` to a finished/running agent's id continues it **with its context intact** — steering an existing agent is cheaper than respawning (this is the "steer, don't respawn" rung of the failure ladder). Subagents can also opt into persistent `memory` (user/project/local scope) — rarely needed, and keep it off any reviewer: one that remembers prior runs is no longer the blank-context reviewer Step 6 relies on.
 - Some harnesses expose a `Workflow` tool (scripted deterministic fan-out: `pipeline()`, `parallel()`, budgets). It is one of the two execution backends Step 3 chooses between, not a separate way of working — "Running an approved plan through `Workflow`" below covers the translation. It needs the user's explicit opt-in to multi-agent scale, and subagents never get the tool: only the parent can drive one.
 - Agent Teams (peer-to-peer, shared task list, agents message each other) is experimental, behind `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. That env var is set outside a running session, so it is a user decision, not a route you can take mid-run. Genuine debate or competing-hypothesis work only (pattern 8); it costs significantly more than subagents.
 
-## Limits and knobs (defaults as of v2.1.219)
+## Limits and knobs (verified against docs 2026-08-06, local install v2.1.222)
 
-| Limit | Default | Env var |
-| --- | --- | --- |
-| Subagents per session | 200 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` |
-| Concurrent subagents | 20 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` |
-| Spawn depth (nesting) | 3 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` |
+| Limit | Default | Env var | Since |
+| --- | --- | --- | --- |
+| Subagents per session | 200 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | v2.1.212 |
+| Concurrent subagents | 20 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | v2.1.217 |
+| Spawn depth (nesting) | 3 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | v2.1.219 |
 
-The *useful* fan-out is far below the hard cap — keep the skill's default (4) unless the task is a genuinely wide sweep. Note that the spawn-depth cap is the only real enforcement of "no nested delegation"; the line in a brief is an instruction.
+The `Since` column is not trivia: spawn depth was fixed at 5 through v2.1.216, dropped to 1, and reached 3 only in v2.1.219. These numbers move between releases — check them rather than trusting this table.
+
+The *useful* fan-out is far below the hard cap — keep the skill's default (4) unless the task is a genuinely wide sweep. Note what the depth cap does **not** do: at 3 it *permits* two levels of nesting, so it bounds runaway recursion rather than enforcing "no nested delegation". The real enforcement is a `tools:` allow-list with no Agent tool — which is why all three shipped agents cannot spawn anything.
 
 ## Models and effort
 
 Which setting wins, when several are present: env override → per-invocation `model` param → agent-file frontmatter → inherit from the main conversation.
 
-That "env override" has a name — `CLAUDE_CODE_SUBAGENT_MODEL` — and it outranks **both** the per-invocation `model` param and agent-file frontmatter. A second path is quieter still: an `availableModels` allowlist skips a value that resolves to an excluded model and runs the subagent on the *inherited* model instead, with no error and no notice. Either one turns every Model cell in an approved plan into fiction — and that column is the one field in the plan a user can actually audit.
+That "env override" has a name — `CLAUDE_CODE_SUBAGENT_MODEL` — and it outranks **both** the per-invocation `model` param and agent-file frontmatter. A second path is quieter still: an `availableModels` allowlist "skips a value that resolves to an excluded model and runs the subagent on the *inherited* model instead" (documented verbatim; whether it surfaces any notice is **not** documented, so plan as if it doesn't). Either one turns every Model cell in an approved plan into fiction — and that column is the one field in the plan a user can actually audit.
 
 So check it once, at Step 3, before writing the column:
 
@@ -45,7 +47,7 @@ So check it once, at Step 3, before writing the column:
 echo "${CLAUDE_CODE_SUBAGENT_MODEL:-<unset>}"
 ```
 
-Set → say so in the plan and write the model that will really run, or ask the user to unset it. Unset → the column means what it says. One command converts the plan's most auditable field from a hope into a fact.
+Set → say so in the plan and write the model that will really run, or ask the user to unset it. Unset → the column means what it says *on this path*. The check rules out the loud override only; the `availableModels` fallback above is invisible to it, so what one command buys is a verified column, not a guaranteed one.
 
 ### Resolving a tier to a model — do this at plan time
 
@@ -80,16 +82,18 @@ A saved agent file is the only place a per-unit constraint becomes real, and it 
 | Field | What it enforces | Reach for it when |
 | --- | --- | --- |
 | `maxTurns` | hard cap on agentic turns before the unit stops | **the only per-unit budget rail that exists** |
-| `permissionMode` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan`, `manual` | an unattended writer — or `plan`, for a unit that must propose rather than act |
+| `permissionMode` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` — plus `manual`, an *alias* for `default` (v2.1.200+) | an unattended writer — or `plan`, for a unit that must propose rather than act |
 | `skills` | which skills the unit may load | keeping a reader out of machinery it has no use for |
 | `mcpServers` | which MCP servers it can reach | bounding a surface `tools` alone does not |
 | `hooks` | per-agent hooks | a check the brief would otherwise only *request* |
 | `background` | forces background execution | a role that should never block the parent |
 | `isolation: worktree` | frontmatter twin of the Agent-tool param | a writer role that must never share a tree |
 
-**`maxTurns` is the gap worth closing first.** This skill's budget discipline is per-*task* and made of prose — "stop and ask beyond 10 agents or ~500k". Nothing bounds a single unit that loops, and a loop is precisely what you are not watching while four agents run in the background. Treat a unit that hits its cap as `blocked`, not failed: like a scope block it charges no rung on the failure ladder, because a higher tier would hit the same wall.
+**`maxTurns` is the gap worth closing first.** This skill's budget discipline is per-*task* and made of prose (the Defaults table's agent-count, token and wall-clock rails). Nothing bounds a single unit that loops, and a loop is precisely what you are not watching while four agents run in the background. Treat a unit that hits its cap as `blocked`, not failed: like a scope block it charges no rung on the failure ladder, because a higher tier would hit the same wall.
 
 **Don't guess a cap into the three shipped agents.** Set too low it truncates an agent mid-answer the way a wrong line range does — and the agent cannot report what it never reached. It is a per-unit lever: set it where the unit's shape is known, leave it unset where it isn't.
+
+The docs confirm `maxTurns` stops the unit and say nothing further — in particular, **nothing documents whether the caller can tell the cap was the reason** a report came back thin. So "treat it as `blocked`" is this skill's policy for an ambiguous signal, not a status the harness hands you. If a capped unit's answer looks truncated, that is the diagnosis to reach for first.
 
 ## Running an approved plan through `Workflow`
 
@@ -101,6 +105,7 @@ The plan table is the script's input. Translate it row for row, so what the user
 - **The Flow column becomes structure.** Rows in one wave go in a `parallel()`; a row consuming a prior row's result becomes a `pipeline()` stage. Barriers only where the plan actually specified one.
 - **`opts.isolation: 'worktree'`** for any writer row the plan isolated.
 - **The approved `Cap` does not transfer by itself.** `parallel()` fans out every thunk it is given; the only ceiling is the runtime's own `min(16, cores−2)`. A plan approved at "cap 4" runs up to sixteen unless you chunk it. Slice the rows into groups of `Cap` and await each group — which costs pipeline flow between chunks, so if the cap was arbitrary rather than load-driven, re-gate it instead of silently paying for it.
+- **`agent({schema})` is the one place a return shape is enforced rather than requested.** Pass a JSON Schema and the unit must call a structured-output tool; the call returns a validated object, and a mismatch makes the model retry. Everywhere else in this skill the `Return format` line is a polite ask — this is the exception, and it is worth reaching for on rows whose output you will parse rather than read. It is not a blanket upgrade: response format measurably changes agent performance and there is no one-size-fits-all shape, so impose a schema where you need the guarantee, not everywhere.
 
 ```js
 phase('Review')
@@ -117,6 +122,10 @@ for (let i = 0; i < rows.length; i += CAP) {        // CAP = the plan's approved
 ```
 
 Limits that change the *plan*, not just the script: there is **no mid-run user input**, so auto-mode's "stop and ask" rails cannot fire from inside a run — anything that might need the user stays hand-batched. `budget.total` comes from a user-side directive, not from your plan, so without one `budget.remaining()` is `Infinity` and this skill's rail stays prose. Concurrency caps at `min(16, cores−2)`; nesting is one level deep.
+
+**A permission fact that belongs in the plan, not just the script:** the subagents a workflow spawns **always run in `acceptEdits`** and inherit your tool allowlist, regardless of the session's permission mode — file edits are auto-approved. A user approving "go — via Workflow" on a plan with any writer row is approving unattended edits, so say so at the gate rather than after.
+
+Script-authoring traps worth knowing before you write one: scripts are plain JavaScript, not TypeScript, and `Date.now()`, `new Date()` and `Math.random()` **throw** — they would break resume, so pass timestamps in through `args` and vary a prompt by index rather than by random. A run that dies on line one costs the whole wave.
 
 ## Cautions
 

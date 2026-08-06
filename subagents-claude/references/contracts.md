@@ -1,6 +1,6 @@
 # Contracts and templates
 
-Copy these; don't improvise the structure. Fields may be trimmed when genuinely irrelevant, never renamed.
+Copy these; don't improvise the structure. Fields may be trimmed when genuinely irrelevant, never renamed — the parent scans these shapes across many reports, and a renamed field reads as a missing one.
 
 ## Orchestration Plan (Step 3)
 
@@ -16,7 +16,7 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 | 2 | ...                         | W   | sonnet (standard) | — (no control)   | bg, after1 | write lease    | ~80k        |
 | 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)  | bg, after2 | frozen diff    | ~50k        |
 
-Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock.
+Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
 Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Hand-batched unless the shape fits>.
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.

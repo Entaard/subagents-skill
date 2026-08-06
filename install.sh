@@ -58,9 +58,29 @@ done
 
 rsync -av "$agents_src" "$agents_dest"
 
+# Output styles live in ~/.claude/output-styles/, one file per style. Same conflict-safe copy as
+# agents above: back up anything with the same filename but different content, never delete styles
+# this repo doesn't own.
+styles_src="$repo_dir/output-styles/"
+styles_dest="$HOME/.claude/output-styles/"
+
+mkdir -p "$styles_dest"
+
+for f in "$styles_src"*.md; do
+  name="$(basename "$f")"
+  existing="$styles_dest$name"
+  if [ -f "$existing" ] && ! cmp -s "$f" "$existing"; then
+    cp "$existing" "$existing.bak"
+    echo "NOTE: replaced a different $name; previous version saved to $existing.bak"
+  fi
+done
+
+rsync -av "$styles_src" "$styles_dest"
+
 echo
 echo "Installed subagents skill  -> $dest"
 echo "Installed subagent agents  -> $agents_dest"
+echo "Installed output styles    -> $styles_dest"
 echo
 cat <<'TIP'
 Optional, for long orchestration runs:

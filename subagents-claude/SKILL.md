@@ -91,7 +91,7 @@ Draft the **Orchestration Plan** (template in `references/contracts.md` — open
 - **Hand-batched** (default) — one `Agent` call per row, batched per wave. Keeps every mid-run lever: steering a running agent, triaging a report as it lands, asking the user, taking a unit inline.
 - **Via `Workflow`** — the rows become a script the harness runs. Buys a real Effort cell on *every* row, live token display, and resumable runs; costs the entire steering layer, since a running script takes no input and recovery is edit-and-resume, which is a respawn rather than a steer. **Its subagents always run in `acceptEdits`** regardless of the session's mode, so any writer row auto-approves its file edits — say that in the plan before the user approves this backend.
 
-Offer it only when the tool exists **and** the shape fits — a uniform transform over many known items, or roughly ≥8 units — where keeping N reports out of your context outweighs the ability to intervene. Below that, intervention is worth more: the savings are small, since reports are *asked* for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival. It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
+Offer it whenever the tool exists — there is no unit-count floor. The choice belongs to the user, so put both backends in front of them and let the tradeoff decide: a uniform transform over many known items is where the script pays off most, while on a small or exploratory run intervention is usually worth more than the context saved, since reports are *asked* for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival. Say which way that cuts for *this* plan in the `Recommended:` line rather than withholding the option. It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
 
 ### Manual mode — HARD GATE
 
@@ -107,7 +107,7 @@ Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min.
 4. plan-only — save the plan, run nothing
 ```
 
-When the backend is a real choice — the tool exists, and the work is pipeline-shaped or roughly ≥8 units — it belongs *in* the forced choice, not in prose the user has already scrolled past. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
+Whenever the `Workflow` tool exists the backend is a real choice, and it belongs *in* the forced choice, not in prose the user has already scrolled past. Use this shape for every plan in a session that has the tool. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
 
 ```
 Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-only" to save it and run nothing.
@@ -117,7 +117,7 @@ Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-onl
 4. solo               — no subagents; I do it inline
 ```
 
-Workflow leads that list because reaching this block *is* the finding that the shape fits — the ordering is not itself a recommendation, since hand-batched remains the default across all other plans. Name which one you recommend in the plan's `Recommended:` line, since "go" alone no longer identifies a single option.
+The ordering is not a recommendation — hand-batched is still the default whenever the shape doesn't clearly favour a script. Name which one you recommend in the plan's `Recommended:` line, since "go" alone no longer identifies a single option.
 
 - On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`.
 - Do not treat an unrelated next message as approval; if the reply doesn't address the plan, ask again.

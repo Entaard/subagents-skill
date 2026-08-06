@@ -17,7 +17,8 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 | 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)  | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
-Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Hand-batched unless the shape fits>.
+Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Both are offered whenever the
+         Workflow tool exists; hand-batched is the default unless the shape favours a script>.
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.

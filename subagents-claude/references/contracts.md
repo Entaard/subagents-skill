@@ -19,6 +19,10 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
 Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Both are offered whenever the
          Workflow tool exists; hand-batched is the default unless the shape favours a script>.
+Acceptance suite: light | full | none — recommended: <which>, because <one line>. <Omit this line and
+         the next when the plan has no writer unit or nothing checkable; say which instead.
+         `patterns.md` #10. Its cost is a guess, not a band — see the estimating note below>
+         Criteria: R1 <text>; R2 <text>; ...
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
@@ -30,7 +34,9 @@ Recommended: <the default answer. Name the option, not just "go", whenever the b
 
 **Effort column:** the level *and* the mechanism setting it. A saved-agent dispatch gets a real one — `low (explorer)`, `high (verifier)`, `medium (web-researcher)` — because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. Write `— (no control)` only for a **hand-batched plain Agent call**, which is the one path with no lever. A bare `low` is a promise nothing keeps.
 
-Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
+**Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
+
+Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
 
 ## Task brief (Step 4) — every dispatch
 
@@ -57,6 +63,13 @@ Model: <the exact value passed to this dispatch, matching the approved plan row;
         On a saved-agent dispatch, its frontmatter model is that value unless you deliberately override>
 Effort: <level and the control setting it — agent-file frontmatter or Workflow `agent()` — or "not settable here">
 ```
+
+**When an acceptance suite runs** (`patterns.md` #10), three briefs change shape. The blind author's
+`Inputs` are the requirement text and the approved criteria, and nothing else — and it is the one
+dispatch class exempt from "name the decisions already made" (SKILL.md Step 4): it receives the
+decisions' observable consequences, never the decisions. The implementer's brief carries the criterion
+IDs and never the suite path. The verifier's brief carries the suite path and the per-case verdict set,
+pass / fail / `Awaiting human`, with evidence required on each.
 
 ## Agent report — required return shape
 
@@ -100,7 +113,7 @@ Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; s
 
 - **Low**: parent or one worker; focused checks; review only if behavior is non-obvious.
 - **Medium**: ≤2 explorers for real unknowns; one writer; one lens-specific reviewer; targeted fix verification.
-- **High**: bounded exploration; optional plan critic / independent test designer (each justified by a named trigger); one writer per isolated tree; staged checks; two independent reviewers on the same frozen diff; parent triage; targeted regression verification; human checkpoint for subjective criteria.
+- **High**: bounded exploration; optional plan critic, and a blind acceptance suite (`patterns.md` #10 — offer it at the gate, never assume it); each justified by a named trigger; one writer per isolated tree; staged checks; two independent reviewers on the same frozen diff; parent triage; targeted regression verification; human checkpoint for subjective criteria. One hard trigger points the other way: "behavior with no reliable test oracle" recommends no suite, with verification routed to human checkpoints and the domain's other evidence.
 
 ## Shared-tree snapshot protocol (any writer present)
 
@@ -129,17 +142,31 @@ Plan amendments: <any change to an approved row — model, effort, scope, count 
 
 Update on every state change. After compaction or a new session, the ledger plus the repo — not memory of the conversation — is the source of continuity.
 
-## Orchestration Report (Step 7)
+## Final message (Step 7) — Result first, then the Orchestration Report
+
+Two parts, in this order. The order is structural, not a preference.
+
+1. **Result** — the deliverable's own summary, in prose, standing on its own. What the user asked for,
+   answered, at whatever length the answer needs. Someone who reads only the opening should have the
+   answer in hand, not a pointer to one.
+2. **The Orchestration Report block** below. It never opens the message.
+
+The split exists because `OUTCOME:` is one line inside a template, and one line inside a template
+compresses a deliverable into a pointer. Given a Result section above it, `OUTCOME:` may point up at
+that section instead of restating it.
 
 ```text
-OUTCOME: <what the user asked for, answered first>
+OUTCOME: <one line, or a pointer up to the Result section — never a replacement for it>
 Topology: <pattern, N agents, why> (or "solo — gate failed: <reason>")
 Agents: <one line each: unit → model actually used → status → key evidence>
 Cost: <N agents, ~tokens actual vs ~estimate, wall clock — say so if no token counts were visible,
        in which case the agent-count and wall-clock rails were the ones in force>
 Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none">
 Findings: <accepted/rejected/deferred/user-decision counts + the ones that matter>
-Verification: <checks run and outcomes>
+Verification: <checks run and outcomes. Where an acceptance suite ran, separate MEASURED passes — a
+                     command executed — from JUDGED passes, where a case was read and ruled on. A judged
+                     pass is a reviewer's opinion with a case number on it. `Awaiting human` cases count
+                     as neither, and any machine-verifiable case that downgraded is named here>
 Coordination check: <what depended on the agents being independent — a disagreement, a refutation, a
                      cross-angle finding — or "nothing; one agent at this budget would likely have
                      matched it". Answer honestly; "the fan-out bought nothing" is a real result.>

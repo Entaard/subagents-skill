@@ -10,11 +10,11 @@ MODE: manual | auto | plan        RISK: low | medium | high (rubric below)
 TOPOLOGY: <pattern name or custom> — <one-line why>
 PARENT: <the model you are running on> — does synthesis, triage, completion claim
 
-| # | Unit (done when)            | R/W | Model (tier)      | Effort (via)     | Flow       | Isolation      | Est. tokens |
-|---|-----------------------------|-----|-------------------|------------------|------------|----------------|-------------|
-| 1 | ...                         | R   | haiku (fast)      | low (explorer)   | bg, batch1 | —              | ~20k        |
-| 2 | ...                         | W   | sonnet (standard) | — (no control)   | bg, after1 | write lease    | ~80k        |
-| 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)  | bg, after2 | frozen diff    | ~50k        |
+| # | Unit (done when)            | R/W | Model (tier)      | Effort (via)        | Flow       | Isolation      | Est. tokens |
+|---|-----------------------------|-----|-------------------|---------------------|------------|----------------|-------------|
+| 1 | ...                         | R   | haiku (fast)      | low (explorer)      | bg, batch1 | —              | ~20k        |
+| 2 | ...                         | W   | sonnet (standard) | medium (no control) | bg, after1 | write lease    | ~80k        |
+| 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)     | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
 Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Both are offered whenever the
@@ -32,7 +32,9 @@ Recommended: <the default answer. Name the option, not just "go", whenever the b
 
 **Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
-**Effort column:** the level *and* the mechanism setting it. A saved-agent dispatch gets a real one — `low (explorer)`, `high (verifier)`, `medium (web-researcher)` — because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. Write `— (no control)` only for a **hand-batched plain Agent call**, which is the one path with no lever. A bare `low` is a promise nothing keeps.
+**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 4 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
+
+Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what the `Workflow` backend would buy on that row. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
 
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
@@ -56,7 +58,7 @@ The digest attached to each `go` option is a summary, not a second copy. Fit it 
 # the preview on "go — via Workflow", where the recommendation is the other option
 8 agents (5 parallel) · ~615k · ~55 min · cap 5
 Recommended: hand-batched — exploratory; steering beats saved context
-This option: scripted. Real effort per row. No mid-run steering.
+This option: scripted. Enforces planned effort. No steering.
              Writer rows auto-accept their edits.
 Top risk: the fix changes sync behaviour on every build
 Full plan printed above ↑   (saved: <path>)
@@ -92,7 +94,8 @@ Return format: the agent report below, ≤1–2k tokens; put bulk output in <scr
                `web-researcher` distill instead; a scratch path in their brief is a briefing error)
 Model: <the exact value passed to this dispatch, matching the approved plan row; tier in brackets.
         On a saved-agent dispatch, its frontmatter model is that value unless you deliberately override>
-Effort: <level and the control setting it — agent-file frontmatter or Workflow `agent()` — or "not settable here">
+Effort: <the level, always, plus the control setting it — agent-file frontmatter, Workflow `agent()`,
+        or "no control" on a plain dispatch. Matches the approved plan row.>
 ```
 
 **When an acceptance suite runs** (`patterns.md` #10), three briefs change shape. The blind author's

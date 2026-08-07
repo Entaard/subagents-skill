@@ -1,6 +1,6 @@
 ---
 name: subagents
-description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use when a task might need several agents, or to decide whether it needs any at all. Manual mode (default) proposes a plan (agents, cap, the named model each, effort where settable, cost) and waits for approval. Auto mode decides and reports. Zero subagents is a valid outcome.
+description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use when a task might need several agents, or to decide whether it needs any at all. Manual mode (default) proposes a plan (agents, cap, the named model and effort each, cost) and waits for approval. Auto mode decides and reports. Zero subagents is a valid outcome.
 argument-hint: "[auto|manual|plan] <task>"
 disable-model-invocation: true
 ---
@@ -84,12 +84,12 @@ Draft the **Orchestration Plan** (template in `references/contracts.md` — open
 - Risks, and the solo alternative with its tradeoff when the call is close.
 - Every row carries your **recommendation** — the user should be able to accept everything with one word.
 
-**Write what will actually run, not a category of it.** A tier is how you choose; the user can only audit a name. Resolve every tier to a concrete model at plan time, then keep the tier in brackets: `haiku (fast)`. Effort follows the same rule — name the control that sets it, or write `— (no control)`. `contracts.md` gives both column rules in detail.
+**Write what will actually run, not a category of it.** A tier is how you choose; the user can only audit a name. Resolve every tier to a concrete model at plan time, then keep the tier in brackets: `haiku (fast)`. Effort follows the same rule, with one addition: **always name the level, then name what sets it** — `low (explorer)`, `high (workflow)`, or `medium (no control)` where nothing can enforce it. Never a dash. The level is the target you chose in Step 4, and it belongs in the plan even when the backend cannot hold you to it; that is exactly what tells the user what switching backend would buy. `contracts.md` gives both column rules in detail.
 
 **Choose the execution backend, and put it in the plan.** Two ways to run an approved plan:
 
 - **Hand-batched** (default) — one `Agent` call per row, batched per wave. Keeps every mid-run lever: steering a running agent, triaging a report as it lands, asking the user, taking a unit inline.
-- **Via `Workflow`** — the rows become a script the harness runs. Buys a real Effort cell on *every* row, live token display, and resumable runs; costs the entire steering layer, since a running script takes no input and recovery is edit-and-resume, which is a respawn rather than a steer. **Its subagents always run in `acceptEdits`** regardless of the session's mode, so any writer row auto-approves its file edits — say that in the plan before the user approves this backend.
+- **Via `Workflow`** — the rows become a script the harness runs. Enforces the planned effort on *every* row, not just the saved-agent ones, and adds live token display and resumable runs; costs the entire steering layer, since a running script takes no input and recovery is edit-and-resume, which is a respawn rather than a steer. **Its subagents always run in `acceptEdits`** regardless of the session's mode, so any writer row auto-approves its file edits — say that in the plan before the user approves this backend.
 
 Offer it whenever the tool exists — there is no unit-count floor. The choice belongs to the user, so put both backends in front of them and let the tradeoff decide: a uniform transform over many known items is where the script pays off most, while on a small or exploratory run intervention is usually worth more than the context saved, since reports are *asked* for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival. Say which way that cuts for *this* plan in the `Recommended:` line rather than withholding the option. It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
 
@@ -114,7 +114,7 @@ Whenever the `Workflow` tool exists the backend is a real choice, and it belongs
 
 ```
 Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-only" to save it and run nothing.
-1. go — via Workflow  — scripted; real effort on every row, no mid-run steering
+1. go — via Workflow  — scripted; enforces the planned effort, no mid-run steering
 2. go — hand-batched  — one Agent call per row; every mid-run lever kept
 3. adjust             — change cap / models / efforts / budget / topology / backend
 4. solo               — no subagents; I do it inline
@@ -178,7 +178,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Correctness/security review, verification | frontier | high+ |
 | Synthesis, triage, completion claim | **the parent — you** | — |
 
-That effort column is a target, reachable only where a real control exists. Three saved agent files make it real for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only) — dispatch by agent type and write `low (explorer)`, not a dash. The `Workflow` backend makes it real on every row at once. `references/claude-code.md` has their exact scopes and the bar for adding another.
+That effort column is a target. Pick it for every unit — it goes in the plan either way. What changes by backend is only whether a control enforces it. Three saved agent files make it real for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only) — dispatch by agent type and the cell reads `low (explorer)` rather than `low (no control)`. The `Workflow` backend enforces it on every row at once. `references/claude-code.md` has their exact scopes and the bar for adding another.
 
 - Escalate one tier on retry rather than repeating the same dispatch.
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write (caches, screenshots, builds) — with a no-source-edit rule in the contract.
@@ -202,7 +202,7 @@ That effort column is a target, reachable only where a real control exists. Thre
 - Implementation work gets **two-stage review**: spec compliance (explicit pass/fail per acceptance criterion) *and* quality — never accept a report missing either verdict. Where a suite ran, the compliance verdict is per case: **pass / fail / `Awaiting human`**, each with evidence. That third state is the one the evidence menu already defines, and it has to stay legal — a verifier that cannot execute a flow and has only two words available will guess, which turns a blind suite into a generator of confident fiction. A failing case is a finding, not a verdict; triage decides.
 - **A reviewer's value is its clean context, not the head count.** It sees what the writer cannot precisely because it never saw the writer's reasoning — so never "help" one with the rationale or the alternatives weighed. One clean reviewer beats two carrying the writer's context.
 - **Reviewers report what you ask them to look for.** One told to find gaps will find some even when the work is sound. Scope the mandate to correctness and the stated criteria, and make "no findings" explicitly valid — otherwise you buy rework on defects that were never there.
-- High-stakes findings get **adversarial verification**: independent agents prompted to refute, not confirm. **Vary the model across maker and checker, not just the instance — self-preference bias is documented, and a checker from the writer's own family skews positive.** When no second frontier model exists, use a standard-tier checker with a tight brief for the diversity, or accept the same-family check and record the residual bias in the report. Overriding a saved agent's model for that diversity may not carry its frontmatter `effort` across, so write that row's Effort cell as unverified rather than claiming the file's level.
+- High-stakes findings get **adversarial verification**: independent agents prompted to refute, not confirm. **Vary the model across maker and checker, not just the instance — self-preference bias is documented, and a checker from the writer's own family skews positive.** When no second frontier model exists, use a standard-tier checker with a tight brief for the diversity, or accept the same-family check and record the residual bias in the report. Overriding a saved agent's model for that diversity may not carry its frontmatter `effort` across, so keep the level and mark the bracket unverified — `high (unverified: model override)` — rather than claiming the file still sets it.
 - Triage every finding: accepted / rejected with evidence / deferred with owner / converted to a user decision. Reviewer labels never control the gate directly, and neither does agreement between them — two clean contexts can miss the same thing. Consensus is not evidence; an empty report is a result, not a pass.
 - After merging parallel work: run the compose check (full suite/build), confirm the diff stays inside authorized scope, confirm pre-existing changes survived.
 

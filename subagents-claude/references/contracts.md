@@ -36,7 +36,38 @@ Recommended: <the default answer. Name the option, not just "go", whenever the b
 
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
+**Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview. The preview box clips to `terminal rows − 26` lines and **drops the tail**, which is where `Risks:`, `Solo alternative:` and `Recommended:` live. Printed text does not clip. See `claude-code.md`, "The gate dialog", for the measured budgets.
+
 Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
+
+### Fitting the plan to the gate surface
+
+Three rules shrink the block itself. Apply them before printing, because a shorter block also makes a better digest:
+
+- **One physical line per row.** A cell holding a sentence turns one row into three or four lines. Keep a short unit name in the cell and move every `done when` clause to a numbered list under the table, keyed by row id.
+- **A constant column is not a column.** Where every row shares a value, delete the column and state it once above the table: `All rows: background, read-only, wave 1.` Effort, Flow and Isolation collapse this way in most plans. A column that varies stays, however wide.
+- **Keep in the table only what the user audits:** id, unit, R/W, model, effort, est. tokens. Anything that would not change the answer goes below the table.
+
+Where the block still runs past ~30 lines, save it to the session scratchpad as well and put that path in the digest. An editor has no width or height budget at all.
+
+The digest attached to each `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order. A clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
+
+```text
+# the preview on "go — via Workflow", where the recommendation is the other option
+8 agents (5 parallel) · ~615k · ~55 min · cap 5
+Recommended: hand-batched — exploratory; steering beats saved context
+This option: scripted. Real effort per row. No mid-run steering.
+             Writer rows auto-accept their edits.
+Top risk: the fix changes sync behaviour on every build
+Full plan printed above ↑   (saved: <path>)
+
+A1 R opus   ~90k  delivery + dedup audit
+A2 R opus   ~80k  classifier precision audit
+W  W opus     —   parent writes the fix inline
+V1 R opus   ~90k  compliance review of the frozen diff
+```
+
+On an `adjust` re-ask the shape holds and the row list is the changed rows only. Where two `go` variants exist, line 3 is what differs between them, so it differs per option.
 
 ## Task brief (Step 4) — every dispatch
 

@@ -1,6 +1,8 @@
 # Claude Code mechanics
 
-Verified against code.claude.com docs 2026-08. Model names and limits drift — when precision matters, check `/model`, `/agents`, and the sub-agents doc.
+Verified against code.claude.com docs and the published changelog 2026-08-11, local install v2.1.227. Model names and limits drift — when precision matters, check `/model`, `/agents`, and the sub-agents doc.
+
+**Docs-drift trigger:** when `claude --version` reports a build newer than the version in the line above, re-verify this file's tables against the changelog before trusting them. That is not a formality — the pass that produced this revision found a limit that had been deleted three releases earlier and a knob that was never documented here at all.
 
 ## Spawning
 
@@ -23,23 +25,35 @@ Verified against code.claude.com docs 2026-08. Model names and limits drift — 
 - Some harnesses expose a `Workflow` tool (scripted deterministic fan-out: `pipeline()`, `parallel()`, budgets). It is one of the two execution backends Step 3 chooses between, not a separate way of working — "Running an approved plan through `Workflow`" below covers the translation. It needs the user's explicit opt-in to multi-agent scale, and subagents never get the tool: only the parent can drive one.
 - Agent Teams (peer-to-peer, shared task list, agents message each other) is experimental, behind `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. That env var is set outside a running session, so it is a user decision, not a route you can take mid-run. Genuine debate or competing-hypothesis work only (pattern 8); it costs significantly more than subagents.
 
-## Limits and knobs (verified against docs 2026-08-06, local install v2.1.222)
+## Limits and knobs (verified against the changelog 2026-08-11, local install v2.1.227)
 
 | Limit | Default | Env var | Since |
 | --- | --- | --- | --- |
-| Subagents per session | 200 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | v2.1.212 |
 | Concurrent subagents | 20 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | v2.1.217 |
 | Spawn depth (nesting) | 3 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | v2.1.219 |
 
-The `Since` column is not trivia: spawn depth was fixed at 5 through v2.1.216, dropped to 1, and reached 3 only in v2.1.219. These numbers move between releases — check them rather than trusting this table.
+**There is no per-session spawn cap any more.** One existed — 200 spawns per session, `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`, added in v2.1.212 — and **v2.1.224 removed it**: "long-running sessions no longer refuse new agents (concurrency and depth limits still apply)". That is recorded here rather than deleted without trace, because a plan written against the old number budgets around a wall that no longer exists, and because the env var is inert if you find it in an old settings file.
 
-The *useful* fan-out is far below the hard cap — keep the skill's default (4) unless the task is a genuinely wide sweep. Note what the depth cap does **not** do: at 3 it *permits* two levels of nesting, so it bounds runaway recursion rather than enforcing "no nested delegation". The real enforcement is a `tools:` allow-list with no Agent tool — which is why all three shipped agents cannot spawn anything.
+The `Since` column is not trivia: spawn depth was fixed at 5 through v2.1.216, dropped to 1 in v2.1.217, and reached 3 only in v2.1.219 — three values in three releases, and the row above them was deleted outright in a fourth. These numbers move; check them rather than trusting this table.
+
+**The hard cost backstop nearest your plan is user-side: `--max-budget-usd`.** Since v2.1.217, reaching that cap does not just warn — "new spawns are denied and running background agents are halted". Two things follow for a plan. It is a command-line flag, so like the agent-teams env var it is a user decision you cannot take or inspect mid-run: you cannot read the remaining headroom. And it *kills in-flight background units*, which is the exact opposite of this skill's own budget rail, where in-flight units finish and only new launches stop. So treat it as the ungraceful outer layer beneath a graceful one — if a run may approach a cap the user set, pause at your own rail first, because past theirs a half-finished writer's work is simply gone, with the `/rewind` gap below meaning nothing snapshotted it either.
+
+It is not the outermost layer, only the nearest one: a gateway or organisation spend limit can end the session from further out still, and those you can neither see nor plan around. Which is the argument for the rail you *do* control — it is the only one of the three that stops a run tidily.
+
+The *useful* fan-out is far below any of these limits — keep the skill's default (4) unless the task is a genuinely wide sweep. Note what the depth cap does **not** do: at 3 it *permits* two levels of nesting, so it bounds runaway recursion rather than enforcing "no nested delegation". The real enforcement is a `tools:` allow-list with no Agent tool — which is why all three shipped agents cannot spawn anything.
 
 ## Models and effort
 
 Which setting wins, when several are present: env override → per-invocation `model` param → agent-file frontmatter → inherit from the main conversation.
 
-That "env override" has a name — `CLAUDE_CODE_SUBAGENT_MODEL` — and it outranks **both** the per-invocation `model` param and agent-file frontmatter. A second path is quieter still: an `availableModels` allowlist "skips a value that resolves to an excluded model and runs the subagent on the *inherited* model instead" (documented verbatim; whether it surfaces any notice is **not** documented, so plan as if it doesn't). Either one turns every Model cell in an approved plan into fiction — and that column is the one field in the plan a user can actually audit.
+That "env override" has a name — `CLAUDE_CODE_SUBAGENT_MODEL` — and it outranks **both** the per-invocation `model` param and agent-file frontmatter.
+
+A second path is quieter: an `availableModels` allowlist. The docs say it "skips a value that resolves to an excluded model and runs the subagent on the *inherited* model instead", and two changelog entries have since qualified that sentence in ways the Model column depends on:
+
+- **v2.1.222** narrowed the fallback. An org-restricted **family alias** — `model: opus` and the like, on a subagent or a teammate — now steps *down to the newest org-allowed model in that same family* rather than dropping to the parent model. So "runs on the inherited model" describes a restricted value with no in-family fallback, not every restricted value. A row that reads `opus (frontier)` may run a different, older opus.
+- **v2.1.223** added a warning when a requested subagent model is restricted and the parent model runs instead — but the entry names exactly four cases: **workflow agents, forked skills, slash commands, and resumed background agents.** A plain hand-batched dispatch is not among them. The notice exists, and the dispatch path this skill uses most is the one not documented to raise it, so keep planning as if a plain dispatch swaps silently.
+
+Either path turns every Model cell in an approved plan into fiction — and that column is the one field in the plan a user can actually audit.
 
 So check it once, at Step 3, before writing the column:
 
@@ -121,7 +135,7 @@ for (let i = 0; i < rows.length; i += CAP) {        // CAP = the plan's approved
 }
 ```
 
-Limits that change the *plan*, not just the script: there is **no mid-run user input**, so auto-mode's "stop and ask" rails cannot fire from inside a run — anything that might need the user stays hand-batched. `budget.total` comes from a user-side directive, not from your plan, so without one `budget.remaining()` is `Infinity` and this skill's rail stays prose. Concurrency caps at `min(16, cores−2)`; nesting is one level deep.
+Limits that change the *plan*, not just the script: there is **no mid-run user input**, so the mid-run rails (SKILL.md Step 3) cannot fire from inside a run — anything that might need the user stays hand-batched. `budget.total` comes from a user-side directive, not from your plan, so without one `budget.remaining()` is `Infinity` and this skill's rail stays prose. Concurrency caps at `min(16, cores−2)`; nesting is one level deep.
 
 **A permission fact that belongs in the plan, not just the script:** the subagents a workflow spawns **always run in `acceptEdits`** and inherit your tool allowlist, regardless of the session's permission mode — file edits are auto-approved. A user approving "go — via Workflow" on a plan with any writer row is approving unattended edits, so say so at the gate rather than after.
 

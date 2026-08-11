@@ -1,7 +1,7 @@
 ---
 name: subagents
-description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use when a task might need several agents, or to decide whether it needs any at all. Manual mode (default) proposes a plan (agents, cap, the named model and effort each, cost) and waits for approval. Auto mode decides and reports. Zero subagents is a valid outcome.
-argument-hint: "[auto|manual|plan] <task>"
+description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use when a task might need several agents, or to decide whether it needs any at all. Always proposes a plan (agents, cap, the named model and effort each, cost) and waits for your approval before spawning anything. Zero subagents is a valid outcome.
+argument-hint: "<task>"
 disable-model-invocation: true
 ---
 
@@ -19,21 +19,13 @@ Three principles govern everything below:
 
 | Knob                     | Default                                                                                                                                                                                                                                             |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mode                     | `manual`                                                                                                                                                                                                                                            |
 | Max concurrent subagents | 4 (raise only for large independent sweeps)                                                                                                                                                                                                         |
-| Auto-mode budget rail    | stop and ask beyond 10 agents or ~500k subagent tokens per task, or once the run passes the plan's printed wall-clock estimate by ~25%; where the harness shows no token counts, the agent-count and wall-clock rails govern — say so in the report |
-| Approval floor (manual)  | one read-only fast-tier lookup may run without the gate                                                                                                                                                                                             |
+| Mid-run budget rail      | stop and ask beyond 10 agents or ~500k subagent tokens per task, or once the run passes the plan's printed wall-clock estimate by ~25%; where the harness shows no token counts, the agent-count and wall-clock rails govern — say so in the report |
 | Subagent report size     | ask for 1–2k tokens returned, details to files — except for units that cannot write, which distill instead                                                                                                                                          |
 | Fix rounds per unit      | 2 delegated attempts (steer once → one tier up), then inline or ask — cut short on a repeated failure signature                                                                                                                                     |
 | Review depth             | one review round (1–2 reviewers) + one targeted fix-verification round; adversarial verification keeps its own counts; discovery sweeps stop on dry rounds instead                                                                                  |
 
-## Step 0 — Resolve the mode
-
-Precedence: explicit keyword in this invocation (`auto`, `manual`, `plan`) → a `subagents-mode: auto|manual` line in the project's `CLAUDE.md`/`AGENTS.md` → default `manual`.
-
-- **manual** — full decision procedure, but the plan blocks on user approval (Step 3 hard gate).
-- **auto** — same decision procedure, defaults applied silently, plan printed as a brief launch note; hard rails still stop for the user (Step 3).
-- **plan** — produce the plan and cost estimate, save it to the session scratchpad (or a path the user named), print it, and end the turn. Ask nothing: the gate question does not apply here, because its `plan-only` option is already the answer.
+There is one way to run: work the steps, plan, and **stop at the gate** (Step 3) until the user answers. No invocation keyword changes that, and nothing runs before the answer. A user who wants the plan without a run says so at the gate — that is what `plan-only` is for.
 
 ## Step 1 — Qualify: the delegation gate
 
@@ -93,9 +85,9 @@ Draft the **Orchestration Plan** (template in `references/contracts.md` — open
 
 Offer it whenever the tool exists — there is no unit-count floor. The choice belongs to the user, so put both backends in front of them and let the tradeoff decide: a uniform transform over many known items is where the script pays off most, while on a small or exploratory run intervention is usually worth more than the context saved, since reports are _asked_ for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival. Say which way that cuts for _this_ plan in the `Recommended:` line rather than withholding the option. It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
 
-### Manual mode — HARD GATE
+### The gate — HARD STOP
 
-Do **NOT** spawn any subagent, create any worktree, or start any delegated work until the user has answered the plan question (one exception: the approval floor below). Present the plan, ask, and **end your turn**.
+Do **NOT** spawn any subagent, create any worktree, or start any delegated work until the user has answered the plan question. There is no exemption, and none is small enough to be worth one — the plan is where the user's judgment enters, and a run that starts before the answer has already spent it. Present the plan, ask, and **end your turn**.
 
 - **Print the whole plan block as message text immediately before the question.** The `AskUserQuestion` preview box clips to `terminal rows − 26` lines and drops the **tail** — which is where `Risks:` and `Recommended:` sit — so it cannot be the only copy. You cannot measure the terminal, so you cannot know whether a given plan fits. Printed text does not clip and stays in the scrollback while the dialog is open.
 - Then ask as a forced choice, with a **digest** of that block as the `preview` on each `go` option: totals, recommendation, what this option changes, top risk, a pointer up to the printed plan, then the per-agent rows last. Clipping then costs the rows, which are printed above in full. On an `adjust` re-ask the rows are the changed ones. Never reduce the _printed_ plan to counts: approving "5 agents, ~300k" audits nothing.
@@ -137,11 +129,11 @@ Hide `full` only where the session cannot build and run tests, and that is the o
 - Do not treat an unrelated next message as approval; if the reply doesn't address the plan, ask again.
 - Do not soften this into a rhetorical question and keep working. The gate fails only when the turn actually ends.
 
-**Approval floor** (delete this paragraph for strict manual): a _single, read-only, fast-tier_ lookup — the moral equivalent of a grep — may run without the gate. Anything more (≥2 agents, any writer, any tier escalation) gates.
+One consequence worth naming, because it is where the gate is most tempting to skip: a plan whose honest recommendation is "almost nothing to delegate" still gets printed and still gets asked. **"Mostly solo" is a plan, not a reason to skip planning** — and it is the recommendation the user is most likely to overrule with information you don't have.
 
-### Auto mode — hard rails
+### Mid-run rails — when a running task comes back to you
 
-Print a 2–4 line plan summary, including the wall-clock estimate the rail measures against, and proceed. Stop and ask the user anyway before:
+These fire **after** the gate, on approved work. They are not a mode: approval covers the plan, and a plan can still run into something only the user can decide. Stop and ask the user before:
 
 - destructive, irreversible, or externally visible actions (pushes, deletes, publishes, messages);
 - more than one writer without worktree isolation;
@@ -149,7 +141,7 @@ Print a 2–4 line plan summary, including the wall-clock estimate the rail meas
 - ambiguity that changes the decomposition (don't guess the user's intent at fan-out scale);
 - delegating work likely to hit permission prompts in an unattended run.
 
-Every rail above assumes you can interrupt. Under the `Workflow` backend you cannot, so in auto mode either plan hand-batched, or size the run so no rail is expected to fire and say which in the launch note.
+Every rail above assumes you can interrupt. Under the `Workflow` backend you cannot. So where any rail is plausibly in reach, either plan hand-batched or size the run so none is expected to fire — and say which, in the plan, **before** the user picks a backend. A rail the chosen backend cannot fire is not a rail.
 
 ## Step 4 — Brief each agent
 

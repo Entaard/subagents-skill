@@ -6,7 +6,7 @@ Copy these; don't improvise the structure. Fields may be trimmed when genuinely 
 
 ```text
 TASK: <one line>
-MODE: manual | auto | plan        RISK: low | medium | high (rubric below)
+RISK: low | medium | high (rubric below)
 TOPOLOGY: <pattern name or custom> — <one-line why>
 PARENT: <the model you are running on> — does synthesis, triage, completion claim
 
@@ -167,7 +167,7 @@ Two lease cases the seven steps don't cover. If the parent takes a writer unit i
 
 ```text
 # Ledger: <task> — <date>
-Mode/cap/budget: ...
+Cap/budget/backend: ...
 Plan: <approved plan or pointer>
 | id | unit | agent/thread | model used | state | evidence | actual tokens |
 Decisions & dropped disagreements: <every one, with reason — silent discard forbidden>

@@ -2,7 +2,7 @@
 
 Copy these; don't improvise the structure. Fields may be trimmed when genuinely irrelevant, never renamed — the parent scans these shapes across many reports, and a renamed field reads as a missing one.
 
-## Orchestration Plan (Step 3)
+## Orchestration Plan (Step 2)
 
 ```text
 TASK: <one line>
@@ -17,7 +17,7 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 | 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)     | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
-Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 3. Both are offered whenever the
+Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 2. Both are offered whenever the
          Workflow tool exists; hand-batched is the default unless the shape favours a script>.
 Acceptance suite: light | full | none — recommended: <which>, because <one line>. <Omit this line and
          the next when the plan has no writer unit or nothing checkable; say which instead.
@@ -32,7 +32,7 @@ Recommended: <the default answer. Name the option, not just "go", whenever the b
 
 **Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
-**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 4 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
+**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
 
 Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what the `Workflow` backend would buy on that row. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
 
@@ -40,7 +40,7 @@ Never write a bare level and never write a dash. A bare `low` is a promise nothi
 
 **Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview. The preview box clips to `terminal rows − 26` lines and **drops the tail**, which is where `Risks:`, `Solo alternative:` and `Recommended:` live. Printed text does not clip. See `claude-code.md`, "The gate dialog", for the measured budgets.
 
-Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 7, hits included.
+Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 6, hits included.
 
 ### Fitting the plan to the gate surface
 
@@ -71,7 +71,7 @@ V1 R opus   ~90k  compliance review of the frozen diff
 
 On an `adjust` re-ask the shape holds and the row list is the changed rows only. Where two `go` variants exist, line 3 is what differs between them, so it differs per option.
 
-## Task brief (Step 4) — every dispatch
+## Task brief (Step 3) — every dispatch
 
 ```text
 Role: <implementer | explorer | reviewer(lens) | verifier | judge>
@@ -100,7 +100,7 @@ Effort: <the level, always, plus the control setting it — agent-file frontmatt
 
 **When an acceptance suite runs** (`patterns.md` #10), three briefs change shape. The blind author's
 `Inputs` are the requirement text and the approved criteria, and nothing else — and it is the one
-dispatch class exempt from "name the decisions already made" (SKILL.md Step 4): it receives the
+dispatch class exempt from "name the decisions already made" (SKILL.md Step 3): it receives the
 decisions' observable consequences, never the decisions. The implementer's brief carries the criterion
 IDs and never the suite path. The verifier's brief carries the suite path and the per-case verdict set,
 pass / fail / `Awaiting human`, with evidence required on each.
@@ -176,7 +176,7 @@ Plan amendments: <any change to an approved row — model, effort, scope, count 
 
 Update on every state change. After compaction or a new session, the ledger plus the repo — not memory of the conversation — is the source of continuity.
 
-## Final message (Step 7) — Result first, then the Orchestration Report
+## Final message (Step 6) — Result first, then the Orchestration Report
 
 Two parts, in this order. The order is structural, not a preference.
 
@@ -191,7 +191,7 @@ that section instead of restating it.
 
 ```text
 OUTCOME: <one line, or a pointer up to the Result section — never a replacement for it>
-Topology: <pattern, N agents, why> (or "solo — gate failed: <reason>")
+Topology: <pattern, N agents, why> (or "solo — recommended and approved: <reason>")
 Agents: <one line each: unit → model actually used → status → key evidence>
 Cost: <N agents, ~tokens actual vs ~estimate, wall clock — say so if no token counts were visible,
        in which case the agent-count and wall-clock rails were the ones in force>

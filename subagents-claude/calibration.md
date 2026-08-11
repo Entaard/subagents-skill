@@ -3,12 +3,12 @@
 What orchestration runs on this machine actually cost, against what was estimated — and what they
 taught.
 
-Read this at **Step 3**, before writing a budget: where a row covers the task class in hand, its
-actuals beat the coarse bands in `contracts.md`. Append one row at **Step 7**, every run — including
+Read this at **Step 2**, before writing a budget: where a row covers the task class in hand, its
+actuals beat the coarse bands in `contracts.md`. Append one row at **Step 6**, every run — including
 the runs where the estimate held. A band you can trust needs its hits recorded next to its misses.
 
 The `note` column is for **lessons, not only costs**: a coordination check that came back negative, a
-failure-ladder stall and what unstuck it, a gate call worth reversing. Write each one so Step 3 can act
+failure-ladder stall and what unstuck it, a gate call worth reversing. Write each one so Step 2 can act
 on it. "Fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is
 not.
 

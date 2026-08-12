@@ -17,8 +17,17 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 | 3 | review of #2 (lens: ...)    | R   | opus (frontier)   | high (verifier)     | bg, after2 | frozen diff    | ~50k        |
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
-Backend: hand-batched | via Workflow — <which, and why; SKILL.md Step 2. Both are offered whenever the
-         Workflow tool exists; hand-batched is the default unless the shape favours a script>.
+Backend: hand-batched, except <row ids> via Workflow — <why, per row group; SKILL.md Step 2. Assign per
+         ROW and record the split as a row-id list — never a per-row column. Hand-batched is the default
+         for any row whose shape does not clearly favour a script. Write `hand-batched (all rows)` when
+         none is scripted. Name here the mid-run rail each scripted row was sized to keep clear of, and
+         what the scripted rows' Effort brackets fall back to under `go — all hand-batched`. With a
+         writer row present and the Workflow tool in session, add which writer rows auto-approve their
+         edits the moment they are scripted — the gate can script one this draft left in hand. Where
+         the plan scripts NOTHING, state the other direction instead: `go — all via Workflow` raises
+         every row to `(workflow)` and auto-approves any writer's edits. Both directions also carry
+         the aggregate rail: print the ceiling the scripted GROUP was sized against, since no single
+         row is ever in reach of a budget or wall-clock rail>.
 Acceptance suite: light | full | none — recommended: <which>, because <one line>. <Omit this line and
          the next when the plan has no writer unit or nothing checkable; say which instead.
          `patterns.md` #10. Its cost is a guess, not a band — see the estimating note below>
@@ -26,15 +35,19 @@ Acceptance suite: light | full | none — recommended: <which>, because <one lin
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
-Recommended: <the default answer. Name the option, not just "go", whenever the backend block puts two
-              options behind that word>.
+Recommended: <the default answer. Two `go` options exist whenever the Workflow tool does, so name which
+              one — "go" alone identifies nothing then>.
 ```
 
 **Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
-**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, because effort is frontmatter there. Under the `Workflow` backend the mechanism is `agent({effort})`, real on *every* row — write `high (workflow)`. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
+**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, because effort is frontmatter there. On a **scripted plain** row the mechanism is `agent({effort})` — write `high (workflow)`. A scripted row that *names a saved agent* passes `agentType` alone, so its frontmatter still sets the effort and the bracket keeps the agent's name — `high (verifier)`, scripted or not. What a script buys is an enforced effort on the rows that had none, not a new mechanism on the rows that already had one. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
 
-Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what the `Workflow` backend would buy on that row. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
+A `(workflow)` bracket is legal **only on a plain row, and only while the `Backend:` line still lists it** — which makes it the one bracket a gate answer can rewrite, in either direction. `go — all hand-batched` collapses those rows to `(no control)`; on a plan that scripts nothing, `go — all via Workflow` raises the **plain** rows to `(workflow)` instead. Saved-agent rows never move in either direction: their frontmatter holds. The `Backend:` line states whichever direction its plan exposes. Otherwise option 2 runs a column the user never approved.
+
+Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what scripting that row would buy. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
+
+**Flow column:** `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, and `bg, per-item after <id>` for the pipeline-per-item flow Step 1 prefers. That third value is not decoration — it is what the backend rule reads to check whether a split straddles a pipeline, which is the case that silently turns a per-item flow into a barrier. (How a per-item stage over N items is numbered — one row or N — is still unsettled: write one row and put the item count in its `done when` clause. **A stage written as one row cannot be split across backends** — the `Backend:` line addresses rows, not the items inside one — so if part of it must be scripted, enumerate the rows instead and accept the wider table.)
 
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
@@ -55,11 +68,11 @@ Where the block still runs past ~30 lines, save it to the session scratchpad as 
 The digest attached to each `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order. A clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
 
 ```text
-# the preview on "go — via Workflow", where the recommendation is the other option
+# the preview on "go — all hand-batched", where the recommendation is the other option
 8 agents (5 parallel) · ~615k · ~55 min · cap 5
-Recommended: hand-batched — exploratory; steering beats saved context
-This option: scripted. Enforces planned effort. No steering.
-             Writer rows auto-accept their edits.
+Recommended: as planned — A1–A2 scripted, the rest by hand
+This option: every row held. Drops the script, and the
+             effort it pinned on A1–A2 falls to no control.
 Top risk: the fix changes sync behaviour on every build
 Full plan printed above ↑   (saved: <path>)
 
@@ -70,6 +83,8 @@ V1 R opus   ~90k  compliance review of the frozen diff
 ```
 
 On an `adjust` re-ask the shape holds and the row list is the changed rows only. Where two `go` variants exist, line 3 is what differs between them, so it differs per option.
+
+**Identical rows may collapse to one digest line with a count** — `M1–M12 W haiku ~15k ea — transform`. That is the one collapse the digest permits, and it exists because a per-row backend split makes wide plans likelier: a 14-row plan cannot otherwise fit its rows in the twelve lines the box gives. Collapse only rows that are genuinely identical bar the id, and never collapse a row whose backend differs from its neighbours' — that is the difference the user is reading.
 
 ## Task brief (Step 3) — every dispatch
 
@@ -167,7 +182,7 @@ Two lease cases the seven steps don't cover. If the parent takes a writer unit i
 
 ```text
 # Ledger: <task> — <date>
-Cap/budget/backend: ...
+Cap/budget/backend split: <cap, budget, and which row ids ran scripted vs hand-batched>
 Plan: <approved plan or pointer>
 | id | unit | agent/thread | model used | state | evidence | actual tokens |
 Decisions & dropped disagreements: <every one, with reason — silent discard forbidden>
@@ -195,7 +210,9 @@ Topology: <pattern, N agents, why> (or "solo — recommended and approved: <reas
 Agents: <one line each: unit → model actually used → status → key evidence>
 Cost: <N agents, ~tokens actual vs ~estimate, wall clock — say so if no token counts were visible,
        in which case the agent-count and wall-clock rails were the ones in force>
-Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none">
+Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none".
+       A backend the USER chose at the gate is not a deviation: name which `go` option ran, and the
+       Effort brackets it set or revoked, under `Topology:` instead>
 Findings: <accepted/rejected/deferred/user-decision counts + the ones that matter>
 Verification: <checks run and outcomes. Where an acceptance suite ran, separate MEASURED passes — a
                      command executed — from JUDGED passes, where a case was read and ruled on. A judged

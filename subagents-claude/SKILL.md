@@ -80,12 +80,21 @@ Draft the **Orchestration Plan** (template in `references/contracts.md` — open
 
 **Write what will actually run, not a category of it.** A tier is how you choose; the user can only audit a name. Resolve every tier to a concrete model at plan time, then keep the tier in brackets: `haiku (fast)`. Effort follows the same rule, with one addition: **always name the level, then name what sets it** — `low (explorer)`, `high (workflow)`, or `medium (no control)` where nothing can enforce it. Never a dash. The level is the target you chose in Step 3, and it belongs in the plan even when the backend cannot hold you to it; that is exactly what tells the user what switching backend would buy. `contracts.md` gives both column rules in detail.
 
-**Choose the execution backend, and put it in the plan.** Two ways to run an approved plan:
+**Assign the execution backend per row, and put the split in the plan.** Two ways to run an approved row:
 
-- **Hand-batched** (default) — one `Agent` call per row, batched per wave. Keeps every mid-run lever: steering a running agent, triaging a report as it lands, asking the user, taking a unit inline.
-- **Via `Workflow`** — the rows become a script the harness runs. Enforces the planned effort on _every_ row, not just the saved-agent ones, and adds live token display and resumable runs; costs the entire steering layer, since a running script takes no input and recovery is edit-and-resume, which is a respawn rather than a steer. **Its subagents always run in `acceptEdits`** regardless of the session's mode, so any writer row auto-approves its file edits — say that in the plan before the user approves this backend.
+- **Hand-batched** (default) — one `Agent` call, batched per wave. Keeps every mid-run lever: steering a running agent, triaging a report as it lands, asking the user, taking a unit inline.
+- **Via `Workflow`** — the rows become a script the harness runs. Enforces the planned effort on _every_ row it covers, not just the saved-agent ones, and adds live token display and resumable runs; costs the entire steering layer on those rows, since a running script takes no input and recovery is edit-and-resume, which is a respawn rather than a steer.
 
-Offer it whenever the tool exists — there is no unit-count floor. The choice belongs to the user, so put both backends in front of them and let the tradeoff decide: a uniform transform over many known items is where the script pays off most, while on a small or exploratory run intervention is usually worth more than the context saved, since reports are _asked_ for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival. Say which way that cuts for _this_ plan in the `Recommended:` line rather than withholding the option. It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
+**One plan may use both, and usually should.** The `Workflow` call returns as soon as it launches and notifies on completion, so a script runs _beside_ your hand-batched dispatches rather than instead of them — nothing forces a wave, or a plan, to hold one backend. That is what the split buys: script the uniform transform over many known items, and keep the exploratory wave, the triage, and the fixes in hand, where intervention is worth more than the context saved. Reports are _asked_ for at 1–2k each and nothing enforces it, so a runaway one is yours to truncate on arrival — which you can only do on a row you are still holding. Record the split as a **row-id list** on the plan's `Backend:` line, and say which way the tradeoff cuts for _this_ plan in `Recommended:`.
+
+Four consequences belong to the plan, not just to the script:
+
+- **`acceptEdits` is not optional inside a script.** A workflow's subagents always run in `acceptEdits` regardless of the session's mode, so a writer row auto-approves its file edits the moment it is scripted. Whenever the plan carries a writer row _and_ the `Workflow` tool exists, name those rows and say this **before** the user picks — the gate can script a writer row the drafted split left in hand, so it is the option set that makes the disclosure due, never the split you happened to draft.
+- **The approved cap covers both backends at once, and a script cannot re-read it.** A script chunks only against its own rows, cannot see the hand-batched units in flight beside it, and takes no input once running — so "cap minus what you are holding" is a _moving_ number that has to be fixed before launch. Size the script to the approved cap **minus the most held rows that can be in flight during its lifetime**, and print that number in the plan. Sizing to the instantaneous figure instead either exceeds the cap the moment a held row starts, or wastes the headroom for the rest of the run.
+- **A script's results land only when it returns, so a split can silently become a barrier.** There is no per-row notification out of a running script, only the launch's return value — so a held row cannot consume a scripted row's output per item. **A pipeline-per-item flow that straddles the split turns into a barrier at the split.** Script the whole pipeline, where `pipeline()` preserves the per-item flow, or hold all of it. If it genuinely must straddle, say in the plan that the flow degrades there: Step 1 chose that flow and the user approves it along with the rows.
+- **Effort is pinned only where the script reaches, and only where nothing pinned it already.** A row's `(workflow)` bracket is legal only on a plain row, and only while the `Backend:` line still lists it; a scripted saved-agent row passes `agentType` alone and keeps its own bracket. The column rule in `contracts.md` has the rest, including what those rows fall back to if the gate collapses the split.
+
+It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan every row hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
 
 ### The gate — HARD STOP
 
@@ -104,17 +113,21 @@ Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min.
 4. plan-only — save the plan, run nothing
 ```
 
-Whenever the `Workflow` tool exists the backend is a real choice, and it belongs _in_ the forced choice, not in prose the user has already scrolled past. Use this shape for every plan in a session that has the tool. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
+Whenever the `Workflow` tool exists the backend split is a real decision, and it belongs _in_ the forced choice, not in prose the user has already scrolled past. Use this shape for every plan in a session that has the tool. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
 
 ```
 Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-only" to save it and run nothing.
-1. go — via Workflow  — scripted; enforces the planned effort, no mid-run steering
-2. go — hand-batched  — one Agent call per row; every mid-run lever kept
-3. adjust             — change cap / models / efforts / budget / topology / backend
-4. solo               — no subagents; I do it inline
+1. go — as planned       — <name the split: e.g. "rows M1–M12 scripted, the rest by hand">
+2. go — all hand-batched — every row held; drops the script and the effort it pinned on <rows>
+3. adjust                — change cap / models / efforts / budget / topology / the backend split
+4. solo                  — no subagents; I do it inline
 ```
 
-The ordering is not a recommendation — hand-batched is still the default whenever the shape doesn't clearly favour a script. Name which one you recommend in the plan's `Recommended:` line, since "go" alone no longer identifies a single option.
+**Option 2 is always the collapse that only adds levers** — which is why it names what it takes away. Rows the plan scripted read `high (workflow)`; hand-batched they fall to whatever still backs them, `(no control)` on a plain dispatch. An option that silently downgrades an approved column is a different plan than the one printed, so put the loss in the option's own description.
+
+**Where the plan scripted no row, option 2 flips direction:** `go — all via Workflow` — and its description names _that_ cost instead: the steering layer on every row, plus auto-approved edits on any writer. The flip is keyed to the **tool being present, not to the plan**. With no `Workflow` tool in the session there is no second `go` at all, and the four options are the block printed above this one.
+
+The ordering is not a recommendation — hand-batched is still the default for any row whose shape doesn't clearly favour a script. Name which option you recommend in the plan's `Recommended:` line, since "go" alone no longer identifies a single one.
 
 **Second question — the acceptance suite.** Where the plan carries a writer unit _and_ checkable criteria can be extracted without inventing behavior, add one more question to the **same** `AskUserQuestion` call (`references/patterns.md` #10 holds both of those conditions and the artifact). Three options. Unlike the backend pair above, this question _does_ carry its signal in the list: put the recommended option first and tag it inline.
 
@@ -127,7 +140,7 @@ Acceptance suite? Cases are authored blind, before the code exists.
 
 Hide `full` only where the session cannot build and run tests, and that is the only option this question ever removes. Nothing else does: repo coverage that already spans the criteria, a diff that fits one sentence, a risk-rubric hard trigger, criteria that would flake as asserts — each moves the "(Recommended)" tag and the one-line reason, never the option list. Precedence when they conflict: a hard trigger outranks existing coverage, which outranks the one-sentence-diff signal; flake-prone criteria only choose between `light` and `full`, never argue for `none`. The criteria text goes in the printed plan block, verbatim — it is long, it is what the user co-signs, and a preview would clip it. Each option's `preview` then carries the deciding signal and that form's cost estimate, in that order. Where the plan has no writer unit, or nothing checkable can be extracted, **do not ask** — say which, in one line, in the plan. A `solo` answer on the main question voids this one: with no subagents there is no blind author.
 
-- On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`.
+- On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`. **A backend adjust changes no row cell**, so re-presenting "the rows that changed" would show nothing: re-present the `Backend:` line, the `acceptEdits` disclosure, and the Effort bracket of every row that moved.
 - Do not treat an unrelated next message as approval; if the reply doesn't address the plan, ask again.
 - Do not soften this into a rhetorical question and keep working. The gate fails only when the turn actually ends.
 
@@ -143,7 +156,7 @@ These fire **after** the gate, on approved work. They are not a mode: approval c
 - ambiguity that changes the decomposition (don't guess the user's intent at fan-out scale);
 - delegating work likely to hit permission prompts in an unattended run.
 
-Every rail above assumes you can interrupt. Under the `Workflow` backend you cannot. So where any rail is plausibly in reach, either plan hand-batched or size the run so none is expected to fire — and say which, in the plan, **before** the user picks a backend. A rail the chosen backend cannot fire is not a rail.
+Every rail above assumes you can interrupt. Inside a script you cannot. So apply the test **row by row**: a row where a rail is plausibly in reach stays hand-batched, and a row you script is one you have sized so none is expected to fire. Say which, in the plan — in the `Backend:` line's own reason, where the user reads the split — and say it **before** the user picks. One rail resists the row-by-row test: the budget, agent-count and wall-clock rail is an **aggregate**, so no single row is ever "in reach" of it. Test that one against the **scripted group as a whole** and print the group's ceiling; a group that could cross the rail before it returns is too big to script. A rail no in-flight row can fire is not a rail.
 
 ## Step 3 — Brief each agent
 
@@ -172,7 +185,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Correctness/security review, verification   | frontier             | high+         |
 | Synthesis, triage, completion claim         | **the parent — you** | —             |
 
-That effort column is a target. Pick it for every unit — it goes in the plan either way. What changes by backend is only whether a control enforces it. Three saved agent files make it real for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only) — dispatch by agent type and the cell reads `low (explorer)` rather than `low (no control)`. The `Workflow` backend enforces it on every row at once. `references/claude-code.md` has their exact scopes and the bar for adding another.
+That effort column is a target. Pick it for every unit — it goes in the plan either way. What changes by backend is only whether a control enforces it. Three saved agent files make it real for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), and **`web-researcher`** (standard, medium, web+read only) — dispatch by agent type and the cell reads `low (explorer)` rather than `low (no control)`. A **scripted plain** row gets it from `agent({effort})` instead — so the split you draft decides which of the *unbacked* rows carry an enforced effort and which carry only a target. A scripted row named to a saved agent keeps that agent's bracket; the script adds nothing it did not already have. `references/claude-code.md` has their exact scopes and the bar for adding another.
 
 - Escalate one tier on retry rather than repeating the same dispatch.
 - Reviewers: read-only _role_ always; a writable _sandbox_ only when verification must write (caches, screenshots, builds) — with a no-source-edit rule in the contract.
@@ -180,8 +193,8 @@ That effort column is a target. Pick it for every unit — it goes in the plan e
 
 ## Step 4 — Execute
 
-- **If the approved backend is `Workflow`, most of this step belongs to the script.** Write it from the plan (translation in the harness reference), launch it, keep the ledger, and go to Step 5. A failed unit comes back in the return value rather than mid-run, so the ladder below collapses to: re-run that row with a sharpened brief or a higher tier, or take it inline. Everything else here describes the hand-batched path.
-- Launch independent units as **one parallel batch up to the cap** (batching mechanics per harness reference). Background by default; synchronous only when the result blocks your next step.
+- **Every row the plan scripted belongs to the script; every other row follows the hand-batched path in the rest of this step.** Write each script from the plan (translation in the harness reference) — **one launch per run of adjacent scripted rows**, not one per wave, because a script's own `parallel()`/`pipeline()` structure already carries the plan's flow across those rows. **Adjacent means adjacent in the flow, not in the table**: scripted rows share a launch when no row you are holding feeds a later one of them. Order the launch against those held rows, too — **anything that could change the decomposition lands before a script it could invalidate starts**, because nothing stops a script once it is running. It returns at launch, so keep working the rows you held beside it, and bring the ledger current when it lands rather than waiting on it. A failed scripted row comes back in the return value rather than mid-run, so for that row the ladder below collapses to: re-run it with a sharpened brief or a higher tier, or take it inline. Note where a re-run lands — **a resumed script re-enters `acceptEdits`**, so a scripted writer row retried that way is unattended again.
+- Launch independent units as **one parallel batch up to the cap** (batching mechanics per harness reference) — on a mixed plan, up to the cap _minus the rows a script is running beside you_, since both backends draw on the one approved number. Background by default; synchronous only when the result blocks your next step.
 - **Dispatch the model the approved row named.** Deciding mid-run that a unit needs more judgment is often correct; changing its model silently is not — the user approved one plan while a different one ran. State the change and the reason in one line before dispatching, record it in the ledger, and list it under `Plan deviations` in the report. Tier escalation on the failure ladder below is already part of the approved plan: log it, don't re-gate it.
 - While agents run, do non-overlapping read-only work. **Never fabricate or predict a pending agent's result.** Don't poll a harness that notifies.
 - Any writer in a shared tree → run the snapshot protocol (contracts reference): baseline → write lease → stabilize → freeze → review → triage → new lease → verify. **`/rewind` will not undo what a subagent wrote** (harness reference, Cautions), so that baseline is the only way back — take it before the writer starts, not after something looks wrong.

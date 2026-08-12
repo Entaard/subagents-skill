@@ -18,7 +18,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** same change across many sites (API migration, framework upgrade, mass rename with judgment).
 **Flow:** discovery agent produces the complete work-list (the parent spot-checks completeness — a missed site is silent scope loss) → pipeline each unit through transform → verify, concurrency-capped; parallel writers only via per-unit worktrees, with one integration owner merging in a defined order → compose check over the whole.
-**Rules:** per-item pipeline, not waves — unit 12 gets verified while unit 40 transforms. Log every skipped/failed unit in the ledger.
+**Rules:** per-item pipeline, not waves — unit 12 gets verified while unit 40 transforms. Log every skipped/failed unit in the ledger. **This is the pattern most likely to want a mixed backend, and the one where the split is most dangerous:** scripting the transform stage while holding the verify stage collapses that per-item flow into a barrier, because a script's results land only when it returns (SKILL.md Step 2). Script the whole pipeline or hold all of it.
 
 ## 4. Bake-off / judge panel
 

@@ -58,6 +58,33 @@ done
 
 rsync -av "$agents_src" "$agents_dest"
 
+# Ecosystem skills (clean-code, diff-review) live beside the subagents skill in ~/.claude/skills/,
+# one directory per skill. Their names are chosen to coexist with the separately installed
+# mattpocock skills (tdd, code-review); this script never touches those. Same conflict-safe copy as
+# agents above: back up a same-named skill with different content, never delete skills this repo
+# doesn't own, and refuse to replace a symlink — a symlink is another installer's property.
+eco_src="$repo_dir/claude-skills/"
+eco_dest="$HOME/.claude/skills/"
+
+if [ -d "$eco_src" ]; then
+  for d in "$eco_src"*/; do
+    [ -d "$d" ] || continue
+    name="$(basename "$d")"
+    existing="$eco_dest$name"
+    if [ -L "$existing" ]; then
+      echo "NOTE: $existing is a symlink owned by another installer; skipping $name."
+      continue
+    fi
+    if [ -d "$existing" ] && ! diff -rq "$d" "$existing" >/dev/null 2>&1; then
+      rm -rf "$existing.bak"
+      cp -R "$existing" "$existing.bak"
+      echo "NOTE: replaced a different $name skill; previous version saved to $existing.bak"
+    fi
+    mkdir -p "$existing"
+    rsync -av --delete "$d" "$existing/"
+  done
+fi
+
 # Output styles live in ~/.claude/output-styles/, one file per style. Same conflict-safe copy as
 # agents above: back up anything with the same filename but different content, never delete styles
 # this repo doesn't own.
@@ -80,6 +107,9 @@ rsync -av "$styles_src" "$styles_dest"
 echo
 echo "Installed subagents skill  -> $dest"
 echo "Installed subagent agents  -> $agents_dest"
+if [ -d "$eco_src" ]; then
+  echo "Installed ecosystem skills -> $eco_dest (from claude-skills/)"
+fi
 echo "Installed output styles    -> $styles_dest"
 echo
 cat <<'TIP'

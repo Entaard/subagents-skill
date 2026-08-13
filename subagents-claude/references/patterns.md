@@ -11,8 +11,8 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 ## 2. Implement → review → fix (single increment)
 
 **When:** one bounded implementation unit at medium+ risk.
-**Flow:** (optional ≤2 explorers for real unknowns) → one writer under lease → deterministic checks → freeze → 1–2 lens reviewers on the frozen diff (lenses from the risk, e.g. behavioral correctness vs. integration/lifecycle) → parent triage → original writer fixes accepted findings → targeted verification.
-**Rules:** reviewers get the same brief and diff, can't see each other, may return "no findings." Spec-compliance and quality are separate verdicts. One review + one fix-verification pass by default.
+**Flow:** (optional ≤2 explorers for real unknowns) → one writer under lease (the `implementer` saved agent when delegated — it preloads `clean-code`; or the parent inline) → deterministic checks → freeze → 1–2 lens reviewers on the frozen diff (diff-review's Spec and Standards axes where that skill is installed — see Rules; otherwise lenses from the risk, e.g. behavioral correctness vs. integration/lifecycle) → parent triage → original writer fixes accepted findings → targeted verification.
+**Rules:** reviewers get the same brief and diff, can't see each other, may return "no findings." Spec-compliance and quality are separate verdicts — and where the `diff-review` skill is installed, its Spec and Standards reader briefs are those two reviewers' briefs, verbatim (its inside-a-run mode: the axes become plan rows behind the gate; the parent aggregates, `diff-review` does not). One review + one fix-verification pass by default.
 
 ## 3. Migration / repo-wide transform (pipeline)
 

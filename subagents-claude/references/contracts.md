@@ -32,6 +32,8 @@ Acceptance suite: light | full | none — recommended: <which>, because <one lin
          the next when the plan has no writer unit or nothing checkable; say which instead.
          `patterns.md` #10. Its cost is a guess, not a band — see the estimating note below>
          Criteria: R1 <text>; R2 <text>; ...
+Scouting: <N explorer scouts, rounds where two, ~actual tokens — already spent before this plan
+        printed (SKILL.md Step 1). Omit when none ran>.
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
@@ -52,6 +54,8 @@ Never write a bare level and never write a dash. A bare `low` is a promise nothi
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
 **Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview. The preview box clips to `terminal rows − 26` lines and **drops the tail**, which is where `Risks:`, `Solo alternative:` and `Recommended:` live. Printed text does not clip. See `claude-code.md`, "The gate dialog", for the measured budgets.
+
+**On `plan-only`, this block is also the file** — saved and resumed per SKILL.md, "Saving and resuming a plan".
 
 Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 6, hits included.
 

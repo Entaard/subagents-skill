@@ -1,6 +1,6 @@
 ---
 name: subagents
-description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use for a task big enough to want a fleet designed for it. Always proposes a plan (agents, cap, the named model and effort each, cost) and waits for your approval before spawning anything. A mostly-solo plan is a valid recommendation, and yours to overrule.
+description: Plan and run subagent orchestration — parallel research, multi-part implementation, migrations, independent review. Use for a task big enough to want a fleet designed for it. Always proposes a plan (agents, cap, the named model and effort each, cost) and waits for your approval before spawning anything beyond bounded read-only scouts, disclosed in the plan. A mostly-solo plan is a valid recommendation, and yours to overrule.
 argument-hint: "<task>"
 disable-model-invocation: true
 ---
@@ -25,11 +25,13 @@ Three principles govern everything below:
 | Fix rounds per unit      | 2 delegated attempts (steer once → one tier up), then inline or ask — cut short on a repeated failure signature                                                                                                                                     |
 | Review depth             | one review round (1–2 reviewers) + one targeted fix-verification round; adversarial verification keeps its own counts; discovery sweeps stop on dry rounds instead                                                                                  |
 
-There is one way to run: work the steps, plan, and **stop at the gate** (Step 2) until the user answers. No invocation keyword changes that, and nothing runs before the answer. A user who wants the plan without a run says so at the gate — that is what `plan-only` is for.
+There is one way to run: work the steps, plan, and **stop at the gate** (Step 2) until the user answers. No invocation keyword changes that, and nothing beyond Step 1's pre-plan scouts runs before the answer. A user who wants the plan without a run says so at the gate — that is what `plan-only` is for.
 
 ## Step 1 — Decompose
 
 Whether the task is worth agents at all is not yours to decide: the user answered it by invoking this skill. What is still open is **which units are safe to hand out, and which the parent must keep** — and that question is answered per unit, not per task. Split the work first, then test each unit against the criteria below.
+
+**Scout before you study.** Splitting needs a map of the task, and the parent reading the codebase raw to build one is the exact bulk reading this skill keeps out of parent context — spent in the one window that must stay sharp for triage and integration later. Where the map takes more than a few targeted reads, dispatch **pre-plan scouts**: `explorer` agents, each briefed with a checklist and distilling back, the wave sized to the task's surfaces — a complete map outranks the cost of drawing it, so a surface left uncovered to save a dispatch is the wrong trade. Three bounds make this the one dispatch that legally precedes the gate, and none of them is a count: the saved `explorer` type only, because its file enforces read-only with no shell and no network (not installed → no scouts; study inline); at most two rounds, the second only for follow-ups the first surfaced; and the actual cost printed on the plan's `Scouting:` line as spend that has already happened. Scouts appear in Step 6's agent and cost lines like any other unit. They are still spending — a task you can decompose from what you already know gets none, and one area's small lookups are still one scout with a checklist, not N.
 
 - Split by independence: each unit is separately checkable, and no two units need to exchange information mid-flight. If two units keep passing data to each other, merge or serialize them.
 - **Split by context boundary, not by problem type** — where context must not cross, and where you'd want to inspect or intervene. Don't slice one unit of production work into sequential phases handed agent-to-agent: each handoff loses fidelity, and the phases of one deliverable belong to one agent. Review and verification stages are the deliberate exception — they exist _because_ the handoff drops the writer's context. A ten-step job does not need ten units.
@@ -74,6 +76,7 @@ Read `references/claude-code.md` before drafting. You need it to turn tiers into
 Draft the **Orchestration Plan** (template in `references/contracts.md` — open it now; Steps 2 through 6 all use its shapes):
 
 - Per-agent table: id, task, reader/writer, **named model** (with its tier in brackets), effort and how it is set, background/sync, isolation, est. tokens.
+- The `Scouting:` line where pre-plan scouts ran (Step 1) — count and **actual** tokens, marked already spent. No scouts → omit the line.
 - A writer unit's frozen-diff review rows come from the `diff-review` skill where it is installed: its Spec and Standards reader briefs go into this plan verbatim, as two reader rows behind this gate — whatever pattern the plan uses. Step 5 consumes their reports.
 - Concurrency cap, total budget estimate, expected wall clock.
 - Risks, and the solo alternative with its tradeoff when the call is close.
@@ -99,7 +102,7 @@ It needs the user's explicit opt-in either way, and only you can drive it — su
 
 ### The gate — HARD STOP
 
-Do **NOT** spawn any subagent, create any worktree, or start any delegated work until the user has answered the plan question. There is no exemption, and none is small enough to be worth one — the plan is where the user's judgment enters, and a run that starts before the answer has already spent it. Present the plan, ask, and **end your turn**.
+Do **NOT** spawn any subagent, create any worktree, or start any delegated work until the user has answered the plan question. The one dispatch that precedes the answer is Step 1's pre-plan scouts — bounded there, and already printed on the plan's `Scouting:` line by the time you ask. Beyond them there is no exemption, and none is small enough to be worth one — the plan is where the user's judgment enters, and a run that starts before the answer has already spent it. Present the plan, ask, and **end your turn**.
 
 - **Print the whole plan block as message text immediately before the question.** The `AskUserQuestion` preview box clips to `terminal rows − 26` lines and drops the **tail** — which is where `Risks:` and `Recommended:` sit — so it cannot be the only copy. You cannot measure the terminal, so you cannot know whether a given plan fits. Printed text does not clip and stays in the scrollback while the dialog is open.
 - Then ask as a forced choice, with a **digest** of that block as the `preview` on each `go` option: totals, recommendation, what this option changes, top risk, a pointer up to the printed plan, then the per-agent rows last. Clipping then costs the rows, which are printed above in full. On an `adjust` re-ask the rows are the changed ones. Never reduce the _printed_ plan to counts: approving "5 agents, ~300k" audits nothing.
@@ -146,6 +149,14 @@ Hide `full` only where the session cannot build and run tests, and that is the o
 - Do not soften this into a rhetorical question and keep working. The gate fails only when the turn actually ends.
 
 One consequence worth naming, because it is where the gate is most tempting to skip: a plan whose honest recommendation is "almost nothing to delegate" still gets printed and still gets asked. **"Mostly solo" is a plan, not a reason to skip planning** — and it is the recommendation the user is most likely to overrule with information you don't have.
+
+### Saving and resuming a plan
+
+`plan-only` writes the plan before the turn ends: the full block, headed by the date and the git revision it was drafted against, to a **durable gitignored path** — never the session scratchpad, which the next session cannot find (`references/claude-code.md`, Cautions). Print the path.
+
+A session invoked with a saved plan (`/subagents <path to the file>`) skips the drafting, never the gate. Read the file, then re-validate what a new session silently changes: the recorded revision against the live tree, the Model column against the live session — the `CLAUDE_CODE_SUBAGENT_MODEL` check and tier resolution run again — and the `Backend:` line against whether this session has the `Workflow` tool. Re-present the plan with stale rows marked as amendments, and stop at the gate as always: `plan-only` saved a plan, not an approval.
+
+The split is also the answer to an expensive planning phase: plan in one session, answer `plan-only`, execute from a fresh window that reads the file instead of re-deriving it. The study cost dies with the disposable session; triage and integration get the headroom.
 
 ### Mid-run rails — when a running task comes back to you
 

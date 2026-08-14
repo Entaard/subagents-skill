@@ -36,7 +36,7 @@ fi
 # directory. No --delete here — other agents in that directory are not this script's to remove.
 #
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
-# any project, based on their `description` field. All three descriptions are written to say they are
+# any project, based on their `description` field. All the descriptions are written to say they are
 # dispatched by name from an approved orchestration plan, and to send ordinary lookups to the
 # built-in Explore agent instead, so they should not capture routine work. Delete them from
 # ~/.claude/agents/ if you would rather they not exist outside this skill.
@@ -45,7 +45,7 @@ agents_dest="$HOME/.claude/agents/"
 
 mkdir -p "$agents_dest"
 
-# 'explorer', 'verifier' and 'web-researcher' are generic enough to collide with an agent you
+# Names like 'explorer' or 'implementer' are generic enough to collide with an agent you
 # already wrote. Back up anything we are about to replace rather than overwriting it silently.
 for f in "$agents_src"*.md; do
   name="$(basename "$f")"

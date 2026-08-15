@@ -9,9 +9,13 @@ dest="$HOME/.claude/skills/subagents/"
 
 mkdir -p "$dest"
 
-# calibration.md is excluded from the sync on purpose: it accumulates real run costs on this
-# machine, and --delete would wipe them on every update. It is user data living in a synced tree.
-rsync -av --delete --exclude='calibration.md' "$src" "$dest"
+# Two files are excluded from the sync on purpose: calibration.md accumulates real run costs on
+# this machine, and calibration-archive.md (created by /agents-self-reflect) holds its retired
+# rows. --delete would wipe both on every update. They are user data living in a synced tree.
+# Everything else under this dir is managed: a user file placed here is removed on re-install
+# (rsync announces each deletion). The leading / anchors each pattern to the top of the synced
+# dir, so a same-named file deeper in the tree is still synced normally.
+rsync -av --delete --exclude='/calibration.md' --exclude='/calibration-archive.md' "$src" "$dest"
 
 # Seed the calibration log on first install only — never overwrite accumulated actuals.
 if [ ! -f "${dest}calibration.md" ]; then
@@ -19,15 +23,19 @@ if [ ! -f "${dest}calibration.md" ]; then
   echo "Seeded calibration log     -> ${dest}calibration.md"
 else
   # The rows in an existing calibration.md are user data, so we leave the file alone. But the text
-  # ABOVE the table is skill-authored guidance, and that does change between versions. Without this
-  # notice, a guidance change would never reach anyone who already installed. Reconciling is the
-  # user's call: only they can tell a seed row from one of their own.
-  header_src="$(sed -n '1,/^| date |/p' "${src}calibration.md")"
-  header_dest="$(sed -n '1,/^| date |/p' "${dest}calibration.md")"
+  # ABOVE the first "## " section heading is the skill-authored contract, and that does change
+  # between versions. Without this notice, a guidance change would never reach anyone who already
+  # installed. The comparison runs from the top of the file through the first "## " heading line
+  # (sed's range is end-inclusive); everything below that line holds user data (bands, rules,
+  # rows) and stays out of it. Reconciling is the user's call: only they can tell a seed row from
+  # one of their own.
+  header_src="$(sed -n '1,/^## /p' "${src}calibration.md")"
+  header_dest="$(sed -n '1,/^## /p' "${dest}calibration.md")"
   if [ "$header_src" != "$header_dest" ]; then
     echo
     echo "NOTE: calibration.md guidance changed in this version. Your copy was left untouched,"
-    echo "      because it holds your accumulated rows. To see what moved above the table:"
+    echo "      because it holds your accumulated rows. This note repeats until the text above the"
+    echo "      first '## ' heading in your copy matches the new seed's. To see what moved:"
     echo "        diff ${src}calibration.md ${dest}calibration.md"
   fi
 fi

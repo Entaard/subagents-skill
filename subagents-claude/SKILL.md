@@ -71,7 +71,7 @@ Pick a topology from `references/patterns.md` when one fits (research sweep, imp
 
 ## Step 2 — Plan, then gate
 
-Read `references/claude-code.md` before drafting. You need it to turn tiers into the model names the plan has to show, and to know which knobs this harness really exposes. Read `calibration.md` too: the bands in `contracts.md` are priors, and that file holds what runs here actually cost. Where a row covers the same task class, its actuals beat the band — cite the row in the plan, so the user can see the estimate has evidence behind it.
+Read `references/claude-code.md` before drafting. You need it to turn tiers into the model names the plan has to show, and to know which knobs this harness really exposes. Read `calibration.md` too: the bands in `contracts.md` are priors, and that file holds what runs here actually cost. Where one of its Bands lines or rows covers the task class, its actuals beat the band — cite it in the plan, so the user can see the estimate has evidence behind it.
 
 Draft the **Orchestration Plan** (template in `references/contracts.md` — open it now; Steps 2 through 6 all use its shapes):
 
@@ -237,7 +237,7 @@ The order is structural because `OUTCOME:` is one line inside a template, and a 
 Two closing obligations, cheap and easy to skip:
 
 - **Coordination check.** Did any result depend on the agents being independent — a disagreement, a refutation, something visible only across angles — or would one agent at the same budget have matched it? In the one published analysis of this (Anthropic's research system, on BrowseComp), token spend alone explained 80% of the variance in outcomes. This is the only line here that can falsify the skill's own premise, so answer honestly: "the fan-out bought nothing" is a real result.
-- **Append one row to `calibration.md`** — the run's actuals and the lesson a future run needs, per that file's own instructions. The file is outside the working directory, so the write may prompt or be refused — if it doesn't land, say so under `Gaps` and put the row in the report instead.
+- **Append one row to `calibration.md`** — the run's actuals and the lesson a future run needs, per that file's own instructions. The file is outside the working directory, so the write may prompt or be refused — if it doesn't land, say so under `Gaps` and put the row in the report instead. Where one of the consolidation triggers holds — the `agents-self-reflect` skill carries the canonical list (the log's header mirrors it once consolidated) — add `Consolidation due: <reason>` to the report: the user runs `/agents-self-reflect`; this skill never does.
 
 ## Stop rule
 
@@ -252,4 +252,4 @@ Default one review round + one fix-verification round. Another full review only 
 - `references/contracts.md` — plan, brief, report, finding schema, risk rubric, snapshot protocol, ledger. Open it at Step 2 and keep it open through Step 6.
 - `references/patterns.md` — orchestration topologies and per-domain evidence menus. Read at Step 1.
 - `references/claude-code.md` — Claude Code mechanics, the tier → model resolution procedure, effort controls. Read at Step 2.
-- `calibration.md` — actual costs and lessons from past runs; the skill's only memory across tasks. Read at Step 2, appended at Step 6. Grows on your machine; never overwritten by an update.
+- `calibration.md` — actual costs and lessons from past runs; the skill's only memory across tasks. Read at Step 2, appended at Step 6. Grows on your machine; never overwritten by an update. Its companion `calibration-archive.md` — created by the user-invoked `agents-self-reflect` skill — holds retired rows verbatim and is never read at Step 2.

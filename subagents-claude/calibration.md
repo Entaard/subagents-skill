@@ -42,22 +42,63 @@ machine. The part of a band that travels (a ratio, a shape) is named in its Qual
 
 - Estimate from the corpus a unit must hold and the lenses it must apply — never from the size of
   the deliverable or the name of the role. Add 60–150% where the unit reads widely before it
-  reasons. Machine-independent. (×3, 2026-08-04 → 2026-08-05, seed.)
+  reasons. Machine-independent. (×5, 2026-08-04 → 2026-08-07, seed + author's log; **promoted
+  2026-08-15** — `references/contracts.md`, estimating note.)
+- Price review and verify as a pair: the fix-verification round has never come back empty, and four
+  times cost more than the review itself — a fresh or full-mandate continuation re-reads the whole
+  corpus, so retained context makes the round cheaper to brief, not to run. Measured exception:
+  steering the same verifier thread for a narrow re-verdict on named fixes ran ~5× cheaper than a
+  fresh dispatch. Machine-independent. (×6, 2026-08-05 → 2026-08-15, author's log; **promoted
+  2026-08-15** — `references/contracts.md`, estimating note.)
+- A claim checklist prices a review lens at its band's floor only when every item settles in one
+  look; an item quantified over the corpus costs an open mandate — price a lens by its widest
+  question. Machine-independent. (×3, 2026-08-11 → 2026-08-12, author's log; **promoted
+  2026-08-15** — `references/contracts.md`, estimating note.)
 - Bands over-estimate too: a single lens over a corpus it need not cross-check against a second
   document runs below band. Machine-independent. (×1, 2026-08-05, seed.)
 
 ### Step 3, briefing
 
-- Name a web brief's target URLs. Brief style, not task class, sets web-research cost — naming the
-  sources is the cheapest single lever in this file. Machine-independent. (×1, 2026-08-06, seed.)
+- Name a brief's ground truth outright — exact files, line numbers, URLs, measured baselines, and
+  the harness to measure with. ~2–2.5× cheaper than an open-ended brief and fewer failures, across
+  fetching, code, and prose; brief style, not task class, sets the cost. Machine-independent. (×5,
+  2026-08-05 → 2026-08-12, seed + author's log; **promoted 2026-08-15** — SKILL.md Step 3 and the
+  task-brief template. Supersedes the narrower "name a web brief's target URLs", ×1 seed.)
+- Grep the claim before you brief it, and cite only what the named artifact contains — a pointer
+  into a transcript the agent cannot read is a briefing error. Machine-independent. (×3,
+  2026-08-07 → 2026-08-12, author's log; **promoted 2026-08-15** — SKILL.md Step 3.)
+
+### Step 4, execution
+
+- Isolation discipline covers every mutating unit and the parent itself: worktrees for
+  mutation-probing reviewers, prove the worktree recipe before launch, prune changed worktrees each
+  wave, snapshot the parent's own tree, commit explicit paths while agents run. Machine-independent.
+  (×5, 2026-08-06 → 2026-08-08, author's log; **promoted 2026-08-15** — SKILL.md Step 4.)
 
 ### Step 5, verification
 
+- Point an adversarial pass at the parent's own fixes, claims, and recommendations — the fix round
+  is where unsourced confidence enters, and the refuter aimed there has paid on every dispatch.
+  Machine-independent. (×7, 2026-08-06 → 2026-08-15, seed + author's log; **promoted 2026-08-15** —
+  SKILL.md Step 5.)
+- Units that independently construct the same specific finding by different routes are strong
+  evidence for it; agreement that nothing is wrong proves nothing. Machine-independent. (×5
+  instances, 2026-08-07 → 2026-08-13, author's log; **promoted 2026-08-15** — SKILL.md Step 5 and
+  `references/patterns.md` #4.)
+- Red-check a blind acceptance suite at baseline before believing it: write the test, prove it
+  fails on the old code, then trust it. Machine-independent. (×4, 2026-08-07 → 2026-08-08, author's
+  log; **promoted 2026-08-15** — already carried by `references/patterns.md` #10 and SKILL.md
+  Step 5.)
 - When the deliverable includes a file the installer treats specially, add an execute-the-installer
-  check; a reviewer reading the diff cannot see it. Machine-independent. (×1, 2026-08-05, seed.)
-- Run the maker/checker diversity pass on your own fix-round edits, not only on the artifact you
-  were given — and settle reviewer disagreements with a command, not by preferring the more senior
-  model. Machine-independent. (×1, 2026-08-06, seed.)
+  check — snapshot, run, byte-compare; a reviewer reading the diff cannot see it.
+  Machine-independent. (×3, 2026-08-05 → 2026-08-15, seed + author's log; **promoted 2026-08-15** —
+  SKILL.md Step 5.)
+- When the target is a range, never optimise or report a mean: chase the internal range, report
+  minimums, and never re-check an aesthetic finding with the metric that misled you.
+  Machine-independent. (×3, 2026-08-07, author's log; **promoted 2026-08-15** — SKILL.md Step 5.)
+- Settle reviewer disagreements with a command, not by preferring the more senior model — the
+  standard-tier checker has been right against the frontier one. Machine-independent. (×2,
+  2026-08-06 → 2026-08-07, seed + author's log.)
 - Budget one verification step for a standard-tier checker's counts: it overcounted once and a
   single grep settled it. Machine-independent. (×1, 2026-08-05, seed.)
 

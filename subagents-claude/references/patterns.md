@@ -24,7 +24,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** wide solution space, high cost of picking wrong (architecture, algorithm, API design).
 **Flow:** N=2–3 independent attempts from *different declared angles* (e.g. simplest-possible, performance-first, compatibility-first) in isolated workspaces → independent judge(s) score against written criteria → parent synthesizes from the winner, grafting runner-up ideas.
-**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria written before results return.
+**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria written before results return. Read for convergence before scoring: entrants from opposite declared angles reaching the same root cause is stronger evidence than any one agent's assertion, and a losing arm — forbidden the winners' move by its own angle — can convert their shared inference into a measured fact. A bake-off's value is often the agreement, not the winner (calibration, 5 instances across 4 runs).
 
 ## 5. Loop-until-dry (unknown-size discovery)
 

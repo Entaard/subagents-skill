@@ -59,6 +59,8 @@ Never write a bare level and never write a dash. A bare `low` is a promise nothi
 
 Estimating tokens: exploration/lookup ~15–40k; implementation ~40–150k; focused review ~30–80k per agent. An acceptance suite adds ~15–35k for the blind author (`light`), and ~30–60k more for the compile unit and its red-check (`full`) — both **guesses, not bands**: no calibration row covers either unit class yet, and the first figure is borrowed from the nearest measured shape, an anchored single-corpus brief. Say so at the gate rather than presenting them as evidence. **These bands are priors and known to run low — read `../calibration.md` first.** Web fetches and large-corpus reads have run 2–5× the band; that file's own correction factor is a different number, not a substitute for this one. Where a row covers the task class, quote its actuals instead of the band and name the row. Append this run's actuals at Step 6, hits included.
 
+Three estimating rules have held across enough runs to be defaults (counts and dates in the calibration log): **estimate from the corpus a unit must hold and the lenses it must apply** — never from the deliverable's size or the role's name (5 confirmations). **Price review and verify as a pair** — the fix-verification round has never once come back empty, and four times cost more than the review itself, because a fresh or full-mandate continuation still re-reads the whole corpus: retained context makes the round cheaper to brief, not cheaper to run. One measured exception: steering the same verifier thread for a narrow re-verdict on named fixes ran ~5× cheaper than a fresh dispatch — the pair rule prices a full verify round, not a steered follow-up (6 confirmations). **A claim checklist prices a review lens at its band's floor only when every item settles in one look** — an item quantified over the corpus costs what an open mandate costs, so price a lens by its widest question (3 confirmations).
+
 ### Fitting the plan to the gate surface
 
 Three rules shrink the block itself. Apply them before printing, because a shorter block also makes a better digest:
@@ -95,7 +97,10 @@ On an `adjust` re-ask the shape holds and the row list is the changed rows only.
 ```text
 Role: <implementer | explorer | reviewer(lens) | verifier | judge>
 Objective: <one sentence>
-Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank; no transcript>
+Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank; no transcript. Name the
+                          exact ground truth: files, line numbers, URLs, the measured baseline, the
+                          harness to measure with. A brief that must rediscover its ground truth costs
+                          ~2× and fails more>
 Scope and relevant files: <explicit>
 Allowed writes: <none | exact paths | worktree path>
 Allowed tools: <the tool scope this objective needs — e.g. "read + search only, no network, no shell"

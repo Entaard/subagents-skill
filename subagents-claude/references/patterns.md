@@ -59,11 +59,17 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 ## 10. Blind acceptance suite (the independent test designer)
 
-**When:** the plan carries a writer unit *and* checkable criteria can be extracted without inventing behavior (one strong criterion qualifies). Offered at the gate as **light / full / none**; `full` needs a target that builds and runs tests in-session, and is the only option ever hidden. Coverage, diff size, scale and risk triggers move the "(Recommended)" tag, never the option list.
+**When:** the plan carries a writer unit *and* checkable criteria can be extracted without inventing behavior (one strong criterion qualifies). Offered at the gate as **light / full / none**; `full` needs a target that builds and runs tests in-session, and is the only option ever hidden. The triggers that move the "(Recommended)" tag — never the option list — are enumerated in SKILL.md Step 2, the authoritative list.
 **Artifact:** one scratch file of numbered cases — written cases, not test code. Each carries an ID, the criterion it traces to, steps, the expected *observable* outcome, and a check method tagged **machine-verifiable / agent-observable-but-subjective / human-only** (the evidence-menu taxonomy below).
 **Flow — light:** one small standard-tier unit authors the suite in parallel with the implementer, from the requirement text and approved criteria only — never the plan's design, the source, or a diff (firewall: SKILL.md Step 3). It writes one scratch file and touches no tree, so parallel is safe by construction. Then: parent traceability scan (an uncited case is an invented expectation) → verifier checklist → diff-reviewer coverage lens.
 **Flow — full:** after freeze, one compile unit turns each machine-verifiable case into a runnable test from the as-built interface — signatures only, never the diff, never a run against the candidate → red-check all against the baseline (every one must fail there; one that passes is vacuous, flag it) → run in the existing verification stage.
 **Rules:** an ambiguity the author cannot resolve returns as a **question**, never as a case. The implementer sees criteria, never the suite. Verdicts are pass / fail / `Awaiting human`; human-only cases route to the human checkpoint. A failing case is a finding, not a verdict — triage decides (defect / case overreach / user decision). A case the toolchain cannot express downgrades to agent-observable, recorded, never dropped. Fix leases exclude test paths, and at fix time the implementer gets the failed criterion and observed behavior, not the case text. **No new stage.**
+
+## 11. Pre-write plan critic
+
+**When:** high risk, or any change that alters a rule every future run reads — a skill corpus, a shared template, a convention file. Optional; the risk rubric's High row (`contracts.md`) names it.
+**Flow:** before any writer starts, one fresh agent reads the drafted plan or design sketch and is briefed to **refute its central justification** — not to improve it. Findings land before implementation, so a refuted design costs a re-plan, not a rewrite.
+**Rules:** the critic sees the plan and the evidence it cites, never the parent's reasoning behind it; standard or frontier tier; distinct from the completeness critic (#9), which audits coverage at the *end* — this one attacks the design at the *start*. Evidence: one logged run where a ~57k critic, spent before a line was written, refuted the design's central claim — the sketch derived a rule from "a Workflow call is atomic", which is false — and the unit re-planned instead of rewriting (author's calibration log, 2026-08-12).
 
 ---
 

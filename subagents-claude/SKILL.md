@@ -69,7 +69,7 @@ Scale the fleet to the task — over-spawning is the classic failure mode, and t
 
 Little or nothing delegable is a finished decomposition, not a failed one — recommend mostly solo, and take it to the gate like any other plan (Step 2).
 
-Pick a topology from `references/patterns.md` when one fits (research sweep, implement–review–fix, migration pipeline, bake-off, loop-until-dry, adversarial verification, quarantined deep read, blind acceptance suite).
+Pick a topology from `references/patterns.md` when one fits (research sweep, implement–review–fix, migration pipeline, bake-off, loop-until-dry, adversarial verification, quarantined deep read, competing hypotheses, completeness critic, blind acceptance suite, pre-write plan critic).
 
 ## Step 2 — Plan, then gate
 
@@ -185,7 +185,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Mechanical, high-volume, search/exploration | fast                 | low–medium    |
 | Standard implementation, integration        | standard             | medium        |
 | Ambiguous, cross-system integration         | standard→frontier    | high          |
-| Correctness/security review, verification   | frontier             | high+         |
+| Correctness/security review, verification   | frontier             | high–max      |
 | Synthesis, triage, completion claim         | **the parent — you** | —             |
 
 That effort column is a target: pick it for every unit — it goes in the plan either way, and the backend changes only whether a control enforces it. Four saved agent files make it real for the units that recur most: **`explorer`** (fast, low, read+search only), **`verifier`** (frontier, high, no edit tools), **`web-researcher`** (standard, medium, web+read only), and **`implementer`** (standard, medium, repo edits + shell inside its lease, no nested spawning; `skills:` preloads `clean-code`, so that skill's rules bind every writer dispatch without re-briefing them). Dispatch by agent type and the cell reads `low (explorer)` or `medium (implementer)` rather than `low (no control)`. A **scripted plain** row gets its effort from `agent({effort})` instead — the split you draft decides which of the _unbacked_ rows carry an enforced effort and which carry only a target. A scripted row named to a saved agent keeps that agent's bracket; the script adds nothing it did not already have. `references/claude-code.md` has their exact scopes and the bar for adding another.
@@ -244,4 +244,4 @@ Default one review round + one fix-verification round. Another full review only 
 - `references/contracts.md` — plan, brief, report, finding schema, risk rubric, snapshot protocol, ledger. Open it at Step 2 and keep it open through Step 6.
 - `references/patterns.md` — orchestration topologies and per-domain evidence menus. Read at Step 1.
 - `references/claude-code.md` — Claude Code mechanics, the tier → model resolution procedure, effort controls. Read at Step 2.
-- `calibration.md` — actual costs and lessons from past runs; the skill's only memory across tasks. Read at Step 2, appended at Step 6. Grows on your machine; never overwritten by an update. Its companion `calibration-archive.md` — created by the user-invoked `agents-self-reflect` skill — holds retired rows verbatim and is never read at Step 2.
+- `calibration.md` — actual costs and lessons from past runs; the skill's only memory across tasks. Read at Step 2, appended at Step 6. Grows on your machine; never overwritten by an update. Its companion `calibration-archive.md` — created by the user-invoked `agents-self-reflect` skill, so absent until that skill first runs — holds retired rows verbatim and is never read at Step 2.

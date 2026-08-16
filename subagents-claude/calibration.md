@@ -17,11 +17,12 @@ The contract:
   version-bound claims (this list mirrors the canonical one in the `agents-self-reflect` skill) —
   Step 6 prints `Consolidation due: <reason>`, and the user runs `/agents-self-reflect`. That pass
   rewrites this file into this shape and moves rows out of the log, verbatim (retired or
-  compressed), into `calibration-archive.md` beside it — never read at Step 2, greppable for
-  provenance.
+  compressed), into `calibration-archive.md` beside it — a file that first exists when that pass
+  first runs (absent until then), never read at Step 2, greppable for provenance.
 - Rows marked **(seed)** shipped with the skill: real runs, but from the author's machine, not this
   one. Untagged rows are local actuals and outrank them. This file is yours, not the skill's —
-  `install.sh` seeds it once and never overwrites it.
+  the source repo's `install.sh` (not in this installed directory) seeds it once and never
+  overwrites it.
 
 ## Bands: quote these at Step 2
 

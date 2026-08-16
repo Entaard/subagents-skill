@@ -40,6 +40,29 @@ else
   fi
 fi
 
+# Backups from every section below land in one timestamped directory per run, OUTSIDE the
+# directories Claude Code auto-discovers (skills/, agents/, output-styles/). A backup inside a
+# discovered directory becomes a phantom skill or agent (a discoverable clean-code.bak skill
+# appeared in practice), and a fixed backup name is clobbered by the next differing install.
+# The directory is created lazily, so an install that replaces nothing leaves no empty dir behind.
+backup_root="$HOME/.claude/backups/subagents-skill/$(date +%Y%m%d-%H%M%S)-$$"
+
+backup() { # backup <path> <category> — preserve a file or directory before it is replaced
+  mkdir -p "$backup_root/$2"
+  cp -R "$1" "$backup_root/$2/"
+  echo "NOTE: replacing a different $(basename "$1"); previous version saved to $backup_root/$2/$(basename "$1")"
+}
+
+# Earlier versions of this script wrote `<name>.bak` beside the original, inside the discovered
+# directories. Move any such backup produced for this repo's own names into the backup root, so
+# it stops being discoverable; backups of anything this repo does not own are left where they are.
+migrate_legacy_bak() { # migrate_legacy_bak <path> <category>
+  [ -e "$1" ] || return 0
+  mkdir -p "$backup_root/$2"
+  mv "$1" "$backup_root/$2/"
+  echo "NOTE: moved legacy backup $1 -> $backup_root/$2/ (backups no longer live in discovered directories)"
+}
+
 # Agent files have to live in ~/.claude/agents/; Claude Code does not discover them inside a skill
 # directory. No --delete here — other agents in that directory are not this script's to remove.
 #
@@ -58,9 +81,9 @@ mkdir -p "$agents_dest"
 for f in "$agents_src"*.md; do
   name="$(basename "$f")"
   existing="$agents_dest$name"
+  migrate_legacy_bak "$existing.bak" agents
   if [ -f "$existing" ] && ! cmp -s "$f" "$existing"; then
-    cp "$existing" "$existing.bak"
-    echo "NOTE: replaced a different $name; previous version saved to $existing.bak"
+    backup "$existing" agents
   fi
 done
 
@@ -83,10 +106,9 @@ if [ -d "$eco_src" ]; then
       echo "NOTE: $existing is a symlink owned by another installer; skipping $name."
       continue
     fi
+    migrate_legacy_bak "$existing.bak" skills
     if [ -d "$existing" ] && ! diff -rq "$d" "$existing" >/dev/null 2>&1; then
-      rm -rf "$existing.bak"
-      cp -R "$existing" "$existing.bak"
-      echo "NOTE: replaced a different $name skill; previous version saved to $existing.bak"
+      backup "$existing" skills
     fi
     mkdir -p "$existing"
     rsync -av --delete "$d" "$existing/"
@@ -104,9 +126,9 @@ mkdir -p "$styles_dest"
 for f in "$styles_src"*.md; do
   name="$(basename "$f")"
   existing="$styles_dest$name"
+  migrate_legacy_bak "$existing.bak" output-styles
   if [ -f "$existing" ] && ! cmp -s "$f" "$existing"; then
-    cp "$existing" "$existing.bak"
-    echo "NOTE: replaced a different $name; previous version saved to $existing.bak"
+    backup "$existing" output-styles
   fi
 done
 
@@ -119,6 +141,9 @@ if [ -d "$eco_src" ]; then
   echo "Installed ecosystem skills -> $eco_dest (from claude-skills/)"
 fi
 echo "Installed output styles    -> $styles_dest"
+if [ -d "$backup_root" ]; then
+  echo "Backups from this run      -> $backup_root"
+fi
 echo
 cat <<'TIP'
 Optional, for long orchestration runs:

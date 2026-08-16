@@ -46,11 +46,11 @@ A `(workflow)` bracket is legal **only on a plain row, and only while the `Backe
 
 Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what scripting that row would buy. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
 
-**Flow column:** `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, and `bg, per-item after <id>` for the pipeline-per-item flow Step 1 prefers. That third value is not decoration — it is what the backend rule reads to check whether a split straddles a pipeline, the case that silently turns a per-item flow into a barrier. (How a per-item stage over N items is numbered — one row or N — is still unsettled: write one row and put the item count in its `done when` clause. **A stage written as one row cannot be split across backends** — the `Backend:` line addresses rows, not the items inside one — so if part of it must be scripted, enumerate the rows instead and accept the wider table.)
+**Flow column:** `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, and `bg, per-item after <id>` for the pipeline-per-item flow Step 1 prefers. That third value is not decoration — it is what the backend rule reads to check whether a split straddles a pipeline, the case that silently turns a per-item flow into a barrier. (A per-item stage over N items is written as **one row**, with the item count in its `done when` clause. **A stage written as one row cannot be split across backends** — the `Backend:` line addresses rows, not the items inside one — so where part of the stage must be scripted, enumerate the rows instead and accept the wider table.)
 
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
-**Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview — the preview clips and printed text does not (mechanics and budgets: `claude-code.md`, "The gate dialog").
+This block is printed in full as message text immediately before the gate question, with only a digest attached to the `AskUserQuestion` preview — that rule's authoritative statement is SKILL.md's gate (Step 2); the clipping mechanics and budgets behind it are in `claude-code.md`, "The gate dialog".
 
 **On `plan-only`, this block is also the file** — saved and resumed per SKILL.md, "Saving and resuming a plan".
 
@@ -168,7 +168,7 @@ Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; s
 
 - **Low**: parent or one worker; focused checks; review only if behavior is non-obvious.
 - **Medium**: ≤2 explorers for real unknowns; one writer; one lens-specific reviewer; targeted fix verification.
-- **High**: bounded exploration; optional plan critic, and a blind acceptance suite (`patterns.md` #10 — offer it at the gate, never assume it); each justified by a named trigger; one writer per isolated tree; staged checks; two independent reviewers on the same frozen diff; parent triage; targeted regression verification; human checkpoint for subjective criteria. One hard trigger points the other way: "behavior with no reliable test oracle" recommends no suite, with verification routed to human checkpoints and the domain's other evidence.
+- **High**: bounded exploration; optional pre-write plan critic (`patterns.md` #11), and a blind acceptance suite (`patterns.md` #10 — offer it at the gate, never assume it); each justified by a named trigger; one writer per isolated tree; staged checks; two independent reviewers on the same frozen diff; parent triage; targeted regression verification; human checkpoint for subjective criteria (the `Awaiting human` route — `patterns.md`, evidence menus). One hard trigger points the other way: "behavior with no reliable test oracle" recommends no suite, with verification routed to human checkpoints and the domain's other evidence.
 
 ## Shared-tree snapshot protocol (any writer present)
 

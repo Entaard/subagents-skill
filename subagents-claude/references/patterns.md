@@ -6,7 +6,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** broad question answerable from many independent angles — codebase audit, literature/doc research, multi-dimension code review.
 **Flow:** decompose into 4–8 *non-overlapping* angles (by subsystem, by lens, by source type — never "agent 1 and agent 2 both research X"). Launch one batch, readers only, background. Parent synthesizes; conflicting claims go to verification, not a coin flip.
-**Rules:** each brief names what the *other* agents cover so nobody duplicates; reports carry citations/file refs; parent never pastes full reports onward — synthesize and drop.
+**Rules:** each brief names what the *other* agents cover so nobody duplicates; reports carry citations/file refs; parent never pastes full reports onward — synthesize and drop. **Disjoint mandates produce disjoint find-sets**, which is what makes the sweep worth its cost: every multi-lens run logged has returned zero duplicate findings across its lenses, and repeatedly the decisive finding was invisible to every other unit. Cut an *angle* to save budget and you lose the findings only that angle sees; cutting a second agent off the *same* angle costs nothing (calibration: established).
 
 ## 2. Implement → review → fix (single increment)
 
@@ -24,7 +24,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** wide solution space, high cost of picking wrong (architecture, algorithm, API design).
 **Flow:** N=2–3 independent attempts from *different declared angles* (e.g. simplest-possible, performance-first, compatibility-first) in isolated workspaces → independent judge(s) score against written criteria → parent synthesizes from the winner, grafting runner-up ideas.
-**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria written before results return. Read for convergence before scoring: entrants from opposite declared angles reaching the same root cause is stronger evidence than any one agent's assertion, and a losing arm — forbidden the winners' move by its own angle — can convert their shared inference into a measured fact. A bake-off's value is often the agreement, not the winner (calibration, 5 instances across 4 runs).
+**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria written before results return. Read for convergence before scoring: entrants from opposite declared angles reaching the same root cause is stronger evidence than any one agent's assertion, and a losing arm — forbidden the winners' move by its own angle — can convert their shared inference into a measured fact. A bake-off's value is often the agreement, not the winner (calibration: established).
 
 ## 5. Loop-until-dry (unknown-size discovery)
 
@@ -69,7 +69,7 @@ Pick the smallest pattern that fits; compose them for larger work. Every pattern
 
 **When:** high risk, or any change that alters a rule every future run reads — a skill corpus, a shared template, a convention file. Optional; the risk rubric's High row (`contracts.md`) names it.
 **Flow:** before any writer starts, one fresh agent reads the drafted plan or design sketch and is briefed to **refute its central justification** — not to improve it. Findings land before implementation, so a refuted design costs a re-plan, not a rewrite.
-**Rules:** the critic sees the plan and the evidence it cites, never the parent's reasoning behind it; standard or frontier tier; distinct from the completeness critic (#9), which audits coverage at the *end* — this one attacks the design at the *start*. Evidence: one logged run where a ~57k critic, spent before a line was written, refuted the design's central claim — the sketch derived a rule from "a Workflow call is atomic", which is false — and the unit re-planned instead of rewriting (author's calibration log, 2026-08-12).
+**Rules:** the critic sees the plan and the evidence it cites, never the parent's reasoning behind it; standard or frontier tier; distinct from the completeness critic (#9), which audits coverage at the *end* — this one attacks the design at the *start*. Evidence: one logged run where a ~57k critic, spent before a line was written, refuted the design's central claim — the sketch derived a rule from "a Workflow call is atomic", which is false — and the unit re-planned instead of rewriting (calibration: provisional — one logged run).
 
 ---
 

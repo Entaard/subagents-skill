@@ -18,7 +18,7 @@ This list is the canonical copy — the subagents skill points here, and the log
 
 1. The log is past ~10k tokens (~40KB).
 2. 40 rows or more.
-3. A lesson has three or more confirmations spread across rows.
+3. A lesson **not yet in the skill text** reaches three or more confirmations spread across rows, or a rule already promoted crosses a strength band (step 10). A promoted rule merely gaining another confirmation is **not** a trigger: the count lives in this log, and the skill text cites the band.
 4. Two rows give different figures for one band, so a planner must read both to get the right number.
 5. Structural damage: rows outside a table, or a summary contradicting rows below it.
 6. A row asserts harness behavior from a version older than the one `references/claude-code.md` was last verified against.
@@ -46,9 +46,10 @@ count and the last-confirmed date. A losing figure survives as a qualifier.
 ### Step 4, execution
 ### Step 5, verification
 
-One or two sentences per rule, with its confirmation count and dates, and a
-machine-independence mark. A rule promoted into the skill text is marked
-"promoted <date>", then archived on a later pass.
+One or two sentences per rule, with its confirmation count and dates, a
+machine-independence mark, and the strength band the skill text cites —
+derived here once, never re-derived at promotion time. A rule promoted into
+the skill text is marked "promoted <date>", then archived on a later pass.
 
 ## Watch list
 
@@ -77,6 +78,12 @@ archive pointer.
 9. Show the user the full diff for both files. Write only after the user agrees; a declined diff ends the pass with nothing written.
 10. Report, as output for the user to act on:
     - **Promotion candidates** — rules at three or more confirmations, each with its count and dates, proposed for the skill's own text. The machine-independent ones are also proposed for the repo seed (`subagents-claude/calibration.md`), approved per rule.
+
+      **What a promotion writes: the rule and its strength band — never the count, never the dates.** Skill text cites `(calibration: established)` at six or more confirmations, `(calibration: recurring)` at three to five, and `(calibration: provisional)` for a below-bar fact carried only because its mechanism is structural. The arithmetic stays in this log, the one file every pass rewrites anyway. Inline it in the skill text as well and each later confirmation re-dates two files instead of one, building a changelog inside a guideline that no pass ever prunes — the skill text has no consolidation step, so anything dated that lands there is permanent.
+
+      Two things are **not** tallies and travel intact. An **undated anecdote** — "one reader described a data structure that does not exist" — is what makes an abstract rule recognisable in the wild; keep it, drop only its date. A **figure the skill computes with** — a ratio, a token band, a boot cost, a discount factor — is a parameter, not evidence for a rule, and stays numeric wherever it appears or the instruction stops being usable. A date stays only on a claim about a system that drifts, where staleness is the signal: `references/claude-code.md`'s "verified against the changelog <date>, local install <version>" is the shape that earns one.
+
+      A candidate whose only change is a higher count is **not** a promotion. Report it as "already carried, band unchanged" and propose no edit.
     - **Skill defects** that deserve a repo issue.
 
 Done when: the user has answered on the diff, any approved write passed the self-check, and the report in step 10 is delivered.

@@ -13,12 +13,19 @@ The contract:
   `note` column is for lessons, not only costs: write each one so Step 2 can act on it.
   "Fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
 - **Consolidation is the user's act.** When a trigger holds — this file past ~10k tokens, 40+ rows,
-  a lesson at three confirmations, two rows disagreeing on one band, structural damage, stale
+  a lesson *not yet in the skill text* at three confirmations or a promoted rule crossing a band,
+  two rows disagreeing on one band, structural damage, stale
   version-bound claims (this list mirrors the canonical one in the `agents-self-reflect` skill) —
   Step 6 prints `Consolidation due: <reason>`, and the user runs `/agents-self-reflect`. That pass
   rewrites this file into this shape and moves rows out of the log, verbatim (retired or
   compressed), into `calibration-archive.md` beside it — a file that first exists when that pass
   first runs (absent until then), never read at Step 2, greppable for provenance.
+- **The skill text cites a band; the counts and dates live here.** A rule promoted into `SKILL.md`
+  or a reference carries `(calibration: established)` at six or more confirmations,
+  `(calibration: recurring)` at three to five, `(calibration: provisional)` for a below-bar fact kept
+  only because its mechanism is structural. So a new confirmation updates one file, not two, and the
+  guideline never accretes a changelog it has no pass to prune. What is *not* a tally travels intact:
+  an undated anecdote, and any figure the skill computes with — a ratio, a token band, a boot cost.
 - Rows marked **(seed)** shipped with the skill: real runs, but from the author's machine, not this
   one. Untagged rows are local actuals and outrank them. This file is yours, not the skill's —
   the source repo's `install.sh` (not in this installed directory) seeds it once and never
@@ -41,73 +48,150 @@ machine. The part of a band that travels (a ratio, a shape) is named in its Qual
 
 ### Step 2, estimating
 
-- Estimate from the corpus a unit must hold and the lenses it must apply — never from the size of
-  the deliverable or the name of the role. Add 60–150% where the unit reads widely before it
-  reasons. Machine-independent. (×5, 2026-08-04 → 2026-08-07, seed + author's log; **promoted
-  2026-08-15** — `references/contracts.md`, estimating note.)
 - Price review and verify as a pair: the fix-verification round has never come back empty, and four
   times cost more than the review itself — a fresh or full-mandate continuation re-reads the whole
-  corpus, so retained context makes the round cheaper to brief, not to run. Measured exception:
-  steering the same verifier thread for a narrow re-verdict on named fixes ran ~5× cheaper than a
-  fresh dispatch. Machine-independent. (×6, 2026-08-05 → 2026-08-15, author's log; **promoted
+  corpus, so retained context makes the round cheaper to brief, not to run. Machine-independent.
+  (×8, established, 2026-08-05 → 2026-08-16, author's log; **promoted 2026-08-15** —
+  `references/contracts.md`, estimating note.)
+- Estimate from the corpus a unit must hold and the lenses it must apply — never from the size of
+  the deliverable or the name of the role. Add 60–150% where the unit reads widely before it
+  reasons. This governs blind acceptance-suite authors too: two runs missed high, by 1.6× and 1.7×,
+  pricing the author from the requirement's length instead of from the corpus its brief named.
+  Machine-independent. (×7, established, 2026-08-04 → 2026-08-16, seed + author's log; **promoted
   2026-08-15** — `references/contracts.md`, estimating note.)
+- Steer the same verifier thread for a narrow re-verdict on named fixes; do not respawn. 11–20k
+  steered against 78–112k fresh, a ~4–7× discount — so the pair rule above prices a full verify
+  round, not a steered follow-up. Caveat: a completed agent's transcript may be unresumable, so plan
+  the steer before the agent reports. Machine-independent. (×4, recurring, 2026-08-07 → 2026-08-16,
+  author's log; **promoted 2026-08-15** as a clause of the pair rule — `references/contracts.md`.)
+- Price a run off a same-shape logged row before reaching for band arithmetic — same unit topology,
+  same corpus kind. Three consecutive runs priced this way landed within ±6% of their core estimate,
+  after a stretch of band-priced overruns. Machine-independent. (×3, recurring, 2026-08-15 →
+  2026-08-16, author's log; **promoted 2026-08-16** — `references/contracts.md`, estimating note,
+  and SKILL.md Step 2.)
 - A claim checklist prices a review lens at its band's floor only when every item settles in one
   look; an item quantified over the corpus costs an open mandate — price a lens by its widest
-  question. Machine-independent. (×3, 2026-08-11 → 2026-08-12, author's log; **promoted
+  question. Machine-independent. (×3, recurring, 2026-08-11 → 2026-08-12, author's log; **promoted
   2026-08-15** — `references/contracts.md`, estimating note.)
+- Build the measurement harness before the gate: reproduce the central claims yourself, then brief
+  every unit against named numbers with one shared harness. A gate question with a number in it is
+  answerable; one without is a guess. Mandate the one shared harness where several units report the
+  same metric — absolute numbers were not comparable across agents. Machine-independent. (×3,
+  recurring, 2026-08-08 → 2026-08-16, author's log; **promoted 2026-08-16** — SKILL.md Step 2.)
 - Bands over-estimate too: a single lens over a corpus it need not cross-check against a second
-  document runs below band. Machine-independent. (×1, 2026-08-05, seed.)
+  document runs below band. Machine-independent. (×1, provisional, 2026-08-05, seed.)
 
 ### Step 3, briefing
 
 - Name a brief's ground truth outright — exact files, line numbers, URLs, measured baselines, and
   the harness to measure with. ~2–2.5× cheaper than an open-ended brief and fewer failures, across
   fetching, code, and prose; brief style, not task class, sets the cost. Machine-independent. (×5,
-  2026-08-05 → 2026-08-12, seed + author's log; **promoted 2026-08-15** — SKILL.md Step 3 and the
-  task-brief template. Supersedes the narrower "name a web brief's target URLs", ×1 seed.)
-- Grep the claim before you brief it, and cite only what the named artifact contains — a pointer
-  into a transcript the agent cannot read is a briefing error. Machine-independent. (×3,
-  2026-08-07 → 2026-08-12, author's log; **promoted 2026-08-15** — SKILL.md Step 3.)
+  recurring, 2026-08-05 → 2026-08-12, seed + author's log; **promoted 2026-08-15** — SKILL.md Step 3
+  and the task-brief template. Supersedes the narrower "name a web brief's target URLs", ×1 seed.)
+- Grep the claim before you brief it — and before you assert it. Cite only what the named artifact
+  contains; a pointer into a transcript the agent cannot read is a briefing error. The rule covers
+  **completion claims**, not only briefs: one run asserted a precedent about a sibling skill without
+  grepping it, and the file said the opposite. Machine-independent. (×4, recurring, 2026-08-07 →
+  2026-08-16, author's log; **promoted 2026-08-15** — SKILL.md Step 3.)
+- A unit's toolset comes from its agent file, not from its self-report — and a brief that points a
+  unit at a skill must name a `Read`-able path unless that unit's `tools:` includes `Skill`. One
+  lens downgraded its own confidence over tools its file grants; measured later, an `implementer`
+  (no `Skill`) could reach guidance only through a readable path, while a subject that had `Skill`
+  auto-invoked it. Machine-independent. (×3, recurring, 2026-08-11 → 2026-08-16, author's log;
+  **promoted 2026-08-16** — SKILL.md Step 3 and `references/claude-code.md`.)
+- Verify a reader's or researcher's structural claims by running them before building on them. One
+  reader fabricated a data structure that does not exist; three recon claims in one run were wrong;
+  a web researcher's headline version-attribution finding was wrong, and applying it would have
+  introduced the defect it claimed to fix. Fetch the primary source locally and grep it yourself — a
+  summarising fetch tool is a lead generator, not ground truth. Machine-independent. (×3, recurring,
+  2026-08-06 → 2026-08-16, seed + author's log; **promoted 2026-08-16** — SKILL.md Step 3.)
 
 ### Step 4, execution
 
 - Isolation discipline covers every mutating unit and the parent itself: worktrees for
-  mutation-probing reviewers, prove the worktree recipe before launch, prune changed worktrees each
-  wave, snapshot the parent's own tree, commit explicit paths while agents run. Machine-independent.
-  (×5, 2026-08-06 → 2026-08-08, author's log; **promoted 2026-08-15** — SKILL.md Step 4.)
+  mutation-probing reviewers, a sandbox `HOME` for an installer-execution verifier for the same
+  reason, prove the worktree recipe before launch, prune changed worktrees each wave, snapshot the
+  parent's own tree, commit explicit paths while agents run, never edit a tree a measuring agent is
+  reading. Machine-independent. (×7, established, 2026-08-06 → 2026-08-16, author's log; **promoted
+  2026-08-15** — SKILL.md Step 4.)
 
 ### Step 5, verification
 
 - Point an adversarial pass at the parent's own fixes, claims, and recommendations — the fix round
-  is where unsourced confidence enters, and the refuter aimed there has paid on every dispatch.
-  Machine-independent. (×7, 2026-08-06 → 2026-08-15, seed + author's log; **promoted 2026-08-15** —
-  SKILL.md Step 5.)
+  is where unsourced confidence enters, and the refuter aimed there has paid on every dispatch, in
+  ten consecutive runs. The mechanism: a fix closing one finding can silently un-pass a criterion
+  already verified, because the diff readers ruled on a pre-fix freeze and the refuter is the only
+  unit standing after it. Qualifier — the streak broke on 2026-08-16 in the other direction, when a
+  researcher's headline finding was wrong and the parent caught it, so a refuter's "no defect found"
+  on domain correctness is weak evidence. Machine-independent. (×10, established, 2026-08-06 →
+  2026-08-16, seed + author's log; **promoted 2026-08-15** — SKILL.md Step 5.)
+- Disjoint mandates produce disjoint find-sets — that is the coordination check paying, and it is
+  the argument against cutting a lens for budget. Every multi-lens run since 2026-08-12 reported
+  zero duplicate findings across its lenses; in three of them the decisive finding was invisible to
+  every other unit. Machine-independent. (×6, established, 2026-08-12 → 2026-08-16, author's log;
+  **promoted 2026-08-16** — SKILL.md Step 5 and `references/patterns.md` #1.)
 - Units that independently construct the same specific finding by different routes are strong
-  evidence for it; agreement that nothing is wrong proves nothing. Machine-independent. (×5
-  instances, 2026-08-07 → 2026-08-13, author's log; **promoted 2026-08-15** — SKILL.md Step 5 and
-  `references/patterns.md` #4.)
-- Red-check a blind acceptance suite at baseline before believing it: write the test, prove it
-  fails on the old code, then trust it. Machine-independent. (×4, 2026-08-07 → 2026-08-08, author's
-  log; **promoted 2026-08-15** — already carried by `references/patterns.md` #10 and SKILL.md
-  Step 5.)
+  evidence for it; agreement that nothing is wrong proves nothing. Machine-independent. (×6
+  instances across 5 runs, established, 2026-08-07 → 2026-08-16, author's log; **promoted
+  2026-08-15** — SKILL.md Step 5 and `references/patterns.md` #4.)
 - When the deliverable includes a file the installer treats specially, add an execute-the-installer
-  check — snapshot, run, byte-compare; a reviewer reading the diff cannot see it.
-  Machine-independent. (×3, 2026-08-05 → 2026-08-15, seed + author's log; **promoted 2026-08-15** —
+  check — snapshot, run, byte-compare, in sandbox `HOME`s; a reviewer reading the diff cannot see
+  it. Every dispatch has measured something no diff reader could: a managed directory's deletion
+  scope, a `.bak` clobbered on the second install, and a guard testing `[ -f ]` on a path that can
+  be a directory, which then aborts the whole sync. Machine-independent. (×6, established,
+  2026-08-05 → 2026-08-16, seed + author's log; **promoted 2026-08-15** — SKILL.md Step 5.)
+- Red-check a blind acceptance suite at baseline before believing it: write the test, prove it fails
+  on the old code, then trust it. Machine-independent. (×5, recurring, 2026-08-07 → 2026-08-16,
+  author's log; **promoted 2026-08-15** — already carried by `references/patterns.md` #10 and
   SKILL.md Step 5.)
+- Settle a disagreement with a command, not by model tier and not by majority. The standard-tier
+  checker has been right against the frontier one; and where reviewers agreed a mechanism claim was
+  inconsistent but none of them could see the runtime, the consensus repair direction was factually
+  backwards — one small docs unit changed the fix. Routing a suspected sibling defect to a unit that
+  measures did the same. Machine-independent. (×4, recurring, 2026-08-06 → 2026-08-16, seed +
+  author's log; **promoted 2026-08-16** — SKILL.md Step 5.)
+- A criterion can pass literally while the mechanic it describes is broken — only behavioural
+  measurement catches that failure mode, and a behavioural test measures the mechanic only if it
+  performs the action the trigger names: a subject briefed planning-only, against a trigger
+  conditioned on making a change, proved nothing and cost 16.7k. Machine-independent. (×3,
+  recurring, 2026-08-07 → 2026-08-16, author's log; **promoted 2026-08-16** — SKILL.md Step 5.)
 - When the target is a range, never optimise or report a mean: chase the internal range, report
   minimums, and never re-check an aesthetic finding with the metric that misled you.
-  Machine-independent. (×3, 2026-08-07, author's log; **promoted 2026-08-15** — SKILL.md Step 5.)
-- Settle reviewer disagreements with a command, not by preferring the more senior model — the
-  standard-tier checker has been right against the frontier one. Machine-independent. (×2,
-  2026-08-06 → 2026-08-07, seed + author's log.)
+  Machine-independent. (×3, recurring, 2026-08-07, author's log; **promoted 2026-08-15** — SKILL.md
+  Step 5.)
 - Budget one verification step for a standard-tier checker's counts: it overcounted once and a
-  single grep settled it. Machine-independent. (×1, 2026-08-05, seed.)
+  single grep settled it. Machine-independent. (×1, provisional, 2026-08-05, seed.)
 
 ## Watch list
 
-- Uncovered classes: implementation units that write real code, migrations, worktree-isolated
-  writers, any substantial `haiku` run. Those fall back to the `contracts.md` bands, which are
-  unproven there — say so in the plan rather than implying the number has evidence.
+Lessons seen once, not yet rules:
+
+- **A subagent's transcript is observable.** Each dispatch returns an `output_file` holding that
+  unit's full JSONL, so grepping it measures what the agent actually invoked rather than what it
+  reported. Never conclude a subagent is unobservable without checking the `output_file` the dispatch
+  already handed you — one run converted six case verdicts from judged to measured that way
+  (2026-08-16). Carried as a harness fact in `references/claude-code.md`, Spawning.
+- A projection built from **band midpoints is an upper bound**, not a forecast — say which you are
+  holding up when you stop at the overrun rail, or the user authorises headroom the run never needs
+  (2026-08-16). Carried in SKILL.md's mid-run rails.
+
+Known defect in this skill, tracked as a repo issue:
+
+- The ~25% overrun rail is sampled **between dispatches**, so it misses in both directions. Four runs
+  overran on their final agent with nothing left to launch, leaving the rail able only to report
+  (2026-08-12 ×2, 2026-08-13, 2026-08-16); once it fired early on a band-midpoint projection and the
+  actual then landed under the printed ceiling (2026-08-16). The projection wording and the
+  upper-bound disclosure in SKILL.md's mid-run rails are both disclosures — neither moves the
+  sampling point, which is the defect. This is the evidence behind those two sentences.
+
+Uncovered classes:
+
+- Implementation units that write real code, migrations, worktree-isolated writers, any substantial
+  `haiku` run. Those fall back to the `contracts.md` bands, which are unproven there — say so in the
+  plan rather than implying the number has evidence.
+- **Scripted `Workflow` fan-outs since v2.1.229**, whose same-prefix stagger changes what a scripted
+  wave costs against the same rows hand-batched. Every logged `Workflow` row predates it, so a
+  `Backend:` line drawn from one is estimating on stale ground — say so at the gate.
 
 ## Run log (append new rows here)
 

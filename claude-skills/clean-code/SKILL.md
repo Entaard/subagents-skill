@@ -91,6 +91,8 @@ A few words matter here and in the test loop below.
 24. **Give a domain concept its own type.** Money is not a float. An identifier is not an integer you can add. Let the type make wrong states impossible. A rule the compiler enforces beats a rule a comment requests.
 25. **Wrap what you do not own.** A third-party type stops at one adapter. The rest of the codebase talks to your own interface. That gives you one place to change and one seam for tests.
 
+**Shared state across threads is a different problem.** When your change lets two threads, tasks, or processes reach the same mutable state, or adds a queue, a background task, or async coordination, apply the `concurrency` skill's rules as well as these. If you cannot load a skill, read `~/.claude/skills/concurrency/SKILL.md` instead.
+
 ## Failure
 
 26. **Fail through the language's error channel, with context.** Use the mechanism a caller cannot ignore by accident. Do not hide a failure inside a normal return value. The message says which operation failed, on what, and why. A stack trace only says where.

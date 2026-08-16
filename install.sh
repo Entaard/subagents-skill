@@ -78,22 +78,36 @@ mkdir -p "$agents_dest"
 
 # Names like 'explorer' or 'implementer' are generic enough to collide with an agent you
 # already wrote. Back up anything we are about to replace rather than overwriting it silently.
+skip_agents=()
 for f in "$agents_src"*.md; do
   name="$(basename "$f")"
   existing="$agents_dest$name"
   migrate_legacy_bak "$existing.bak" agents
+  if [ -e "$existing" ] && [ ! -f "$existing" ]; then
+    # A directory sitting where an agent file belongs. rsync cannot replace it, fails with
+    # "unlinkat: Directory not empty" (exit 23), and set -e then aborts the run, so nothing after
+    # this point installs at all. Skip this one name instead of clearing it: the path is a
+    # directory the user may have made deliberately, and emptying it would mean rm -rf on their
+    # data. Same bargain the symlinked skill directory gets below.
+    echo "NOTE: $existing is not a regular file; skipping $name."
+    skip_agents+=(--exclude="$name")
+    continue
+  fi
   if [ -f "$existing" ] && ! cmp -s "$f" "$existing"; then
     backup "$existing" agents
   fi
 done
 
-rsync -av "$agents_src" "$agents_dest"
+# The +alternate form matters: stock macOS ships bash 3.2, where "${arr[@]}" on an empty array is an
+# unbound variable under set -u and would abort every clean install.
+rsync -av ${skip_agents[@]+"${skip_agents[@]}"} "$agents_src" "$agents_dest"
 
-# Ecosystem skills (clean-code, diff-review) live beside the subagents skill in ~/.claude/skills/,
-# one directory per skill. Their names are chosen to coexist with the separately installed
-# mattpocock skills (tdd, code-review); this script never touches those. Same conflict-safe copy as
-# agents above: back up a same-named skill with different content, never delete skills this repo
-# doesn't own, and refuse to replace a symlink — a symlink is another installer's property.
+# Ecosystem skills (every directory under claude-skills/) live beside the subagents skill in
+# ~/.claude/skills/, one directory per skill. Their names are chosen to coexist with the
+# separately installed mattpocock skills (tdd, code-review); this script never touches those.
+# Same conflict-safe copy as agents above: back up a same-named skill with different content,
+# never delete skills this repo doesn't own, refuse to replace a symlink — a symlink is another
+# installer's property — and clear a stray non-directory rather than aborting the run on it.
 eco_src="$repo_dir/claude-skills/"
 eco_dest="$HOME/.claude/skills/"
 
@@ -109,6 +123,13 @@ if [ -d "$eco_src" ]; then
     migrate_legacy_bak "$existing.bak" skills
     if [ -d "$existing" ] && ! diff -rq "$d" "$existing" >/dev/null 2>&1; then
       backup "$existing" skills
+    elif [ -e "$existing" ] && [ ! -d "$existing" ]; then
+      # A stray file sitting where a skill directory belongs. Without this branch mkdir -p fails on
+      # it and set -e aborts the whole run, so output styles never install and the summary never
+      # prints — a truncated install that looks like a crash. Preserve it, then clear the path, the
+      # same bargain a differing skill directory gets above.
+      backup "$existing" skills
+      rm -f "$existing"
     fi
     mkdir -p "$existing"
     rsync -av --delete "$d" "$existing/"
@@ -123,16 +144,24 @@ styles_dest="$HOME/.claude/output-styles/"
 
 mkdir -p "$styles_dest"
 
+skip_styles=()
 for f in "$styles_src"*.md; do
   name="$(basename "$f")"
   existing="$styles_dest$name"
   migrate_legacy_bak "$existing.bak" output-styles
+  if [ -e "$existing" ] && [ ! -f "$existing" ]; then
+    # Same non-file collision as the agents loop above, and the same reason for skipping rather
+    # than clearing. This one aborts last, so it costs only the style and the closing summary.
+    echo "NOTE: $existing is not a regular file; skipping $name."
+    skip_styles+=(--exclude="$name")
+    continue
+  fi
   if [ -f "$existing" ] && ! cmp -s "$f" "$existing"; then
     backup "$existing" output-styles
   fi
 done
 
-rsync -av "$styles_src" "$styles_dest"
+rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 
 echo
 echo "Installed subagents skill  -> $dest"

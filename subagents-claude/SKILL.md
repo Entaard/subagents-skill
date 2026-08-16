@@ -93,10 +93,10 @@ Draft the **Orchestration Plan** (template in `references/contracts.md` — open
 
 Four consequences belong to the plan, not just to the script:
 
-- **`acceptEdits` is not optional inside a script.** A workflow's subagents always run in `acceptEdits` regardless of the session's mode, so a writer row auto-approves its file edits the moment it is scripted. Whenever the plan carries a writer row _and_ the `Workflow` tool exists, name those rows and say this **before** the user picks — the gate can script a writer row the drafted split left in hand, so it is the option set that makes the disclosure due, never the split you happened to draft.
+- **`acceptEdits` is not optional inside a script.** A workflow's subagents always run in `acceptEdits` regardless of the session's mode, so a writer row auto-approves its file edits the moment it is scripted. Name every scripted writer row and say this **before** the user picks. `go` runs the split as drafted, so what you drafted is exactly what the disclosure has to cover.
 - **The approved cap covers both backends at once, and a script cannot re-read it.** A script chunks only against its own rows, cannot see the hand-batched units in flight beside it, and takes no input once running — so "cap minus what you are holding" is a _moving_ number that has to be fixed before launch. Size the script to the approved cap **minus the most held rows that can be in flight during its lifetime**, and print that number in the plan. Sizing to the instantaneous figure instead either exceeds the cap the moment a held row starts, or wastes the headroom for the rest of the run.
 - **A script's results land only when it returns, so a split can silently become a barrier.** There is no per-row notification out of a running script, only the launch's return value — so a held row cannot consume a scripted row's output per item. **A pipeline-per-item flow that straddles the split turns into a barrier at the split.** Script the whole pipeline, where `pipeline()` preserves the per-item flow, or hold all of it. If it genuinely must straddle, say in the plan that the flow degrades there: Step 1 chose that flow and the user approves it along with the rows.
-- **Effort is pinned only where the script reaches, and only where nothing pinned it already.** A row's `(workflow)` bracket is legal only on a plain row, and only while the `Backend:` line still lists it; a scripted saved-agent row passes `agentType` alone and keeps its own bracket. The column rule in `contracts.md` has the rest, including what those rows fall back to if the gate collapses the split.
+- **Effort is pinned only where the script reaches, and only where nothing pinned it already.** A row's `(workflow)` bracket is legal only on a plain row, and only while the `Backend:` line still lists it; a scripted saved-agent row passes `agentType` alone and keeps its own bracket. The column rule in `contracts.md` has the rest, including how a bracket moves when an `adjust` changes the split.
 
 It needs the user's explicit opt-in either way, and only you can drive it — subagents never get the tool. No `Workflow` tool in this session → say so once and plan every row hand-batched. `references/claude-code.md` has the row-for-row translation and the limits that change the plan rather than just the script.
 
@@ -105,35 +105,21 @@ It needs the user's explicit opt-in either way, and only you can drive it — su
 Do **NOT** spawn any subagent, create any worktree, or start any delegated work until the user has answered the plan question. The one dispatch that precedes the answer is Step 1's pre-plan scouts — bounded there, and already printed on the plan's `Scouting:` line by the time you ask. Beyond them there is no exemption, and none is small enough to be worth one — the plan is where the user's judgment enters, and a run that starts before the answer has already spent it. Present the plan, ask, and **end your turn**.
 
 - **Print the whole plan block as message text immediately before the question.** The `AskUserQuestion` preview box clips to `terminal rows − 26` lines and drops the **tail** — which is where `Risks:` and `Recommended:` sit — so it cannot be the only copy. You cannot measure the terminal, so you cannot know whether a given plan fits. Printed text does not clip and stays in the scrollback while the dialog is open.
-- Then ask as a forced choice, with a **digest** of that block as the `preview` on each `go` option: totals, recommendation, what this option changes, top risk, a pointer up to the printed plan, then the per-agent rows last. Clipping then costs the rows, which are printed above in full. On an `adjust` re-ask the rows are the changed ones. Never reduce the _printed_ plan to counts: approving "5 agents, ~300k" audits nothing.
+- Then ask as a forced choice, with a **digest** of that block as the `preview` on the `go` option: totals, recommendation, the backend split, top risk, a pointer up to the printed plan, then the per-agent rows last. Clipping then costs the rows, which are printed above in full. On an `adjust` re-ask the rows are the changed ones. Never reduce the _printed_ plan to counts: approving "5 agents, ~300k" audits nothing.
 - **Keep the block short enough to read** — one physical line per row, `done when` clauses listed under the table, and a column whose value repeats on every row collapsed into one line above it. Wrapped cells, not agent count, are what make a plan too tall. `references/contracts.md` has the rules and the digest template.
-- **Write the options to survive the client.** Labels run 1–5 words, descriptions one short sentence. Anything the user needs _in order to decide_ goes in the printed block — never only in a description, which the dialog truncates, and never only in a preview, which clips. A new orthogonal decision gets **its own question in the same call** (the tool takes up to four) rather than another `go` variant; the backend pair below is the one exempt case, because both of its options run the same approved rows. And a `multiSelect` question gets **no preview at all**. `references/claude-code.md` has the measured budgets and the full rules under "The gate dialog".
+- **Write the options to survive the client.** Labels run 1–5 words, descriptions one short sentence. Anything the user needs _in order to decide_ goes in the printed block — never only in a description, which the dialog truncates, and never only in a preview, which clips. A new orthogonal decision gets **its own question in the same call** (the tool takes up to four) rather than another `go` variant. And a `multiSelect` question gets **no preview at all**. `references/claude-code.md` has the measured budgets and the full rules under "The gate dialog".
 
 ```
 Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min.
-1. go        — run as recommended
-2. adjust    — change cap / models / efforts / budget / topology (tell me which)
+1. go        — run as recommended; <the split in a few words: e.g. "M1–M12 scripted, rest by hand">
+2. adjust    — change cap / models / efforts / budget / topology / backend split (tell me which)
 3. solo      — no subagents; I do it inline
 4. plan-only — save the plan, run nothing
 ```
 
-Whenever the `Workflow` tool exists the backend split is a real decision, and it belongs _in_ the forced choice, not in prose the user has already scrolled past. Use this shape for every plan in a session that has the tool. The surface caps at four options, so `plan-only` moves into the header sentence, which has to carry it explicitly:
+**Four options, always — `go` runs the split the plan printed.** Every row's backend came from that row's own risk: whether a mid-run rail could plausibly fire on it. So a change to the split is a change to rows, and rows change through `adjust` — name which ones, re-derive, re-present, re-gate. That keeps the option list one decision wide: options that run the same rows and differ only in how force the user to re-read the whole plan hunting for the line that changed. Name the split in option 1's own description instead, so it is visible without opening the preview.
 
-```
-Orchestration plan: N agents (M parallel), est. ~X tokens, ~Y min. Say "plan-only" to save it and run nothing.
-1. go — as planned       — <name the split: e.g. "rows M1–M12 scripted, the rest by hand">
-2. go — all hand-batched — every row held; drops the script and the effort it pinned on <rows>
-3. adjust                — change cap / models / efforts / budget / topology / the backend split
-4. solo                  — no subagents; I do it inline
-```
-
-**Option 2 is always the collapse that only adds levers** — which is why it names what it takes away. Rows the plan scripted read `high (workflow)`; hand-batched they fall to whatever still backs them, `(no control)` on a plain dispatch. An option that silently downgrades an approved column is a different plan than the one printed, so put the loss in the option's own description.
-
-**Where the plan scripted no row, option 2 flips direction:** `go — all via Workflow` — and its description names _that_ cost instead: the steering layer on every row, plus auto-approved edits on any writer. The flip is keyed to the **tool being present, not to the plan**. With no `Workflow` tool in the session there is no second `go` at all, and the four options are the block printed above this one.
-
-The ordering is not a recommendation — hand-batched is still the default for any row whose shape doesn't clearly favour a script. Name which option you recommend in the plan's `Recommended:` line, since "go" alone no longer identifies a single one.
-
-**Second question — the acceptance suite.** Where the plan carries a writer unit _and_ checkable criteria can be extracted without inventing behavior, add one more question to the **same** `AskUserQuestion` call (`references/patterns.md` #10 holds both of those conditions and the artifact). Three options. Unlike the backend pair above, this question _does_ carry its signal in the list: put the recommended option first and tag it inline.
+**Second question — the acceptance suite.** Where the plan carries a writer unit _and_ checkable criteria can be extracted without inventing behavior, add one more question to the **same** `AskUserQuestion` call (`references/patterns.md` #10 holds both of those conditions and the artifact). Three options, with the recommended one first and tagged inline.
 
 ```
 Acceptance suite? Cases are authored blind, before the code exists.
@@ -144,7 +130,7 @@ Acceptance suite? Cases are authored blind, before the code exists.
 
 Hide `full` only where the session cannot build and run tests, and that is the only option this question ever removes. Nothing else does: repo coverage that already spans the criteria, a diff that fits one sentence, a risk-rubric hard trigger, criteria that would flake as asserts — each moves the "(Recommended)" tag and the one-line reason, never the option list. Precedence when they conflict: a hard trigger outranks existing coverage, which outranks the one-sentence-diff signal; flake-prone criteria only choose between `light` and `full`, never argue for `none`. The criteria text goes in the printed plan block, verbatim — it is long, it is what the user co-signs, and a preview would clip it. Each option's `preview` then carries the deciding signal and that form's cost estimate, in that order. Where the plan has no writer unit, or nothing checkable can be extracted, **do not ask** — say which, in one line, in the plan. A `solo` answer on the main question voids this one: with no subagents there is no blind author.
 
-- On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`. **A backend adjust changes no row cell**, so re-presenting "the rows that changed" would show nothing: re-present the `Backend:` line, the `acceptEdits` disclosure, and the Effort bracket of every row that moved.
+- On `adjust`: apply the change, re-present the rows that changed, and still run only on `go`. **A backend adjust leaves every row's task and model untouched**, so re-presenting "the rows that changed" shows almost nothing: re-present the `Backend:` line, the `acceptEdits` disclosure, and the Effort bracket of every row that moved across the split.
 - Do not treat an unrelated next message as approval; if the reply doesn't address the plan, ask again.
 - Do not soften this into a rhetorical question and keep working. The gate fails only when the turn actually ends.
 

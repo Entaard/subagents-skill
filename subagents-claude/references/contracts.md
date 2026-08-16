@@ -20,14 +20,12 @@ Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <cal
 Backend: hand-batched, except <row ids> via Workflow — <why, per row group; SKILL.md Step 2. Assign per
          ROW and record the split as a row-id list — never a per-row column. Hand-batched is the default
          for any row whose shape does not clearly favour a script. Write `hand-batched (all rows)` when
-         none is scripted. Name here the mid-run rail each scripted row was sized to keep clear of, and
-         what the scripted rows' Effort brackets fall back to under `go — all hand-batched`. With a
-         writer row present and the Workflow tool in session, add which writer rows auto-approve their
-         edits the moment they are scripted — the gate can script one this draft left in hand. Where
-         the plan scripts NOTHING, state the other direction instead: `go — all via Workflow` raises
-         every row to `(workflow)` and auto-approves any writer's edits. Both directions also carry
-         the aggregate rail: print the ceiling the scripted GROUP was sized against, since no single
-         row is ever in reach of a budget or wall-clock rail>.
+         none is scripted and `Workflow (all rows)` when every row is — both are legal splits when the
+         rows call for them, and both still say why here. Name the mid-run rail each scripted row was
+         sized to keep clear of. Where a scripted row is a writer, add that its edits are auto-approved
+         the moment the script runs. Scripted rows also carry the aggregate rail: print the ceiling the
+         scripted GROUP was sized against, since no single row is ever in reach of a budget or
+         wall-clock rail>.
 Acceptance suite: light | full | none — recommended: <which>, because <one line>. <Omit this line and
          the next when the plan has no writer unit or nothing checkable; say which instead.
          `patterns.md` #10. Its cost is a guess, not a band — see the estimating note below>
@@ -37,15 +35,15 @@ Scouting: <N explorer scouts, rounds where two, ~actual tokens — already spent
 Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly — checkpointing does not
         track subagent edits, so the manual baseline is the only recovery map (harness ref, Cautions)>.
 Solo alternative: <what one strong agent inline would cost/miss — include when the call is close>.
-Recommended: <the default answer. Two `go` options exist whenever the Workflow tool does, so name which
-              one — "go" alone identifies nothing then>.
+Recommended: <the default answer, and one line of why — the user should be able to accept the whole
+              plan with one word>.
 ```
 
 **Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
 **Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`, because effort is frontmatter there. On a **scripted plain** row the mechanism is `agent({effort})` — write `high (workflow)`. A scripted row that *names a saved agent* passes `agentType` alone, so its frontmatter still sets the effort and the bracket keeps the agent's name — `high (verifier)`, scripted or not. What a script buys is an enforced effort on the rows that had none, not a new mechanism on the rows that already had one. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
 
-A `(workflow)` bracket is legal **only on a plain row, and only while the `Backend:` line still lists it** — which makes it the one bracket a gate answer can rewrite, in either direction. `go — all hand-batched` collapses those rows to `(no control)`; on a plan that scripts nothing, `go — all via Workflow` raises the **plain** rows to `(workflow)` instead. Saved-agent rows never move in either direction: their frontmatter holds. The `Backend:` line states whichever direction its plan exposes. Otherwise option 2 runs a column the user never approved.
+A `(workflow)` bracket is legal **only on a plain row, and only while the `Backend:` line still lists it** — which makes it the one bracket that moves when the split does. An `adjust` that un-scripts a plain row drops it to `(no control)`; one that scripts a plain row raises it to `(workflow)`. Saved-agent rows never move either way: their frontmatter holds. Re-present every bracket that moved along with the new `Backend:` line, or the run uses a column the user never approved.
 
 Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what scripting that row would buy. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
 
@@ -71,14 +69,14 @@ Three rules shrink the block itself. Apply them before printing, because a short
 
 Where the block still runs past ~30 lines, save it to the session scratchpad as well and put that path in the digest. An editor has no width or height budget at all.
 
-The digest attached to each `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order. A clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
+The digest attached to the `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order. A clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
 
 ```text
-# the preview on "go — all hand-batched", where the recommendation is the other option
+# the preview on "go"
 8 agents (5 parallel) · ~615k · ~55 min · cap 5
-Recommended: as planned — A1–A2 scripted, the rest by hand
-This option: every row held. Drops the script, and the
-             effort it pinned on A1–A2 falls to no control.
+Recommended: go — the fix and its triage stay in hand
+Backend: A1–A2 scripted; W, V1 and triage held
+         A1–A2 run at high (workflow); W and V1 at no control
 Top risk: the fix changes sync behaviour on every build
 Full plan printed above ↑   (saved: <path>)
 
@@ -88,7 +86,7 @@ W  W opus     —   parent writes the fix inline
 V1 R opus   ~90k  compliance review of the frozen diff
 ```
 
-On an `adjust` re-ask the shape holds and the row list is the changed rows only. Where two `go` variants exist, line 3 is what differs between them, so it differs per option.
+On an `adjust` re-ask the shape holds and the row list is the changed rows only; line 3 carries the split as re-derived, with every Effort bracket that moved with it.
 
 **Identical rows may collapse to one digest line with a count** — `M1–M12 W haiku ~15k ea — transform`. That is the one collapse the digest permits, and it exists because a per-row backend split makes wide plans likelier: a 14-row plan cannot otherwise fit its rows in the twelve lines the box gives. Collapse only rows that are genuinely identical bar the id, and never collapse a row whose backend differs from its neighbours' — that is the difference the user is reading.
 

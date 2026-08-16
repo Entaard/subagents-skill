@@ -18,14 +18,13 @@ PARENT: <the model you are running on> — does synthesis, triage, completion cl
 
 Cap: <N> concurrent.  Budget: ~<total> tokens, ~<min> wall clock — basis: <calibration row, or the band>.
 Backend: hand-batched, except <row ids> via Workflow — <why, per row group; SKILL.md Step 2. Assign per
-         ROW and record the split as a row-id list — never a per-row column. Hand-batched is the default
-         for any row whose shape does not clearly favour a script. Write `hand-batched (all rows)` when
-         none is scripted and `Workflow (all rows)` when every row is — both are legal splits when the
-         rows call for them, and both still say why here. Name the mid-run rail each scripted row was
-         sized to keep clear of. Where a scripted row is a writer, add that its edits are auto-approved
-         the moment the script runs. Scripted rows also carry the aggregate rail: print the ceiling the
-         scripted GROUP was sized against, since no single row is ever in reach of a budget or
-         wall-clock rail>.
+         ROW and record the split as a row-id list, never a per-row column. Hand-batched is the default
+         for any row whose shape does not clearly favour a script. Write `hand-batched (all rows)`
+         when none is scripted and `Workflow (all rows)` when every row is — both are legal splits
+         when the rows call for them, and both still say why here. Name the mid-run
+         rail each scripted row was sized to keep clear of; where a scripted row is a writer, add that
+         its edits are auto-approved the moment the script runs; and print the ceiling the scripted
+         GROUP was sized against, since no single row is ever in reach of a budget or wall-clock rail>.
 Acceptance suite: light | full | none — recommended: <which>, because <one line>. <Omit this line and
          the next when the plan has no writer unit or nothing checkable; say which instead.
          `patterns.md` #10. Its cost is a guess, not a band — see the estimating note below>
@@ -39,19 +38,19 @@ Recommended: <the default answer, and one line of why — the user should be abl
               plan with one word>.
 ```
 
-**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`). Run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing this column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
+**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`), and run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing the column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
-**Effort column:** the level *and* the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`, because effort is frontmatter there. On a **scripted plain** row the mechanism is `agent({effort})` — write `high (workflow)`. A scripted row that *names a saved agent* passes `agentType` alone, so its frontmatter still sets the effort and the bracket keeps the agent's name — `high (verifier)`, scripted or not. What a script buys is an enforced effort on the rows that had none, not a new mechanism on the rows that already had one. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)`. Write `no control` in full — never abbreviate it, and never substitute another word for it.
+**Effort column:** the level _and_ the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)` — effort is frontmatter there. A **scripted plain** row: `high (workflow)`, the mechanism being `agent({effort})`. A scripted row that _names a saved agent_ passes `agentType` alone, so its frontmatter still sets the effort and the bracket keeps the agent's name — `high (verifier)`, scripted or not: a script buys an enforced effort on the rows that had none, not a new mechanism on rows that already had one. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)` — written in full, never abbreviated or substituted.
 
-A `(workflow)` bracket is legal **only on a plain row, and only while the `Backend:` line still lists it** — which makes it the one bracket that moves when the split does. An `adjust` that un-scripts a plain row drops it to `(no control)`; one that scripts a plain row raises it to `(workflow)`. Saved-agent rows never move either way: their frontmatter holds. Re-present every bracket that moved along with the new `Backend:` line, or the run uses a column the user never approved.
+A `(workflow)` bracket is legal **only on a plain row, and only while the `Backend:` line still lists it** — the one bracket that moves when the split does. An `adjust` that un-scripts a plain row drops it to `(no control)`; one that scripts a plain row raises it to `(workflow)`. Saved-agent rows never move either way: their frontmatter holds. Re-present every bracket that moved along with the new `Backend:` line, or the run uses a column the user never approved.
 
 Never write a bare level and never write a dash. A bare `low` is a promise nothing keeps. A dash is worse: it hides the target, so the user cannot see what scripting that row would buy. `medium (no control)` next to `medium (workflow)` states the trade in one cell — same target, one enforced.
 
-**Flow column:** `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, and `bg, per-item after <id>` for the pipeline-per-item flow Step 1 prefers. That third value is not decoration — it is what the backend rule reads to check whether a split straddles a pipeline, which is the case that silently turns a per-item flow into a barrier. (How a per-item stage over N items is numbered — one row or N — is still unsettled: write one row and put the item count in its `done when` clause. **A stage written as one row cannot be split across backends** — the `Backend:` line addresses rows, not the items inside one — so if part of it must be scripted, enumerate the rows instead and accept the wider table.)
+**Flow column:** `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, and `bg, per-item after <id>` for the pipeline-per-item flow Step 1 prefers. That third value is not decoration — it is what the backend rule reads to check whether a split straddles a pipeline, the case that silently turns a per-item flow into a barrier. (How a per-item stage over N items is numbered — one row or N — is still unsettled: write one row and put the item count in its `done when` clause. **A stage written as one row cannot be split across backends** — the `Backend:` line addresses rows, not the items inside one — so if part of it must be scripted, enumerate the rows instead and accept the wider table.)
 
 **Acceptance suite line** (`patterns.md` #10): the criteria go in as **text, verbatim, not a count**. This line is where the user co-signs the expectations, and an invented expectation has to be readable to die at the gate. Phrase each criterion at the requirement's observable surface — no module names, no data stores, no mechanism choices — because a design noun inside a criterion carries the parent's design straight through the blind author's firewall.
 
-**Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview. The preview box clips to `terminal rows − 26` lines and **drops the tail**, which is where `Risks:`, `Solo alternative:` and `Recommended:` live. Printed text does not clip. See `claude-code.md`, "The gate dialog", for the measured budgets.
+**Print this block as message text immediately before the gate question**, then attach only a digest of it to the `AskUserQuestion` preview — the preview clips and printed text does not (mechanics and budgets: `claude-code.md`, "The gate dialog").
 
 **On `plan-only`, this block is also the file** — saved and resumed per SKILL.md, "Saving and resuming a plan".
 
@@ -69,7 +68,7 @@ Three rules shrink the block itself. Apply them before printing, because a short
 
 Where the block still runs past ~30 lines, save it to the session scratchpad as well and put that path in the digest. An editor has no width or height budget at all.
 
-The digest attached to the `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order. A clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
+The digest attached to the `go` option is a summary, not a second copy. Fit it to **12 lines and 60 columns**, and keep this order — a clipped reader then loses the rows, which are printed above in full, rather than the recommendation:
 
 ```text
 # the preview on "go"

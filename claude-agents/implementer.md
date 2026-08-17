@@ -1,6 +1,6 @@
 ---
 name: implementer
-description: Writer unit for the /subagents orchestration skill, dispatched by name from an approved orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Implements one bounded unit inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
+description: Writer unit for the /subagents orchestration skill, dispatched by name from an orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Implements one bounded unit inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
 tools: Read, Glob, Grep, Edit, Write, NotebookEdit, Bash
 model: sonnet
 effort: medium

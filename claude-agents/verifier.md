@@ -1,6 +1,6 @@
 ---
 name: verifier
-description: Review and verification unit for the /subagents orchestration skill, dispatched by name from an approved orchestration plan. NOT a general code-review agent for everyday changes. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
+description: Review and verification unit for the /subagents orchestration skill, dispatched by name from an orchestration plan. NOT a general code-review agent for everyday changes. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
 tools: Read, Glob, Grep, Bash, WebFetch, WebSearch
 disallowedTools: Edit, Write, NotebookEdit
 model: opus

@@ -38,7 +38,7 @@ Recommended: <the default answer, and one line of why — the user should be abl
               plan with one word>.
 ```
 
-**Model column:** the exact value you will pass, tier in brackets. Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`), and run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing the column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
+**Model column:** the exact value you will pass, tier in brackets — except on an **alt** row, where you pass no value at all and the column records what its file sets, read with one grep (`claude-code.md`, "The alt lane"). Not a tier alone — a tier hides whether that is `haiku` or `sonnet`, and the user is approving what runs. Resolve tier → model against the live session first (procedure in `claude-code.md`), and run that file's `CLAUDE_CODE_SUBAGENT_MODEL` check before writing the column: a set override outranks both the dispatch param and agent frontmatter, and makes every cell in it false.
 
 **Effort column:** the level _and_ the mechanism setting it. **Always write a level.** You picked one from the Step 3 tier table, and it stays in the cell whether or not a control can enforce it — the bracket says what enforces it. A saved-agent dispatch: `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)` — effort is frontmatter there. An alt row's frontmatter sets it the same way: `low (explorer-alt)`, `high (verifier-alt)`, `medium (web-researcher-alt)`. A **scripted plain** row: `high (workflow)`, the mechanism being `agent({effort})`. A scripted row that _names a saved agent_ passes `agentType` alone, so its frontmatter still sets the effort and the bracket keeps the agent's name — `high (verifier)`, scripted or not: a script buys an enforced effort on the rows that had none, not a new mechanism on rows that already had one. A **hand-batched plain Agent call** has no lever, so the bracket says so: `medium (no control)` — written in full, never abbreviated or substituted.
 
@@ -114,7 +114,9 @@ Return format: the agent report below, ≤1–2k tokens; put bulk output in <scr
                (omit the scratch path for a unit that cannot write — `explorer` and
                `web-researcher` distill instead; a scratch path in their brief is a briefing error)
 Model: <the exact value passed to this dispatch, matching the approved plan row; tier in brackets.
-        On a saved-agent dispatch, its frontmatter model is that value unless you deliberately override>
+        On a saved-agent dispatch, its frontmatter model is that value unless you deliberately
+        override — and on an alt agent you never do: that row passes no `model` at all, and the
+        cell records what its file sets (`claude-code.md`, "The alt lane")>
 Effort: <the level, always, plus the control setting it — agent-file frontmatter, Workflow `agent()`,
         or "no control" on a plain dispatch. Matches the approved plan row.>
 ```

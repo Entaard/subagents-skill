@@ -295,16 +295,42 @@ if [ -d "$alt_src" ]; then
     alt_names+=("$(basename "$tpl" .md.in)")
   done
 
-  # Config present -> render the enabled roles. Absent -> install none. Still run the removal pass
-  # below either way: turning the config off, or never having had one, means no alt agent survives
-  # on this machine. A directory or an unreadable file at the config path is NOTE-and-skip, the
-  # same pattern the agent loop above uses. One bad path here cannot abort the whole install.
+  # Config present -> render the enabled roles. Absent -> install none. Both are DECIDED states, so
+  # the removal pass below runs on either: turning the config off, or never having had one, means
+  # no alt agent survives on this machine.
+  #
+  # A directory, an unreadable file, or a dangling symlink at the config path is NOT a decided
+  # state. It is a config this run could not read, and the two must never collapse into one
+  # outcome. They did: the branches below printed NOTE-and-skip while `enabled_names` stayed unset,
+  # and the removal pass then deleted every installed alt agent and reported them as "no longer
+  # enabled" — they were still enabled; the file was just unreachable. An unmounted path, a
+  # permissions slip, or a mistyped SUBAGENTS_ALT_CONF silently uninstalled the whole lane. So
+  # `alt_conf_known` separates "the config says none" from "the config could not be read", and the
+  # removal pass runs only on the first. One bad path here still cannot abort the install; it now
+  # cannot delete anything either.
+  alt_conf_known=1
+  alt_conf_dir="$(dirname "$alt_conf")"
   if [ -L "$alt_conf" ] && [ ! -e "$alt_conf" ]; then
     echo "NOTE: $alt_conf is a symlink to a path that does not exist; skipping the alt-model config."
+    alt_conf_known=0
   elif [ -e "$alt_conf" ] && [ ! -f "$alt_conf" ]; then
     echo "NOTE: $alt_conf is not a regular file; skipping the alt-model config."
+    alt_conf_known=0
   elif [ -f "$alt_conf" ] && [ ! -r "$alt_conf" ]; then
     echo "NOTE: $alt_conf is not readable; skipping the alt-model config."
+    alt_conf_known=0
+  elif [ ! -e "$alt_conf" ] && { [ ! -d "$alt_conf_dir" ] || [ ! -x "$alt_conf_dir" ]; }; then
+    # An absent config is normally a decided opt-out, and the removal pass below is meant to run on
+    # it. But "absent" and "unreachable" look identical to `[ -f ]`, and only one of them is a
+    # decision. A path on an unmounted volume, a typo in SUBAGENTS_ALT_CONF, or a home directory
+    # this run cannot traverse all report the file as absent, and treating that as an opt-out
+    # deleted the whole lane — the very scenario the flag above was added to prevent, still open
+    # because the check tested the file and never its directory. So an absent file counts as a
+    # decision only when the directory that would hold it exists and can be entered.
+    echo "NOTE: $alt_conf_dir does not exist or cannot be entered, so $alt_conf cannot be read"
+    echo "      (an unmounted path or a typo in SUBAGENTS_ALT_CONF looks exactly like an absent"
+    echo "      config). Skipping the alt-model config."
+    alt_conf_known=0
   elif [ -f "$alt_conf" ]; then
     enabled_names=()
     # Names already claimed by an earlier line in this same config. A role named twice must not
@@ -312,6 +338,11 @@ if [ -d "$alt_src" ]; then
     # first saved copy with this run's own output, and that loses the user's real file for good.
     seen_names=()
     while IFS= read -r line || [ -n "$line" ]; do
+      # Trim first, then classify. Classifying the raw line made a whitespace-only line and an
+      # indented '# comment' both fall through to the "has no '='" NOTE, contradicting the tip this
+      # same script prints ("Blank lines and '#' comments are ignored"). The trim also strips a
+      # trailing CR, so a CRLF config needs no separate handling.
+      line="${line#"${line%%[![:space:]]*}"}"; line="${line%"${line##*[![:space:]]}"}"
       case "$line" in
         ''|'#'*) continue ;;
       esac
@@ -427,6 +458,10 @@ if [ -d "$alt_src" ]; then
   # safe to remove after a backup. A file with no marker is the user's. It is left alone in
   # silence. This rule is narrower than install.sh's usual "no --delete in agents/" rule, not wider.
   alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
+  if [ "$alt_conf_known" -eq 0 ]; then
+    echo "NOTE: leaving any installed alt agent in place, since $alt_conf could not be read."
+    echo "      Fix the path and re-run to apply what the config actually says."
+  else
   for name in ${alt_names[@]+"${alt_names[@]}"}; do
     keep=0
     for en in ${enabled_names[@]+"${enabled_names[@]}"}; do
@@ -442,6 +477,7 @@ if [ -d "$alt_src" ]; then
       echo "Removed alt agent no longer enabled -> $dest (previous version saved to $backup_root/agents/$(basename "$dest"))"
     fi
   done
+  fi
 
 fi
 

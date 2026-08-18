@@ -1,33 +1,57 @@
-# The Sage
 
-## Thought
+- Terminal rule is 40%? Since we have successor sages now, remove the terminal rule.
+- I feel sage is more costly than the previous version of subagents. What are the most costly steps and flows?
+- Roughly how is sage's performance vs subagents?
+- Check the sage and subagents skills to see if they try to pass Anthropic model names into the alt custom agents.
+- Do the sage and subagents skills use the alt agents when the alt agents are available?
 
-I'm getting quite fond of the subagents skill, and I want it to evolve even more. I want to create a new skill name "sage" (the wise agent).
+----
 
-## Ideas
+watchdog didnt stop after the work was finished:
 
-The sage doesn't need to be more intelligent than the model it uses (Fable or Opus 5 for example). Instead, the sage aims to use the models' powers and
-capabilities as efficient as possible. The sage always learn from its mistakes and successes, so that it gets better after every task. The sage makes
-sure to extract the purest, smallest, shortest, but most precise piece of golden information from any useful lesson, so that it can easily apply the
-knowledge for the next work.
+should it stop when the run is finished? Just a question, dont attempt to fix it now
 
-The sage knows that every agent has its limit. So, no single agent can go far and go long. The true strength lies in combining the strength of the other
-agents (the other sages in their own rights).
+● Yes, it should. And the skill does not say so, which looks like a real gap.
 
-The sage knows when any of its agents is overloaded, can't think straight anymore, or gets lots in a maze without an answer. It calls the agent back,
-learn from it, and decide for itself if it's good to explore with another one, or to think about another way.
+  Step 4 says to host the watchdog on Monitor with persistent: true. ## Handover says a supervising parent keeps hosting it. Step 6 lists its closing obligations — bring the ledger current, write the run record, append the memory row, print three
+  things — and stopping the watchdog is not among them. It relies on the session ending instead.
 
-The sage knows that conflict is the way to evolution. It embraces and encourages the agents to think critically, to raise voices and different ideas.
-The ideas are always listened carefully and equally, and verified thoughtfully, so as to find a better way to solve the task, or to find the hidden
-problems that might have been over looked because everyone always agrees with each other blindly.
+  Three concrete failure modes follow, and they get worse the longer the session lives.
 
-The sage knows to walk away from pointless quarrels. It stops and thinks and finds another way, so that it doesn't get lost forever in a rabbit hole.
+  The occupancy rungs never stop firing. occ-40pct is the parent's terminal rung, and no SAGE_OCC_ACK silences it. That is deliberate for a live run. After the run ends it means that if I keep working in this session and cross 40%, the watchdog fires a
+  handover alarm for a run that finished an hour ago. There is nothing to hand over.
 
-The sage knows when to find peace and handover the work effectively, so that it doesn't become overloaded, and also keep its mind sharp and clear.
+  It would adopt the next wave with the wrong numbers. It watches a fixed subagents/ directory, and that is this session's directory. Any agent you dispatch later lands there. The old watchdog would price those units against this run's estimates file,
+  so the spend rungs would be relative to the wrong rows. That is the same defect as having no estimates file, except it looks healthy.
 
-The sage organizes its moto, thought, and knowledge, or in other words, its brain, in the most efficient way possible: the information stays as precise
-as possible, and as short as possible, removing all the unneeded words, so that its brain is always at top performance. The sage always connects the
-information at ease. The sage doesn't need any humans to understand its thought. Its greatness comes from achieving great results, not the plain words
-of explanation that I know this or I'm good at that.
+  Its filter outlives its reason. The grep -v mutes tool-repeat for one agent id running one command. That id is finished. The filter now just carries a small permanent blind spot for no benefit.
 
-The sage doesn't need to propose its plan to any humans. It also doesn't show the report of what it does by default. The human has to ask for the report.
+  The cheap fix is one line in Step 6: stop the watchdog as part of closing, in the same place the memory row is appended. That also gives the surfaced-event list something honest to say when it could not be stopped.
+
+  There is one argument the other way, and it is weak. If you follow up in the same session with more agent work, a live watchdog is already there. But it is the wrong watchdog by then, for the reasons above, and starting a fresh one costs one call.
+
+----
+
+previous session's surfaced:
+
+  Surfaced
+
+  - Criterion 7 is Awaiting human. I could not test what happens when your gateway cannot serve a configured model. The Agent
+  tool's model parameter is a closed enum, so a bad value dies in schema validation and would measure the tool, not the
+  harness. The mitigation ships anyway: each alt agent must open its report with MODEL-FAMILY:, and a run may record family
+  diversity only when that line names a non-Anthropic identity.
+  - Whether agent frontmatter honours the [1m] suffix is unsettled. The falsifier is recorded: an alt unit whose report names
+  an Anthropic identity, on a machine whose gateway serves the configured model.
+  - Zero cross-family verification this run. All seven review lenses self-reported Anthropic Opus 5. That is exactly the gap
+  this deliverable closes, and it could not close it for itself.
+  - A sage-watch.sh defect, out of lease. Its tool-repeat counter is a high-water mark, so once any command is called four
+  times the rung fires on every later sample for that unit's life. I measured it three times on a writer whose tree was
+  demonstrably still changing. It made me filter the rung mid-run.
+  - Discoverability gap. Removing the installer's interactive prompt was correct, because its only trigger was
+  ANTHROPIC_BASE_URL, which means a proxy and not a gateway. But a new user who never opens harness.md now has no way to learn
+  the lane exists. One README.md line would close it. README.md was outside the write lease.
+- One finding I filed was wrong and is retracted. I claimed the watchdog's estimates file never matches its keys. It matches
+  fine; 150k is the documented per-unit floor. My test used four cases all below that floor, so it could not tell a broken
+  mechanism from a working clamp.
+
+----

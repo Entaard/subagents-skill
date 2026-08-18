@@ -27,10 +27,12 @@ headroom**: a wide context window at low per-token cost, for a corpus too large 
 hold on the base agent's model. It does not buy family diversity. Nothing here licenses a claim of
 a second reviewing family. A brief that expects that is briefing this agent for the wrong job.
 
-**Caveat:** this model's long-context comprehension falls off past roughly 256k tokens of input
-(MRCR v2: 41.3% past 256k). Do not brief it with an unbounded corpus. Keep the scope you hand it
-bounded, and treat a finding about material past that range as lower-confidence than the same
-finding closer to the front.
+**Caveat:** a wide advertised window is not uniform comprehension across it, and where the fall-off
+starts is a property of whichever model this machine configured — not something this file can name.
+So treat the scope you are handed as the real bound: do not widen it to fill the window, and treat
+a finding drawn from material deep in a very large input as lower-confidence than the same finding
+near the front. Say which it was, under `Uncertainty` — that is the slot for it; the return format
+has no other.
 
 **Self-identification.** The first line of every report must be
 `MODEL-FAMILY: <the vendor and model you are running as, or "unknown">`. Write the vendor and model

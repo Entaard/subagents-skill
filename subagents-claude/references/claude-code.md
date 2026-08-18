@@ -18,7 +18,7 @@ Verified against code.claude.com docs and the published changelog 2026-08-16, lo
 | `web-researcher` | `sonnet` | this harness | `medium` | `WebSearch`, `WebFetch`, `Read` | outside sources only; no shell, no repo edits, **cannot write** |
 | `implementer` | `sonnet` | this harness | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` — no Agent tool | writes only inside its briefed lease; `skills:` preloads `clean-code` (full text at startup), and with no Skill tool in its list it can load nothing else; cannot spawn agents |
 | `explorer-alt` (optional) | per-machine config | outside this harness | `low` | same as `explorer` | same as `explorer`; buys price/window headroom, not diversity |
-| `verifier-alt` (optional) | per-machine config | outside this harness | `high` | same as `verifier` | same as `verifier`; the one alt twin that can honestly claim family diversity, and only when its report's `MODEL-FAMILY:` line confirms it |
+| `verifier-alt` (optional) | per-machine config | outside this harness | `high` | same as `verifier` | same as `verifier`; the one alt twin that can honestly claim family diversity, and only once a measurement confirms it — its report's `MODEL-FAMILY:` line, or a grep of its transcript when that line says `unknown` ("The alt lane", below) |
 | `web-researcher-alt` (optional) | per-machine config | outside this harness | `medium` | same as `web-researcher` | same as `web-researcher`; buys price/window headroom, not diversity |
 
 ### The alt lane
@@ -33,6 +33,42 @@ Verified against code.claude.com docs and the published changelog 2026-08-16, lo
   read it off the filesystem or `/agents`. Plan without them when none is in your live list. This
   is the full statement of the rule for `/subagents`. Every other mention of it in this corpus
   points back here.
+
+  **An alt dispatch passes no `model` parameter — on either backend.** Not a different model, not
+  the same model, not one you intend to log as a deviation. The `model` parameter silently wins
+  over agent-file frontmatter, so passing one replaces the outside-family model with whatever you
+  named and the only reason the alt agent exists is gone with no error raised. Hand-batched, that
+  means the Agent call carries `subagent_type` and no `model`. Scripted, it means
+  `agent(prompt, {agentType: 'verifier-alt'})` and nothing else — `opts.model` there is the same
+  override, and "Running an approved plan through `Workflow`" below already routes saved-agent rows
+  that way. An alt row still **records** its configured model in the plan's Model column — that
+  column is the audit surface and it stays filled — but recording a value and passing one are two
+  different acts, and only the second reaches `opts.model`. The script copies `agentType` from an
+  alt row and never its Model cell. Measured 2026-08-18: a parent passed `model: haiku` on all three alt dispatches while the
+  brief text in the same call said it overrode nothing. 22.4k spent, three dispatches testing
+  nothing, and no agent caught it. Measured directly the same day: dispatching `explorer-alt` —
+  whose frontmatter names an outside-family model — with `model: haiku` ran the unit on
+  `claude-haiku-4-5-20251001`, read from `message.model` in its own transcript. The parameter wins;
+  nothing warns. **This is the one dispatch class the "name the model on every plain dispatch" rule
+  does not reach**, because the file already named it.
+
+  **Filling an alt row's Model column.** You resolve no tier for an alt row — its file holds the
+  model. Read that name with one grep of the installed file
+  (`grep '^model:' ~/.claude/agents/verifier-alt.md`) and write it in the column with its tier and
+  lane, e.g. `gpt-5.6-sol[1m] (frontier, alt)`. That is a filesystem read for a **name**, which is
+  fine; the ban above is on reading the filesystem for **availability**, a different question. The
+  configured name is what the file requests, not proof of what ran.
+
+  **Settle the family claim by measurement, and take either measurement.** Record family diversity
+  when the checker's report names a non-Anthropic identity in its required `MODEL-FAMILY:` line, or
+  when a grep of its transcript does. An Anthropic identity from either is a same-family check.
+  `unknown` is neither — it is an **absent measurement**, not a same-family verdict. Measured
+  2026-08-18: an `explorer-alt` unit that really ran on `gpt-5.6-luna` reported `unknown` in the
+  same run, because a model that cannot observe its own identity writes `unknown` honestly. Every
+  dispatch hands back that unit's own transcript at `output_file` (Spawning, above), and
+  `message.model` in it is the only field that establishes which model ran — the sidecar's `model`
+  field records a dispatch-time *override*, so it is empty on exactly the alt rows you care about:
+  `grep -o '"model":"[^"]*"' <output_file> | sort -u`.
 
   Dispatch by agent type and the plan's Effort column becomes real. **On a hand-batched row** everything outside these four is a plain dispatch with no effort control (a scripted row is the exception — see "Models and effort") — including any *reader* that must produce a scratch file, since `explorer` and `web-researcher` cannot write one. `verifier` can: shell redirection to a path its brief names is the one write it is allowed. Don't dispatch the built-in `Explore` while the plan row reads `low (explorer)`: that is exactly the unbacked effort claim the column exists to prevent.
 - `~/.claude/agents/` is **global**: Claude Code watches it and auto-delegates on the `description` field, in every project ("the subagent is available in every project on your machine"). All four worker-role descriptions say "dispatched by name from an orchestration plan" and redirect ordinary work elsewhere (`Explore` for lookups, the main conversation for everyday edits), so they don't quietly capture routine work. Keep that framing in any role you add — and don't add one until it has recurred across several real tasks. There is **no per-agent switch for auto-delegation alone**: `permissions.deny: ["Agent(<name>)"]` is the only hard lever, and it blocks explicit dispatch too. Description wording is the whole of the soft control.
@@ -107,7 +143,7 @@ The parent's own model belongs in the plan header. The user is reading a cost es
 
 Reasoning effort: the Agent tool has **no per-dispatch `effort` parameter** — an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in exactly two places: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; available levels depend on the model), and the `effort` option on the Workflow tool's `agent()` call. Use `low`–`medium` for mechanical work and `high`–`max` for verification and judging. **The four shipped agents exist to make this reachable** — dispatch by agent type and the plan can honestly write `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`. The three optional alt twins carry the same frontmatter effort as their base agent. An alt row writes `low (explorer-alt)`, `high (verifier-alt)`, `medium (web-researcher-alt)`. A **scripted plain** row carries a real effort — precisely what a script buys, since a saved-agent row passes `agentType` alone and keeps the effort its frontmatter already set. The one path with no lever at all is a **hand-batched plain dispatch**: there the `model` param is all you have. Still write the level you chose and mark it unenforced — `medium (no control)`, never a dash — so the user can see which rows the script pins, and which rows would gain or lose that pin if an `adjust` moves them across the split.
 
-Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the named value the plan should show. Passing `model` overrides it, and can invalidate that file's `effort` because the available levels depend on the model — override only as a deliberate, logged deviation. Maker/checker diversity is the usual good reason.
+Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the named value the plan should show. Passing `model` overrides it, and can invalidate that file's `effort` because the available levels depend on the model — override only as a deliberate, logged deviation. Maker/checker diversity is the usual good reason. **On an alt agent there is no good reason and the rule is absolute: pass no `model` at all** ("The alt lane", above). Reaching for an override to buy diversity is what the alt lane replaced; on an alt row it destroys the diversity instead.
 
 Tool scoping — the mechanism behind the brief's `Allowed tools` line: agent-file frontmatter takes `tools` (an allow-list; omitting it inherits everything a subagent can reach) and `disallowedTools` (subtracted from whatever was inherited or listed). A plain dispatch has no tool parameter, so the only enforceable scoping is an agent file — on a plain dispatch, `Allowed tools` in the brief is an instruction, not a constraint, and should be written as one. **Read a unit's toolset off its file, never off the unit**: one lens downgraded its own confidence over tools its file grants, and an agent's account of what it can reach is not evidence about what it can reach. One consequence binds every brief. A unit whose `tools:` omits `Skill` cannot invoke a skill at all, so guidance you want it to follow has to be named as a path it can `Read` — measured both ways in a single run, an `implementer` (no `Skill`) reaching its guidance only through a readable path while a subject that held the tool auto-invoked the skill by name. None of the five agents shipped to `~/.claude/agents/` lists `Skill`; `implementer` gets `clean-code` by preload, not by invocation. The failure mode: if no entry in a `tools` list resolves to a real tool, the agent fails to launch rather than running unrestricted. Recovery is to correct the list and re-dispatch — fix the repo copy too, or the next run of the source repo's `install.sh` (not in this installed tree) reverts it. That is a briefing fix, not a rung on the failure ladder.
 
@@ -136,7 +172,7 @@ The docs confirm `maxTurns` stops the unit and say nothing further — in partic
 The plan table is the script's input. Translate it row for row, so what the user approved is what runs. **Only the rows the plan's `Backend:` line scripted** — the rest are hand-batched beside this script, and one launch covers a run of adjacent scripted rows rather than one launch per wave.
 
 - **One `agent()` call per row.** `opts.label` is the row's id, so `/workflows` shows the plan's own names back to the user while it runs.
-- **A row naming a saved agent passes `agentType` alone.** Its frontmatter already *is* the approved model and effort; passing `model` overrides both, with the `effort` caveat above.
+- **A row naming a saved agent passes `agentType` alone.** Its frontmatter already *is* the approved model and effort; passing `model` overrides both, with the `effort` caveat above. On an **alt** row that is not a caveat but a hard rule — an `opts.model` there silently deletes the outside-family model the row exists for ("The alt lane", above).
 - **A plain row passes `model` and `effort`.** This is the one dispatch path where the Effort column is real without a saved agent file — `agent()` takes `low | medium | high | xhigh | max` directly.
 - **The Flow column becomes structure.** Rows in one wave go in a `parallel()`; a row consuming a prior row's result becomes a `pipeline()` stage. Barriers only where the plan actually specified one. This is why adjacent scripted rows are **one** script across several waves and not one per wave: the flow between them lives inside it, and splitting them pays a second boot and breaks resume across the pair. It is also the boundary condition on the split — `pipeline()` preserves a per-item flow only *inside* one script, so a per-item flow that straddles the split degrades to a barrier there (SKILL.md Step 2). Either the whole pipeline is scripted, or none of it is.
 - **`opts.isolation: 'worktree'`** for any writer row the plan isolated.

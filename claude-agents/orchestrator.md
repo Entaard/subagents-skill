@@ -82,4 +82,6 @@ there is no such input available to frontmatter. `xhigh` is the deliberate stand
 successor's duties are synthesis, triage, and integration, the tier table's top row
 (`references/harness.md`, Models and effort). Overriding it at dispatch to match a
 higher-effort session is a logged deviation, the same rule as overriding any saved agent's
-frontmatter.
+frontmatter — with one exception you inherit as a parent: an **alt** agent takes no `model`
+override at all, because the parameter would delete the outside-family model that row exists
+for (`references/harness.md`, The alt lane).

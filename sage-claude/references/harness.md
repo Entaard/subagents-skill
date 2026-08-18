@@ -110,23 +110,63 @@ parent cannot run a slash command anyway. A file added mid-session is not yet di
 alt agent is in your live agent list, plan exactly as you would without this lane. This is the
 full statement of the rule for `/sage`. Every other mention of it in this corpus points back here.
 
+**An alt dispatch passes no `model` parameter.** Not a different model, not the same model, not one
+you intend to log as a deviation — none. The `model` parameter silently wins over agent-file
+frontmatter (Models and effort, above), so passing one replaces the outside-family model with
+whatever you named, and the only reason the alt agent exists is gone with no error raised. Measured
+here 2026-08-18: a parent passed `model: haiku` on all three alt dispatches while the brief text in
+the same call said it overrode nothing. 22.4k spent, three dispatches testing nothing, and no agent
+caught it — only a deterministic check afterwards did. Measured directly the same day: dispatching `explorer-alt` — whose frontmatter names an outside-family model — with `model: haiku` ran the unit on `claude-haiku-4-5-20251001`, read from `message.model` in its own transcript. The parameter wins; nothing warns. **This is the one dispatch class the
+"name the model explicitly" rule above does not reach**, because the file already named it.
+
+The same reasoning makes an override pointless on the four base agents: passing the model their
+frontmatter already sets changes nothing and can still cost that file's `effort`. Pass `model` on a
+saved agent only when you mean to *change* it, and log it when you do.
+
 **Per-role benefit.** `verifier-alt` buys a second model family for the checker half of a
 maker/checker pair. That is the one property no same-family model can supply. `explorer-alt` and
 `web-researcher-alt` buy price and window headroom for bulk reading. Neither buys diversity.
 
-Write an alt row's Model cell like any other cell: tier in brackets, lane named too. One machine
-might set `verifier-alt` to `gpt-5.6-sol[1m]`. That cell would then read
-`gpt-5.6-sol[1m] (frontier, alt)`. That model name is one machine's own configured value. It is
-an example of the cell's shape. This repo ships no default model name for the alt lane.
+**Filling an alt row's Model cell.** You resolve no tier for an alt row — its file already holds
+the model. Read that name with one grep of the installed file:
 
-Criterion 7 (adversarial verification, above) governs the claim. Record family diversity only when
-the checker's report names a non-Anthropic identity in its required `MODEL-FAMILY:` line.
-`unknown`, an Anthropic identity, or a missing line all count as a same-family check, whatever
-model was requested.
+```bash
+grep '^model:' ~/.claude/agents/verifier-alt.md
+```
+
+That is a filesystem read for a **name**, which is fine. The ban above is on reading the filesystem
+for **availability**, which is a live-session fact and a different question. Then write the cell
+like any other: tier in brackets, lane named too. One machine might set `verifier-alt` to
+`gpt-5.6-sol[1m]`, and that cell would read `gpt-5.6-sol[1m] (frontier, alt)`. That model name is
+one machine's own configured value, an example of the cell's shape. This repo ships no default
+model name for the alt lane.
+
+The configured name is what the file **requests**. What actually **ran** is a separate question,
+and criterion 7 (adversarial verification, above) rules on that one.
+
+**Settle the family claim by measurement, and take either measurement.** Record family diversity
+when the checker's report names a non-Anthropic identity in its required `MODEL-FAMILY:` line, or
+when the grep below does. An Anthropic identity from either is a same-family check, whatever model
+was requested.
+
+`unknown` is neither. It is an **absent measurement**, not a same-family verdict — measured here
+2026-08-18, an `explorer-alt` unit that really ran on `gpt-5.6-luna` reported `unknown` in the same
+run, because a model that cannot observe its own identity writes `unknown` honestly. So settle it
+with the command. Every dispatch hands back that unit's own transcript at `output_file`
+(Spawning, above), and `message.model` in it is the only field that establishes which model ran —
+the sidecar's `model` field records a dispatch-time *override*, so it is empty on exactly the alt
+rows you care about:
+
+```bash
+grep -o '"model":"[^"]*"' <output_file> | sort -u
+```
+
+A missing `MODEL-FAMILY:` line with no grep behind it stays a same-family check, as before. What
+changed is that one command can now settle it instead.
 
 **Reasoning effort has exactly one lever.** The Agent tool has no per-dispatch `effort` parameter, and an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in one place only: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; available levels depend on the model). Use `low`–`medium` for mechanical work and `high`–`max` for verification and judging. **The four worker roles exist to make this reachable** — dispatch by agent type and the ledger can honestly write `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`. A plain dispatch has no lever at all: the `model` param is all you have, so write the level you chose and mark it unenforced — `medium (no control)`, spelled out, never a dash.
 
-Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the value the ledger should show; passing `model` overrides it and can invalidate that file's `effort`, since available levels depend on the model — override only as a logged deviation, and maker/checker diversity is the usual good reason.
+Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the value the ledger should show; passing `model` overrides it and can invalidate that file's `effort`, since available levels depend on the model — override only as a logged deviation, and maker/checker diversity is the usual good reason. **On an alt agent there is no good reason and the rule is absolute: pass no `model` at all** (The alt lane, above). Reaching for an override to buy diversity is what the alt lane replaced; on an alt row it destroys the diversity instead.
 
 **Tool scoping** is the mechanism behind the brief's `Allowed tools` line: agent-file frontmatter takes `tools` (an allow-list; omitting it inherits everything a subagent can reach) and `disallowedTools` (subtracted from whatever was inherited or listed). A plain dispatch has no tool parameter, so the only enforceable scoping is an agent file — on a plain dispatch, `Allowed tools` is an instruction, not a constraint, and the brief should say so. **Read a unit's toolset off its file, never off the unit:** one lens downgraded its own confidence over tools its file grants, and an agent's account of what it can reach is not evidence about what it can reach. One consequence binds every brief: a unit whose `tools` omits `Skill` cannot invoke a skill at all, so guidance you want it to follow has to be named as a path it can `Read` — measured both ways in a single run, an `implementer` (no `Skill`) reaching its guidance only through a readable path while a subject holding the tool auto-invoked the skill by name. None of the five agents lists `Skill`; `implementer` gets `clean-code` by preload, not by invocation. The failure mode: if no entry in a `tools` list resolves to a real tool, the agent fails to launch rather than running unrestricted. Recovery is to correct the list and re-dispatch — fix the repo copy too, or the next run of the source repo's `install.sh` reverts it. That is a briefing fix, and it charges no rung on the failure ladder.
 

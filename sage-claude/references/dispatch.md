@@ -167,6 +167,7 @@ Cost: <N agents, ~actual against ~estimate, wall clock — say so where no token
 Deviations: <every row that ran with a different model, effort, count, or scope than planned, and why — or "none">
 Findings: <accepted / rejected / deferred / user-decision counts, plus the ones that matter>
 Verification: <checks run and outcomes. Separate MEASURED passes — a command executed — from JUDGED passes, where a case was read and ruled on. A judged pass is a reviewer's opinion with a case number on it. `Awaiting human` cases count as neither, and any machine-verifiable case that downgraded to judged is named here>
+Diff: <pointer to the frozen diff — revision range or changed-file manifest, writer by writer, or "none">
 Coordination check: <what depended on the agents being independent — a disagreement, a refutation, a cross-angle finding — or "nothing; one agent at this budget would likely have matched it". Answer honestly: "the fan-out bought nothing" is a real result>
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective or product checkpoints, if any>

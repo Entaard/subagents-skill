@@ -1,6 +1,6 @@
 ---
 name: implementer
-description: Writer unit for the /subagents orchestration skill, dispatched by name from an orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Implements one bounded unit inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
+description: Writer unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Implements one bounded unit inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
 tools: Read, Glob, Grep, Edit, Write, NotebookEdit, Bash
 model: sonnet
 effort: medium
@@ -67,10 +67,11 @@ brief. Never report `completed` with failing checks; that is `partial`, and the 
 ## Note for the parent
 
 The `model` above is a default; overriding it on the failure ladder's escalation rung is a logged
-deviation, and the `effort` here may not survive the override (`references/claude-code.md`). This
+deviation, and the `effort` here may not survive the override (the dispatching skill's harness
+reference: `references/claude-code.md` in /subagents, `references/harness.md` in /sage). This
 file deliberately sets no `maxTurns` — implementation units vary too much in shape for one cap;
 where a unit's shape is known, set the cap in a project-level copy rather than guessing one here.
-Review of this agent's diff belongs to the `diff-review` skill's two readers (SKILL.md Step 5) —
+Review of this agent's diff belongs to the `diff-review` skill's two readers (the orchestration skill's Step 5) —
 never to this agent, and never to a fork that inherits its context. A project can add per-agent
 `hooks` (lint after each edit) in a project-level copy; this global file binds only what is true
 everywhere.

@@ -1,6 +1,6 @@
 ---
 name: explorer
-description: Reader unit for the /subagents orchestration skill, dispatched by name from an orchestration plan. NOT a general-purpose search agent — for ordinary lookups and codebase questions, use the built-in Explore agent instead. Reports facts with file:line pointers from a fixed scope. Read and search only, no writes, no shell, no network.
+description: Reader unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general-purpose search agent — for ordinary lookups and codebase questions, use the built-in Explore agent instead. Reports facts with file:line pointers from a fixed scope. Read and search only, no writes, no shell, no network.
 tools: Read, Glob, Grep
 model: haiku
 effort: low

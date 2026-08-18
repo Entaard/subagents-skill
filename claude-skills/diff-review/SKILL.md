@@ -1,6 +1,6 @@
 ---
 name: diff-review
-description: Two-axis review of the changes since a fixed git point — Standards (does the diff follow this repo's documented coding rules, or the baseline smell list below) and Spec (does the diff match what was asked for). This skill triggers only when the user invokes "diff-review" by name, or when the subagents orchestration skill uses it inside a run. It does not trigger on general requests like "review since X" or "review this branch".
+description: Two-axis review of the changes since a fixed git point — Standards (does the diff follow this repo's documented coding rules, or the baseline smell list below) and Spec (does the diff match what was asked for). This skill triggers only when the user invokes "diff-review" by name, or when an orchestration skill (/subagents, /sage) uses it inside a run. It does not trigger on general requests like "review since X" or "review this branch".
 ---
 
 # diff-review
@@ -32,7 +32,7 @@ If either check fails, stop and report the failure. Do not let a bad ref or an e
 
 Look for the spec in this order. Stop at the first step that finds one.
 
-1. **The current orchestration run's own artifacts**, if this diff-review runs inside a run: the approved acceptance criteria, the unit's "done when" clause, or the initial requirements recorded in the run's ledger or briefs.
+1. **The current orchestration run's own artifacts**, if this diff-review runs inside a run: the run's acceptance criteria, the unit's "done when" clause, or the initial requirements recorded in the run's ledger or briefs.
 2. **Issue references in the commit messages** (`#123`, `Closes #45`, and similar). Use this step only when the repo itself documents an issue-tracker workflow, for example in a `docs/agents/issue-tracker.md` file or an equivalent file the repo names. Never assume an issue-tracker workflow, and never install one from another repo to get this step to work.
 3. **A path the user passed as an argument.**
 4. **A spec file** under `docs/`, `specs/`, or `.scratch/` that matches the branch name or the feature.
@@ -88,9 +88,9 @@ Each reader reports back in under 400 words.
 
 ### Inside an orchestration run
 
-Use this mode when the subagents orchestration skill's Step 2 gate is building a plan and diff-review is one of its rows.
+Use this mode when an orchestration skill (/subagents, /sage) is building its plan — /subagents at its Step 2 gate, /sage in its Step 2 ledger — and diff-review is one of its rows.
 
-diff-review spawns nothing itself in this mode. The two axes become two rows in the approved plan, behind the gate. The two reader briefs below become those rows' briefs, written into the plan exactly as they read here. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
+diff-review spawns nothing itself in this mode. The two axes become two rows in the orchestration plan — behind the approval gate where the skill has one (/subagents), recorded in the run ledger where it does not (/sage). The two reader briefs below become those rows' briefs, written into the plan exactly as they read here. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
 
 ## Reader briefs
 

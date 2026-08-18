@@ -1,6 +1,6 @@
 ---
 name: web-researcher
-description: Outside-sources research unit for the /subagents orchestration skill, dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell.
+description: Outside-sources research unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell.
 tools: WebSearch, WebFetch, Read
 model: sonnet
 effort: medium
@@ -59,7 +59,8 @@ Uncertainty: <what you could not confirm from a source, and what would settle it
 
 ## Note for the parent
 
-Budget from the skill's `calibration.md`, but never from a single past run's per-agent average — that
+Budget from the dispatching skill's cost records (`calibration.md` in /subagents, `memory/local.md`
+in /sage), but never from a single past run's per-agent average — that
 average encodes the brief style that produced it, not the task class. **Brief style dominates cost for
 this unit.** Briefs naming their exact target URLs have repeatedly come back under 40k per agent, and
 as low as 13.7k; open-ended "go find primary sources" briefs on the same task class fetched their way

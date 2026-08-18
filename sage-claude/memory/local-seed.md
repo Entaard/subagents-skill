@@ -21,7 +21,7 @@ Quote these at Step 2. Cost figures are machine-specific by nature; the part of 
 
 | Class | Figure | Qualifiers | Evidence |
 | --- | --- | --- | --- |
-| Any single agent, all classes | p50 133k, p90 498k, p99 3.0M | the whole local distribution, so it prices nothing on its own — it is what the 150k per-unit budget floor sits just above, and what makes a fixed absolute threshold useless across unit sizes | 204 done of 212 agent transcripts (`subagents/agent-*.jsonl`, non-recursive, `wf_*` excluded), 2026-08-18 |
+| Any single agent, all classes | p50 164k, p90 410k, p99 766k, max 818k | the whole local distribution, so it prices nothing on its own — it is what makes any fixed absolute threshold useless across unit sizes. Nearest-rank percentiles; a linear-interpolation rule moves p99 to ~700k on the same data, so name the rule beside the figure | 195 agent transcripts (`subagents/agent-*.jsonl`, non-recursive, `wf_*` excluded), 186 presumed done, 2026-08-18. Seed figures are the author's machine — re-measure before betting on them |
 | Frontier review lens, prose corpus ≤10k words | 50–95k per agent | cost tracks the corpus the reviewer must hold, not the size of the change; a blank-context critique lands in the same band | 3 runs, last 2026-08-06 (seed) |
 | Web research, brief must find its sources | 70–120k per agent | multi-question briefs sit at the top; valid only for briefs that must discover their sources | 3 runs, last 2026-08-06 (seed) |
 | Web research, brief names its target URLs | 14–34k per agent | the fetch-heavy band above does not apply | 1 run (2 agents), 2026-08-06 (seed) |
@@ -56,7 +56,7 @@ Lessons seen once, contradictions against a `shared.md` rule, skill defects, and
 | --- | --- | --- | --- | --- | --- |
 | A subagent's transcript is observable: every dispatch returns an `output_file` holding that unit's full JSONL, so grepping it measures what the agent invoked rather than what it reported. One run converted six case verdicts from judged to measured that way. **(seed)** | lesson | 1 | 2026-08-16 | — | watching |
 | A projection built from band midpoints is an upper bound, not a forecast — say which kind of figure you are holding up when a rail stops the run, or headroom gets authorised that the run never needed. **(seed)** | lesson | 1 | 2026-08-16 | — | watching |
-| The watchdog's false-positive rate is unmeasured. Grant it no autonomous action beyond a `SendMessage` until ten runs of evidence sit in the Run log below. | gap | 0 | 2026-08-17 | — | watching |
+| The watchdog is an occupancy sensor and sends nothing. Its six per-unit rungs were measured and cut: **0 true positives** across 193 subagent transcripts and 37 units in 4 real runs. What survives is `--status` arithmetic plus the two parent-occupancy rungs, both notify-only. | lesson | 1 | 2026-08-18 | — | watching |
 | The 4× budget multiplier may be consumed rather than used: on this machine every past ceiling raise was spent up to the new ceiling. Retire it if ten runs land near 4× with coordination checks naming nothing the spend bought. | gap | 0 | 2026-08-17 | — | watching |
 | Running unattended is unmeasured against running with a human approving the plan first: no logged row anywhere records an approval answer, a requested change, or a reversed call. The assumption log is the instrument — read the rows the user corrects. | gap | 0 | 2026-08-17 | — | watching |
 

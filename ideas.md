@@ -1,9 +1,11 @@
 
+- Continue working with the sage in the same session?
 - Terminal rule is 40%? Since we have successor sages now, remove the terminal rule.
 - I feel sage is more costly than the previous version of subagents. What are the most costly steps and flows?
 - Roughly how is sage's performance vs subagents?
 - Check the sage and subagents skills to see if they try to pass Anthropic model names into the alt custom agents.
 - Do the sage and subagents skills use the alt agents when the alt agents are available?
+- Remove the cap number of successor sages.
 
 ----
 

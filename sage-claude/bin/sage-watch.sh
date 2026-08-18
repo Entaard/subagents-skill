@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# sage-watch.sh — the sage watchdog probe. Notify only; it never recalls anything.
+# sage-watch.sh — the sage occupancy sensor. Notify only; it never recalls anything.
 #
-# It reads the in-flight subagent transcripts of one session, walks the ladder in
-# `../SKILL.md` Step 4 — the arithmetic behind each signal is `../references/harness.md`,
-# `## Transcripts and the token arithmetic` — and prints ONE LINE PER FIRED RUNG. A healthy sample prints
-# nothing and exits 0. It is hosted on `Monitor` with `persistent: true`, where every
+# It reads the in-flight subagent transcripts of one session, watches the two
+# parent-occupancy rungs — the handover and terminal rules in `../SKILL.md` ##
+# Handover — and prints ONE LINE PER FIRED RUNG. A healthy sample prints nothing
+# and exits 0. It is hosted on `Monitor` with `persistent: true`, where every
 # stdout line becomes a notification, so silence is the default output.
 #
 # It never writes a file, never calls `TaskStop`, never kills a process, and never
@@ -14,23 +14,24 @@
 # ---------------------------------------------------------------------------
 # USAGE
 #
-#   sage-watch.sh [<subagents-dir>|-] [<estimates-file>]
-#   sage-watch.sh --status [<subagents-dir>|-] [<estimates-file>]
+#   sage-watch.sh [<subagents-dir>|-] [<ignored>]
+#   sage-watch.sh --status [<subagents-dir>|-] [<ignored>]
 #   sage-watch.sh --help
 #
-#   <subagents-dir>    The session's `subagents/` directory. Omit it, or pass `-`, to
+#   <subagents-dir>   The session's `subagents/` directory. Omit it, or pass `-`, to
 #                      discover it (rule below).
-#   <estimates-file>   Optional. Per-unit token estimates, so the spend rungs are
-#                      relative to each row's own estimate (format below).
+#   <ignored>          A stale second positional argument, accepted and never an error:
+#                      fail-open applies to arguments too. `--status` prints one `note`
+#                      line saying so; ladder mode says nothing about it, ever.
 #   --status           Diagnostic mode. Prints one line per agent with every figure,
 #                      fires no rungs. This is the "probe once at start" call: if it
-#                      prints nothing, the watchdog cannot run on this layout and the
+#                      prints nothing, the sensor cannot run on this layout and the
 #                      parent disables it silently and writes one ledger line.
 #
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
-#                      as an estimates-file value. Defaults to 1006380 (the measured
-#                      figure in `../references/harness.md`) when unset, unparseable, or
-#                      zero. Drives the parent occupancy rungs below — see BLIND SPOTS for
+#                      as below. Defaults to 1006380 (the measured figure in
+#                      `../references/harness.md`) when unset, unparseable, or zero.
+#                      Drives the parent occupancy rungs below — see BLIND SPOTS for
 #                      what a wrong value actually does (it is not silence).
 #   SAGE_OCC_ACK       Env. Any non-empty value suppresses the parent `occ-30pct` rung
 #                      ONLY (not `--status`, which always reports occupancy, and not the
@@ -40,8 +41,8 @@
 #
 # Exit status is 0 in every normal case, including a missing directory, no transcripts,
 # malformed JSON, a half-written final line, and a transcript with no assistant records.
-# Exit 2 means the ARGUMENTS were unusable (too many, or an unreadable estimates file);
-# nothing was inspected.
+# Exit 2 means the ARGUMENTS were unusable (more than two positional arguments, or an
+# unknown option); nothing was inspected.
 #
 # ---------------------------------------------------------------------------
 # DISCOVERY RULE (used when <subagents-dir> is omitted or `-`)
@@ -66,137 +67,77 @@
 # LINE below, which withhold the line on either mode.
 #
 # ---------------------------------------------------------------------------
-# ESTIMATES FILE FORMAT
-#
-# One row per unit. Blank lines and `#` comments ignored. The LAST whitespace-separated
-# field is the estimate; everything before it is the key, so keys may contain spaces:
-#
-#     # key                          estimate
-#     ac00f3c9804d0df39              240k        # agent id, with or without `agent-`
-#     implementer                    250k        # agentType from the .meta.json sidecar
-#     Write the watchdog probe       120000      # exact description from the sidecar
-#
-# Estimate forms: a bare integer, or an integer with a `k`/`K` (x1000) or `m`/`M`
-# (x1000000) suffix. A row that parses as neither is ignored.
-#
-# Key match precedence per agent, first hit wins: agent id, then description, then
-# agentType. No estimate for a unit -> the 150k floor. Every estimate is floored at
-# 150k, so a small row cannot make the rungs fire on ordinary work.
-#
-# ---------------------------------------------------------------------------
 # THE ARITHMETIC — this is where a naive build goes wrong
 #
 # THE REFERENCE CORPUS, named once because every figure below is measured on it and on
-# nothing else: 212 transcripts, measured 2026-08-18 — every
+# nothing else: 197 transcripts, measured 2026-08-18 — every
 # `<session>/subagents/agent-*.jsonl` under `~/.claude/projects/`, NON-RECURSIVE, across
 # all projects, `workflows/wf_*/` excluded. That is exactly the population this script's
 # own glob can read, and it is the same one `../references/harness.md` quotes; the two
 # must agree, figure for figure. A recursive sweep instead drags in the `wf_*` sidecars
 # of the deleted `Workflow` backend — units this probe never opens and sage never
-# produces — and moves every number below. Symlinked duplicates are counted once. These
-# are date-stamped because the corpus grows and old transcripts are pruned: re-measure
-# before betting a threshold on them.
+# produces — and moves every number below. Symlinked duplicates are counted once. This is
+# date-stamped because the corpus grows and old transcripts are pruned: re-measure before
+# betting anything on it.
 #
 # Assistant records are STREAMING PARTIALS: one `message.id` is written many times with
 # growing `usage`. Summing raw inflates spend, so a rail built the obvious way fires at a
 # fraction of real spend and alarms on healthy agents constantly. Always
-# `group_by(.message.id) | map(.[-1])` before any sum.
+# `group_by(.message.id) | map(.[-1])` before any sum — the inflation is a DISTRIBUTION,
+# not a constant: the median transcript inflates about 2x and the tail past 8x, which is
+# the magnitude, and `../references/harness.md`, `## Transcripts and the token arithmetic`
+# holds the distribution as its single home. This is why the dedup is not optional.
 #
-# The inflation is a DISTRIBUTION, not a constant. Raw/deduplicated over the reference
-# corpus (212 transcripts, 2026-08-18): min 1.00x, p10 1.66x, p25 1.88x, p50 2.14x,
-# p75 2.53x, p90 2.94x, p99 4.22x, max 4.26x; mean 2.26x; corpus aggregate (all raw /
-# all dedup) 2.01x. A single transcript can land anywhere in that range, which is exactly
-# why the dedup is not optional and why no single multiplier can stand in for it.
-#
-#   done       the unit is presumed FINISHED, and a finished unit fires nothing. Read off
-#              the FINAL assistant record in FILE order (not the `group_by` array's last
-#              element, which is sorted by id), and not off `any` record. Three clauses,
-#              any one sufficient:
+#   done       the unit is presumed FINISHED. Read off the FINAL assistant record in FILE
+#              order (not the `group_by` array's last element, which is sorted by id), and
+#              not off `any` record. Three clauses, any one sufficient:
 #                a. its `stop_reason` is `end_turn` or `stop_sequence`;
 #                b. its content carries a `text` block and no `tool_use` block — a turn
 #                   that ended in prose with no call pending is over, whatever the
 #                   `stop_reason` field says;
 #                c. `idle` is past IDLE_CEIL — evidence this cold describes a unit that is
 #                   gone, not one that is stalling, and there is nothing left to steer.
-#              Clause (b) is the load-bearing one. Over the reference corpus (212
-#              transcripts, 2026-08-18), 41 (19.3%) carry `end_turn` NOWHERE: their final
-#              record reads `null` 34 times, `tool_use` 5, `stop_sequence` 2. An
-#              `any(end_turn)` test called every one of them still-running, forever, and
-#              at the 60s Monitor cadence that turns roughly one finished unit in five
-#              into a permanent notification: that superseded rule covers 171/212 (80.7%)
-#              where clauses (a)+(b) cover 204/212 (96.2%). Two tempting explanations are
-#              both wrong, measured on the same corpus: deduplication loses an `end_turn`
-#              in 0 of 212, and judging the final record instead of `any` gives the
-#              identical 171 — the field is simply absent from the file. What makes (b) a
-#              strict superset rather than a looser guess: all 171 `end_turn` finals end
-#              in a text-only content array, and so do 33 of the 41 that lack the field.
-#              Clause (c) covers the residue that leaves — 8 transcripts (3.8%), 7 ending
-#              in a `tool_use` and one truncated mid-`thinking`. That shape looks the same
-#              for a unit running a long tool right now and a unit killed mid-call days
-#              ago; only elapsed time separates the two, so only there does time get a
-#              vote — and on 3.8% of the corpus, not the fifth an `any` test would hand it.
+#              Clause (b) is the load-bearing one: with it the predicate covers 95.5% of
+#              the reference corpus. `../references/harness.md` is the single home for the
+#              rest — the per-clause split, the superseded `any`-record rule it replaced,
+#              and what `done` still cannot see. Read a coverage figure there, not here.
 #   spend      sum of `input + cache_creation + output` over DEDUPLICATED records.
 #              Excludes `cache_read` — re-read context is not spend.
 #   occupancy  `input + cache_creation + cache_read` on the SINGLE MOST RECENT assistant
 #              record. Includes `cache_read` — those tokens are in the window.
 #              Point-in-time, never a sum. Reported by --status; fires no rung here.
 #   idle       now minus the last record's timestamp. Reliable for liveness, noisy as a
-#              stall proxy — over the reference corpus (212 transcripts, 2026-08-18) 39%
-#              of the runs this predicate calls done still contain a gap over 120s, so
-#              idle is unusable below 300s; the rungs sit at 600s and 1800s, where the
-#              base rates fall to 5% and 1%. Ceiling above: p99 of the per-transcript
-#              largest gap is 3764s and the largest gap any transcript came back from is
-#              13195s (3.7h, and that one is machine sleep, not work). IDLE_CEIL sits at
-#              21600s — 12x the top rung, 5.7x that p99, and 1.6x the largest observed
-#              return — so a unit past it is called gone, not stalled.
+#              stall proxy (`../references/harness.md` has the base rates). IDLE_CEIL
+#              below is set well past the largest returns this corpus has measured.
 #   repeat     the largest count of one identical tool call (same name AND same input)
-#              across deduplicated records. Sharp distribution over the reference corpus
-#              (2026-08-18): p90 is 1, p99 is 3, max 5 — which is why REPEAT_MIN sits at 4.
+#              across deduplicated records. Diagnostic only now — `--status` reports it,
+#              nothing on the ladder acts on it.
 #
 # ---------------------------------------------------------------------------
 # THE LADDER — nothing in it recalls an agent automatically
 #
-#   rung        action    fires when (and the unit is not presumed finished)
-#   idle-600    log       idle > 600s
-#   idle-1800   message   idle > 1800s          -> SendMessage asking for a one-liner
-#   tool-repeat message   same tool call >= 4x  -> SendMessage naming the repeated call
-#   spend-2x    log       spend > 2x estimate
-#   spend-4x    message   spend > 4x estimate   -> SendMessage: report what you have now
-#   spend-6x    surface   spend > 6x estimate   -> surface to the user; TaskStop only on
-#                                                  their word
-#
-# Only the HIGHEST idle rung and the HIGHEST spend rung fire per agent, so one agent
-# emits at most three lines. `tool-repeat` is independent of the other two.
-#
-# The other arm of that last rung in `../SKILL.md` Step 4 — "no reply 600s after two
-# messages" — needs state this script does not have; it never saw the messages. The
-# parent tracks that arm.
-#
-#   rung        action    fires when
+#   rung        action    fires when (and parent occupancy is not presumed acted-on)
 #   occ-30pct   handover  parent occupancy >= 30% of SAGE_WINDOW  -> stop launching, run
 #                                                                    `../SKILL.md` ## Handover
 #   occ-40pct   terminal  parent occupancy >= 40% of SAGE_WINDOW  -> supervisor terminal
 #                                                                    rule, `../SKILL.md`
 #                                                                    ## Handover
 #
-# HIGHEST-RUNG-ONLY, same rule as idle and spend above: pct >= 40 fires `occ-40pct`
-# ALONE, checked first and REGARDLESS of `SAGE_OCC_ACK` — a supervising parent's own
-# terminal rule needs a sensor no ack can silence, because the ack is exactly what a
-# supervisor sets right after handover, and that is precisely when its own occupancy
-# keeps climbing toward 40%. Only when pct < 40 does `occ-30pct` get a chance, and only
-# then does `SAGE_OCC_ACK` matter. The parent rung is a SINGLE line, not per-agent, and
-# both rungs run only when <subagents-dir> was passed explicitly (DISCOVERY RULE above).
-# `occ-30pct` fires regardless of the estimates file — it needs no estimate row — and,
-# deliberately, it repeats on every sample until `SAGE_OCC_ACK` silences it: it is the
-# handover alarm that must survive a compaction, and the ack is how it ends once the
-# parent has acted on it. `occ-40pct` always repeats — there is no ack for the terminal
-# rule, because a supervisor that reaches it is meant to stop, not to keep going quietly.
+# HIGHEST-RUNG-ONLY: pct >= 40 fires `occ-40pct` ALONE, checked first and REGARDLESS of
+# `SAGE_OCC_ACK` — a supervising parent's own terminal rule needs a sensor no ack can
+# silence, because the ack is exactly what a supervisor sets right after handover, and
+# that is precisely when its own occupancy keeps climbing toward 40%. Only when pct < 40
+# does `occ-30pct` get a chance, and only then does `SAGE_OCC_ACK` matter. The parent rung
+# is a SINGLE line, not per-agent, and both rungs run only when <subagents-dir> was passed
+# explicitly (DISCOVERY RULE above). `occ-30pct` repeats on every sample until
+# `SAGE_OCC_ACK` silences it: it is the handover alarm that must survive a compaction, and
+# the ack is how it ends once the parent has acted on it. `occ-40pct` always repeats —
+# there is no ack for the terminal rule, because a supervisor that reaches it is meant to
+# stop, not to keep going quietly.
 #
 # OUTPUT LINE SHAPE, fixed field order:
 #
 #   sage-watch <rung> <action> <agent-id> [<agentType>] "<description>" <figures...>
-#   sage-watch spend-4x message a1cc4e647a6d9 [implementer] "Write the probe" \
-#              spend=640k est=150k ratio=4.2x
 #
 # Grep a rung name to select; field 2 is the rung, field 3 the action, field 4 the id.
 #
@@ -204,16 +145,21 @@
 # every figure as key=value:
 #
 #   sage-watch status a37cd95f4 [Explore] "Gate blast radius" done=yes spend=205k \
-#              raw=496k occupancy=173k idle=2379s repeat=1 records=44 est=150k
+#              raw=496k occupancy=173k idle=2379s repeat=1 records=44
 #
 # `raw` is the undeduplicated sum, printed only here, only so the dedupe stays auditable.
 #
-# THE PARENT LINE, printed first and separately from the per-agent lines above, WHEN it
-# prints at all (fail-open exceptions below). `window=` is always the RAW integer, never
-# `tok()`-shortened — the parent must read back exactly the figure it passed in
-# `SAGE_WINDOW`, and a rounded window is precision the caller cannot use. Ladder rungs
-# print this line only when <subagents-dir> was passed explicitly (never under discovery);
-# `--status` prints it whether the dir was explicit or discovered:
+# A stale second positional argument prints one extra `note` line, `--status` only, before
+# every other line:
+#
+#   sage-watch note "estimates file ignored: the spend rungs were removed" <path-as-given>
+#
+# THE PARENT LINE, printed first (after the note line, if any) and separately from the
+# per-agent lines above, WHEN it prints at all (fail-open exceptions below). `window=` is
+# always the RAW integer, never `tok()`-shortened — the parent must read back exactly the
+# figure it passed in `SAGE_WINDOW`, and a rounded window is precision the caller cannot
+# use. Ladder rungs print this line only when <subagents-dir> was passed explicitly
+# (never under discovery); `--status` prints it whether the dir was explicit or discovered:
 #
 #   sage-watch occ-30pct handover <session-id> [parent] "session transcript" \
 #              occupancy=302k window=1006380 pct=30%
@@ -232,9 +178,8 @@
 # records, or its occupancy reads 0. The ladder prints the line only under an explicit
 # dir, and only when a rung actually fires (`occ-40pct` regardless of the ack, `occ-30pct`
 # only when it is unset).
-# `done` takes three values: `yes` (clause a or b), `stale` (clause c — the transcript is
-# older than IDLE_CEIL, so the unit is presumed gone), and `no`. Both `yes` and `stale`
-# fire nothing; only `no` walks the ladder.
+# `done` takes three values on `--status`: `yes` (clause a or b), `stale` (clause c — the
+# transcript is older than IDLE_CEIL, so the unit is presumed gone), and `no`.
 #
 # BLIND SPOTS, stated rather than hidden: no signal here detects the confident-wrong
 # agent that burns a normal budget and returns a fluent fabrication, correct-but-
@@ -242,12 +187,12 @@
 # able from a stall. The verification layer is the only defence for the first.
 #
 # What the `done` predicate specifically cannot see, since it decides on the last record
-# written rather than on any statement of intent:
+# written rather than on any statement of intent — `../references/harness.md` carries the
+# full corpus breakdown:
 #   - A unit that stalls just after emitting a text block and before its tool call lands
 #     in the same turn reads as finished under clause (b). While the unit is alive this
 #     self-corrects at the next sample; if it hangs in exactly that window it is silent
-#     for good. Seven of the eight non-text-terminal transcripts in the reference corpus
-#     stall inside a tool call instead, which is the shape clause (b) leaves alone.
+#     for good.
 #   - A unit that returns a complete, wrong or empty answer is `done` — the predicate
 #     reads shape, never content.
 #   - A unit genuinely hung inside a tool call for more than IDLE_CEIL is called gone and
@@ -255,12 +200,6 @@
 #     next tool round, and a unit with no tool round in six hours has none coming, so the
 #     probe has no actionable claim left to make. Machine sleep lands here too, and going
 #     quiet after it is the fail-open answer.
-#   - `stop_reason` values outside `end_turn`/`stop_sequence`/`tool_use`/null are all but
-#     absent from the reference corpus, and untested where it counts: sweeping every
-#     assistant `stop_reason` in it (2026-08-18), `max_tokens` appears exactly once and
-#     mid-transcript — never as the FINAL record this predicate actually reads, whose only
-#     observed values are those four. `max_tokens` on a text-only final would read as
-#     finished, which is right in effect — a truncated unit is not going to continue.
 #   - The parent occupancy rungs trust `SAGE_WINDOW` completely: neither has a way to learn
 #     the real window on its own. A window SMALLER than the real one fires EARLY and LOUD —
 #     measured: 900k against a real ~1,006,380 fired a false `occ-30pct` at 32% actual
@@ -276,16 +215,13 @@
 #
 # FAIL OPEN. An absent signal means no alarm, never a recall.
 
-IDLE_LOG=600          # rung idle-600
-IDLE_MSG=1800         # rung idle-1800
 IDLE_CEIL=21600       # 6h. Past this a not-yet-finished unit is presumed gone, not stalled
-REPEAT_MIN=4          # rung tool-repeat
-EST_FLOOR=150000      # every estimate is floored here
 OCC_HANDOVER_PCT=30   # rung occ-30pct: parent occupancy as a percent of WINDOW
 OCC_TERMINAL_PCT=40   # rung occ-40pct: supervisor terminal rule, never suppressed by an ack
 
-# WINDOW: same integer/k/K/m/M parsing as an estimates-file value. An unparseable or
-# unset SAGE_WINDOW falls back to the measured figure in ../references/harness.md.
+# WINDOW: an integer, or an integer with a k/K (x1000) or m/M (x1000000) suffix. An
+# unparseable or unset SAGE_WINDOW falls back to the measured figure in
+# ../references/harness.md.
 parse_amount() {  # parse_amount <raw> <default> — echoes an integer, never fails
   local raw="$1" fallback="$2" num mult=1
   case "$raw" in
@@ -308,12 +244,13 @@ JQ=$(command -v jq 2>/dev/null)
 usage() {
   # The header above is the manual; this is the reminder.
   printf '%s\n' \
-    'sage-watch.sh [<subagents-dir>|-] [<estimates-file>]   walk the ladder, print fired rungs' \
-    'sage-watch.sh --status [<dir>|-] [<estimates>]         one line per agent, fires nothing' \
-    'sage-watch.sh --help                                   this reminder' \
+    'sage-watch.sh <subagents-dir> [<ignored>]       parent occupancy rungs only' \
+    'sage-watch.sh [-] [<ignored>]                   discovery: prints nothing, by design' \
+    'sage-watch.sh --status [<dir>|-] [<ignored>]    one line per agent, fires nothing' \
+    'sage-watch.sh --help                            this reminder' \
     '' \
-    'Estimates file: one row per unit, `<agent-id | agentType | description>  <tokens>`,' \
-    'the estimate last, `k`/`m` suffixes allowed, `#` comments ignored, 150k floor.' \
+    'A second positional argument is accepted and ignored (stale estimates-file path from' \
+    'before the per-unit rungs were cut). --status prints one note line saying so.' \
     'SAGE_WINDOW (env): the live context window, default 1006380. SAGE_OCC_ACK (env):' \
     'non-empty suppresses the parent occ-30pct rung. Both documented above.' \
     'Exit 0 always; exit 2 only when the arguments themselves are unusable.'
@@ -324,7 +261,7 @@ usage() {
 
 STATUS=0
 DIR=""
-EST_FILE=""
+IGNORED_ARG=""
 POSN=0
 
 for arg in "$@"; do
@@ -336,17 +273,12 @@ for arg in "$@"; do
       POSN=$((POSN + 1))
       case "$POSN" in
         1) [ "$arg" = "-" ] || DIR="$arg" ;;
-        2) EST_FILE="$arg" ;;
+        2) IGNORED_ARG="$arg" ;;
         *) printf 'sage-watch: too many arguments\n' >&2; exit 2 ;;
       esac
       ;;
   esac
 done
-
-if [ -n "$EST_FILE" ] && [ ! -r "$EST_FILE" ]; then
-  printf 'sage-watch: estimates file not readable: %s\n' "$EST_FILE" >&2
-  exit 2
-fi
 
 # ---------------------------------------------------------------------------
 # Discovery. See DISCOVERY RULE above.
@@ -371,8 +303,15 @@ if [ -n "$DIR" ]; then EXPLICIT_DIR=1; else EXPLICIT_DIR=0; fi
 
 # Fail open: no directory, an unreadable one, or no jq to read it with, is not an alarm.
 # This is the "probe once at start" answer — a --status call that prints nothing means the
-# watchdog cannot run on this layout, and the parent disables it and writes one ledger line.
+# sensor cannot run on this layout, and the parent disables it and writes one ledger line.
 if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ] || [ ! -x "$JQ" ]; then exit 0; fi
+
+# The note about the ignored argument is --status-only and prints before every other line.
+# It sits BELOW the guard above on purpose: a probe whose layout does not resolve must
+# print nothing at all, or the caller reads one note line as "the sensor works here".
+if [ "$STATUS" -eq 1 ] && [ -n "$IGNORED_ARG" ]; then
+  printf 'sage-watch note "estimates file ignored: the spend rungs were removed" %s\n' "$IGNORED_ARG"
+fi
 
 # Canonicalize to an absolute path now, once validation has already proven $DIR exists and
 # is readable — safe to `cd` into. The parent occupancy sensor derives the parent transcript
@@ -383,60 +322,6 @@ if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ] || [ ! -x "$JQ" ]; then e
 DIR=$(cd "$DIR" && pwd)
 
 # ---------------------------------------------------------------------------
-# Estimates. Parsed once into two parallel indexed arrays (bash 3.2 has no
-# associative arrays). Lookups are a linear scan over a handful of rows.
-
-EST_KEYS=()
-EST_VALS=()
-
-parse_estimates() {
-  local line key val num mult
-  while IFS= read -r line || [ -n "$line" ]; do
-    line="${line%%#*}"                       # strip comment
-    line="${line//$'\t'/ }"                  # tabs become spaces
-    while [ "$line" != "${line//  / }" ]; do line="${line//  / }"; done
-    line="${line# }"; line="${line% }"       # trim
-    case "$line" in ''|' ') continue ;; esac
-    case "$line" in *' '*) : ;; *) continue ;; esac   # need a key AND a value
-    val="${line##* }"
-    key="${line% *}"
-    mult=1
-    case "$val" in
-      *k|*K) num="${val%?}"; mult=1000 ;;
-      *m|*M) num="${val%?}"; mult=1000000 ;;
-      *)     num="$val" ;;
-    esac
-    case "$num" in ''|*[!0-9]*) continue ;; esac      # unparseable row: ignore
-    EST_KEYS[${#EST_KEYS[@]}]="$key"
-    EST_VALS[${#EST_VALS[@]}]=$((num * mult))
-  done < "$1"
-}
-
-[ -n "$EST_FILE" ] && parse_estimates "$EST_FILE"
-
-# Exact lookup of one key. Echoes the token count, or nothing.
-est_lookup() {
-  local want="$1" i=0 n=${#EST_KEYS[@]}
-  while [ "$i" -lt "$n" ]; do
-    if [ "${EST_KEYS[$i]}" = "$want" ]; then printf '%s' "${EST_VALS[$i]}"; return 0; fi
-    i=$((i + 1))
-  done
-  return 1
-}
-
-# Precedence: agent id, then description, then agentType. Floored at EST_FLOOR.
-estimate_for() {
-  local id="$1" desc="$2" type="$3" v=""
-  v=$(est_lookup "$id") || v=$(est_lookup "agent-$id") \
-    || { [ -n "$desc" ] && v=$(est_lookup "$desc"); } \
-    || { [ -n "$type" ] && v=$(est_lookup "$type"); } \
-    || v=""
-  case "$v" in ''|*[!0-9]*) v=0 ;; esac
-  [ "$v" -ge "$EST_FLOOR" ] || v=$EST_FLOOR
-  printf '%s' "$v"
-}
-
-# ---------------------------------------------------------------------------
 # Formatting helpers
 
 # 1250000 -> 1.2M ; 612345 -> 612k ; 900 -> 900
@@ -445,13 +330,6 @@ tok() {
     printf '%d.%dM' $(($1 / 1000000)) $(($1 % 1000000 / 100000))
   elif [ "$1" -ge 1000 ]; then printf '%dk' $(($1 / 1000))
   else printf '%d' "$1"; fi
-}
-
-# 640000 150000 -> 4.2x   (integer math; no bc, no awk)
-ratio() {
-  local r
-  r=$(( $1 * 10 / $2 ))
-  printf '%d.%dx' $((r / 10)) $((r % 10))
 }
 
 emit() {  # rung action id type desc figures...
@@ -468,8 +346,10 @@ emit() {  # rung action id type desc figures...
 #
 # `last_ts` is the last timestamp on ANY record, not just an assistant one: a tool
 # result lands between assistant turns and is the freshest liveness evidence there is.
-# `assistant_records` gates the ladder — a transcript with no assistant record carries
-# no evidence about the agent at all, and no evidence is never an alarm.
+# `assistant_records` is why a transcript with no assistant record produces no `--status`
+# line: no records is no evidence about the agent, and no evidence is never a signal.
+# Fields 8 and 9 (tool, input) are read by nothing here. PROBE is deliberately unchanged,
+# byte for byte, because the parent occupancy sensor and `--status` share it.
 
 PROBE='
 def num($x): if ($x|type) == "number" then $x else 0 end;
@@ -508,7 +388,7 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
   ] | @tsv
 '
 
-# No usable clock means no usable idle figure. The spend and repeat rungs still stand.
+# No usable clock means no usable idle figure.
 NOW=$(date +%s 2>/dev/null)
 case "$NOW" in ''|*[!0-9]*) NOW=-1 ;; esac
 
@@ -548,7 +428,7 @@ EOF
           printf 'sage-watch status %s [parent] "session transcript" occupancy=%s window=%s pct=%s%%\n' \
             "$session_id" "$(tok "$p_occ")" "$WINDOW" "$p_pct"
         elif [ "$EXPLICIT_DIR" -eq 1 ]; then
-          # Highest-rung-only, same rule as idle and spend below: the terminal rung fires
+          # Highest-rung-only, same rule as the SKILL.md ladder: the terminal rung fires
           # ALONE and REGARDLESS of SAGE_OCC_ACK — a supervisor sets that ack right after
           # handover, exactly when its own occupancy keeps climbing toward the terminal
           # rule, so nothing may silence this one. Only below it does the ack apply.
@@ -565,87 +445,56 @@ EOF
   fi
 fi
 
-for f in "$DIR"/agent-*.jsonl; do
-  [ -f "$f" ] && [ -r "$f" ] || continue
+# In ladder mode, per-unit rows do no work at all now — nothing on the ladder reads them.
+# Skip the loop entirely so a ladder sample reads only the parent transcript above.
+if [ "$STATUS" -eq 1 ]; then
+  for f in "$DIR"/agent-*.jsonl; do
+    [ -f "$f" ] && [ -r "$f" ] || continue
 
-  base="${f##*/}"; base="${base%.jsonl}"; id="${base#agent-}"
+    base="${f##*/}"; base="${base%.jsonl}"; id="${base#agent-}"
 
-  atype=""; desc=""
-  meta="$DIR/$base.meta.json"
-  if [ -r "$meta" ]; then
-    metaline=$("$JQ" -r 'if type == "object"
-                         then [(.agentType // ""), ((.description // "") | tostring
-                              | gsub("[\t\r\n\"]"; " "))] | @tsv
-                         else "" end' "$meta" 2>/dev/null)
-    IFS=$'\t' read -r atype desc <<EOF
+    atype=""; desc=""
+    meta="$DIR/$base.meta.json"
+    if [ -r "$meta" ]; then
+      metaline=$("$JQ" -r 'if type == "object"
+                           then [(.agentType // ""), ((.description // "") | tostring
+                                | gsub("[\t\r\n\"]"; " "))] | @tsv
+                           else "" end' "$meta" 2>/dev/null)
+      IFS=$'\t' read -r atype desc <<EOF
 $metaline
 EOF
-  fi
+    fi
 
-  row=$("$JQ" -R -n -r "$PROBE" < "$f" 2>/dev/null) || row=""
-  # An unparseable transcript yields nothing. Fail open: no row, no alarm.
-  [ -n "$row" ] || continue
+    row=$("$JQ" -R -n -r "$PROBE" < "$f" 2>/dev/null) || row=""
+    # An unparseable transcript yields nothing. Fail open: no row, no alarm.
+    [ -n "$row" ] || continue
 
-  IFS=$'\t' read -r done spend raw_spend occ last_ts rep_n recs rep_tool rep_in <<EOF
+    # Fields 8 and 9 (tool name, tool input) are absorbed and unused: PROBE is frozen
+    # byte-identical, and nothing left in this script reads them.
+    IFS=$'\t' read -r done spend raw_spend occ last_ts rep_n recs _ _ <<EOF
 $row
 EOF
 
-  # Fail open once more: anything non-numeric where a figure belongs is no signal.
-  case "$done$spend$raw_spend$occ$last_ts$rep_n$recs" in *[!0-9-]*|'') continue ;; esac
+    # Fail open once more: anything non-numeric where a figure belongs is no signal.
+    case "$done$spend$raw_spend$occ$last_ts$rep_n$recs" in *[!0-9-]*|'') continue ;; esac
 
-  est=$(estimate_for "$id" "$desc" "$atype")
+    if [ "$last_ts" -ge 0 ] && [ "$NOW" -ge 0 ]; then idle=$((NOW - last_ts)); else idle=-1; fi
 
-  if [ "$last_ts" -ge 0 ] && [ "$NOW" -ge 0 ]; then idle=$((NOW - last_ts)); else idle=-1; fi
+    # Clause (c) of `done`: a transcript colder than the ceiling describes a unit that is
+    # gone, not one that is stalling, and nothing on the ladder can reach it. Needs a
+    # usable clock — without one there is no presumption either way.
+    stale=0
+    if [ "$done" -eq 0 ] && [ "$idle" -ge 0 ] && [ "$idle" -gt "$IDLE_CEIL" ]; then stale=1; fi
 
-  # Clause (c) of `done`: a transcript colder than the ceiling describes a unit that is
-  # gone, not one that is stalling, and nothing on the ladder can reach it. Needs a
-  # usable clock — without one there is no presumption either way.
-  stale=0
-  if [ "$done" -eq 0 ] && [ "$idle" -ge 0 ] && [ "$idle" -gt "$IDLE_CEIL" ]; then stale=1; fi
-
-  if [ "$STATUS" -eq 1 ]; then
     if [ "$idle" -ge 0 ]; then idle_s="${idle}s"; else idle_s="-"; fi
     if [ "$done" -eq 1 ]; then done_s=yes
     elif [ "$stale" -eq 1 ]; then done_s=stale
     else done_s=no; fi
-    printf 'sage-watch status %s [%s] "%s" done=%s spend=%s raw=%s occupancy=%s idle=%s repeat=%s records=%s est=%s\n' \
+    printf 'sage-watch status %s [%s] "%s" done=%s spend=%s raw=%s occupancy=%s idle=%s repeat=%s records=%s\n' \
       "$id" "${atype:-?}" "$desc" "$done_s" "$(tok "$spend")" "$(tok "$raw_spend")" \
-      "$(tok "$occ")" "$idle_s" "$rep_n" "$recs" "$(tok "$est")"
-    continue
-  fi
-
-  # No assistant record means no evidence about this agent. No evidence, no alarm.
-  [ "$recs" -ge 1 ] || continue
-
-  # A unit presumed finished — by its final record, or by the idle ceiling — fires nothing.
-  [ "$done" -eq 1 ] && continue
-  [ "$stale" -eq 1 ] && continue
-
-  # Idle — highest rung only.
-  if [ "$idle" -gt "$IDLE_MSG" ]; then
-    emit idle-1800 message "$id" "$atype" "$desc" "idle=${idle}s"
-  elif [ "$idle" -gt "$IDLE_LOG" ]; then
-    emit idle-600 log "$id" "$atype" "$desc" "idle=${idle}s"
-  fi
-
-  # Repeated identical tool call — independent of the idle and spend rungs.
-  if [ "$rep_n" -ge "$REPEAT_MIN" ]; then
-    emit tool-repeat message "$id" "$atype" "$desc" \
-      "count=$rep_n tool=${rep_tool:-?} input=${rep_in}"
-  fi
-
-  # Spend — highest rung only.
-  if [ "$spend" -gt $((est * 6)) ]; then
-    emit spend-6x surface "$id" "$atype" "$desc" \
-      "spend=$(tok "$spend") est=$(tok "$est") ratio=$(ratio "$spend" "$est")"
-  elif [ "$spend" -gt $((est * 4)) ]; then
-    emit spend-4x message "$id" "$atype" "$desc" \
-      "spend=$(tok "$spend") est=$(tok "$est") ratio=$(ratio "$spend" "$est")"
-  elif [ "$spend" -gt $((est * 2)) ]; then
-    emit spend-2x log "$id" "$atype" "$desc" \
-      "spend=$(tok "$spend") est=$(tok "$est") ratio=$(ratio "$spend" "$est")"
-  fi
-done
+      "$(tok "$occ")" "$idle_s" "$rep_n" "$recs"
+  done
+fi
 
 # No transcripts is not an alarm either.
 exit 0

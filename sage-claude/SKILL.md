@@ -1,7 +1,7 @@
 ---
 name: sage
-description: Unattended subagent orchestration. Sage decomposes a task into units, writes the full plan to a ledger without presenting it, dispatches without asking, watches every agent from its live transcript, verifies with disjoint and adversarial lenses, records every decision and assumption it made, and prints one line plus anything that needs the user's eyes. It stops only on four safety rails. `/sage report` renders the complete run record from the ledger; `/sage promote` moves earned lessons into memory.
-argument-hint: "<task> | report | promote"
+description: Unattended subagent orchestration. Sage decomposes a task into units, writes the full plan to a ledger without presenting it, dispatches without asking, watches every agent from its live transcript, verifies with disjoint and adversarial lenses, records every decision and assumption it made, and prints one line plus anything that needs the user's eyes. It stops only on four safety rails. `/sage report` renders the complete run record from the ledger; `/sage promote` moves earned lessons into memory; `/sage resume [note-path]` re-enters a run from a handoff note.
+argument-hint: "<task> | report | promote | resume [note-path]"
 disable-model-invocation: true
 ---
 
@@ -9,11 +9,12 @@ disable-model-invocation: true
 
 Your job: decompose one task into units, place each on the cheapest model that can hold it, dispatch, watch, verify against evidence you bought rather than agreement you collected, and land the deliverable — end to end, with no input after the invocation. Everything is recorded. Almost nothing is printed.
 
-Three invocation forms:
+Four invocation forms:
 
 - **`/sage <task>`** — the default path, Steps 1 through 6 below.
 - **`/sage report`** — print a ledger's `### Run record` in full (`references/dispatch.md`, `## The ledger`, which owns the path and how to resolve it when no session is named). Render only; dispatch nothing. The ledger is durable, so this answers from a later session as well as this one.
 - **`/sage promote`** — run `## Promote` in `references/memory.md`. That is the only path that writes `memory/shared.md`.
+- **`/sage resume [note-path]`** — resume a run from a handoff note (default: the newest `.claude/plans/sage-handoff-*.md` under the working directory). This is the human path's re-entry, described in `## Handover`.
 
 Four axioms govern the six steps:
 
@@ -40,7 +41,7 @@ Edit this block to tune the skill.
 | Fix rounds per unit | 2 delegated attempts (steer once → one tier up), then inline — cut short on a repeated failure signature |
 | Review depth | one review round (1–2 reviewers) + one targeted fix-verification round; adversarial verification keeps its own counts; discovery sweeps stop on dry rounds instead |
 | Watchdog | on whenever the transcript directory resolves; notify-only (`## Step 4 — Execute and watch`) |
-| Handover | parent occupancy ≥ 600k tokens (`## Handover`) |
+| Handover | parent occupancy ≥ 30% of the live window → successor subagent (`## Handover`) |
 
 ## Step 1 — Decompose
 
@@ -103,6 +104,7 @@ Write the plan into the ledger (`references/dispatch.md`, `## The ledger` — op
 - **Resolve every tier to a concrete model at plan time**, then keep the tier in brackets: `haiku (fast)`. Effort follows the same rule — name the level, then name what sets it: `low (explorer)`, `medium (no control)` where nothing can enforce it, never a dash.
 - Where the plan carries a **writer** unit *and* checkable criteria can be extracted without inventing behavior, plan a **blind acceptance suite**: `light`, `full`, or `none`. `references/topologies.md` #10 owns that decision — the four signals that move it and their precedence when they conflict — so decide it there, then record the choice, its deciding signal, and the criteria text verbatim in `### Plan`, because the criteria are what Step 5 rules against.
 - Where a writer unit's diff will be reviewed and the `diff-review` skill is installed, its Spec and Standards reader briefs go into `### Unit table` verbatim as two reader rows. Step 5 consumes their reports.
+- **Resolve the live context window once, here.** From your environment when it is knowable, else the measured figure in `references/harness.md`. Compute the 30% handover threshold from it, and stamp both into the ledger's occupancy-duty header line (`references/dispatch.md`, `## The ledger`). Step 4's watchdog commands and `## Handover` both read this window back rather than re-resolving it.
 
 **The assumption log.** Every time you resolve an ambiguity that would otherwise need the user — scope, interpretation, a design fork with no evidence either way — write one row to `### Assumption log`, and carry one condensed line into `### Run record`. The row's shape is in `references/dispatch.md`. Two rules make the log worth its ink: write the row **when you resolve the ambiguity**, not at the end from memory, because the alternative you rejected is unrecoverable an hour later; and name a **falsifier** in the "how it would show if wrong" column that a later run could actually observe. A user correction is recorded next to the row it corrects, never in place of it. Ambiguity that changes the decomposition is the highest-value row in the log and also a surfaced line at Step 6 — this is the one place sage accepts more risk than an attended run, and the log is how that risk is audited.
 
@@ -138,7 +140,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Correctness/security review, verification | frontier | high–max |
 | Synthesis, triage, completion claim | **the parent — you** | — |
 
-Four saved agent files make the effort column real for the units that recur most: **`explorer`** (fast, low, read and search only), **`verifier`** (frontier, high, no edit tools), **`web-researcher`** (standard, medium, web and read only), and **`implementer`** (standard, medium, repo edits and shell inside its lease, no nested spawning; `skills:` preloads `clean-code`, so that skill's rules bind every writer dispatch without re-briefing them). Dispatch by agent type and the effort cell reads `low (explorer)` rather than `low (no control)`. `references/harness.md` has their exact scopes and the bar for adding another.
+Four saved agent files make the effort column real for the units that recur most: **`explorer`** (fast, low, read and search only), **`verifier`** (frontier, high, no edit tools), **`web-researcher`** (standard, medium, web and read only), and **`implementer`** (standard, medium, repo edits and shell inside its lease, no nested spawning; `skills:` preloads `clean-code`, so that skill's rules bind every writer dispatch without re-briefing them). Dispatch by agent type and the effort cell reads `low (explorer)` rather than `low (no control)`. `references/harness.md` has their exact scopes and the bar for adding another. A fifth saved file, **`orchestrator`**, exists only as `## Handover`'s successor — it is never a plan unit and is never dispatched from Step 3.
 
 - Escalate one tier on retry rather than repeating the same dispatch.
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write — caches, screenshots, builds — with a no-source-edit rule in the contract.
@@ -151,13 +153,13 @@ Four saved agent files make the effort column real for the units that recur most
 - While agents run, do non-overlapping read-only work. **Never fabricate or predict a pending agent's result.** Do not poll a harness that notifies.
 - Any writer in a shared tree → run the snapshot protocol (`references/dispatch.md`, `## Snapshot protocol`): baseline → write lease → stabilize → freeze → review → triage → new lease → verify. **`/rewind` will not undo what a subagent wrote** (`references/harness.md`, `## Cautions`), so that baseline is the only way back — take it before the writer starts, not after something looks wrong. **The protocol covers your own tree too**: the logged run that destroyed a working copy was the parent's doing, not a writer's. Snapshot before editing inline, commit explicit paths while any agent is running, and never edit a tree a measuring agent is reading. Every mutation-probing unit, reviewers included, gets worktree isolation, and an installer-execution verifier gets a sandbox `HOME` for the same reason a writer gets a worktree: it has to mutate a real tree to learn anything. Prove the worktree recipe (`ln -s node_modules`, `rev-parse HEAD`) with one command before launching on it, and prune changed worktrees after each wave — auto-clean removes only unchanged ones (calibration: established).
 - Failure ladder per unit: steer the same agent with a sharpened brief → dispatch a fresh agent one tier up, framed as full owner → take it inline. **Count signatures, not attempts.** From the second failure on, compare the signature — same file, symbol, error class — with the last. A different one means the unit is learning the problem's shape: spend the next rung. An **identical** one means the loop is stuck, not slow: skip to the last rung. Scope-`blocked` is neither — a higher tier grants no extra tool, so fix the brief or re-route, and charge no rung. Log every abandoned disagreement in `### Decisions and deviations`; silent discard is forbidden, and an abandoned disagreement is a surfaced event at Step 6.
-- **Bring the ledger current before launching a wave and after each integration**, and re-read it before dispatching anything new after a compaction. Auto-compact lands mid-run, with agents in flight, and discards nearly the whole window in one blocking event (`references/harness.md`, `## Transcripts and the token arithmetic`). Four things read the ledger back mid-run after that: the budget rail needs the recorded estimate; the write lease and snapshot baseline are the only way back from a bad writer; the failure ladder counts signatures across attempts; and `## Handover` reconstructs the run from it.
+- **Bring the ledger current before launching a wave and after each integration**, and re-read it before dispatching anything new after a compaction. Auto-compact lands mid-run, with agents in flight, and discards nearly the whole window in one blocking event (`references/harness.md`, `## Transcripts and the token arithmetic`). Four things read the ledger back mid-run after that: the budget rail needs the recorded estimate; the write lease and snapshot baseline are the only way back from a bad writer; the failure ladder counts signatures across attempts; and `## Handover` reconstructs the run from it. **Every point that brings the ledger current is also an occupancy check** (`## Handover`'s cadence) — stamp occupancy, window, and percentage into the ledger header line at the same time.
 
 **The watchdog.** Start it when the first wave launches, in three steps. The probe is `~/.claude/skills/sage/bin/sage-watch.sh`, and **its header is the manual** — estimates-file format, discovery rule, output line shape, exit codes. Read it there; nothing below restates it.
 
 1. **Write the estimates file** from `### Unit table`: one row per unit, `<agent name, agentType, or description>` then that row's estimated tokens, to `.claude/plans/sage-estimates-<session>.txt` beside the ledger. Rewrite it whenever a wave changes the table. **This step is the whole value of the spend rungs.** Skip it and every unit prices at the 150k floor, so the relative rungs become fixed thresholds — measured on a real 300k row: with the file it reported `spend-4x message` at 4.9×; without it, `spend-6x surface` at 9.9×, on the same transcript.
-2. **Probe once**, before hosting anything — the installed path is not on `PATH`, so write it out: `~/.claude/skills/sage/bin/sage-watch.sh --status - .claude/plans/sage-estimates-<session>.txt`. Lines back → the layout resolves and those figures are the ones the ladder will use, so read them once as a check on the estimates file. Nothing back → it cannot run here; disable it, write one ledger line, and never warn again.
-3. **Host it** on `Monitor`, `persistent: true`, command `while true; do ~/.claude/skills/sage/bin/sage-watch.sh - .claude/plans/sage-estimates-<session>.txt; sleep 60; done` — the script takes one sample and exits, so the loop is what makes it a watch, and 60s is the cadence its cost was measured at (`references/harness.md`). Every stdout line becomes a notification, so **silence is its default output** and it speaks only on a rung below.
+2. **Probe once**, before hosting anything — the installed path is not on `PATH`, so write it out, passing the **explicit** subagents dir (never `-`) and the window Step 2 resolved: `SAGE_WINDOW=<window> ~/.claude/skills/sage/bin/sage-watch.sh --status <subagents-dir> .claude/plans/sage-estimates-<session>.txt`. Lines back → the layout resolves and those figures are the ones the ladder will use, so read them once as a check on the estimates file. Nothing back → it cannot run here; disable it, write one ledger line, and never warn again. Carry `SAGE_WINDOW` always, not only when it differs from the default — an unset window is how the small-window defect reproduces.
+3. **Host it** on `Monitor`, `persistent: true`, command `while true; do SAGE_WINDOW=<window> ~/.claude/skills/sage/bin/sage-watch.sh <subagents-dir> .claude/plans/sage-estimates-<session>.txt; sleep 60; done` — the same explicit dir and window prefix, always. The script takes one sample and exits, so the loop is what makes it a watch, and 60s is the cadence its cost was measured at (`references/harness.md`). Every stdout line becomes a notification, so **silence is its default output** and it speaks only on a rung below.
 
 | Trigger | Action | Seen by |
 | --- | --- | --- |
@@ -168,6 +170,9 @@ Four saved agent files make the effort column real for the units that recur most
 | Spend > 4× this row's estimate and not done | `SendMessage`: report what you have now — and this row just crossed rail 4 (`## Rails`) | watchdog |
 | Spend > 6× this row's estimate and not done | Surface to the user (`## Rails`) | watchdog |
 | No reply 600s after two messages | Surface to the user (`## Rails`) | **you** |
+| Parent occupancy ≥ 30% of the window | Handover — stop launching, run `## Handover` | watchdog + you |
+
+The probe reads the parent transcript itself, but only when the subagents dir was passed explicitly — discovery can resolve a different session's directory, so a handover trigger must never fire on it (`bin/sage-watch.sh` header, DISCOVERY RULE).
 
 - **The last arm is yours to track**, because the script never saw the messages and says so. Record every `SendMessage` in the `### Unit table`'s `messages` cell (`references/dispatch.md`) — sent-at time per message, and whether a reply landed. That cell is the arm's only state; unrecorded, the arm cannot fire.
 - **Nothing in the ladder recalls an agent.** `SendMessage` is the strongest autonomous action; it reaches the lost-but-active unit and cannot reach a genuinely hung one, which only `TaskStop` touches, and only on the user's word. A recall is recoverable — `references/harness.md` has why, and what it costs. Until ten runs in `memory/local.md` carry false-positive evidence for these rungs, that bound holds unchanged: this is the one place the design could make things worse rather than better.
@@ -215,7 +220,7 @@ Bring the ledger fully current first, then write its `### Run record`: topology 
 - The coordination check came back negative — the fan-out bought nothing.
 - A memory hint is due, promotion or consolidation.
 - The watchdog fired, or could not run.
-- The handover threshold was crossed.
+- The handover threshold was crossed — name the successor generation and the handoff note's path.
 
 Two closing obligations, cheap and easy to skip:
 
@@ -259,16 +264,37 @@ Three properties travel with it:
 
 ## Handover
 
-Track parent **occupancy** — `input + cache_creation + cache_read` on your most recent record, a point-in-time value and never a sum (`references/harness.md`, `## Transcripts and the token arithmetic`). You can read this; you cannot compact yourself, which is why the threshold has to fire early.
+Track parent **occupancy** — `input + cache_creation + cache_read` on your most recent record, a point-in-time value and never a sum (`references/harness.md`, `## Transcripts and the token arithmetic`). You can read this; you cannot compact yourself, which is why the threshold has to fire early. Check it at every point that brings the ledger current — before launching a wave, after each integration, and at the start of this step (`## Step 4`'s cadence bullet) — and restamp the ledger header's occupancy duty line each time (`references/dispatch.md`, `## The ledger`).
 
-- **≥ 400,000 tokens** → advisory. One ledger line, nothing printed.
-- **≥ 600,000 tokens** → write the handoff note and stop launching new units. In-flight units finish and their reports are harvested into the note.
+Resolve the live window once, at Step 2: from your environment when it is knowable, else the measured figure in `references/harness.md`. Record window and threshold in the ledger header.
 
-The 600k figure is measured headroom, not taste. `references/harness.md` holds the window size, what a compaction costs, the parent's measured burn rate with a fleet in flight, and what a good note costs to write; at 600k they add up to roughly 400k of slack and ~50 minutes to spend it in, and they are why a threshold below ~500k would fire on runs never in danger.
+**Single threshold: parent occupancy ≥ 30% of the window.** No advisory below it — there is no principled fraction for one, and a sub-threshold rung only re-creates the duty this design removes. At the threshold, run the successor protocol:
+
+1. Stop launching new units. Let in-flight units finish. Harvest their reports.
+2. Write the handoff note exactly as today (`references/dispatch.md`, `## The handoff note`), plus its Generation field.
+3. Spawn the `orchestrator` successor, background, briefed with the note path and nothing else but file paths (the note, the ledger, this file and its references). You enter supervisor mode.
+4. Spawn fails, or the environment blocks nesting → the human path: print the note path and end the turn. `/sage resume [path]` re-enters from it.
+
+**Supervisor mode.** You keep hosting the watchdog over the shared `subagents/` directory — a nested spawn's transcripts land there too (measured: depth-2 sidecars carry `parentAgentId` and sit in the same watched dir), so the watchdog keeps covering the successor's fleet. On entering supervision:
+
+- Stamp the ledger header's Generation and role fields.
+- Hand the ledger's write lease to the successor. From then on, log your own supervisor actions — steers sent, replies, spot checks — in the handoff note instead, so the one-writer rule holds on the ledger too.
+- Re-host the watchdog with `SAGE_OCC_ACK=1`, so the `occ-30pct` handover alarm you already acted on stops repeating. **Your own terminal rule keeps its sensor regardless**: the watchdog's `occ-40pct` rung fires on *your* occupancy no matter what the ack says (`bin/sage-watch.sh`, THE LADDER) — the ack silences only the alarm you already answered, never the one still ahead of you.
+- **Re-anchor your own check cadence to every harvest point** — a successor report landing, a unit report landing, a watchdog notification — rather than to "every point that brings the ledger current": the ledger is the successor's to write now, not yours, so you no longer have bring-current points of your own to hang the check on.
+
+You send the ladder's `SendMessage` steers — the successor cannot (measured: no `SendMessage` in a background subagent's toolset). A unit the successor dispatched is addressed by the agentId in its `subagents/agent-<id>.meta.json` sidecar — measured 2026-08-18: a `SendMessage` to a grandchild's agentId resolved, resumed it, and the unit processed the message (a finished grandchild resumed and ACKed; a running one drains it at its next tool round, the documented general mechanism). You own all four rails and every ask-the-user relay; the successor runs the between-dispatch budget projection itself and returns any rail that would fire. On the successor's final report, run one cheap adversarial spot-check (grep-level, or one small verifier) before printing Step 6's three items. The completion claim stays parent-signed. Supervision cost per generation is unmeasured — record its actual in the run log rather than asserting a figure.
+
+**Terminal rule.** A supervising parent whose own occupancy reaches 40% of the window — below the 46.4% measured lower bound of the compaction trigger — updates the note, prints its path, and ends the turn: the human path. A supervisor cannot hand itself over. The sensor is the watchdog's `occ-40pct` rung, which no `SAGE_OCC_ACK` silences.
+
+**Chaining — up to 3 successor generations per run.** A second and third generation are allowed only when the previous generation returns at its own occupancy threshold with work remaining. Invariant: **every successor is spawned by the parent, at depth 1 — a successor never spawns its own successor.** That keeps each generation's fleet at depth 2 (same as a normal run), keeps every transcript in the watched directory, and keeps the watchdog, the steering ladder, the rails, the budget rail, and the ledger fully in force each time. Generation 3 exhausting its window with work remaining → stop chaining: write the note, print the path, surface the event. The human path is the terminal fallback, not a fourth generation.
+
+**Slack, honestly bounded.** `references/harness.md` holds the window size, the compaction cost, the parent's measured burn rate with a fleet in flight, and what a good note costs to write. The only auto-compact measurement is 466,802 occupancy reached **without** a compaction firing — a lower bound on the trigger's location, never its location. From the 302k threshold to that bound: 164,888 (~165k), **at least** ~21 minutes at the measured ~7.7k tokens/min burn. Never state slack against the window end.
 
 Write the note to `.claude/plans/sage-handoff-<session>-<timestamp>.md`, durable, beside the ledger — gitignored only where that repo says so, so run `git check-ignore -q .claude/plans/` first and, if it comes back non-zero, name the path you wrote to and the one-line `.gitignore` fix (`references/harness.md`, Ledger location). Its template and full contents are in `references/dispatch.md`, `## The handoff note`; the load-bearing parts are the write lease, the snapshot baseline, and the `agentId → description` map with the `subagents/` directory path, since those are what a fresh session cannot reconstruct.
 
-**Then print the path, unconditionally.** Handover ends in a human action, and a skill that neither pauses for approval nor files a report has removed the actor its handover depends on — an unannounced note goes to a path nobody was told to read. This is the one place a quiet design speaks whether or not anything went wrong.
+**`/sage resume [note-path]`:** read the note (newest `sage-handoff-*` by default), re-read the ledger it points at, verify the snapshot baseline still matches the tree (`git status` against Paths touched), then continue as the parent at Step 4 with the note's Resume line as the next action. A missing note or ledger → say so and stop.
+
+**On the human path, print the note path unconditionally.** That path — spawn failure, blocked nesting, or generation 3 exhausted — has removed the actor the note depends on: an unannounced note goes to a path nobody was told to read. This is the one place a quiet design speaks whether or not anything went wrong. On the successor path, the handover event (generation, note path) is a Step 6 surfaced event instead.
 
 ## Stop rule
 

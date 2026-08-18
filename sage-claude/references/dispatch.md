@@ -88,6 +88,14 @@ Two lease cases the seven steps do not cover. The parent taking a writer unit in
 
 One file, `.claude/plans/sage-ledger-<session>.md` — durable; **gitignored only where that repo says so, which is a `git check-ignore -q .claude/plans/` test to run before the first write, never an assumption** (`harness.md`, Ledger location, for the four branches and what each one prints) — the session scratchpad only as a fallback where no durable path exists — and it is the only record of a run. **It is not written for the user.** Auto-compact lands mid-run with agents still in flight and discards nearly the whole window (`harness.md`, Transcripts). Five things read it back afterwards, and all five are sage: the budget rail needs the recorded estimate to measure against; the write lease and snapshot baseline are the only way back from a bad writer; the failure ladder counts signatures across attempts; handover reconstructs the run from it; and `/sage report` renders it — which is why it may not live where a session's end deletes it. **Bring it current before launching a wave and after each integration.** **`/sage report` resolves it in this order:** this session's file; else, with no session named, the most recently modified `.claude/plans/sage-ledger-*.md` under the working directory, naming which one it read; else the scratchpad fallback. None of those → say so. A run record is rendered from a ledger or not at all, never reconstructed from memory.
 
+**The ledger's first line is a fixed header comment**, so the occupancy duty survives a compaction summary and a fresh reader re-learns it from the ledger alone rather than from anything the parent remembers:
+
+```text
+<!-- sage occupancy duty: at every bring-current point, read parent occupancy (input + cache_creation + cache_read on the latest assistant record of <parent-transcript-path>); at >= <threshold> (30% of the <window> window), stop launching and run SKILL.md ## Handover. Generation: <0|1|2|3>/3, role: <parent|supervisor>. Last check: <occ> (<pct>) at <when>. -->
+```
+
+Written at Plan time, restamped at every bring-current point. The `Generation` and `role` fields are what a post-compaction parent reads to know it is **already** supervising generation *n* — the chaining cap has no other durable sensor, and without these fields a compacted supervisor would re-run the handover and spawn a duplicate successor.
+
 ### Plan
 
 Written at `../SKILL.md` Step 2, in full, before any dispatch. Estimating: read `../memory/shared.md` for the estimating rules and `../memory/local.md` for the bands.
@@ -181,9 +189,12 @@ The **Result** — the deliverable in prose, standing alone — is printed by `.
 
 Written to `.claude/plans/sage-handoff-<session>-<timestamp>.md` when parent occupancy crosses the handover threshold (`../SKILL.md`, Handover). Durable, beside the ledger — and it holds the whole run state, so it is the file the `git check-ignore -q .claude/plans/` test matters most for: check first, then name the path you wrote to (`harness.md`, Ledger location).
 
+**The note is normally the successor's whole brief** — an `orchestrator` dispatch names only file paths, this one among them — which is why completeness here matters more than it once did: a gap the parent could once have filled in by memory is now a gap the successor starts blank against.
+
 ```text
 # Sage handoff — <task> — <session> — <timestamp>
 Goal: <the user's task, verbatim — not a paraphrase>
+Generation: <n of max 3>
 Ledger: <path to `.claude/plans/sage-ledger-<session>.md`, which this note summarises and does not replace>
 Plan: <the ledger's Plan block, each row carrying its current status>
 Findings so far: <every finding harvested, with file:line provenance and its triage state>
@@ -197,4 +208,4 @@ Transcripts: <path to this session's `subagents/` directory>
 Resume: <the next action a fresh session should take>
 ```
 
-**The note's own blind spot, and sage states it rather than hiding it:** handover ends in a human action, and a skill that neither presents a plan nor writes a report has removed the actor that action depends on. The note lands at a path nobody was told to read. So the handoff path is a surfaced event, unconditionally (`../SKILL.md` Step 6) — this is the one place a quiet design speaks.
+**The note's own blind spot, restated for the successor design.** The human path — a spawn that failed, an environment that blocked nesting, or a third generation exhausted with work remaining — is now the **terminal fallback**, not the default outcome, and on that path a skill that neither presents a plan nor writes a report has removed the actor the fallback depends on: the note lands at a path nobody was told to read. So on the human path, the printed note path stays a surfaced event, unconditionally (`../SKILL.md` Step 6) — this is the one place a quiet design speaks. On the successor path, the run does not stop: the handover event — generation, note path — is surfaced at Step 6 alongside everything else, and the note itself is read by the successor rather than by a person.

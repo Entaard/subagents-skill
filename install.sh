@@ -505,6 +505,110 @@ done
 
 rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 
+# offer_compact_hook: sage's handoff note and ledger header carry the occupancy duty forward
+# through a compaction summary, but only a SessionStart(compact) hook makes a compacted session
+# actually re-read them (sage-claude/references/harness.md, Cautions). Offered here rather than
+# left as a suggestion, and offered carefully: this is the one place install.sh touches a file it
+# does not own the whole of — the user's ~/.claude/settings.json holds arbitrary other config.
+offer_compact_hook() {
+  local settings="$HOME/.claude/settings.json" marker="sage-reanchor"
+  local cmd tmp reply
+
+  # A symlink is another owner's property, the same rule the installer already applies to
+  # symlinked skills and shared memory — never write through it.
+  if [ -L "$settings" ]; then
+    echo "NOTE: $settings is a symlink; leaving it alone. See the TIP below for the manual hook."
+    return 0
+  fi
+
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "NOTE: jq is not installed, so the compaction hook cannot be offered automatically."
+    echo "      See the TIP below for the manual snippet."
+    return 0
+  fi
+
+  if [ -e "$settings" ]; then
+    if ! jq empty "$settings" >/dev/null 2>&1; then
+      echo "NOTE: $settings does not parse as JSON; leaving it untouched."
+      echo "      See the TIP below for the manual snippet."
+      return 0
+    fi
+    # Broader than a marker match: a user who already followed the previously shipped TIP
+    # snippet has a SessionStart(compact) hook whose command carries no marker at all. A
+    # marker-only check would double-install for exactly them.
+    if jq -e '.hooks.SessionStart[]? | select(.matcher == "compact")' "$settings" >/dev/null 2>&1; then
+      echo "NOTE: a SessionStart(compact) hook already exists in $settings; not adding another."
+      return 0
+    fi
+  fi
+
+  # No tty on stdin (a non-interactive install run) -> skip the prompt silently. The TIP below
+  # still carries the manual snippet for that path.
+  if [ ! -t 0 ]; then
+    return 0
+  fi
+
+  printf 'Add a SessionStart(compact) hook to %s so a compacted session re-reads its run ledger? [y/N] ' "$settings"
+  read -r reply || reply=""
+  case "$reply" in
+    y|Y|yes|YES|Yes) : ;;
+    *) return 0 ;;
+  esac
+
+  cmd="echo '$marker: a compaction landed. Re-read the run ledger before dispatching anything new: .claude/plans/sage-ledger-*.md (fallback: the session scratchpad). The ledger header carries the occupancy duty.'"
+
+  # Every state-changing command below gets its own guard. This function runs after the
+  # skill/agent/style syncs, under `set -euo pipefail`, so an unguarded failure here would
+  # abort those already-printed results into a truncated-looking install. Nothing past this
+  # point may exit non-zero without this function catching it and returning 0 itself.
+  if [ -e "$settings" ]; then
+    backup "$settings" settings || {
+      echo "NOTE: could not back up $settings; leaving it untouched."
+      return 0
+    }
+  else
+    mkdir -p "$(dirname "$settings")" || {
+      echo "NOTE: could not create $(dirname "$settings"); skipping the compaction hook."
+      return 0
+    }
+    printf '{}\n' > "$settings" || {
+      echo "NOTE: could not write $settings; skipping the compaction hook."
+      return 0
+    }
+  fi
+
+  tmp="$(mktemp "${settings}.XXXXXX")" || {
+    echo "NOTE: could not create a temp file beside $settings; leaving it untouched."
+    return 0
+  }
+  if ! jq --arg cmd "$cmd" \
+       '.hooks.SessionStart = ((.hooks.SessionStart // []) + [{"matcher": "compact", "hooks": [{"type": "command", "command": $cmd}]}])' \
+       "$settings" > "$tmp"; then
+    echo "NOTE: failed to build the merged settings.json; leaving $settings untouched."
+    rm -f "$tmp"
+    return 0
+  fi
+  if ! jq empty "$tmp" >/dev/null 2>&1; then
+    echo "NOTE: the merged settings.json did not parse; leaving $settings untouched."
+    rm -f "$tmp"
+    return 0
+  fi
+  # An in-place write, not `mv`: $settings already exists by this point (created above when
+  # missing), and writing through it keeps its original mode and ownership rather than
+  # inheriting mktemp's 0600.
+  if ! cat "$tmp" > "$settings"; then
+    echo "NOTE: could not write the merged settings.json into $settings; leaving it untouched."
+    rm -f "$tmp"
+    return 0
+  fi
+  rm -f "$tmp"
+  echo "Added a SessionStart(compact) hook to $settings (marker: $marker)."
+}
+
+if [ -d "$sage_src" ]; then
+  offer_compact_hook
+fi
+
 echo
 echo "Installed subagents skill  -> $subagents_dest"
 if [ -d "$sage_src" ]; then
@@ -525,16 +629,17 @@ Optional, for long orchestration runs:
 
   Triggering /compact is yours, not the model's. To compact earlier, set
   CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>. Sage reads its own context
-  usage and hands over at 600k rather than waiting for a compaction; /subagents does not.
+  usage and hands over to a successor subagent at 30% of the live window rather than waiting for
+  a compaction; /subagents does not.
 
-  To re-anchor a run after a compaction, add a hook in ~/.claude/settings.json that echoes the
-  ledger paths back into the session:
+  If you skipped the compaction-hook prompt above (or ran this install non-interactively), add a
+  hook in ~/.claude/settings.json by hand that re-anchors a session after a compaction:
 
     "hooks": {
       "SessionStart": [
         { "matcher": "compact",
           "hooks": [ { "type": "command",
-                       "command": "echo 'Ledger: <scratch>/subagents-ledger.md or .claude/plans/sage-ledger-*.md'" } ] }
+                       "command": "echo 'sage-reanchor: a compaction landed. Re-read the run ledger before dispatching anything new: .claude/plans/sage-ledger-*.md (fallback: the session scratchpad). The ledger header carries the occupancy duty.'" } ] }
       ]
     }
 TIP

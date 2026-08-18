@@ -175,14 +175,22 @@ Lessons seen once, not yet rules:
   holding up when you stop at the overrun rail, or the user authorises headroom the run never needs
   (2026-08-16). Carried in SKILL.md's mid-run rails.
 
-Known defect in this skill, tracked as a repo issue:
+Closed defect in this skill, kept for its evidence:
 
-- The ~25% overrun rail is sampled **between dispatches**, so it misses in both directions. Four runs
-  overran on their final agent with nothing left to launch, leaving the rail able only to report
-  (2026-08-12 ×2, 2026-08-13, 2026-08-16); once it fired early on a band-midpoint projection and the
-  actual then landed under the printed ceiling (2026-08-16). The projection wording and the
-  upper-bound disclosure in SKILL.md's mid-run rails are both disclosures — neither moves the
-  sampling point, which is the defect. This is the evidence behind those two sentences.
+- The ~25% overrun rail used to be sampled **between dispatches**, so it missed in both directions.
+  Four runs overran on their final agent with nothing left to launch, leaving the rail able only to
+  report (2026-08-12 ×2, 2026-08-13, 2026-08-16); once it fired early on a band-midpoint projection
+  and the actual then landed under the printed ceiling (2026-08-16). **Closed 2026-08-18** by moving
+  the sampling point rather than disclosing it again: a dispatch hands back a symlink to its unit's
+  live transcript at launch, so per-unit spend is now read while the unit runs, and the rail gained a
+  per-unit scope (4× the row's own estimate, floor 150k) whose lever — steer the unit, launch nothing
+  more against that row, surface — still exists when nothing is left to dispatch. SKILL.md's mid-run
+  rails carry the rule; `references/claude-code.md`, "Reading a running unit's spend", carries the
+  mechanism and its measurements. The rows above are the evidence that motivated it, and the two
+  disclosure sentences that preceded it are gone.
+- Watch what the new sensor is worth: record, on the next few runs, whether the per-unit rail fired
+  on anything the old between-dispatch check would have missed, and whether the measured actuals
+  changed the estimate-vs-actual gap. A sensor that never fires is a cost, not a rail.
 
 Uncovered classes:
 

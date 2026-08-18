@@ -2,9 +2,9 @@
 #
 # sage-watch.sh — the sage occupancy sensor. Notify only; it never recalls anything.
 #
-# It reads the in-flight subagent transcripts of one session, watches the two
-# parent-occupancy rungs — the handover and terminal rules in `../SKILL.md` ##
-# Handover — and prints ONE LINE PER FIRED RUNG. A healthy sample prints nothing
+# It reads the in-flight subagent transcripts of one session, watches the single
+# parent-occupancy rung — the handover rule in `../SKILL.md` ## Handover — and
+# prints ONE LINE PER FIRED RUNG. A healthy sample prints nothing
 # and exits 0. It is hosted on `Monitor` with `persistent: true`, where every
 # stdout line becomes a notification, so silence is the default output.
 #
@@ -31,13 +31,13 @@
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
 #                      as below. Defaults to 1006380 (the measured figure in
 #                      `../references/harness.md`) when unset, unparseable, or zero.
-#                      Drives the parent occupancy rungs below — see BLIND SPOTS for
+#                      Drives the parent occupancy rung below — see BLIND SPOTS for
 #                      what a wrong value actually does (it is not silence).
 #   SAGE_OCC_ACK       Env. Any non-empty value suppresses the parent `occ-30pct` rung
-#                      ONLY (not `--status`, which always reports occupancy, and not the
-#                      `occ-40pct` terminal rung, which no ack can silence — see THE
-#                      LADDER below). Set by a supervising parent after handover, so the
-#                      handover alarm stops repeating once it has been acted on.
+#                      ONLY — not `--status`, which always reports occupancy. Set by a
+#                      supervising parent after handover, so the handover alarm stops
+#                      repeating once it has been acted on. It is the only rung, so an
+#                      ack silences the ladder outright — see THE LADDER below.
 #
 # Exit status is 0 in every normal case, including a missing directory, no transcripts,
 # malformed JSON, a half-written final line, and a transcript with no assistant records.
@@ -56,11 +56,11 @@
 # Prefer passing the directory explicitly when the parent already knows the session id;
 # discovery is the fallback for a probe launched without one.
 #
-# The PARENT OCCUPANCY RUNGS (occ-30pct, occ-40pct — below) run ONLY when <subagents-dir>
-# was passed explicitly. Under discovery they are skipped entirely, unconditionally:
+# The PARENT OCCUPANCY RUNG (occ-30pct — below) runs ONLY when <subagents-dir>
+# was passed explicitly. Under discovery it is skipped entirely, unconditionally:
 # discovery picks the most recently modified subagents/ directory under the project slug,
 # which can belong to a DIFFERENT session than the one asking — measured on this machine:
-# 9 candidate directories, top two 1,832s apart — and a handover or terminal trigger must
+# 9 candidate directories, top two 1,832s apart — and a handover trigger must
 # never fire on someone else's occupancy. `--status` is diagnostic, not a trigger, so it
 # does not carry that risk: it prints the parent line under discovery too, labeled with
 # whichever session id discovery resolved — subject to the fail-open cases in THE PARENT
@@ -119,21 +119,14 @@
 #   rung        action    fires when (and parent occupancy is not presumed acted-on)
 #   occ-30pct   handover  parent occupancy >= 30% of SAGE_WINDOW  -> stop launching, run
 #                                                                    `../SKILL.md` ## Handover
-#   occ-40pct   terminal  parent occupancy >= 40% of SAGE_WINDOW  -> supervisor terminal
-#                                                                    rule, `../SKILL.md`
-#                                                                    ## Handover
 #
-# HIGHEST-RUNG-ONLY: pct >= 40 fires `occ-40pct` ALONE, checked first and REGARDLESS of
-# `SAGE_OCC_ACK` — a supervising parent's own terminal rule needs a sensor no ack can
-# silence, because the ack is exactly what a supervisor sets right after handover, and
-# that is precisely when its own occupancy keeps climbing toward 40%. Only when pct < 40
-# does `occ-30pct` get a chance, and only then does `SAGE_OCC_ACK` matter. The parent rung
-# is a SINGLE line, not per-agent, and both rungs run only when <subagents-dir> was passed
-# explicitly (DISCOVERY RULE above). `occ-30pct` repeats on every sample until
-# `SAGE_OCC_ACK` silences it: it is the handover alarm that must survive a compaction, and
-# the ack is how it ends once the parent has acted on it. `occ-40pct` always repeats —
-# there is no ack for the terminal rule, because a supervisor that reaches it is meant to
-# stop, not to keep going quietly.
+# ONE RUNG, deliberately. There is nothing above `occ-30pct` because a supervising parent
+# has no action left to take on its own occupancy: it cannot hand itself over, and there is
+# no generation cap for it to run out of (`../SKILL.md` ## Handover, "Supervising past the
+# threshold"). The parent rung is a SINGLE line, not per-agent, and it runs only when
+# <subagents-dir> was passed explicitly (DISCOVERY RULE above). `occ-30pct` repeats on
+# every sample until `SAGE_OCC_ACK` silences it: it is the handover alarm that must survive
+# a compaction, and the ack is how it ends once the parent has acted on it.
 #
 # OUTPUT LINE SHAPE, fixed field order:
 #
@@ -164,9 +157,6 @@
 #   sage-watch occ-30pct handover <session-id> [parent] "session transcript" \
 #              occupancy=302k window=1006380 pct=30%
 #
-#   sage-watch occ-40pct terminal <session-id> [parent] "session transcript" \
-#              occupancy=403k window=1006380 pct=40%
-#
 #   sage-watch status <session-id> [parent] "session transcript" \
 #              occupancy=160k window=1006380 pct=16%
 #
@@ -176,8 +166,8 @@
 # discovered — EXCEPT the five fail-open cases that print no parent line at all: the
 # parent transcript is missing, unreadable, or unparseable, it carries no assistant
 # records, or its occupancy reads 0. The ladder prints the line only under an explicit
-# dir, and only when a rung actually fires (`occ-40pct` regardless of the ack, `occ-30pct`
-# only when it is unset).
+# dir, and only when `occ-30pct` actually fires — which is only when `SAGE_OCC_ACK` is
+# unset.
 # `done` takes three values on `--status`: `yes` (clause a or b), `stale` (clause c — the
 # transcript is older than IDLE_CEIL, so the unit is presumed gone), and `no`.
 #
@@ -200,24 +190,22 @@
 #     next tool round, and a unit with no tool round in six hours has none coming, so the
 #     probe has no actionable claim left to make. Machine sleep lands here too, and going
 #     quiet after it is the fail-open answer.
-#   - The parent occupancy rungs trust `SAGE_WINDOW` completely: neither has a way to learn
+#   - The parent occupancy rung trusts `SAGE_WINDOW` completely: it has no way to learn
 #     the real window on its own. A window SMALLER than the real one fires EARLY and LOUD —
 #     measured: 900k against a real ~1,006,380 fired a false `occ-30pct` at 32% actual
-#     occupancy, 700k fired a false `occ-40pct` at 41%. A window LARGER than the real one
+#     occupancy. A window LARGER than the real one
 #     fires LATE or never — measured: 10m against the same occupancy read `pct=4%`. Neither
 #     direction goes silent on its own; a value that parses to 0 is treated as unparseable
 #     and falls back to the 1006380 default (below), so it cannot zero out the percentage.
-#     Only discovery mode (above) silences the rungs outright. Pass the resolved window
+#     Only discovery mode (above) silences the rung outright. Pass the resolved window
 #     explicitly rather than trusting the built-in default.
 #   - `occ-30pct` repeats every sample once it fires, by design (THE LADDER above) — that
-#     persistence is not a bug to suppress with anything but `SAGE_OCC_ACK`. `occ-40pct`
-#     repeats too, and nothing suppresses it: reaching it means stop, not go quiet.
+#     persistence is not a bug to suppress with anything but `SAGE_OCC_ACK`.
 #
 # FAIL OPEN. An absent signal means no alarm, never a recall.
 
 IDLE_CEIL=21600       # 6h. Past this a not-yet-finished unit is presumed gone, not stalled
 OCC_HANDOVER_PCT=30   # rung occ-30pct: parent occupancy as a percent of WINDOW
-OCC_TERMINAL_PCT=40   # rung occ-40pct: supervisor terminal rule, never suppressed by an ack
 
 # WINDOW: an integer, or an integer with a k/K (x1000) or m/M (x1000000) suffix. An
 # unparseable or unset SAGE_WINDOW falls back to the measured figure in
@@ -244,7 +232,7 @@ JQ=$(command -v jq 2>/dev/null)
 usage() {
   # The header above is the manual; this is the reminder.
   printf '%s\n' \
-    'sage-watch.sh <subagents-dir> [<ignored>]       parent occupancy rungs only' \
+    'sage-watch.sh <subagents-dir> [<ignored>]       parent occupancy rung only' \
     'sage-watch.sh [-] [<ignored>]                   discovery: prints nothing, by design' \
     'sage-watch.sh --status [<dir>|-] [<ignored>]    one line per agent, fires nothing' \
     'sage-watch.sh --help                            this reminder' \
@@ -403,8 +391,8 @@ pct() {
 # no second jq program, since occupancy is field 4 of the same TSV shape.
 #
 # `--status` reports the parent under discovery too — it is diagnostic, not a trigger, so
-# resolving to the wrong session's occupancy costs nothing. The two ladder rungs below run
-# only under an EXPLICIT <subagents-dir> (DISCOVERY RULE above): a handover or terminal
+# resolving to the wrong session's occupancy costs nothing. The ladder rung below runs
+# only under an EXPLICIT <subagents-dir> (DISCOVERY RULE above): a handover
 # trigger must never fire on a different session's occupancy.
 if [ "$STATUS" -eq 1 ] || [ "$EXPLICIT_DIR" -eq 1 ]; then
   session_dir=$(dirname "$DIR")
@@ -428,14 +416,9 @@ EOF
           printf 'sage-watch status %s [parent] "session transcript" occupancy=%s window=%s pct=%s%%\n' \
             "$session_id" "$(tok "$p_occ")" "$WINDOW" "$p_pct"
         elif [ "$EXPLICIT_DIR" -eq 1 ]; then
-          # Highest-rung-only, same rule as the SKILL.md ladder: the terminal rung fires
-          # ALONE and REGARDLESS of SAGE_OCC_ACK — a supervisor sets that ack right after
-          # handover, exactly when its own occupancy keeps climbing toward the terminal
-          # rule, so nothing may silence this one. Only below it does the ack apply.
-          if [ "$p_pct" -ge "$OCC_TERMINAL_PCT" ]; then
-            emit occ-40pct terminal "$session_id" parent "session transcript" \
-              "occupancy=$(tok "$p_occ") window=$WINDOW pct=${p_pct}%"
-          elif [ "$p_pct" -ge "$OCC_HANDOVER_PCT" ] && [ -z "${SAGE_OCC_ACK:-}" ]; then
+          # One rung (THE LADDER above): a supervising parent has no action left to take
+          # on its own occupancy, so the ack silences this alarm outright once acted on.
+          if [ "$p_pct" -ge "$OCC_HANDOVER_PCT" ] && [ -z "${SAGE_OCC_ACK:-}" ]; then
             emit occ-30pct handover "$session_id" parent "session transcript" \
               "occupancy=$(tok "$p_occ") window=$WINDOW pct=${p_pct}%"
           fi

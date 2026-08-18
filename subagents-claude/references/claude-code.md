@@ -74,10 +74,50 @@ Verified against code.claude.com docs and the published changelog 2026-08-16, lo
 - `~/.claude/agents/` is **global**: Claude Code watches it and auto-delegates on the `description` field, in every project ("the subagent is available in every project on your machine"). All four worker-role descriptions say "dispatched by name from an orchestration plan" and redirect ordinary work elsewhere (`Explore` for lookups, the main conversation for everyday edits), so they don't quietly capture routine work. Keep that framing in any role you add — and don't add one until it has recurred across several real tasks. There is **no per-agent switch for auto-delegation alone**: `permissions.deny: ["Agent(<name>)"]` is the only hard lever, and it blocks explicit dispatch too. Description wording is the whole of the soft control.
 - **Boot cost.** A `tools:`-scoped agent boots several times cheaper than `general-purpose`: the allow-list drops the unlisted tool schemas from startup. Every dispatch pays that floor before doing any work — measure it here, and see `../calibration.md`. Custom agents also load the whole CLAUDE.md hierarchy plus a git snapshot, which only the built-in `Explore` and `Plan` skip, so a heavy global `~/.claude/CLAUDE.md` taxes every custom dispatch.
 - **Never dispatch a reviewer or verifier as a `fork`-type agent.** A fork inherits the parent's entire context, which silently destroys the clean-context property Step 5 depends on. **v2.1.232 made subagent forking available by default** ("a `subagent_type: 'fork'` subagent inherits the full conversation and prompt cache"). Read that as the *feature* being ungated, not as forking becoming the default shape: the Agent tool still forks only when the row asks for `fork` by name, and any other type — or omitting it — starts a fresh agent. So nothing spawns forked behind your back, and this caution gets more load-bearing rather than less, because reaching for a fork is now the easy path.
-- **A dispatch hands back the unit's own transcript.** Each Agent call returns an `output_file` path holding that unit's full JSONL — every tool call it actually made, not the summary it chose to write about them. A subagent's behaviour is therefore *measurable* rather than self-reported: `grep -o '"name":"Skill","input":{"skill":"[a-z-]*"' <output_file>` says which skills it really invoked. Never conclude a unit is unobservable without opening the file the dispatch already handed you — one run flipped six case verdicts from judged to measured that way (calibration: provisional — one observation, below the promotion bar). It is a large file: grep it, never read it whole, or the context you delegated to protect goes to the transcript instead.
+- **A dispatch hands back the unit's own transcript, at launch rather than at the end.** Each Agent call returns an `output_file` path in its *launch* result, and that path is a symlink into the live transcript the unit is writing right now ("Reading a running unit's spend", below — that is where the budget rail's sensor comes from). It holds that unit's full JSONL — every tool call it actually made, not the summary it chose to write about them. A subagent's behaviour is therefore *measurable* rather than self-reported: `grep -o '"name":"Skill","input":{"skill":"[a-z-]*"' <output_file>` says which skills it really invoked. Never conclude a unit is unobservable without opening the file the dispatch already handed you — one run flipped six case verdicts from judged to measured that way (calibration: provisional — one observation, below the promotion bar). It is a large file: grep it, never read it whole, or the context you delegated to protect goes to the transcript instead.
 - Continuation: `SendMessage` to a finished/running agent's id continues it **with its context intact** — steering an existing agent is cheaper than respawning (the "steer, don't respawn" rung of the failure ladder). Subagents can also opt into persistent `memory` (user/project/local scope) — rarely needed, and keep it off any reviewer: one that remembers prior runs is no longer the blank-context reviewer Step 5 relies on.
 - Some harnesses expose a `Workflow` tool (scripted deterministic fan-out: `pipeline()`, `parallel()`, budgets). It is one of the two execution backends Step 2 assigns **per row** — "Running an approved plan through `Workflow`" below has the translation. **The call returns at launch and notifies on completion** — its own documented behaviour: it hands back a task id immediately and fires a task-notification when the workflow finishes, exactly like a background dispatch. That is what lets a script run beside your hand-batched rows, and the whole per-row split rests on it — re-read the `Workflow` tool description to confirm it, as you would any harness fact in this file; it is the in-session authority. It needs the user's explicit opt-in to multi-agent scale, and subagents never get the tool: only the parent can drive one.
 - Agent Teams (peer-to-peer, shared task list, agents message each other) is experimental, behind `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. That env var is set outside a running session, so it is a user decision, not a route you can take mid-run. Genuine debate or competing-hypothesis work only (pattern 8); it costs significantly more than subagents.
+
+## Reading a running unit's spend
+
+`../SKILL.md`'s budget rail samples from this. It is the one signal that fires the rail **while a unit is still burning tokens**, instead of after its usage lands.
+
+**Where the numbers are.** The `output_file` a dispatch hands back at launch is a symlink into the session's live transcript directory:
+
+```
+/private/tmp/.../<session-uuid>/tasks/<agentId>.output
+  ->  ~/.claude/projects/<cwd-slug>/<session-uuid>/subagents/agent-<id>.jsonl
+```
+
+One `readlink` on any dispatch's `output_file` gives you the directory holding **every** unit of the run, from the first dispatch onward, with no directory search. Beside each transcript sits `agent-<id>.meta.json` carrying `agentType`, `description`, and the `toolUseId` of the dispatch that created it — that last field is what maps a transcript back to its plan row. Keep the glob non-recursive: `subagents/workflows/wf_*/` holds the `Workflow` backend's own sidecars, a different population, and mixing the two moves every figure.
+
+```sh
+D=$(dirname "$(readlink <any output_file>)")
+for f in "$D"/agent-*.jsonl; do
+  id=$(basename "$f" .jsonl)
+  lbl=$(jq -r '"\(.agentType) \(.description // "")"' "${f%.jsonl}.meta.json" 2>/dev/null)
+  spend=$(jq -R 'fromjson? | select(.message.usage)' "$f" \
+        | jq -s 'group_by(.message.id) | map(.[-1])
+                 | map(.message.usage
+                       | .input_tokens + .cache_creation_input_tokens + .output_tokens) | add')
+  echo "$id  $lbl  spend=$spend"
+done
+```
+
+Five properties, each measured on this machine on 2026-08-18 against one earlier run's four transcripts (~1.5MB):
+
+- **It reads a unit that is still running.** The symlink was created in the launch minute and its target was still growing 18 minutes later. This is what moves the rail's sampling point off the dispatch boundary.
+- **Deduplicate by `message.id` before any sum.** Assistant records are streaming partials, so one id is written many times. Raw sums over those four transcripts ran **2.03×, 2.11×, 2.25× and 3.49×** the deduplicated figure. Sum raw and the rail fires at roughly half of real spend, at a ratio you cannot predict from one transcript.
+- **`cache_read_input_tokens` stays out.** It is re-read context, not spend. Include it and every long-context unit reads as a runaway.
+- **A half-written last line is normal, and this form survives it.** `jq -R 'fromjson? | select(...)'` drops a partial record; plain `jq -s` aborts the whole file with a parse error, and a transcript being appended to right now often has one. Tested against a truncated copy.
+- **It is free.** 0.05s for the four transcripts. Reading it at every triage point costs nothing next to one dispatch.
+
+**This does not break the launch result's own warning.** That result says: do not `Read` or `tail` the transcript, it will overflow your context. The warning is about pulling content in. The loop above returns one integer per unit and never puts a record in your window. `cat`, `tail -f`, and the `Read` tool still do — these files run to hundreds of KB each.
+
+**Name the measure whenever you record a figure**: `input + cache_creation + output`, deduplicated, cache reads excluded. Rows in `../calibration.md` written before 2026-08-18 do not state how their actuals were obtained, so read one as the same order of magnitude, not the same instrument.
+
+**Probe once, then degrade.** Run the read at the first triage point of a run. If it returns nothing — no such directory, no `usage` records, a layout that has moved — this run has no live spend signal: say so once in the report, and fall back to the between-dispatch projection plus the agent-count and wall-clock rails. An absent signal never fires a rail.
 
 ## Limits and knobs (verified against the changelog 2026-08-16, local install v2.1.233)
 
@@ -153,7 +193,7 @@ A saved agent file is the only place a per-unit constraint becomes real, and it 
 
 | Field | What it enforces | Reach for it when |
 | --- | --- | --- |
-| `maxTurns` | hard cap on agentic turns before the unit stops | **the only per-unit budget rail that exists** |
+| `maxTurns` | hard cap on agentic turns before the unit stops | **the only per-unit cap the harness enforces** (the per-unit budget rail is your own read — see below) |
 | `permissionMode` | `default`, `acceptEdits`, `auto`, `dontAsk`, `bypassPermissions`, `plan` — plus `manual`, an *alias* for `default` (v2.1.200+) | an unattended writer — or `plan`, for a unit that must propose rather than act |
 | `skills` | preloads the listed skills — their full content is injected into the unit's context at startup. **Not an allow-list**: unlisted skills stay invocable through the Skill tool, so omit that tool from `tools` where "only these" must hold | a role whose rules must be in context on every dispatch — the shipped `implementer` preloads `clean-code` this way |
 | `mcpServers` | which MCP servers it can reach | bounding a surface `tools` alone does not |
@@ -161,7 +201,7 @@ A saved agent file is the only place a per-unit constraint becomes real, and it 
 | `background` | forces background execution | a role that should never block the parent |
 | `isolation: worktree` | frontmatter twin of the Agent-tool param | a writer role that must never share a tree |
 
-**`maxTurns` is the gap worth closing first.** This skill's budget discipline is per-*task* and made of prose (the Defaults table's agent-count, token and wall-clock rails); nothing bounds a single unit that loops, and a loop is precisely what you are not watching while four agents run in the background. Treat a unit that hits its cap as `blocked`, not failed: like a scope block it charges no rung on the failure ladder, because a higher tier would hit the same wall.
+**`maxTurns` is the only cap the harness *enforces* on one unit.** The skill's own per-unit rail is observed, not enforced: you read a running unit's spend (below) and act on it. The two are complements. A cap stops a looping unit without you present; a read tells you a unit is looping while it still has a lever on it, and tells you nothing about a unit whose loop is cheap. Treat a unit that hits its cap as `blocked`, not failed: like a scope block it charges no rung on the failure ladder, because a higher tier would hit the same wall.
 
 **Don't guess a cap into the four shipped agents.** Set too low it truncates an agent mid-answer the way a wrong line range does — and the agent cannot report what it never reached. It is a per-unit lever: set it where the unit's shape is known, leave it unset where it isn't.
 

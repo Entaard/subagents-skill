@@ -192,10 +192,14 @@ Two lease cases the seven steps don't cover. If the parent takes a writer unit i
 # Ledger: <task> — <date>
 Cap/budget/backend split: <cap, budget, and which row ids ran scripted vs hand-batched>
 Plan: <approved plan or pointer>
-| id | unit | agent/thread | model used | state | evidence | actual tokens |
+| id | unit | agent/thread | model used | state | evidence | est. tokens | spend so far |
 Decisions & dropped disagreements: <every one, with reason — silent discard forbidden>
 Plan amendments: <any change to an approved row — model, effort, scope, count — with the reason and when>
 ```
+
+Re-read `spend so far` off the live transcripts every time you bring the ledger current, running units
+included (`claude-code.md`, "Reading a running unit's spend"). That column is what the per-unit budget
+rail compares against 4× the row's estimate, and what Step 6 reports as actuals.
 
 Update on every state change. After compaction or a new session, the ledger plus the repo — not memory of the conversation — is the source of continuity.
 
@@ -216,8 +220,12 @@ that section instead of restating it.
 OUTCOME: <one line, or a pointer up to the Result section — never a replacement for it>
 Topology: <pattern, N agents, why> (or "solo — recommended and approved: <reason>")
 Agents: <one line each: unit → model actually used → status → key evidence>
-Cost: <N agents, ~tokens actual vs ~estimate, wall clock — say so if no token counts were visible,
-       in which case the agent-count and wall-clock rails were the ones in force>
+Cost: <N agents, wall clock, and per-unit token actuals against that row's estimate — read from the
+       running units' transcripts (`claude-code.md`, "Reading a running unit's spend") and named as
+       that measure: deduplicated input + cache_creation + output, cache reads excluded. Where the
+       live read was unavailable, say so, and say that the agent-count and wall-clock rails were the
+       ones in force. Name any rail that fired, and whether the figure that fired it was an actual or
+       an estimate for pending work>
 Plan deviations: <every row that ran with a different model, effort, count, or scope than approved, and why — or "none".
        A backend the USER chose at the gate is not a deviation: name which `go` option ran, and the
        Effort brackets it set or revoked, under `Topology:` instead>

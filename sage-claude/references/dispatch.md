@@ -91,10 +91,10 @@ One file, `.claude/plans/sage-ledger-<session>.md` — durable; **gitignored onl
 **The ledger's first line is a fixed header comment**, so the occupancy duty survives a compaction summary and a fresh reader re-learns it from the ledger alone rather than from anything the parent remembers:
 
 ```text
-<!-- sage occupancy duty: at every bring-current point, read parent occupancy (input + cache_creation + cache_read on the latest assistant record of <parent-transcript-path>); at >= <threshold> (30% of the <window> window), stop launching and run SKILL.md ## Handover. Generation: <0|1|2|3>/3, role: <parent|supervisor>. Last check: <occ> (<pct>) at <when>. -->
+<!-- sage occupancy duty: at every bring-current point, read parent occupancy (input + cache_creation + cache_read on the latest assistant record of <parent-transcript-path>); at >= <threshold> (30% of the <window> window), stop launching and run SKILL.md ## Handover. Generation: <n>, role: <parent|supervisor>. Last check: <occ> (<pct>) at <when>. -->
 ```
 
-Written at Plan time, restamped at every bring-current point. The `Generation` and `role` fields are what a post-compaction parent reads to know it is **already** supervising generation *n* — the chaining cap has no other durable sensor, and without these fields a compacted supervisor would re-run the handover and spawn a duplicate successor.
+Written at Plan time, restamped at every bring-current point. The `Generation` and `role` fields are what a post-compaction parent reads to know it is **already** supervising generation *n* — without them a compacted supervisor would re-run the handover and spawn a duplicate successor. Generations are uncapped (`../SKILL.md` `## Handover`), so the count is provenance, not a budget.
 
 ### Plan
 
@@ -194,7 +194,7 @@ Written to `.claude/plans/sage-handoff-<session>-<timestamp>.md` when parent occ
 ```text
 # Sage handoff — <task> — <session> — <timestamp>
 Goal: <the user's task, verbatim — not a paraphrase>
-Generation: <n of max 3>
+Generation: <n>
 Ledger: <path to `.claude/plans/sage-ledger-<session>.md`, which this note summarises and does not replace>
 Plan: <the ledger's Plan block, each row carrying its current status>
 Findings so far: <every finding harvested, with file:line provenance and its triage state>
@@ -208,4 +208,4 @@ Transcripts: <path to this session's `subagents/` directory>
 Resume: <the next action a fresh session should take>
 ```
 
-**The note's own blind spot, restated for the successor design.** The human path — a spawn that failed, an environment that blocked nesting, or a third generation exhausted with work remaining — is now the **terminal fallback**, not the default outcome, and on that path a skill that neither presents a plan nor writes a report has removed the actor the fallback depends on: the note lands at a path nobody was told to read. So on the human path, the printed note path stays a surfaced event, unconditionally (`../SKILL.md` Step 6) — this is the one place a quiet design speaks. On the successor path, the run does not stop: the handover event — generation, note path — is surfaced at Step 6 alongside everything else, and the note itself is read by the successor rather than by a person.
+**The note's own blind spot, restated for the successor design.** The human path — a spawn that failed, or an environment that blocked nesting — is the **last fallback**, not the default outcome, and on that path a skill that neither presents a plan nor writes a report has removed the actor the fallback depends on: the note lands at a path nobody was told to read. So on the human path, the printed note path stays a surfaced event, unconditionally (`../SKILL.md` Step 6) — this is the one place a quiet design speaks. On the successor path, the run does not stop: the handover event — generation, note path — is surfaced at Step 6 alongside everything else, and the note itself is read by the successor rather than by a person.

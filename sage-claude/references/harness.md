@@ -93,6 +93,37 @@ Snapshot as of 2026-08 (verify against source 1 before relying on it):
 
 The parent's own model belongs in the ledger's Plan section — the model doing synthesis and triage is part of what the run cost.
 
+### The alt lane
+
+`explorer-alt`, `verifier-alt`, `web-researcher-alt` are the same three reader roles on a model
+from outside this harness's own family. `install.sh` installs one only when a config on this
+machine names a model for it.
+
+**The config.** Write `~/.claude/subagents-alt-models.conf` (`SUBAGENTS_ALT_CONF` overrides this
+path). One role per line, as `<name>=<model>`. Blank lines and `#` comments are ignored. This repo
+ships no model name; the machine supplies it. Re-run `install.sh` after editing the file, then
+start a new session before dispatching the alt agent it installed.
+
+**Availability is a live-session fact, never a filesystem fact.** Read it off the agent types
+listed in your own context. Never read it off the filesystem. Never read it off `/agents`. A
+parent cannot run a slash command anyway. A file added mid-session is not yet dispatchable. If no
+alt agent is in your live agent list, plan exactly as you would without this lane. This is the
+full statement of the rule for `/sage`. Every other mention of it in this corpus points back here.
+
+**Per-role benefit.** `verifier-alt` buys a second model family for the checker half of a
+maker/checker pair. That is the one property no same-family model can supply. `explorer-alt` and
+`web-researcher-alt` buy price and window headroom for bulk reading. Neither buys diversity.
+
+Write an alt row's Model cell like any other cell: tier in brackets, lane named too. One machine
+might set `verifier-alt` to `gpt-5.6-sol[1m]`. That cell would then read
+`gpt-5.6-sol[1m] (frontier, alt)`. That model name is one machine's own configured value. It is
+an example of the cell's shape. This repo ships no default model name for the alt lane.
+
+Criterion 7 (adversarial verification, above) governs the claim. Record family diversity only when
+the checker's report names a non-Anthropic identity in its required `MODEL-FAMILY:` line.
+`unknown`, an Anthropic identity, or a missing line all count as a same-family check, whatever
+model was requested.
+
 **Reasoning effort has exactly one lever.** The Agent tool has no per-dispatch `effort` parameter, and an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in one place only: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; available levels depend on the model). Use `low`–`medium` for mechanical work and `high`–`max` for verification and judging. **The four worker roles exist to make this reachable** — dispatch by agent type and the ledger can honestly write `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`. A plain dispatch has no lever at all: the `model` param is all you have, so write the level you chose and mark it unenforced — `medium (no control)`, spelled out, never a dash.
 
 Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the value the ledger should show; passing `model` overrides it and can invalidate that file's `effort`, since available levels depend on the model — override only as a logged deviation, and maker/checker diversity is the usual good reason.

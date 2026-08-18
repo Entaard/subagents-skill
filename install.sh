@@ -230,7 +230,10 @@ if [ -d "$sage_src" ]; then
 fi
 
 # Agent files have to live in ~/.claude/agents/; Claude Code does not discover them inside a skill
-# directory. No --delete here — other agents in that directory are not this script's to remove.
+# directory. No --delete here: other agents in that directory are not this script's to remove.
+# One narrow exception: the alt-agent removal pass below deletes a file at an alt agent's path
+# only when it carries the generated-file marker this script wrote. Even then, only after a
+# backup.
 #
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
 # any project, based on their `description` field. All the descriptions are written to say they are
@@ -265,6 +268,194 @@ for f in "$agents_src"*.md; do
 done
 
 rsync -av ${skip_agents[@]+"${skip_agents[@]}"} "$agents_src" "$agents_dest"
+
+# Alt agents are the same three reader roles, on a model outside this harness's own family
+# when the machine serves one. Never a different role. Never a name this repo hardcodes.
+# The templates live in claude-agents-alt/, a SIBLING of claude-agents/, never a subdirectory of it.
+# The rsync above has no exclude for a subdirectory. The backup guard above it globs only
+# "$agents_src"*.md. A subdirectory file would be copied to ~/.claude/agents/ wholesale, with no
+# backup. A sibling directory sits outside both and cannot be reached by either.
+#
+# No model name is hardcoded anywhere here or in a template's frontmatter. The machine supplies the
+# name through a config file this script only reads. The repo ships `__ALT_MODEL__` placeholders.
+# That placeholder is the only thing that keeps a checkout installable on a machine served by a
+# different gateway. `/v1/models` cannot be probed for candidates either. The gateway this design
+# was built against returns a single placeholder id for every machine, so auto-detection is not
+# attempted.
+alt_src="$repo_dir/claude-agents-alt/"
+
+if [ -d "$alt_src" ]; then
+  alt_conf="${SUBAGENTS_ALT_CONF:-$HOME/.claude/subagents-alt-models.conf}"
+  alt_installed=0
+  # Every template name this run could have installed. The removal pass below can then tell
+  # "opted out" from "never offered", without re-globbing $alt_src a second time.
+  alt_names=()
+  for tpl in "$alt_src"*.md.in; do
+    [ -e "$tpl" ] || continue
+    alt_names+=("$(basename "$tpl" .md.in)")
+  done
+
+  # Config present -> render the enabled roles. Absent -> install none. Still run the removal pass
+  # below either way: turning the config off, or never having had one, means no alt agent survives
+  # on this machine. A directory or an unreadable file at the config path is NOTE-and-skip, the
+  # same pattern the agent loop above uses. One bad path here cannot abort the whole install.
+  if [ -L "$alt_conf" ] && [ ! -e "$alt_conf" ]; then
+    echo "NOTE: $alt_conf is a symlink to a path that does not exist; skipping the alt-model config."
+  elif [ -e "$alt_conf" ] && [ ! -f "$alt_conf" ]; then
+    echo "NOTE: $alt_conf is not a regular file; skipping the alt-model config."
+  elif [ -f "$alt_conf" ] && [ ! -r "$alt_conf" ]; then
+    echo "NOTE: $alt_conf is not readable; skipping the alt-model config."
+  elif [ -f "$alt_conf" ]; then
+    enabled_names=()
+    # Names already claimed by an earlier line in this same config. A role named twice must not
+    # render and back up over its own first render. Its second backup() call would overwrite the
+    # first saved copy with this run's own output, and that loses the user's real file for good.
+    seen_names=()
+    while IFS= read -r line || [ -n "$line" ]; do
+      case "$line" in
+        ''|'#'*) continue ;;
+      esac
+      case "$line" in
+        *=*) ;;
+        *) echo "NOTE: $alt_conf: '$line' has no '=', skipping."; continue ;;
+      esac
+      name="${line%%=*}"
+      model="${line#*=}"
+      # Trim surrounding whitespace from both halves.
+      name="${name#"${name%%[![:space:]]*}"}"; name="${name%"${name##*[![:space:]]}"}"
+      model="${model#"${model%%[![:space:]]*}"}"; model="${model%"${model##*[![:space:]]}"}"
+
+      if [ -z "$model" ]; then
+        echo "NOTE: $alt_conf: '$name' has no model, skipping."
+        continue
+      fi
+      # A name carrying '/' can still match a template by accident (./explorer-alt). The
+      # removal pass below then compares against the bare template name, never recognizes this
+      # enabled name, and deletes the file this same run just wrote. Reject it here, before the
+      # template lookup.
+      case "$name" in
+        */*) echo "NOTE: $alt_conf: '$name' contains '/', skipping."; continue ;;
+      esac
+      tpl="$alt_src$name.md.in"
+      if [ ! -f "$tpl" ]; then
+        echo "NOTE: $alt_conf: '$name' names no matching template ($tpl); skipping."
+        continue
+      fi
+      dup=0
+      for sn in ${seen_names[@]+"${seen_names[@]}"}; do
+        [ "$sn" = "$name" ] && dup=1 && break
+      done
+      if [ "$dup" -eq 1 ]; then
+        echo "NOTE: $alt_conf: '$name' is named more than once; using the first line, skipping this one."
+        continue
+      fi
+      seen_names+=("$name")
+      enabled_names+=("$name")
+
+      # verifier-alt is the one twin whose value IS its model family: it exists to be the checker
+      # half of a maker/checker pair, and that is the one benefit no same-family model can supply.
+      # An Anthropic model here installs a same-family checker wearing an alt name, while its own
+      # description claims the diversity — the exact false claim this lane exists to make honest.
+      # The other two twins buy price and window headroom, where an Anthropic model is a perfectly
+      # good choice, so this checks verifier-alt alone.
+      #
+      # It warns and installs anyway rather than skipping. The config is the user's call, this
+      # pattern cannot know every non-Anthropic model name, and refusing to install would turn a
+      # questionable model choice into no checker at all. The run that would be misled by a
+      # same-family checker is a later one, and it has the report's MODEL-FAMILY: line to catch it.
+      if [ "$name" = "verifier-alt" ]; then
+        case "$model" in
+          claude*|*haiku*|*sonnet*|*opus*)
+            echo "NOTE: $alt_conf: verifier-alt is set to '$model', which looks like an Anthropic"
+            echo "      model. verifier-alt exists to be a checker from a different model family, so"
+            echo "      that setting gives it no diversity to offer. Installing it as configured;"
+            echo "      set a non-Anthropic model if you want the maker/checker diversity."
+            ;;
+        esac
+      fi
+
+      dest="$agents_dest$name.md"
+      if [ -e "$dest" ] && [ ! -f "$dest" ]; then
+        echo "NOTE: $dest is not a regular file; skipping $name."
+        continue
+      fi
+
+      # Index-based substitution, not sed or awk's sub(). A model name can carry / [ ] & or \.
+      # A regex-replacement tool treats every one of those specially in the replacement text.
+      # `awk -v` is not safe here either: `-v` runs escape-sequence processing on the value it
+      # assigns, so a `\` in a model name is consumed before `index()` ever runs. Passing the model
+      # through the environment, and reading it back with `ENVIRON`, does no escape processing. So
+      # `\` and every other character in the model string reach the substitution literally. This
+      # form is also POSIX awk, not a GNU-only extension.
+      rendered="$(mktemp "${dest}.XXXXXX")" || {
+        echo "NOTE: could not create a temp file to render $name; skipping."
+        continue
+      }
+      if ! m="$model" awk '{
+             i = index($0, "__ALT_MODEL__")
+             if (i) print substr($0,1,i-1) ENVIRON["m"] substr($0, i+length("__ALT_MODEL__"))
+             else print
+           }' "$tpl" > "$rendered"; then
+        echo "NOTE: failed to render $tpl for '$name'; skipping."
+        rm -f "$rendered"
+        continue
+      fi
+
+      if [ -f "$dest" ]; then
+        if cmp -s "$rendered" "$dest"; then
+          rm -f "$rendered" # identical content already installed; no backup, nothing to move
+          alt_installed=$((alt_installed + 1))
+          continue
+        fi
+        backup "$dest" agents
+      fi
+      # mktemp creates its file 0600, and mv keeps that mode. Every other file this installer
+      # places is 0644. Match that mode before the move, rather than leaving alt agents oddly
+      # locked down.
+      chmod 644 "$rendered"
+      mv "$rendered" "$dest"
+      alt_installed=$((alt_installed + 1))
+    done < "$alt_conf"
+    if [ "$alt_installed" -eq 0 ]; then
+      echo "NOTE: $alt_conf exists but enables no alt agent. Uncomment a role and set its model to"
+      echo "      turn one on: $alt_conf"
+    fi
+  fi
+
+  # Removal pass: a template name with no enabled config line loses its installed agent, but only
+  # the copy this installer generated. A marker-carrying file is this installer's own output,
+  # safe to remove after a backup. A file with no marker is the user's. It is left alone in
+  # silence. This rule is narrower than install.sh's usual "no --delete in agents/" rule, not wider.
+  alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
+  for name in ${alt_names[@]+"${alt_names[@]}"}; do
+    keep=0
+    for en in ${enabled_names[@]+"${enabled_names[@]}"}; do
+      [ "$en" = "$name" ] && keep=1 && break
+    done
+    [ "$keep" -eq 1 ] && continue
+
+    dest="$agents_dest$name.md"
+    if [ -f "$dest" ] && grep -qxF "$alt_marker" "$dest"; then
+      mkdir -p "$backup_root/agents"
+      cp "$dest" "$backup_root/agents/"
+      rm -f "$dest"
+      echo "Removed alt agent no longer enabled -> $dest (previous version saved to $backup_root/agents/$(basename "$dest"))"
+    fi
+  done
+
+fi
+
+# This decides whether the TIP heredoc's alt-lane paragraph is worth printing. A machine with no
+# config file, and no alt agent installed, sees nothing new. Criterion 1 stays true byte-for-byte
+# on that machine: behavior is exactly as before. ANTHROPIC_BASE_URL is not part of this test. It
+# marks any Anthropic-compatible proxy, including a corporate proxy in front of the plain API.
+# Most machines that set it serve no alt model at all.
+alt_lane_relevant=0
+if [ -d "$alt_src" ]; then
+  if [ -f "$alt_conf" ] || [ "${alt_installed:-0}" -gt 0 ]; then
+    alt_lane_relevant=1
+  fi
+fi
 
 # An installed skill directory holds two kinds of thing: the files this repo ships, and whatever the
 # skill itself wrote there at runtime. The two are told apart structurally — no filename this script
@@ -616,6 +807,12 @@ if [ -d "$sage_src" ]; then
   echo "  shared memory symlink    -> $shared_src"
 fi
 echo "Installed subagent agents  -> $agents_dest"
+if [ "${alt_installed:-0}" -gt 0 ]; then
+  echo "Installed alt agents       -> $alt_installed of the three, at $agents_dest"
+  echo "  Start a new Claude Code session before an alt agent can be dispatched."
+  echo "  The agent registry resolves once at session start. One added mid-session is not yet"
+  echo "  visible."
+fi
 if [ -d "$eco_src" ]; then
   echo "Installed ecosystem skills -> $eco_dest (from claude-skills/)"
 fi
@@ -643,3 +840,16 @@ Optional, for long orchestration runs:
       ]
     }
 TIP
+
+if [ "$alt_lane_relevant" -eq 1 ]; then
+cat <<'ALTTIP'
+
+Optional, to place orchestration units on an external model:
+
+  Write ~/.claude/subagents-alt-models.conf (SUBAGENTS_ALT_CONF overrides this path). One role per
+  line, as <name>=<model>: explorer-alt, verifier-alt, web-researcher-alt. Blank lines and '#'
+  comments are ignored. No model name is guessed for you. Put in the model your own gateway serves.
+  Re-run this installer after editing the file. Removing a line removes that agent on the next run.
+  Then start a new session. A file added mid-session is not yet dispatchable.
+ALTTIP
+fi

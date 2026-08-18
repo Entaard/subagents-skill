@@ -11,12 +11,28 @@ Verified against code.claude.com docs and the published changelog 2026-08-16, lo
 - Built-in agent types: `Explore` (read-only search; skips CLAUDE.md/git status — cheap and fast), `Plan` (read-only planning research), `general-purpose` (full tools). Custom roles live in `~/.claude/agents/*.md` (personal) or `.claude/agents/*.md` (project) — **not inside the skill directory; they are not discovered there.**
 - **Four custom worker roles ship with this skill**, installed to `~/.claude/agents/` by `install.sh` (which lives in the skill's **source repo** — the installer is not synced into the installed skill directory, so don't look for it beside this file). They are **shared with the `/sage` skill** — one set of files dispatched by both orchestration skills; edit them compatibly, never fork a per-skill copy. A fifth file, `orchestrator`, lands in the same directory but belongs to `/sage`'s handover mechanism alone — `/subagents` never dispatches it:
 
-| Role | Model | Effort | Tools | Scope — what it cannot do |
-| --- | --- | --- | --- | --- |
-| `explorer` | `haiku` | `low` | `Read`, `Glob`, `Grep` | codebase only; no shell, no network, **cannot write** |
-| `verifier` | `opus` | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; edit tools denied | Bash is bound to running checks — but note it **can** reach the network, so say in the brief when it should not |
-| `web-researcher` | `sonnet` | `medium` | `WebSearch`, `WebFetch`, `Read` | outside sources only; no shell, no repo edits, **cannot write** |
-| `implementer` | `sonnet` | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` — no Agent tool | writes only inside its briefed lease; `skills:` preloads `clean-code` (full text at startup), and with no Skill tool in its list it can load nothing else; cannot spawn agents |
+| Role | Model | Family | Effort | Tools | Scope — what it cannot do |
+| --- | --- | --- | --- | --- | --- |
+| `explorer` | `haiku` | this harness | `low` | `Read`, `Glob`, `Grep` | codebase only; no shell, no network, **cannot write** |
+| `verifier` | `opus` | this harness | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; edit tools denied | Bash is bound to running checks — but note it **can** reach the network, so say in the brief when it should not |
+| `web-researcher` | `sonnet` | this harness | `medium` | `WebSearch`, `WebFetch`, `Read` | outside sources only; no shell, no repo edits, **cannot write** |
+| `implementer` | `sonnet` | this harness | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` — no Agent tool | writes only inside its briefed lease; `skills:` preloads `clean-code` (full text at startup), and with no Skill tool in its list it can load nothing else; cannot spawn agents |
+| `explorer-alt` (optional) | per-machine config | outside this harness | `low` | same as `explorer` | same as `explorer`; buys price/window headroom, not diversity |
+| `verifier-alt` (optional) | per-machine config | outside this harness | `high` | same as `verifier` | same as `verifier`; the one alt twin that can honestly claim family diversity, and only when its report's `MODEL-FAMILY:` line confirms it |
+| `web-researcher-alt` (optional) | per-machine config | outside this harness | `medium` | same as `web-researcher` | same as `web-researcher`; buys price/window headroom, not diversity |
+
+### The alt lane
+
+  The three alt rows install only when a per-machine config names a model for them. Write
+  `~/.claude/subagents-alt-models.conf` (`SUBAGENTS_ALT_CONF` overrides this path). One role per
+  line, as `<name>=<model>`. Blank lines and `#` comments are ignored. This repo ships no model
+  name; the machine supplies it. Re-run `install.sh` after editing the file, then start a new
+  session before dispatching the alt agent it installed.
+
+  Availability is a live-session fact. Read it off the agent types in your own context. Never
+  read it off the filesystem or `/agents`. Plan without them when none is in your live list. This
+  is the full statement of the rule for `/subagents`. Every other mention of it in this corpus
+  points back here.
 
   Dispatch by agent type and the plan's Effort column becomes real. **On a hand-batched row** everything outside these four is a plain dispatch with no effort control (a scripted row is the exception — see "Models and effort") — including any *reader* that must produce a scratch file, since `explorer` and `web-researcher` cannot write one. `verifier` can: shell redirection to a path its brief names is the one write it is allowed. Don't dispatch the built-in `Explore` while the plan row reads `low (explorer)`: that is exactly the unbacked effort claim the column exists to prevent.
 - `~/.claude/agents/` is **global**: Claude Code watches it and auto-delegates on the `description` field, in every project ("the subagent is available in every project on your machine"). All four worker-role descriptions say "dispatched by name from an orchestration plan" and redirect ordinary work elsewhere (`Explore` for lookups, the main conversation for everyday edits), so they don't quietly capture routine work. Keep that framing in any role you add — and don't add one until it has recurred across several real tasks. There is **no per-agent switch for auto-delegation alone**: `permissions.deny: ["Agent(<name>)"]` is the only hard lever, and it blocks explicit dispatch too. Description wording is the whole of the soft control.
@@ -82,9 +98,14 @@ Snapshot as of 2026-08 (verify against source 1 before relying on it):
 | standard | `sonnet` (Sonnet 5) | default workers |
 | frontier | `opus` (Opus 5) / session's top model | hard review, judging; the parent usually already runs here |
 
+This tier table lists only this harness's own family. An alt row sits outside it. Its Model
+cell names the per-machine config value with its tier and the lane. One machine might set this
+cell to `gpt-5.6-sol[1m] (frontier, alt)`. That model name is one machine's own configured value.
+This repo ships no default model name for the alt lane. Never write a bare tier.
+
 The parent's own model belongs in the plan header. The user is reading a cost estimate, and the model doing synthesis and triage is part of it.
 
-Reasoning effort: the Agent tool has **no per-dispatch `effort` parameter** — an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in exactly two places: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; available levels depend on the model), and the `effort` option on the Workflow tool's `agent()` call. Use `low`–`medium` for mechanical work and `high`–`max` for verification and judging. **The four shipped agents exist to make this reachable** — dispatch by agent type and the plan can honestly write `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`. A **scripted plain** row carries a real effort — precisely what a script buys, since a saved-agent row passes `agentType` alone and keeps the effort its frontmatter already set. The one path with no lever at all is a **hand-batched plain dispatch**: there the `model` param is all you have. Still write the level you chose and mark it unenforced — `medium (no control)`, never a dash — so the user can see which rows the script pins, and which rows would gain or lose that pin if an `adjust` moves them across the split.
+Reasoning effort: the Agent tool has **no per-dispatch `effort` parameter** — an effort level written into the prompt text does not change the reasoning configuration. Effort is settable in exactly two places: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; available levels depend on the model), and the `effort` option on the Workflow tool's `agent()` call. Use `low`–`medium` for mechanical work and `high`–`max` for verification and judging. **The four shipped agents exist to make this reachable** — dispatch by agent type and the plan can honestly write `low (explorer)`, `high (verifier)`, `medium (web-researcher)`, `medium (implementer)`. The three optional alt twins carry the same frontmatter effort as their base agent. An alt row writes `low (explorer-alt)`, `high (verifier-alt)`, `medium (web-researcher-alt)`. A **scripted plain** row carries a real effort — precisely what a script buys, since a saved-agent row passes `agentType` alone and keeps the effort its frontmatter already set. The one path with no lever at all is a **hand-batched plain dispatch**: there the `model` param is all you have. Still write the level you chose and mark it unenforced — `medium (no control)`, never a dash — so the user can see which rows the script pins, and which rows would gain or lose that pin if an `adjust` moves them across the split.
 
 Name the model explicitly on every plain dispatch, so no fleet of explorers silently inherits an expensive parent model. On a saved-agent dispatch the frontmatter model *is* the named value the plan should show. Passing `model` overrides it, and can invalidate that file's `effort` because the available levels depend on the model — override only as a deliberate, logged deviation. Maker/checker diversity is the usual good reason.
 

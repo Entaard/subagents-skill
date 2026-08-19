@@ -1,7 +1,7 @@
 ---
 name: sage
-description: Unattended subagent orchestration. Sage decomposes a task into units, writes the full plan to a ledger without presenting it, dispatches without asking, watches every agent from its live transcript, verifies with disjoint and adversarial lenses, records every decision and assumption it made, and prints one line plus anything that needs the user's eyes. It stops only on four safety rails. `/sage report` renders the complete run record from the ledger; `/sage promote` moves earned lessons into memory and, at full strength, into the skill's own text, and refreshes the model lineup and its allocations; `/sage resume [note-path]` re-enters a run from a handoff note.
-argument-hint: "<task> | report | promote | resume [note-path]"
+description: Unattended subagent orchestration. Sage decomposes a task into units, writes the full plan to a ledger without presenting it, dispatches without asking, watches every agent from its live transcript, verifies with disjoint and adversarial lenses, records every decision and assumption it made, and prints one line plus anything that needs the user's eyes. It stops only on four safety rails. `/sage report` renders the complete run record from the ledger; `/sage resume [note-path]` re-enters a run from a handoff note. Promotion — moving earned lessons into memory, into the skill's own text, and refreshing the model lineup — is the separate `/sage-promote` skill, on the user's word only.
+argument-hint: "<task> | report | resume [note-path]"
 disable-model-invocation: true
 ---
 
@@ -9,11 +9,10 @@ disable-model-invocation: true
 
 Your job: decompose one task into units, place each on the cheapest model that can hold it, dispatch, watch, verify against evidence you bought rather than agreement you collected, and land the deliverable — end to end, with no input after the invocation. Everything is recorded. Almost nothing is printed.
 
-Four invocation forms:
+Three invocation forms:
 
 - **`/sage <task>`** — the default path, Steps 1 through 6 below.
 - **`/sage report`** — print a ledger's `### Run record` in full (`references/dispatch.md`, `## The ledger`, which owns the path and how to resolve it when no session is named). Render only; dispatch nothing. The ledger is durable, so this answers from a later session as well as this one.
-- **`/sage promote`** — run `## Promote` in `references/memory.md`. That is the only path that writes `memory/shared.md` — and, at its second and third stages, the only path that rewrites the skill's own text: stage two promotes calibrated rules, stage three refreshes the model lineup and its allocations.
 - **`/sage resume [note-path]`** — resume a run from a handoff note (default: the newest `.claude/plans/sage-handoff-*.md` under the working directory). This is the human path's re-entry, described in `## Handover`.
 
 Four axioms govern the six steps:
@@ -224,7 +223,7 @@ Bring the ledger fully current first, then write its `### Run record`: topology 
 Three closing obligations, cheap and easy to skip:
 
 - **Coordination check.** Did any result depend on the agents being independent — a disagreement, a refutation, something visible only across angles — or would one agent at the same budget have matched it? In the one published analysis of this, token spend alone explained 80% of the variance in outcomes. This is the only line that can falsify sage's own premise, so answer honestly: "the fan-out bought nothing" is a real result, it goes in `### Run record`, and a negative answer is a surfaced event.
-- **Append one row to `memory/local.md`** — the run's actuals, hits included, and the lesson a future run can act on. `references/memory.md`, `## Append`, owns the anchoring rule and the row shape; the obligation is here and it is unconditional, because the estimate that set this run's budget ceiling is only honest if its actual is recorded. If the write does not land, say so under gaps and put the row in the printed block instead. Then check the hint triggers (`references/memory.md`, `## The hint`) — a due hint is one surfaced line and nothing more. This step performs neither of the other two acts: promotion waits for `/sage promote`, and consolidation already ran at Step 2.
+- **Append one row to `memory/local.md`** — the run's actuals, hits included, and the lesson a future run can act on. `references/memory.md`, `## Append`, owns the anchoring rule and the row shape; the obligation is here and it is unconditional, because the estimate that set this run's budget ceiling is only honest if its actual is recorded. If the write does not land, say so under gaps and put the row in the printed block instead. Then check the hint triggers (`references/memory.md`, `## The hint`) — a due hint is one surfaced line and nothing more. This step performs neither of the other two acts: promotion waits for the user running `/sage-promote`, and consolidation already ran at Step 2.
 - **Stop the watchdog.** The hosted `while true` loop outlives the run unless you end it; a `Monitor` left running against a finished session's `subagents/` directory prices nothing and reports nothing useful. Where the harness gives no clean way to stop it, say so explicitly under gaps rather than leaving it running silently — an un-stoppable watchdog is a fact about the run, not an omission from the record.
 
 Anything beyond the three printed items is available on `/sage report`, which renders the full block from the ledger. The ledger is the source, so the answer survives compaction.
@@ -309,7 +308,7 @@ Default one review round plus one fix-verification round. Another full review on
 - `references/dispatch.md` — task brief, agent report shape, finding schema, risk rubric, snapshot protocol, the ledger with its assumption log and run record, and the handoff note. Open at Step 2; keep it open through Step 6.
 - `references/topologies.md` — the orchestration patterns and the per-domain evidence menus. Read at Step 1.
 - `references/harness.md` — Claude Code mechanics, tier → model resolution, effort controls, agent-file fields, transcript layout, and the spend and occupancy arithmetic. Read at Step 2; re-read `## Transcripts and the token arithmetic` when the watchdog or `## Handover` needs a number.
-- `references/memory.md` — the memory protocol: append, consolidate, the hint triggers, promote, evict, the structural invariants, the compression floor. Read at Step 6 and on `/sage promote`.
-- `memory/shared.md` — portable rules that hold on any machine: ratios, discount factors, failure recognisers, each with its qualifier, strength band, and falsifier. Read at Step 2. Written only by `/sage promote`.
+- `references/memory.md` — the memory protocol: append, consolidate, the hint triggers, the structural invariants, the compression floor. Read at Step 2 and Step 6. Promotion and eviction are not here; they are `/sage-promote`'s, and that skill reads this file for the triggers, the invariants and the floor.
+- `memory/shared.md` — portable rules that hold on any machine: ratios, discount factors, failure recognisers, each with its qualifier, strength band, and falsifier. Read at Step 2. Written only by `/sage-promote`.
 - `memory/local.md` — this machine's numbers: cost bands, run rows, confirmation counts and dates, the watch list, the harness version stamp. Read at Step 2, appended at Step 6. A dangling `memory/shared.md` symlink → run on local memory alone and surface one line; never guess a repo path.
 - `bin/sage-watch.sh` — the watchdog probe, installed at `~/.claude/skills/sage/bin/sage-watch.sh` and hosted on `Monitor` from Step 4. **Its header is its manual**: read that file for the discovery rule, the output line shape and the exit codes, rather than inferring them.

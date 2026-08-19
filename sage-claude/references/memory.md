@@ -20,15 +20,37 @@ A rule earns three homes in order, one content class each: `local.md` holds its 
 
 **A dangling `shared.md` symlink → run on `local.md` alone and print one line saying so.** The repo moved or was deleted. Do not guess a repo path, and do not write a replacement file: a second physical copy is the fork this design exists to prevent.
 
-**The residual case.** A local run contradicting a portable rule does **not** overturn that rule. Write a watch-list row in `local.md` whose `Contradicts` cell names the rule; the row needs its own confirmations, and it appears in the next hint as a **retirement candidate**.
+**The residual case.** A local run contradicting a portable rule does **not** overturn that rule. Write a watch-list row in `local.md` whose `Contradicts` cell names the rule (`## Append` below has its columns and its anchor — they are not the Run-log row's); the row needs its own confirmations, and it appears in the next hint as a **retirement candidate**.
 
 ## Append
 
-Automatic, every run, at Step 6, to `local.md` only. One Run-log row: date, task class, agents, est, actual, wall clock, note — **including the runs where the estimate held**, because a band you can trust needs its hits recorded next to its misses.
+Automatic, every run, at Step 6, to `local.md` only. A run touches the file in exactly three ways: the **Run-log row** it owes every time; a **new Watch-list row** when it has one — the residual case above orders one, and a lesson seen once, a skill defect, or a task class with no coverage are the others; and a **confirmation of a Watch-list row that already exists**, which raises that row's `Count` and extends its `First → last` in place rather than filing a second row for the same observation. That third act is what makes the counts mean anything: `## The hint` fires on a count reaching three, so an observation filed as three separate `Count 1` rows fires nothing, ever. Everything else in the file — Bands, Rules, `Promoted` cells, the harness stamp — changes through consolidation (`## Consolidate`) or `/sage-promote` (`## Promotion and eviction`), never through an append.
 
-Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
+The two row kinds live in different sections and take **different anchors**. Using one kind's anchor for the other is the failure this section exists to prevent.
 
-**Anchor the append on the file's final characters, never on a date cell.** The Run log is the last section by construction, so "append at the end of the file" stays correct however the file grows; an anchor on a date matches the wrong row the first time two runs share a day.
+**The Run-log row** — date, task class, agents, est, actual, wall clock, note — **including the runs where the estimate held**, because a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
+
+**Anchor the Run-log row on the file's final characters, never on a date cell.** The Run log is the last section by construction, so "append at the end of the file" stays correct however the file grows; an anchor on a date matches the wrong row the first time two runs share a day.
+
+**The Watch-list row** — observation, `Kind`, `Count`, `First → last`, `Contradicts`, `Status`, the six columns `## Structural invariants` fixes. An empty `Contradicts` is written `—`, never blank and never "none".
+
+**Anchor it on the last row of the Watch-list table, as the very next line, with no blank line between.** Two ways to get this wrong, and neither is visible in the row you just wrote. The end-of-file anchor above belongs to the Run log **alone**: reach for it here and the row is filed as a run row, in the wrong table, under the wrong headers — and nothing complains, because a six-column row sitting inside the seven-column Run-log table breaks no invariant. The blank line is the other way: a blank line **ends** a markdown table, so a row set one line below becomes a second, header-less table, which breaks `## Structural invariants`' requirement that `## Watch list` hold exactly one table and halts the next consolidation pass. That one is not hypothetical — this machine's `local.md` was damaged exactly that way on 2026-08-18, and nothing noticed for a day, until a consolidation pass aborted on it.
+
+**So measure every section you touch, before and after.** An append is not done when the row is in the file; it is done when the row is in the *table*. Take the before reading of every section you intend to write to **before you write anything** — one command, once per section per side:
+
+```sh
+awk -v s='Watch list' '$0=="## "s{i=1;next} /^## /{i=0} i&&/^\|/{if(!b)n++;b=1;r++;next}{b=0} END{print n+0, r+0}' ~/.claude/skills/sage/memory/local.md
+```
+
+It prints **blocks and lines** for that one section. Swap `Watch list` for `Run log` for the other. Read it this way:
+
+- **Before you write, blocks must be `1`.** Anything else means the file is *already* damaged and your anchor does not exist — "the last row of the table" is undefined when there are two tables, and appending to the literal last row grows the damage instead of adding to it. Do not write to that section — and stop only on that section. The other section's row is still owed, so write it, and surface the damage as a Step 6 event (`../SKILL.md`, Step 6, surfaced events). Halting the whole append instead would cost the run its Run-log row, which the budget rail and every later estimate read back, so a damaged Watch list would quietly bleed the run log dry. Pre-existing damage is not an appender's to fix.
+- **After you write, blocks must still be `1`, and the line count must have moved exactly as your acts predict, summed — `+1` per new row of either kind, and `0` for a confirmation written in place.** Blocks `2` is the blank line. A new row that leaves the count unchanged never reached this table: look in the other section, and immediately below this one. A confirmation that moves the count is not a confirmation — you have added a row, and a duplicate row is the thing the third act exists to prevent.
+- **`0` is never healthy and never means "the row missed the section".** A well-formed section always has a header and a separator, so an append cannot drive this to zero: `0` means the heading is not byte-for-byte `## <section>`, or the file has CRLF endings. Empty output with a non-zero exit is a different fault again, and the likeliest one: the path is wrong.
+
+Where more than the append is in doubt, run the whole `## Structural invariants` check.
+
+**If your own write is what broke it, revert it — do not repair it in place.** Restore the file to its pre-append state and append again correctly. That is deliberately narrower than repair, and the narrowness is the point: "Do not repair the file" in `## Structural invariants` is a rule about a writer that cannot be trusted to see damage it caused itself, and an appender holding a check with two known blind spots is exactly that writer. Undoing your own change needs no such judgment. If the check still fails after the revert, the damage predates you — surface it and stop.
 
 ## Consolidate
 

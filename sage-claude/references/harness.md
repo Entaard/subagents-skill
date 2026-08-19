@@ -81,17 +81,20 @@ Sage reasons in tiers because tiers outlive model releases, but a dispatch takes
 2. **The model list in your environment or system context**, or what `/model` shows.
 3. **The snapshot table below** — a cached answer, and the first thing to go stale.
 
-Then map by role rather than by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strongest reasoning model → frontier. If the harness offers a model this table does not list, the harness wins — place it by role. If you cannot tell which role it fills, write an assumption-log row naming what you were unsure about rather than silently guessing.
+Then map by role rather than by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strong reviewer and judge → frontier, and the strongest long-horizon reasoning model above that → apex. A lineup with nothing above the frontier model leaves apex unfilled: the failure ladder then tops out at frontier, and a plan row asking for apex resolves to the frontier model with a note. If the harness offers a model this table does not list, the harness wins — place it by role for this run, and write an assumption-log row naming what you were unsure about rather than silently guessing. A model that *persists* across sessions without a row in this table is `/sage promote` stage three's job (`memory.md`, Promote) — that stage studies it and rewrites this table; a run only ever places it provisionally.
 
 Snapshot as of 2026-08 (verify against source 1 before relying on it):
 
 | Tier | Model param | Notes |
 | --- | --- | --- |
-| fast | `haiku` (Haiku 4.5) | exploration, mechanical work, high volume |
+| fast | `haiku` (Haiku 4.5) | exploration, mechanical work, high volume. **200K window, no 1M variant** — the one hard bound in the lineup: a scout that must hold a corpus past ~150k tokens goes to `sonnet` or `explorer-alt`, never `haiku` |
 | standard | `sonnet` (Sonnet 5) | default workers |
-| frontier | `opus` (Opus 5) / session's top model | hard review, judging; the parent usually already runs here |
+| frontier | `opus` (Opus 5) | hard review, judging; the default checker seat |
+| apex | `fable` (Fable 5) | above frontier: the escalation rung `../SKILL.md` Step 3 names, and single-owner units that are genuinely ambiguous, cross-system, and long-horizon. ~2× frontier price and the slowest latency in the family, so it takes no explorer, web-researcher, or implementer seat — mechanical and standard work does not pay apex rates |
 
-The parent's own model belongs in the ledger's Plan section — the model doing synthesis and triage is part of what the run cost.
+**The parent is apex's real home.** Run sage sessions on `fable` where the choice exists: synthesis, triage, placement, and the completion claim are the seats where a long-horizon model's judgment pays — the expensive failures in the run log are parent-judgment failures, not worker failures — and the parent is the critical path anyway, so worst-in-family latency costs nothing there. The `orchestrator` successor carries no `model:` line and inherits the parent, so handover generations follow for free. The parent's own model belongs in the ledger's Plan section — the model doing synthesis and triage is part of what the run cost.
+
+**Apex stays out of the checker seat.** `verifier` keeps `opus`. Checking is bought with clean context and a tight mandate more than with raw capability — the standard-tier checker has been right against the frontier one — and adversarial-refuter rows are already the most expensive a run carries, so doubling their rate buys the least. Under a `fable` parent an `opus` checker is a different model reviewing the maker's work, which is most of what "vary the model across maker and checker" asks for; `verifier-alt` stays the true cross-family check. Escalate one review row to `fable` only when the maker was not `fable`, and log it as a deviation.
 
 ### The alt lane
 

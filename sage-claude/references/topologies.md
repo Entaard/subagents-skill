@@ -6,7 +6,7 @@ Pick the smallest pattern that fits the task, then compose patterns for larger w
 
 **When:** a broad question answerable from many independent angles — codebase audit, doc or literature research, multi-dimension review.
 **Flow:** decompose into 4–8 *non-overlapping* angles (by subsystem, by lens, by source type — never "agent 1 and agent 2 both research X"). Launch one batch, readers only, background. Parent synthesizes; conflicting claims go to verification, not a coin flip.
-**Rules:** each brief names what the *other* agents cover so nobody duplicates; reports carry citations and file refs; the parent never pastes a full report onward — synthesize and drop. **Disjoint mandates produce disjoint find-sets**, which is what makes the sweep worth its cost: every multi-lens run logged has returned zero duplicate findings across its lenses, and repeatedly the decisive finding was invisible to every other unit. Cut an *angle* to save budget and you lose the findings only that angle sees; cutting a second agent off the *same* angle costs nothing (calibration: established).
+**Rules:** each brief names what the *other* agents cover so nobody duplicates; reports carry citations and file refs; the parent never pastes a full report onward — synthesize and drop. Disjoint mandates produce disjoint find-sets (`../SKILL.md` Step 5, calibration: established) — so cutting an *angle* to save budget loses the findings only that angle sees, while cutting a second agent off the *same* angle costs nothing.
 
 ## 2. Implement → review → fix (single increment)
 

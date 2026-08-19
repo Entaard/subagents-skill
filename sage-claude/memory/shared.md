@@ -6,7 +6,7 @@ Your job here: read every rule at Step 2 before estimating and at Step 3 before 
 
 **This is the only physical copy.** Every install symlinks to it, so a write here lands in `<repo>/sage-claude/memory/shared.md` and shows up in `git status`. One rule per block, so two machines editing this file conflict inside one block rather than across the file.
 
-Written by `/sage promote` only, never by a run. Every block carries exactly five fields in this order: the **rule** in bold under its heading, then `Qualifier`, `Recogniser`, `Band`, `Falsifier`. `Band` is `established` (six or more confirmations), `recurring` (three to five), or `provisional` (below bar, carried only because its mechanism is structural); the counts and dates behind it live in `local.md`, so a new confirmation re-dates one file rather than two. Skill text citing a rule writes `(calibration: <band>)` and nothing more. A rule whose `Falsifier` fires is evicted to `local-archive.md` with the observation attached — `../references/memory.md`, Evict.
+Written by `/sage promote` only, never by a run. Every block carries exactly five fields in this order: the **rule** in bold under its heading, then `Qualifier`, `Recogniser`, `Band`, `Falsifier`. `Band` is `established` (six or more confirmations), `recurring` (three to five), or `provisional` (below bar, carried only because its mechanism is structural); the counts and dates behind it live in `local.md`, so a new confirmation re-dates one file rather than two. Skill text citing a rule writes `(calibration: <band>)` and nothing more of this file's bookkeeping — the clause, its qualifier and its anecdote travel; counts, dates and falsifiers never do. A rule whose `Falsifier` fires is evicted to `local-archive.md` with the observation attached — `../references/memory.md`, Evict.
 
 ## Price off a same-shape row
 
@@ -68,7 +68,7 @@ Written by `/sage promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: brief style, not task class, sets this cost, and it holds across fetching, code and prose. One dispatch class is exempt: a blind acceptance-suite author receives the decisions' observable consequences, never the decisions.
 - Recogniser: a brief whose Inputs read as a topic rather than as a path list.
-- Band: recurring
+- Band: established
 - Falsifier: three ground-truth-named briefs costing what comparable open-ended briefs cost.
 
 ## Settle a disagreement with a command
@@ -77,7 +77,7 @@ Written by `/sage promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: agreement that nothing is wrong proves nothing; units independently constructing the same specific finding by different routes are the one kind of agreement that is evidence.
 - Recogniser: the standard-tier checker has been right against the frontier one; and where reviewers agreed a mechanism claim was inconsistent but none of them could see the runtime, the repair direction they agreed on was backwards, and one small docs unit changed the fix.
-- Band: recurring
+- Band: established
 - Falsifier: three disagreements no command could decide, where tier or majority then proved right.
 
 ## A scoped agent boots ~3× cheaper

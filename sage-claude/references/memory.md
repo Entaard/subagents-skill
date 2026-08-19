@@ -16,7 +16,7 @@ Your job here: put every fact sage learns in the one file whose content class it
 | Read at | Step 2, before estimating | Step 2, before estimating |
 | Physical form | one copy, in the repo, symlinked into every install — a write lands in `<repo>/sage-claude/memory/shared.md` and shows in `git status` | a real file on this machine, seeded once, never overwritten |
 
-A rule earns three homes in order, one content class each: `local.md` holds its counts and dates, `shared.md` holds the rule with its recogniser and falsifier, and skill text cites the clause and the band as `(calibration: <band>)`. No home restates another home's class.
+A rule earns three homes in order, one content class each: `local.md` holds its counts and dates, `shared.md` holds the rule with its recogniser and falsifier, and skill text carries the clause — with its qualifier and the recognising anecdote where the compression floor demands them — tagged `(calibration: <band>)`. No home restates another home's bookkeeping: counts and dates stay local, recogniser and falsifier stay in `shared.md`.
 
 **A dangling `shared.md` symlink → run on `local.md` alone and print one line saying so.** The repo moved or was deleted. Do not guess a repo path, and do not write a replacement file: a second physical copy is the fork this design exists to prevent.
 
@@ -52,28 +52,47 @@ sage: 3 rules ready → shared, 1 → skill text, 1 retirement candidate. Run `/
 | Target | Trigger |
 | --- | --- |
 | → `shared.md` | A rule reaches 3 confirmations, is marked machine-independent, and is not already in `shared.md` |
-| → skill text | A rule in `shared.md` reaches 6 confirmations, or a promoted rule crosses a strength band |
+| → skill text | A rule in `shared.md` reaches 6 confirmations and its `Promoted` cell does not yet record `skill` or `refused`, or a rule's count-derived band (the thresholds in `shared.md`'s header) disagrees with its block's `- Band:` field — a crossing: stage one re-writes the field, stage two re-tags wherever skill text cites it |
 | → retirement | A rule's falsifier condition was observed, or two confirmations contradict it |
 | → consolidation | `local.md` past ~10k tokens, or 40 rows, or two rows disagree on one band, or structural damage, or a version-bound claim older than the recorded harness version |
 
-Every trigger reads `local.md`'s Rules and Watch list tables — `Count`, `Class`, `Contradicts`, and `Rule` matched by name against `shared.md`'s `##` headings. All four are machine-checkable with no judgment, so a hint that fires is a fact rather than an opinion.
+Every trigger reads `local.md`'s Rules and Watch list tables — `Count`, `Class`, `Contradicts`, `Promoted`, and `Rule` matched by name against `shared.md`'s `##` headings — plus, for a band crossing, the matched block's `- Band:` field. All are machine-checkable with no judgment, so a hint that fires is a fact rather than an opinion.
 
 ## Promote
 
-`/sage promote`, on the user's word only, in this order:
+`/sage promote`, on the user's word only. Two stages, shared first — the skill stage reads `shared.md` blocks the first stage may have just written. A stage with no candidates is skipped in one printed line.
+
+**Stage one — → `shared.md`.**
 
 1. Read the candidates: every `local.md` Rules row and Watch-list row whose trigger above fired.
 2. For each, write the five fields in the order `shared.md` fixes — rule, qualifier, recogniser, band, **falsifier**. The falsifier is the observation that would retire the rule, stated concretely enough that a later run recognises it without re-reading the rule's history. Falsifiers are new machinery: none exists anywhere in `/subagents`, so write one rather than port one, and **a candidate whose falsifier you cannot state is not ready** — leave it on the watch list and say which one you could not write.
-3. Dispatch **one refuting `verifier` over the whole batch, briefed to default to refuted**: a rule survives only on evidence the verifier can name. One dispatch for the batch, not one per rule — the batch is what pays the boot cost.
-4. Write the survivors into `shared.md`, one `##` block each, and set that rule's `Promoted` cell in `local.md` to `shared <date>`.
+3. Dispatch **one refuting `verifier` over the whole batch, briefed to default to refuted**: a rule survives only on evidence the verifier can name. One dispatch for the batch, not one per rule — the batch is what pays the boot cost. A band crossing is arithmetic — count against `shared.md`'s own thresholds — not a claim, so it skips the refuter.
+4. Write the survivors into `shared.md`, one `##` block each; a band crossing re-writes only its standing block's `- Band:` field. Then append `shared <date>` — or `band <new band> <date>` for a crossing — to that rule's `Promoted` cell in `local.md`. **The cell is a history: append with ` · `, never overwrite**, because the → skill text guard and Evict both read its earlier entries.
 5. Send each refuted rule back to the watch list **with the refutation attached**, status `watching`. It is not written to `shared.md`.
 6. Print the diff.
+
+**Stage two — → skill text.** The highest-consequence write sage makes: it rewrites the corpus every future run boots from, so each step below exists to keep the edit minimal, checkable, and reversible. Candidates: every rule whose → skill text trigger holds when this stage begins — re-checked here, because stage one may have just written the qualifying block or moved the band.
+
+1. **Find the rule's one home.** Grep `SKILL.md` and `references/` for the rule's subject. Exactly one location may carry the rule at full strength — the step whose instructions the rule changes; every other mention defers or points. A citation already standing → the edit is a band-tag update in place. Standing text that *contradicts* the rule → a conflict, not an edit: the older sentence is a retirement candidate needing eviction's evidence bar, so name the retiring observation in the diff, or leave both standing and put the conflict on the watch list.
+2. **Resolve the ground, then draft, before any write.** `readlink ../memory/shared.md` — the installed symlink beside `local.md` — names the repo; then `diff -rq` the repo corpus against the installed one, `memory/` excluded. A dangling link, a non-symlink result, or a pre-existing divergence → stage two is off this run with zero bytes written, one surfaced line naming which. Then draft every edit — exact old text → exact new text, held in the promote diff. The reverse of the draft is the rollback; no draft, no write. Every edit lands in the repo copy, so the printed diff comes from git while the drafts stay the rollback — never `git checkout`, which cannot tell the batch's edits from pre-existing dirt in the tree.
+3. **Write the fewest words that clear the compression floor** — the clause, its qualifier, the recognising anecdote where the floor demands one, `(calibration: <band>)` — and nothing of the other homes' classes: no count, date, cost, or falsifier. A rule that needs a paragraph is not distilled yet; it stays in `shared.md` unwritten, with one watch-list line saying why.
+4. **Replace, never accrete.** Where the home already holds weaker or hedged text on the subject, the new clause replaces it. The corpus may grow by at most the clause itself; growth beyond that means something that should have been replaced was kept.
+5. **Check the corpus as a whole, once, after the batch's last edit** — four checks, and a failing edit reverts by its draft:
+   - **one home** — each promoted rule at full strength exactly once across `SKILL.md` and `references/`, verified by grep;
+   - **no contradiction** — every grep hit on the edit's subject agrees with or defers to the new clause;
+   - **floor audit** — everything the batch removed, item by item against the compression floor: replacement under step 4 and a retirement removal carrying its named observation (`## Evict`) are licensed; silent loss is not;
+   - **class check** — no count, date, or absolute cost entered skill text.
+6. **The degradation gate.** Dispatch one refuting `verifier` over the frozen corpus diff — one for the batch, as in stage one — briefed to default to refuted: name a case the pre-edit corpus handled that the post-edit corpus handles worse, a second home, a lost floor item, or a behavior change wider than the promoted rules. A refuted edit reverts by its draft, its rule keeps full standing in `shared.md`, the refutation goes to the watch list, and `refused <date>` is appended to the rule's `Promoted` cell — the entry the → skill text guard reads, so the hint stops offering it until a band crossing or the user's word reopens it.
+7. **Land the survivors.** Byte-copy the edited files into the installed skill and prove the two trees identical again with step 2's `diff -rq`. A copy that fails to prove → surface and stop; never hand-edit the installed tree into agreement.
+8. Append `skill <date>` to each landed rule's `Promoted` cell in `local.md` — the guard the → skill text trigger reads — and print the git diff.
 
 ## Evict
 
 Symmetric to promotion, and absent from `/subagents` entirely.
 
-A rule whose `Falsifier` fires — the named observation happened, or two watch-list confirmations contradict it — moves out of `shared.md` into `local-archive.md` **with the observation attached, not deleted**, tagged `retired: <the observation>`, so one grep settles why a rule that used to be there is gone. Set that rule's `Promoted` cell in `local.md` to `retired <date>`, or its old count re-promotes it on the next hint.
+A rule whose `Falsifier` fires — the named observation happened, or two watch-list confirmations contradict it — moves out of `shared.md` into `local-archive.md` **with the observation attached, not deleted**, tagged `retired: <the observation>`, so one grep settles why a rule that used to be there is gone. Append `retired <date>` to that rule's `Promoted` cell in `local.md` — append, because the paragraph below still needs the cell's earlier `skill` entry — or its old count re-promotes it on the next hint.
+
+**Retirement reaches skill text.** A rule whose `Promoted` cell records `skill` still stands in the corpus, citing a band that no longer exists — the worst false confidence the skill can carry. Grep the corpus for its clause and citation; remove the hit, or cut it back to whatever weaker statement the surviving evidence supports, under stage two's draft, whole-corpus check, degradation gate, and two-copy landing, with the retiring observation named in the diff. The compression floor does not shield it: the floor guards against cuts sold as shortening, and this is a spec change made on named evidence.
 
 Eviction runs inside `/sage promote`, on the same user word. A falsifier firing surfaces as a hint line like any other; it never rewrites `shared.md` on its own.
 

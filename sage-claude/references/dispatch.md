@@ -96,6 +96,8 @@ One file, `.claude/plans/sage-ledger-<session>.md` — durable; **gitignored onl
 
 Written at Plan time, restamped at every bring-current point. The `Generation` and `role` fields are what a post-compaction parent reads to know it is **already** supervising generation *n* — without them a compacted supervisor would re-run the handover and spawn a duplicate successor. Generations are uncapped (`../SKILL.md` `## Handover`), so the count is provenance, not a budget.
 
+**Both fields' initial values are defined here, because a field with no defined start gets invented.** The original parent writes `Generation: 1, role: parent` at Plan time, having spawned nothing: `1` is the parent's own generation, never a count of successors. **The parent increments it, at spawn time**: the generation that crosses its own occupancy threshold writes the handoff note, stamps `Generation: n+1` into this comment, and only then dispatches the successor — the successor never renumbers itself. Naming the owner matters because `../SKILL.md` `## Handover` passes the ledger's write lease to that successor in the same breath, and a field two writers both believe they own is a field neither maintains. It increments only when a successor is actually spawned, and it never carries a denominator — generations are uncapped, so `0/3` asserts a ceiling that does not exist. **`role` is the field that answers "am I already supervising"; the number is not** — a reader keying on the count sees `1` and cannot tell a fresh parent from one that has handed over. Every malformation named here is in the corpus on this machine: `Generation: 0` twice, `Generation: 0/3` once, the whole comment absent once, and once replaced by bold prose three lines down, where nothing looking for the comment finds it.
+
 ### Plan
 
 Written at `../SKILL.md` Step 2, in full, before any dispatch. Estimating: read `../memory/shared.md` for the estimating rules and `../memory/local.md` for the bands.
@@ -150,10 +152,16 @@ Ambiguity that changes the decomposition is the one place sage carries more risk
 ### Decisions and deviations
 
 ```text
-| when | decision, plan amendment, or dropped disagreement | reason |
+| id | when | decision, plan amendment, or dropped disagreement | reason |
 ```
 
 Every plan amendment — model, effort, scope, count, topology, cap — with its reason and when it happened. **Every abandoned disagreement gets a row too**: what was dropped, which unit held it, and why it lost. Silent discard is forbidden.
+
+**An amendment writes its row here *and* marks the rows it amends.** Every row in this table carries an id in its first cell — `D1`, `D2`, … in the order written — because the mark on the amended row has to name something. Then tag the affected `### Plan` and `### Unit table` rows in their own first cell — `2 superseded → D2`, naming the Decisions row that supersedes them — so the plan actually in force reads off the table without replaying this log. Both halves or neither: a Decisions row on its own leaves the Plan table asserting something that stopped being true, and no reader of that table can tell; a tag on its own points at nothing.
+
+**Both halves go missing in the corpus, one each way** — which is why the rule names both. One run cut 516 vendored files from a review mandate at freeze and *did* write the Decisions row, leaving the amended unit row untouched (`2b2ed63f`). Another added a whole unit `1b` to its `### Unit table` and wrote no Decisions row at all — `grep 1b` finds it in that table and in the Run record, nowhere else (`8f7be95a`) — which is exactly why the ledger lint's `plan-unit` check fires on it. One cell, deliberately, rather than a second plan section: a fifth representation of the plan cannot fix non-compliance with the four that already exist. `bin/sage-lint.sh` strips the `superseded → D<n>` tag before it compares the Plan and Unit id sets, so obeying this rule never costs a ledger a violation for obeying it.
+
+**A rail-1 authorisation is a row here too**, written before the authorised action runs (`../SKILL.md` `## Rails`). It has no other home.
 
 ### Findings and dispositions
 
@@ -162,6 +170,8 @@ Every plan amendment — model, effort, scope, count, topology, cap — with its
 ```
 
 One row per finding from the schema above, each carrying exactly one triage state. A finding whose triage is still open is an unfinished run.
+
+**One disclosure has its only home here**, so that a reader knows where to look and a check can tell when it is missing: the **residual same-family maker/checker bias**, wherever no cross-family checker was available (`../SKILL.md` Step 5). That one line has landed in five different sections across the ledgers on this machine — Plan, Unit table, Decisions, Run record, and, in one run, the section the rule already named — while another run that owed it recorded it nowhere at all. The rule was never ambiguous; it simply had nothing reading it. A duty with no fixed address is a duty nothing can check.
 
 ### Run record
 

@@ -17,13 +17,13 @@ result of its own.
 address it — including the better one this run designed — fails the same test: it reads a signal that the
 run corpus shows is not there.**
 
-| # | Item | Verdict |
-| --- | --- | --- |
-| The central claim | "Right about the team plan, wrong about the task plan" | **Not upheld.** The boundary is misplaced, and two of the four pillars under it do not hold. See section 3. |
-| E1 | Pre-dispatch seat check | **Not proven, either way.** The rule already exists for the roles involved. Its headline cost saving is misattributed to it. One data point supports it: this run. Section 4. |
-| E2 | Plan-premise check at the bring-current cadence | **Reject as written**, and the narrowed version this run built to save it also fails. Sections 4 and 6. |
-| E3 | An amendment record that supersedes | **Reject, weakly.** The strongest argument against it did not survive review. What is left is an unmeasured tradeoff, not a defect. Section 4. |
-| E4 | Re-pricing may not raise a ceiling | **Reject as a ban.** A logged counterexample shows re-pricing was correct and the rail fired anyway. No clean replacement boundary was found. Section 4. |
+| #                 | Item                                                   | Verdict                                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The central claim | "Right about the team plan, wrong about the task plan" | **Not upheld.** The boundary is misplaced, and two of the four pillars under it do not hold. See section 3.                                                                   |
+| E1                | Pre-dispatch seat check                                | **Not proven, either way.** The rule already exists for the roles involved. Its headline cost saving is misattributed to it. One data point supports it: this run. Section 4. |
+| E2                | Plan-premise check at the bring-current cadence        | **Reject as written**, and the narrowed version this run built to save it also fails. Sections 4 and 6.                                                                       |
+| E3                | An amendment record that supersedes                    | **Reject, weakly.** The strongest argument against it did not survive review. What is left is an unmeasured tradeoff, not a defect. Section 4.                                |
+| E4                | Re-pricing may not raise a ceiling                     | **Reject as a ban.** A logged counterexample shows re-pricing was correct and the rail fired anyway. No clean replacement boundary was found. Section 4.                      |
 
 **The one thing worth acting on is not in the document.** The adversarial pass named a larger problem, with
 four logged instances: sage's controls are prose, and the same parent that writes the plan interprets and
@@ -41,7 +41,7 @@ it.
 The document says a rebuttal to "LLMs Cannot Self-Correct Reasoning Yet" exists, and that "it turns on
 having an external verification condition. That is the whole distinction."
 
-The paper is *Large Language Models Can Self-Correct with Key Condition Verification* (EMNLP 2024,
+The paper is _Large Language Models Can Self-Correct with Key Condition Verification_ (EMNLP 2024,
 `https://aclanthology.org/2024.emnlp-main.714/`, fetched 2026-08-19). Its method works **without external
 feedback**. It masks a key condition in the question, inserts the candidate answer, and asks the same model
 to recover the masked condition. No tool, no oracle, no second model.
@@ -74,7 +74,7 @@ spent up to the new ceiling" and adds "Not some. Every one." That row in `memory
 confirmed instance. A search of all 11 prior ledgers then found no mid-run ceiling raise at all.
 
 **C7. The source document was not produced by a sage run.** That session left no ledger and dispatched
-`general-purpose` agents. Its own briefing errors are evidence about working *without* sage's Step 3, not
+`general-purpose` agents. Its own briefing errors are evidence about working _without_ sage's Step 3, not
 about a gap inside it. Its pointer to `attack-repo.md` and `defend-repo.md` in the scratchpad is also dead;
 those files no longer exist. The 22.4k error was a real sage run and stands, subject to C2.
 
@@ -219,7 +219,7 @@ nothing is indistinguishable from a check that was skipped.
 
 **What would change the verdict.** A replay over historical harvest boundaries showing real report text
 firing real pre-existing rows, and reproducing at least one amendment. Or a redesign that stops treating the
-assumption log as the carrier and pre-registers premises *per pending unit* instead, with the trigger and
+assumption log as the carrier and pre-registers premises _per pending unit_ instead, with the trigger and
 the affected row as separate checkable fields. Neither is a small change, and neither is justified by
 anything in the current corpus.
 

@@ -224,9 +224,12 @@ if [ -d "$sage_src" ]; then
   # rsync -a carries the source mode across, so this only matters when the repo's copy lost its
   # executable bit (a zip download, a checkout with no exec support). The watchdog is spawned as a
   # command, so a probe that is not executable disables the watchdog on every run.
-  if [ -f "${sage_dest}bin/sage-watch.sh" ]; then
-    chmod +x "${sage_dest}bin/sage-watch.sh"
-  fi
+  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh; do
+    if [ -f "${sage_dest}bin/$_sage_bin" ]; then
+      chmod +x "${sage_dest}bin/$_sage_bin"
+    fi
+  done
+  unset _sage_bin
 fi
 
 # Agent files have to live in ~/.claude/agents/; Claude Code does not discover them inside a skill
@@ -732,6 +735,104 @@ done
 
 rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 
+# offer_alt_guard_hook: the one sage rule with a deterministic predicate and zero legitimate
+# exceptions — an alt-lane dispatch must carry NO model parameter, because the parameter wins over
+# the agent file and silently deletes the outside-family model the row exists to buy. Prose has
+# stated it three times and a measured run broke it anyway (22.4k spent on three dispatches that
+# tested nothing). Offered, never imposed, and offered with the same care as the compact hook:
+# ~/.claude/settings.json holds arbitrary other config that this script does not own.
+# The guard itself fails OPEN on every unrecognised payload — see sage-claude/bin/sage-alt-guard.sh.
+offer_alt_guard_hook() {
+  settings="$HOME/.claude/settings.json"
+  guard="${sage_dest}bin/sage-alt-guard.sh"
+  marker="sage-alt-guard.sh"
+
+  # No guard installed (partial tree, or a source checkout without it) -> nothing to offer.
+  if [ ! -f "$guard" ]; then
+    return 0
+  fi
+  # A symlinked settings file belongs to something else; never edit through it.
+  if [ -L "$settings" ]; then
+    echo "NOTE: $settings is a symlink; skipping the alt-lane guard hook offer."
+    return 0
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "NOTE: jq is not installed; skipping the alt-lane guard hook offer (the guard needs jq too)."
+    return 0
+  fi
+  # Already present -> say nothing and change nothing. This is what makes re-running safe.
+  if [ -f "$settings" ] && jq -e . "$settings" >/dev/null 2>&1; then
+    if jq -e --arg m "$marker" '[.hooks.PreToolUse // [] | .[] | .hooks // [] | .[] | .command // ""] | any(contains($m))' \
+         "$settings" >/dev/null 2>&1; then
+      return 0
+    fi
+  fi
+  # Non-interactive install -> never prompt, never write.
+  if [ ! -t 0 ]; then
+    return 0
+  fi
+
+  printf 'Add a PreToolUse hook to %s that blocks an alt-lane subagent dispatch carrying a model parameter? [y/N] ' "$settings"
+  read -r reply || reply=""
+  case "$reply" in
+    y|Y|yes|YES|Yes) : ;;
+    *) return 0 ;;
+  esac
+
+  # Past this point the user has answered `y`, so every bailout says why. A silent `return 0`
+  # here reads as "installed" and is not: the same guard shape offer_compact_hook uses, and for
+  # the same reason — this function runs under `set -euo pipefail`, so an unguarded failure
+  # would abort the whole installer after the already-printed sync results.
+  if [ -e "$settings" ]; then
+    backup "$settings" settings || {
+      echo "NOTE: could not back up $settings; leaving it untouched, no alt-lane guard hook added."
+      return 0
+    }
+  else
+    mkdir -p "$(dirname "$settings")" || {
+      echo "NOTE: could not create $(dirname "$settings"); skipping the alt-lane guard hook."
+      return 0
+    }
+    printf '{}\n' > "$settings" || {
+      echo "NOTE: could not write $settings; skipping the alt-lane guard hook."
+      return 0
+    }
+  fi
+
+  # Beside the target, not in /tmp: same filesystem as the file it will be written into.
+  tmp="$(mktemp "${settings}.XXXXXX")" || {
+    echo "NOTE: could not create a temp file beside $settings; leaving it untouched."
+    return 0
+  }
+  if ! jq --arg cmd "$guard" \
+       '.hooks.PreToolUse = ((.hooks.PreToolUse // []) + [{"matcher": "Agent", "hooks": [{"type": "command", "command": $cmd}]}])' \
+       "$settings" > "$tmp"; then
+    echo "NOTE: could not merge the alt-lane guard hook into $settings; left it unchanged."
+    rm -f "$tmp"
+    return 0
+  fi
+  if ! jq -e . "$tmp" >/dev/null 2>&1; then
+    echo "NOTE: the merged settings did not parse; left $settings unchanged."
+    rm -f "$tmp"
+    return 0
+  fi
+  # An in-place write, not `mv`: $settings already exists by this point, and writing through
+  # it keeps its original mode and ownership rather than inheriting mktemp's 0600. Guarded,
+  # because the redirection truncates $settings BEFORE `cat` runs — an unguarded failure here
+  # would leave the user with an empty settings file, silently, and abort the installer under
+  # `set -euo pipefail` before anything could say so.
+  if ! cat "$tmp" > "$settings"; then
+    echo "NOTE: could not write the merged settings into $settings; it may now be truncated."
+    echo "      If a backup path for settings.json was printed above, restore from there"
+    echo "      ($backups_dir/...); if not, this installer created $settings itself this run"
+    echo "      and an empty one can simply be deleted."
+    rm -f "$tmp"
+    return 0
+  fi
+  rm -f "$tmp"
+  echo "Added the alt-lane guard hook to $settings. Check it with: $guard --selftest"
+}
+
 # offer_compact_hook: sage's handoff note and ledger header carry the occupancy duty forward
 # through a compaction summary, but only a SessionStart(compact) hook makes a compacted session
 # actually re-read them (sage-claude/references/harness.md, Cautions). Offered here rather than
@@ -834,6 +935,7 @@ offer_compact_hook() {
 
 if [ -d "$sage_src" ]; then
   offer_compact_hook
+  offer_alt_guard_hook
 fi
 
 echo

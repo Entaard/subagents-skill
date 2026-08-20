@@ -1,6 +1,6 @@
 # Claude Code mechanics
 
-Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Verified against code.claude.com docs and the changelog 2026-08-16, local install v2.1.233; model names and limits drift, so check `/model`, `/agents` and the sub-agents doc when precision matters.
+Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Verified against the vendor model docs and the changelog 2026-08-20, local install v2.1.237; model names and limits drift, so check `/model`, `/agents` and the sub-agents doc when precision matters.
 
 **Docs-drift trigger:** `claude --version` reports a build newer than that line → re-verify this file's tables against the changelog before trusting them. Not a formality: the pass that produced this file found a limit deleted three releases earlier and a knob never documented here at all.
 
@@ -39,7 +39,7 @@ Your job here: resolve a tier to a real model, dispatch a unit that is actually 
 
 ## Limits and knobs
 
-Verified against the changelog 2026-08-16, local install v2.1.233.
+Verified against the changelog 2026-08-20, local install v2.1.237.
 
 | Limit | Default | Env var | Since |
 | --- | --- | --- | --- |
@@ -83,7 +83,7 @@ Sage reasons in tiers because tiers outlive model releases, but a dispatch takes
 
 Then map by role rather than by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strong reviewer and judge → frontier, and the strongest long-horizon reasoning model above that → apex. A lineup with nothing above the frontier model leaves apex unfilled: the failure ladder then tops out at frontier, and a plan row asking for apex resolves to the frontier model with a note. If the harness offers a model this table does not list, the harness wins — place it by role for this run, and write an assumption-log row naming what you were unsure about rather than silently guessing. A model that *persists* across sessions without a row in this table is `/sage-promote` stage three's job (that skill's `## Stage three — model lineup refresh`) — that stage studies it and rewrites this table; a run only ever places it provisionally.
 
-Snapshot as of 2026-08 (verify against source 1 before relying on it):
+Snapshot as of 2026-08-20 (verify against source 1 before relying on it; vendor price ratio haiku : sonnet : opus : fable = 1 : 2 : 5 : 10, input and output alike):
 
 | Tier | Model param | Notes |
 | --- | --- | --- |
@@ -91,6 +91,8 @@ Snapshot as of 2026-08 (verify against source 1 before relying on it):
 | standard | `sonnet` (Sonnet 5) | default workers |
 | frontier | `opus` (Opus 5) | hard review, judging; the default checker seat |
 | apex | `fable` (Fable 5) | above frontier: the escalation rung `../SKILL.md` Step 3 names, and single-owner units that are genuinely ambiguous, cross-system, and long-horizon. ~2× frontier price and the slowest latency in the family, so it takes no explorer, web-researcher, or implementer seat — mechanical and standard work does not pay apex rates |
+
+Studied and rejected 2026-08-20: `claude-mythos-5` (and the invitation-only `claude-mythos-preview`) — Fable 5's restricted-availability twin at the same specifications and price, so it buys nothing over `fable` even where an organisation has it, and neither name is a value the Agent tool's `model` schema accepts here, so no identity probe can run and neither takes a seat in this lineup. Re-study only if a `mythos` value appears in source 1.
 
 **The parent is apex's real home.** Run sage sessions on `fable` where the choice exists: synthesis, triage, placement, and the completion claim are the seats where a long-horizon model's judgment pays — the expensive failures in the run log are parent-judgment failures, not worker failures — and the parent is the critical path anyway, so worst-in-family latency costs nothing there. The `orchestrator` successor carries no `model:` line and inherits the parent, so handover generations follow for free. The parent's own model belongs in the ledger's Plan section — the model doing synthesis and triage is part of what the run cost.
 

@@ -68,7 +68,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: brief style, not task class, sets this cost, and it holds across fetching, code and prose. One dispatch class is exempt: a blind acceptance-suite author receives the decisions' observable consequences, never the decisions.
 - Recogniser: a brief whose Inputs read as a topic rather than as a path list.
-- Band: established
+- Band: recurring
 - Falsifier: three ground-truth-named briefs costing what comparable open-ended briefs cost.
 
 ## Settle a disagreement with a command
@@ -77,7 +77,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: agreement that nothing is wrong proves nothing; units independently constructing the same specific finding by different routes are the one kind of agreement that is evidence.
 - Recogniser: the standard-tier checker has been right against the frontier one; and where reviewers agreed a mechanism claim was inconsistent but none of them could see the runtime, the repair direction they agreed on was backwards, and one small docs unit changed the fix.
-- Band: established
+- Band: recurring
 - Falsifier: three disagreements no command could decide, where tier or majority then proved right.
 
 ## A scoped agent boots ~3× cheaper

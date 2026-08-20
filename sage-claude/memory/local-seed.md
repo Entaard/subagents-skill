@@ -1,4 +1,4 @@
-<!-- sage-local-memory v1 -->
+<!-- sage-local-memory v2 -->
 # Sage local memory
 
 Your job here: read Bands and Rules at Step 2 before writing a budget, and append one Run-log row at Step 6 — every run, **hits included**, because a band you can trust needs its hits recorded next to its misses. This file holds this machine's numbers. The portable rules live in `shared.md`; skill text cites a strength band; every count and date behind that band lives here, so a new confirmation re-dates one file rather than two.
@@ -50,15 +50,15 @@ The arithmetic behind every rule in `shared.md`. `Rule` matches that file's `##`
 
 ## Watch list
 
-Lessons seen once, contradictions against a `shared.md` rule, skill defects, and task classes with no coverage. `Kind` is `lesson`, `contradiction`, `defect` or `gap`. `Contradicts` names the `shared.md` rule a local run cut against, or `—`. A `contradiction` row does not overturn the rule it names; it needs its own confirmations and surfaces in the next hint as a **retirement candidate**.
+Lessons seen once, contradictions against a `shared.md` rule, skill defects, and task classes with no coverage. `Kind` is `lesson`, `contradiction`, `defect` or `gap`; `../references/memory.md`, `## Append`, says what each records and where it ends. `Contradicts` names the `shared.md` rule a local run cut against, or `—`. A `contradiction` row does not overturn the rule it names; it needs its own confirmations and surfaces in the next hint as a **retirement candidate**. `Class` is `portable` or `local` — the same test the Rules table above applies — and `Promoted` is the same append-only history joined with ` · `. **Those two columns are what let a row here become a rule at all**: the `→ shared.md` trigger reads both, and for twelve runs this table had neither, so nothing on it could ever evaluate the trigger and nothing ever graduated. `Status` is `watching`, `settled → …`, `promoted → …` or `dropped → …`, and **the state is the cell's first word** — the rest is payload. `../references/memory.md`, `### The closure act`, says who may write each state and what evidence it needs.
 
-| Observation | Kind | Count | First → last | Contradicts | Status |
-| --- | --- | --- | --- | --- | --- |
-| A subagent's transcript is observable: every dispatch returns an `output_file` holding that unit's full JSONL, so grepping it measures what the agent invoked rather than what it reported. One run converted six case verdicts from judged to measured that way. **(seed)** | lesson | 1 | 2026-08-16 | — | watching |
-| A projection built from band midpoints is an upper bound, not a forecast — say which kind of figure you are holding up when a rail stops the run, or headroom gets authorised that the run never needed. **(seed)** | lesson | 1 | 2026-08-16 | — | watching |
-| The watchdog is an occupancy sensor and sends nothing. Its six per-unit rungs were measured and cut: **0 true positives** across 193 subagent transcripts and 37 units in 4 real runs. What survives is `--status` arithmetic plus the two parent-occupancy rungs, both notify-only. | lesson | 1 | 2026-08-18 | — | watching |
-| The 4× budget multiplier may be consumed rather than used: on this machine every past ceiling raise was spent up to the new ceiling. Retire it if ten runs land near 4× with coordination checks naming nothing the spend bought. | gap | 0 | 2026-08-17 | — | watching |
-| Running unattended is unmeasured against running with a human approving the plan first: no logged row anywhere records an approval answer, a requested change, or a reversed call. The assumption log is the instrument — read the rows the user corrects. | gap | 0 | 2026-08-17 | — | watching |
+| Observation | Kind | Count | First → last | Contradicts | Class | Promoted | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| A subagent's transcript is observable: every dispatch returns an `output_file` holding that unit's full JSONL, so grepping it measures what the agent invoked rather than what it reported. One run converted six case verdicts from judged to measured that way. **(seed)** | lesson | 1 | 2026-08-16 | — | portable | — | watching |
+| A projection built from band midpoints is an upper bound, not a forecast — say which kind of figure you are holding up when a rail stops the run, or headroom gets authorised that the run never needed. **(seed)** | lesson | 1 | 2026-08-16 | — | portable | — | watching |
+| The watchdog is an occupancy sensor and sends nothing. Its six per-unit rungs were measured and cut: **0 true positives** across 193 subagent transcripts and 37 units in 4 real runs. What survives is `--status` arithmetic plus the two parent-occupancy rungs, both notify-only. | lesson | 1 | 2026-08-18 | — | local | — | watching |
+| The 4× budget multiplier may be consumed rather than used: on this machine every past ceiling raise was spent up to the new ceiling. Retire it if ten runs land near 4× with coordination checks naming nothing the spend bought. | gap | 0 | 2026-08-17 | — | local | — | watching |
+| Running unattended is unmeasured against running with a human approving the plan first: no logged row anywhere records an approval answer, a requested change, or a reversed call. The assumption log is the instrument — read the rows the user corrects. | gap | 0 | 2026-08-17 | — | portable | — | watching |
 
 ## Run log
 

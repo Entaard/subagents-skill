@@ -190,6 +190,7 @@ Coordination check: <what depended on the agents being independent — a disagre
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective or product checkpoints, if any>
 Assumptions: <one condensed line from the assumption log — the calls that would change the answer if wrong>
+Memory check: <the append's before-and-after readings, one line per section touched, as `<section>: <blocks> <lines> → <blocks> <lines>` (`../references/memory.md`, `## Append`). This is the only audit trail the guard on every memory write leaves, so "ran it" is not an entry here — the numbers are. "none — nothing appended" is a legal value and says which>
 Lessons: <the note from the row appended to `../memory/local.md` this run, mirroring that column verbatim — the lesson a future run can act on, or "none beyond the actuals". `../SKILL.md` Step 6 writes the row; this line is what makes it renderable>
 ```
 

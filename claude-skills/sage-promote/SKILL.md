@@ -1,6 +1,6 @@
 ---
 name: sage-promote
-description: Sage's self-update pass. Promotes earned lessons into shared memory, then the strongest of those into sage's own skill text, refreshes the model lineup its tiers resolve to, and retires rules whose falsifier fired. Runs only on the user's word, never inside a run.
+description: Sage's self-update pass. Repairs the defects its own runs recorded, promotes earned lessons into shared memory, then the strongest of those into sage's own skill text, refreshes the model lineup its tiers resolve to, and retires rules whose falsifier fired. Runs only on the user's word, never inside a run.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 One pass, on the user's word. It moves what sage's runs proved into the places future runs read: shared memory first, sage's own text second, the model lineup third. It also runs **eviction** — a rule whose falsifier fired leaves shared memory and the corpus together, so the skill never cites a band that no longer exists.
 
-**This is the highest-consequence write in the system.** Stages two and three rewrite the corpus every future sage run boots from. Every step below exists to keep that edit minimal, checkable, and reversible. Read it in order and do not reorder the stages: stage two reads blocks stage one may have just written, and stage three runs last because its evidence is the live harness rather than run rows.
+**This is the highest-consequence write in the system.** Stage zero, stage two and stage three rewrite the corpus every future sage run boots from. Every step below exists to keep that edit minimal, checkable, and reversible. Read it in order and do not reorder the stages: stage zero runs first because every later stage writes into the corpus it repairs, stage two reads blocks stage one may have just written, and stage three runs last because its evidence is the live harness rather than run rows.
 
 **Sage never calls this skill.** A run detects candidates and prints one hint line (sage's `references/memory.md`, `## The hint`). The user runs `/sage-promote`. Nothing here is automatic.
 
@@ -17,16 +17,19 @@ One pass, on the user's word. It moves what sage's runs proved into the places f
 | File                                                | Written here                                      | Written by a sage run            |
 | --------------------------------------------------- | ------------------------------------------------- | -------------------------------- |
 | `<sage>/memory/shared.md` — a symlink into the repo | stage one, eviction                               | never                            |
-| `<sage>/memory/local.md`                            | `Promoted` cells, watch-list rows, one run row    | every run: appends, consolidates |
+| `<sage>/memory/local.md`                            | `Promoted` cells, watch-list rows and their `Status`, a minted `## Rules` row, one run row | every run: appends, consolidates |
 | `<sage>/memory/local-archive.md`                    | eviction                                          | consolidation                    |
-| `<repo>/sage-claude/SKILL.md` and `references/`     | stage two, stage three, eviction                  | never                            |
+| `<repo>/sage-claude/SKILL.md` and `references/`     | stage zero, stage two, stage three, eviction      | never                            |
+| `<repo>/sage-claude/bin/*.sh`                       | stage zero                                        | never                            |
 | `<repo>/claude-agents*/*.md`                        | stage three                                       | never                            |
 | the installed `<sage>` tree                          | the landing step only, byte-copied from the repo  | never                            |
 | the installed `~/.claude/agents/*.md` tree          | the landing step of stage three only, byte-copied | never                            |
 
 `<sage>` is the installed sage skill directory, resolved by preflight step 0. `<repo>` is whatever the preflight's `readlink` resolves. **The installer gives this skill nothing** — no seed file, no drift check, no symlink of its own, no executable bit to repair. It is a plain text skill that reads and writes another skill's tree, so the preflight below is the only guard those writes get.
 
-**Never touched by this skill:** `install.sh`, `memory/local-seed.md`, and this file. An installer change that a promotion appears to need is a finding for the user, not an edit.
+**Never touched by this skill:** `install.sh`, `memory/local-seed.md`, and this file. An installer change that a promotion appears to need is a finding for the user, not an edit — and stage zero says what to do with a defect row that names one of them: escalate it, never close it.
+
+**`bin/*.sh` is on the writes list above, and it was on neither list before.** The shipped scripts belonged to nothing: not to this skill's writes, not to its never-touched set, so a defect in one had no owner and three live watch rows recorded exactly that. Stage zero owns them now.
 
 ## Preflight
 
@@ -37,7 +40,7 @@ Runs once, before any stage, in this order. **Any check failing stops the pass w
 1. **Resolve the ground.** Two commands: `[ -L <sage>/memory/shared.md ]` proves it is a symlink, then `readlink -f` canonicalizes the target (`-f` also resolves a relative link target, which a bare `readlink` hands back unresolved). The canonical path is the physical file of shared memory, not the repo: it must end in `/sage-claude/memory/shared.md` **as whole path segments**, and `<repo>` is the non-empty prefix left when that suffix is cut — `/x/not-sage-claude/memory/shared.md` matches no `/` boundary and stops. Every stage-two and stage-three edit lands under `<repo>` first. Not a symlink, a target that does not exist, or a suffix that does not match at a `/` boundary → stop. Never guess a repo path, and never write a replacement file: a second physical copy of shared memory is the fork this design exists to prevent.
 2. **Prove the two trees agree.** `diff -rq <repo>/sage-claude/ <sage>/ -x memory`. It covers sage's own tree only; stage three's agent-file edits are proved separately, at their own landing, against `~/.claude/agents/`.
 
-   A pre-existing divergence **does not stop the whole pass.** It switches off stage two, stage three, and **the whole of eviction**, with zero corpus bytes written and one surfaced line naming the divergence. Stage one still runs: it writes only memory, and a rule it promotes whose skill-text edit was skipped keeps a live `→ skill text` trigger waiting for the next pass. **Eviction has no such return path, which is why it is gated whole and never split** — see `## Eviction`. The corpus stages each end by proving this same command clean again, so a pass that starts divergent could never prove it landed.
+   A pre-existing divergence **does not stop the whole pass.** It switches off stage zero, stage two, stage three, and **the whole of eviction**, with zero corpus bytes written and one surfaced line naming the divergence. Stage zero is gated with them because it writes the corpus too: repairing into a tree that already disagrees with its source is how a repair becomes the next divergence. Stage one still runs: it writes only memory, and a rule it promotes whose skill-text edit was skipped keeps a live `→ skill text` trigger waiting for the next pass. **Eviction has no such return path, which is why it is gated whole and never split** — see `## Eviction`. The corpus stages each end by proving this same command clean again, so a pass that starts divergent could never prove it landed.
 
 3. **Check the structural invariants** of `local.md` and `shared.md`. `<sage>/references/memory.md`, `## Structural invariants`, is the contract, and it is complete: a check written from that section and nothing else is a complete check. Damage → stop, naming the marker.
 4. **Read the four inputs.** `local.md` (Rules, Watch list, Bands, the harness stamp), `shared.md` (the standing blocks and their `- Band:` fields), `<sage>/references/memory.md` (`## The hint` for the triggers, `## Structural invariants`, `## The compression floor`), and the corpus itself — sage's `SKILL.md` and `references/`, read from the `<sage>` copy.
@@ -46,7 +49,8 @@ Runs once, before any stage, in this order. **Any check failing stops the pass w
 ```
 sage-promote preflight
   repo:   <the derived <repo>, from the readlink -f target>
-  trees:  <identical (diff -rq clean) | divergent: <files> — stages two, three and eviction are off>
+  trees:  <identical (diff -rq clean) | divergent: <files> — stages zero, two, three and eviction are off>
+  stage zero  → repair: <n> defect rows (<n> escalated, may not be written here)
   stage one   → shared: <n> candidates, <n> band crossings
   stage two   → skill:  <n> candidates
   stage three → lineup: always runs
@@ -68,7 +72,7 @@ The lane reaches one non-checker seat too: stage three's vendor-docs fetch may r
 
 ## The write machinery
 
-Stage two, stage three, and eviction all write the corpus. They share one procedure, defined here once. A stage that says "under the write machinery" means every numbered step below, in order. The shape is one explore–write–review loop: the preflight and the stages' greps map the ground, you draft and write, one independent checker reviews the batch, and only survivors land — no edit of your own lands unreviewed.
+Stage zero, stage two, stage three, and eviction all write the corpus. They share one procedure, defined here once. A stage that says "under the write machinery" means every numbered step below, in order. The shape is one explore–write–review loop: the preflight and the stages' greps map the ground, you draft and write, one independent checker reviews the batch, and only survivors land — no edit of your own lands unreviewed.
 
 1. **Draft before you write.** For every edit, hold the exact old text and the exact new text. **The reverse of the draft is the rollback. No draft, no write.** This is why rollback is never `git checkout`: a checkout cannot tell this batch's edits from pre-existing dirt in the working tree. Every edit is written to the `<repo>` copy; the installed tree changes only at step 5's byte-copy.
 2. **Replace, never accrete.** Where the target already holds weaker or hedged text on the subject, the new clause replaces it. The corpus may grow by at most the clause itself. Growth beyond that means something that should have been replaced was kept.
@@ -81,6 +85,21 @@ Stage two, stage three, and eviction all write the corpus. They share one proced
 5. **Land the survivors in two copies.** The repo copy is already written. Byte-copy the edited files into the installed tree, then prove them identical with the preflight's `diff -rq`. A copy that fails to prove → surface and stop. **Never hand-edit the installed tree into agreement** — that is how the two copies fork while both look correct.
 6. **Print the git diff** from the repo. The drafts stay the rollback; the diff is only the report.
 
+## Stage zero — corpus repair
+
+Candidates: every `local.md` Watch-list row whose `Kind` is `defect` and whose `Status` begins `watching`.
+
+**It runs before stage one, and the order is the whole point.** A `defect` row records a fault in the corpus the later stages are about to write into. Stage two's whole-corpus check assumes "exactly one location may carry the rule at full strength" and greps for that one home — run it against a corpus with a standing two-homes defect and it is grepping ground the pass already knows is wrong. Repair first, promote into the repaired corpus second.
+
+**This stage is a stage and not a hint, deliberately.** A hint firing on any `defect` row at count 1 would fire on eight of nineteen live rows, three of them deliberate accumulators whose own text says "until ten runs of evidence sit in the Run log" — an always-firing hint, which is the same defect as a trigger that can never clear. Defect rows do not need louder detection. They need an owner.
+
+1. **Re-verify before you repair.** A defect row is a lead, not a spec: re-check it against the file it names with one command. A defect that no longer reproduces closes as `settled → no longer reproduces <date>` and is not repaired. A defect whose *subject* is gone — the file, flag or script it names no longer exists — is `dropped → <what was removed> <date>` instead: nothing was repaired, so nothing was settled.
+2. **Repair the survivors as one batch, under the write machinery**, so the degradation gate sees the whole repair rather than one edit at a time.
+3. **What this stage may write:** `<repo>/sage-claude/SKILL.md`, `references/`, and `bin/*.sh` — landing in the installed tree at the write machinery's step 5 like any other corpus edit.
+4. **What it may not write, and what to do instead.** `install.sh`, `memory/local-seed.md` and this file stay never-touched. A defect row naming one of them is **escalated, never closed**: print it as a finding for the user and set its `Status` to `watching (escalated <date>: <path> is on the never-touched list)`. Three live rows name `install.sh` today, so this is the normal path, not the corner case — and silently closing one would tell every later pass the fault was fixed.
+5. **Close every repaired row** — `Status` → `settled → <file> <date>`, naming the file the repair landed in, per sage's `references/memory.md`, `### The closure act`. A repair that leaves its row open is re-done by the next pass, and the row that recorded it becomes permanent noise.
+6. Print the slate: repaired, escalated, no-longer-reproduces.
+
 ## Stage one — into shared memory
 
 Candidates: every `local.md` Rules row and Watch-list row whose `→ shared.md` trigger fired.
@@ -88,9 +107,13 @@ Candidates: every `local.md` Rules row and Watch-list row whose `→ shared.md` 
 1. For each candidate, write the five fields in the order `shared.md` fixes — **rule, qualifier, recogniser, band, falsifier**. The falsifier is the observation that would retire the rule, stated concretely enough that a later run recognises it without re-reading the rule's history. **Falsifiers are sage's own machinery: none exists anywhere in `/subagents`, so write one rather than go looking for one to port.** **A candidate whose falsifier you cannot state is not ready:** leave it on the watch list and print which one you could not write.
 2. Dispatch **one refuting checker (`## The checker seat`) over the whole batch, briefed to default to refuted**. A rule survives only on evidence the checker can name. One dispatch for the batch, not one per rule — the batch is what pays the boot cost.
    **A band crossing skips the refuter.** A crossing is arithmetic — the count against `shared.md`'s own thresholds — not a claim, and there is nothing for a refuter to attack.
-3. Write the survivors into `shared.md`, one `##` block each. A band crossing rewrites only its standing block's `- Band:` field and nothing else.
-4. Append to that rule's `Promoted` cell in `local.md`: `shared <date>`, or `band <new band> <date>` for a crossing. **The cell is a history: append with ` · ` — space, middle dot, space — never overwrite** — the → skill text guard and eviction both read its earlier entries.
-5. Send each refuted rule back to the watch list **with the refutation attached**, status `watching`. It is not written to `shared.md`.
+3. **Mint the rule name first, then write the survivors into `shared.md`, one `##` block each, under that name.** The name is the join: every later trigger matches a Rules row against `shared.md`'s `##` headings by it, so a block written before its name is settled has no defined source for the one string both homes must share. For a Rules-row candidate the name already exists and is carried through unchanged. A band crossing rewrites only its standing block's `- Band:` field and nothing else.
+4. **Land the bookkeeping in `local.md`. The two candidate kinds diverge here, and this is the step the loop was missing.**
+   - **A Rules-row candidate** — append to that rule's `Promoted` cell: `shared <date>`, or `band <new band> <date>` for a crossing. **The cell is a history: append with ` · ` — space, middle dot, space — never overwrite** — the → skill text guard and eviction both read its earlier entries.
+   - **A Watch-list candidate — mint the rule name and write a new `## Rules` row**, then close the watch row against it: `Status` → `promoted → Rules row "<name>"`, and `shared <date>` appended to the watch row's own `Promoted` cell. The new Rules row carries the watch row's `Count` and `First → last` verbatim, its `Class` verbatim, `shared <date>` as its `Promoted`, and a `Provenance` naming where the confirmations came from — the watch row's own provenance where it has one, else `watch list <first-seen date>`.
+
+   The Rules row is appended as the table's last row, and the batch's after-check is the same before-and-after reading `references/memory.md`'s `## Append` orders, `+1` line per minted row. **Writing `shared.md` without writing the Rules row is the whole defect, not a bookkeeping detail.** Every later trigger reads counts from the Rules table: `→ skill text` needs six confirmations, `→ retirement` needs two contradictions, a band crossing needs the count against `shared.md`'s thresholds. A rule that reaches `shared.md` with no Rules row behind it has no count anywhere, so none of those three can ever fire on it again — it is write-only, which is the disease this stage exists to cure, moved one file over. It also breaks the three-homes invariant in sage's `references/memory.md`: `local.md` holds a rule's counts and dates, and a rule with no local row has no home for them. **This is also the step that finally lets `## Rules` gain a row.** Across twelve runs on the author's machine it never gained one — seed eleven, live eleven — while Bands went 6→8 and the Watch list 5→19: the candidates existed, the gate would not read them, and nothing minted the row even when it did.
+5. Send each refuted rule back to the watch list **with the refutation attached**, `Status` left at `watching` and `refused <date>` appended to its `Promoted` cell. It is not written to `shared.md`. **The refusal goes in `Promoted`, never in `Status`** — a refused candidate is not closed, it is ineligible until newer evidence arrives, and the `→ shared.md` trigger reads exactly that: it skips a row whose `Promoted` records a `refused` dated later than the row's last confirmation. Recording the refusal in `Status` instead would either hide the row from every trigger for ever or, left at `watching` with no record at all, re-promote it on every later pass.
 6. Print the diff.
 
 ## Stage two — into skill text

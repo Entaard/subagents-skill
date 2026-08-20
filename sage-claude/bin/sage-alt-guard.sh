@@ -37,15 +37,20 @@
 #       "hooks": [ { "type": "command",
 #                    "command": "~/.claude/skills/sage/bin/sage-alt-guard.sh" } ] } ] }
 #
-#   `install.sh` offers to add exactly that block, the same way it offers the
-#   SessionStart(compact) hook, and never edits a settings file it was not told to.
+#   `install.sh` offers to add exactly that block — writing the `~` expanded to the
+#   absolute home path, the same hook — the same way it offers the SessionStart(compact)
+#   hook, and never edits a settings file it was not told to.
 #
 #   sage-alt-guard.sh --help    print this usage and exit 0.
 #   sage-alt-guard.sh --selftest
 #                               run the built-in fixtures and print one PASS/FAIL line
-#                               each. Exits 0 if every fixture behaves, 1 otherwise. This
-#                               is how you check the guard still works after a Claude Code
-#                               upgrade moves a field name.
+#                               each. Exits 0 if every fixture behaves, 1 otherwise. It
+#                               validates THIS SCRIPT'S OWN LOGIC against fixed fixtures,
+#                               and it CANNOT detect harness-side drift: a field rename or
+#                               a deny-form deprecation upstream leaves every fixture green
+#                               while the guard goes quiet in real dispatches. The live
+#                               check is one deliberate alt dispatch WITH a model
+#                               parameter, which must come back blocked.
 #
 # ---------------------------------------------------------------------------
 # THE PREDICATE, stated exactly. All four must hold or the dispatch is allowed:
@@ -69,6 +74,13 @@
 # before the subagent ran. This file uses the JSON path, because it returns a reason the
 # caller can read; the non-zero-exit path surfaces the same text as a hook error.
 #
+# The deny object carries BOTH documented forms in one emission: the legacy top-level
+# `decision`/`reason` pair — the form proven live on Claude Code 2.1.237, kept exactly as
+# it was — plus `hookSpecificOutput.permissionDecision: "deny"` with the same reason text,
+# the form the current hooks documentation prefers. Whichever form the running Claude Code
+# honours, the dispatch stops; a version that reads neither ignores the object entirely,
+# which is the fail-open direction.
+#
 # ---------------------------------------------------------------------------
 # FAIL OPEN. This is the whole safety argument for shipping an enforcement hook at all.
 #
@@ -85,7 +97,8 @@
 #
 #   A guard that fails closed on an unrecognised payload would block every dispatch in the
 #   session the day a field is renamed. Failing open costs the enforcement and keeps the
-#   run; failing closed costs the run. Run `--selftest` to find out that it went quiet.
+#   run; failing closed costs the run. `--selftest` proves this script's own logic still
+#   works; only a live alt+model dispatch proves the harness still listens (see USAGE).
 #
 # ---------------------------------------------------------------------------
 # BLIND SPOTS, stated rather than hidden:
@@ -142,7 +155,10 @@ file, so passing model=\"$model\" replaces the outside-family model this row exi
 dispatch would succeed and test nothing. Remove the model parameter and dispatch again. \
 (~/.claude/skills/sage/references/harness.md, The alt lane.)"
 
-  printf '%s' "$reason" | "$JQ" -R -s '{decision:"block", reason:.}' 2>/dev/null || return 1
+  # Both documented deny forms in one object (see the header): the legacy top-level pair
+  # first — proven live, byte-identical to what it always emitted — then the
+  # hookSpecificOutput form with the same reason text.
+  printf '%s' "$reason" | "$JQ" -R -s '{decision:"block", reason:., hookSpecificOutput:{hookEventName:"PreToolUse", permissionDecision:"deny", permissionDecisionReason:.}}' 2>/dev/null || return 1
   return 0
 }
 
@@ -186,6 +202,18 @@ selftest() {
   run "not JSON                    -> allow" 'this is not json at all' allow
   run "empty payload               -> allow" '' allow
   run "JSON but no tool_name       -> allow" '{"tool_input":{"subagent_type":"verifier-alt","model":"x"}}' allow
+  # One SHAPE assertion beyond the verdict fixtures: the deny object must carry both
+  # documented forms at once — the legacy top-level decision/reason pair and
+  # hookSpecificOutput.permissionDecision — with the same reason text in both. A verdict
+  # fixture cannot see a dropped field. This still cannot prove the harness READS either
+  # form; only the live alt+model dispatch does (see USAGE).
+  name="deny output carries both forms"
+  out=$(decide '{"tool_name":"Agent","tool_input":{"subagent_type":"verifier-alt","model":"gpt-5"}}')
+  if printf '%s' "$out" | "$JQ" -e '(.decision == "block") and ((.reason | type) == "string") and (.reason != "") and (.hookSpecificOutput.hookEventName == "PreToolUse") and (.hookSpecificOutput.permissionDecision == "deny") and (.hookSpecificOutput.permissionDecisionReason == .reason)' >/dev/null 2>&1; then
+    printf 'PASS  %-46s shape\n' "$name"
+  else
+    printf 'FAIL  %-46s deny JSON is missing a required field\n' "$name"; fail=1
+  fi
   return $fail
 }
 

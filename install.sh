@@ -743,9 +743,10 @@ rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 # ~/.claude/settings.json holds arbitrary other config that this script does not own.
 # The guard itself fails OPEN on every unrecognised payload — see sage-claude/bin/sage-alt-guard.sh.
 offer_alt_guard_hook() {
-  settings="$HOME/.claude/settings.json"
-  guard="${sage_dest}bin/sage-alt-guard.sh"
-  marker="sage-alt-guard.sh"
+  local settings="$HOME/.claude/settings.json"
+  local guard="${sage_dest}bin/sage-alt-guard.sh"
+  local marker="sage-alt-guard.sh"
+  local tmp reply
 
   # No guard installed (partial tree, or a source checkout without it) -> nothing to offer.
   if [ ! -f "$guard" ]; then
@@ -760,8 +761,14 @@ offer_alt_guard_hook() {
     echo "NOTE: jq is not installed; skipping the alt-lane guard hook offer (the guard needs jq too)."
     return 0
   fi
-  # Already present -> say nothing and change nothing. This is what makes re-running safe.
-  if [ -f "$settings" ] && jq -e . "$settings" >/dev/null 2>&1; then
+  if [ -e "$settings" ]; then
+    # The same invalid-JSON pre-check as offer_compact_hook: a settings file that does not
+    # parse is bailed on BEFORE the prompt, not discovered at merge time after a backup.
+    if ! jq empty "$settings" >/dev/null 2>&1; then
+      echo "NOTE: $settings does not parse as JSON; leaving it untouched — no alt-lane guard hook offered."
+      return 0
+    fi
+    # Already present -> say nothing and change nothing. This is what makes re-running safe.
     if jq -e --arg m "$marker" '[.hooks.PreToolUse // [] | .[] | .hooks // [] | .[] | .command // ""] | any(contains($m))' \
          "$settings" >/dev/null 2>&1; then
       return 0
@@ -784,7 +791,11 @@ offer_alt_guard_hook() {
   # the same reason — this function runs under `set -euo pipefail`, so an unguarded failure
   # would abort the whole installer after the already-printed sync results.
   if [ -e "$settings" ]; then
-    backup "$settings" settings || {
+    # A DISTINCT backup category from offer_compact_hook's `settings`: both offers can run
+    # in one install, backup() names the saved copy by basename inside its category, and a
+    # shared category made the second offer's backup overwrite the first's — leaving the
+    # only restore point post-first-edit, which is not the file the user started with.
+    backup "$settings" settings-alt-guard || {
       echo "NOTE: could not back up $settings; leaving it untouched, no alt-lane guard hook added."
       return 0
     }

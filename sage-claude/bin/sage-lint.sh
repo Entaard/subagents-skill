@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 #
-# LC_ALL=C throughout: every regex here is ASCII-anchored, and running byte-wise (rather
-# than through a UTF-8 multibyte table) means a stray non-UTF8 byte in the ledger is just
-# another byte, never an awk "multibyte conversion" crash — fail quiet, per FAIL OPEN below.
-export LC_ALL=C
-#
 # sage-lint.sh — deterministic record-integrity checker for ONE sage ledger (the single
 # markdown file, `.claude/plans/sage-ledger-<session>.md`, that records one orchestration
 # run — see `../references/dispatch.md` `## The ledger` for the prescribed shape).
@@ -51,9 +46,11 @@ export LC_ALL=C
 #
 #   header
 #     Reads: line 1 of the raw file.
-#     Fires: line 1 is not an HTML comment containing the literal text
-#       `sage occupancy duty` — either the phrase is absent from the whole file, or it is
-#       present but on a line other than 1.
+#     Fires: line 1 is not a one-line HTML comment containing the literal text
+#       `sage occupancy duty` — three messages, one each for: the phrase is absent from the
+#       whole file; it is present but on a line other than 1; or the comment opens on line 1
+#       but does not close on line 1 (a multi-line comment — the fields cannot be read from
+#       line 1, so `header-fields` has nothing to parse and stays silent).
 #     Cannot see: a header restamped with stale figures — this check only looks at whether
 #       the comment exists and sits first, never whether its numbers are current.
 #
@@ -78,27 +75,42 @@ export LC_ALL=C
 #       (space, comma, semicolon, ...). Trailing annotation is legal: `reported 07:11` and
 #       `reported, steered, re-reported` both pass. `done 07:13...` fails (not one of the
 #       seven words); a word that only starts the same way, like a hypothetical `reportedly`,
-#       also fails (boundary check, not a prefix check). Or the Unit table has no column
-#       labelled `state` at all (one violation for the table, not one per row).
+#       also fails (boundary check, not a prefix check). An EMPTY state cell fails too: the
+#       invariant is that every unit carries a value from the enum, and an emptied cell is
+#       the emptiest possible violation of it, not a parse the check cannot make. Or the
+#       Unit table has no column labelled `state` at all (one violation for the table, not
+#       one per row). Or the `Unit table` heading exists with NO table anywhere under it —
+#       one violation for the section, the absence case of the same invariant (the sibling
+#       of `plan-unit`'s empty-Plan rule; a row the table never had is otherwise invisible
+#       to every per-row check here).
 #     Cannot see: whether a state was actually KEPT current while the unit ran, only whether
 #       the word written down is a legal word. A ledger updated once at the very end and a
-#       ledger updated live read identically to this check.
+#       ledger updated live read identically to this check. A data row SHORTER than the
+#       state column (a malformed row with missing cells) is a parse failure, not an empty
+#       cell, and stays silent per FAIL QUIET.
 #
 #   triage-orphan
 #     Reads: the first table under the FIRST `Findings and dispositions` heading (its first
 #       column, taken as the set of real finding ids) — that is the ONLY source of "this id
 #       has a triage row". Candidate ids (things that might be orphans) are harvested from
-#       two places: (a) the first column of every OTHER table in the document, EXCEPT the
-#       `Plan`, `Unit table`, `Assumption log` and `Decisions and deviations` sections in full
-#       (each carries its own id/index namespace — plan/unit ids, `A1`, `A2`... in two real
-#       ledgers, and `D1`, `D2`... in the Decisions table — none of that is a finding id, and
-#       scanning it invites exactly the false positive this check must not produce; Decisions
-#       is excluded by SECTION NAME rather than by its `id` header label, because `D1` is
-#       finding-shaped and a ledger that merely bolds that header cell would otherwise turn
-#       every compliant decision row into an orphan), and also except a table whose header's
-#       first column reads `id`, `#`, `when`, or `assumption` — markdown emphasis and code
-#       ticks stripped before that comparison — even outside those four sections, as one
-#       further belt-and-suspenders exclusion; and (b) PROSE, but ONLY on the Run record's `Findings:` summary line (the
+#       two places: (a) the first column of tables OUTSIDE every prescribed section, plus
+#       tables under `Run record` (whose summaries can cite ids that were never triaged).
+#       `Plan`, `Unit table`, `Assumption log` and `Decisions and deviations` each carry
+#       their own id/index namespace (plan/unit ids, `A1`, `A2`..., `D1`, `D2`...) and the
+#       Findings section supplies the triage set — none of the five is a candidate source.
+#       The exclusion is by prescribed SECTION, never by a table's header label: an earlier
+#       draft also dropped any table whose first column was labelled `id`/`#`/`when`/
+#       `assumption`, and that let a fix table headed `id`, holding an untriaged blocker,
+#       escape silently — the exact case this check exists for. Section extents are
+#       NESTING-AWARE here: a lower-level heading inside a prescribed section (a `###`
+#       subsection under `## Findings and dispositions`, a legacy layout the real corpus
+#       uses) stays inside it, while a sibling-level section (`### Fix log` beside `### Run
+#       record`) ends it — which is what keeps a fix table harvestable. A harvested
+#       candidate is then dropped when it is a KNOWN NON-FINDING id: an id that appears in
+#       the Unit table's own id column, or a `D<n>` id from the Decisions table's id
+#       column — so a stamp table citing unit `U1`, or a summary table citing decision
+#       `D2`, cannot turn either into a bogus orphan.
+#       And (b) PROSE, but ONLY on the Run record's `Findings:` summary line (the
 #       one field the prescribed template reserves for exactly this content) — a
 #       finding-shaped token sitting at a clean word boundary immediately before a `(`, e.g.
 #       `K (residual note, not yet triaged)`. Deliberately narrower than "any prose anywhere":
@@ -119,7 +131,27 @@ export LC_ALL=C
 #       token appears twice within the Findings table itself (duplicate).
 #     Cannot see: an id that does not match the shape above at all, or a prose id with no `(`
 #       right after it — a first cell or a sentence with an id buried where this check does
-#       not look is invisible to it, by design.
+#       not look is invisible to it, by design. And a finding whose id COLLIDES with a unit
+#       id or a Decisions id (`U1`, `D2`) is dropped by the known-non-finding subtraction
+#       above — a run that names its findings after its units hides them from this check.
+#       Four more escapes are MEASURED, not theoretical, and each one is a deliberate trade
+#       against a false-alarm class rather than an oversight:
+#         - A table in a subsection UNDER `## Findings and dispositions` is inside the
+#           prescribed section, so an untriaged id in a `### Fix log` written THERE (rather
+#           than beside Findings) is invisible. Harvesting those subsections was tried and
+#           measured: it added 14 false alarms on one real ledger, whose `### Dispositions`
+#           table triages its findings in a column labelled `state`. A fix table one heading
+#           level up still fires, which is the layout the prescribed template produces.
+#         - A table is treated as SELF-TRIAGED on its header row alone. A `disposition`
+#           column whose cells are all EMPTY excludes the table just as a filled one does.
+#           The label test is a SUBSTRING test, so any header cell merely CONTAINING
+#           `triage` or `disposition` excludes the table — `untriaged?` and `predisposition`
+#           both do it. Narrowing the test to exact labels was rejected: the real corpus
+#           spells these columns freely (`triage`, `**triage**`, `disposition`, `Triage`),
+#           and an exact list would miss the spellings the exclusion exists to catch.
+#         - Section identity is prefix-matched, so `Plan B` reads as `Plan` and is excluded.
+#         - Only `##` and `###` are headings here. A `####` heading does not end a section,
+#           so everything under it belongs to the enclosing one.
 #
 #   plan-unit
 #     Reads: the first table under the FIRST `Plan` heading and the first table under the
@@ -149,22 +181,29 @@ export LC_ALL=C
 #       section's text.
 #
 #   disclosure-home
-#     Reads: every line whose CURRENT heading (the nearest preceding `##`/`###` line) is
-#       exactly one of `Findings and dispositions`, `Decisions and deviations`, or
-#       `Assumption log` — deliberately NOT `Plan`, `Unit table`, or `Run record`, both of
-#       which routinely preview or restate a disclosure that lives properly elsewhere
-#       ("residual bias recorded in Findings"), and firing on that preview would be exactly
-#       the noise this check must not make.
+#     Reads: EVERY line of the document (outside fences) — trigger-anywhere, home-required.
+#       An earlier draft scanned only three sections and excluded `Plan`, `Unit table` and
+#       `Run record`; the measured history says those are exactly where a mislaid disclosure
+#       actually lands, so the trigger scan now excludes nothing.
 #     Keyword sets (case-insensitive substring, heuristic — say so plainly): a same-family /
 #       residual maker-checker bias disclosure is recognised by `same-family`, `same family`,
-#       or `self-preference bias`; its one legal home is `Findings and dispositions`. A
-#       rail-1 authorisation is recognised by `rail-1` or `rail 1`; its one legal home is
+#       or `self-preference bias`; its one required home is `Findings and dispositions`. A
+#       rail-1 authorisation is recognised by `rail-1` or `rail 1`; its one required home is
 #       `Decisions and deviations`.
-#     Fires: either keyword set found in one of the three scanned sections OTHER than its own
-#       legal home.
-#     Cannot see: anything outside those three sections (by design, see above), and cannot
-#       tell a real disclosure from an incidental use of the same words in an unrelated
-#       sentence — a heuristic, not a parser of meaning.
+#     Fires: a keyword set appears somewhere in the document while NO line under its home
+#       section carries that same set — one violation per keyword set, pointing at the first
+#       trigger line. A trigger outside the home is legal WHEN the home also carries the
+#       disclosure: previews and restatements of a properly-homed line are not the failure,
+#       a disclosure whose home is empty is.
+#     KNOWN FALSE-POSITIVE MODE, measured live: a ledger that merely DISCUSSES this rule —
+#       a finding about the disclosure duty, a run-record sentence weighing same-family
+#       lenses — trips the keywords without owing the disclosure. The remedy is to reword
+#       the discussing line, or to carry this check's line to Step 6 as a surfaced event
+#       with the reason written next to it. A keyword heuristic cannot tell recording a
+#       disclosure from reviewing the rule, and saying so here is cheaper than pretending.
+#     Cannot see: a real disclosure phrased without any of the keywords (silence, per the
+#       miss-over-false-alarm trade), and it cannot tell a real disclosure from an
+#       incidental use of the same words — a heuristic, not a parser of meaning.
 #
 #   amend-tag
 #     Reads: the first cell of every data row in the `Plan` and `Unit table` sections that
@@ -221,6 +260,12 @@ export LC_ALL=C
 #     correctly);
 #   - a dispatch that was simply never written down at all — this tool only ever sees what
 #     made it onto the page;
+#   - an UNTAGGED amendment: a Decisions row that amends a unit while the amended Plan/Unit
+#     row carries no `superseded` tag. Only the tag→D-row direction is checked (`amend-tag`
+#     resolves a tag to its row); no text says which rows an untagged D-row amended, so that
+#     half has no deterministic predicate and is asked for, never enforced — a deliberate
+#     decision (this repo's fix-run ledger, decision D3): a keyword guess here would buy the
+#     false-alarm cost without buying the check;
 #   - and, stated explicitly because it is the one most likely to be over-read: `state-enum`
 #     checks that a state word is LEGAL, never that it was kept LIVE. A ledger written once at
 #     the very end, backfilling every state to its final value, and a ledger updated at every
@@ -232,6 +277,19 @@ export LC_ALL=C
 # exit other than the three defined above. When in doubt, this script says nothing: a linter
 # that cries wolf gets ignored, and an ignored linter is worse than none, because the run
 # record still says it ran.
+#
+# DEGRADATION — the same convention as bin/sage-watch.sh. "Cannot run here" means the script
+# itself will not execute on this machine: the file is missing or not executable, bash or the
+# core tools are absent, or every invocation dies before reading the ledger. The response is
+# the watchdog's: disable the lint for the rest of the run, write ONE ledger line saying so,
+# and never warn about it again. Exit 2 (bad arguments) and exit 3 (not a ledger) are NOT
+# degradation — fix the call and run it again — and exit 1 is the lint working. Nothing here
+# changes the exit-code semantics above.
+
+# LC_ALL=C throughout: every regex here is ASCII-anchored, and running byte-wise (rather
+# than through a UTF-8 multibyte table) means a stray non-UTF8 byte in the ledger is just
+# another byte, never an awk "multibyte conversion" crash — fail quiet, per FAIL QUIET above.
+export LC_ALL=C
 
 usage() {
   printf '%s\n' \
@@ -267,13 +325,30 @@ if [ ! -e "$FILE" ] || [ -d "$FILE" ] || [ ! -r "$FILE" ]; then
   exit 3
 fi
 
+# The one shared definition of the heading grammar and the cell trim, prepended to every awk
+# program below that parses either (the repo's clean-code rule: one definition, not seven
+# drifting copies — and the one place a parsing fix lands once instead of seven times).
+# `###?` rather than `#{2,3}`: mawk (Debian's default awk) and BSD awk have no brace
+# intervals — gawk quietly accepts them, which is how the trap ships — so every regex in
+# this file is interval-free, the same convention bin/sage-watch.sh already runs on macOS.
+AWK_LIB='
+  function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
+  function is_heading(line) { return (line ~ /^###?[ \t]/) }
+  function heading_level(line) { return (line ~ /^###[ \t]/) ? 3 : 2 }
+  function heading_of(line,   h) {
+    h = line
+    sub(/^###?[ \t]+/, "", h)
+    sub(/[ \t\r]+$/, "", h)
+    return h
+  }
+'
+
 # Fence-blank the content once: any line between a pair of ``` fence markers becomes an
 # empty line, line count preserved, so every later check that scans for headings or table
 # rows never mistakes a quoted template inside a fence for the ledger's own record.
-SANITIZED=$(awk '
+SANITIZED=$(awk "$AWK_LIB"'
   {
-    t = $0
-    sub(/^[ \t]+/, "", t)
+    t = trim($0)
     if (t ~ /^```/) { infence = !infence; print ""; next }
     if (infence) { print ""; next }
     print
@@ -283,16 +358,14 @@ SANITIZED=$(awk '
 REQUIRED_SECTIONS='Plan,Unit table,Assumption log,Decisions and deviations,Findings and dispositions,Run record'
 
 # Three independent marks of ledger-hood; any one is enough (see "Is a ledger" above).
-IS_LEDGER=$(awk -v req="$REQUIRED_SECTIONS" '
+IS_LEDGER=$(awk -v req="$REQUIRED_SECTIONS" "$AWK_LIB"'
   BEGIN { n = split(req, want, ","); for (i = 1; i <= n; i++) ok[want[i]] = 1 }
   NR == 1 && /<!--/ && /sage occupancy duty/ { byheader = 1 }
   {
     line = $0
     if (line ~ /^#[ \t]+sage ledger/) bytitle = 1
-    if (match(line, /^#{2,3}[ \t]+/)) {
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
+    if (is_heading(line)) {
+      h = heading_of(line)
       if ((h in ok) && !(h in seen)) { seen[h] = 1; heads++ }
       next
     }
@@ -320,9 +393,20 @@ FIRST_HDR_LINE=$(awk '
   /sage occupancy duty/ && /<!--/ && /-->/ { print NR; exit }
 ' "$FILE" 2>/dev/null)
 
+# The third firing mode (see the header manual): the comment OPENS on line 1 and carries the
+# phrase, but does not CLOSE there — a multi-line comment, which is present, on line 1, and
+# still unreadable to the field parse. Reporting that as "absent" was factually wrong.
+HDR_OPEN_UNCLOSED=$(awk '
+  NR == 1 { if (/<!--/ && /sage occupancy duty/ && $0 !~ /-->/) print 1; exit }
+' "$FILE" 2>/dev/null)
+
 HEADER_OK=0
 if [ -z "$FIRST_HDR_LINE" ]; then
-  add "sage-lint header $FILE:1 header comment (sage occupancy duty) is absent"
+  if [ -n "$HDR_OPEN_UNCLOSED" ]; then
+    add "sage-lint header $FILE:1 header comment opens on line 1 but does not close on line 1"
+  else
+    add "sage-lint header $FILE:1 header comment (sage occupancy duty) is absent"
+  fi
 elif [ "$FIRST_HDR_LINE" != "1" ]; then
   add "sage-lint header $FILE:$FIRST_HDR_LINE header comment present but not on line 1"
 else
@@ -333,25 +417,30 @@ if [ "$HEADER_OK" -eq 1 ]; then
   LINE1=$(sed -n '1p' "$FILE" 2>/dev/null)
 
   if printf '%s' "$LINE1" | grep -q 'Generation:'; then
-    GEN=$(printf '%s' "$LINE1" | sed -n 's/.*Generation:[ \t]*\([^,]*\),.*/\1/p')
-    GEN=$(printf '%s' "$GEN" | sed 's/^[ \t]*//; s/[ \t]*$//')
-    case "$GEN" in
-      [1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]|[1-9][0-9][0-9][0-9][0-9]) : ;;
-      [0-9]*)
-        if ! printf '%s' "$GEN" | grep -qE '^[1-9][0-9]*$'; then
-          add "sage-lint header-fields $FILE:1 Generation is not a bare positive integer: '$GEN'"
-        fi
-        ;;
-      *)
-        add "sage-lint header-fields $FILE:1 Generation is not a bare positive integer: '$GEN'"
-        ;;
-    esac
+    # A bounded token, not everything-to-the-next-comma: the value is the run of digits and
+    # slashes right after `Generation:`, so `Generation: 1` and `Generation: 1.` are as
+    # legal as the stamped `Generation: 1,` — requiring the comma made this check fire on a
+    # legal header, the one broken-promise defect of the first release — while `0` and
+    # `0/3` still fail the positive-integer test below. The captured value is the WHOLE
+    # field, not a valid prefix of it: everything up to the first comma, the first blank, or
+    # the end of the line. Capturing a prefix instead let `12x`, `1-2` and `1-->` all read as
+    # a legal `1`. One trailing period is then stripped, because a header that ends the
+    # sentence (`Generation: 1.`) is legal and a comma-delimited one is the stamped form.
+    # Known gap: `.*` is greedy, so a line carrying `Generation:` TWICE is validated on the
+    # last one. Two such fields are themselves malformed, and this matches the behaviour of
+    # the comma-delimited version this replaced. `[[:blank:]]`, never `[ \t]`:
+    # BSD sed reads `\t` inside a bracket expression as two literal characters.
+    GEN=$(printf '%s' "$LINE1" | sed -n 's/.*Generation:[[:blank:]]*\([^,[:blank:]]*\).*/\1/p')
+    GEN=${GEN%.}
+    if ! printf '%s' "$GEN" | grep -qE '^[1-9][0-9]*$'; then
+      add "sage-lint header-fields $FILE:1 Generation is not a bare positive integer: '$GEN'"
+    fi
   else
     add "sage-lint header-fields $FILE:1 header comment carries no Generation: field"
   fi
 
   if printf '%s' "$LINE1" | grep -q 'role:'; then
-    ROLE=$(printf '%s' "$LINE1" | sed -n 's/.*role:[ \t]*\([A-Za-z]*\).*/\1/p')
+    ROLE=$(printf '%s' "$LINE1" | sed -n 's/.*role:[[:blank:]]*\([A-Za-z]*\).*/\1/p')
     if [ "$ROLE" != "parent" ] && [ "$ROLE" != "supervisor" ]; then
       add "sage-lint header-fields $FILE:1 role is neither 'parent' nor 'supervisor': '$ROLE'"
     fi
@@ -363,16 +452,12 @@ fi
 # ---------------------------------------------------------------------------
 # state-enum
 
-CHK=$(awk -v FILE="$FILE" '
-  function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
   {
     line = $0
-    if (match(line, /^#{2,3}[ \t]+/)) {
+    if (is_heading(line)) {
       in_table = 0
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
-      heading = h
+      heading = heading_of(line)
       if (heading == "Unit table" && unit_idx == 0) unit_idx = NR
       next
     }
@@ -398,13 +483,15 @@ CHK=$(awk -v FILE="$FILE" '
           if (state_idx < n) {
             id = trim(cells[2])
             val = trim(cells[state_idx])
-            if (val != "") {
+            if (val == "") {
+              # An emptied cell is the absence case of the same invariant, not a parse
+              # failure: the row is well-formed and the cell is there, holding nothing.
+              printf "sage-lint state-enum %s:%d unit '"'"'%s'"'"' has an empty state cell\n", FILE, NR, id
+            } else if (val !~ /^(planned|running|reported|blocked|failed|abandoned|inline)([^A-Za-z]|$)/) {
               # A legal state word at a real word boundary: end of the cell, or followed by
               # anything that is not a letter (space, comma, semicolon, ...). `reported,` and
               # `reported 07:11` both pass; `done ...` and `reportedly ...` both fail.
-              if (val !~ /^(planned|running|reported|blocked|failed|abandoned|inline)([^A-Za-z]|$)/) {
-                printf "sage-lint state-enum %s:%d unit '"'"'%s'"'"' has illegal state '"'"'%s'"'"'\n", FILE, NR, id, val
-              }
+              printf "sage-lint state-enum %s:%d unit '"'"'%s'"'"' has illegal state '"'"'%s'"'"'\n", FILE, NR, id, val
             }
           }
         }
@@ -416,6 +503,8 @@ CHK=$(awk -v FILE="$FILE" '
   END {
     if (unit_idx > 0 && header_seen && state_idx == 0)
       printf "sage-lint state-enum %s:%d Unit table has no column labelled '"'"'state'"'"'\n", FILE, header_line
+    if (unit_idx > 0 && !header_seen)
+      printf "sage-lint state-enum %s:%d Unit table heading has no table under it\n", FILE, unit_idx
   }
 ' <<<"$SANITIZED")
 add "$CHK"
@@ -423,8 +512,7 @@ add "$CHK"
 # ---------------------------------------------------------------------------
 # triage-orphan
 
-CHK=$(awk -v FILE="$FILE" '
-  function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
   function idtoken(cell,   t, i, j) {
     t = trim(cell)
     i = index(t, " ")
@@ -434,12 +522,32 @@ CHK=$(awk -v FILE="$FILE" '
     return t
   }
   function is_id(t) {
-    return (t ~ /^[A-Z]$/) || (t ~ /^[A-Z]{1,4}-?[0-9]{1,3}[a-z]?$/)
+    return (t ~ /^[A-Z]$/) || (t ~ /^[A-Z][A-Z]?[A-Z]?[A-Z]?-?[0-9][0-9]?[0-9]?[a-z]?$/)
+  }
+  # delabel: a header cell compared without markdown emphasis or code ticks, so `**triage**`
+  # and `` `disposition` `` still read as their words. Ledgers here bold table cells freely.
+  function delabel(s) { gsub(/[*_`]/, "", s); return trim(tolower(s)) }
+  # sec_match/sec_of: prefix-matched prescribed-section identity — exact name, or the name
+  # followed by a non-alphanumeric separator (`Unit table (phase 2)`, `Run record — phase
+  # 2`). `Planning` does not match `Plan`; `Plan B` does, and that is the accepted trade.
+  function sec_match(h, name,   c) {
+    if (h == name) return 1
+    if (index(h, name) == 1) {
+      c = substr(h, length(name) + 1, 1)
+      if (c !~ /[A-Za-z0-9]/) return 1
+    }
+    return 0
+  }
+  function sec_of(h) {
+    if (sec_match(h, "Plan")) return "Plan"
+    if (sec_match(h, "Unit table")) return "Unit table"
+    if (sec_match(h, "Assumption log")) return "Assumption log"
+    if (sec_match(h, "Decisions and deviations")) return "Decisions and deviations"
+    if (sec_match(h, "Findings and dispositions")) return "Findings and dispositions"
+    if (sec_match(h, "Run record")) return "Run record"
+    return ""
   }
   function rstrip(s) { sub(/[ \t]+$/, "", s); return s }
-  # delabel: a header cell compared without markdown emphasis or code ticks, so `**id**`,
-  # `_id_` and `` `id` `` all read as `id`. Ledgers on this machine bold table cells freely.
-  function delabel(s) { gsub(/[*_`]/, "", s); return trim(tolower(s)) }
   # trailing_token: the run of [A-Za-z0-9-] characters at the very end of s, but only if the
   # character just before that run (if any) is NOT itself alnum — a genuine word boundary,
   # not the tail of a longer identifier. Returns "" when no such boundary-clean run exists.
@@ -462,30 +570,59 @@ CHK=$(awk -v FILE="$FILE" '
     line = $0
     trimmedline = line
     sub(/^[ \t]+/, "", trimmedline)
-    if (match(line, /^#{2,3}[ \t]+/)) {
+    if (is_heading(line)) {
       in_table = 0
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
-      heading = h
-      if (heading == "Findings and dispositions" && find_idx == 0) find_idx = NR
+      h = heading_of(line)
+      # Section identity is PREFIX-matched here (`Unit table (phase 2)`, `Run record —
+      # phase 2` — legacy multi-run ledgers suffix their section names, and the id
+      # namespaces are the same), and section extents are NESTING-AWARE: a heading at a
+      # LOWER level than the current section is a subsection and stays inside; one at the
+      # same or a higher level ends it. Legacy ledgers keep findings material in `###`
+      # subsections under `## Findings and dispositions`, and a flat tracker read every one
+      # of those dispositions tables as a foreign section — an orphan storm on files that
+      # were, in their own format, fully dispositioned. A sibling-level section (`### Fix
+      # log` beside `### Run record`) still ends the context, which is what keeps a fix
+      # table outside the exclusions and lets an untriaged id there fire.
+      s = sec_of(h)
+      if (s != "") {
+        section = s; seclevel = heading_level(line)
+        if (s == "Findings and dispositions") find_exact = (h == s)
+      } else if (section != "" && heading_level(line) > seclevel) {
+        ; # a subsection: the enclosing prescribed section still governs
+      } else {
+        section = ""; seclevel = 0
+      }
+      if (section == "Findings and dispositions" && find_exact && find_idx == 0) find_idx = NR
       next
     }
     # Assumption log, Plan, Unit table and Decisions and deviations each carry their own
     # id/index namespace (`A1`, `#`-numbered rows, unit ids, `D1`) — never a source of
-    # finding-id candidates. Decisions is excluded BY NAME rather than by its `id` header
-    # label: `D1`, `D2` are finding-SHAPED, so a ledger that merely bolds that header cell
-    # (`**id**`) would turn every one of its decision rows into a bogus orphan — a
-    # false-positive storm produced by a fully compliant ledger.
-    excluded_section = (heading == "Assumption log" || heading == "Plan" || \
-                        heading == "Unit table" || heading == "Decisions and deviations")
+    # finding-id candidates — and the Findings section itself supplies the triage set, not
+    # candidates. Exclusion is by prescribed SECTION only; a table header FIRST-column
+    # label such as `id` excludes nothing (a fix table headed `id` holding an untriaged
+    # finding must fire — the label exclusion this replaces let exactly that escape).
+    # Candidates come from tables OUTSIDE every prescribed section, plus the Run record
+    # (its tables and its `Findings:` prose line can cite ids that were never triaged) —
+    # minus SELF-TRIAGED tables: a table carrying a column labelled `triage` or
+    # `disposition` anywhere in its header row records its own dispositions in place (the
+    # legacy multi-run layout), and an id dispositioned where it lives is not an untriaged
+    # orphan, however non-prescribed its home. Known non-finding ids are handled by
+    # SUBTRACTION: ids from any Unit-table section and `D<n>` ids from any Decisions
+    # section are collected below, and a candidate matching one is dropped in END rather
+    # than never harvested.
+    candidate_ok = (section == "" || section == "Run record")
     if (line ~ /^\|/) {
       if (!in_table) {
         in_table = 1
         expect_sep = 1
-        is_find = (find_idx > 0 && find_captured == 0 && heading == "Findings and dispositions")
+        is_find = (find_idx > 0 && find_captured == 0 && section == "Findings and dispositions" && find_exact)
+        is_unit = (section == "Unit table")
+        selftriaged = 0
         n = split(line, cells, "|")
-        header_label = delabel(cells[2])
+        for (i = 2; i < n; i++) {
+          lab = delabel(cells[i])
+          if (index(lab, "triage") > 0 || index(lab, "disposition") > 0) selftriaged = 1
+        }
         next
       } else if (expect_sep) {
         expect_sep = 0
@@ -493,13 +630,14 @@ CHK=$(awk -v FILE="$FILE" '
       } else {
         n = split(line, cells, "|")
         tok = idtoken(cells[2])
+        if (is_unit && tok != "") unit_id[tok] = 1
+        if (section == "Decisions and deviations" && tok ~ /^D[0-9]+$/) dec_id[tok] = 1
         if (tok != "" && is_id(tok)) {
           if (is_find) {
             find_count[tok]++
             if (find_count[tok] == 1) find_line[tok] = NR
             find_last[tok] = NR
-          } else if (!excluded_section && header_label != "id" && header_label != "#" && \
-                     header_label != "when" && header_label != "assumption") {
+          } else if (candidate_ok && !selftriaged) {
             if (!(tok in cand_line)) cand_line[tok] = NR
           }
         }
@@ -518,7 +656,7 @@ CHK=$(awk -v FILE="$FILE" '
     # would otherwise miss. A token has to sit at a clean word boundary right before `(` to
     # count even on the `Findings:` line, exactly as in a table cell.
     is_findings_line = (trimmedline ~ /^Findings:/)
-    if (!excluded_section && is_findings_line && index(line, "(") > 0) {
+    if (candidate_ok && is_findings_line && index(line, "(") > 0) {
       rest = line
       while ((p = index(rest, "(")) > 0) {
         before = substr(rest, 1, p - 1)
@@ -534,7 +672,7 @@ CHK=$(awk -v FILE="$FILE" '
       if (find_count[id] >= 2)
         printf "sage-lint triage-orphan %s:%d duplicate finding id '"'"'%s'"'"' appears %d times in Findings and dispositions\n", FILE, find_last[id], id, find_count[id]
     for (id in cand_line)
-      if (!(id in find_count))
+      if (!(id in find_count) && !(id in unit_id) && !(id in dec_id))
         printf "sage-lint triage-orphan %s:%d orphan finding id '"'"'%s'"'"': appears in the ledger but has no row in the first table under Findings and dispositions (the only table this check reads as triage)\n", FILE, cand_line[id], id
   }
 ' <<<"$SANITIZED" | sort -t: -k2 -n)
@@ -546,8 +684,7 @@ add "$CHK"
 extract_table_ids() {  # extract_table_ids <heading-name>  — prints "id<TAB>line" rows, or
                         # "NOTABLE<TAB>line" if the heading exists with no table under it,
                         # or nothing at all if the heading does not exist.
-  awk -v target="$1" '
-    function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
+  awk -v target="$1" "$AWK_LIB"'
     # plain_id: an amendment tag is not part of the id (see plan-unit in the header manual).
     # `2 superseded → D2` and `2 (superseded)` both reduce to `2`. The dangling separator —
     # arrow, dash, comma — is stripped only in the branch that actually removed a tag, so an
@@ -566,12 +703,9 @@ extract_table_ids() {  # extract_table_ids <heading-name>  — prints "id<TAB>li
     }
     {
       line = $0
-      if (match(line, /^#{2,3}[ \t]+/)) {
+      if (is_heading(line)) {
         in_table = 0
-        h = line
-        sub(/^#{2,3}[ \t]+/, "", h)
-        sub(/[ \t\r]+$/, "", h)
-        heading = h
+        heading = heading_of(line)
         if (heading == target && th_idx == 0) th_idx = NR
         next
       }
@@ -595,14 +729,11 @@ extract_table_ids() {  # extract_table_ids <heading-name>  — prints "id<TAB>li
   ' <<<"$SANITIZED"
 }
 
-DECISIONS_TEXT=$(awk '
+DECISIONS_TEXT=$(awk "$AWK_LIB"'
   {
     line = $0
-    if (match(line, /^#{2,3}[ \t]+/)) {
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
-      heading = h
+    if (is_heading(line)) {
+      heading = heading_of(line)
       next
     }
     if (heading == "Decisions and deviations") print line
@@ -679,26 +810,33 @@ fi
 # ---------------------------------------------------------------------------
 # disclosure-home
 
-CHK=$(awk -v FILE="$FILE" '
+# Trigger-anywhere, home-required (see the header manual): every line is scanned for the
+# keyword sets; a set found anywhere fires ONE violation — at the first trigger line outside
+# the home — unless at least one line under the home section also carries the set. A
+# restatement of a properly-homed disclosure is legal; a disclosure whose home is empty is
+# the failure this check exists for.
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
   {
     line = $0
-    if (match(line, /^#{2,3}[ \t]+/)) {
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
-      heading = h
+    if (is_heading(line)) {
+      heading = heading_of(line)
       next
     }
-    cat = ""
-    if (heading == "Findings and dispositions") cat = "FIND"
-    else if (heading == "Decisions and deviations") cat = "DEC"
-    else if (heading == "Assumption log") cat = "ASSUM"
-    if (cat == "") next
     low = tolower(line)
-    if ((index(low, "same-family") > 0 || index(low, "same family") > 0 || index(low, "self-preference bias") > 0) && cat != "FIND")
-      printf "sage-lint disclosure-home %s:%d same-family/residual bias disclosure keyword found outside its home (Findings and dispositions); seen in %s\n", FILE, NR, heading
-    if ((index(low, "rail-1") > 0 || index(low, "rail 1") > 0) && cat != "DEC")
-      printf "sage-lint disclosure-home %s:%d rail-1 authorisation keyword found outside its home (Decisions and deviations); seen in %s\n", FILE, NR, heading
+    if (index(low, "same-family") > 0 || index(low, "same family") > 0 || index(low, "self-preference bias") > 0) {
+      if (heading == "Findings and dispositions") fam_home = 1
+      else if (fam_first == 0) fam_first = NR
+    }
+    if (index(low, "rail-1") > 0 || index(low, "rail 1") > 0) {
+      if (heading == "Decisions and deviations") rail_home = 1
+      else if (rail_first == 0) rail_first = NR
+    }
+  }
+  END {
+    if (fam_first > 0 && !fam_home)
+      printf "sage-lint disclosure-home %s:%d same-family/residual-bias keywords appear in the ledger but no line under Findings and dispositions (the required home) carries the disclosure\n", FILE, fam_first
+    if (rail_first > 0 && !rail_home)
+      printf "sage-lint disclosure-home %s:%d rail-1 keywords appear outside Decisions and deviations and no rail-1 line exists there (the required home for an authorisation)\n", FILE, rail_first
   }
 ' <<<"$SANITIZED")
 add "$CHK"
@@ -706,16 +844,12 @@ add "$CHK"
 # ---------------------------------------------------------------------------
 # amend-tag
 
-CHK=$(awk -v FILE="$FILE" '
-  function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
   {
     line = $0
-    if (match(line, /^#{2,3}[ \t]+/)) {
+    if (is_heading(line)) {
       in_table = 0
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
-      heading = h
+      heading = heading_of(line)
       next
     }
     if (line !~ /^\|/) { in_table = 0; next }
@@ -765,14 +899,12 @@ add "$CHK"
 # ---------------------------------------------------------------------------
 # sections
 
-CHK=$(awk -v FILE="$FILE" -v req="$REQUIRED_SECTIONS" '
+CHK=$(awk -v FILE="$FILE" -v req="$REQUIRED_SECTIONS" "$AWK_LIB"'
   BEGIN { n = split(req, want, ",") }
   {
     line = $0
-    if (match(line, /^#{2,3}[ \t]+/)) {
-      h = line
-      sub(/^#{2,3}[ \t]+/, "", h)
-      sub(/[ \t\r]+$/, "", h)
+    if (is_heading(line)) {
+      h = heading_of(line)
       for (i = 1; i <= n; i++) {
         if (h == want[i]) {
           count[h]++

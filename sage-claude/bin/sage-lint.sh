@@ -279,10 +279,18 @@
 # record still says it ran.
 #
 # DEGRADATION — the same convention as bin/sage-watch.sh. "Cannot run here" means the script
-# itself will not execute on this machine: the file is missing or not executable, bash or the
-# core tools are absent, or every invocation dies before reading the ledger. The response is
-# the watchdog's: disable the lint for the rest of the run, write ONE ledger line saying so,
-# and never warn about it again. Exit 2 (bad arguments) and exit 3 (not a ledger) are NOT
+# itself will not execute on this machine: the file is missing or not executable, bash will
+# not run it, or every invocation dies before reading the ledger. The response is the
+# watchdog's: disable the lint for the rest of the run, write ONE ledger line saying so,
+# and never warn about it again.
+#
+# ONE NAMED EXCEPTION, and it used to be filed under the sentence above: a missing core tool
+# (awk, sed, grep, sort, cut, head) is A FIXABLE DEPENDENCY, not a layout this lint cannot
+# run on. The preflight below exits 0 with stdout silent and the tool's name on stderr, and
+# the correct response is to install it and run again -- NOT to disable the lint for the run.
+# Treating it as degradation costs every later check for the sake of an absent `sed`, and
+# leaving it unhandled was worse still: without the preflight this script INVENTED violations
+# on a valid ledger. Read stderr before you disable this lint (../SKILL.md, Step 5). Exit 2 (bad arguments) and exit 3 (not a ledger) are NOT
 # degradation — fix the call and run it again — and exit 1 is the lint working. Nothing here
 # changes the exit-code semantics above.
 
@@ -296,7 +304,8 @@ usage() {
     'sage-lint.sh <ledger-path>   check one ledger, one violation per line, silent if clean' \
     'sage-lint.sh --help          this reminder' \
     '' \
-    'Exit 0 clean, 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger.' \
+    'Exit 0 clean OR a required tool is missing and nothing was checked (stderr says' \
+    '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger.' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
     'Checks: header header-fields state-enum triage-orphan plan-unit disclosure-home sections' \
     '        amend-tag'
@@ -324,6 +333,21 @@ if [ ! -e "$FILE" ] || [ -d "$FILE" ] || [ ! -r "$FILE" ]; then
   printf 'sage-lint: %s: not readable, or a directory, or missing\n' "$FILE" >&2
   exit 3
 fi
+
+# Core-tool preflight. Without it this script INVENTS violations instead of failing quiet:
+# in a stub PATH with no sed it reported two fabricated violations on a VALID ledger, with
+# empty stderr, and with no awk it exits 3 "not a ledger" -- a code DEGRADATION below says
+# is NOT a degradation, so the caller fixes the call and re-runs instead of disabling the
+# lint. Both break the FAIL QUIET promise, and a check that punishes a compliant ledger
+# trains the parent to stop reading it. This is the ONE NAMED EXCEPTION in DEGRADATION above,
+# not a "cannot run here": stdout is silent and exit 0 so nothing false is ever reported, and
+# the missing tool's name goes to stderr, where it costs one line to fix.
+for _tool in awk sed grep sort cut head; do
+  if ! command -v "$_tool" >/dev/null 2>&1; then
+    printf 'sage-lint: %s not found on PATH -- install it and run again; the ledger was NOT checked\n' "$_tool" >&2
+    exit 0
+  fi
+done
 
 # The one shared definition of the heading grammar and the cell trim, prepended to every awk
 # program below that parses either (the repo's clean-code rule: one definition, not seven

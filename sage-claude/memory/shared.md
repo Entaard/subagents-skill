@@ -30,7 +30,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 **Price a review round and its fix-verification round as a pair.** The verify round has never come back empty, and has repeatedly cost more than the review itself: a fresh or full-mandate continuation re-reads the whole corpus, so retained context makes the round cheaper to brief, not cheaper to run.
 
-- Qualifier: one measured exception — steering the same verifier thread for a narrow re-verdict on named fixes runs ~4–7× cheaper than a fresh dispatch, so the pair prices a full verify round, never a steered follow-up. Plan the steer before that agent reports; a completed agent's transcript may be unresumable.
+- Qualifier: one measured exception — steering the same verifier thread for a narrow re-verdict on named fixes runs ~4–7× cheaper than a fresh dispatch, so the pair prices a full verify round, never a steered follow-up. A finished agent's handle continues with its context intact, so the steer need not be planned before that agent reports.
 - Recogniser: a plan carrying a review row and no verify row, or a verify row priced as whatever is left over.
 - Band: established
 - Falsifier: a fix-verification round returning empty twice on work that had accepted findings.
@@ -68,7 +68,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: brief style, not task class, sets this cost, and it holds across fetching, code and prose. One dispatch class is exempt: a blind acceptance-suite author receives the decisions' observable consequences, never the decisions.
 - Recogniser: a brief whose Inputs read as a topic rather than as a path list.
-- Band: recurring
+- Band: established
 - Falsifier: three ground-truth-named briefs costing what comparable open-ended briefs cost.
 
 ## Settle a disagreement with a command
@@ -77,7 +77,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: agreement that nothing is wrong proves nothing; units independently constructing the same specific finding by different routes are the one kind of agreement that is evidence.
 - Recogniser: the standard-tier checker has been right against the frontier one; and where reviewers agreed a mechanism claim was inconsistent but none of them could see the runtime, the repair direction they agreed on was backwards, and one small docs unit changed the fix.
-- Band: recurring
+- Band: established
 - Falsifier: three disagreements no command could decide, where tier or majority then proved right.
 
 ## A scoped agent boots ~3× cheaper

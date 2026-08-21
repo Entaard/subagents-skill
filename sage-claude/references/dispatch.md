@@ -1,6 +1,6 @@
 # Dispatch contracts
 
-Copy these shapes; do not improvise them. Trim a field only where it is genuinely irrelevant and never rename one — sage scans these shapes across many units, and a renamed field reads as a missing one.
+Copy these shapes; do not improvise them. Trim a field only where it is genuinely irrelevant and never rename one — sage scans these shapes across many units, and a renamed field reads as a missing one. **The fenced blocks below are presentation, never content.** Copy the shape *inside* the fence into the ledger — real headings, real unfenced tables — and never the fence markers with it. `bin/sage-lint.sh` blanks every line between a pair of fence markers by design, so that a document merely *quoting* this template gets no credit for it; a ledger that carried the fences across reads to that lint as a ledger whose Plan section holds no table at all, and **fails for having complied** — measured on a purpose-built fixture, against a non-compliant ledger that passed clean.
 
 **Contents** — [Task brief](#task-brief) · [Agent report](#agent-report) · [Finding schema](#finding-schema) · [Risk rubric](#risk-rubric) · [Snapshot protocol](#snapshot-protocol) · [The ledger](#the-ledger) (Plan · Unit table · Assumption log · Decisions and deviations · Findings and dispositions · Run record) · [The handoff note](#the-handoff-note)
 
@@ -9,7 +9,7 @@ Copy these shapes; do not improvise them. Trim a field only where it is genuinel
 ```text
 Role: <implementer | explorer | reviewer(lens) | verifier | judge>
 Objective: <one sentence>
-Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank, with no transcript. Name the exact ground truth: files, line numbers, URLs, the measured baseline, the harness to measure with. A brief that must rediscover its ground truth costs ~2× and fails more>
+Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank, with no transcript. Name the exact ground truth: files, line numbers, URLs, the measured baseline, the harness to measure with. A brief that must rediscover its ground truth costs more and fails more — `../SKILL.md` Step 3 carries the measured ratio and is its one home>
 Scope and relevant files: <explicit>
 Allowed writes: <none | exact paths | worktree path>
 Allowed tools: <the tool scope this objective needs — "read + search only, no network, no shell" | "repo tools + Bash for the test command only" | "inherit". Reviewers and explorers: deny network and shell unless the objective names a use for them. Read-only writes plus open network access is not read-only>

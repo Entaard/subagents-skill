@@ -25,8 +25,13 @@
 #                      line saying so; ladder mode says nothing about it, ever.
 #   --status           Diagnostic mode. Prints one line per agent with every figure,
 #                      fires no rungs. This is the "probe once at start" call: if it
-#                      prints nothing, the sensor cannot run on this layout and the
-#                      parent disables it silently and writes one ledger line.
+#                      prints nothing ON STDOUT AND NOTHING ON STDERR, the sensor cannot
+#                      run on this layout and the parent disables it silently and writes
+#                      one ledger line. Empty stdout WITH a line on stderr is NOT that
+#                      signal: it names a missing jq, or an explicit directory that does
+#                      not resolve, and both are one-line fixes -- fix what it names and
+#                      probe again rather than disabling the sensor for the run. The
+#                      stderr diagnostics are --status only; ladder mode stays silent.
 #
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
 #                      as below. Defaults to 1006380 (the measured figure in
@@ -290,9 +295,33 @@ if [ -n "$DIR" ]; then EXPLICIT_DIR=1; else EXPLICIT_DIR=0; fi
 [ -n "$DIR" ] || DIR=$(discover_dir)
 
 # Fail open: no directory, an unreadable one, or no jq to read it with, is not an alarm.
-# This is the "probe once at start" answer — a --status call that prints nothing means the
-# sensor cannot run on this layout, and the parent disables it and writes one ledger line.
-if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ] || [ ! -x "$JQ" ]; then exit 0; fi
+# This is the "probe once at start" answer — a --status call that prints nothing on stdout
+# AND nothing on stderr means the sensor cannot run on this layout, and the parent disables
+# it and writes one ledger line. Empty stdout WITH a line on stderr is the other case, and
+# the split below is what makes the two tellable apart.
+#
+# The jq test and the layout test are SEPARATE, and each names itself on stderr, because
+# the two failures need opposite answers and used to be byte-identical. A missing jq is a
+# fixable dependency -- jq does NOT ship with Claude Code, and the /usr/bin fallback above
+# is a macOS-shaped assumption, so this fires on Linux and not here -- while an unresolved
+# layout is the signal ../SKILL.md Step 4 turns into disabling the sensor for the whole
+# run. One silent exit 0 for both told the parent to give up permanently on a one-line fix,
+# killing the only rail with a measured true positive. The diagnostics are --status only
+# and go to stderr: stdout lines become notifications in the hosting loop, and the loop
+# must stay silent. An explicit dir that does not resolve is a caller error, not a layout
+# verdict, so it says which layout it expected.
+if [ ! -x "$JQ" ]; then
+  if [ "$STATUS" -eq 1 ]; then
+    printf 'sage-watch: jq not found on PATH or at /usr/bin/jq -- install jq and probe again; the layout was NOT tested\n' >&2
+  fi
+  exit 0
+fi
+if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ]; then
+  if [ "$STATUS" -eq 1 ] && [ "$EXPLICIT_DIR" -eq 1 ]; then
+    printf 'sage-watch: %s: no such readable directory -- the layout is <project>/<session-id>/subagents, one level deeper than <project>/subagents; resolve it from the output_file any dispatch returned\n' "$DIR" >&2
+  fi
+  exit 0
+fi
 
 # The note about the ignored argument is --status-only and prints before every other line.
 # It sits BELOW the guard above on purpose: a probe whose layout does not resolve must

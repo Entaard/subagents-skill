@@ -173,6 +173,9 @@ They are in neither `/sage-promote`'s "what it writes" list nor its "never touch
 
 **B6. One condensed branch is wrong. (minor, high)** `SKILL.md` reduces `harness.md`'s four `git check-ignore` branches to a two-way test. In a directory that is not a git repository, the parent prints a spurious recommendation to edit a `.gitignore` git cannot see.
 
+**B7. Name what a handover generation owes the Watch list. (major, high)** The append rule (`references/memory.md`, `## Append`) makes the Run-log row a duty every run, but a Watch row only "when it has one" — and nothing names handover as a thing to observe. The 2026-08-20 run recorded three handover facts for three different reasons: supervision cost (~15k) because `## Handover` line 290 says "record its actual"; the successor's transposed figures (`local.md:77`) because the parent judged it a defect; note cost (~8k) not at all — the review dug it up afterwards. One instructed, one discretionary, one missed. Discretionary selection at Step 6, by a parent past 30% occupancy, is what will vary run to run, and B1–B3 are what that variance looks like after one run.
+*Change:* one bullet in `## Handover` (beside the existing "record its actual" sentence) listing what every handover generation appends: handoff-note size, supervision cost per generation, successor-report accuracy against the ledger, and generation count. Each carries the `Class` A6 adds (`measurement` for the first three, `defect` when accuracy fails). Then handover stops depending on the parent noticing, the same way the Run-log row already does.
+
 ### C. Promotion
 
 **C1.** Promotion works for rules that already exist, and only for those. Three passes ran, landed band crossings, and one correctly refuted its own edits at the gate. The machinery is sound. It has no input, because of A6.

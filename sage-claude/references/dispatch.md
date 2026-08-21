@@ -198,7 +198,7 @@ The **Result** — the deliverable in prose, standing alone — is printed by `.
 
 ## The handoff note
 
-Written to `.claude/plans/sage-handoff-<session>-<timestamp>.md` when parent occupancy crosses the handover threshold (`../SKILL.md`, Handover). Durable, beside the ledger — and it holds the whole run state, so it is the file the `git check-ignore -q .claude/plans/` test matters most for: check first, then name the path you wrote to (`harness.md`, Ledger location).
+Written to `.claude/plans/sage-handoff-<session>-<timestamp>.md` when parent occupancy crosses the handover threshold (`../SKILL.md`, Handover). Durable, beside the ledger — and it holds the whole run state, so it is the file the `git check-ignore -q .claude/plans/` test matters most for: check first, then follow the branch it returns — the note's path is named on exit 1 and on the scratchpad fallback, and on neither of the two silent branches (`harness.md`, Ledger location).
 
 **The note is normally the successor's whole brief** — an `orchestrator` dispatch names only file paths, this one among them — which is why completeness here matters more than it once did: a gap the parent could once have filled in by memory is now a gap the successor starts blank against.
 

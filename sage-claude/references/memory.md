@@ -28,7 +28,7 @@ Automatic, every run, at Step 6, to `local.md` only. A run touches the file in e
 
 The two row kinds live in different sections and take **different anchors**. Using one kind's anchor for the other is the failure this section exists to prevent.
 
-**The Run-log row** — date, task class, agents, est, actual, wall clock, note — **including the runs where the estimate held**, because a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
+**The Run-log row** — date, task class, agents, est, actual, wall clock, note — **including the runs where the estimate held**, because a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not. **A run that handed over owes three more figures in this row's `note` cell** — the handoff note's write cost, each generation's supervision cost, and the generation the run reached — and one Watch-list row besides — or, where a row already records it, the confirmation that raises its `Count`, never a second row (`../SKILL.md`, `## Handover`, which names both). The seven columns do not change.
 
 **Anchor the Run-log row on the file's final characters, never on a date cell.** The Run log is the last section by construction, so "append at the end of the file" stays correct however the file grows; an anchor on a date matches the wrong row the first time two runs share a day.
 

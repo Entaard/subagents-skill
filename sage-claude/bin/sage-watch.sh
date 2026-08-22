@@ -318,7 +318,7 @@ if [ ! -x "$JQ" ]; then
 fi
 if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ]; then
   if [ "$STATUS" -eq 1 ] && [ "$EXPLICIT_DIR" -eq 1 ]; then
-    printf 'sage-watch: %s: no such readable directory -- the layout is <project>/<session-id>/subagents, one level deeper than <project>/subagents; resolve it from the output_file any dispatch returned\n' "$DIR" >&2
+    printf 'sage-watch: %s: no such readable directory -- the layout is <project>/<session-id>/subagents, one level deeper than <project>/subagents; readlink -f the output_file any dispatch returned -- it is a symlink under tasks/ -- and use its target directory\n' "$DIR" >&2
   fi
   exit 0
 fi

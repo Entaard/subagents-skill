@@ -16,8 +16,8 @@ One pass, on the user's word. It moves what sage's runs proved into the places f
 
 | File                                                | Written here                                      | Written by a sage run            |
 | --------------------------------------------------- | ------------------------------------------------- | -------------------------------- |
-| `<sage>/memory/shared.md` — a symlink into the repo | stage one, eviction                               | never                            |
-| `<sage>/memory/local.md`                            | `Promoted` cells, watch-list rows and their `Status`, a minted `## Rules` row, one run row | every run: appends, consolidates |
+| `<sage>/memory/shared.md` — a symlink into the repo | stage zero (a standing block's prose fields only), stage one, eviction | never                            |
+| `<sage>/memory/local.md`                            | `Promoted` cells, watch-list rows and their `Status`, a minted `## Rules` row, the harness stamp (stage three, on every pass), one run row | every run: appends, consolidates |
 | `<sage>/memory/local-archive.md`                    | eviction                                          | consolidation                    |
 | `<repo>/sage-claude/SKILL.md` and `references/`     | stage zero, stage two, stage three, eviction      | never                            |
 | `<repo>/sage-claude/bin/*.sh`                       | stage zero                                        | never                            |
@@ -115,7 +115,19 @@ Candidates: every `local.md` Watch-list row whose `Kind` is `defect` and whose `
 
 1. **Re-verify before you repair.** A defect row is a lead, not a spec: re-check it against the file it names with one command. A defect that no longer reproduces closes as `settled → no longer reproduces <date>` and is not repaired. A defect whose *subject* is gone — the file, flag or script it names no longer exists — is `dropped → <what was removed> <date>` instead: nothing was repaired, so nothing was settled.
 2. **Repair the survivors as one batch, under the write machinery**, so the degradation gate sees the whole repair rather than one edit at a time.
-3. **What this stage may write:** `<repo>/sage-claude/SKILL.md`, `references/`, and `bin/*.sh` — landing in the installed tree at the write machinery's step 5 like any other corpus edit.
+3. **What this stage may write:** `<repo>/sage-claude/SKILL.md`, `references/`, and `bin/*.sh` — landing in the installed tree at the write machinery's step 5 like any other corpus edit — **and the prose fields of a standing block in `memory/shared.md`.**
+
+   **That last clause exists because a field that is simply *untrue* had no owner.** A `Recogniser` a later run disproved, a `Qualifier` misstating what was measured, a `Falsifier` naming an observation that can no longer happen: each is a defect in a block whose rule is otherwise sound and must *stay*. Stage one writes only new blocks and band crossings, and eviction's prose edits belong to a rule whose evidence has died — so a field that is merely wrong fitted neither, and the row recording one could only be escalated for ever. It is a repair, and repairs are this stage's.
+
+   **The boundary is hard, and it is single-owner.** Stage zero may rewrite a standing block's **Rule, Qualifier, Recogniser or Falsifier** text — every in-place prose edit to a block that stays. It may **never** add a block, remove one, or touch a `- Band:` field: band is stage one's arithmetic, and removal is eviction's.
+
+   **Check that against eviction's written steps rather than against its reputation, because they do not say what they are assumed to say.** Eviction's step 1 cut-back branch — "cut it back to whatever weaker statement the surviving evidence supports" — operates on **the corpus**, and the preflight defines that term exactly: "the corpus itself — sage's `SKILL.md` and `references/`". `shared.md` is named separately in the same sentence and is not part of it. The only eviction step that reaches `shared.md` is step 3, which **moves a whole block out**. So eviction has no written step that edits a field of a surviving block, stage zero's permission takes nothing from it, and there is no overlap to route between: one owner for in-place prose, one owner for removal.
+
+   **One case this skill does not model, recorded rather than invented.** A *clause-level* retirement — a falsifier or two contradictions killing one sentence inside a block whose rule keeps full standing — has no written procedure anywhere. Eviction models whole-rule retirement only. The 2026-08-21 pass performed a clause-level one regardless, recording it in `local-archive.md` as step 1's cut-back branch when that branch cannot reach `shared.md`. Until the case is designed, file it as a `defect` row so stage zero repairs the sentence and the rule keeps standing. **Do not stretch eviction's transaction to cover it**: its three steps are one ordered transaction whose reverse order this skill calls permanent damage, and widening it by improvisation is how that order gets broken.
+
+   A defect row that would need a whole block added or removed is not a stage-zero repair at all — it is a stage-one candidate or a retirement, and it routes there.
+
+   **A `shared.md` repair needs no landing copy.** The file is a symlink into `<repo>`, so both trees already hold the one physical file, and the preflight's `diff -rq` excludes `memory`: the write machinery's step 5 has nothing to copy and nothing to prove here. Every other step still binds — draft the exact old and new text, replace rather than accrete, run the four whole-corpus checks, and put the batch through the degradation gate. **Brief that gate to re-measure the claim the field makes, not to read the diff.** Both repairs this clause was written for were factually wrong, both passed all four whole-corpus checks, and both were killed only because the gate went and sampled the world instead.
 4. **What it may not write, and what to do instead.** `install.sh`, `memory/local-seed.md` and this file stay never-touched. A defect row naming one of them is **escalated, never closed**: print it as a finding for the user and set its `Status` to `watching (escalated <date>: <path> is on the never-touched list)`. Three live rows name `install.sh` today, so this is the normal path, not the corner case — and silently closing one would tell every later pass the fault was fixed.
 5. **Close every repaired row** — `Status` → `settled → <file> <date>`, naming the file the repair landed in, per sage's `references/memory.md`, `### The closure act`, and **under `## The cell rule`**: the named file is the write this flip claims, so grep it for the repair before flipping. A repair that leaves its row open is re-done by the next pass, and the row that recorded it becomes permanent noise.
 6. Print the slate: repaired, escalated, no-longer-reproduces.
@@ -165,7 +177,17 @@ It is how a newly released model (a tier above apex, a cheaper fast model) enter
 
    Compare against three recorded surfaces: `<sage>/references/harness.md`'s tier snapshot table; every `model:` line in the repo's agent sources — `grep '^model:' <repo>/claude-agents*/*.md`, which covers the base roles only, since the alt templates in `claude-agents-alt/` carry no `model:` lines; and the alt lane's configured models — `~/.claude/subagents-alt-models.conf` (or the path `SUBAGENTS_ALT_CONF` names) plus the installed `~/.claude/agents/*-alt.md` frontmatter. The conf is the machine owner's file: a deprecated or renamed alt model there is a finding for the user, never an edit.
 
-   Collect three lists: **new** models, **removed** models, **changed facts** about current ones (price, window, latency, deprecation, capability order). All three empty → print `lineup unchanged` and the stage ends there. That determination is only step 1's own enumeration to make.
+   Collect three lists: **new** models, **removed** models, **changed facts** about current ones (price, window, latency, deprecation, capability order). All three empty → **re-date the harness stamp, then** print `lineup unchanged` and the stage ends there. That determination is only step 1's own enumeration to make.
+
+   **Re-dating on a no-change pass is not bookkeeping — it is the difference between a live sensor and a dead one.** The stamp records what was last **verified**, never what last **changed**: `local.md`'s own line reads `verified <date>`, the paragraph under it splits facts into those re-verified under the current build and those still carrying an older one, and the consolidation trigger reads "a version-bound claim older than the recorded harness version", which means nothing at all against a last-changed stamp. So a pass that enumerated the whole lineup and found it unmoved **has verified it**, and the stamp moves even though the lineup did not. Leave it behind the build and `→ model lineup` fires on every later run carrying no information about any of them — a trigger that can never clear, which is the same defect this skill records against a consolidation threshold that could not fall. Re-date to the build `claude --version` reports, with today's date.
+
+   **Re-sort the stamp's paragraph; never rewrite it.** Only what step 1 actually checked this pass moves into the "verified live under `<build>`" list; everything the stage never touched keeps its older build attribution verbatim, in the "not re-verified" list. A stamp that claims more than the stage measured is worse than a stale one, because a stale stamp is visibly stale and an overclaiming one is not. **This write is not a cell and does not run under `## The cell rule`.** That section governs a claim that a write landed *somewhere else* — a `Promoted` entry, a `Status` flip, a minted `## Rules` row — and each of its read-back templates names a separate artifact to check the cell against. The stamp names no elsewhere: the `local.md` line **is** the artifact. It takes the same discipline without the machinery. After writing, read the line back off disk —
+
+   ```sh
+   grep '^sage-harness-stamp:' <sage>/memory/local.md
+   ```
+
+   — and confirm it carries the build `claude --version` just reported. It does not → the write did not land: name it in the report's tail and leave the stage's other work standing.
 
 2. **Study every new model before placing it. Two measurements, never a headline.**
    - One **no-op identity probe** on a scoped saved agent, reading `message.model` from the returned transcript. That field is the only one that establishes what actually ran, and it proves both that the name is dispatchable and what it resolves to.
@@ -179,7 +201,7 @@ It is how a newly released model (a tier above apex, a cheaper fast model) enter
 4. **Re-derive allocations for changed current models.** A price cut, a window change, a deprecation, or a capability flip moves allocations, not just notes: the snapshot table's rows, the roles' `model:` frontmatter in the repo's agent sources, the parent-seat and checker-seat paragraphs, and any clause in sage's `SKILL.md` that names the ordering. A deprecated model's tier falls to the nearest surviving fit — retire the fast model and the cheapest survivor becomes fast, with every row that named the old model **rewritten, not annotated**.
 5. **Every edit goes through the write machinery.** Its degradation gate is briefed for this stage as: name a dispatch the old lineup served that the new one serves worse. Agent-source edits land the same way — the repo copy first, then the installed `~/.claude/agents/` copy, byte-identical.
    **Absolute prices stay out of skill text — ratios only**, per the class check.
-6. The probe transcripts and any placement lesson append to `local.md` as ordinary run evidence, and the refreshed lineup's facts re-date the harness stamp.
+6. The probe transcripts and any placement lesson append to `local.md` as ordinary run evidence, and the refreshed lineup's facts re-date the harness stamp — **the same re-dating step 1's early exit performs on a no-change pass, under the same two rules**: the stamp means last-verified, and only what this stage actually verified enters the verified list. The two paths differ in what they found, never in whether the stamp moves; stage three always leaves it current.
 
 ## Eviction
 
@@ -202,7 +224,7 @@ Print this, and only this, at the end. One block, whatever the stages did.
 sage-promote — <date>
   stage one   → shared: <n> written, <n> refuted, <n> band crossings, <n> not ready
   stage two   → skill:  <n> landed, <n> refused, <n> conflicts to the watch list
-  stage three → lineup: <lineup unchanged | n new, n removed, n re-derived>
+  stage three → lineup: <lineup unchanged | n new, n removed, n re-derived>, stamp → <build> <date>
   eviction:            <n> retired, <n> corpus removals
   trees:               <the last diff -rq result: identical, or the divergence that switched the corpus stages off>
   local.md:            <n> Promoted cells appended, <n> watch-list rows
@@ -224,5 +246,6 @@ Append one row to `local.md`'s Run log for this pass, like any run.
 | The landing `diff -rq` fails to prove    | stop and surface; never hand-edit the installed tree            |
 | A cell's read-back fails                 | that cell only: no cell written, no `Status` flipped, the rule named in the report |
 | A pass-end re-verification fails         | that candidate only: every claim this pass wrote for it is undone — the appended entry, the `Status` flip, the minted `## Rules` row — and named in the report |
+| Stage three's stamp read-back does not match the build | that write only: no stamp line changed, named in the report's tail, the stage's other work stands |
 
 **The blind spot, stated so you compensate for it.** Every check above catches structural damage and unsupported edits. **None of them catches a rule that is simply wrong.** A perfectly shaped `shared.md` full of false bands passes every marker. Falsifiers and eviction are the only defence against that, and they run on the user's word rather than on a check — which is the whole reason this skill is never automatic.

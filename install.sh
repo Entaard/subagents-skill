@@ -5,6 +5,25 @@ set -euo pipefail
 
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# rsync is the one external tool this installer cannot do without. Every section below copies
+# through it — the primary skills (install_skill), the agents, the eco-skill loop, the output
+# styles — and the first of those call sites is unconditional, so there is no install path that
+# skips it. Under `set -euo pipefail` an absent rsync aborts the run AT that first sync with
+# nothing but the shell's own "command not found": after the backup root has been named, before a
+# single file is placed, and with no line saying which tool was missing or that the install is now
+# half-done. Fail here instead, while nothing has been touched. This is a preflight rather than
+# four guards at the four call sites precisely because rsync is not optional — jq gets its guards
+# down at the two hook offers because those features are, and a guard belongs where the thing it
+# protects can legitimately be skipped.
+if ! command -v rsync >/dev/null 2>&1; then
+  echo "ERROR: rsync is required but was not found on PATH." >&2
+  echo "  Every step of this installer copies through it (skills, agents, eco skills, output styles)." >&2
+  echo "  Nothing has been installed or modified. Install rsync and re-run:" >&2
+  echo "    macOS:         brew install rsync   (or use the system /usr/bin/rsync if PATH is masking it)" >&2
+  echo "    Debian/Ubuntu: sudo apt install rsync" >&2
+  exit 1
+fi
+
 # Backups from every section below land in one timestamped directory per run, OUTSIDE the
 # directories Claude Code auto-discovers (skills/, agents/, output-styles/). A backup inside a
 # discovered directory becomes a phantom skill or agent (a discoverable clean-code.bak skill

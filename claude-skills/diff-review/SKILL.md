@@ -90,7 +90,7 @@ Each reader reports back in under 400 words.
 
 Use this mode when an orchestration skill (/subagents, /sage) is building its plan — /subagents at its Step 2 gate, /sage in its Step 2 ledger — and diff-review is one of its rows.
 
-diff-review spawns nothing itself in this mode. The two axes become two rows in the orchestration plan — behind the approval gate where the skill has one (/subagents), recorded in the run ledger where it does not (/sage). The two reader briefs below become those rows' briefs, written into the plan exactly as they read here. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
+diff-review spawns nothing itself in this mode. The two axes become two rows in the orchestration plan — behind the approval gate where the skill has one (/subagents), recorded in the run ledger where it does not (/sage). The two reader briefs below become those rows' briefs, written into the plan exactly as they read here — **and the Standards row carries the smell baseline above verbatim as well**, for the same reason standalone mode pastes it in full: that brief tells its reader to report every baseline smell it spots, the reader has no other access to the list, and items 13-16 are this ecosystem's own additions that no model reconstructs from general knowledge. A Standards row briefed without it is ruling against a list nobody handed it. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
 
 ## Reader briefs
 

@@ -12,12 +12,19 @@
 # USAGE
 #
 #   sage-lint.sh <ledger-path>
+#   sage-lint.sh --corpus <sage-skill-dir>
 #   sage-lint.sh --help
 #
-#   <ledger-path>   The one file to check. Required, exactly one.
-#   --help / -h     Print this reminder, exit 0. Any other argument starting with `-`,
-#                   zero arguments, or more than one argument is a usage error (exit 2) —
-#                   nothing is read in that case.
+#   <ledger-path>       The one file to check. Required, exactly one.
+#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a ninth
+#                        ledger check: it checks a sage skill DIRECTORY's own corpus for
+#                        dangling `.md` citations, not a ledger. `<dir>` must carry a
+#                        readable `SKILL.md`; `--corpus` with no following argument, or with
+#                        more than one argument total, is a usage error (exit 2) exactly like
+#                        the ledger form.
+#   --help / -h         Print this reminder, exit 0. Any other argument starting with `-`,
+#                        zero arguments, or more than one argument (outside the `--corpus`
+#                        form above) is a usage error (exit 2) — nothing is read in that case.
 #
 # "Is a ledger" (the test the path must pass to be checked at all, rather than rejected):
 # readable, not a directory, and carrying at least ONE of these three marks of being a RECORD
@@ -234,13 +241,73 @@
 #       different heading string, and this check does not guess at near-misses).
 #
 # ---------------------------------------------------------------------------
+# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a ninth ledger check. It
+# never reads a ledger and the eight checks above never run in it. It exists because the live
+# corpus cited a document that was deleted, `sage-plan-integrity-round3.md`, and nothing
+# caught it for weeks — the citation just sat there, dead.
+#
+#   corpus-citation
+#     Reads: `<dir>/SKILL.md` and every `<dir>/references/*.md`, each OUTSIDE its own fenced
+#       (```) code blocks — the same fence-blanking convention the ledger's "is a ledger" test
+#       uses above, reused rather than re-written, so a path quoted inside a fence as an
+#       example is never treated as a citation.
+#     What counts as a citation: a backtick-wrapped span whose entire content is a `.md` path
+#       — letters, digits, `.`, `_`, `-`, `/` — immediately followed by nothing but the
+#       closing backtick. Resolved relative to the CITING FILE'S OWN DIRECTORY, and ONLY
+#       there: a `../`-style relative citation (`../memory/local.md`, seen from
+#       `references/`) and a bare sibling citation (`harness.md`, seen from another file in
+#       `references/`) both resolve this way, and those are the shapes the corpus uses. There
+#       is deliberately NO corpus-root fallback. One existed, so that a file inside
+#       `references/` could cite `references/harness.md` root-relative; it masked exactly the
+#       defect this check was built for, a citation that does not resolve from where it is
+#       written, and the corpus's three such sites were fixed rather than excused.
+#     Memory citations, in two halves — the split is narrower than the directory on purpose:
+#       OUT OF SCOPE, never checked: the genuinely PER-MACHINE files — bare `local.md` and
+#         `local-*.md`, or path-qualified `memory/local.md` / `.../memory/local-*.md`. They
+#         are seeded once at install time and are deliberately absent from the repo
+#         (`harness.md`: "excluded from the synced tree"), so no existence test can be honest
+#         about them, and checking them would turn "not seeded yet" into a false alarm.
+#       IN SCOPE, resolved BY BASENAME under `<dir>/memory/`: everything else the corpus
+#         calls by a memory name — `shared.md`, `shared-*.md`, `memory/shared.md`,
+#         `../memory/shared.md`, and the repo-rooted `sage-claude/memory/shared.md` that a
+#         reader of the REPO (rather than of an install) sees. That file is real and checked
+#         in, so a dangling citation to it is a real defect and is reported. Only the
+#         basename is common to those five spellings, so the basename is what resolves.
+#     Fires: a citation's resolved path does not exist (and it is not out of scope, above) —
+#       one violation per citation SITE, so the same dangling filename cited three times (as
+#       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
+#       collapsed line, because each site is a separate promise that broke.
+#     Cannot see (stated plainly, the same convention as the eight checks above):
+#       - a path cited inside a fenced code block as an example — deliberately not a citation;
+#       - a path built by string interpolation or otherwise assembled at read time, since this
+#         is a text scan of the literal backtick span, never an interpreter;
+#       - a citation to a document that EXISTS but whose content moved out from under it — the
+#         check resolves a path, it does not read what is at the far end;
+#       - a genuinely dangling citation to a PER-MACHINE memory file (`local.md`,
+#         `local-archive.md`, `memory/local.md`), or a bare mention shaped like one that is
+#         not actually about that directory — silence, not a violation, and the whole
+#         remaining cost of the out-of-scope trade directly above; a caller who suspects one
+#         exists checks those files by hand. `shared.md` is no longer in this blind spot;
+#       - a `~`-rooted span (`~/.claude/CLAUDE.md`) — it names a path outside this corpus
+#         entirely (the user's global config, an installed file, never a file this corpus
+#         ships), so it is skipped, not resolved and not flagged.
+#     Exit codes for this mode only: 0 clean, 1 dirty (same meaning as the ledger form), 2 a
+#       `--corpus` usage error, 3 `<dir>` is missing/unreadable/not a directory, or carries no
+#       readable `SKILL.md` — the corpus equivalent of "not a ledger", same FAIL-QUIET spirit:
+#       a dir that is not a sage skill dir gets one diagnostic on stderr, never a pile of
+#       violations about files it was never going to find.
+#
+# ---------------------------------------------------------------------------
 # OUTPUT LINE SHAPE, fixed field order:
 #
 #   sage-lint <check-id> <path>:<line> <message>
 #
-# `<path>` is the path exactly as given on the command line (never resolved or shortened).
+# `<path>` is the path exactly as given on the command line (never resolved or shortened) in
+# ledger mode; in `--corpus` mode `<path>` is the citing file's path, built from the `<dir>`
+# argument exactly as given.
 # Grep field 2 to select a check; split on the first `:` after field 3 to get the line
-# number. A clean ledger prints NOTHING — no summary line, no "0 violations", nothing.
+# number. A clean ledger, or a clean corpus, prints NOTHING — no summary line, no "0
+# violations", nothing.
 #
 # ---------------------------------------------------------------------------
 # EXIT STATUS
@@ -250,7 +317,8 @@
 #   2   usage error — the arguments themselves were unusable; nothing was read
 #   3   the path is unreadable, is a directory, or is not a ledger at all (see "Is a ledger"
 #       above) — distinguishable from "dirty": a caller can tell "nothing to check here" from
-#       "checked it, found problems" without parsing any prose.
+#       "checked it, found problems" without parsing any prose. In `--corpus` mode, exit 3
+#       means `<dir>` is unreadable, not a directory, or has no readable `SKILL.md`.
 #
 # ---------------------------------------------------------------------------
 # BLIND SPOTS, stated rather than hidden — none of the eight checks above can see:
@@ -301,30 +369,177 @@ export LC_ALL=C
 
 usage() {
   printf '%s\n' \
-    'sage-lint.sh <ledger-path>   check one ledger, one violation per line, silent if clean' \
-    'sage-lint.sh --help          this reminder' \
+    'sage-lint.sh <ledger-path>       check one ledger, one violation per line, silent if clean' \
+    'sage-lint.sh --corpus <dir>      check a sage skill dir'"'"'s own .md citations (separate mode)' \
+    'sage-lint.sh --help              this reminder' \
     '' \
     'Exit 0 clean OR a required tool is missing and nothing was checked (stderr says' \
-    '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger.' \
+    '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger (or, in' \
+    '       --corpus mode, dir unreadable/not-a-dir/no SKILL.md).' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
     'Checks: header header-fields state-enum triage-orphan plan-unit disclosure-home sections' \
-    '        amend-tag'
+    '        amend-tag                                        (ledger mode, all eight)' \
+    '        corpus-citation                                  (--corpus mode, its one check)'
+}
+
+# Core-tool preflight. Without it this script INVENTS violations instead of failing quiet:
+# in a stub PATH with no sed it reported two fabricated violations on a VALID ledger, with
+# empty stderr, and with no awk it exits 3 "not a ledger" -- a code DEGRADATION below says
+# is NOT a degradation, so the caller fixes the call and re-runs instead of disabling the
+# lint. Both break the FAIL QUIET promise, and a check that punishes a compliant ledger
+# trains the parent to stop reading it. This is the ONE NAMED EXCEPTION in DEGRADATION above,
+# not a "cannot run here": stdout is silent and exit 0 so nothing false is ever reported, and
+# the missing tool's name goes to stderr, where it costs one line to fix. Shared by both
+# modes; the only difference is the noun in the stderr line, passed in by the caller.
+preflight_tools() {  # preflight_tools <noun-for-the-stderr-message>
+  for _tool in awk sed grep sort cut head; do
+    if ! command -v "$_tool" >/dev/null 2>&1; then
+      printf 'sage-lint: %s not found on PATH -- install it and run again; the %s was NOT checked\n' "$_tool" "$1" >&2
+      exit 0
+    fi
+  done
 }
 
 # ---------------------------------------------------------------------------
 # Arguments
 
-if [ $# -ne 1 ]; then
-  usage >&2
-  exit 2
+if [ "${1-}" = "--corpus" ]; then
+  if [ $# -ne 2 ]; then
+    usage >&2
+    exit 2
+  fi
+  CORPUS_DIR="$2"
+else
+  if [ $# -ne 1 ]; then
+    usage >&2
+    exit 2
+  fi
+
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    -*) printf 'sage-lint: unknown option %s\n' "$1" >&2; exit 2 ;;
+  esac
+
+  FILE="$1"
 fi
 
-case "$1" in
-  -h|--help) usage; exit 0 ;;
-  -*) printf 'sage-lint: unknown option %s\n' "$1" >&2; exit 2 ;;
-esac
+# ---------------------------------------------------------------------------
+# CORPUS MODE — a separate branch from ledger mode, entered and exited here, so nothing
+# below this block (the ledger's own path validation, its checks, its exit codes) changes
+# shape for a plain `<ledger-path>` call. See CORPUS MODE in the header above for the one
+# check this runs and what it cannot see.
 
-FILE="$1"
+if [ -n "${CORPUS_DIR-}" ]; then
+  if [ ! -e "$CORPUS_DIR" ] || [ ! -d "$CORPUS_DIR" ] || [ ! -r "$CORPUS_DIR" ]; then
+    printf 'sage-lint: %s: not readable, or not a directory, or missing\n' "$CORPUS_DIR" >&2
+    exit 3
+  fi
+
+  SKILL_FILE="$CORPUS_DIR/SKILL.md"
+  if [ ! -e "$SKILL_FILE" ] || [ -d "$SKILL_FILE" ] || [ ! -r "$SKILL_FILE" ]; then
+    printf 'sage-lint: %s: not a sage skill directory (no readable SKILL.md)\n' "$CORPUS_DIR" >&2
+    exit 3
+  fi
+
+  preflight_tools "corpus"
+
+  # The corpus is SKILL.md plus every references/*.md sibling. No references/ dir is not an
+  # error — SKILL.md alone still gets checked (fail quiet, same spirit as the ledger side).
+  CORPUS_FILES="$SKILL_FILE"
+  if [ -d "$CORPUS_DIR/references" ]; then
+    for _rf in "$CORPUS_DIR"/references/*.md; do
+      [ -e "$_rf" ] && CORPUS_FILES="$CORPUS_FILES
+$_rf"
+    done
+  fi
+
+  OUT=""
+  add() {  # add <text-with-trailing-lines-or-empty>
+    [ -n "$1" ] || return 0
+    if [ -z "$OUT" ]; then OUT="$1"; else OUT="$OUT
+$1"; fi
+  }
+
+  while IFS= read -r CFILE; do
+    [ -n "$CFILE" ] || continue
+    case "$CFILE" in
+      */*) CDIR="${CFILE%/*}" ;;
+      *)   CDIR="." ;;
+    esac
+
+    # Every backtick-wrapped `<path>.md` span outside a fenced (```) code block — same fence
+    # convention the ledger's "is a ledger" test uses, reused rather than re-written, so a
+    # path quoted as an example inside a fence is never read as a citation. A `~`-rooted span
+    # is skipped (see CORPUS MODE / Cannot see, header above): it names a path outside this
+    # corpus, never one this check can resolve or should flag.
+    CANDIDATES=$(awk '
+      {
+        t = $0
+        sub(/^[ \t]+/, "", t)
+        if (t ~ /^```/) { infence = !infence; next }
+        if (infence) next
+        line = $0
+        while (match(line, /`[A-Za-z0-9_.\/~-]+\.md`/)) {
+          tok = substr(line, RSTART + 1, RLENGTH - 2)
+          if (tok !~ /^~/) print NR "\t" tok
+          line = substr(line, RSTART + RLENGTH)
+        }
+      }
+    ' "$CFILE" 2>/dev/null)
+
+    [ -n "$CANDIDATES" ] || continue
+
+    while IFS="$(printf '\t')" read -r CLINE CTOK; do
+      [ -n "$CTOK" ] || continue
+
+      # OUT OF SCOPE, never checked: the genuinely PER-MACHINE memory files. `memory/local.md`
+      # and its `local-*` siblings are seeded once at install time and are deliberately absent
+      # from the repo (`harness.md`: "excluded from the synced tree"), so no existence test can
+      # be honest about them and checking them would turn "not seeded yet" into a false alarm.
+      # This exclusion names the per-machine FILES, not the `memory/` directory -- narrower than
+      # it used to be, and narrower on purpose. See CORPUS MODE, header above.
+      case "$CTOK" in
+        local.md|local-*.md|memory/local.md|memory/local-*.md|*/memory/local.md|*/memory/local-*.md)
+          continue ;;
+      esac
+
+      # IN SCOPE, resolved BY BASENAME under `<dir>/memory/`: everything else the corpus calls
+      # by a memory name. `memory/shared.md` is a real checked-in file, so a dangling citation
+      # to it is a real defect and must be reported. The corpus spells it five ways -- bare
+      # (`shared.md`), corpus-relative (`memory/shared.md`, `../memory/shared.md`) and
+      # repo-rooted (`sage-claude/memory/shared.md`, the path a reader of the REPO sees) -- and
+      # only the basename is common to all of them, so the basename is what resolves.
+      case "$CTOK" in
+        */memory/*|memory/*|shared.md|shared-*.md)
+          if [ -e "$CORPUS_DIR/memory/${CTOK##*/}" ]; then
+            continue
+          fi
+          add "sage-lint corpus-citation $CFILE:$CLINE cites '$CTOK' which does not resolve to a file"
+          continue ;;
+      esac
+
+      # Everything else resolves relative to the CITING FILE'S OWN DIRECTORY, and only there.
+      # There is deliberately no corpus-root fallback: one existed, so a file inside
+      # `references/` could cite `references/harness.md` root-relative, and it MASKED exactly
+      # the defect this check was built for -- a citation that does not resolve from where it
+      # is written. The corpus's three such sites were fixed rather than excused.
+      if [ -e "$CDIR/$CTOK" ]; then
+        continue
+      fi
+      add "sage-lint corpus-citation $CFILE:$CLINE cites '$CTOK' which does not resolve to a file"
+    done <<EOF
+$CANDIDATES
+EOF
+  done <<EOF
+$CORPUS_FILES
+EOF
+
+  if [ -n "$OUT" ]; then
+    printf '%s\n' "$OUT"
+    exit 1
+  fi
+  exit 0
+fi
 
 # ---------------------------------------------------------------------------
 # Path validation and "is a ledger" (see USAGE above)
@@ -334,20 +549,7 @@ if [ ! -e "$FILE" ] || [ -d "$FILE" ] || [ ! -r "$FILE" ]; then
   exit 3
 fi
 
-# Core-tool preflight. Without it this script INVENTS violations instead of failing quiet:
-# in a stub PATH with no sed it reported two fabricated violations on a VALID ledger, with
-# empty stderr, and with no awk it exits 3 "not a ledger" -- a code DEGRADATION below says
-# is NOT a degradation, so the caller fixes the call and re-runs instead of disabling the
-# lint. Both break the FAIL QUIET promise, and a check that punishes a compliant ledger
-# trains the parent to stop reading it. This is the ONE NAMED EXCEPTION in DEGRADATION above,
-# not a "cannot run here": stdout is silent and exit 0 so nothing false is ever reported, and
-# the missing tool's name goes to stderr, where it costs one line to fix.
-for _tool in awk sed grep sort cut head; do
-  if ! command -v "$_tool" >/dev/null 2>&1; then
-    printf 'sage-lint: %s not found on PATH -- install it and run again; the ledger was NOT checked\n' "$_tool" >&2
-    exit 0
-  fi
-done
+preflight_tools "ledger"
 
 # The one shared definition of the heading grammar and the cell trim, prepended to every awk
 # program below that parses either (the repo's clean-code rule: one definition, not seven

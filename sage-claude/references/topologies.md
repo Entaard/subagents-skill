@@ -11,8 +11,8 @@ Pick the smallest pattern that fits the task, then compose patterns for larger w
 ## 2. Implement → review → fix (single increment)
 
 **When:** one bounded implementation unit at medium or higher risk.
-**Flow:** (optional ≤2 explorers for real unknowns) → one writer under lease (the `implementer` agent when delegated — it preloads `clean-code`; or the parent inline) → deterministic checks → freeze → 1–2 lens reviewers on the frozen diff (`diff-review`'s Spec and Standards axes where that skill is installed — see Rules; otherwise lenses drawn from the risk, e.g. behavioural correctness against integration and lifecycle) → parent triage → the original writer fixes accepted findings → targeted verification.
-**Rules:** reviewers get the same brief and diff, cannot see each other, and may return "no findings". Spec compliance and quality are separate verdicts — and where `diff-review` is installed, its Spec and Standards reader briefs are those two reviewers' briefs, verbatim, entered as two plan rows; the parent aggregates, `diff-review` does not. One review round plus one fix-verification pass by default.
+**Flow:** (optional ≤2 explorers for real unknowns) → one writer under lease (the `implementer` agent when delegated — it preloads `clean-code`; or the parent inline) → deterministic checks → freeze → 1–2 lens reviewers on the frozen diff (`diff-review`'s Spec and Standards axes where that skill is installed — see Rules; otherwise lenses drawn from the risk, e.g. behavioural correctness against integration and lifecycle) → parent triage → the original writer fixes accepted findings → targeted verification → re-freeze → follow-up rounds scoped to blocker and major only, until one comes back dry.
+**Rules:** reviewers get the same brief and diff, cannot see each other, and may return "no findings". Spec compliance and quality are separate verdicts — and where `diff-review` is installed, its Spec and Standards reader briefs are those two reviewers' briefs, verbatim, entered as two plan rows — **and the Standards row carries that skill's smell baseline verbatim too**, because nothing else on this path hands its reader the list; the parent aggregates, `diff-review` does not. One full review round plus one targeted fix-verification round is where it starts, then follow-up rounds scoped to blocker and major only until a **dry round** — a condition, not a count (#5 below holds that machinery).
 
 ## 3. Migration / repo-wide transform (pipeline)
 
@@ -24,7 +24,7 @@ Pick the smallest pattern that fits the task, then compose patterns for larger w
 
 **When:** a wide solution space with a high cost of picking wrong — architecture, algorithm, API design.
 **Flow:** N=2–3 independent attempts from *different declared angles* (simplest-possible, performance-first, compatibility-first) in isolated workspaces → independent judges score against written criteria → parent synthesizes from the winner, grafting runner-up ideas.
-**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria are written before results return. Read for convergence before scoring: entrants from opposite declared angles reaching the same root cause is stronger evidence than any one agent's assertion, and a losing arm — forbidden the winners' move by its own angle — can convert their shared inference into a measured fact. A bake-off's value is often the agreement, not the winner (calibration: established). Judges reach family diversity only when `verifier-alt` is in your live agent list. See `references/harness.md`, "The alt lane".
+**Rules:** attempts never see each other; judges see all attempts but not authorship framing; criteria are written before results return. Read for convergence before scoring: entrants from opposite declared angles reaching the same root cause is stronger evidence than any one agent's assertion, and a losing arm — forbidden the winners' move by its own angle — can convert their shared inference into a measured fact. A bake-off's value is often the agreement, not the winner (calibration: established). Judges reach family diversity only when `verifier-alt` is in your live agent list. See `harness.md`, "The alt lane".
 
 ## 5. Loop-until-dry (unknown-size discovery)
 
@@ -37,7 +37,7 @@ Pick the smallest pattern that fits the task, then compose patterns for larger w
 
 **When:** high-stakes claims — security findings, root-cause diagnoses, "this is safe to delete".
 **Flow:** per claim, 2–3 independent agents briefed to **refute** it ("default to refuted if uncertain"), or given distinct lenses (correctness / security / does-it-reproduce) where it can fail in different ways. Majority refutation kills the claim; survivors get acted on.
-**Rules:** verifiers never see the finder's reasoning, only the claim and its evidence pointers. Verifiers reach family diversity only when `verifier-alt` is in your live agent list. See `references/harness.md`, "The alt lane".
+**Rules:** verifiers never see the finder's reasoning, only the claim and its evidence pointers. Verifiers reach family diversity only when `verifier-alt` is in your live agent list. See `harness.md`, "The alt lane".
 
 ## 7. Quarantined deep read (context protection)
 

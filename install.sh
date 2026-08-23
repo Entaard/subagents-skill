@@ -24,6 +24,62 @@ if ! command -v rsync >/dev/null 2>&1; then
   exit 1
 fi
 
+# The installed sage-claude/bin scripts are text tools built on the base POSIX toolchain, not on
+# rsync: sage-lint.sh states "awk/sed/grep only, no jq" and carries its own preflight over
+# awk/sed/grep/sort/cut/head (sage-claude/bin/sage-lint.sh, the "Core-tool preflight" comment) --
+# sage-watch.sh and sage-alt-guard.sh call a subset of that same set (awk, sed, cut). These ship
+# with the base OS on macOS and virtually every Linux distribution, so a preflight here rarely
+# fires, but a minimal or container PATH can be missing one, and unlike jq below there is no
+# fallback: sage-lint.sh's own answer to a missing core tool is to print one stderr line and skip
+# the check entirely (exit 0, "the ledger was NOT checked") rather than fabricate a result, so an
+# installer that says nothing here just ships a linter that silently never runs. jq is NOT in this
+# list on purpose: sage-watch.sh and sage-alt-guard.sh both fail OPEN without it (a probe that
+# names the missing tool and skips the check, a guard that allows), and the two hook offers further
+# below already guard it and degrade gracefully -- jq being unavailable is not a reason to abort an
+# install that does not touch either of those optional features.
+missing_hard_tools=()
+for _tool in awk sed grep sort cut head; do
+  command -v "$_tool" >/dev/null 2>&1 || missing_hard_tools+=("$_tool")
+done
+if [ "${#missing_hard_tools[@]}" -gt 0 ]; then
+  echo "ERROR: missing required tool(s) on PATH: ${missing_hard_tools[*]}" >&2
+  echo "  sage-lint.sh (and parts of sage-watch.sh, sage-alt-guard.sh) cannot run without them." >&2
+  echo "  Nothing has been installed or modified. Install the missing tool(s) and re-run:" >&2
+  # awk/sed/grep/sort/cut/head ship in macOS's own /usr/bin and are essentially never actually
+  # absent there -- unlike rsync (a separate, real, uninstalled binary on a bare macOS), a miss
+  # here almost always means a PATH that shadows /usr/bin (a from-source coreutils/busybox/etc
+  # earlier on PATH, or a stripped-down PATH set by a wrapper), not a package to install. Naming
+  # a brew formula anyway would mislead: `brew install coreutils` installs `gsort`/`gcut`/`ghead`
+  # (g-prefixed, so `sort` on PATH still resolves to nothing), and the same is true of the
+  # gawk/gnu-sed formulas for awk/sed. So this line points at the PATH, not at a formula.
+  echo "    macOS:         these ship with the base system (/usr/bin); check 'echo \$PATH' for" >&2
+  echo "                   an entry ahead of /usr/bin that shadows it" >&2
+  echo "    Debian/Ubuntu: sudo apt install coreutils gawk sed grep   (installs sort/cut/head, awk, sed, grep)" >&2
+  exit 1
+fi
+
+# SOFT: jq is not required by any hard install path, and both scripts that use it fail open
+# without it (sage-watch.sh's --status probe names the miss and skips the check rather than
+# alarming; sage-alt-guard.sh allows rather than blocks) -- so its absence must never abort this
+# installer, and the two existing guards at the alt-lane guard hook offer and the compaction hook
+# offer below already handle that at the point each optional feature is offered. This is a
+# SEPARATE, additional report: the whole point of an install-time preflight is that a user learns
+# once, up front, what degrades, instead of meeting the same fact three sentences at a time as
+# each optional feature quietly skips itself later in this run.
+# Probe jq the way its two consumers do, not just on PATH: sage-watch.sh:235 and
+# sage-alt-guard.sh:122 both fall back to /usr/bin/jq for exactly the stripped-PATH case the
+# hard-tool comment above calls the realistic one. Testing PATH alone reports a degradation
+# that is not one on any macOS box whose PATH omits /usr/bin but still has jq where it ships.
+if ! command -v jq >/dev/null 2>&1 && ! [ -x /usr/bin/jq ]; then
+  echo "NOTE: jq was not found on PATH or at /usr/bin/jq. Three optional features degrade without it:" >&2
+  echo "  - the sage-watch.sh occupancy watchdog probe (fails open: reports it cannot run, fires no rungs)" >&2
+  echo "  - the sage-alt-guard.sh alt-lane guard hook: this installer SKIPS OFFERING it (the guard needs jq)" >&2
+  echo "  - the SessionStart(compact) hook: this installer SKIPS OFFERING it too; a manual TIP prints instead" >&2
+  echo "  Install jq for all three to work fully; the install continues without it either way:" >&2
+  echo "    macOS:         brew install jq" >&2
+  echo "    Debian/Ubuntu: sudo apt install jq" >&2
+fi
+
 # Backups from every section below land in one timestamped directory per run, OUTSIDE the
 # directories Claude Code auto-discovers (skills/, agents/, output-styles/). A backup inside a
 # discovered directory becomes a phantom skill or agent (a discoverable clean-code.bak skill

@@ -101,13 +101,36 @@ A few words matter here and in the test loop below.
 ## Comments
 
 28. **Write why, never what.** The code states what it does. A comment records the reason a reader cannot derive: a constraint, a trade-off, a warning, or a rejected alternative.
-29. **Delete what version control already remembers.** Dead code, unused functions, commented-out code, change logs, author names, ticket numbers, and "fixed in this PR" notes. All of them mislead the next reader.
+29. **A comment states only facts its own scope owns.** A comment on a function describes that function. It never describes what the callers do with it. It never describes what they are protected from, or what happens elsewhere in the request. That text belongs at the call site, or nowhere. A comment that reaches outside its own scope goes stale in silence. Nothing in its own file changes when the fact it asserts changes. The rule holds even when the outside fact is a real reason. Move the reason to the scope that owns it.
+30. **A summary that paraphrases the name is noise. Delete it.** Rule 4 already makes the name carry the whole job. A sentence that repeats the name in longer words adds a line to maintain and nothing to read. Rule 3 sets the reach: delete it in the code you are already changing. Leave the untouched ones alone.
+31. **A why-comment is short: one to three lines.** Rationale that needs paragraphs is not a comment. Put it in the commit message, in an architecture decision record, or in the module's own document. A reader who lands on a function wants the function.
+32. **Comment density is never a reason to write a comment.** A harness instruction, an output style, or the file around you may tell you to match the comment density of the surrounding code. For comments, these rules override that instruction. A saturated file does not earn a new block. It earns the comments that rules 28 to 31 allow, and no more. Rule 3 already tells you to write every line you touch by these rules, even where the surrounding code breaks them. Comment volume is that case.
+33. **Delete what version control already remembers.** Dead code, unused functions, commented-out code, change logs, author names, ticket numbers, and "fixed in this PR" notes. All of them mislead the next reader. **A "how it used to work" narrative is a change log**, whatever it is called. Three real examples: "this module was previously synchronous", "before the retry was added", "the old path ran the work on a thread pool thread". Version control holds the old shape. Delete the paragraph.
+34. **A comment found to be factually wrong gets deleted, not rewritten.** The rule applies whether you find the error while writing or a reviewer finds it later. Deletion is the default. The burden falls on keeping it. The comment asserted something the code did not show. That is what rules 28 to 31 exist to catch. Rewriting it longer to make the narrative true only makes a wrong comment bigger. Keep it only where a real reason survives rules 28 to 31, in one to three lines.
+
+This block is real. It passes rule 28, because it does carry reasons a reader cannot derive. It fails rules 29, 30, 31 and 33. That combination is the point: why-material alone does not earn a comment.
+
+```
+/// <summary>
+/// Logs a quota charge that could not be recorded, and swallows the cause.
+/// </summary>
+/// <remarks>
+/// Called from three entry points. Two of those entry points run at the end of the
+/// request, after the response has been written, so a throw there would be invisible
+/// to the caller. While this module was still asynchronous the charge went onto a
+/// thread pool thread, which is why the failure had to be contained here.
+/// </remarks>
+private void LogLostQuotaCharge(string key, long amount) =>
+    Log.Warn($"Lost quota charge {amount} for {key}");
+```
+
+Rule 30 deletes the summary. The name already says it. The summary also adds a false clause: `Log.Warn` swallows nothing. The callers' `catch` blocks do. Rule 29 deletes the callers paragraph for the same reason. That fact is not this method's to assert, and it goes stale here without warning. Rule 31 would have capped whatever survived at three lines. Rule 33 deletes the "while this module was asynchronous" paragraph as a change log. Nothing is left, and nothing is the right answer. The one-line body is the whole story.
 
 ## Tests
 
-30. **Test code is production code.** Every rule above applies to it. Dirty tests get abandoned. Then the production code rots.
-31. **F.I.R.S.T.** Fast. Independent, so no test sets up another and any order works. Repeatable, so it passes on a laptop with no network. Self-checking, so it passes or fails without a human reading logs. Timely, so you write it before the code it covers.
-32. **Test the edges, and test around a bug.** People get the middle right and the edges wrong. Bugs cluster, so when you find one, test its neighbourhood hard.
+35. **Test code is production code.** Every rule above applies to it. Dirty tests get abandoned. Then the production code rots.
+36. **F.I.R.S.T.** Fast. Independent, so no test sets up another and any order works. Repeatable, so it passes on a laptop with no network. Self-checking, so it passes or fails without a human reading logs. Timely, so you write it before the code it covers.
+37. **Test the edges, and test around a bug.** People get the middle right and the edges wrong. Bugs cluster, so when you find one, test its neighbourhood hard.
 
 ### The loop
 

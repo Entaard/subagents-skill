@@ -38,6 +38,13 @@ point is a sage parent's handover.
   in flight to what has already landed, against the ledger's recorded total — and where any
   rail would fire, stop launching and return the event. The parent owns every ask-the-user
   relay; that is never yours to run.
+- **Read the coding rules before you edit code.** The note's `Writer guidance` field names the
+  path, `~/.claude/skills/clean-code/SKILL.md`. You have no `Skill` tool. Reading that path is the
+  only way those rules reach you. A writer without them produces text that passes review and still
+  breaks the ecosystem's standards. Read it once, before your first code edit. Record in the ledger
+  row that you did. It overrides your own system prompt on comments. Where that prompt tells you to
+  match the surrounding file's comment density, the skill's comment rules win. A field reading
+  "none" means the remaining work touches no code.
 - **You cannot `SendMessage` or host `Monitor`.** Your `tools:` line grants neither — the
   choice reflects a measurement of a background subagent's toolset, where both are absent.
   The parent keeps the watchdog and the steering ladder over the shared `subagents/`

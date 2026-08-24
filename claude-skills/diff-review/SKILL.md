@@ -49,7 +49,7 @@ Whatever the repo documents, the Standards axis also always carries the smell ba
 
 ### Smell baseline
 
-The first 12 entries come from Martin Fowler's *Refactoring*, chapter 3, as carried by the MIT-licensed source skill. The last 4 come from the Clean Code smells this ecosystem's research found missing from Fowler's list.
+The first 12 entries come from Martin Fowler's *Refactoring*, chapter 3, as carried by the MIT-licensed source skill. The last 5 come from the Clean Code smells this ecosystem's research found missing from Fowler's list.
 
 Each entry reads as *what it is* → *how to fix it*. Match each one against the diff.
 
@@ -69,6 +69,7 @@ Each entry reads as *what it is* → *how to fix it*. Match each one against the
 14. **Imprecise decision** — an approximate type, a missing boundary check, or a race-prone construct sits where the problem needs precision. → Make the decision exact.
 15. **Convention where structure belongs** — a rule that only a naming convention or a comment enforces, where a type or a language construct could enforce it instead. → Move the rule into structure.
 16. **Null in, null out** — the change passes or returns "nothing" that a caller can forget to check. → Use an empty collection, a typed absence, or a loud failure instead.
+17. **Comment noise** — a comment that restates the member's name or its body, narrates its callers or its own change history, or asserts facts about code outside its own scope. → Delete it. Where a real reason survives, shrink it to that, in one to three lines. A comment the diff makes factually **wrong** is this smell too, and deletion is its first repair, not a longer rewrite. Judge volume as well as truth: an accurate wall of comment is still this smell.
 
 ## Step 4: Two modes
 
@@ -90,7 +91,7 @@ Each reader reports back in under 400 words.
 
 Use this mode when an orchestration skill (/subagents, /sage) is building its plan — /subagents at its Step 2 gate, /sage in its Step 2 ledger — and diff-review is one of its rows.
 
-diff-review spawns nothing itself in this mode. The two axes become two rows in the orchestration plan — behind the approval gate where the skill has one (/subagents), recorded in the run ledger where it does not (/sage). The two reader briefs below become those rows' briefs, written into the plan exactly as they read here — **and the Standards row carries the smell baseline above verbatim as well**, for the same reason standalone mode pastes it in full: that brief tells its reader to report every baseline smell it spots, the reader has no other access to the list, and items 13-16 are this ecosystem's own additions that no model reconstructs from general knowledge. A Standards row briefed without it is ruling against a list nobody handed it. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
+diff-review spawns nothing itself in this mode. The two axes become two rows in the orchestration plan — behind the approval gate where the skill has one (/subagents), recorded in the run ledger where it does not (/sage). The two reader briefs below become those rows' briefs, written into the plan exactly as they read here — **and the Standards row carries the smell baseline above verbatim as well**, for the same reason standalone mode pastes it in full: that brief tells its reader to report every baseline smell it spots, the reader has no other access to the list, and items 13-17 are this ecosystem's own additions that no model reconstructs from general knowledge. A Standards row briefed without it is ruling against a list nobody handed it. The orchestration skill's own Step 5 does the aggregating and the triage. diff-review does not aggregate in this mode.
 
 ## Reader briefs
 

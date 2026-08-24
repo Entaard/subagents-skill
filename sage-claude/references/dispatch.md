@@ -214,6 +214,7 @@ Snapshot baseline: <revision, dirty files, task-owned files. `/rewind` does not 
 Paths touched: <every one, writer by writer>
 Open questions: <each with the current hypothesis and what would settle it>
 Discarded: <approaches tried and dropped, with why, so the next session does not re-buy them>
+Writer guidance: <`~/.claude/skills/clean-code/SKILL.md`. The successor must `Read` this path before it edits code, because its `tools:` line carries no Skill tool. The only other legal value is "none — no code left to write">
 Transcripts: <path to this session's `subagents/` directory>
         <agentId → description, one line per agent dispatched — mine these for units whose reports were never absorbed>
 Resume: <the next action a fresh session should take>

@@ -51,7 +51,7 @@ Put the concrete thing before the abstract explanation. Name the thing, then exp
 
 - Keep code, commands, file paths, type names, error text, and command flags exactly as they are. These rules govern the prose around the code, not the code itself.
 - Do not simplify away necessary precision. A caveat that changes correctness stays in. Write it plainly.
-- Code comments follow these rules for wording only. Do not change how many comments the surrounding code has. Match the file's comment density and simplify the language.
+- Code comments follow these rules for wording only. These rules never add a comment. How many comments to write is an agent's decision: write why, never what. Do not match the surrounding file's comment density.
 - Templated output keeps its template. A skill, a pull request form, or a report format sets the structure. These rules apply to the prose inside that structure.
 
 ## Example

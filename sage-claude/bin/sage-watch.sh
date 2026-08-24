@@ -28,10 +28,14 @@
 #                      prints nothing ON STDOUT AND NOTHING ON STDERR, the sensor cannot
 #                      run on this layout and the parent disables it silently and writes
 #                      one ledger line. Empty stdout WITH a line on stderr is NOT that
-#                      signal: it names a missing jq, or an explicit directory that does
-#                      not resolve, and both are one-line fixes -- fix what it names and
-#                      probe again rather than disabling the sensor for the run. The
-#                      stderr diagnostics are --status only; ladder mode stays silent.
+#                      signal: it names a missing jq, an EXPLICIT directory that does not
+#                      resolve, or any directory -- explicit or discovered -- that resolves
+#                      and holds no readable agent-*.jsonl. All three are one-line fixes --
+#                      fix what it names and probe again rather than disabling the sensor
+#                      for the run. Discovery that finds no readable directory is the one
+#                      silent case. Those three are --status only, and ladder mode stays
+#                      silent about them; an unusable ARGUMENT is the exception -- it
+#                      exits 2 and says so in either mode.
 #
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
 #                      as below. Defaults to 1006380 (the measured figure in
@@ -316,9 +320,14 @@ if [ ! -x "$JQ" ]; then
   fi
   exit 0
 fi
-if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ]; then
+# `-x` as well as `-r`, because the canonicalizing `cd` below needs to TRAVERSE the
+# directory, not just list it. Without it a mode-600 directory passed this guard, failed
+# that `cd`, and emptied $DIR through the command substitution -- after which the empty-glob
+# guard at the foot of this file printed a diagnostic naming no path at all and claiming the
+# layout had "resolved". Measured: two stderr lines, one of them the raw shell `cd` error.
+if [ -z "$DIR" ] || [ ! -d "$DIR" ] || [ ! -r "$DIR" ] || [ ! -x "$DIR" ]; then
   if [ "$STATUS" -eq 1 ] && [ "$EXPLICIT_DIR" -eq 1 ]; then
-    printf 'sage-watch: %s: no such readable directory -- the layout is <project>/<session-id>/subagents, one level deeper than <project>/subagents; readlink -f the output_file any dispatch returned -- it is a symlink under tasks/ -- and use its target directory\n' "$DIR" >&2
+    printf 'sage-watch: %s: not a readable, traversable directory -- the layout is <project>/<session-id>/subagents, one level deeper than <project>/subagents; readlink -f the output_file any dispatch returned -- it is a symlink under tasks/ -- and use its target directory\n' "$DIR" >&2
   fi
   exit 0
 fi
@@ -331,11 +340,11 @@ if [ "$STATUS" -eq 1 ] && [ -n "$IGNORED_ARG" ]; then
 fi
 
 # Canonicalize to an absolute path now, once validation has already proven $DIR exists and
-# is readable — safe to `cd` into. The parent occupancy sensor derives the parent transcript
-# path from $DIR's own parents (dirname twice); a relative, one-component $DIR (e.g.
-# `--status subagents`, run from inside the session directory) derives a garbage path from
-# that arithmetic and silently disables the sensor instead of failing loudly. `cd` in a
-# subshell so the script's own working directory never moves.
+# is both readable and traversable — safe to `cd` into. The parent occupancy sensor derives
+# the parent transcript path from $DIR's own parents (dirname twice); a relative,
+# one-component $DIR (e.g. `--status subagents`, run from inside the session directory)
+# derives a garbage path from that arithmetic and silently disables the sensor instead of
+# failing loudly. `cd` in a subshell so the script's own working directory never moves.
 DIR=$(cd "$DIR" && pwd)
 
 # ---------------------------------------------------------------------------
@@ -460,8 +469,10 @@ fi
 # In ladder mode, per-unit rows do no work at all now — nothing on the ladder reads them.
 # Skip the loop entirely so a ladder sample reads only the parent transcript above.
 if [ "$STATUS" -eq 1 ]; then
+  found=0
   for f in "$DIR"/agent-*.jsonl; do
     [ -f "$f" ] && [ -r "$f" ] || continue
+    found=$((found + 1))
 
     base="${f##*/}"; base="${base%.jsonl}"; id="${base#agent-}"
 
@@ -506,6 +517,23 @@ EOF
       "$id" "${atype:-?}" "$desc" "$done_s" "$(tok "$spend")" "$(tok "$raw_spend")" \
       "$(tok "$occ")" "$idle_s" "$rep_n" "$recs"
   done
+
+  # The one silent exit --status still had. Once $DIR resolves, an empty glob and an
+  # unresolvable layout produced byte-identical output -- exit 0, empty stdout, empty
+  # stderr -- so a caller read a working sensor as absent and disabled the only rail with
+  # a measured true positive. Measured: --status on a real, readable tasks/ directory
+  # returned 0 bytes on both streams, while the guard above named the path. No byte count
+  # here on purpose: that message embeds $DIR, so its length tracks the path, and an
+  # earlier draft of this comment cited a stale one. Repairing that guard's wording could
+  # not reach this gap -- it fires only when $DIR fails [ -d ], [ -r ] or [ -x ], and here
+  # $DIR passes all three. stderr and --status only, for the same reason as every
+  # diagnostic above: stdout lines become notifications in the hosting loop, which must
+  # stay silent. Not an alarm -- exit 0 stands -- and the count is of glob matches that are
+  # also readable files, so an unparseable transcript still fails open above while an
+  # unreadable one is what the message's "readable" is doing.
+  if [ "$found" -eq 0 ]; then
+    printf 'sage-watch: %s: resolved, but holds no readable agent-*.jsonl -- the sensor RAN and found no units, which is not "cannot run here"; if units are in flight this is the wrong directory: readlink -f the output_file any dispatch returned -- it is a symlink under tasks/ -- and use its target directory\n' "$DIR" >&2
+  fi
 fi
 
 # No transcripts is not an alarm either.

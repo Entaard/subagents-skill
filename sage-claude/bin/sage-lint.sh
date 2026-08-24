@@ -16,7 +16,7 @@
 #   sage-lint.sh --help
 #
 #   <ledger-path>       The one file to check. Required, exactly one.
-#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a ninth
+#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a tenth
 #                        ledger check: it checks a sage skill DIRECTORY's own corpus for
 #                        dangling `.md` citations, not a ledger. `<dir>` must carry a
 #                        readable `SKILL.md`; `--corpus` with no following argument, or with
@@ -47,7 +47,7 @@
 # worse than useless, it would be misleading.
 #
 # ---------------------------------------------------------------------------
-# THE CHECKS — exactly eight, each with a short stable id. Every check reads ONLY the text
+# THE CHECKS — exactly nine, each with a short stable id. Every check reads ONLY the text
 # named below and states what it therefore cannot see; that blind spot is not a bug in the
 # check, it is the check's honest shape.
 #
@@ -160,6 +160,56 @@
 #         - Only `##` and `###` are headings here. A `####` heading does not end a section,
 #           so everything under it belongs to the enclosing one.
 #
+#   triage-state
+#     Reads: the triage column of the SAME table `triage-orphan` reads as its triage set —
+#       the first table under the FIRST exact `Findings and dispositions` heading. It runs
+#       inside that check's awk pass rather than in one of its own, so "which table is the
+#       triage table" has one owner here instead of two. The column is found by LABEL, never
+#       by counting to a fixed position: a header cell whose delabelled text (emphasis and
+#       code ticks stripped, lowercased) is EXACTLY `triage` or `disposition`. Those two
+#       words, across four casings, are what every ledger in the local corpus spells. The
+#       exact test is deliberately stricter than the substring test `triage-orphan` uses one
+#       line above it: that one only EXCLUDES a table from candidacy, where a wrong guess
+#       costs nothing, while this one SELECTS a column whose every cell then gets ruled on,
+#       where a wrong guess reports a whole table of false violations.
+#     Fires: a data row whose triage cell is EMPTY, or carries no disposition word anywhere
+#       in it at a word boundary. The words: `accepted`, `rejected`, `deferred` and
+#       `user decision` — the four triage states in `../references/dispatch.md`
+#       `## Finding schema`, which is their one authority — plus `merged`, `retracted` and
+#       `disclosed`, three the real corpus uses to close a finding without one of the four.
+#       Those three are here to stop false alarms, and they are why this check is narrower
+#       than the commit gate it serves (`../SKILL.md`, Step 5): it catches the PARKED cell
+#       (`pending triage`, `open`, `TBD`, empty), not every cell outside the spec's list.
+#       The word may sit anywhere in the cell, not only at its start: `all accepted —
+#       wording fixes applied` and `merged into C2 (accepted)` are both real cells, and a
+#       start-anchored test reports them both. A longer word that merely CONTAINS a state
+#       word does not count — `unaccepted` fires. Boundary test, not substring.
+#     Measured, on every sage ledger on this machine (17 files): zero violations before this
+#       check shipped, and one probe ledger carrying `pending triage` fires. The corpus is
+#       what set the accepted word list, not a guess at one.
+#     Cannot see:
+#       - A Findings table with NO triage column: silence, never a violation. Measured, not
+#         assumed — one real ledger records its findings under `## Findings and dispositions`
+#         in a corrections table headed `| # | claim | correction | evidence |`. There is no
+#         cell to read there, so this is a parse the check cannot make and FAIL QUIET
+#         governs. `state-enum` DOES report a missing `state` column, and the difference is
+#         the corpus: every Unit table carries that column, while the Findings table's shape
+#         varies across real runs.
+#       - Whether a legal word is the RIGHT disposition. A finding wrongly marked `accepted`
+#         and one correctly marked `accepted` read identically here. Reading the column
+#         against the four states stays a human act; this check removes only its parked-cell
+#         half, which is the half that shipped a real run with three findings untriaged.
+#       - Whether `rejected` really carries its evidence, or `deferred` its owner. The spec
+#         names both halves. In the real corpus they usually live in the row's own
+#         `evidence` column, so demanding the literal phrase would report compliant rows.
+#       - A row whose cell count differs from its header row's — an unescaped `|` inside a
+#         cell (a code span, say) slides every later column along. The one violation this
+#         check produced over the whole local corpus was exactly that, and the text it
+#         reported was a fragment of a jq command. A stray pipe is named in FAIL QUIET as a
+#         parse to stay silent on, so it stays silent.
+#       - A findings table under a differently-named heading, for the same reason
+#         `triage-orphan` cannot see one: the heading is what locates the table.
+#
 #   plan-unit
 #     Reads: the first table under the FIRST `Plan` heading and the first table under the
 #       FIRST `Unit table` heading, each table's first column as its id set — with an
@@ -241,8 +291,8 @@
 #       different heading string, and this check does not guess at near-misses).
 #
 # ---------------------------------------------------------------------------
-# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a ninth ledger check. It
-# never reads a ledger and the eight checks above never run in it. It exists because the live
+# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a tenth ledger check. It
+# never reads a ledger and the nine checks above never run in it. It exists because the live
 # corpus cited a document that was deleted, `sage-plan-integrity-round3.md`, and nothing
 # caught it for weeks — the citation just sat there, dead.
 #
@@ -277,7 +327,7 @@
 #       one violation per citation SITE, so the same dangling filename cited three times (as
 #       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
 #       collapsed line, because each site is a separate promise that broke.
-#     Cannot see (stated plainly, the same convention as the eight checks above):
+#     Cannot see (stated plainly, the same convention as the nine checks above):
 #       - a path cited inside a fenced code block as an example — deliberately not a citation;
 #       - a path built by string interpolation or otherwise assembled at read time, since this
 #         is a text scan of the literal backtick span, never an interpreter;
@@ -321,7 +371,7 @@
 #       means `<dir>` is unreadable, not a directory, or has no readable `SKILL.md`.
 #
 # ---------------------------------------------------------------------------
-# BLIND SPOTS, stated rather than hidden — none of the eight checks above can see:
+# BLIND SPOTS, stated rather than hidden — none of the nine checks above can see:
 #   - a briefing error (a unit given the wrong instructions can still fill every cell out
 #     legally);
 #   - a wrong-path reproduction (a command that measured the wrong thing but is quoted
@@ -338,6 +388,10 @@
 #     checks that a state word is LEGAL, never that it was kept LIVE. A ledger written once at
 #     the very end, backfilling every state to its final value, and a ledger updated at every
 #     real transition are indistinguishable to this check. Legality is not liveness.
+#   - and its sibling, for the same reason: `triage-state` checks that a triage cell holds a
+#     disposition WORD, never that the disposition is the RIGHT one. A finding waved through
+#     as `accepted` and one genuinely accepted read identically here. It ends the parked
+#     cell, not the wrong call.
 #
 # FAIL QUIET. A parse this script cannot make is silence, not a violation and not a crash. A
 # malformed table, a stray pipe, a non-UTF8 byte, a file with no trailing newline, a heading
@@ -377,8 +431,8 @@ usage() {
     '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger (or, in' \
     '       --corpus mode, dir unreadable/not-a-dir/no SKILL.md).' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
-    'Checks: header header-fields state-enum triage-orphan plan-unit disclosure-home sections' \
-    '        amend-tag                                        (ledger mode, all eight)' \
+    'Checks: header header-fields state-enum triage-orphan triage-state plan-unit' \
+    '        disclosure-home sections amend-tag                (ledger mode, all nine)' \
     '        corpus-citation                                  (--corpus mode, its one check)'
 }
 
@@ -848,7 +902,15 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
         for (i = 2; i < n; i++) {
           lab = delabel(cells[i])
           if (index(lab, "triage") > 0 || index(lab, "disposition") > 0) selftriaged = 1
+          # triage-state rides this same header walk: the ONE table triage-orphan reads as
+          # its triage set is the one whose cells triage-state rules on, so "which table is
+          # the triage table" keeps one owner. Exact label, not the substring test above:
+          # that one is deliberately loose (it only EXCLUDES a table from candidacy, where a
+          # wrong guess costs nothing), while this one selects a column whose every cell then
+          # gets ruled on, where a wrong guess reports a whole table of false violations.
+          if (is_find && find_tri == 0 && (lab == "triage" || lab == "disposition")) find_tri = i
         }
+        if (is_find) find_ncell = n
         next
       } else if (expect_sep) {
         expect_sep = 0
@@ -856,6 +918,19 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
       } else {
         n = split(line, cells, "|")
         tok = idtoken(cells[2])
+        # n == find_ncell, not just find_tri < n: a row carrying an unescaped `|` (inside a
+        # code span, say) splits into MORE cells than its header, so the triage column slides
+        # and the cell read is text from some other column. Measured on the local corpus: the
+        # only violation this check produced over every ledger on the machine was exactly
+        # that row, and the text it reported was a fragment of a jq command. A stray pipe is
+        # named in FAIL QUIET as a parse to stay silent on, so it stays silent.
+        if (is_find && find_tri > 0 && n == find_ncell) {
+          tri = delabel(cells[find_tri])
+          if (tri == "")
+            printf "sage-lint triage-state %s:%d finding '"'"'%s'"'"' has an empty triage cell\n", FILE, NR, tok
+          else if (tri !~ /(^|[^a-z])(accepted|rejected|deferred|user decision|merged|retracted|disclosed)([^a-z]|$)/)
+            printf "sage-lint triage-state %s:%d finding '"'"'%s'"'"' is parked outside every disposition word: '"'"'%s'"'"'\n", FILE, NR, tok, substr(trim(cells[find_tri]), 1, 60)
+        }
         if (is_unit && tok != "") unit_id[tok] = 1
         if (section == "Decisions and deviations" && tok ~ /^D[0-9]+$/) dec_id[tok] = 1
         if (tok != "" && is_id(tok)) {

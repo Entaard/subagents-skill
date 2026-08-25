@@ -16,7 +16,8 @@
 #   sage-lint.sh --help
 #
 #   <ledger-path>       The one file to check. Required, exactly one.
-#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a tenth
+#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never an
+#                        eleventh
 #                        ledger check: it checks a sage skill DIRECTORY's own corpus for
 #                        dangling `.md` citations, not a ledger. `<dir>` must carry a
 #                        readable `SKILL.md`; `--corpus` with no following argument, or with
@@ -47,7 +48,7 @@
 # worse than useless, it would be misleading.
 #
 # ---------------------------------------------------------------------------
-# THE CHECKS — exactly nine, each with a short stable id. Every check reads ONLY the text
+# THE CHECKS — exactly ten, each with a short stable id. Every check reads ONLY the text
 # named below and states what it therefore cannot see; that blind spot is not a bug in the
 # check, it is the check's honest shape.
 #
@@ -288,11 +289,42 @@
 #       (repeated) — one violation per offending name, not per extra occurrence.
 #     Cannot see: a heading text that is CLOSE but not exact (`### Decisions and deviations
 #       (continued)` does not count as a second `Decisions and deviations` — it is a
-#       different heading string, and this check does not guess at near-misses).
+#       different heading string, and this check does not guess at near-misses). Where that
+#       near-miss was MANUFACTURED by a bad edit rather than typed, `splice` below is what
+#       sees it, and it sees it by the splice signature rather than by guessing at names.
+#
+#   splice
+#     Reads: every line outside a fenced block, tracking inline-code (`) parity cumulatively
+#       across lines. That is deliberately LOOSER than a markdown reader, which never lets an
+#       inline span cross a block boundary -- the looseness is what lets it see a splice that
+#       cut a sentence in half, and it is also this check's one false-positive shape.
+#     Fires: a heading or a table row appears while an inline-code span is still OPEN — one
+#       violation per offending line. That is the signature of a mis-anchored edit, and it is
+#       measured: a `str.replace` whose anchor (`## Findings and dispositions`) was a
+#       SUBSTRING of a longer string already in the file (a risk sentence quoting
+#       `### Findings and dispositions` in backticks) spliced a whole section into the middle
+#       of that sentence — prose truncated mid-clause, the section's rows sitting inside an
+#       unclosed code span, a malformed heading left behind — and every check that existed at
+#       the time returned clean on it, before and after. The edit-side rule this check is
+#       the detector for: assert anchor uniqueness (`s.count(old) == 1`) before any replace,
+#       because a longer superstring elsewhere makes `replace(..., 1)` silently hit the
+#       wrong site.
+#     Cannot see: a splice that lands outside a code span, or one whose fragments happen to
+#       leave backtick parity even. Its false positive is the mirror image: ONE stray unpaired
+#       backtick in prose opens a span that never closes, and every later heading and table row
+#       is then reported. The count tracks how much file follows the stray, not how much is
+#       wrong: one backtick inserted near the top of each of this corpus's 12 clean ledgers
+#       measured 44 to 110 findings. Read a long run of splice findings as "find the stray
+#       backtick above the first one", never as that many separate defects. It does NOT
+#       check for duplicated non-prescribed headings: `sections` already covers the six
+#       prescribed names (measured — it caught a repeated `Run record`), and no ledger in
+#       the corpus repeats a heading outside them, so a check for that would be untested
+#       guesswork. Measured: zero findings across the 18 ledgers in `.claude/plans/`, three
+#       on the spliced fixture.
 #
 # ---------------------------------------------------------------------------
-# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a tenth ledger check. It
-# never reads a ledger and the nine checks above never run in it. It exists because the live
+# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not an eleventh ledger check.
+# It never reads a ledger and the ten checks above never run in it. It exists because the live
 # corpus cited a document that was deleted, `sage-plan-integrity-round3.md`, and nothing
 # caught it for weeks — the citation just sat there, dead.
 #
@@ -327,7 +359,7 @@
 #       one violation per citation SITE, so the same dangling filename cited three times (as
 #       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
 #       collapsed line, because each site is a separate promise that broke.
-#     Cannot see (stated plainly, the same convention as the nine checks above):
+#     Cannot see (stated plainly, the same convention as the ten checks above):
 #       - a path cited inside a fenced code block as an example — deliberately not a citation;
 #       - a path built by string interpolation or otherwise assembled at read time, since this
 #         is a text scan of the literal backtick span, never an interpreter;
@@ -371,7 +403,7 @@
 #       means `<dir>` is unreadable, not a directory, or has no readable `SKILL.md`.
 #
 # ---------------------------------------------------------------------------
-# BLIND SPOTS, stated rather than hidden — none of the nine checks above can see:
+# BLIND SPOTS, stated rather than hidden — none of the ten checks above can see:
 #   - a briefing error (a unit given the wrong instructions can still fill every cell out
 #     legally);
 #   - a wrong-path reproduction (a command that measured the wrong thing but is quoted
@@ -432,7 +464,7 @@ usage() {
     '       --corpus mode, dir unreadable/not-a-dir/no SKILL.md).' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
     'Checks: header header-fields state-enum triage-orphan triage-state plan-unit' \
-    '        disclosure-home sections amend-tag                (ledger mode, all nine)' \
+    '        disclosure-home sections amend-tag splice         (ledger mode, all ten)' \
     '        corpus-citation                                  (--corpus mode, its one check)'
 }
 
@@ -1221,6 +1253,23 @@ CHK=$(awk -v FILE="$FILE" -v req="$REQUIRED_SECTIONS" "$AWK_LIB"'
       if (c == 0) printf "sage-lint sections %s:1 section '"'"'%s'"'"' is missing\n", FILE, name
       else if (c > 1) printf "sage-lint sections %s:%d section '"'"'%s'"'"' appears %d times (expected exactly once)\n", FILE, lastline[name], name, c
     }
+  }
+' <<<"$SANITIZED")
+add "$CHK"
+
+# ---------------------------------------------------------------------------
+# splice
+
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
+  {
+    line = $0
+    if (open && (is_heading(line) || line ~ /^\|/))
+      printf "sage-lint splice %s:%d %s sits inside an unclosed inline-code span -- a mis-anchored edit spliced structure into the middle of a sentence\n", \
+        FILE, NR, (is_heading(line) ? "heading" : "table row")
+    # Parity is tracked AFTER the test, so the line that opens a span is not itself a
+    # finding -- only the structure that follows it is. $SANITIZED has already blanked every
+    # fenced line, so a ``` block cannot move this parity.
+    if (gsub(/`/, "`") % 2 == 1) open = !open
   }
 ' <<<"$SANITIZED")
 add "$CHK"

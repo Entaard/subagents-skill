@@ -27,15 +27,21 @@
 #                      fires no rungs. This is the "probe once at start" call: if it
 #                      prints nothing ON STDOUT AND NOTHING ON STDERR, the sensor cannot
 #                      run on this layout and the parent disables it silently and writes
-#                      one ledger line. Empty stdout WITH a line on stderr is NOT that
-#                      signal: it names a missing jq, an EXPLICIT directory that does not
-#                      resolve, or any directory -- explicit or discovered -- that resolves
-#                      and holds no readable agent-*.jsonl. All three are one-line fixes --
-#                      fix what it names and probe again rather than disabling the sensor
-#                      for the run. Discovery that finds no readable directory is the one
-#                      silent case. Those three are --status only, and ladder mode stays
-#                      silent about them; an unusable ARGUMENT is the exception -- it
-#                      exits 2 and says so in either mode.
+#                      one ledger line. A line on stderr is NOT that signal, whatever
+#                      stdout did: it names a missing jq, an EXPLICIT directory that does
+#                      not resolve, or any directory -- explicit or discovered -- that
+#                      resolves and holds no readable agent-*.jsonl. Judge the two streams
+#                      SEPARATELY, because that third line does not need an empty stdout:
+#                      it fires after the per-agent loop, so a directory holding no
+#                      agent-*.jsonl but a readable parent transcript prints a `[parent]`
+#                      status line on stdout AND the diagnostic on stderr (measured). All
+#                      three are one-line fixes -- fix what it names and probe again rather
+#                      than disabling the sensor for the run. Discovery that finds no
+#                      readable, TRAVERSABLE directory is the one silent case: the guard
+#                      below tests -d, -r and -x, so a discovered mode-600 directory passes
+#                      -r, fails -x, and is silent too. Those three are --status only, and
+#                      ladder mode stays silent about them; an unusable ARGUMENT is the
+#                      exception -- it exits 2 and says so in either mode.
 #
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
 #                      as below. Defaults to 1006380 (the measured figure in
@@ -301,8 +307,9 @@ if [ -n "$DIR" ]; then EXPLICIT_DIR=1; else EXPLICIT_DIR=0; fi
 # Fail open: no directory, an unreadable one, or no jq to read it with, is not an alarm.
 # This is the "probe once at start" answer — a --status call that prints nothing on stdout
 # AND nothing on stderr means the sensor cannot run on this layout, and the parent disables
-# it and writes one ledger line. Empty stdout WITH a line on stderr is the other case, and
-# the split below is what makes the two tellable apart.
+# it and writes one ledger line. A line on stderr is the other case whatever stdout did --
+# judge the two streams separately, per USAGE above -- and the split below is what makes the
+# two tellable apart.
 #
 # The jq test and the layout test are SEPARATE, and each names itself on stderr, because
 # the two failures need opposite answers and used to be byte-identical. A missing jq is a
@@ -345,7 +352,13 @@ fi
 # one-component $DIR (e.g. `--status subagents`, run from inside the session directory)
 # derives a garbage path from that arithmetic and silently disables the sensor instead of
 # failing loudly. `cd` in a subshell so the script's own working directory never moves.
-DIR=$(cd "$DIR" && pwd)
+# `CDPATH=` on that `cd`, because `cd` consults CDPATH for a RELATIVE argument and ECHOES
+# the directory it landed in whenever it uses one. Measured: with CDPATH exported and a
+# one-component $DIR, the substitution returned the decoy path TWICE -- $DIR became a
+# two-line string naming a directory the caller never asked for, after which the empty-glob
+# guard at the foot of this file printed a malformed two-line diagnostic naming the decoy
+# while the caller's real transcripts got no status line at all.
+DIR=$(CDPATH= cd "$DIR" && pwd)
 
 # ---------------------------------------------------------------------------
 # Formatting helpers
@@ -372,8 +385,17 @@ emit() {  # rung action id type desc figures...
 #
 # `last_ts` is the last timestamp on ANY record, not just an assistant one: a tool
 # result lands between assistant turns and is the freshest liveness evidence there is.
-# `assistant_records` is why a transcript with no assistant record produces no `--status`
-# line: no records is no evidence about the agent, and no evidence is never a signal.
+# `assistant_records` is the evidence count, and what it gates is narrower than it looks.
+# It gates the PARENT line and the parent rung, which both test `records >= 1`: a session
+# transcript carrying no assistant record produces no `[parent]` status line and fires no
+# handover rung. It does NOT gate the per-agent rows -- an evidence-free transcript still
+# prints a full row, `records=0` with spend, raw, occupancy and repeat all zero (measured
+# on a user-only transcript), because a caller probing the layout needs to see that the
+# file was found and read. So `records=0` is the tell, never `idle`: idle is computed from
+# the last timestamp on ANY record, so an evidence-free transcript still reports a real
+# age, and its `-` means only that the subtraction could not be made -- an absent or
+# unparseable stamp, no usable clock, a stamp strictly in the future, or one before the
+# epoch, which fails the same non-negative guard.
 # Fields 8 and 9 (tool, input) are read by nothing here. PROBE is deliberately unchanged,
 # byte for byte, because the parent occupancy sensor and `--status` share it.
 
@@ -489,7 +511,10 @@ EOF
     fi
 
     row=$("$JQ" -R -n -r "$PROBE" < "$f" 2>/dev/null) || row=""
-    # An unparseable transcript yields nothing. Fail open: no row, no alarm.
+    # This guard catches jq FAILING, not garbage input: PROBE reads with `fromjson?`, which
+    # drops every unparseable line and still emits a full zeros row, so an unparseable
+    # transcript prints `records=0` exactly like any other evidence-free one (measured).
+    # Fail open either way -- an empty $row is no row and no alarm.
     [ -n "$row" ] || continue
 
     # Fields 8 and 9 (tool name, tool input) are absorbed and unused: PROBE is frozen

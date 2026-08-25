@@ -14,7 +14,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: same unit topology and same corpus kind, or it is not the same shape and the band is the better prior.
 - Recogniser: runs priced this way landed within ±6% of their core estimate, after a stretch of band-priced overruns.
-- Band: recurring
+- Band: established
 - Falsifier: three consecutive same-shape-priced runs missing by more than band arithmetic missed on comparable work.
 
 ## Estimate from the corpus and the lenses
@@ -50,7 +50,7 @@ Written by `/sage-promote` only, never by a run. Every block carries exactly fiv
 
 - Qualifier: a summarising fetch tool generates leads, it does not settle facts; the rule reaches your own completion claims, not only your briefs.
 - Recogniser: one reader described a data structure that does not exist; a researcher's headline version attribution was wrong, and the fix it implied would have introduced the defect it claimed to remove.
-- Band: recurring
+- Band: established
 - Falsifier: ten consecutive reader structural claims that a grep confirms unchanged.
 
 ## Disjoint mandates produce disjoint find-sets

@@ -121,8 +121,9 @@
 #   occupancy  `input + cache_creation + cache_read` on the SINGLE MOST RECENT assistant
 #              record. Includes `cache_read` — those tokens are in the window.
 #              Point-in-time, never a sum. Reported by --status; fires no rung here.
-#   idle       now minus the last record's timestamp. Reliable for liveness, noisy as a
-#              stall proxy (`../references/harness.md` has the base rates). IDLE_CEIL
+#   idle       now minus the last STRING-typed record timestamp (PROBE skips a numeric
+#              one -- see the probe block). Reliable for liveness, noisy as a stall
+#              proxy (`../references/harness.md` has the base rates). IDLE_CEIL
 #              below is set well past the largest returns this corpus has measured.
 #   repeat     the largest count of one identical tool call (same name AND same input)
 #              across deduplicated records. Diagnostic only now — `--status` reports it,
@@ -383,8 +384,12 @@ emit() {  # rung action id type desc figures...
 # by `fromjson?` instead of failing the parse. Emits one TSV row:
 #   done spend raw_spend occupancy last_ts repeat_count assistant_records tool input
 #
-# `last_ts` is the last timestamp on ANY record, not just an assistant one: a tool
-# result lands between assistant turns and is the freshest liveness evidence there is.
+# `last_ts` is the last STRING-typed timestamp on any record, not just an assistant one: a
+# tool result lands between assistant turns and is the freshest liveness evidence there is.
+# `select(type == "string")` in PROBE skips a JSON-numeric `timestamp`, so one arriving
+# LAST reports the previous record's age rather than `-`. Fixture-measured only: on a
+# 2026-08-25 re-measurement of the reference corpus above -- same population definition,
+# since grown -- every stamp was string-typed, so this path is documented, never observed.
 # `assistant_records` is the evidence count, and what it gates is narrower than it looks.
 # It gates the PARENT line and the parent rung, which both test `records >= 1`: a session
 # transcript carrying no assistant record produces no `[parent]` status line and fires no
@@ -392,10 +397,10 @@ emit() {  # rung action id type desc figures...
 # prints a full row, `records=0` with spend, raw, occupancy and repeat all zero (measured
 # on a user-only transcript), because a caller probing the layout needs to see that the
 # file was found and read. So `records=0` is the tell, never `idle`: idle is computed from
-# the last timestamp on ANY record, so an evidence-free transcript still reports a real
-# age, and its `-` means only that the subtraction could not be made -- an absent or
-# unparseable stamp, no usable clock, a stamp strictly in the future, or one before the
-# epoch, which fails the same non-negative guard.
+# the last string-typed timestamp on any record, so an evidence-free transcript still
+# reports a real age, and its `-` means only that the subtraction could not be made -- an
+# absent, non-string, or unparseable stamp, no usable clock, a stamp strictly in the
+# future, or one before the epoch, which fails the same non-negative guard.
 # Fields 8 and 9 (tool, input) are read by nothing here. PROBE is deliberately unchanged,
 # byte for byte, because the parent occupancy sensor and `--status` share it.
 

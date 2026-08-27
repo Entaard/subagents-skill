@@ -373,17 +373,21 @@
 #       defect this check was built for, a citation that does not resolve from where it is
 #       written, and the corpus's three such sites were fixed rather than excused.
 #     Memory citations, in two halves — the split is narrower than the directory on purpose:
-#       OUT OF SCOPE, never checked: the genuinely PER-MACHINE files — bare `local.md` and
-#         `local-*.md`, or path-qualified `memory/local.md` / `.../memory/local-*.md`. They
-#         are seeded once at install time and are deliberately absent from the repo
+#       OUT OF SCOPE, never checked: the genuinely PER-MACHINE files — the journal
+#         (`journal.md`, `memory/journal.md`, `.../memory/journal.md`), the local KI files
+#         (`harness-stamp.md`, and any `local/<file>.md` / `.../local/<file>.md` spelling),
+#         and the v2 names (`local.md`, `local-*.md`, path-qualified or bare). They are
+#         seeded or written on each machine and are deliberately absent from the repo
 #         (`harness.md`: "excluded from the synced tree"), so no existence test can be honest
 #         about them, and checking them would turn "not seeded yet" into a false alarm.
-#       IN SCOPE, resolved BY BASENAME under `<dir>/memory/`: everything else the corpus
-#         calls by a memory name — `shared.md`, `shared-*.md`, `memory/shared.md`,
-#         `../memory/shared.md`, and the repo-rooted `sage-claude/memory/shared.md` that a
-#         reader of the REPO (rather than of an install) sees. That file is real and checked
-#         in, so a dangling citation to it is a real defect and is reported. Only the
-#         basename is common to those five spellings, so the basename is what resolves.
+#       IN SCOPE, resolved BY BASENAME under `<dir>/memory/`, `<dir>/memory/shared/` and
+#         `<dir>/memory/archive/`: everything else the corpus calls by a memory name — a
+#         portable KI (`shared/<slug>.md`, `../memory/shared/<slug>.md`, or repo-rooted), an
+#         archived file (`memory/archive/shared-v2.md`), and the retired v2 spellings
+#         (`shared.md`, `shared-*.md`), which now correctly flag as dangling. Those files are
+#         real and checked in, so a dangling citation is a real defect and is reported. Only
+#         the basename is common to the spellings, so the basename is what resolves, in any
+#         of the three directories a checked-in memory file can legally live in.
 #     Fires: a citation's resolved path does not exist (and it is not out of scope, above) —
 #       one violation per citation SITE, so the same dangling filename cited three times (as
 #       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
@@ -394,11 +398,12 @@
 #         is a text scan of the literal backtick span, never an interpreter;
 #       - a citation to a document that EXISTS but whose content moved out from under it — the
 #         check resolves a path, it does not read what is at the far end;
-#       - a genuinely dangling citation to a PER-MACHINE memory file (`local.md`,
-#         `local-archive.md`, `memory/local.md`), or a bare mention shaped like one that is
-#         not actually about that directory — silence, not a violation, and the whole
-#         remaining cost of the out-of-scope trade directly above; a caller who suspects one
-#         exists checks those files by hand. `shared.md` is no longer in this blind spot;
+#       - a genuinely dangling citation to a PER-MACHINE memory file (`journal.md`,
+#         `harness-stamp.md`, a `local/` KI, or the v2 names `local.md` / `local-archive.md`),
+#         or a bare mention shaped like one that is not actually about that directory —
+#         silence, not a violation, and the whole remaining cost of the out-of-scope trade
+#         directly above; a caller who suspects one exists checks those files by hand. The
+#         portable KIs under `memory/shared/` are not in this blind spot;
 #       - a `~`-rooted span (`~/.claude/CLAUDE.md`) — it names a path outside this corpus
 #         entirely (the user's global config, an installed file, never a file this corpus
 #         ships), so it is skipped, not resolved and not flagged.
@@ -607,26 +612,33 @@ $1"; fi
     while IFS="$(printf '\t')" read -r CLINE CTOK; do
       [ -n "$CTOK" ] || continue
 
-      # OUT OF SCOPE, never checked: the genuinely PER-MACHINE memory files. `memory/local.md`
-      # and its `local-*` siblings are seeded once at install time and are deliberately absent
-      # from the repo (`harness.md`: "excluded from the synced tree"), so no existence test can
-      # be honest about them and checking them would turn "not seeded yet" into a false alarm.
-      # This exclusion names the per-machine FILES, not the `memory/` directory -- narrower than
-      # it used to be, and narrower on purpose. See CORPUS MODE, header above.
+      # OUT OF SCOPE, never checked: the genuinely PER-MACHINE memory files. The journal, the
+      # local KI files (harness-stamp.md and everything else under memory/local/), and the v2
+      # names local.md / local-* are seeded or written on each machine and are deliberately
+      # absent from the repo (`harness.md`: "excluded from the synced tree"), so no existence
+      # test can be honest about them and checking them would turn "not seeded yet" into a
+      # false alarm. This exclusion names the per-machine FILES, not the `memory/` directory --
+      # narrower than it used to be, and narrower on purpose. See CORPUS MODE, header above.
       case "$CTOK" in
         local.md|local-*.md|memory/local.md|memory/local-*.md|*/memory/local.md|*/memory/local-*.md)
           continue ;;
+        journal.md|memory/journal.md|*/memory/journal.md|harness-stamp.md|local/*.md|*/local/*.md)
+          continue ;;
       esac
 
-      # IN SCOPE, resolved BY BASENAME under `<dir>/memory/`: everything else the corpus calls
-      # by a memory name. `memory/shared.md` is a real checked-in file, so a dangling citation
-      # to it is a real defect and must be reported. The corpus spells it five ways -- bare
-      # (`shared.md`), corpus-relative (`memory/shared.md`, `../memory/shared.md`) and
-      # repo-rooted (`sage-claude/memory/shared.md`, the path a reader of the REPO sees) -- and
-      # only the basename is common to all of them, so the basename is what resolves.
+      # IN SCOPE, resolved BY BASENAME under `<dir>/memory/`, `<dir>/memory/shared/` and
+      # `<dir>/memory/archive/`: everything else the corpus calls by a memory name. A
+      # portable KI under memory/shared/ and an archived file are real checked-in files, so
+      # a dangling citation to either is a real defect and must be reported. The corpus
+      # spells such paths several ways -- corpus-relative (`../memory/shared/<slug>.md`),
+      # bare (`shared/<slug>.md`) and repo-rooted -- and only the basename is common to all
+      # of them, so the basename is what resolves, in any of the three directories a
+      # checked-in memory file can legally live in.
       case "$CTOK" in
-        */memory/*|memory/*|shared.md|shared-*.md)
-          if [ -e "$CORPUS_DIR/memory/${CTOK##*/}" ]; then
+        */memory/*|memory/*|shared.md|shared-*.md|shared/*.md|*/shared/*.md|archive/*.md|*/archive/*.md)
+          if [ -e "$CORPUS_DIR/memory/${CTOK##*/}" ] \
+            || [ -e "$CORPUS_DIR/memory/shared/${CTOK##*/}" ] \
+            || [ -e "$CORPUS_DIR/memory/archive/${CTOK##*/}" ]; then
             continue
           fi
           add "sage-lint corpus-citation $CFILE:$CLINE cites '$CTOK' which does not resolve to a file"

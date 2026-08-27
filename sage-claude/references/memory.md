@@ -1,196 +1,135 @@
 # Memory protocol
 
-Your job here: put every fact sage learns in the one file whose content class it belongs to, append to local memory on every run, and run consolidation and the hint under checks that can fail. Read this at Step 2 before estimating, and again at Step 6 before appending. Promotion and eviction are `/sage-promote`'s, never a run's.
+Your job here: read the knowledge items your task matches at Step 2, and append plain lines to the journal at Step 6 — nothing else. A run never edits a knowledge-item file, never bumps a count, never consolidates. Every structured write belongs to `/sage-promote`, on the user's word. Read this at Step 2 before estimating, and again at Step 6 before appending.
 
-[The two files](#the-two-files) · [Append](#append) · [Consolidate](#consolidate) · [The hint](#the-hint) · [Promotion and eviction](#promotion-and-eviction) · [Structural invariants](#structural-invariants) · [The compression floor](#the-compression-floor)
+[The shape](#the-shape) · [Knowledge items](#knowledge-items) · [The journal](#the-journal) · [Read at Step 2](#read-at-step-2) · [Append at Step 6](#append-at-step-6) · [The hint](#the-hint) · [Promotion, consolidation, eviction](#promotion-consolidation-eviction) · [Structural invariants](#structural-invariants) · [The compression floor](#the-compression-floor)
 
-## The two files
+This is the v3 protocol. v2 kept the machine's knowledge in two table-structured files that every run edited in place, and the record is unambiguous about how that ended: blank-line splits, glued rows, misfiled appends, a consolidation pass that could only abort — six distinct corruption classes across two machines, every one produced by an LLM hand-editing a strict-format table mid-run. v3 removes the failure class instead of guarding it: **a run's only write is an append of plain lines, and there is no table to break.** Design: the source repo's 2026-08-27 sage-memory-v3 design note.
 
-**The split is by content class, not by precedence.** Because the two files never hold the same kind of claim, they cannot contradict each other on the same claim, and there is no arbitration rule to get wrong.
+## The shape
 
-| | `../memory/shared.md` — portable | `../memory/local.md` — this machine |
+Two kinds of text, two ownership rules:
+
+- **Cortex** — `../SKILL.md`, `references/`, `bin/`: the protocol itself. Hand-owned. Changed only by `/sage-promote`'s gated stages or by build-authoring on the user's explicit word. No run and no consolidation touches it.
+- **Knowledge items and the journal** — everything under `memory/`. Perishable, modular, statistical. A run reads KIs and appends journal lines; `/sage-promote` does every other write.
+
+The `memory/` layout, installed:
+
+| Path | Holds | Written by |
 | --- | --- | --- |
-| Holds | rules that would hold on any machine: topology lessons, ratios, discount factors, failure recognisers | absolute costs, bands, run rows, confirmation counts and dates, harness version stamp, watch list |
-| Carries per entry | rule, qualifier, recogniser, strength band, falsifier | numbers, counts, dates, provenance |
-| Written by | `/sage-promote`, on the user's word only | every run, automatically |
-| Read at | Step 2, before estimating | Step 2, before estimating |
-| Physical form | one copy, in the repo, symlinked into every install — a write lands in `<repo>/sage-claude/memory/shared.md` and shows in `git status` | a real file on this machine, seeded once, never overwritten |
+| `memory/shared/` → symlink into `<repo>/sage-claude/memory/shared/` | one file per **portable** KI — rules that hold on any machine, text and band only, nothing machine-specific | `/sage-promote` only |
+| `memory/local/` | one file per **machine-local** KI: cost bands, stats sidecars for shared KIs, lessons, gaps, defects, contradictions, the harness stamp | `/sage-promote` only |
+| `memory/journal.md` | append-only plain lines: run actuals, observations, KI usage | **every run**, at Step 6 — the only file a run writes |
+| `memory/archive/` | drained journal segments, archived and retired KIs, superseded format versions | `/sage-promote` only |
 
-A rule earns three homes in order, one content class each: `local.md` holds its counts and dates, `shared.md` holds the rule with its recogniser and falsifier, and skill text carries the clause — with its qualifier and the recognising anecdote where the compression floor demands them — tagged `(calibration: <band>)`. No home restates another home's bookkeeping: counts and dates stay local, recogniser and falsifier stay in `shared.md`.
+**The split is by content class, and it is the v2 split preserved:** counts, dates, uses and absolute costs stay per-machine in `local/`; rule text, qualifiers, recognisers, falsifiers and the band stay in the one shared copy. A count in the shared copy would fork across machines — machine B, having seen less, would write the number back down in a clean edit no merge catches — which is exactly why v2 kept them apart and v3 does not reunite them.
 
-**The editing test, for a fact that could sit in more than one file.** The three homes above say where a *rule's* parts live. This says where a *fact* lives, and it governs every corpus file, not only these two:
+**A dangling `memory/shared` symlink → run on `local/` and the journal alone and print one line saying so.** The repo moved or was deleted. Do not guess a repo path, and do not create a replacement directory: a second physical copy of portable knowledge is the fork this design exists to prevent.
 
-- **Skill text carries the clause and the anecdote that makes it recognisable** — never the arithmetic behind it, which is what `(calibration: <band>)` exists to stand in for.
-- **Harness facts go to `harness.md`, with their measurement, their date and their population.** That file is the *declared* home for corpus statistics and **is exempt from the rest of this test**: its dates are deliberate, because a standing instruction to re-measure before quoting is only meaningful when a reader can see how old the figure is. Staleness is what those dates are for.
-- **Counts, dates and absolute costs go to `local.md`.**
+**The editing test, for a fact that could sit in more than one place.** It governs every corpus file, not only `memory/`:
+
+- **Skill text carries the clause and the anecdote that makes it recognisable** — never the arithmetic behind it, which is what `(calibration: <band>)` stands in for. A rule earns three homes in order, one content class each: the stats sidecar in `local/` holds its counts and dates, the shared KI holds the rule with its recogniser and falsifier, and skill text carries the clause tagged `(calibration: <band>)`. No home restates another home's bookkeeping.
+- **Harness facts go to `harness.md`, with their measurement, their date and their population.** That file is the declared home for corpus statistics and is exempt from the rest of this test: its dates are deliberate, because a standing instruction to re-measure before quoting is only meaningful when a reader can see how old the figure is.
+- **Counts, dates and absolute costs go to `local/` or the journal.**
 - **A number survives in skill text only where the sentence's purpose is to stop a run using it.** An anti-band — one observation, warning a reader off pricing from it — loses its whole point once the provenance is stripped, so that sentence keeps its figure.
 
-Two failures this catches, both of them live in this corpus when the test was written: a paragraph of skill text citing a run artifact that had already been deleted, and dated measurements copied into skill text from `harness.md`, which already held them, better stated, with the caveat about which half was inferred.
+**And a pointer must resolve on the machine that reads it.** `local/` and the journal are per-machine, so skill text may point at the *shape* of what lives there — "append the run line, hits included" — and never at a specific KI, figure or date only the authoring machine ever had. `memory/shared/` and everything under `references/` are identical on every install and may be cited precisely. Cite a KI by its `id:`, never by a line number — promote moves files to `archive/` on its own schedule, and where a deliverable quotes one, say in the deliverable that these files are live.
 
-**And a pointer must resolve on the machine that reads it.** `local.md` is per-machine and never overwritten, so skill text may point at the *shape* of what lives there — "record every generation's actual in the run log" — and never at a specific row, figure or date that only the authoring machine ever had. A fresh install's `local.md` holds the seed and nothing else, so a citation to a run it never made is a dangling pointer no `ls` can catch: the file exists, and the row does not. `shared.md` and everything under `references/` are identical on every install and may be cited precisely.
+## Knowledge items
 
-**And `local.md` moves in time, not only across machines.** Consolidation rewrites it at the start of a run, so it is stable *within* that run — but a concurrent session's consolidation is under no such ordering. One measured incident rewrote the file mid-run and left eight of an in-flight run's line-number citations resolving to nothing; the content had moved to `local-archive.md`, and only an adversarial pass that `stat`ed the file caught it, the run's own assumption log having recorded the opposite assumption. So cite `local.md` by content — a rule's name, a band's `Class` cell, an observation's own words — never by line number; and where a deliverable quotes it, say in the deliverable that these files are live and rewritten periodically.
+One file per KI. Frontmatter between `---` fences — one `key: value` per line, no tables — then a markdown body. A malformed KI file quarantines that one KI (skip it, surface one line); it cannot damage its neighbours, which is the point of the one-file grain.
 
-**A dangling `shared.md` symlink → run on `local.md` alone and print one line saying so.** The repo moved or was deleted. Do not guess a repo path, and do not write a replacement file: a second physical copy is the fork this design exists to prevent.
+**Portable KI** (`shared/<slug>.md`): `id`, `kind: rule`, `class: portable`, `band` (`established` — six or more confirmations, `recurring` — three to five, `provisional` — below bar, carried only because its mechanism is structural), `status`. Body: the **rule** as a bold sentence, then `- Qualifier:`, `- Recogniser:`, `- Falsifier:` list items. No date, count or absolute cost anywhere in the file; ratios and discount factors yes, because the skill computes with them.
 
-**The residual case.** A local run contradicting a portable rule does **not** overturn that rule. Write a watch-list row in `local.md` whose `Contradicts` cell names the rule (`## Append` below has its columns and its anchor — they are not the Run-log row's); the row needs its own confirmations, and it appears in the next hint as a **retirement candidate**.
+**Local KI** (`local/<file>.md`), seven kinds:
 
-## Append
+| `kind` | file name | records | ends when |
+| --- | --- | --- | --- |
+| `stats` | `<slug>.stats.md` | this machine's numbers for the shared KI its `for:` names — `count`, `first`, `last`, `provenance`, `promoted` (append-only ` · ` history), `uses`, `last-used`, `misses` | the shared KI retires or archives |
+| `band` | `band-<slug>.md` | a cost band: class of work (`name:`), figure, qualifiers, evidence | superseded by a newer band, or retired on recorded misses — bands and the stamp are age-less by design, so the disuse signal never reaches them |
+| `lesson` | `lesson-<slug>.md` | something a run learned that would change how a later run acts | promotion to `shared/` at three confirmations — the only `kind` the → shared signal accepts |
+| `gap` | `gap-<slug>.md` | a task class, rate or behaviour with no coverage yet — a programme of work, never promotable | the measurement lands and promote settles it against the artifact |
+| `defect` | `defect-<slug>.md` | a fault in sage's own corpus, scripts or protocol | `/sage-promote`'s corpus-repair stage fixes the corpus and settles it |
+| `contradiction` | `contradiction-<slug>.md` | a local run cut against a shared KI, named in `contradicts:` | the retirement signal, on its second confirmation; it never overturns the rule on its own |
+| `stamp` | `harness-stamp.md` | the `sage-harness-stamp:` line and its verification prose | never — re-dated by every promote pass |
 
-Automatic, every run, at Step 6, to `local.md` only. A run touches the file in exactly four ways: the **Run-log row** it owes every time; a **new Watch-list row** when it has one — the residual case above orders one, and a lesson seen once, a skill defect, or a task class with no coverage are the others; and a **confirmation of a Watch-list row that already exists**, which raises that row's `Count` and extends its `First → last` in place — or, where the row was **under-counted when it was filed**, a *correction*, which is the same edit with a different justification and must say so in the cell: name the observations that were already in the row's own text and the date they were re-read. A correction may widen `First → last` **backwards**, because it is recording evidence that always existed rather than evidence a run just met. Both are the same act; conflating them is not, because a trigger firing on a corrected count is firing on a re-reading, and a reader is owed that distinction in the row rather than filing a second row for the same observation; and the **closure of a Watch-list row this run settled**, which `### The closure act` below defines and which is the only act that takes a row *out* of circulation. That third act is what makes the counts mean anything: `## The hint` fires on a count reaching three, so an observation filed as three separate `Count 1` rows fires nothing, ever — and the fourth is what stops the table growing for ever. Everything else in the file — Bands, Rules, `Promoted` cells, the harness stamp — changes through consolidation (`## Consolidate`) or `/sage-promote` (`## Promotion and eviction`), never through an append.
+**The field contract by kind — these are the fields the promotion signals read, so they are load-bearing, not decoration.** A `lesson`, `gap`, `defect` or `contradiction` file carries `class:` (`portable` or `local` — the → shared signal accepts only a portable lesson), `count:`, `first:`, `last:`, and `promoted:` (the append-only ` · ` history, `—` when empty); a `contradiction` also carries `contradicts:` naming the shared KI id. A `band` file carries `name:` — the class of work as verbatim prose, because a slug is not a name and a qualifier like "≤10k words" must survive somewhere live — with its figure, qualifiers and evidence in the body. **Usage fields** — `uses:`, `last-used:`, `misses:` — may appear on any **local** KI, never on a file under `shared/` (a shared KI's usage is machine-specific, so it lands on the stats sidecar): `/sage-promote`'s consolidation adds or bumps them from the journal's `use` lines, and an **absent usage field reads as zero-uses, never-used, zero-misses** — absence is the ordinary state of a KI no run has cited yet, not damage. `created:` is optional; where present it anchors the disuse signal's age test, and a KI whose age no field establishes (`created:` or `first:`) is exempt from disuse-archiving.
 
-The two row kinds live in different sections and take **different anchors**. Using one kind's anchor for the other is the failure this section exists to prevent.
+**When two `kind`s both fit, choose by what would close the KI, not by what it is about.** Closing it means editing sage's own corpus or scripts → `defect`; closing it means three confirmations and a promotion → `lesson`. The tiebreak is load-bearing: only `lesson` reaches `shared/`, so an observation filed `defect` when a rule was what travelled is a rule that can never graduate. One that genuinely needs both gets two KIs, each with its own closure.
 
-**The Run-log row** — date, task class, agents, est, actual, wall clock, note — **including the runs where the estimate held**, because a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not. **A run that handed over owes three more figures in this row's `note` cell** — the handoff note's write cost, each generation's supervision cost, and the generation the run reached — and one Watch-list row besides — or, where a row already records it, the confirmation that raises its `Count`, never a second row (`../SKILL.md`, `## Handover`, which names both). The seven columns do not change.
+`status` is machine-readable by its **first word**: `live`, `watching` (the filing default for lesson/gap/defect/contradiction), `settled → <artifact>`, `promoted → <shared KI id>`, `dropped → <reason>`, `retired → <observation>`, `archived → <reason>`. The rest of the value is free payload. The closure evidence rules are unchanged from v2 and live with their owner: `settled` requires the named artifact to **exist**, not to be intended — building the mechanism a KI complained about is not the same as settling it; the KI settles when the artifact the complaint asked for actually lands. Who may write each state: **a run writes none of them.** A run that settles a KI records a `settle` line in the journal (below); `/sage-promote`'s consolidation flips the status against that line's evidence.
 
-**Anchor the Run-log row on the file's final characters, never on a date cell.** The Run log is the last section by construction, so "append at the end of the file" stays correct however the file grows; an anchor on a date matches the wrong row the first time two runs share a day.
+`bin/sage-index.sh` prints one line per KI — `id | kind | class | band | status | <first words>` — from the frontmatter, on demand. There is no stored index file to go stale.
 
-**The Watch-list row** — observation, `Kind`, `Count`, `First → last`, `Contradicts`, `Class`, `Promoted`, `Status`, the eight columns `## Structural invariants` fixes. An empty `Contradicts` is written `—`, never blank and never "none", and an unpromoted row's `Promoted` is `—` the same way.
+## The journal
 
-**`Class` and `Promoted` are on this table for one reason: without them a watch row can never become a rule.** They are the same two columns the Rules table carries, holding the same values and read by the same triggers — `Class` is `portable` (would hold on any machine) or `local` (this machine's measured behavior); `Promoted` is an append-only history joined with ` · `, never overwritten, exactly as `/sage-promote` already writes one. A row filed without them is filed outside the promotion path, which is the failure this table spent twelve runs demonstrating: the `→ shared.md` trigger tests both, the Watch list had neither, so no watch row could ever evaluate the trigger and none ever graduated. `Promoted` is also the only place a `refused <date>` can sit — a refusal recorded in `Status` instead would close the row, and a refused candidate is not closed, it is ineligible until newer evidence arrives.
+`memory/journal.md`. Line 1 is the sentinel `<!-- sage-local-memory v3 -->` — the installer greps it for format drift, so nothing may rewrite it. Then a short fixed header, then payload lines, append-only, newest last:
 
-**`Kind` is one of exactly four values, and the protocol names them here** because a value only the data file's own prose knows is a value no trigger can key on:
-
-| `Kind` | The row records | Where it ends |
-| --- | --- | --- |
-| `lesson` | something a run learned that would change how a later run acts | the `→ shared.md` trigger, once it reaches three confirmations — the only `Kind` that trigger accepts |
-| `contradiction` | a local run cut against a `shared.md` rule, named in `Contradicts` | the `→ retirement` trigger, on its second confirmation; it never overturns the rule on its own |
-| `defect` | a fault in sage's own corpus, scripts, or protocol | `/sage-promote`'s corpus-repair stage, which fixes the corpus and closes the row |
-| `gap` | a task class, a rate, or a behaviour with no coverage yet | the measurement lands and the row is closed against it — a `gap` is a programme of work, never a rule, so it is not promotable |
-
-**When two `Kind`s both fit, choose by what would close the row, not by what it is about.** If closing it means editing sage's own corpus or scripts, it is a `defect`; if closing it means three confirmations and a promotion, it is a `lesson`. The tiebreak is load-bearing rather than tidy, because only `lesson` reaches `→ shared.md`: a row filed `defect` when a rule was what travelled is a rule that can never graduate, and one filed `lesson` when a repair was what was needed is a repair nobody owns. A row that genuinely needs both gets two rows, each with its own closure.
-
-**Anchor it on the last row of the Watch-list table, as the very next line, with no blank line between.** Two ways to get this wrong, and neither is visible in the row you just wrote. The end-of-file anchor above belongs to the Run log **alone**: reach for it here and the row is filed as a run row, in the wrong table, under the wrong headers — and nothing complains, because `## Structural invariants` checks *header* rows and never data-row widths — a misfiled row of any width sits in the wrong table undetected. Do not read a column count as a safety net here: it never was one, and since the Watch-list row grew to eight cells against the Run log's seven, the two are no longer even different lengths in the direction that would make a stray row look odd to a human reader. The blank line is the other way: a blank line **ends** a markdown table, so a row set one line below becomes a second, header-less table, which breaks `## Structural invariants`' requirement that `## Watch list` hold exactly one table and halts the next consolidation pass. That one is not hypothetical — this machine's `local.md` was damaged exactly that way on 2026-08-18, and nothing noticed for a day, until a consolidation pass aborted on it.
-
-**So measure every section you touch, before and after.** An append is not done when the row is in the file; it is done when the row is in the *table*. Take the before reading of every section you intend to write to **before you write anything** — one command, once per section per side:
-
-```sh
-awk -v s='Watch list' '$0=="## "s{i=1;next} /^## /{i=0} i&&/^\|/{if(!b)n++;b=1;r++;next}{b=0} END{print n+0, r+0}' ~/.claude/skills/sage/memory/local.md
+```
+<date> run <session> | <task class> | agents=N est=X actual=Y wall=W | <note>
+<date> obs <session> | <kind> <class> | <observation> | falsifier: <...>
+<date> obs <session> | confirm <ki-id> | <what happened>
+<date> obs <session> | settle <ki-id> | artifact: <...>
+<date> use <session> | <ki-id> hit | <ki-id> miss: <why>
+<date> mark promote | drained through here by the <date> pass
 ```
 
-It prints **blocks and lines** for that one section. Swap `Watch list` for `Run log` for the other. Read it this way:
+Grammar: `date type session | payload`, types `run`, `obs`, `use`, `mark`. Write one line per fact and never reflow an existing line. A `|` inside payload is harmless — only the first three fields are positional. A malformed line is a question for the next `/sage-promote` pass, never damage.
 
-- **Before you write, blocks must be `1`.** Anything else means the file is *already* damaged and your anchor does not exist — "the last row of the table" is undefined when there are two tables, and appending to the literal last row grows the damage instead of adding to it. Do not write to that section — and stop only on that section. The other section's row is still owed, so write it, and surface the damage as a Step 6 event (`../SKILL.md`, Step 6, surfaced events). Halting the whole append instead would cost the run its Run-log row, which the budget rail and every later estimate read back, so a damaged Watch list would quietly bleed the run log dry. Pre-existing damage is not an appender's to fix.
-- **After you write, blocks must still be `1`, and the line count must have moved exactly as your acts predict, summed — `+1` per new row of either kind, and `0` for a confirmation, a correction, or a closure written in place.** Three of the four acts move no line at all, so a zero delta is the *expected* reading for all but a new row; the check that catches a lost in-place edit is the row's own content, not this count. Blocks `2` is the blank line. A new row that leaves the count unchanged never reached this table: look in the other section, and immediately below this one. A confirmation that moves the count is not a confirmation — you have added a row, and a duplicate row is the thing the third act exists to prevent.
-- **`0` is never healthy and never means "the row missed the section".** A well-formed section always has a header and a separator, so an append cannot drive this to zero: `0` means the heading is not byte-for-byte `## <section>`, or the file has CRLF endings. Empty output with a non-zero exit is a different fault again, and the likeliest one: the path is wrong.
+The `mark` line is promote's drain marker: everything after the last `mark` is what the next consolidation ingests, and the count of those lines is what the hint fires on. Promote's drain always leaves the newest three `run` lines in the live journal — they are Step 2's same-shape pricing rows, the v2 newest-three rule carried over.
 
-**Record both readings.** The check leaves no trace today, which is why no run on this machine can show it ever ran one — the only guard standing over every memory write has no audit trail at all. Write the pair for every section you touched into the run's ledger `### Run record`, one line per section, as `<section>: <blocks> <lines> → <blocks> <lines>`. Two readings and one line of arithmetic are the whole cost. A run that cannot show the pair did not run the check, and "I ran it" is not the evidence — the numbers are.
+## Read at Step 2
 
-Where more than the append is in doubt, run the whole `## Structural invariants` check.
+1. `bin/sage-index.sh` — the one-line-per-KI index.
+2. Open the KI files the task matches: the band KIs for the unit shapes in the plan, the shared rules whose recogniser matches what is in front of you (with their stats sidecars for the counts), any watching lesson/gap/defect/contradiction KI touching the task's area. This is a judgment over the index, not a load-everything rule — the index is what makes selective loading possible, and the `use` line at Step 6 is what makes it honest.
+3. The journal tail since the last `mark` — the newest run lines are the same-shape rows pricing wants first (`shared/price-off-a-same-shape-row.md`).
+4. Check the two hint conditions (`## The hint`).
 
-### The closure act
+**Remember what you loaded.** The Step 6 `use` line names the KIs this run actually read and whether each helped — that line is the entire usage-statistics instrument, and a run that skips it is invisible to the KI review stage that retires dead knowledge. Keep it to one line; ceremony here is how bookkeeping prose dies.
 
-**Nothing used to take a row out of `watching`, and that is why every counter here only ever grew.** Eighteen of nineteen rows sat at `watching`; the one that had left was set by hand, with no rule authorising it. A trigger reading a table nothing ever drains fires forever, so closure is not tidiness — it is the half of the loop that makes the other half mean something.
+## Append at Step 6
 
-`Status` holds one of four states. **The state is the first word of the cell**, which is what makes it machine-readable: the rest of the cell is free payload, and live rows already carry it (`watching (run 6/10: hosted ~60 min over 8 dispatches …)`). Never test the cell for equality; test its first word.
+Automatic, every run, to `memory/journal.md` only, via shell append (`>>`) — never by rewriting the file:
 
-| `Status` | Means | Written by | Evidence it needs |
-| --- | --- | --- | --- |
-| `watching` | live and accumulating; the filing default | any run | none — this is where a row starts |
-| `settled → <artifact>` | the question the row asked has an answer, **and that answer is recorded where a future run will read it** | a run, at Step 6, **only for a row that same run settled**; and `/sage-promote` stage zero, for a `defect` row its own repair closed | the cell names the artifact: a Bands row, a Rules row, a corpus file and section, or a `shared.md` rule |
-| `promoted → Rules row "<name>"` | the row graduated into the rule set | `/sage-promote` stage one only | the named Rules row exists, and `Promoted` carries `shared <date>` |
-| `dropped → <reason>` | no longer worth watching: its subject is gone, or another row supersedes it | `/sage-promote` only — stage zero for a `defect` row whose subject was removed, stage one for a candidate another row supersedes | the cell names the superseding row, or what was removed |
+- **The `run` line, every run, hits included** — a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not. A run that handed over adds to this line's note: the handoff note's write cost, each generation's supervision cost, and the generation reached (`../SKILL.md`, `## Handover`).
+- **The `use` line** — every KI read at Step 2, `hit` or `miss: <why>`. A `miss` is the KI misleading the run, not the run not needing it; not-needed is simply absent from the line.
+- **`obs` lines as earned** — a new lesson, gap, defect or contradiction, with kind and class named, and a falsifier for anything that could one day be a rule; `confirm <ki-id>` where this run re-observed an existing KI (that is what makes counts reach three and mean it); `settle <ki-id>` where this run produced the artifact that answers a KI, naming the artifact — the closure evidence bar from `## Knowledge items` applies to the line, because promote will flip the status on its word.
 
-Three rules keep the act honest:
-
-- **A run may only close what that run settled.** Closing a row on the strength of reading it is how a watch list gets emptied by a run that measured nothing. If you did not produce the artifact, the row stays `watching`.
-- **`settled` requires the artifact to exist, not to be intended.** `settled → Bands row X` is a claim one grep checks, and the point of naming it is that a later reader can check it. **Building the mechanism a row complained about is not the same as settling the row**, and the difference is the whole of this rule: a row recording that some table has never gained an entry is settled when an entry lands, not when the code path that could produce one is written. Closing it early hides the only instrument that would have shown the path still does not work. This one is not hypothetical — the run that wrote this clause made exactly that mistake, closed such a row against a step that had never executed, and a refuter pointed at this sentence to overturn it.
-- **A row whose state is not `watching` is out of the promotion path — the `→ shared.md` trigger reads only live rows — and is exactly what the consolidation trigger counts** (`## The hint`), and `## Consolidate` may move it to the archive. That is the decrement: closure marks a row dead, consolidation carries it out, and the row count finally falls. **A closed row counts toward the consolidation trigger until the pass drains it, and deliberately so** — closed rows are half that trigger's count, so closing a row is what arms the pass that carries it out: closure schedules the drain rather than silencing it.
-
-**If your own write is what broke it, revert it — do not repair it in place.** Restore the file to its pre-append state and append again correctly. That is deliberately narrower than repair, and the narrowness is the point: "Do not repair the file" in `## Structural invariants` is a rule about a writer that cannot be trusted to see damage it caused itself, and an appender holding a check with two known blind spots is exactly that writer. Undoing your own change needs no such judgment. If the check still fails after the revert, the damage predates you — surface it and stop.
-
-## Consolidate
-
-Automatic when a trigger below holds, **at the start of a run, before `../SKILL.md` Step 2 reads memory**, on `local.md` only. That placement is the whole invoker — nothing else calls this pass, which is why a consolidation trigger raised at Step 6 clears at the next run's Step 2 instead of reprinting its hint forever, and why Step 2 never prices off unmerged rows. Rewrite into Bands and Rules, then compress to a pointer, every Run-log data row beyond the table's newest three — those three stay full, and they are exactly the rows the trigger's count excludes (`## The hint`), so a maximal pass leaves the trigger nothing to count; a pricing signal a compressed row carried belongs in the Bands or Rules row its pointer cites, never in extra rows kept full; **a rule a compressed row confirms takes the whole increment, not just a later date** — its `Count` rises, its `First → last` extends, and its `Provenance` gains `+ local run` where the confirmation is this machine's rather than a seed row's, reconciled against what the archive already narrates for that rule rather than against the live cell alone. Both halves have been lost in practice and both understate: a `Count` frozen while the archive narrates later confirmations, and a `Provenance` still reading `author's log (seed)` after local runs have confirmed the rule — which argues the wrong way to the next reader deciding whether that rule's band leans on seed evidence; and move out every Watch-list row whose `Status` no longer begins `watching` — settled, promoted or dropped, its work already recorded elsewhere by the act that closed it. Then move every consolidated original, verbatim, into `local-archive.md` beside it, each tagged with why it left — retired, compressed, or closed. **Closed watch rows are the Watch list's only drain**, and without this half the closure act above changes no count in this file. That archive first exists when the first pass runs, and Step 2 never reads it; it exists so one grep settles a rule's provenance.
-
-Two checks guard the write. **Both must pass, or the pass aborts and writes nothing** — no partial result, no question to the user. A human approving a diff is not this safeguard: the one recorded corruption on this machine landed *through* an approved diff and was found later by a check.
-
-1. **Self-check.** Every pre-pass row survives verbatim in exactly one place — **its own section or the archive** — and the count of survivors equals the pre-pass row total, since a compressed row's one-line summary is a pointer, not a survivor, and a closed watch row survives in the archive rather than in the Watch list; every band cites at least one run; every rule carries at least one date; the result is smaller than what it replaces; both files parse as markdown.
-2. **Structural invariant check**, against the section below.
-
-A pass that produced no change reports `nothing to consolidate` and ends, writing nothing and running neither check — so a second pass straight after a first proposes nothing.
+Then read the tail back — `tail -n 5 memory/journal.md` — and confirm your lines are there, whole, one line each. That is the entire post-append check. There is no table arithmetic, no before-and-after block count, and no revert protocol, because there is nothing an append can structurally break: the failure modes those checks guarded died with the tables.
 
 ## The hint
 
 Sage detects, prints one line, and stops. **Promotion is never automatic**; the user runs `/sage-promote`.
 
-```
-sage: 3 rules ready → shared, 1 → skill text, 1 retirement candidate. Run `/sage-promote`.
-```
-
-| Target | Trigger |
+| Trigger | Condition |
 | --- | --- |
-| → `shared.md` | **A Rules row** reaches 3 confirmations, is marked machine-independent, is not already in `shared.md`, and its `Promoted` cell either records no `retired` or the Rules row's last-confirmation date is newer than that `retired` date — a retired rule re-qualifies only on evidence dated after its retirement, never on its old count. **A Watch-list row** qualifies on the same shape read from its own columns: `Kind` is `lesson`, `Count` reaches 3, `Class` is `portable`, `Status` begins `watching`, and `Promoted` records no `refused` dated later than the row's last confirmation |
-| → skill text | A rule in `shared.md` reaches 6 confirmations and its `Promoted` cell does not yet record `skill` or `refused`, or a rule's count-derived band (the thresholds in `shared.md`'s header) **exceeds** its block's `- Band:` field — a crossing: `/sage-promote`'s stage one re-writes the field, its stage two re-tags wherever skill text cites it. **Exceeds, never merely disagrees, and the direction is the whole of the rule:** a band rises by arithmetic and falls only by eviction, which is this corpus's model everywhere else — lowering confidence needs a fired falsifier or two contradicting confirmations, and a symmetric crossing is the one mechanism here that could take confidence away with neither. It bites hardest across machines, because counts live in each machine's own `local.md` and never travel: machine A promotes a rule to `established` and commits the block; machine B pulls, reads its own lower count, and writes the field back down in a clean single-block edit that raises no merge conflict at all. A count-derived band **below** the standing field is therefore not a crossing — it is a machine that has seen less, and it files a watch row if it files anything |
-| → retirement | A rule's falsifier condition was observed, or two confirmations contradict it |
-| → model lineup | The harness stamp in `local.md` is older than the build `claude --version` reports, or a Watch-list row records a `message.model` value absent from `harness.md`'s tier snapshot table |
-| → consolidation | **Actionable rows ≥ 10** — an actionable row is a Watch-list data row whose `Status` cell's first word is not `watching`, or a non-pointer Run-log data row other than the table's newest three (the counting rule and command are below) — or two rows disagree on one band, or structural damage, or a version-bound claim older than the recorded harness version |
+| → `/sage-promote` | the journal holds **≥ 25 payload lines after the last `mark`** (`grep -c` after the last mark line; no mark → count all payload lines) |
+| → model lineup | the `harness-stamp` KI's build is older than what `claude --version` reports |
 
-Every trigger reads `local.md`'s Rules and Watch list tables — `Count`, `Class`, `Contradicts`, `Promoted`, and `Rule` matched by name against `shared.md`'s `##` headings — plus, for a band crossing, the matched block's `- Band:` field, and, for the lineup trigger alone, one `claude --version` read and one scan of Watch-list text for recorded `message.model` values against the snapshot table's names — and, for the consolidation trigger, the Watch-list `Status` column and the Run log. All are machine-checkable with no judgment, so a hint that fires is a fact rather than an opinion.
+Two, deliberately, where v2 ran five. The promotion, band-crossing and retirement triggers read aggregates — counts against thresholds across every KI — that only `/sage-promote` acts on, so v3 computes them where they are consumed: the pass builds its own slate (its KI-review stage). A run's whole duty is these two lines' worth of checks; both are clearable by the action they call for, which is what makes a hint information rather than noise.
 
-**The watch-row clause needs no name match, and that is deliberate.** A Rules row is matched against `shared.md` by name because it has one; a watch row holds an observation paragraph instead, so "is not already in `shared.md`" needs no test — a row still on the watch list is by definition not yet a rule. Naming it is judgment, and judgment belongs to `/sage-promote`, which mints the rule name when it promotes the row. **`Kind` must be `lesson`** because the other three are not rules: a `gap` is a programme of work, a `defect` is a repair job, and a `contradiction` routes to `→ retirement` instead. Dropping that condition is how a measurement programme gets promoted as though it were a lesson. The lineup hint is deliberately best-effort — it sees a new build and a new name, never a price or window change behind an unchanged name; `/sage-promote` stage three's unconditional vendor-docs read is what covers that gap when it runs.
+The bar of 25 inherits v2's bar-of-10 economics: each run appends ~2–4 lines, so the hint re-fires within roughly eight to twelve runs even with nothing else accumulating. **Falsifier:** the hint fires on more than half of the next ten runs, or the journal sits past ~60 unmarked lines with the hint fired and no pass run — either reading means the bar is mis-sized; re-derive it from a measured pass, never by moving the number to make a hint go quiet.
 
-**The consolidation trigger counts only what a pass may drain, and that is what makes it clearable at all.** A trigger must be clearable by the action it fires. Of everything `## Consolidate` licenses, exactly two moves drain rows from this file's tables — moving closed Watch-list rows out to the archive, and compressing Run-log rows beyond the table's newest three to pointers — so those two row kinds are the whole count. Bands and Rules rows are outside it: a pass rewrites them, and may retire one a rewrite supersedes, but their tables never drain on the pass's schedule. `watching` Watch rows are outside it because a pass may not touch them at all. The trigger's first form counted every non-pointer data row against a bar of 40, plus a ~10k-token size clause: measured 2026-08-25, the file's undrainable floor — Bands 14, Rules 12, `watching` Watch rows ~45 — stood at ~71 rows, and the structural sections alone measured ~12–16k tokens against the size clause's ~10k bar, so both clauses were permanently on, the hint fired on every run carrying no information, and a maximal pass (every drainable row drained) moved the count 78 → 75. The two escalated repairs — count only what moves, or scale the bar with the structural sections — are one repair: `movable ≥ K` is `total ≥ structural + K`, a bar that scales by construction.
+## Promotion, consolidation, eviction
 
-**An actionable row is:** a Watch-list data row whose `Status` cell's first word is not `watching` (`### The closure act` — the state is the first word; these are what the pass drains), or a non-pointer Run-log data row other than the table's newest three (those stay full for Step 2's same-shape pricing, and `## Consolidate` binds the pass to the same three, which is what lets a maximal pass drive this count to 0). A **pointer row** is a Run-log row whose `note` cell — its last — begins ``Compressed → `local-archive.md` ``. Both tests read the row's **last cell**, matched on the cell boundary and never on the whole line, because a row merely *quoting* either string mid-cell must not move the count: measured on a fixture, a whole-line pointer test dropped a full Run-log row whose task-class cell began with the pointer string — an under-count, the direction that silently disarms the trigger. Residual, named so a reader can weigh it: a last cell carrying a raw `|` (backticks included — awk cannot see markdown) splits wrong and over-counts, which fires the hint early rather than never; no row on this machine has yet carried one.
+All three belong to **`/sage-promote`**, a separate skill, on the user's word only — consolidation included, which in v2 ran automatically at Step 2 and in v3 is the pass's first stage. A run never loads the procedures it will not run.
 
-**The bar is 10, derived from the pass's own economics — and from the one deterministic inflow.** Every run appends one Run-log row, and a row kept full at pass time starts counting once three newer rows exist, so actionable rises by at least one per run and the hint re-fires after at most ten runs even with zero closures — sooner as closures land. The pass's overhead is fixed whatever it drains (baseline snapshot, two guard checks, verbatim archive append), and per-pass drains measured on this machine's archive ran 3–21 rows (7, 14, 21, 4, 8, 3 across the six pass-dates to 2026-08-25), so 10 sits inside the measured range and buys several quiet runs after a maximal pass. **Falsifier:** across the next ten runs the hint fires on more than half of them, or actionable sits past ~20 with the hint having fired and no pass run — either reading means the bar is mis-sized; re-derive it with a measured pass, never by moving the number to make a hint go quiet. One command settles the number:
+`/sage-promote` reads this file for three things and writes none of it: the KI shapes and journal grammar above, which tell it what to ingest and mint; `## Structural invariants`, which its preflight checks; and `## The compression floor`, which bounds what its corpus edits may remove. It writes `shared/`, `local/`, the journal's `mark` line, `archive/`, and — at its gated stages — sage's own corpus, `bin/*.sh`, and the model lineup's agent sources.
 
-```sh
-awk '
-  /^## /{s=$0}
-  !/^\|/ || /^\| *---/ {next}
-  {
-    line=$0; sub(/\|[[:space:]]*$/,"",line); n=split(line,c,"|")
-    cell=c[n]; sub(/^[[:space:]]+/,"",cell)
-  }
-  s=="## Watch list" && !/^\| Observation \|/ {
-    if (cell !~ /^watching/) a++
-  }
-  s=="## Run log" && !/^\| date \|/ {
-    r++; ptr[r] = (cell ~ /^Compressed → `local-archive\.md`/) ? 1 : 0
-  }
-  END{ for(i=1;i<=r-3;i++) if(!ptr[i]) a++; print a+0 }
-' ~/.claude/skills/sage/memory/local.md
-```
-
-**The path here and in the append check above is the installed file; substitute it when working on a copy.** Counting any other way does not make the trigger stricter, it makes it dead — the first form proved it: a hint that fires on every run carries no information about any run. What the retired size clause watched — Step 2's read cost of an ever-growing file — is real and is deliberately not re-attached here, because consolidation cannot move it: only closure, promotion, dropping and eviction shrink the structural sections, and a Watch-list `gap` row in `local.md` is the standing record that no instrument reads that growth yet.
-
-## Promotion and eviction
-
-Both belong to **`/sage-promote`**, a separate skill, on the user's word only. A run never loads
-the procedure it will not run: a run's whole duty is the hint above — detect, print one line, stop.
-
-`/sage-promote` reads this file for three things and writes none of it: the triggers above, which
-tell it what its candidates are; `## Structural invariants` below, which its preflight checks
-`local.md` and `shared.md` against; and `## The compression floor` below, which bounds what its
-corpus edits may remove. It writes `shared.md`; the `Promoted` cells, watch-list rows, harness stamp and one
-run row in `local.md`; `local-archive.md`; and — at its zeroth, second and third stages — sage's own
-corpus, its `bin/*.sh` scripts, and the model lineup's agent sources, repo and installed.
-
-Eviction is the same skill's, for the same reason: a rule whose `Falsifier` fires leaves
-`shared.md` **with the observation attached**, and any skill text citing its band comes out with
-it. A falsifier firing surfaces as a hint line like any other. It never rewrites `shared.md` on
-its own.
+Its KI-review stage is the retirement path that v2 lacked in practice: disuse (`uses` at zero across passes) and recorded misses are first-class signals there, beside the fired falsifiers and contradictions v2 already recognised. A rule whose `Falsifier` fires still leaves `shared/` **with the observation attached**, and any skill text citing its band comes out with it.
 
 ## Structural invariants
 
-This section is the contract the invariant check tests against: a check written from this section and nothing else is a complete check. The repo's `../memory/local-seed.md` — what the installer copies once to create `local.md` — is a file that satisfies every marker below, so it doubles as the worked example and as the check's own fixture.
+The contract the checks test against — a check written from this section and nothing else is a complete check. The repo's `memory/local-seed/` satisfies every **file-level** marker below (the journal sentinel and the KI shapes), so it doubles as the worked example and the fixture for those; marker 4's directories and symlink exist only on an installed tree, where the installer creates them.
 
-**`local.md`** — the sentinel, then these `##` sections in this order, none missing, none repeated, no other `##`:
+1. **The journal**: line 1 is exactly `<!-- sage-local-memory v3 -->` — the header sentinel the installer greps; absent, the file is not sage memory and every pass aborts before reading further. Every payload line matches `^<date> (run|obs|use|mark) ` in shape. A line that does not is surfaced by promote's consolidation as a question, never silently dropped and never "repaired".
+2. **Every KI file**: opens with a `---` fence on line 1, closes the frontmatter with a second `---`, and carries at least `id:`, `kind:`, `status:`. `kind` is one of `rule`, `stats`, `band`, `lesson`, `gap`, `defect`, `contradiction`, `stamp`. A file under `shared/` carries `class: portable` and no `count`, `first`, `last`, `uses` or absolute cost; a `stats` file carries a `for:` naming an existing shared KI id; a `lesson`/`gap`/`defect`/`contradiction` file carries `class:` and `count:`; a `band` file carries `name:` (the field contract above lists the rest, and the usage fields are legal on any **local** KI only).
+3. **The stamp KI** holds exactly one line matching `^sage-harness-stamp: ` — the lineup hint compares against it, so a rewrite that drops or reflows it disarms that hint with nothing to show for it.
+4. **`memory/shared`** is a symlink whose target resolves; **`memory/local/`** and **`memory/archive/`** are real directories.
 
-1. Line 1 is exactly `<!-- sage-local-memory v2 -->` and line 2 is exactly `# Sage local memory`. **v2 (2026-08-20) added `Class` and `Promoted` to the Watch-list table**; a `local.md` still reading `v1` has a six-column Watch list, fails marker 5 below, and must gain the two cells in every row before any pass will run on it — which is exactly what the installer's drift notice exists to announce, and why the sentinel had to move with the format rather than after it. This is the **header sentinel**; absent, the file is not sage local memory and the pass aborts before reading further. **The installer greps this line** — `sage-local-memory` — rather than diffing the header, so consolidation must carry it through verbatim. Comparing anything sage itself is licensed to rewrite would latch the drift notice on permanently; a sentinel that moves only when the format really moves lets the notice go quiet the moment the answer is yes.
-2. `## Harness version stamp`, holding exactly one line matching `^sage-harness-stamp: `. Consolidation carries that line through unchanged and on one line, because the version-bound consolidation trigger above compares against it — a rewrite that drops or reflows it disarms that trigger with nothing to show for it.
-3. `## Bands`, holding one table, header row exactly `| Class | Figure | Qualifiers | Evidence |`.
-4. `## Rules`, holding one table, header row exactly `| Rule | Count | First → last | Provenance | Class | Promoted |`.
-5. `## Watch list`, holding one table, header row exactly `| Observation | Kind | Count | First → last | Contradicts | Class | Promoted | Status |`. `Class` and `Promoted` sit in the same order they take in the Rules table above, immediately before this table's own state column, because the promotion triggers read the two tables with one rule and a column order that disagreed between them would be a second rule to keep in step.
-6. `## Run log`, holding one table, header row exactly `| date | task class | agents | est | actual | wall clock | note |`, and it is the **last section in the file** — that is what makes the append's end-of-file anchor correct.
+**On failure: quarantine, never repair.** A malformed KI is skipped and surfaced by name; a broken journal sentinel or symlink aborts the pass that found it. No writer repairs the shape it is validating against — a rewriter that does cannot detect damage it caused itself.
 
-**`shared.md`** — a header block, then one rule per `##` block and nothing else at `##`. Every block carries exactly five fields in this order: the **rule** as a bold sentence on the first non-blank line under the heading, then four list items beginning `- Qualifier:`, `- Recogniser:`, `- Band:`, `- Falsifier:`. `Band` is one of `established`, `recurring`, `provisional`. No date, no confirmation count and no absolute cost appears anywhere in the file; ratios and discount factors do, because the skill computes with them.
-
-**On failure: abort, write nothing, and surface one line** naming the marker that failed and the file it failed in. Do not repair the file — a rewriter that repairs the shape it is validating against cannot detect the damage it caused itself.
-
-**Its blind spot, stated so you compensate for it: this check catches structural damage, never a wrong rule.** A perfectly shaped file full of false bands passes every marker above. Falsifiers and eviction are the only defence against that second failure, and they run on the user's word rather than on a check.
+**The blind spot, stated so you compensate for it: these checks catch structural damage, never a wrong rule.** A perfectly shaped KI full of false claims passes every marker. Falsifiers, misses, and eviction are the only defence against that second failure, and they run on the user's word rather than on a check.
 
 ## The compression floor
 

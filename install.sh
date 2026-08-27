@@ -207,15 +207,16 @@ drift_calibration_header() { # drift_calibration_header <seed> <installed>
   fi
 }
 
-# Sage's local memory does NOT get the byte comparison above, and reusing it here would be a bug.
-# Sage's own consolidation pass is licensed to rewrite that file in place, so any byte comparison
-# against the seed latches on permanently the first time consolidation runs, and then blames the
-# seed for a change sage made itself. What it compares instead is the header sentinel
+# Sage's journal does NOT get the byte comparison above, and reusing it here would be a bug.
+# Every sage run appends lines to it, and /sage-promote's consolidation stage is licensed to
+# drain it, so any byte comparison against the seed latches on permanently after the first run
+# and then blames the seed for a change sage made itself. What it compares instead is the header
+# sentinel
 #
-#     <!-- sage-local-memory v1 -->
+#     <!-- sage-local-memory v3 -->
 #
-# which sage-claude/references/memory.md, "Structural invariants", declares as line 1 of local.md
-# and requires every consolidation to preserve verbatim — so it survives the one rewrite a byte
+# which sage-claude/references/memory.md, "Structural invariants", declares as line 1 of
+# journal.md and requires every drain to preserve verbatim — so it survives the rewrites a byte
 # comparison cannot survive, and it moves only when the format really does. That makes the notice
 # ask the question that matters, is this file still the shape the current sage expects, and go
 # quiet again as soon as the answer is yes. A seed carrying no sentinel cannot be compared against,
@@ -234,11 +235,53 @@ drift_memory_sentinel() { # drift_memory_sentinel <seed> <installed>
   fi
   if [ "$want" != "$have" ]; then
     echo
-    echo "NOTE: sage's memory format is now \"$want\"; your memory/local.md says"
+    echo "NOTE: sage's memory format is now \"$want\"; your memory/journal.md says"
     echo "      \"${have:-nothing}\". Your copy was left untouched, because it holds this machine's"
     echo "      numbers. This note repeats until the two sentinels match. To see what moved:"
     echo "        diff $1 $2"
   fi
+}
+
+# Sage's v3 memory is a tree, not a file, so it cannot ride install_skill's one-file seed step.
+# Three machine states, three answers, checked in this order:
+#   v3 machine    -> journal.md exists: compare its sentinel to the seed's
+#   v2 machine    -> local.md exists and journal.md does not: the data is this machine's numbers
+#                    in the old shape, so migrate by hand (the design doc's Migration section),
+#                    never here — auto-migrating user data is how it gets lost
+#   fresh machine -> copy the seed tree once (journal.md + local/), create archive/
+seed_sage_memory() { # seed_sage_memory <src> <dest>
+  local seed="$1memory/local-seed" mem="$2memory"
+  if [ ! -f "$seed/journal.md" ]; then
+    echo "NOTE: $seed/journal.md is missing; sage's memory was not seeded."
+    return 0
+  fi
+  if [ -f "$mem/journal.md" ]; then
+    # The directories are cheap to re-create and nothing else repairs them, so a v3 machine
+    # that lost one gets it back here rather than failing sage's invariant check later.
+    mkdir -p "$mem/local" "$mem/archive"
+    drift_memory_sentinel "$seed/journal.md" "$mem/journal.md"
+    return 0
+  fi
+  if [ -f "$mem/local.md" ]; then
+    echo
+    echo "NOTE: sage's memory format is now v3 — a journal plus one file per knowledge item."
+    echo "      Your memory/local.md is the v2 format and was left untouched, because it holds"
+    echo "      this machine's numbers. This note repeats until the migration runs. Migrate by"
+    echo "      hand: 'Migration' in the source repo's 2026-08-27-sage-memory-v3-design.md."
+    if [ -L "$mem/shared.md" ]; then
+      echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
+      echo "      memory/archive/shared-v2.md); the migration removes it."
+    fi
+    return 0
+  fi
+  mkdir -p "$mem/local" "$mem/archive"
+  cp "$seed/journal.md" "$mem/journal.md"
+  # An explicit loop, not `cp "$seed/local/"*.md`: under set -e an unmatched glob makes cp
+  # abort the whole install after the journal landed but before the shared symlink exists.
+  for _seed_ki in "$seed/local/"*.md; do
+    [ -f "$_seed_ki" ] && cp "$_seed_ki" "$mem/local/"
+  done
+  printf 'Seeded %-20s-> %s\n' "journal.md + local/" "$mem/"
 }
 
 # The subagents skill. calibration.md accumulates real run costs on this machine, and
@@ -250,22 +293,22 @@ install_skill "$subagents_src" "$subagents_dest" \
   calibration.md calibration.md drift_calibration_header \
   '/calibration.md' '/calibration-archive.md'
 
-# The sage skill. Its whole memory/ directory is user data: local.md and local-archive.md are
-# written by sage itself, and shared.md is the symlink created below. Nothing in the installed
+# The sage skill. Its whole memory/ directory is user data: journal.md and local/ are written
+# by sage and /sage-promote, and shared is the symlink created below. Nothing in the installed
 # memory/ is a copy of a repo file, so --delete must never reach into it — which also means
-# local-seed.md is never installed, only read from the repo by install_skill's seed step.
+# local-seed/ is never installed, only read from the repo by seed_sage_memory.
 sage_src="$repo_dir/sage-claude/"
 sage_dest="$HOME/.claude/skills/sage/"
-shared_src="$repo_dir/sage-claude/memory/shared.md"
-shared_link="${sage_dest}memory/shared.md"
+shared_src="$repo_dir/sage-claude/memory/shared"
+shared_link="${sage_dest}memory/shared"
 
 if [ -d "$sage_src" ]; then
-  install_skill "$sage_src" "$sage_dest" \
-    memory/local-seed.md memory/local.md drift_memory_sentinel \
-    '/memory/'
+  mkdir -p "$sage_dest"
+  rsync -av --delete --exclude='/memory/' "$sage_src" "$sage_dest"
+  seed_sage_memory "$sage_src" "$sage_dest"
 
-  # Shared memory is ONE physical file, living in the repo and reached through a symlink. Sage
-  # writes ~/.claude/skills/sage/memory/shared.md, the bytes land in the working tree where git
+  # Shared memory is ONE physical directory, living in the repo and reached through a symlink.
+  # Sage writes ~/.claude/skills/sage/memory/shared/, the bytes land in the working tree where git
   # sees them, and there is never a second copy to fork — which is the failure the install-vs-repo
   # calibration split already demonstrated. The link is absolute and points into the clone this
   # script was run from, so a machine with two clones tracks whichever one installed last.
@@ -299,7 +342,7 @@ if [ -d "$sage_src" ]; then
   # rsync -a carries the source mode across, so this only matters when the repo's copy lost its
   # executable bit (a zip download, a checkout with no exec support). The watchdog is spawned as a
   # command, so a probe that is not executable disables the watchdog on every run.
-  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh; do
+  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh sage-index.sh; do
     if [ -f "${sage_dest}bin/$_sage_bin" ]; then
       chmod +x "${sage_dest}bin/$_sage_bin"
     fi

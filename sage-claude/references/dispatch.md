@@ -100,7 +100,7 @@ Written at Plan time, restamped at every bring-current point. The `Generation` a
 
 ### Plan
 
-Written at `../SKILL.md` Step 2, in full, before any dispatch. Estimating: read `../memory/shared.md` for the estimating rules and `../memory/local.md` for the bands.
+Written at `../SKILL.md` Step 2, in full, before any dispatch. Estimating: read the shared rule KIs (`../memory/shared/`) for the estimating rules, and the band KIs (`../memory/local/`) plus the journal tail for this machine's figures.
 
 ```text
 TASK: <one line>
@@ -190,8 +190,8 @@ Coordination check: <what depended on the agents being independent — a disagre
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective or product checkpoints, if any>
 Assumptions: <one condensed line from the assumption log — the calls that would change the answer if wrong>
-Memory check: <the append's before-and-after readings, one line per section touched, as `<section>: <blocks> <lines> → <blocks> <lines>` (`../references/memory.md`, `## Append`). This is the only audit trail the guard on every memory write leaves, so "ran it" is not an entry here — the numbers are. "none — nothing appended" is a legal value and says which>
-Lessons: <the note from the row appended to `../memory/local.md` this run, mirroring that column verbatim — the lesson a future run can act on, or "none beyond the actuals". `../SKILL.md` Step 6 writes the row; this line is what makes it renderable>
+Memory check: <the journal read-back after the append — the lines this run added, counted, as `journal: +N lines, tail verified` (`../references/memory.md`, `## Append at Step 6`). "Ran it" is not an entry here — the count is. "none — nothing appended" is a legal value and says which>
+Lessons: <the note from the `run` line appended to `../memory/journal.md` this run, mirrored verbatim — the lesson a future run can act on, or "none beyond the actuals". `../SKILL.md` Step 6 writes the line; this one is what makes it renderable>
 ```
 
 The **Result** — the deliverable in prose, standing alone — is printed by `../SKILL.md` Step 6 on every run and never lives only here. `OUTCOME:` is one line inside a template, and a template line compresses a deliverable into a pointer.

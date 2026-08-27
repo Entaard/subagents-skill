@@ -16,9 +16,9 @@
 #   sage-lint.sh --help
 #
 #   <ledger-path>       The one file to check. Required, exactly one.
-#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never an
-#                        eleventh
-#                        ledger check: it checks a sage skill DIRECTORY's own corpus for
+#   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a
+#                        twelfth ledger check: it checks a sage skill DIRECTORY's own
+#                        corpus for
 #                        dangling `.md` citations, not a ledger. `<dir>` must carry a
 #                        readable `SKILL.md`; `--corpus` with no following argument, or with
 #                        more than one argument total, is a usage error (exit 2) exactly like
@@ -68,8 +68,10 @@
 #     Fires: the comment carries no `Generation: <N>` field, or N is not a bare positive
 #       integer (this is what catches both a literal `0` and a fraction like `0/3` — neither
 #       is "a generation", one is the zero-eth and the other is not a count at all); or the
-#       comment carries no `role:` field, or the role word is neither `parent` nor
-#       `supervisor`.
+#       comment carries no `role:` field, or the role word is none of `parent`,
+#       `supervisor` or `successor`. All three are legal actors; WHICH one writes the field
+#       when is defined in `../references/dispatch.md` `## The ledger` and is deliberately
+#       not restated here.
 #     Cannot see: whether the Generation number is actually RIGHT for this run — only that it
 #       is a well-formed positive integer.
 #
@@ -207,9 +209,36 @@
 #         cell (a code span, say) slides every later column along. The one violation this
 #         check produced over the whole local corpus was exactly that, and the text it
 #         reported was a fragment of a jq command. A stray pipe is named in FAIL QUIET as a
-#         parse to stay silent on, so it stays silent.
+#         parse to stay silent on, so it stays silent. Re-measured 2026-08-27 and the trade
+#         holds harder than it read — `findings-shape` below carries the figure. That check
+#         reads these same over-long rows for a NARROWER signature and fires on none of them.
 #       - A findings table under a differently-named heading, for the same reason
 #         `triage-orphan` cannot see one: the heading is what locates the table.
+#
+#   findings-shape
+#     Reads: the SAME table `triage-orphan` reads as its triage set — the first table under
+#       the FIRST exact `Findings and dispositions` heading — and its SHAPE rather than its
+#       words: each data row's cell count against the header row's, and where a row is
+#       over-long, the contents of the overflow. It rides the same header walk, so "which
+#       table is the findings table" keeps one owner across all three checks.
+#     Fires: a data row splits into MORE cells than the header AND carries an empty interior
+#       cell immediately followed by a finding-shaped id — the signature of a finding folded
+#       onto the previous row's line by a stray `||`. Such a finding has no row of its own,
+#       so it has no id for `triage-orphan` to fire on and no triage cell for `triage-state`
+#       to rule on: before this check, a clean lint and a complete table were
+#       indistinguishable, and one real ledger shipped a `major` that way.
+#     Cannot see: an over-long row with no empty cell at the join, or a fold whose second id
+#       does not match the id shape — both are silence, never a false alarm, which is the
+#       same trade `triage-orphan` makes on ids. Deliberately NOT a plain cell-count check:
+#       that one is unusable here. THE MEASUREMENT, stated once in this file and pointed at
+#       from the other two places that lean on it: over the 31 real ledgers on this machine
+#       (2026-08-27, counted by this script's own table walk, not a re-implementation of it)
+#       the first Findings table holds 15 over-long data rows and 1 short one across 11
+#       files — 16 shape-mismatched rows, every one of them a legitimate cell holding a `|`
+#       (a jq command, a code span). A plain cell-count check reports all 16. The narrow
+#       signature reports none of them, and reports the folded fixture. It also cannot see a
+#       finding that never reached the page at all — that gap closes at harvest time, not at
+#       commit time.
 #
 #   plan-unit
 #     Reads: the first table under the FIRST `Plan` heading and the first table under the
@@ -323,8 +352,8 @@
 #       on the spliced fixture.
 #
 # ---------------------------------------------------------------------------
-# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not an eleventh ledger check.
-# It never reads a ledger and the ten checks above never run in it. It exists because the live
+# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a twelfth ledger check.
+# It never reads a ledger and the eleven checks above never run in it. It exists because the live
 # corpus cited a document that was deleted, `sage-plan-integrity-round3.md`, and nothing
 # caught it for weeks — the citation just sat there, dead.
 #
@@ -359,7 +388,7 @@
 #       one violation per citation SITE, so the same dangling filename cited three times (as
 #       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
 #       collapsed line, because each site is a separate promise that broke.
-#     Cannot see (stated plainly, the same convention as the ten checks above):
+#     Cannot see (stated plainly, the same convention as the eleven checks above):
 #       - a path cited inside a fenced code block as an example — deliberately not a citation;
 #       - a path built by string interpolation or otherwise assembled at read time, since this
 #         is a text scan of the literal backtick span, never an interpreter;
@@ -403,7 +432,7 @@
 #       means `<dir>` is unreadable, not a directory, or has no readable `SKILL.md`.
 #
 # ---------------------------------------------------------------------------
-# BLIND SPOTS, stated rather than hidden — none of the ten checks above can see:
+# BLIND SPOTS, stated rather than hidden — none of the eleven checks above can see:
 #   - a briefing error (a unit given the wrong instructions can still fill every cell out
 #     legally);
 #   - a wrong-path reproduction (a command that measured the wrong thing but is quoted
@@ -463,8 +492,8 @@ usage() {
     '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger (or, in' \
     '       --corpus mode, dir unreadable/not-a-dir/no SKILL.md).' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
-    'Checks: header header-fields state-enum triage-orphan triage-state plan-unit' \
-    '        disclosure-home sections amend-tag splice         (ledger mode, all ten)' \
+    'Checks: header header-fields state-enum triage-orphan triage-state findings-shape' \
+    '        plan-unit disclosure-home sections amend-tag splice (ledger mode, all eleven)' \
     '        corpus-citation                                  (--corpus mode, its one check)'
 }
 
@@ -753,8 +782,8 @@ if [ "$HEADER_OK" -eq 1 ]; then
 
   if printf '%s' "$LINE1" | grep -q 'role:'; then
     ROLE=$(printf '%s' "$LINE1" | sed -n 's/.*role:[[:blank:]]*\([A-Za-z]*\).*/\1/p')
-    if [ "$ROLE" != "parent" ] && [ "$ROLE" != "supervisor" ]; then
-      add "sage-lint header-fields $FILE:1 role is neither 'parent' nor 'supervisor': '$ROLE'"
+    if [ "$ROLE" != "parent" ] && [ "$ROLE" != "supervisor" ] && [ "$ROLE" != "successor" ]; then
+      add "sage-lint header-fields $FILE:1 role is none of 'parent', 'supervisor', 'successor': '$ROLE'"
     fi
   else
     add "sage-lint header-fields $FILE:1 header comment carries no role: field"
@@ -962,6 +991,26 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
             printf "sage-lint triage-state %s:%d finding '"'"'%s'"'"' has an empty triage cell\n", FILE, NR, tok
           else if (tri !~ /(^|[^a-z])(accepted|rejected|deferred|user decision|merged|retracted|disclosed)([^a-z]|$)/)
             printf "sage-lint triage-state %s:%d finding '"'"'%s'"'"' is parked outside every disposition word: '"'"'%s'"'"'\n", FILE, NR, tok, substr(trim(cells[find_tri]), 1, 60)
+        }
+        # findings-shape. A finding folded onto a NEIGHBOURING row line has no row of its
+        # own: no id for triage-orphan to fire on, no triage cell for triage-state to rule
+        # on, so a clean lint and a complete table are indistinguishable. Measured on a
+        # real ledger, which held a major that way, joined by a stray double pipe.
+        # Narrow on purpose. An over-long row ALONE is the stray-pipe parse FAIL QUIET stays
+        # silent on, and it is common -- the header entry for findings-shape carries the
+        # measurement and is its one home. What fires here is the JOIN signature: an empty
+        # interior cell immediately followed by a finding-shaped id, which no legitimate
+        # over-long row in that corpus carries and a double-pipe fold always does.
+        # Red-checked against a folded fixture, which it names correctly, and green-checked
+        # against a cell holding a jq pipe -- the exact false positive a cell-count test
+        # produces.
+        if (is_find && find_ncell > 0 && n > find_ncell) {
+          for (fs = 2; fs < n; fs++) {
+            if (trim(cells[fs]) == "" && is_id(idtoken(cells[fs + 1]))) {
+              printf "sage-lint findings-shape %s:%d finding id %s is folded into this row: the line splits into %d cells against the header row %d, so that finding has no row of its own and no triage cell\n", FILE, NR, idtoken(cells[fs + 1]), n - 2, find_ncell - 2
+              break
+            }
+          }
         }
         if (is_unit && tok != "") unit_id[tok] = 1
         if (section == "Decisions and deviations" && tok ~ /^D[0-9]+$/) dec_id[tok] = 1

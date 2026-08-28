@@ -277,7 +277,7 @@ seed_sage_memory() { # seed_sage_memory <src> <dest>
     fi
     echo "      This note repeats until the migration runs. The migration is an agent task, not a"
     echo "      script: ask Claude to run the 'Migration procedure' in the source repo's"
-    echo "      2026-08-27-sage-memory-v3-design.md against this machine's local.md."
+    echo "      docs/designs/2026-08-27-sage-memory-v3-design.md against this machine's local.md."
     if [ -L "$mem/shared.md" ]; then
       echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
       echo "      memory/archive/shared-v2.md); the migration removes it."
@@ -294,11 +294,134 @@ seed_sage_memory() { # seed_sage_memory <src> <dest>
   mkdir -p "$mem/local" "$mem/archive"
   cp "$seed/journal.md" "$mem/journal.md"
   # An explicit loop, not `cp "$seed/local/"*.md`: under set -e an unmatched glob makes cp
-  # abort the whole install after the journal landed but before the shared symlink exists.
+  # abort the whole install after the journal landed but before local/ is populated.
   for _seed_ki in "$seed/local/"*.md; do
     [ -f "$_seed_ki" ] && cp "$_seed_ki" "$mem/local/"
   done
   printf 'Seeded %-20s-> %s\n' "journal.md + local/" "$mem/"
+}
+
+# sync_sage_shared <template-dir> <clone-dir> -- copies every file the template ships into the
+# installed clone, one direction only. The template always wins: a differing clone file can only
+# be a hand edit or a stale copy, never a legitimate machine-side change (/sage-promote lands its
+# writes in the template first, then copies the same bytes to the clone), so it is backed up, not
+# merged. A clone file the template no longer ships was retired by another machine's promote pass;
+# it moves to archive/ rather than being deleted outright.
+sync_sage_shared() {
+  local tmpl="$1" clone="$2" archive_dir file rel
+  local added=0 updated=0 archived=0
+
+  if [ ! -d "$tmpl" ]; then
+    echo "NOTE: $tmpl does not exist; sage's shared memory was not synced."
+    return 0
+  fi
+
+  if [ -e "$clone" ] && [ ! -d "$clone" ]; then
+    # A file or a symlink sitting where the clone directory belongs. mkdir -p below would fail
+    # on it and set -e would abort the run half-done, so it is preserved and cleared first, the
+    # same bargain the eco-skills loop gives a stray non-directory.
+    backup "$clone" sage-memory
+    rm -f "$clone"
+    echo "NOTE: $clone was not a directory; replaced it with the shared-memory clone."
+  fi
+
+  archive_dir="$(dirname "$clone")/archive"
+  mkdir -p "$clone"
+
+  # One backup of the whole clone, taken before anything below is written -- not one per file --
+  # so a second, unchanged run produces no backup at all.
+  if shared_clone_diverges "$tmpl" "$clone"; then
+    backup_once "$clone" sage-memory
+  fi
+
+  # An explicit loop, not `cp "$tmpl/"*`: under set -e an unmatched glob (an empty template)
+  # would abort the install, the same reason seed_sage_memory's local/ loop above is explicit.
+  for file in "$tmpl"/*; do
+    [ -f "$file" ] || continue
+    rel="$(basename "$file")"
+    if [ -L "$clone/$rel" ]; then
+      # A symlink at a template filename is never something this sync created. Writing the
+      # template's bytes through `cp` onto an existing symlink follows it and clobbers whatever
+      # it points at, so the link is removed first and the real file copied into its place.
+      backup_symlinked_shared "$clone/$rel"
+      rm -f "$clone/$rel"
+      cp "$file" "$clone/$rel"
+      updated=$((updated + 1))
+    elif [ ! -e "$clone/$rel" ]; then
+      cp "$file" "$clone/$rel"
+      added=$((added + 1))
+    elif [ -d "$clone/$rel" ]; then
+      # A directory squatting on a template filename: `cp` onto it would nest the file inside
+      # and the clone would never converge. The whole-clone backup above already preserved it.
+      rm -rf "$clone/$rel"
+      cp "$file" "$clone/$rel"
+      updated=$((updated + 1))
+    elif ! cmp -s "$file" "$clone/$rel"; then
+      cp "$file" "$clone/$rel"
+      updated=$((updated + 1))
+    fi
+  done
+
+  for file in "$clone"/*; do
+    [ -f "$file" ] || [ -L "$file" ] || [ -d "$file" ] || continue
+    rel="$(basename "$file")"
+    [ -f "$tmpl/$rel" ] && continue
+    archive_shared_file "$file" "$archive_dir" "$rel"
+    archived=$((archived + 1))
+  done
+
+  if [ "$((added + updated + archived))" -gt 0 ]; then
+    printf 'Synced shared memory: %d added, %d updated, %d archived\n' "$added" "$updated" "$archived"
+  fi
+}
+
+# shared_clone_diverges <template-dir> <clone-dir> -- true if sync_sage_shared's loops below
+# would touch anything: a symlink or directory at a template filename, a differing file, or a
+# clone-only entry (file, link, or directory).
+# Answering this up front is what lets the caller take one whole-directory backup before any of
+# it happens, instead of a flag threaded through both loops.
+shared_clone_diverges() {
+  local tmpl="$1" clone="$2" file rel
+  for file in "$tmpl"/*; do
+    [ -f "$file" ] || continue
+    rel="$(basename "$file")"
+    [ -L "$clone/$rel" ] && return 0
+    [ -d "$clone/$rel" ] && return 0
+    if [ -e "$clone/$rel" ] && ! cmp -s "$file" "$clone/$rel"; then
+      return 0
+    fi
+  done
+  for file in "$clone"/*; do
+    [ -f "$file" ] || [ -L "$file" ] || [ -d "$file" ] || continue
+    rel="$(basename "$file")"
+    [ -f "$tmpl/$rel" ] || return 0
+  done
+  return 1
+}
+
+# backup_symlinked_shared <clone-file> -- saves the bytes a stray symlink points at, not the link
+# itself. A plain `cp` on one symlink argument dereferences it by default, unlike backup_once's
+# whole-directory `cp -R`, which would preserve the link and save none of the data it names. A
+# dangling link has nothing to save; that failure is swallowed rather than aborting the install.
+backup_symlinked_shared() {
+  local path="$1" dest="$backup_root/sage-memory/$(basename "$path")"
+  mkdir -p "$(dirname "$dest")"
+  cp "$path" "$dest" 2>/dev/null || true
+}
+
+# archive_shared_file <file> <archive-dir> <rel> -- moves a retired clone file into archive-dir
+# without clobbering an existing entry of the same name. A collision gets its own run-stamped
+# name instead of silently overwriting whatever archive already holds under <rel>.
+archive_shared_file() {
+  local file="$1" dir="$2" rel="$3" dest
+  mkdir -p "$dir"
+  dest="$dir/$rel"
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    dest="$dir/$(date +%Y%m%d-%H%M%S)-$$-$rel"
+    echo "NOTE: $dir/$rel already exists; archiving this retired copy as $(basename "$dest") instead."
+  fi
+  mv "$file" "$dest"
+  echo "Archived $rel (retired from the template) -> $dest"
 }
 
 # The subagents skill. calibration.md accumulates real run costs on this machine, and
@@ -310,51 +433,36 @@ install_skill "$subagents_src" "$subagents_dest" \
   calibration.md calibration.md drift_calibration_header \
   '/calibration.md' '/calibration-archive.md'
 
-# The sage skill. Its whole memory/ directory is user data: journal.md and local/ are written
-# by sage and /sage-promote, and shared is the symlink created below. Nothing in the installed
-# memory/ is a copy of a repo file, so --delete must never reach into it — which also means
-# local-seed/ is never installed, only read from the repo by seed_sage_memory.
+# The sage skill. journal.md and local/ are user data: written by sage and /sage-promote, never
+# copied from the repo, so --delete must never reach memory/ — which also means local-seed/ is
+# never installed, only read from the repo by seed_sage_memory. memory/shared/ is the one
+# exception: it is a clone of the repo's template (sage-claude/memory/shared/), kept in step by
+# sync_sage_shared on every run, template always wins.
 sage_src="$repo_dir/sage-claude/"
 sage_dest="$HOME/.claude/skills/sage/"
 shared_src="$repo_dir/sage-claude/memory/shared"
-shared_link="${sage_dest}memory/shared"
+shared_dest="${sage_dest}memory/shared"
 
 if [ -d "$sage_src" ]; then
   mkdir -p "$sage_dest"
   rsync -av --delete --exclude='/memory/' "$sage_src" "$sage_dest"
   seed_sage_memory "$sage_src" "$sage_dest"
 
-  # Shared memory is ONE physical directory, living in the repo and reached through a symlink.
-  # Sage writes ~/.claude/skills/sage/memory/shared/, the bytes land in the working tree where git
-  # sees them, and there is never a second copy to fork — which is the failure the install-vs-repo
-  # calibration split already demonstrated. The link is absolute and points into the clone this
-  # script was run from, so a machine with two clones tracks whichever one installed last.
-  mkdir -p "$(dirname "$shared_link")"
-  if [ -L "$shared_link" ] && [ "$(readlink "$shared_link")" = "$shared_src" ]; then
-    : # already points at this clone; leave it alone
-  elif [ -d "$shared_link" ] && [ ! -L "$shared_link" ]; then
-    # A directory where the link belongs. Clearing it would mean rm -rf on whatever is inside, so
-    # take a copy and leave it standing: sage's documented behavior with no shared memory is to run
-    # on local memory alone and print one line saying so. Leaving it standing is also why the copy
-    # is backup_once and not backup — the condition survives the install and would otherwise be
-    # re-copied in full on every run.
-    backup_once "$shared_link" sage-memory
-    echo "NOTE: $shared_link is a directory; leaving it and skipping the shared-memory link."
-  else
-    # Either nothing is there, or something that is not this clone's link — a link to another
-    # clone, or a real file from an installer that predates the symlink. Whatever is there is
-    # memory someone accumulated, so it is copied out before it is replaced, never clobbered.
-    # -L as well as -e, because a dangling symlink is invisible to -e. rm on a symlink removes the
-    # link and never the file it points at.
-    if [ -e "$shared_link" ] || [ -L "$shared_link" ]; then
-      backup "$shared_link" sage-memory
-      rm -f "$shared_link"
-    fi
-    ln -s "$shared_src" "$shared_link"
+  # A v3.0 install left an absolute symlink here, pointing straight into the repo. The symlink
+  # itself holds no data to preserve — rm removes the link, never the file it points at — so the
+  # migration is just: drop the link and let sync_sage_shared below stand up a real clone, exactly
+  # as it would on a fresh machine.
+  if [ -L "$shared_dest" ]; then
+    _old_shared_target="$(readlink "$shared_dest")"
+    rm -f "$shared_dest"
+    echo "NOTE: $shared_dest was the old v3.0 symlink (-> $_old_shared_target); replaced it with a"
+    echo "      real directory synced from the template. Nothing under local/, journal.md, or"
+    echo "      archive/ was touched."
+    unset _old_shared_target
   fi
-  if [ ! -e "$shared_src" ]; then
-    echo "NOTE: $shared_src does not exist; sage will run on local memory alone until it does."
-  fi
+  sync_sage_shared "$shared_src" "$shared_dest"
+  mkdir -p "${sage_dest}memory"
+  echo "$repo_dir" > "${sage_dest}memory/source-repo"
 
   # rsync -a carries the source mode across, so this only matters when the repo's copy lost its
   # executable bit (a zip download, a checkout with no exec support). The watchdog is spawned as a
@@ -1088,7 +1196,7 @@ echo
 echo "Installed subagents skill  -> $subagents_dest"
 if [ -d "$sage_src" ]; then
   echo "Installed sage skill       -> $sage_dest"
-  echo "  shared memory symlink    -> $shared_src"
+  echo "  shared memory synced from -> $shared_src"
 fi
 echo "Installed subagent agents  -> $agents_dest"
 if [ "${alt_installed:-0}" -gt 0 ]; then

@@ -2,7 +2,6 @@
 id: review-and-verify-are-one-price
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

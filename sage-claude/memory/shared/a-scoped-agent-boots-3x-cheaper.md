@@ -2,7 +2,6 @@
 id: a-scoped-agent-boots-3x-cheaper
 kind: rule
 class: portable
-band: provisional
 status: live
 ---
 

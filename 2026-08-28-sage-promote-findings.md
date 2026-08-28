@@ -1,7 +1,14 @@
 # Findings from the 2026-08-28 `/sage-promote` pass
 
 Written for another machine to act on. Every claim here carries the data behind it and a command
-to re-check it. Nothing in this file is fixed yet.
+to re-check it.
+
+**Status (2026-08-28, later the same day): superseded.** The band relocation in
+`docs/designs/2026-08-28-sage-memory-clone-model.md` removed `band:` from every shared KI file
+and deleted the seed sidecars (`local-seed/local/*.stats.md`), so F1's subject — template bands
+that disagree with seed counts — no longer exists, and the verification commands below that read
+those two locations can no longer run. Each machine's band now lives on its own stats sidecar.
+The data in this file stays as the record that motivated the change.
 
 Machine: Claude Code 2.1.250, GNU grep 3.8, repo at `/app/Storage/code/tools/subagents-skill`.
 Installed sage at `~/.claude/skills/sage`. Pass date 2026-08-28.

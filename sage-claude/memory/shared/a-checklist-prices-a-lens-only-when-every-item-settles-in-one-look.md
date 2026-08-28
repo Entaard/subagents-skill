@@ -2,7 +2,6 @@
 id: a-checklist-prices-a-lens-only-when-every-item-settles-in-one-look
 kind: rule
 class: portable
-band: recurring
 status: live
 ---
 

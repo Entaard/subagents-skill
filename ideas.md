@@ -1,5 +1,6 @@
 # General ideas
 
+- The sage's cortex is still too big. Check if anything else can be made into KIs.
 - Change to sage experiment idea. Not "experiment", but more like "exploration". If a task allows (e.g. non editing, non orchestrating), spawn one
     or more agents using different models than the initial plan. This is to:
     - Cover a plan's inaccuracy. A plan can never be accurate, because a model may sometimes produce much better results than expected. For example,

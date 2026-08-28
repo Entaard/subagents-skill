@@ -2,7 +2,6 @@
 id: when-the-target-is-a-range-never-report-a-mean
 kind: rule
 class: portable
-band: recurring
 status: live
 ---
 

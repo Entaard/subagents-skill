@@ -2,7 +2,6 @@
 id: estimate-from-the-corpus-and-the-lenses
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

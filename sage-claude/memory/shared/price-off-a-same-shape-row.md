@@ -2,7 +2,6 @@
 id: price-off-a-same-shape-row
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

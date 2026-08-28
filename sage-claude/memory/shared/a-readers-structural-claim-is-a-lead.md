@@ -2,7 +2,6 @@
 id: a-readers-structural-claim-is-a-lead
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

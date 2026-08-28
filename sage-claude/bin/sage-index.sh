@@ -10,7 +10,10 @@
 #
 #     <id> | <kind> | <class> | <band> | <created> | <last-used> | <status> | <first words of body>
 #
-#   Fields missing from a file's frontmatter print as an em dash. `status` sits second-to-last
+#   Fields missing from a file's frontmatter print as an em dash. A shared KI's band column is
+#   an em dash by design: the band is machine tracking, printed on its stats sidecar's row once
+#   a promote pass has written it -- an em dash there too until one has, with the sidecar's
+#   count as the interim signal (references/memory.md, The shape). `status` sits second-to-last
 #   because its value is free payload that may run to paragraphs; every field before it is
 #   positional, so `cut -d'|' -f6` reliably reads last-used. The body excerpt is the first
 #   non-empty line after the frontmatter, truncated. Nothing is stored: the index is computed
@@ -49,9 +52,9 @@
 #   never aborts the walk: one bad KI costs one line of stderr, not the index.
 #
 # EXIT CODES
-#   0  index or stale notice printed (possibly empty on a fresh install). A missing or dangling
-#      shared/ is NOT fatal: the protocol's degraded mode (references/memory.md: a dangling
-#      `memory/shared` symlink means run on local/ and the journal alone) needs the local KIs,
+#   0  index or stale notice printed (possibly empty on a fresh install). A missing or empty
+#      shared/ is NOT fatal: the protocol's degraded mode (references/memory.md: a missing
+#      `memory/shared/` clone means run on local/ and the journal alone) needs the local KIs,
 #      so shared/ is named on stderr and the walk continues over local/ without it.
 #   2  <memory-dir>/local does not resolve -- the layout is not v3; the path is named on stderr
 #      A --stale argument that is not all digits is read as the memory-dir, not as a bad months
@@ -85,8 +88,16 @@ if [ ! -d "$mem/local" ]; then
   echo "sage-index: missing directory: $mem/local" >&2
   exit 2
 fi
-if [ ! -d "$mem/shared" ]; then
-  echo "sage-index: shared KIs unreachable (dangling or missing $mem/shared); indexing local/ only" >&2
+shared_has_kis=0
+if [ -d "$mem/shared" ]; then
+  for _shared_file in "$mem"/shared/*.md; do
+    [ -f "$_shared_file" ] || continue
+    shared_has_kis=1
+    break
+  done
+fi
+if [ "$shared_has_kis" -eq 0 ]; then
+  echo "sage-index: shared KIs unreachable (missing or empty $mem/shared); indexing local/ only" >&2
 else
   known_shared=$(sed -n 's/^id: //p' "$mem"/shared/*.md 2>/dev/null | tr '\n' ' ')
 fi

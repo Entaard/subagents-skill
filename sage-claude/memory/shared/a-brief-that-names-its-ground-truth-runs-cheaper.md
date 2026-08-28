@@ -2,7 +2,6 @@
 id: a-brief-that-names-its-ground-truth-runs-cheaper
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

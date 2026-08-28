@@ -2,7 +2,6 @@
 id: disjoint-mandates-produce-disjoint-find-sets
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

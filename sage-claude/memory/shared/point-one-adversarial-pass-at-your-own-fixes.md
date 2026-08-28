@@ -2,7 +2,6 @@
 id: point-one-adversarial-pass-at-your-own-fixes
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

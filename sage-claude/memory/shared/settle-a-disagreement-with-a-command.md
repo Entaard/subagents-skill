@@ -2,7 +2,6 @@
 id: settle-a-disagreement-with-a-command
 kind: rule
 class: portable
-band: established
 status: live
 ---
 

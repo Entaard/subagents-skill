@@ -4,6 +4,8 @@ kind: band
 name: Web research, brief names its target URLs
 class: local
 status: live
+created: 2026-08-06
+last-used: —
 ---
 
 **Figure:** 14–34k per agent

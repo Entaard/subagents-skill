@@ -4,6 +4,8 @@ kind: band
 name: Dispatch floor
 class: local
 status: live
+created: 2026-08-05
+last-used: —
 ---
 
 **Figure:** scoped agent ~5k; general-purpose ~16k

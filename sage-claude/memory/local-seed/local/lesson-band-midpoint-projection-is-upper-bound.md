@@ -8,6 +8,8 @@ last: 2026-08-16
 contradicts: —
 promoted: —
 status: watching
+created: 2026-08-16
+last-used: —
 ---
 
 A projection built from band midpoints is an upper bound, not a forecast — say which kind of figure you are holding up when a rail stops the run, or headroom gets authorised that the run never needed. **(seed)**

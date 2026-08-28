@@ -1,12 +1,12 @@
 ---
 name: sage-promote
-description: Sage's self-update pass. Consolidates the run journal into knowledge items, repairs the defects sage's own runs recorded, reviews every knowledge item's statistics, promotes earned lessons into shared memory and the strongest into sage's own skill text, refreshes the model lineup, and retires or archives knowledge that failed or fell out of use. Runs only on the user's word, never inside a run.
+description: Sage's self-update pass. Consolidates the run journal into knowledge items, repairs the defects sage's own runs recorded, reviews every knowledge item's statistics, promotes earned lessons into shared memory and the strongest into sage's own skill text, refreshes the model lineup, and retires knowledge that was falsified. Disuse removes nothing: an unused knowledge item is reported for the user to judge. Runs only on the user's word, never inside a run.
 disable-model-invocation: true
 ---
 
 # sage-promote
 
-One pass, on the user's word. It moves what sage's runs proved into the places future runs read: the journal into knowledge items first, shared memory second, sage's own text third, the model lineup fourth. It also runs **eviction** — a rule whose falsifier fired leaves shared memory and the corpus together, so the skill never cites a band that no longer exists — and **archiving**, the mild end of eviction, for knowledge nothing uses.
+One pass, on the user's word. It moves what sage's runs proved into the places future runs read: the journal into knowledge items first, shared memory second, sage's own text third, the model lineup fourth. It also runs **eviction** — a rule whose falsifier fired leaves shared memory and the corpus together, so the skill never cites a band that no longer exists. **Disuse removes nothing.** A knowledge item no run has cited is reported to the user and kept; the bar for taking one out of the corpus is two entries long and lives in `<sage>/references/memory.md`, `## Knowledge items` — the removal bar.
 
 **This is the highest-consequence write in the system.** Stage zero, stage two and stage three rewrite the corpus every future sage run boots from, and consolidation is the only writer the knowledge-item files have at all: a sage run appends journal lines and edits nothing (sage's `references/memory.md` — the v3 protocol, which this whole skill is written against). Every step below exists to keep these edits minimal, checkable, and reversible. Read it in order and do not reorder the stages: consolidation runs first because every later stage reads the KI files it brings current, stage zero next because the later stages write into the corpus it repairs, stage two reads what stage one may have just written, and stage three runs last because its evidence is the live harness rather than run rows.
 
@@ -19,7 +19,7 @@ One pass, on the user's word. It moves what sage's runs proved into the places f
 | `<sage>/memory/shared/` — a directory symlink into the repo | stage zero (a standing KI's prose fields only), stage one, a band crossing, eviction | never |
 | `<sage>/memory/local/` | consolidation (minted KIs, count/use bumps, status flips), stage zero closures, `promoted` histories, the harness stamp (stage three, on every pass) | never |
 | `<sage>/memory/journal.md` | consolidation only: the `mark` line and the drain-truncation, plus this pass's own `run` line at the end | every run: appended lines — **the only file a run writes** |
-| `<sage>/memory/archive/` | consolidation (drained journal segments), eviction, archiving | never |
+| `<sage>/memory/archive/` | consolidation (drained journal segments), eviction, and a user-directed removal after the stale notice's manual check | never |
 | `<repo>/sage-claude/SKILL.md` and `references/` | stage zero, stage two, stage three, eviction | never **on its own trigger** — a run never promotes a rule into skill text off its own memory read. This column does not describe the by-hand path: a run editing this corpus on the user's explicit word is build-authoring, which `<sage>/references/topologies.md` #12 scopes |
 | `<repo>/sage-claude/bin/*.sh` | stage zero | never |
 | `<repo>/claude-agents*/*.md` | stage three | never |
@@ -110,14 +110,23 @@ The recogniser, from a real pass: it recorded a `band established` entry for two
 **The first stage, and the journal's only drain.** Candidates: every payload line after the last `mark` in `<sage>/memory/journal.md`. In v2 this ran automatically at a run's Step 2, which put the highest-frequency structured write on the least-supervised path; v3 moves it here, whole.
 
 1. **Ingest, in journal order.**
-   - An `obs` line with a kind and class → **mint a local KI file** of that kind, carrying every field invariant 2 and the field contract require of it: `id:` (the slug), `kind:`, `class:` (from the line), `status: watching`, `count: 1`, `first:`/`last:` from the line's date, `promoted: —`, `contradicts:` where the kind is `contradiction`, and the falsifier in the body where the line carries one. A mint the invariants would quarantine is a mint that never should have been written. Where an existing KI already records the same observation, treat the line as a `confirm` of it instead — one KI per observation, because three separate count-1 KIs fire no threshold ever.
+   - An `obs` line with a kind and class → **mint a local KI file** of that kind, carrying every field invariant 2 and the field contract require of it: `id:` (the slug), `kind:`, `class:` (from the line), `status: watching`, `count: 1`, `first:`/`last:` from the line's date, `created:` from that same date and `last-used: —`, `promoted: —`, `contradicts:` where the kind is `contradiction`, and the falsifier in the body where the line carries one. A mint the invariants would quarantine is a mint that never should have been written. Where an existing KI already records the same observation, treat the line as a `confirm` of it instead — one KI per observation, because three separate count-1 KIs fire no threshold ever.
    - A `confirm <ki-id>` line → bump that KI's `count`, extend `last`, and add `+ local run` to `provenance` where the confirmation is this machine's. The named KI missing → surface the line as a question, ingest nothing for it.
    - A `settle <ki-id>` line → flip that KI's `status` to `settled → <artifact>` **only after checking the named artifact exists** — one `ls` or grep; the closure evidence bar in `references/memory.md` binds this flip, and a line whose artifact does not resolve is surfaced, not applied.
-   - A `use` line → bump `uses` and `last-used` on each named KI's **local record**: the stats sidecar (`local/<id>.stats.md`) where the id names a shared KI — minted with zeroed stats if none exists yet — and the KI file itself where the id is local. **A file under `shared/` never gains a stat**: that is the machine-specific-data fork the shared/local split exists to prevent. A `miss` appends one dated line under a `Misses` heading in the same local record and bumps `misses`. Absent usage fields on a touched KI are added, not errors (`references/memory.md`, the field contract). These are the KI review's raw signal.
+   - A `use` line → bump `uses` and `last-used` on each named KI's **local record**: the stats sidecar (`local/<id>.stats.md`) where the id names a shared KI — minted with zeroed stats and `created:` set to the shared KI's own filing date if none exists yet — and the KI file itself where the id is local. **A file under `shared/` never gains a stat**: that is the machine-specific-data fork the shared/local split exists to prevent. A `miss` appends one dated line under a `Misses` heading in the same local record and bumps `misses`. Absent usage fields on a touched KI are added, not errors (`references/memory.md`, the field contract). These are the KI review's raw signal.
    - A `run` line → stays in the journal until the drain below; run lines are pricing data, not KI content.
    - A line that parses as none of these → print it as a question; never guess, never drop.
-2. **Drain.** Append a `mark` line, move every payload line above it **except the newest three `run` lines** verbatim into `<sage>/memory/archive/journal-<first-date>-<last-date>.md`, and rewrite the live journal as: sentinel, header, the kept `run` lines, the `mark`. The newest-three rule is Step 2's same-shape pricing window; the archive is where a provenance grep goes.
-3. **Two checks guard the write, both must pass or the stage reverts to the pre-stage journal and KI state** (hold both in drafts, exactly as the write machinery holds corpus edits): every drained line survives verbatim in the archive — count in equals count out; every KI file touched still passes the frontmatter invariants. A human approving a diff is not this safeguard: the one recorded v2 corruption landed *through* an approved diff.
+2. **Reconcile a migrated count against the archive — once per KI, never every pass.** A `confirm` line is not the only record a confirmation ever had. KIs carried over from v2 hold counts that were maintained by hand, and `<sage>/memory/archive/` narrates confirmations and citations that never became journal lines, so consolidation alone can never see them. For every stats sidecar and local KI whose frontmatter carries no `reconciled:` field:
+
+   - Grep the archive for the KI's `id` **and** its prose title — both spellings, since v2 wrote titles and v3 writes slugs.
+   - **Read every hit before counting it, and classify it.** A passage stating a `Count` is a count. A passage narrating a run that *cited* the rule is a **use**, not a confirmation — it bumps `uses:` and `last-used:`, never `count:`. Getting this backwards is the recorded failure this step exists to prevent: the two live instances that produced this procedure were read as under-counts when what the archive actually narrated was three uses apiece. A `grep -c` counts mentions, so it settles neither.
+   - Raise `count:` only where the archive states a higher **count** than the sidecar does, and append `+ local run` to `provenance:` where the archive names a run on this machine rather than a seed. **Add** the citations to `uses:` — the archive and the journal are disjoint sources, so this sums rather than overwrites — and take the later of the two `last-used:` dates. Record the prior `uses:` alongside the new one, or the block's arithmetic cannot be checked from the block.
+   - Write the archive's `file:line` for every figure you moved into the KI's body under a `## Reconciled` heading, so the next pass can check the arithmetic rather than repeat it.
+
+   Then stamp `reconciled: <date>` into the frontmatter. **A sidecar carrying it is skipped for ever after** — this is a migration debt, not a recurring stage, and re-running it double-counts. A pass that reconciles nothing writes the stamp anyway, so the walk shortens to zero.
+
+3. **Drain.** Append a `mark` line, move every payload line above it **except the newest three `run` lines** verbatim into `<sage>/memory/archive/journal-<first-date>-<last-date>.md`, and rewrite the live journal as: sentinel, header, the kept `run` lines, the `mark`. The newest-three rule is Step 2's same-shape pricing window; the archive is where a provenance grep goes.
+4. **Two checks guard the write, both must pass or the stage reverts to the pre-stage journal and KI state** (hold both in drafts, exactly as the write machinery holds corpus edits): every drained line survives verbatim in the archive — count in equals count out; every KI file touched still passes the frontmatter invariants. A human approving a diff is not this safeguard: the one recorded v2 corruption landed *through* an approved diff.
 
 ## Stage zero — corpus repair
 
@@ -142,13 +151,37 @@ Candidates: every local KI whose `kind` is `defect` and whose `status` begins `w
 | stats sidecar: `count` ≥ 6, `promoted` records neither `skill` nor `refused` | promote into skill text | stage two |
 | stats `count`-derived band (thresholds in `references/memory.md`: 3 recurring, 6 established) **exceeds** the shared KI's `band:` | band raise — **upward only**: a count below the standing band is a machine that has seen less, never a crossing | stage one (crossing) |
 | a shared KI's falsifier observed, or a `contradiction` KI naming it reaches `count` 2 | retirement | eviction |
-| `misses` ≥ 2 on any KI (an absent `misses` field reads as 0) | repair or retire — judged, with the miss notes as the evidence; a repairable misread mints a `defect` KI for the next pass's stage zero, a wrong rule routes to eviction | judged |
-| `uses` 0 or absent, no `last-used`, and the KI demonstrably older than the last 3 promote passes — by `created:` or `first:`; a KI with neither date field is **exempt**, never archived on age it cannot prove. Bands and the stamp are age-less by design, so this signal never reaches them — the `misses` row above is their retirement path | archive for disuse | archiving, below |
+| `misses` ≥ 2 on any KI (an absent `misses` field reads as 0) | repair or retire — judged, with the miss notes as the evidence; a repairable misread mints a `defect` KI for the next pass's stage zero, a wrong rule routes to eviction. **A miss is the KI misleading a run — its falsifier firing in miniature — which is why this row may remove and the stale row may not** | judged |
+| `bin/sage-index.sh --stale 3` names the KI: nothing has cited it for three months or more, measured from `last-used:` — or from `created:` where nothing ever has | **notify the user, remove nothing** | `## The stale notice`, below |
 | `gap` KI whose measurement landed (its own text names what it waits for) | settle against the artifact | this stage, under the closure bar |
 
-**Archiving for disuse** moves the file to `archive/` with `status: archived → disuse <date>`, reversible by moving it back. It takes no refuter — nothing cited the KI, which is what `uses: 0` measures — with two guards. **A KI cited by skill text or by another KI is never disuse-archived while the citation stands**: the citation is a use the counter cannot see, and one grep settles it. **And the counter is a self-reported instrument, so check it is alive before believing it**: if the journal this pass drained held no `use` lines at all, the runs are not reporting usage and this pass's window contributes no disuse evidence — skip disuse-archiving and file the dead instrument as a `defect` KI instead. Falsifier for the signal itself: a disuse-archived KI restored within three passes, twice — that reading means the counter measures non-reporting rather than non-use; suspend the signal and repair the `use`-line duty.
-
 Print the full slate — one line per candidate with its signal — before executing anything. The user sees what the pass is about to do while it is still nothing but a list.
+
+## The stale notice
+
+**A knowledge item is never removed for being unused.** The removal bar — the whole list of what may take a KI out of the corpus — is `<sage>/references/memory.md`, `## Knowledge items`, `### The removal bar`. **Read it there and do not restate it here:** this is the skill that executes removal, so a copy of the bar living in this file is the copy that goes stale while still being the one acted on. Disuse is not on that list, whatever its entries are on the day you read them. What disuse earns is this notice.
+
+It is a command, not a judgment:
+
+```sh
+<sage>/bin/sage-index.sh --stale 3 <sage>/memory
+```
+
+Three months is the bar. Every line it prints goes into the report's `stale:` block verbatim, oldest first, and the trailing `#` line — the KIs whose age no date proves — goes with it. **Print the block whole and never trim it to a sample**: a truncated notice reads as a short list, which is the one thing this block must not do. Then stop. The pass takes no action on any line of it.
+
+**The manual check, and it is the user's to run.** The notice asks a question this pass cannot answer, because the counter measures what runs *reported*, not what they *used*, and the two have already diverged here: runs report the cost bands they price from and skip the rules they read at Step 2. So the disposition is a `/sage` run on the user's word, with this brief:
+
+> For each KI in the stale block, read the run records since its `last-used:` date and answer one question with evidence: **is there a workflow in that window that would have gone better had this KI been read?** Name the run and the decision it would have changed, or say there was none. Only then say whether the KI is wrong, redundant, or simply uncalled-for.
+
+The three answers route differently, and only one of them removes anything:
+
+| The check finds | What it means | What happens |
+| --- | --- | --- |
+| A run that would have gone better with it | The KI is live and the **reporting** is broken, not the KI | Keep it. Mint a `defect` KI against the `use`-line duty in `<sage>/references/memory.md`, `## Append at Step 6`, naming the run that missed it |
+| No such run, and the KI is still true | Nothing has needed it yet | Keep it, unchanged. A KI that has not paid out is not a KI that is wrong, and a corpus holding only knowledge it already uses can never tell a run something it does not already do |
+| The KI is wrong, or its subject is gone | Falsified, or unfixable — the removal bar's own two entries | On the user's word: `status: archived → <the user's reason> <date>`, file moved to `archive/`, reversible by moving it back |
+
+**Never take the third branch on your own reading.** The user's word licenses it, for the same reason rail 1 in a sage run needs one: it is the only act in this pass with no automatic way back.
 
 ## Stage one — into shared memory
 
@@ -157,7 +190,7 @@ Candidates: the KI review's → shared and band-crossing lines.
 1. For each promotion candidate, draft the shared KI: `id`, `kind: rule`, `class: portable`, `band` from its count (3–5 `recurring`, 6+ `established`), `status: live`, and the body's four parts — the **rule** as a bold sentence, `- Qualifier:`, `- Recogniser:`, `- Falsifier:`. The falsifier is the observation that would retire the rule, stated concretely enough that a later run recognises it without the rule's history. **A candidate whose falsifier you cannot state is not ready:** leave it watching and print which one.
 2. Dispatch **one refuting checker (`## The checker seat`) over the whole batch, briefed to default to refuted**. A rule survives only on evidence the checker can name. One dispatch for the batch. **A band crossing skips the refuter** — a crossing is arithmetic, upward only, adding confidence a count already earned; a downward rewrite is eviction's alone.
 3. **Mint the id first, then write the survivors** — one `shared/<slug>.md` each. The id is the join: stats sidecars' `for:`, `use` lines, and skill-text citations all key on it. A crossing rewrites only the standing KI's `band:` line.
-4. **Land the bookkeeping in `local/`, every claim under `## The cell rule`** — read the shared file back from disk before writing any of it: mint the stats sidecar (`for:` the new id, `count`/`first`/`last`/`provenance` carried verbatim from the lesson KI, `promoted: shared <date>`), flip the lesson KI's `status` to `promoted → <id>`, append `shared <date>` to its `promoted`. **Writing the shared KI without minting the sidecar is the v2 defect moved one file over** — every later signal reads counts from sidecars, so a rule without one can never band-raise, never reach skill text, never retire on contradictions. For a crossing: append `band <new band> <date>` to the sidecar's `promoted` — ` · ` separated, **append, never overwrite** — the → skill guard and eviction read the earlier entries.
+4. **Land the bookkeeping in `local/`, every claim under `## The cell rule`** — read the shared file back from disk before writing any of it: mint the stats sidecar (`for:` the new id, `count`/`first`/`last`/`provenance` carried verbatim from the lesson KI, `created:` and `last-used:` carried verbatim too — invariant 2 requires both on every local KI and a sidecar missing them is quarantined on the next preflight, which silently disqualifies the rule for ever — and `promoted: shared <date>`), flip the lesson KI's `status` to `promoted → <id>`, append `shared <date>` to its `promoted`. **Writing the shared KI without minting the sidecar is the v2 defect moved one file over** — every later signal reads counts from sidecars, so a rule without one can never band-raise, never reach skill text, never retire on contradictions. For a crossing: append `band <new band> <date>` to the sidecar's `promoted` — ` · ` separated, **append, never overwrite** — the → skill guard and eviction read the earlier entries.
 5. Send each refuted candidate back **with the refutation attached**: `status` stays `watching`, `refused <date>` appended to its `promoted`, the refutation added to its body. **The refusal goes in `promoted`, never in `status`** — a refused candidate is not closed, it is ineligible until evidence newer than the refusal arrives, and the review's first signal reads exactly that.
 6. Print the diff.
 
@@ -195,7 +228,7 @@ Same user word, same write machinery, **different evidence**: this stage re-chec
 
 ## Eviction
 
-Symmetric to promotion, on the same user word. A falsifier firing routes here from the KI review; **nothing rewrites `shared/` on its own.** A rule qualifies when its `Falsifier` fired — the named observation happened — or when a `contradiction` KI naming it reached two confirmations.
+Symmetric to promotion, on the same user word. A falsifier firing routes here from the KI review; **nothing rewrites `shared/` on its own.** A rule qualifies when its `Falsifier` fired — the named observation happened — or when a `contradiction` KI naming it reached two confirmations. **Those two are the whole of what qualifies a rule for eviction, and disuse is not among them**: a rule nothing has cited leaves through `## The stale notice`'s manual check, on the user's word, or it does not leave at all (`<sage>/references/memory.md`, the removal bar).
 
 **The three steps below are one transaction, in this order: corpus first, then the sidecar entry, and the `shared/` move last. Run all three or none.** After every prefix of it, the rule is either still in `shared/` (so retirement stays live and the next pass finishes — each step treats work already done as done) or already marked `retired` in its sidecar (so nothing re-promotes it). The reverse order is permanent damage: take the file out of `shared/` first and fail before the corpus cut, and skill text cites a band for a rule that no longer exists — unreachable by every signal the system has, because retirement needs a rule whose falsifier fired and the rule is gone. If anything blocks step 1 — divergent trees, a landing that will not prove — **run none of the three**.
 
@@ -213,7 +246,8 @@ Print this, and only this, at the end. One block, whatever the stages did.
 sage-promote — <date>
   consolidation:       <n> lines ingested (<n> KIs minted, <n> confirms, <n> settles, <n> use bumps), <n> archived, <n> questions
   stage zero  → repair: <n> repaired, <n> escalated, <n> no longer reproduce
-  KI review:           <n> → shared, <n> → skill, <n> crossings, <n> retirement, <n> miss-flagged, <n> disuse-archived
+  KI review:           <n> → shared, <n> → skill, <n> crossings, <n> retirement, <n> miss-flagged
+  stale notice:        <n> KI(s) unused >= 3 months, <n> not assessable — reported, nothing removed
   stage one   → shared: <n> written, <n> refuted, <n> not ready
   stage two   → skill:  <n> landed, <n> refused, <n> conflicts filed
   stage three → lineup: <lineup unchanged | n new, n removed, n re-derived>, stamp → <build> <date>

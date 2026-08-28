@@ -4,6 +4,8 @@ kind: band
 name: Frontier review lens, prose corpus ≤10k words
 class: local
 status: live
+created: 2026-08-06
+last-used: —
 ---
 
 **Figure:** 50–95k per agent

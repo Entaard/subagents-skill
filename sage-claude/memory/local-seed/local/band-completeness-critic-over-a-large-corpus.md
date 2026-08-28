@@ -4,6 +4,8 @@ kind: band
 name: Completeness critic over a large corpus
 class: local
 status: live
+created: 2026-08-04
+last-used: —
 ---
 
 **Figure:** ~170k over ~25k words

@@ -3,6 +3,8 @@ id: harness-stamp
 kind: stamp
 class: local
 status: live
+created: 2026-08-18
+last-used: —
 ---
 
 ## Harness version stamp

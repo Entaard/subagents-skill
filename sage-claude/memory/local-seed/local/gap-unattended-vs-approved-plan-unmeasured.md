@@ -8,6 +8,8 @@ last: 2026-08-17
 contradicts: —
 promoted: —
 status: watching
+created: 2026-08-17
+last-used: —
 ---
 
 Running unattended is unmeasured against running with a human approving the plan first: no logged row anywhere records an approval answer, a requested change, or a reversed call. The assumption log is the instrument — read the rows the user corrects.

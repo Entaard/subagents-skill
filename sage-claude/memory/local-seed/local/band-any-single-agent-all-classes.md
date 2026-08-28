@@ -4,6 +4,8 @@ kind: band
 name: Any single agent, all classes
 class: local
 status: live
+created: 2026-08-18
+last-used: —
 ---
 
 **Figure:** p50 164k, p90 410k, p99 766k, max 818k

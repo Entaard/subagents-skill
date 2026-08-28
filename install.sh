@@ -1019,8 +1019,9 @@ rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 # offer_alt_guard_hook: the one sage rule with a deterministic predicate and zero legitimate
 # exceptions — an alt-lane dispatch must carry NO model parameter, because the parameter wins over
 # the agent file and silently deletes the outside-family model the row exists to buy. Prose has
-# stated it three times and a measured run broke it anyway (22.4k spent on three dispatches that
-# tested nothing). Offered, never imposed, and offered with the same care as the compact hook:
+# stated it three times and a measured run broke it anyway (figure and full account:
+# sage-claude/references/harness.md, "## The alt lane"). Offered, never imposed, and offered with
+# the same care as the compact hook:
 # ~/.claude/settings.json holds arbitrary other config that this script does not own.
 # The guard itself fails OPEN on every unrecognised payload — see sage-claude/bin/sage-alt-guard.sh.
 offer_alt_guard_hook() {

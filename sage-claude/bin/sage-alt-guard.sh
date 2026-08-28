@@ -19,8 +19,9 @@
 #   bought another in-family agent at a higher price.
 #
 #   `../SKILL.md` states the rule three times ("pass no `model` at all"). It has a measured
-#   failure anyway: one run spent 22.4k proving three alt dispatches that tested nothing,
-#   and no agent noticed. It is the only rule in the corpus that is absolute, has a
+#   failure anyway: one run spent real money proving three alt dispatches that tested
+#   nothing, and no agent noticed (figure and full account: ../references/harness.md,
+#   "## The alt lane"). It is the only rule in the corpus that is absolute, has a
 #   deterministic predicate, and has zero legitimate exceptions — which is what makes it
 #   the one worth enforcing rather than asking for.
 #

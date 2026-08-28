@@ -59,7 +59,7 @@ Uncertainty: <what you could not confirm from a source, and what would settle it
 
 ## Note for the parent
 
-Budget from the dispatching skill's cost records (`calibration.md` in /subagents, `memory/local.md`
+Budget from the dispatching skill's cost records (`~/.claude/skills/subagents/calibration.md` in /subagents, `memory/local/`
 in /sage), but never from a single past run's per-agent average — that
 average encodes the brief style that produced it, not the task class. **Brief style dominates cost for
 this unit.** Briefs naming their exact target URLs have repeatedly come back under 40k per agent, and

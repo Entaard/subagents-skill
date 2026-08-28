@@ -68,7 +68,7 @@ brief. Never report `completed` with failing checks; that is `partial`, and the 
 
 The `model` above is a default; overriding it on the failure ladder's escalation rung is a logged
 deviation, and the `effort` here may not survive the override (the dispatching skill's harness
-reference: `references/claude-code.md` in /subagents, `references/harness.md` in /sage). This
+reference: `~/.claude/skills/subagents/references/claude-code.md` in /subagents, `references/harness.md` in /sage). This
 file deliberately sets no `maxTurns` — implementation units vary too much in shape for one cap;
 where a unit's shape is known, set the cap in a project-level copy rather than guessing one here.
 Review of this agent's diff belongs to the `diff-review` skill's two readers (the orchestration skill's Step 5) —

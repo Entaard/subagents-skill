@@ -48,7 +48,7 @@
 # worse than useless, it would be misleading.
 #
 # ---------------------------------------------------------------------------
-# THE CHECKS — exactly ten, each with a short stable id. Every check reads ONLY the text
+# THE CHECKS — exactly eleven, each with a short stable id. Every check reads ONLY the text
 # named below and states what it therefore cannot see; that blind spot is not a bug in the
 # check, it is the check's honest shape.
 #
@@ -353,44 +353,68 @@
 #
 # ---------------------------------------------------------------------------
 # CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a twelfth ledger check.
-# It never reads a ledger and the eleven checks above never run in it. It exists because the live
-# corpus cited a document that was deleted, `sage-plan-integrity-round3.md`, and nothing
-# caught it for weeks — the citation just sat there, dead.
+# It never reads a ledger and the eleven checks above never run in it. `corpus-citation` exists
+# because the live corpus cited a document that was deleted, sage-plan-integrity-round3.md, and
+# nothing caught it for weeks — the citation just sat there, dead. `corpus-figure` and
+# `cortex-budget` exist because `/sage-promote`'s own text names two rules nothing ever checked:
+# no count, date or absolute cost in skill text, and the cortex's own size never bounded at all.
 #
 #   corpus-citation
-#     Reads: `<dir>/SKILL.md` and every `<dir>/references/*.md`, each OUTSIDE its own fenced
-#       (```) code blocks — the same fence-blanking convention the ledger's "is a ledger" test
-#       uses above, reused rather than re-written, so a path quoted inside a fence as an
-#       example is never treated as a citation.
+#     Reads: `<dir>/SKILL.md`, every `<dir>/references/*.md`, every `<dir>/bin/*.sh`, and the
+#       five sage agent files (found as described below) — each OUTSIDE its own fenced (```)
+#       code blocks — the same fence-blanking convention the ledger's "is a ledger" test uses
+#       above, reused rather than re-written, so a path quoted inside a fence as an example is
+#       never treated as a citation. `bin/*.sh` was added because a script header can cite a
+#       corpus file that does not exist, and until this arm existed nothing resolved those
+#       citations.
+#     Finding the agent files: the first of these that exists —
+#       `$SAGE_AGENT_DIR`, then `<dir>/../claude-agents`, then `~/.claude/agents` — supplies
+#       the directory, and ONLY these five basenames are read from it:
+#       explorer.md, implementer.md, orchestrator.md, verifier.md, web-researcher.md.
+#       `~/.claude/agents/` is the user's own directory and holds agents unrelated to this
+#       corpus, so nothing else there is read. No directory found in that order → scan none of
+#       the five and stay silent, the same FAIL-QUIET spirit as a missing `references/`.
 #     What counts as a citation: a backtick-wrapped span whose entire content is a `.md` path
 #       — letters, digits, `.`, `_`, `-`, `/` — immediately followed by nothing but the
-#       closing backtick. Resolved relative to the CITING FILE'S OWN DIRECTORY, and ONLY
-#       there: a `../`-style relative citation (`../memory/local.md`, seen from
-#       `references/`) and a bare sibling citation (`harness.md`, seen from another file in
-#       `references/`) both resolve this way, and those are the shapes the corpus uses. There
-#       is deliberately NO corpus-root fallback. One existed, so that a file inside
-#       `references/` could cite `references/harness.md` root-relative; it masked exactly the
-#       defect this check was built for, a citation that does not resolve from where it is
-#       written, and the corpus's three such sites were fixed rather than excused.
+#       closing backtick. Resolved relative to the CITING FILE'S OWN DIRECTORY for `SKILL.md`
+#       and every `references/*.md` file: a `../`-style relative citation (`../memory/local.md`,
+#       seen from `references/`) and a bare sibling citation (harness.md, seen from another
+#       file in `references/`) both resolve this way, and those are the shapes the corpus uses.
+#       There is deliberately NO corpus-root fallback for these files. One existed, so that a
+#       file inside `references/` could cite `references/harness.md` root-relative; it masked
+#       exactly the defect this check was built for, a citation that does not resolve from
+#       where it is written, and the corpus's three such sites were fixed rather than excused.
+#     A `bin/*.sh` file tries its own directory first, same as above — most of its citations
+#       are `../`-prefixed (`../SKILL.md`, `../references/dispatch.md`) and resolve that way —
+#       then, only on failure, tries CORPUS-RELATIVE TO `<dir>` as well: a bare corpus-relative
+#       spelling (`SKILL.md`, `references/harness.md`) is also a real citation, not a dangling
+#       one, and a script header is written to be read on its own, without the `../` a reader
+#       would need to supply mentally.
+#     An agent file's citations resolve CORPUS-RELATIVE TO `<dir>` ONLY, never relative to its
+#       own directory. It installs to `~/.claude/agents/`, carries no `references/` of its own,
+#       and every sage path it names — `SKILL.md`, `references/harness.md`, memory/shared/... —
+#       is a sage-corpus path, written as if read from inside `<dir>`, not from beside the
+#       agent file itself. Resolving it any other way would flag every one of those citations
+#       as dangling by construction.
 #     Memory citations, in two halves — the split is narrower than the directory on purpose:
 #       OUT OF SCOPE, never checked: the genuinely PER-MACHINE files — the journal
-#         (`journal.md`, `memory/journal.md`, `.../memory/journal.md`), the local KI files
-#         (`harness-stamp.md`, and any `local/<file>.md` / `.../local/<file>.md` spelling),
-#         and the v2 names (`local.md`, `local-*.md`, path-qualified or bare). They are
+#         (journal.md, memory/journal.md, .../memory/journal.md), the local KI files
+#         (harness-stamp.md, and any `local/<file>.md` / `.../local/<file>.md` spelling),
+#         and the v2 names (local.md, local-*.md, path-qualified or bare). They are
 #         seeded or written on each machine and are deliberately absent from the repo
-#         (`harness.md`: "excluded from the synced tree"), so no existence test can be honest
+#         (harness.md: "excluded from the synced tree"), so no existence test can be honest
 #         about them, and checking them would turn "not seeded yet" into a false alarm.
 #       IN SCOPE, resolved BY BASENAME under `<dir>/memory/`, `<dir>/memory/shared/` and
 #         `<dir>/memory/archive/`: everything else the corpus calls by a memory name — a
 #         portable KI (`shared/<slug>.md`, `../memory/shared/<slug>.md`, or repo-rooted), an
 #         archived file (`memory/archive/shared-v2.md`), and the retired v2 spellings
-#         (`shared.md`, `shared-*.md`), which now correctly flag as dangling. Those files are
+#         (shared.md, shared-*.md), which now correctly flag as dangling. Those files are
 #         real and checked in, so a dangling citation is a real defect and is reported. Only
 #         the basename is common to the spellings, so the basename is what resolves, in any
 #         of the three directories a checked-in memory file can legally live in.
 #     Fires: a citation's resolved path does not exist (and it is not out of scope, above) —
 #       one violation per citation SITE, so the same dangling filename cited three times (as
-#       it is, live, for `sage-plan-integrity-round3.md`) is three violation lines, not one
+#       it is, live, for sage-plan-integrity-round3.md) is three violation lines, not one
 #       collapsed line, because each site is a separate promise that broke.
 #     Cannot see (stated plainly, the same convention as the eleven checks above):
 #       - a path cited inside a fenced code block as an example — deliberately not a citation;
@@ -398,15 +422,92 @@
 #         is a text scan of the literal backtick span, never an interpreter;
 #       - a citation to a document that EXISTS but whose content moved out from under it — the
 #         check resolves a path, it does not read what is at the far end;
-#       - a genuinely dangling citation to a PER-MACHINE memory file (`journal.md`,
-#         `harness-stamp.md`, a `local/` KI, or the v2 names `local.md` / `local-archive.md`),
+#       - a genuinely dangling citation to a PER-MACHINE memory file (journal.md,
+#         harness-stamp.md, a `local/` KI, or the v2 names local.md / local-archive.md),
 #         or a bare mention shaped like one that is not actually about that directory —
 #         silence, not a violation, and the whole remaining cost of the out-of-scope trade
 #         directly above; a caller who suspects one exists checks those files by hand. The
 #         portable KIs under `memory/shared/` are not in this blind spot;
 #       - a `~`-rooted span (`~/.claude/CLAUDE.md`) — it names a path outside this corpus
 #         entirely (the user's global config, an installed file, never a file this corpus
-#         ships), so it is skipped, not resolved and not flagged.
+#         ships), so it is skipped, not resolved and not flagged;
+#       - any agent basename other than the five named above, or any file under a `bin/`,
+#         `references/` or agent directory this dir-discovery order never reaches — a
+#         second sage install with `SAGE_AGENT_DIR` unset and no `<dir>/../claude-agents`
+#         reads `~/.claude/agents` and nothing else, silently, per FAIL QUIET.
+#
+#   corpus-figure
+#     Why: `/sage-promote`'s stage two step 2 forbids a confirmation count, a date, or an
+#       absolute cost in skill text — ratios and bands may stand, nothing else. Nothing checked
+#       that rule until now; a prior audit found violations the exception list below has to
+#       carry, and a wrong exception list would either miss real ones or drown the caller in
+#       protected figures re-reported forever.
+#     Reads: `<dir>/SKILL.md` and every `<dir>/references/*.md` **except `../references/harness.md`**
+#       — outside fenced code blocks, same fence convention as `corpus-citation`. `bin/*.sh` and
+#       the five agent files are OUT OF SCOPE, on purpose, for the same reason `corpus-citation`
+#       gave `bin/` a pass: a script header legitimately carries the measurement it documents.
+#       `../references/harness.md` is excluded the same way and for the same reason, not a
+#       narrower one: it is the corpus's own declared destination for exactly this data —
+#       "harness facts go to harness.md with their measurement, date and population" is
+#       `../SKILL.md`'s own instruction, restated at half a dozen citation sites — so treating
+#       its normal contents as
+#       violations would flag the file for doing its one job. No other `references/*.md` file
+#       carries that declared role, so no other file is excluded.
+#     Finds three shapes, each a plain pattern over the unfenced text:
+#       - a bare date: `\b20[0-9]{2}-[0-9]{2}-[0-9]{2}\b`;
+#       - a `k`-scaled absolute cost: `\b[0-9]+(\.[0-9]+)?k\b` — deliberately misses a
+#         comma-grouped raw count (`466,802`) and a plain unscaled integer; both are real
+#         absolute costs and both are outside what this pattern can see (see Cannot see, below);
+#       - a population phrase: digit(s) immediately before one of
+#         `times|runs|dispatches|confirmations|rounds|lenses|instances|cases|sessions|attempts|
+#         findings|tests|machines|files|minutes`, or `<digits>%` immediately followed by
+#         `of the`/`of a`/`of an` — a population statistic, not a threshold. A percentage alone,
+#         with no `of the`/`of a`/`of an` after it, is never flagged: that is what keeps a
+#         multiplier or a bare percentage threshold (`30%` on its own) out of this pattern's
+#         reach; only `30% of the window` shapes trip it, and `30%` itself is on the exception
+#         list below regardless.
+#     The exception list — data, not scattered special cases, and named so its source can be
+#       re-derived: the thirteen protected figures (`P-01`..`P-13`) ruled by the provenance lens
+#       in the repo's .claude/plans/sage-48627a15-lens-2.md, "## Protected — exception applies or
+#       the floor protects; leave in place" — every ratio, band, and anti-band that section clears.
+#       None of those needs a literal entry here, because a bare ratio (`~4×`, `1.6–1.7×`) never
+#       matches any of the three shapes above — no digit-`k`, no date, no population noun. The
+#       entries that DO need one are the `k`-scaled and population-phrase shapes the lens
+#       protects anyway: `150k`/`500k` (the budget rail's own floors), `296k` (the anti-band
+#       observation "one point under the threshold... during a run actually at 11%"), `1–2k`
+#       (the report-size bound the brief contract computes with, both hyphens the corpus uses),
+#       and `30% of the` (the handover threshold, a computed predicate, never a population
+#       statistic). A hit is suppressed when the LINE containing it contains one of these
+#       substrings verbatim — a line match, not a token match, because the surrounding words are
+#       what make a figure a threshold rather than a statistic, and a token-only match would
+#       suppress a genuine `296k` appearing in an unrelated, unprotected sentence.
+#     Fires: one violation per matched figure that survives the exception check, `<check-id>`
+#       `corpus-figure`, one line per hit.
+#     Cannot see: a comma-grouped raw count (`466,802`), a plain unscaled integer used as a
+#       cost or a count, a spelled-out number ("twenty-eight runs"), or a population phrase
+#       whose noun is not on the list above — all silence, the same miss-over-false-alarm trade
+#       the eleven ledger checks make throughout this file. It also cannot tell a genuine
+#       citation-by-date (naming a specific dated design note) from a bare measurement date;
+#       both shapes read identically to a line scan, and only the exception list or a human
+#       tells them apart.
+#
+#   cortex-budget
+#     Why: the only one of the five `/sage-promote` growth-control rules that BOUNDS growth
+#       rather than detecting one instance of it — the repo's 2026-08-28-sage-cortex-extraction.md
+#       §8, closing paragraph. `../SKILL.md` has never once shrunk in the history this repo can measure.
+#     Reads: `<dir>/SKILL.md`'s `## Defaults` section, outside fenced code blocks (same fence
+#       convention `corpus-figure` uses immediately above, reused rather than re-written), one
+#       row, for a budget declared as `Cortex word budget | <N> words`, `<N>` a bare positive
+#       integer (commas allowed, e.g. `12,500`). **No such row → silent, always** — the same
+#       fail-quiet spirit `corpus-citation` and the eleven ledger checks already carry: an
+#       undeclared budget is not a violation, it is a knob nobody has turned yet.
+#     Fires: at most once, when a budget IS declared and `wc -w <dir>/SKILL.md` exceeds it —
+#       `<check-id>` `cortex-budget`, naming the measured word count and the declared budget.
+#     Cannot see: a budget declared in the wrong table, spelled with a different label, or a
+#       negative or zero figure (any of those read as "no budget declared" and stay silent,
+#       never crash and never misreport a huge violation on a typo) — a caller who suspects a
+#       silent budget checks `## Defaults` by hand.
+#
 #     Exit codes for this mode only: 0 clean, 1 dirty (same meaning as the ledger form), 2 a
 #       `--corpus` usage error, 3 `<dir>` is missing/unreadable/not a directory, or carries no
 #       readable `SKILL.md` — the corpus equivalent of "not a ledger", same FAIL-QUIET spirit:
@@ -490,7 +591,10 @@ export LC_ALL=C
 usage() {
   printf '%s\n' \
     'sage-lint.sh <ledger-path>       check one ledger, one violation per line, silent if clean' \
-    'sage-lint.sh --corpus <dir>      check a sage skill dir'"'"'s own .md citations (separate mode)' \
+    'sage-lint.sh --corpus <dir>      check a sage skill dir'"'"'s own .md citations, dated/' \
+    '                                  absolute figures, and cortex word budget, across' \
+    '                                  SKILL.md, references/, bin/*.sh, and the five sage' \
+    '                                  agent files (separate mode)' \
     'sage-lint.sh --help              this reminder' \
     '' \
     'Exit 0 clean OR a required tool is missing and nothing was checked (stderr says' \
@@ -499,7 +603,7 @@ usage() {
     'Output: sage-lint <check-id> <path>:<line> <message>' \
     'Checks: header header-fields state-enum triage-orphan triage-state findings-shape' \
     '        plan-unit disclosure-home sections amend-tag splice (ledger mode, all eleven)' \
-    '        corpus-citation                                  (--corpus mode, its one check)'
+    '        corpus-citation corpus-figure cortex-budget          (--corpus mode, its three checks)'
 }
 
 # Core-tool preflight. Without it this script INVENTS violations instead of failing quiet:
@@ -563,13 +667,43 @@ if [ -n "${CORPUS_DIR-}" ]; then
 
   preflight_tools "corpus"
 
-  # The corpus is SKILL.md plus every references/*.md sibling. No references/ dir is not an
-  # error — SKILL.md alone still gets checked (fail quiet, same spirit as the ledger side).
+  # SKILL.md plus every references/*.md sibling seed the corpus; bin/*.sh and the five agent
+  # files join below. No references/ dir is not an error — SKILL.md alone still gets checked
+  # (fail quiet, same spirit as the ledger side).
   CORPUS_FILES="$SKILL_FILE"
   if [ -d "$CORPUS_DIR/references" ]; then
     for _rf in "$CORPUS_DIR"/references/*.md; do
       [ -e "$_rf" ] && CORPUS_FILES="$CORPUS_FILES
 $_rf"
+    done
+  fi
+
+  # bin/*.sh joins the corpus: a script header can cite a corpus file that does not exist.
+  # No bin/ dir is not an error, same fail-quiet spirit as a missing references/.
+  if [ -d "$CORPUS_DIR/bin" ]; then
+    for _bf in "$CORPUS_DIR"/bin/*.sh; do
+      [ -e "$_bf" ] && CORPUS_FILES="$CORPUS_FILES
+$_bf"
+    done
+  fi
+
+  # The five sage agent files join too. Directory discovery, first that exists:
+  # $SAGE_AGENT_DIR, then <dir>/../claude-agents, then ~/.claude/agents. Only the five
+  # basenames below are read from it — ~/.claude/agents/ is the user's own directory and
+  # holds agents unrelated to this corpus. No directory found in that order → scan none of
+  # the five, silently (see CORPUS MODE, header above).
+  AGENT_DIR=""
+  for _cand in "${SAGE_AGENT_DIR-}" "$CORPUS_DIR/../claude-agents" "$HOME/.claude/agents"; do
+    if [ -n "$_cand" ] && [ -d "$_cand" ]; then
+      AGENT_DIR="$_cand"
+      break
+    fi
+  done
+  if [ -n "$AGENT_DIR" ]; then
+    for _an in explorer implementer orchestrator verifier web-researcher; do
+      _af="$AGENT_DIR/$_an.md"
+      [ -e "$_af" ] && CORPUS_FILES="$CORPUS_FILES
+$_af"
     done
   fi
 
@@ -585,6 +719,20 @@ $1"; fi
     case "$CFILE" in
       */*) CDIR="${CFILE%/*}" ;;
       *)   CDIR="." ;;
+    esac
+    # The five agent files resolve corpus-relative to <dir>, never to their own directory
+    # (see CORPUS MODE, header above, "The one exception, and why"): an agent file carries no
+    # references/ of its own, and every sage path it names is a sage-corpus path.
+    if [ -n "$AGENT_DIR" ] && [ "$CDIR" = "$AGENT_DIR" ]; then
+      CDIR="$CORPUS_DIR"
+    fi
+    # A bin/*.sh file additionally resolves corpus-relative to <dir> (see the fallback below):
+    # unlike the five agent files, a script under bin/ already cites most corpus paths
+    # `../`-prefixed and those keep resolving from the script's own directory; this flag only
+    # widens resolution for the bare corpus-relative spelling.
+    case "$CFILE" in
+      "$CORPUS_DIR"/bin/*) CBIN=1 ;;
+      *) CBIN="" ;;
     esac
 
     # Every backtick-wrapped `<path>.md` span outside a fenced (```) code block — same fence
@@ -615,7 +763,7 @@ $1"; fi
       # OUT OF SCOPE, never checked: the genuinely PER-MACHINE memory files. The journal, the
       # local KI files (harness-stamp.md and everything else under memory/local/), and the v2
       # names local.md / local-* are seeded or written on each machine and are deliberately
-      # absent from the repo (`harness.md`: "excluded from the synced tree"), so no existence
+      # absent from the repo (harness.md: "excluded from the synced tree"), so no existence
       # test can be honest about them and checking them would turn "not seeded yet" into a
       # false alarm. This exclusion names the per-machine FILES, not the `memory/` directory --
       # narrower than it used to be, and narrower on purpose. See CORPUS MODE, header above.
@@ -645,12 +793,18 @@ $1"; fi
           continue ;;
       esac
 
-      # Everything else resolves relative to the CITING FILE'S OWN DIRECTORY, and only there.
-      # There is deliberately no corpus-root fallback: one existed, so a file inside
-      # `references/` could cite `references/harness.md` root-relative, and it MASKED exactly
-      # the defect this check was built for -- a citation that does not resolve from where it
-      # is written. The corpus's three such sites were fixed rather than excused.
+      # Everything else resolves relative to the CITING FILE'S OWN DIRECTORY. There is
+      # deliberately no corpus-root fallback for SKILL.md and references/*.md: one existed, so
+      # a file inside `references/` could cite references/harness.md root-relative, and it
+      # MASKED exactly the defect this check was built for -- a citation that does not resolve
+      # from where it is written. The corpus's three such sites were fixed rather than excused.
       if [ -e "$CDIR/$CTOK" ]; then
+        continue
+      fi
+      # A bin/*.sh file gets one more try, corpus-relative to <dir>: a script header cites most
+      # corpus paths `../`-prefixed (resolved above), but a bare corpus-relative spelling
+      # (`SKILL.md`, `references/harness.md`) is also a real citation, not a dangling one.
+      if [ -n "$CBIN" ] && [ -e "$CORPUS_DIR/$CTOK" ]; then
         continue
       fi
       add "sage-lint corpus-citation $CFILE:$CLINE cites '$CTOK' which does not resolve to a file"
@@ -660,6 +814,138 @@ EOF
   done <<EOF
 $CORPUS_FILES
 EOF
+
+  # ---------------------------------------------------------------------------
+  # corpus-figure — see CORPUS MODE, header above, for what it reads, the three shapes it
+  # matches, and why the exception list holds exactly these entries. `bin/*.sh`, the agent
+  # files, and ../references/harness.md are never in FIGURE_FILES: excluded above `CORPUS_FILES`
+  # is built for `corpus-citation`, this list is built separately and on purpose.
+  FIGURE_FILES="$SKILL_FILE"
+  if [ -d "$CORPUS_DIR/references" ]; then
+    for _rf in "$CORPUS_DIR"/references/*.md; do
+      [ -e "$_rf" ] || continue
+      [ "$(basename "$_rf")" = "harness.md" ] && continue
+      FIGURE_FILES="$FIGURE_FILES
+$_rf"
+    done
+  fi
+
+  # The exception list, as data: the thirteen protected figures P-01..P-13, ruled by the
+  # provenance lens at the repo's .claude/plans/sage-48627a15-lens-2.md, "## Protected —
+  # exception applies or the floor protects; leave in place". Only the entries that can actually collide
+  # with one of the three shapes above are listed (see CORPUS MODE, header above, for why a
+  # bare ratio never needs one). A hit is suppressed when its own LINE contains one of these
+  # substrings verbatim.
+  # Pipe-separated, not newline-separated: the BSD awk on macOS rejects a literal newline
+  # inside a -v value outright ("newline in string"), so a newline-joined list here would
+  # silently break this whole check under 2>/dev/null -- exactly the false-clean failure
+  # FAIL QUIET exists to prevent, not produce. None of these entries contains a `|`.
+  #
+  # Four entries below are not from the lens (SKILL.md-only) but ruled the same way, by hand,
+  # against `../references/memory.md`'s own text, the first time this check ever ran over
+  # references/*.md: a citation to a specific dated design note (naming which revision, not
+  # duplicating a measurement), and three illustrative worked-example strings the corpus
+  # quotes to show a FORMAT rather than assert a fact about this machine — the same shape
+  # `../references/dispatch.md`'s own worked ledger table uses, fenced off there and quoted
+  # in-line here. A real per-machine measurement narrated as evidence for a rule (the
+  # `references/memory.md:76` "uses: 0" case) is the load-bearing anecdote itself, shape 1
+  # in the lens's own vocabulary — the rule is unrecognisable without the concrete case, the
+  # same reasoning that protects P-08's `296k`/`29%` anti-band anecdote.
+  FIGURE_EXCEPTIONS='150k|500k|296k|1–2k|30% of the|sage-memory-v3 note, cross-machine half revised|≤10k words|including rules at counts of 24, 13 and 12|fetch-heavy research runs 70'
+
+  while IFS= read -r FFILE; do
+    [ -n "$FFILE" ] || continue
+    CHK=$(awk -v FILE="$FFILE" -v exc="$FIGURE_EXCEPTIONS" '
+      BEGIN {
+        n = split(exc, ex, "|")
+      }
+      function excepted(line,   i) {
+        for (i = 1; i <= n; i++) if (ex[i] != "" && index(line, ex[i]) > 0) return 1
+        return 0
+      }
+      {
+        t = $0
+        sub(/^[ \t]+/, "", t)
+        if (t ~ /^```/) { infence = !infence; next }
+        if (infence) next
+        line = $0
+        if (excepted(line)) next
+
+        rest = line
+        while (match(rest, /(^|[^0-9])20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]([^0-9]|$)/)) {
+          seg = substr(rest, RSTART, RLENGTH)
+          gsub(/[^0-9-]/, "", seg)
+          printf "date\t%d\t%s\n", NR, seg
+          rest = substr(rest, RSTART + RLENGTH)
+        }
+
+        rest = line
+        while (match(rest, /(^|[^0-9.])[0-9]+(\.[0-9]+)?k([^A-Za-z0-9]|$)/)) {
+          seg = substr(rest, RSTART, RLENGTH)
+          gsub(/[^0-9.k]/, "", seg)
+          printf "cost\t%d\t%s\n", NR, seg
+          rest = substr(rest, RSTART + RLENGTH)
+        }
+
+        rest = line
+        while (match(rest, /[0-9]+ (times|runs|dispatches|confirmations|rounds|lenses|instances|cases|sessions|attempts|findings|tests|machines|files|minutes)([^A-Za-z]|$)/)) {
+          seg = substr(rest, RSTART, RLENGTH)
+          printf "population\t%d\t%s\n", NR, seg
+          rest = substr(rest, RSTART + RLENGTH)
+        }
+
+        rest = line
+        while (match(rest, /[0-9]+(\.[0-9]+)?% +of +(the|a|an) /)) {
+          seg = substr(rest, RSTART, RLENGTH)
+          printf "population\t%d\t%s\n", NR, seg
+          rest = substr(rest, RSTART + RLENGTH)
+        }
+      }
+    ' "$FFILE" 2>/dev/null)
+
+    [ -n "$CHK" ] || continue
+    while IFS="$(printf '\t')" read -r FKIND FLINE FSEG; do
+      [ -n "$FKIND" ] || continue
+      case "$FKIND" in
+        date) FMSG="carries a bare date '$FSEG'" ;;
+        cost) FMSG="carries an absolute cost '$FSEG'" ;;
+        population) FMSG="carries a population phrase '$FSEG'" ;;
+        *) FMSG="carries a figure '$FSEG'" ;;
+      esac
+      add "sage-lint corpus-figure $FFILE:$FLINE $FMSG"
+    done <<EOF
+$CHK
+EOF
+  done <<EOF
+$FIGURE_FILES
+EOF
+
+  # ---------------------------------------------------------------------------
+  # cortex-budget — see CORPUS MODE, header above. Fail quiet on an undeclared budget: no row,
+  # no violation, ever. Reads only the `## Defaults` section, outside fenced code blocks, same
+  # fence convention `corpus-figure` uses immediately above — so a budget row quoted as an
+  # example (fenced, or under a different heading) is never read as the real one.
+  BUDGET_LINE=$(awk '
+    {
+      t = $0
+      sub(/^[ \t]+/, "", t)
+      if (t ~ /^```/) { infence = !infence; next }
+      if (infence) next
+      if (t ~ /^## /) { indefaults = (t ~ /^## Defaults[ \t]*$/); next }
+      if (!indefaults) next
+      if (t ~ /^\| *Cortex word budget *\|/) { print; exit }
+    }
+  ' "$SKILL_FILE" 2>/dev/null)
+
+  if [ -n "$BUDGET_LINE" ]; then
+    BUDGET=$(printf '%s' "$BUDGET_LINE" | sed -n 's/^| *Cortex word budget *| *\([0-9,]*\).*/\1/p' | tr -d ',')
+    if printf '%s' "$BUDGET" | grep -qE '^[1-9][0-9]*$'; then
+      WORDS=$(wc -w < "$SKILL_FILE" | tr -d ' ')
+      if [ "$WORDS" -gt "$BUDGET" ]; then
+        add "sage-lint cortex-budget $SKILL_FILE:1 SKILL.md is $WORDS words, over the ## Defaults budget of $BUDGET words"
+      fi
+    fi
+  fi
 
   if [ -n "$OUT" ]; then
     printf '%s\n' "$OUT"

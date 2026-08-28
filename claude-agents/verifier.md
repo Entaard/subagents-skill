@@ -89,5 +89,5 @@ that never needed the outside world should report `Checks run:` with no fetches 
 
 The `model` above is a default. The plan row's `model` parameter overrides it — and should, when
 maker/checker diversity matters. A checker from the writer's own model family skews positive. Log any
-override as a deviation; the dispatching skill's harness reference (`references/claude-code.md`
+override as a deviation; the dispatching skill's harness reference (`~/.claude/skills/subagents/references/claude-code.md`
 in /subagents, `references/harness.md` in /sage) has the caveat about `effort`.

@@ -135,7 +135,7 @@ Solo alternative: <what one strong agent inline would cost or miss>.
 | id | unit | agent/thread name | model used | state | messages | evidence | actual tokens |
 ```
 
-The live per-unit state, updated on every state change. State ∈ `planned | running | reported | blocked | failed | abandoned | inline`. **Every unit is dispatched with an explicit name and that name is recorded here** — unrecorded, it is a unit you can neither steer nor stop (`harness.md`, Spawning, for why the name is the handle).
+The live per-unit state, updated on every state change. State ∈ `planned | running | reported | blocked | failed | abandoned | inline`. **The `agent/thread name` cell carries the `agentId` the dispatch returned, never the unit's `description`** — a `planned` row leaves it empty and fills it the moment the dispatch returns; left unfilled after that, it is a unit you can neither steer nor stop, and a description string is not an address (`harness.md`, Spawning, for the measurement; `../SKILL.md` Step 3 states the duty).
 
 **`messages`** holds every failure-ladder `SendMessage` you sent to this unit: the time each went out, and whether a reply landed. The watchdog sends nothing, so this cell is entirely your own record. An empty cell means none were sent, never that the unit answered.
 

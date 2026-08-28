@@ -3,8 +3,6 @@
 # Run this after every `git pull` to pick up changes.
 set -euo pipefail
 
-repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 # rsync is the one external tool this installer cannot do without. Every section below copies
 # through it — the primary skills (install_skill), the agents, the eco-skill loop, the output
 # styles — and the first of those call sites is unconditional, so there is no install path that
@@ -79,6 +77,46 @@ if ! command -v jq >/dev/null 2>&1 && ! [ -x /usr/bin/jq ]; then
   echo "    macOS:         brew install jq" >&2
   echo "    Debian/Ubuntu: sudo apt install jq" >&2
 fi
+
+# Neither tool is in the preflight above, whose list is what the installed sage-claude/bin scripts
+# need. These two are this installer's own, and nothing below can run without them.
+missing_walk_tools=()
+for _tool in readlink dirname; do
+  command -v "$_tool" >/dev/null 2>&1 || missing_walk_tools+=("$_tool")
+done
+if [ "${#missing_walk_tools[@]}" -gt 0 ]; then
+  echo "ERROR: missing required tool(s) on PATH: ${missing_walk_tools[*]}" >&2
+  echo "  This installer resolves its own location before it can find anything to copy." >&2
+  echo "  Nothing has been installed or modified. Check 'echo \$PATH' for an entry shadowing /usr/bin." >&2
+  exit 1
+fi
+
+# Walked rather than handed to `readlink -f`, whose availability is not something this script can
+# check for on the machines it has to run on.
+resolve_symlinks() { # resolve_symlinks <path>
+  local path="$1" target hops=0
+  while [ -L "$path" ]; do
+    if [ "$hops" -ge 40 ]; then
+      echo "ERROR: more than 40 symlinks stand between $1 and a real file." >&2
+      return 1
+    fi
+    hops=$(( hops + 1 ))
+    target="$(readlink "$path")"
+    case "$target" in
+      /*) path="$target" ;;
+      *) path="$(dirname "$path")/$target" ;;
+    esac
+  done
+  printf '%s\n' "$path"
+}
+
+# Reached through a symlink, the unresolved path names the link's own directory rather than the
+# checkout every source path below is built from. The walk runs in a subshell, so `|| exit` is what
+# ends the run on a failed one -- without it repo_dir falls back to the working directory and the
+# installer copies from whatever happens to be there. `cd -P` resolves symlinked parent directories,
+# which the walk does not: it only ever rewrites the last component.
+script_path="$(resolve_symlinks "${BASH_SOURCE[0]}")" || exit 1
+repo_dir="$(cd -P "$(dirname "$script_path")" && pwd -P)"
 
 # Backups from every section below land in one timestamped directory per run, OUTSIDE the
 # directories Claude Code auto-discovers (skills/, agents/, output-styles/). A backup inside a

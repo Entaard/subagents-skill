@@ -72,7 +72,7 @@ Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; s
 
 Runs whenever any writer is present, the parent included.
 
-1. **Baseline** — record starting revision, dirty files, task-owned files. Unrelated dirty changes are never the agent's work and must survive. **This is the only recovery map once a writer has run**, because no automatic snapshot covers a delegated write (`harness.md`, Cautions). Baselining is the substitute, not a formality.
+1. **Baseline** — record starting revision, dirty files, task-owned files. Unrelated dirty changes are never the agent's work and must survive. **This is the only recovery map once a writer has run**, because no automatic snapshot covers a delegated write (`harness.md`, Cautions). Baselining is the substitute, not a formality. **An untracked file is recorded by name, and a name is not a recovery path** — git holds no object for it and the baseline holds no content, so one that vanished mid-run was unrecoverable. Copy task-adjacent untracked files into the scratchpad at baseline time.
 2. **Write lease** — one named writer; everyone else source-read-only.
 3. **Stabilize** — writer finishes; run focused checks; capture the diff or changed-file manifest.
 4. **Freeze** — no source changes while reviewers inspect the candidate.

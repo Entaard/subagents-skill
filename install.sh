@@ -243,16 +243,45 @@ drift_memory_sentinel() { # drift_memory_sentinel <seed> <installed>
 }
 
 # Sage's v3 memory is a tree, not a file, so it cannot ride install_skill's one-file seed step.
-# Three machine states, three answers, checked in this order:
-#   v3 machine    -> journal.md exists: compare its sentinel to the seed's
-#   v2 machine    -> local.md exists and journal.md does not: the data is this machine's numbers
-#                    in the old shape, so migrate by hand (the design doc's Migration section),
+# Four machine states, checked in this order:
+#   v2 machine    -> local.md exists, journal.md does not: the data is this machine's numbers
+#                    in the old shape, so migrate by hand (the design doc's Migration procedure),
 #                    never here — auto-migrating user data is how it gets lost
-#   fresh machine -> copy the seed tree once (journal.md + local/), create archive/
+#   half-migrated -> local.md AND journal.md both exist: a migration that has not finished, or a
+#                    journal a run's Step 6 append created on an unmigrated machine
+#   v3 machine    -> journal.md exists, local.md does not: compare its sentinel to the seed's
+#   fresh machine -> neither exists: copy the seed tree once (journal.md + local/), create archive/
+# local.md is tested before journal.md because the migration ends by archiving local.md — its
+# presence at the top level means the migration has not finished, and a journal.md standing
+# beside it must not make this machine read as v3, or the migration notice never prints again.
 seed_sage_memory() { # seed_sage_memory <src> <dest>
   local seed="$1memory/local-seed" mem="$2memory"
   if [ ! -f "$seed/journal.md" ]; then
     echo "NOTE: $seed/journal.md is missing; sage's memory was not seeded."
+    return 0
+  fi
+  if [ -f "$mem/local.md" ]; then
+    echo
+    if [ -f "$mem/journal.md" ]; then
+      # Same repair as the v3 branch below: the directories are installer-owned and cheap, and
+      # the half state must not be the one shape that leaves structural invariant 4 broken.
+      mkdir -p "$mem/local" "$mem/archive"
+      echo "NOTE: sage's memory migration is half-done: memory/journal.md (v3) and memory/local.md"
+      echo "      (v2) both exist. Nothing was changed. Until local.md's data is migrated and the"
+      echo "      file itself is moved into memory/archive/, sage cannot see the v2 numbers."
+    else
+      echo "NOTE: sage's memory format is now v3 — a journal plus one file per knowledge item."
+      echo "      Your memory/local.md is the v2 format and was left untouched, because it holds"
+      echo "      this machine's numbers. Until the migration runs, /sage-promote fails closed"
+      echo "      (its preflight requires memory/journal.md) and sage runs without local memory."
+    fi
+    echo "      This note repeats until the migration runs. The migration is an agent task, not a"
+    echo "      script: ask Claude to run the 'Migration procedure' in the source repo's"
+    echo "      2026-08-27-sage-memory-v3-design.md against this machine's local.md."
+    if [ -L "$mem/shared.md" ]; then
+      echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
+      echo "      memory/archive/shared-v2.md); the migration removes it."
+    fi
     return 0
   fi
   if [ -f "$mem/journal.md" ]; then
@@ -260,18 +289,6 @@ seed_sage_memory() { # seed_sage_memory <src> <dest>
     # that lost one gets it back here rather than failing sage's invariant check later.
     mkdir -p "$mem/local" "$mem/archive"
     drift_memory_sentinel "$seed/journal.md" "$mem/journal.md"
-    return 0
-  fi
-  if [ -f "$mem/local.md" ]; then
-    echo
-    echo "NOTE: sage's memory format is now v3 — a journal plus one file per knowledge item."
-    echo "      Your memory/local.md is the v2 format and was left untouched, because it holds"
-    echo "      this machine's numbers. This note repeats until the migration runs. Migrate by"
-    echo "      hand: 'Migration' in the source repo's 2026-08-27-sage-memory-v3-design.md."
-    if [ -L "$mem/shared.md" ]; then
-      echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
-      echo "      memory/archive/shared-v2.md); the migration removes it."
-    fi
     return 0
   fi
   mkdir -p "$mem/local" "$mem/archive"

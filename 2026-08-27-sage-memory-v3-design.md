@@ -147,7 +147,26 @@ Archiving for disuse moves the file to `archive/` with `status: archived → dis
 
 Read-only. Walks `shared/` and `local/`, parses frontmatter with awk, prints one line per KI: `id | kind | class | band | status | <first line of body, truncated>`. Runs call it at Step 2; promote calls it to build the review slate. No stored index file — nothing to go stale, nothing to corrupt. Degrades like the other bin scripts: missing tools → one stderr line, exit 2, callers fall back to `ls` + reading frontmatter directly.
 
-## Migration (this machine, done by this run)
+## Migration procedure (any v2/v1 machine)
+
+The reusable form of the migration, distilled from its two executions (the design machine below, and the 2026-08-28 run whose verifier findings shaped steps 2 and 5). It is an agent task, not a script: steps 2–3 need judgment over this machine's actual rows. The installer's v2 notice points here. `<mem>` = the installed `~/.claude/skills/sage/memory/`.
+
+0. **Snapshot first.** `rsync -a <mem>/ <scratch>/mem-baseline/` — the only rollback, since no automatic snapshot covers these files. Precondition: the repo is pulled and `install.sh` has run (the v3 skill and the `shared` directory symlink are in place; the v2 notice is printing).
+1. **Read the contract, not this section, for the shapes**: `sage-claude/references/memory.md` — `## Knowledge items` (per-kind frontmatter), `## The journal` (grammar, sentinel), `## Structural invariants` (markers 1–4). Structure exemplars: `sage-claude/memory/local-seed/` (never copy its numbers — they are another machine's).
+2. **Map the source before converting.** Grep `<mem>/local.md` for its real section boundaries and row counts; do not trust remembered line numbers. Expect table damage — both executions found it (a blank line splitting a table, rows glued or stranded outside their table). Rows inside the tables convert; row-shaped strays elsewhere stay verbatim in the archive and are surfaced for the next `/sage-promote` pass to adjudicate — never guessed into KIs.
+3. **Convert — each datum gets exactly one primary v3 home, numbers carried cell-verbatim:**
+   - Rules row → `local/<shared-id>.stats.md` (`for:` the shared KI the rule sentence names; `count`/`first`/`last`/`promoted` from the row; provenance verbatim in the body; `uses: 0`, `misses: 0`, `last-used: —`, `created:` today).
+   - Bands row → `local/band-<slug>.md` (`name:` = the class-of-work cell verbatim; figure/qualifiers/evidence in the body). Prose about uncovered classes → one `gap` KI.
+   - Watch row → one KI of the row's `Kind`, status verbatim; a `contradiction` row gets `contradicts:` naming the shared id. v1/v2 tables carry no `Class` column, so assign `class:` — portable when the observation would hold on any machine running this harness, local when it depends on this machine's numbers, paths or corpus — and log every call with a one-line reason.
+   - The stamp → `local/harness-stamp.md`, its `^sage-harness-stamp: ` line intact.
+   - `journal.md`: the sentinel as line 1, a short header, then the newest three Run-log rows **by date** as `run` lines. Condense notes freely; **never invent an aggregate the source does not state** — restate the row's own figures, keeping a fleet/parent split explicit where the row keeps one.
+4. **Archive and clean up**: `mv local.md archive/local-v2.md`, `mv local-archive.md archive/local-archive-v2.md` (plus any `.pre-*` snapshots), verbatim; `rm` the dangling `shared.md` symlink.
+5. **Verify, all by command**: `cmp` both archived files against the step-0 snapshot; `bin/sage-index.sh <mem>` exits 0 with one line per KI and no warnings; `head -1 journal.md` is the exact sentinel; a frontmatter walk against invariant 2; rows-in = files-out reconciliation per section; and a **cell-level number check of every count, date and figure against its source row** — the one major defect a real execution produced was a fabricated aggregate that the structural and byte checks passed.
+6. **Prove the exit state**: re-run `install.sh` — it must take the quiet v3 path (no migration or drift notice); `/sage-promote`'s preflight now qualifies.
+
+Rollback: `rsync -a <scratch>/mem-baseline/ <mem>/`.
+
+## Migration record (the design machine, done by the design run)
 
 1. `shared.md` (11 rules) → 11 `shared/<slug>.md` files, five fields carried verbatim (one qualifier subsequently repaired in this run's review: the scoped-agent rule's pointer to v2 `local.md` now names the local band KIs); old file → repo `archive/shared-v2.md`; installed `shared.md` symlink **removed** (left in place it dangles, since its repo target moved) and replaced by the `shared` directory symlink.
 2. `local.md` → per-row conversion: 12 Rules rows → 11 stats sidecars (`for:` a shared KI) plus 1 local-class rule as a local `lesson` KI holding its own text; 14 Bands rows → 14 `band-*.md`, each carrying `name:` with the v2 class-of-work cell verbatim; every Watch-list row (65) → one KI file of its `Kind`, status carried verbatim; the stamp section → `harness-stamp.md`; the Run log's newest three rows → journal `run` lines, all 43 older rows → `archive/journal-v2-runlog.md`.

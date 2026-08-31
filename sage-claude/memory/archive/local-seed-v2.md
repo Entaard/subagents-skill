@@ -62,7 +62,7 @@ Lessons seen once, contradictions against a `shared.md` rule, skill defects, and
 
 ## Run log
 
-Append one row here, at the very end of the file, every run. Recent rows stay in full; a fully consolidated row compresses to one line with a pointer into `local-archive.md`. Seed rows below are already compressed to their lesson. Their full original text is at `subagents-claude/calibration.md` inside the source repo — resolve that repo with `readlink shared.md` beside this file, since a repo-relative path means nothing from the installed tree — and that is where a provenance grep goes until this machine's first archive exists. A dangling symlink → the note text below is the whole provenance. If a full row and the Bands or Rules ever disagree, the Bands and Rules are the consolidated reading: treat the mismatch as structural damage, a consolidation trigger.
+Append one row here, at the very end of the file, every run. Recent rows stay in full; a fully consolidated row compresses to one line with a pointer into `local-archive.md`. Seed rows below are already compressed to their lesson. Their full original rows are at `sage-claude/memory/archive/orchestration-calibration-v1.md` inside the source repo — resolve that repo with `readlink shared.md` beside this file, since a repo-relative path means nothing from the installed tree — and that is where a provenance grep goes until this machine's first archive exists. A dangling symlink → the note text below is the whole provenance. If a full row and the Bands or Rules ever disagree, the Bands and Rules are the consolidated reading: treat the mismatch as structural damage, a consolidation trigger.
 
 | date | task class | agents | est | actual | wall clock | note |
 | --- | --- | --- | --- | --- | --- | --- |

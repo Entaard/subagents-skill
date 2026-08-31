@@ -1,6 +1,6 @@
 ---
 name: verifier-alt
-description: Review and verification unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source. Runs on a model from outside the harness's own model family. The twin buys a second model family for the checker half of a maker/checker pair — the one benefit no same-family model can supply.
+description: Review and verification unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source. Runs on a model from outside the harness's own model family. The twin buys a second model family for the checker half of a maker/checker pair — the one benefit no same-family model can supply.
 tools: Read, Glob, Grep, Bash, WebFetch, WebSearch
 disallowedTools: Edit, Write, NotebookEdit
 model: __ALT_MODEL__

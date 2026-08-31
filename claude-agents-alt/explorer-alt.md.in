@@ -1,6 +1,6 @@
 ---
 name: explorer-alt
-description: Reader unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general-purpose search agent — for ordinary lookups and codebase questions, use the built-in Explore agent instead. Reports facts with file:line pointers from a fixed scope. Read and search only, no writes, no shell, no network. Runs on a model from outside the harness's own model family; the twin buys price and window headroom for bulk reading, not family diversity.
+description: Reader unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general-purpose search agent — for ordinary lookups and codebase questions, use the built-in Explore agent instead. Reports facts with file:line pointers from a fixed scope. Read and search only, no writes, no shell, no network. Runs on a model from outside the harness's own model family; the twin buys price and window headroom for bulk reading, not family diversity.
 tools: Read, Glob, Grep
 model: __ALT_MODEL__
 effort: low

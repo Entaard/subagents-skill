@@ -1,6 +1,6 @@
 ---
 name: web-researcher-alt
-description: Outside-sources research unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell. Runs on a model from outside the harness's own model family; the twin buys price and window headroom for source-fetching, not family diversity.
+description: Outside-sources research unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell. Runs on a model from outside the harness's own model family; the twin buys price and window headroom for source-fetching, not family diversity.
 tools: WebSearch, WebFetch, Read
 model: __ALT_MODEL__
 effort: medium

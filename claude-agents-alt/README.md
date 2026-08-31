@@ -19,10 +19,9 @@ and to edit a config file it has no Edit tool for. That is prompt tax plus a sta
 the agent could act on wrongly. A verifier reading its own prompt confirmed the mechanism in
 2026-08.
 
-**Parent-facing rules live in the skill corpora, where the parent actually reads them:**
-`sage-claude/references/harness.md` and `subagents-claude/references/claude-code.md`, both under
-"The alt lane", with shorter statements in each `SKILL.md`. Put a new parent rule there. Put only
-agent-actionable text in a template.
+**Parent-facing rules live in Sage's corpus, where the parent actually reads them:**
+`sage-claude/references/harness.md` under "The alt lane", with a shorter statement in `SKILL.md`.
+Put a new parent rule there. Put only agent-actionable text in a template.
 
 ## The rules that moved here
 

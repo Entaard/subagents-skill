@@ -1,6 +1,6 @@
 ---
 name: verifier
-description: Review and verification unit for orchestration skills (/subagents, /sage), dispatched by name from an orchestration plan. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
+description: Review and verification unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
 tools: Read, Glob, Grep, Bash, WebFetch, WebSearch
 disallowedTools: Edit, Write, NotebookEdit
 model: opus
@@ -89,5 +89,4 @@ that never needed the outside world should report `Checks run:` with no fetches 
 
 The `model` above is a default. The plan row's `model` parameter overrides it — and should, when
 maker/checker diversity matters. A checker from the writer's own model family skews positive. Log any
-override as a deviation; the dispatching skill's harness reference (`~/.claude/skills/subagents/references/claude-code.md`
-in /subagents, `references/harness.md` in /sage) has the caveat about `effort`.
+override as a deviation; `~/.claude/skills/sage/references/harness.md` has the caveat about `effort`.

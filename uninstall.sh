@@ -56,11 +56,9 @@ usage() {
   cat <<'USAGE'
 uninstall.sh — remove what install.sh placed under ~/.claude/.
 
-  --sage-only   Remove the sage skill, its sage-promote companion, its orchestrator agent and
-                its two settings hooks. Leaves the subagents skill, the four worker agents and
-                the three alt agents that both skills dispatch, the other ecosystem skills and
-                the output styles. The alt-lane guard hook goes with sage, because the script
-                that hook runs lives inside the sage skill.
+  --sage-only   Remove the sage skill, its sage-promote companion, all five shipped agents,
+                generated alt agents and its two settings hooks. Leaves the other ecosystem
+                skills and output styles.
   --dry-run     Print what would be removed and change nothing.
   --yes, -y     Skip the confirmation prompt. Required when stdin is not a terminal.
   --help, -h    Print this.
@@ -150,32 +148,37 @@ report_interrupted_state() {
 }
 
 collect_targets() {
-  local src
   collect_primary_skill sage
   if [ "$sage_only" -eq 1 ]; then
-    # sage-promote is sage's memory-promotion companion and nothing else dispatches it; the four
-    # worker agents and their alt twins are shared with /subagents, so only orchestrator goes.
     collect_eco_skill sage-promote
-    collect_shipped_agent orchestrator.md
-    return 0
+  else
+    collect_eco_skills
+    collect_output_styles "$repo_dir/output-styles" "$styles_dest"
   fi
-  collect_primary_skill subagents
-  collect_eco_skills
-  for src in "$repo_dir"/claude-agents/*.md; do
+  collect_sage_agents "$repo_dir/claude-agents" "$repo_dir/claude-agents-alt" "$agents_dest"
+}
+
+collect_output_styles() { # collect_output_styles <source-dir> <destination-dir>
+  local source_dir="$1" destination_dir="$2" src
+  for src in "$source_dir"/*.md; do
     [ -f "$src" ] || continue
-    collect_shipped_agent "$(basename "$src")"
-  done
-  collect_generated_alt_agents
-  for src in "$repo_dir"/output-styles/*.md; do
-    [ -f "$src" ] || continue
-    collect_shipped_file "$src" "$styles_dest/$(basename "$src")" output-styles
+    collect_shipped_file "$src" "$destination_dir/$(basename "$src")" output-styles
   done
 }
 
-collect_primary_skill() { # collect_primary_skill <name> — sage or subagents
+collect_sage_agents() { # collect_sage_agents <source-dir> <alt-source-dir> <destination-dir>
+  local source_dir="$1" alt_source_dir="$2" destination_dir="$3" src
+  for src in "$source_dir"/*.md; do
+    [ -f "$src" ] || continue
+    collect_shipped_file "$src" "$destination_dir/$(basename "$src")" agents
+  done
+  collect_generated_alt_agents "$alt_source_dir" "$destination_dir"
+}
+
+collect_primary_skill() { # collect_primary_skill <name>
   local dir="$skills_dest/$1"
   if [ -L "$dir" ]; then
-    # install.sh guards the eco skills against a symlink and these two against nothing: it
+    # install.sh guards the eco skills against a symlink and this path against nothing: it
     # mkdir -p's and rsyncs straight through the link. Removing the link would leave the whole
     # skill installed at a path this script has no claim on.
     echo "NOTE: $dir is a symlink and install.sh wrote through it, so the skill is at its target."
@@ -312,17 +315,11 @@ collect_eco_skill() { # collect_eco_skill <name>
   add_target "$dir" skills
 }
 
-collect_shipped_agent() { # collect_shipped_agent <file-name>
-  local src="$repo_dir/claude-agents/$1"
-  [ -f "$src" ] || return 0
-  collect_shipped_file "$src" "$agents_dest/$1" agents
-}
-
-collect_generated_alt_agents() {
-  local tpl dest
-  for tpl in "$repo_dir"/claude-agents-alt/*.md.in; do
+collect_generated_alt_agents() { # collect_generated_alt_agents <template-dir> <destination-dir>
+  local template_dir="$1" destination_dir="$2" tpl dest
+  for tpl in "$template_dir"/*.md.in; do
     [ -f "$tpl" ] || continue
-    dest="$agents_dest/$(basename "$tpl" .md.in).md"
+    dest="$destination_dir/$(basename "$tpl" .md.in).md"
     if [ -L "$dest" ]; then
       echo "NOTE: $dest is a symlink you made after installing; leaving it."
       left_standing+=("$dest — a symlink this repo did not create")

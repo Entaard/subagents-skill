@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Installs the subagents and sage skills for Claude Code into ~/.claude/.
+# Installs Sage and its companion agents and skills for Claude Code into ~/.claude/.
 # Run this after every `git pull` to pick up changes.
 set -euo pipefail
 
 # rsync is the one external tool this installer cannot do without. Every section below copies
-# through it — the primary skills (install_skill), the agents, the eco-skill loop, the output
-# styles — and the first of those call sites is unconditional, so there is no install path that
-# skips it. Under `set -euo pipefail` an absent rsync aborts the run AT that first sync with
+# through it — Sage, the agents, the eco-skill loop, the output styles — and the agent copy is
+# unconditional, so there is no install path that skips it. Under `set -euo pipefail` an absent
+# rsync aborts the run AT that first sync with
 # nothing but the shell's own "command not found": after the backup root has been named, before a
 # single file is placed, and with no line saying which tool was missing or that the install is now
 # half-done. Fail here instead, while nothing has been touched. This is a preflight rather than
@@ -181,70 +181,6 @@ migrate_legacy_bak() { # migrate_legacy_bak <path> <category>
   echo "NOTE: moved legacy backup $1 -> $backup_root/$2/ (backups no longer live in discovered directories)"
 }
 
-# install_skill <src/> <dest/> <seed-src-rel> <seed-dest-rel> <drift-fn> [<user-data-path> ...]
-#
-# One primary skill directory, synced with --delete so a file dropped from the repo really goes
-# away, minus the <user-data-path> arguments. Those are the paths this machine writes into a tree
-# the installer otherwise owns; --delete would wipe them on every update. Each is an rsync pattern
-# whose leading / anchors it to the top of the synced dir, so a same-named file deeper in the tree
-# is still synced normally, and excluding a path is also what protects it from --delete. Every one
-# of those patterns is a fixed literal written at the call sites below, never a filename read off
-# this machine, which is the only reason --delete is safe here: a pattern is a glob, and the eco
-# loop further down had to stop generating patterns from runtime filenames for exactly that
-# reason — see the comment there. Do not pass a discovered name to this function. Everything
-# else under the dir is managed: a user file placed there is removed on re-install (rsync announces
-# each deletion).
-#
-# <seed-src-rel> is copied to <seed-dest-rel> on first install only — accumulated user data is
-# never overwritten. On every later install <drift-fn> is called with the two paths and says
-# whatever that skill's notion of "the seed moved on without you" is. The two callers differ there
-# and nowhere else, which is the only reason it is a parameter.
-install_skill() {
-  local src="$1" dest="$2" seed_src="$3" seed_dest="$4" drift_fn="$5"
-  shift 5
-  local excludes=() p
-  for p in ${1+"$@"}; do
-    excludes+=(--exclude="$p")
-  done
-
-  mkdir -p "$dest"
-  # The +alternate form matters here and below: stock macOS ships bash 3.2, where "${arr[@]}" on an
-  # empty array is an unbound variable under set -u and would abort every clean install.
-  rsync -av --delete ${excludes[@]+"${excludes[@]}"} "$src" "$dest"
-
-  if [ ! -f "$src$seed_src" ]; then
-    echo "NOTE: $src$seed_src is missing; $dest$seed_dest was not seeded."
-    return 0
-  fi
-  if [ ! -f "$dest$seed_dest" ]; then
-    mkdir -p "$(dirname "$dest$seed_dest")"
-    cp "$src$seed_src" "$dest$seed_dest"
-    printf 'Seeded %-20s-> %s\n' "$(basename "$seed_dest")" "$dest$seed_dest"
-  else
-    "$drift_fn" "$src$seed_src" "$dest$seed_dest"
-  fi
-}
-
-# The rows in an existing calibration.md are user data, so we leave the file alone. But the text
-# ABOVE the first "## " section heading is the skill-authored contract, and that does change
-# between versions. Without this notice, a guidance change would never reach anyone who already
-# installed. The comparison runs from the top of the file through the first "## " heading line
-# (sed's range is end-inclusive); everything below that line holds user data (bands, rules, rows)
-# and stays out of it. Reconciling is the user's call: only they can tell a seed row from one of
-# their own.
-drift_calibration_header() { # drift_calibration_header <seed> <installed>
-  local header_src header_dest
-  header_src="$(sed -n '1,/^## /p' "$1")"
-  header_dest="$(sed -n '1,/^## /p' "$2")"
-  if [ "$header_src" != "$header_dest" ]; then
-    echo
-    echo "NOTE: calibration.md guidance changed in this version. Your copy was left untouched,"
-    echo "      because it holds your accumulated rows. This note repeats until the text above the"
-    echo "      first '## ' heading in your copy matches the new seed's. To see what moved:"
-    echo "        diff $1 $2"
-  fi
-}
-
 # Sage's journal does NOT get the byte comparison above, and reusing it here would be a bug.
 # Every sage run appends lines to it, and /sage-promote's consolidation stage is licensed to
 # drain it, so any byte comparison against the seed latches on permanently after the first run
@@ -280,7 +216,7 @@ drift_memory_sentinel() { # drift_memory_sentinel <seed> <installed>
   fi
 }
 
-# Sage's v3 memory is a tree, not a file, so it cannot ride install_skill's one-file seed step.
+# Sage's v3 memory is a tree whose installed copy contains user data, so it has a dedicated seed step.
 # Four machine states, checked in this order:
 #   v2 machine    -> local.md exists, journal.md does not: the data is this machine's numbers
 #                    in the old shape, so migrate by hand (the design doc's Migration procedure),
@@ -462,15 +398,6 @@ archive_shared_file() {
   echo "Archived $rel (retired from the template) -> $dest"
 }
 
-# The subagents skill. calibration.md accumulates real run costs on this machine, and
-# calibration-archive.md (created by /agents-self-reflect) holds its retired rows.
-subagents_src="$repo_dir/subagents-claude/"
-subagents_dest="$HOME/.claude/skills/subagents/"
-
-install_skill "$subagents_src" "$subagents_dest" \
-  calibration.md calibration.md drift_calibration_header \
-  '/calibration.md' '/calibration-archive.md'
-
 # The sage skill. journal.md and local/ are user data: written by sage and /sage-promote, never
 # copied from the repo, so --delete must never reach memory/ — which also means local-seed/ is
 # never installed, only read from the repo by seed_sage_memory. memory/shared/ is the one
@@ -522,8 +449,8 @@ fi
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
 # any project, based on their `description` field. All the descriptions are written to say they are
 # dispatched by name from an orchestration plan, and to send ordinary lookups to the built-in
-# Explore agent instead, so they should not capture routine work. Both /subagents and /sage dispatch
-# them. Delete them from ~/.claude/agents/ if you would rather they not exist outside those skills.
+# Explore agent instead, so they should not capture routine work. Sage dispatches them. Delete them
+# from ~/.claude/agents/ if you would rather they not exist outside Sage.
 agents_src="$repo_dir/claude-agents/"
 agents_dest="$HOME/.claude/agents/"
 
@@ -876,8 +803,8 @@ eco_release() { # eco_release <installed-dir> <manifest> <rel>
   return 0
 }
 
-# Ecosystem skills (every directory under claude-skills/) live beside the subagents skill in
-# ~/.claude/skills/, one directory per skill. Their names are chosen to coexist with the
+# Ecosystem skills (every directory under claude-skills/) live beside Sage in ~/.claude/skills/,
+# one directory per skill. Their names are chosen to coexist with the
 # separately installed mattpocock skills (tdd, code-review); this script never touches those.
 # Same conflict-safe copy as agents above: back up a same-named skill with different content,
 # never delete skills this repo doesn't own, refuse to replace a symlink — a symlink is another
@@ -1232,7 +1159,6 @@ if [ -d "$sage_src" ]; then
 fi
 
 echo
-echo "Installed subagents skill  -> $subagents_dest"
 if [ -d "$sage_src" ]; then
   echo "Installed sage skill       -> $sage_dest"
   echo "  shared memory synced from -> $shared_src"
@@ -1258,7 +1184,7 @@ Optional, for long orchestration runs:
   Triggering /compact is yours, not the model's. To compact earlier, set
   CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>. Sage reads its own context
   usage and hands over to a successor subagent at 30% of the live window rather than waiting for
-  a compaction; /subagents does not.
+  a compaction.
 
   If you skipped the compaction-hook prompt above (or ran this install non-interactively), add a
   hook in ~/.claude/settings.json by hand that re-anchors a session after a compaction:

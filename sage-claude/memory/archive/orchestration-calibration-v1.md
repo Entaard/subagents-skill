@@ -1,35 +1,7 @@
-# Calibration log
+# Orchestration calibration archive
 
-What orchestration runs on this machine actually cost, against what was estimated — and what they
-taught.
-
-The contract:
-
-- **Step 2** reads this file before writing a budget. Where a Bands line or a Run-log row covers
-  the task class in hand, its figure beats the coarse bands in `references/contracts.md` — cite it
-  in the plan.
-- **Step 6** appends one row to the Run log at the end of this file — every run, including the runs
-  where the estimate held. A band you can trust needs its hits recorded next to its misses. The
-  `note` column is for lessons, not only costs: write each one so Step 2 can act on it.
-  "Fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
-- **Consolidation is the user's act.** When a trigger holds — this file past ~10k tokens, 40+ rows,
-  a lesson *not yet in the skill text* at three confirmations or a promoted rule crossing a band,
-  two rows disagreeing on one band, structural damage, stale
-  version-bound claims (this list mirrors the canonical one in the `agents-self-reflect` skill) —
-  Step 6 prints `Consolidation due: <reason>`, and the user runs `/agents-self-reflect`. That pass
-  rewrites this file into this shape and moves rows out of the log, verbatim (retired or
-  compressed), into `calibration-archive.md` beside it — a file that first exists when that pass
-  first runs (absent until then), never read at Step 2, greppable for provenance.
-- **The skill text cites a band; the counts and dates live here.** A rule promoted into `SKILL.md`
-  or a reference carries `(calibration: established)` at six or more confirmations,
-  `(calibration: recurring)` at three to five, `(calibration: provisional)` for a below-bar fact kept
-  only because its mechanism is structural. So a new confirmation updates one file, not two, and the
-  guideline never accretes a changelog it has no pass to prune. What is *not* a tally travels intact:
-  an undated anecdote, and any figure the skill computes with — a ratio, a token band, a boot cost.
-- Rows marked **(seed)** shipped with the skill: real runs, but from the author's machine, not this
-  one. Untagged rows are local actuals and outrank them. This file is yours, not the skill's —
-  the source repo's `install.sh` (not in this installed directory) seeds it once and never
-  overwrites it.
+Historical cost bands and run rows preserved from the retired orchestration package. This file is
+provenance only; active Sage runs use `memory/local/`.
 
 ## Bands: quote these at Step 2
 

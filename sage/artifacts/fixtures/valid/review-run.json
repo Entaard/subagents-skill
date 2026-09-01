@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "sage.run-record",
+  "run_id": "run-review",
+  "policy_version": "phase0",
+  "status": "completed",
+  "created_at": "2026-08-31T02:00:00Z",
+  "updated_at": "2026-08-31T02:45:00Z",
+  "objective": "Repair one lifecycle script and verify the frozen result through disjoint lenses.",
+  "plan": {
+    "plan_id": "plan-review",
+    "current_revision": 1,
+    "revisions": [
+      {
+        "revision": 1,
+        "kind": "complete",
+        "reason": "The defect and mutable scope were known before admission.",
+        "expected_prior_revision": null,
+        "created_at": "2026-08-31T02:00:00Z",
+        "admitted_at": "2026-08-31T02:01:00Z",
+        "admission_policy": { "profile": "bounded-observed", "profile_version": "1.0", "control_strength": "advisory", "usage_provenance": "estimated", "sensor_id": "fixture-plan-estimate", "sensor_evidence": [{ "kind": "measurement", "locator": "fixture://review-estimate", "detail": "Frozen plan estimate." }], "limit_authority": "policy_actor", "compatibility_profile": "estimate-multiple/baseline-v1", "estimate_multiple": null },
+        "bounds": {
+          "max_units": 1,
+          "max_attempts_per_unit": 2,
+          "max_concurrency": 1,
+          "max_plan_revisions": 2,
+          "max_admission_seconds": 3600,
+          "planned_agent_count": 1,
+          "max_admitted_agents": 1,
+          "spend_limit": 50000,
+          "spend_unit": "tokens",
+          "uncapped_attended": false,
+          "no_progress_revision_limit": 2
+        },
+        "units": [
+          {
+            "unit_id": "U-WRITE",
+            "unit_spec_revision": 1,
+            "owner": "worker",
+            "objective": "Repair the scoped lifecycle failure and preserve unrelated bytes.",
+            "done_when": "The focused reproduction and full sandbox matrix pass on one frozen diff.",
+            "effect_class": "mutating",
+            "dependencies": [],
+            "acceptance_criteria": [
+              { "criterion_id": "C-REPRO", "text": "The original lifecycle failure no longer reproduces.", "evidence_class": "machine", "required": true },
+              { "criterion_id": "C-PRESERVE", "text": "Unrelated files and configuration remain byte-identical.", "evidence_class": "machine", "required": true }
+            ],
+            "required_capabilities": ["workspace.write.scoped", "sandbox.home", "command.capture"],
+            "preferred_capabilities": [
+              { "predicate": "review.independent_model", "fallback": "record same-family residual and use disjoint mandates" }
+            ],
+            "placement_requirements": {
+              "corpus_size": "medium",
+              "ambiguity": "medium",
+              "reasoning_steps": "many",
+              "tool_needs": ["read", "edit", "shell-test"],
+              "latency_preference": "quality_first",
+              "cost_ceiling": 50000,
+              "independence_required": true,
+              "verification_criticality": "high"
+            },
+            "estimated_spend": 20000
+          }
+        ],
+        "prior_units": []
+      }
+    ]
+  },
+  "briefs": [
+    {
+      "brief_id": "B-WRITE",
+      "brief_revision": 1,
+      "plan_revision": 1,
+      "unit_id": "U-WRITE",
+      "unit_spec_revision": 1,
+      "brief_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+      "role": "writer",
+      "objective": "Repair the scoped lifecycle failure.",
+      "inputs": [
+        { "locator": "fixture://lifecycle-script", "classification": "internal", "sha256": "2222222222222222222222222222222222222222222222222222222222222222", "purpose": "Frozen baseline" },
+        { "locator": "fixture://reproduction", "classification": "internal", "sha256": "3333333333333333333333333333333333333333333333333333333333333333", "purpose": "Failure ground truth" }
+      ],
+      "scope": ["fixture://lifecycle-script"],
+      "allowed_effects": ["read", "write", "execute"],
+      "allowed_resources": ["resource-lifecycle-worktree", "resource-sandbox-home"],
+      "required_tools": ["read", "patch", "shell-test"],
+      "caps": {
+        "max_units": 1,
+        "max_attempts_per_unit": 2,
+        "max_concurrency": 1,
+        "max_plan_revisions": 2,
+        "max_admission_seconds": 3600,
+        "planned_agent_count": 1,
+        "max_admitted_agents": 1,
+        "spend_limit": 50000,
+        "spend_unit": "tokens",
+        "uncapped_attended": false,
+        "no_progress_revision_limit": 2
+      },
+      "must_not": ["write outside the leased script", "alter fixture expectations"],
+      "baseline": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "done_when": "The reproduction and sandbox matrix pass without unrelated change.",
+      "requested_model": "balanced-implementation-profile",
+      "requested_effort": "medium",
+      "return_fields": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"]
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "A-WRITE-1",
+      "plan_revision": 1,
+      "unit_id": "U-WRITE",
+      "unit_spec_revision": 1,
+      "brief_id": "B-WRITE",
+      "brief_revision": 1,
+      "brief_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+      "state": "completed",
+      "side_effect_class": "reversible",
+      "worker_ref": "opaque-worker-review",
+      "turn_ref": "opaque-turn-review",
+      "effective_placement": {
+        "requested_model": "balanced-implementation-profile",
+        "effective_model": "resolved-balanced-model",
+        "requested_effort": "medium",
+        "effective_effort": "medium",
+        "capability_snapshot_id": "cap-review"
+      },
+      "started_at": "2026-08-31T02:02:00Z",
+      "ended_at": "2026-08-31T02:20:00Z",
+      "result_id": "R-WRITE"
+    }
+  ],
+  "results": [
+    {
+      "result_id": "R-WRITE",
+      "attempt_id": "A-WRITE-1",
+      "status": "completed",
+      "result": "The scoped lifecycle failure is repaired.",
+      "evidence": [
+        { "kind": "command", "locator": "command://sandbox-matrix", "detail": "All lifecycle scenarios passed." },
+        { "kind": "file", "locator": "fixture://frozen-diff", "sha256": "4444444444444444444444444444444444444444444444444444444444444444", "detail": "Frozen task-owned diff." }
+      ],
+      "files_changed": ["fixture://lifecycle-script"],
+      "checks_run": [
+        { "check": "focused reproduction", "outcome": "pass", "evidence": [{ "kind": "command", "locator": "command://focused-repro", "detail": "Failure no longer reproduced." }] },
+        { "check": "sandbox lifecycle matrix", "outcome": "pass", "evidence": [{ "kind": "command", "locator": "command://sandbox-matrix", "detail": "All scenarios passed." }] }
+      ],
+      "uncertainty": ["A static shell analyzer was unavailable."],
+      "recommended_next_action": "Run the unavailable analyzer when installed.",
+      "content_hash": "5555555555555555555555555555555555555555555555555555555555555555",
+      "received_at": "2026-08-31T02:20:00Z",
+      "acceptance": "accepted",
+      "accepted_at": "2026-08-31T02:38:00Z"
+    }
+  ],
+  "artifacts": [
+    { "artifact_id": "ART-DIFF", "kind": "frozen_diff", "media_type": "text/x-diff", "classification": "internal", "sha256": "4444444444444444444444444444444444444444444444444444444444444444", "locator": "fixture://frozen-diff", "produced_by_attempt": "A-WRITE-1", "adoption": "adopted", "adopted_under_plan_revision": 1 },
+    { "artifact_id": "ART-REVIEW-RECORD", "kind": "rendered_run_record", "media_type": "text/markdown", "classification": "internal", "sha256": "6666666666666666666666666666666666666666666666666666666666666666", "locator": "fixture://review-run.md", "produced_by_attempt": null, "adoption": "adopted", "adopted_under_plan_revision": 1 }
+  ],
+  "assumptions": [
+    {
+      "assumption_id": "ASM-SCOPE",
+      "choice": "Limit repair to the named lifecycle script.",
+      "alternatives": ["Widen to the paired installer"],
+      "impact": "A matching defect in the paired installer would remain a gap.",
+      "falsifier": "The focused reproduction reaches the paired installer or review finds the same failing path there.",
+      "status": "carried_as_risk",
+      "recorded_at": "2026-08-31T02:00:30Z"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "G-STATIC",
+      "description": "The preferred static shell analyzer was unavailable.",
+      "impact": "Static-only defects may remain.",
+      "evidence_checked": [{ "kind": "command", "locator": "command://analyzer-presence", "detail": "Analyzer not found." }],
+      "owner": "operator",
+      "next_action": "Run the analyzer when installed.",
+      "status": "accepted_risk"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "F-SUBSTRING",
+      "severity": "major",
+      "confidence": "high",
+      "location": "fixture://lifecycle-script#config-removal",
+      "failure_mode": "A substring match could remove an unrelated configuration entry.",
+      "impact": "User configuration could be lost.",
+      "evidence": [{ "kind": "command", "locator": "command://config-fixture-before-fix", "detail": "The unrelated entry was removed on the baseline." }],
+      "violated": "C-PRESERVE",
+      "suggested_direction": "Match the stable structured entry ID.",
+      "verify_fix": "Run the configuration fixture matrix and byte-compare unrelated entries."
+    }
+  ],
+  "dispositions": [
+    {
+      "disposition_id": "DISP-F-SUBSTRING",
+      "finding_id": "F-SUBSTRING",
+      "decision": "accepted",
+      "status": "resolved",
+      "rationale": "The reproduction showed user-visible loss and the structured-ID repair passed.",
+      "evidence": [{ "kind": "command", "locator": "command://config-fixture-after-fix", "detail": "Unrelated bytes remained identical." }],
+      "owner": "policy_actor",
+      "verification_ids": ["V-FIX"],
+      "recorded_at": "2026-08-31T02:37:00Z"
+    }
+  ],
+  "verifications": [
+    { "verification_id": "V-REPRO", "subject_kind": "unit", "subject_id": "U-WRITE", "criterion_id": "C-REPRO", "method": "Focused reproduction", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "command", "locator": "command://focused-repro", "detail": "Baseline failed; candidate passed." }], "verified_by": "independent-correctness-lens", "verified_at": "2026-08-31T02:30:00Z" },
+    { "verification_id": "V-PRESERVE", "subject_kind": "unit", "subject_id": "U-WRITE", "criterion_id": "C-PRESERVE", "method": "Byte comparison", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "measurement", "locator": "fixture://byte-comparison", "detail": "All unrelated files matched." }], "verified_by": "independent-safety-lens", "verified_at": "2026-08-31T02:32:00Z" },
+    { "verification_id": "V-FIX", "subject_kind": "finding", "subject_id": "F-SUBSTRING", "criterion_id": "C-PRESERVE", "method": "Targeted regression matrix", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "command", "locator": "command://config-fixture-after-fix", "detail": "The structured entry alone was removed." }], "verified_by": "independent-fix-verifier", "verified_at": "2026-08-31T02:36:00Z" }
+  ],
+  "decisions": [
+    { "decision_id": "D-SCOPE", "kind": "scope", "decision": "Keep the paired installer out of mutation scope.", "reason": "The reproduction and user request target only the removal path.", "recorded_at": "2026-08-31T02:00:30Z", "affects": ["U-WRITE", "ASM-SCOPE"], "adoption": null }
+  ],
+  "coordination_outcome": {
+    "state": "beneficial",
+    "assessment": "The execution and configuration lenses found disjoint failure modes and the frozen review prevented write/read races.",
+    "unique_contributions": ["Execution lens reproduced the invocation failure.", "Configuration lens found the substring deletion."],
+    "duplicated_work": ["Both lenses confirmed the preservation criterion."],
+    "interventions": 0,
+    "protocol_failures": 0,
+    "critical_path_effect": "Independent reviews ran concurrently after freeze.",
+    "root_context_effect": "Bulk sandbox output stayed in evidence artifacts.",
+    "evidence": [{ "kind": "artifact", "locator": "fixture://frozen-diff", "sha256": "4444444444444444444444444444444444444444444444444444444444444444", "detail": "Common frozen review target." }]
+  },
+  "completion": {
+    "state": "closed",
+    "criteria_status": "pass",
+    "checks_status": "pass",
+    "findings_status": "resolved",
+    "scope_status": "inside_scope",
+    "human_items": [],
+    "claim": "The scoped lifecycle repair passed its reproduction, preservation matrix, and targeted finding verification.",
+    "claimed_at": "2026-08-31T02:44:00Z",
+    "deliverable": "A verified repair to the scoped lifecycle script."
+  },
+  "rendered_run_record": {
+    "artifact_id": "ART-REVIEW-RECORD",
+    "media_type": "text/markdown",
+    "generator_version": "phase0-fixture",
+    "source_state_sha256": "7777777777777777777777777777777777777777777777777777777777777777"
+  }
+}

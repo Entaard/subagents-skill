@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/record-finding-request.json",
+  "patch": [
+    { "op": "replace", "path": "/expected_run_version", "value": null }
+  ],
+  "expected_errors": ["RUNTIME-EXPECTED-VERSION"]
+}
+

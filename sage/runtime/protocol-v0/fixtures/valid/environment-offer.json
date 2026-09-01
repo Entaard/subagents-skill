@@ -1,0 +1,46 @@
+{
+  "message_kind": "environment_offer",
+  "protocol_version": "0.1-provisional",
+  "offer_id": "offer-1",
+  "adapter_kind": "example-adapter",
+  "adapter_version": "0.0-test",
+  "environment_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "working_directory_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "configuration_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "trust_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "approval_policy_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "capabilities": [
+    {
+      "operation": "worker.prepare",
+      "semantic_version": "0.1",
+      "available": true,
+      "authority_source": "versioned local API probe",
+      "trust_state": "trusted",
+      "scope": "worker",
+      "control_strength": "enforced",
+      "delivery": "snapshot-reconcilable",
+      "durability": "restart",
+      "restart_boundary": "adapter process restart",
+      "failure_behavior": "fail-closed",
+      "evidence": ["fixture probe passed"],
+      "uncovered_paths": []
+    },
+    {
+      "operation": "context.pressure",
+      "semantic_version": "0.1",
+      "available": false,
+      "authority_source": "no supported sensor",
+      "trust_state": "not_applicable",
+      "scope": "turn",
+      "control_strength": "not_applicable",
+      "delivery": "not_applicable",
+      "durability": "none",
+      "restart_boundary": "unavailable",
+      "failure_behavior": "unknown",
+      "evidence": [],
+      "uncovered_paths": ["automatic handover sensing"]
+    }
+  ],
+  "observed_at": "2026-08-31T05:00:00Z"
+}
+

@@ -1,0 +1,8 @@
+{
+  "base": "../ownership-receipt.uninstall.example.json",
+  "patch": [
+    { "op": "replace", "path": "/backups/0/sha256", "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-PRIOR-BACKUP"]
+}

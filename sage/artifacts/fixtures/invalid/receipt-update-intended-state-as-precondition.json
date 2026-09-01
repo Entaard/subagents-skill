@@ -1,0 +1,8 @@
+{
+  "base": "../ownership-receipt.update.example.json",
+  "patch": [
+    { "op": "copy", "from": "/operation/journal/3/postcondition/subjects/0", "path": "/operation/journal/3/precondition/subjects/0" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-PRECONDITION"]
+}

@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/plan-commit-transition.json",
+  "patch": [
+    { "op": "replace", "path": "/operation", "value": "EraseEverything" }
+  ],
+  "expected_errors": ["RUNTIME-TRANSITION-AUTHORITY", "SCHEMA-ENUM"]
+}

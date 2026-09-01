@@ -1,0 +1,26 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    {
+      "op": "add",
+      "path": "/findings/-",
+      "value": {
+        "finding_id": "F-ORPHAN",
+        "severity": "major",
+        "confidence": "high",
+        "location": "fixture://source.txt",
+        "failure_mode": "A mandatory condition is absent.",
+        "impact": "The completion claim may be false.",
+        "evidence": [
+          { "kind": "file", "locator": "fixture://source.txt", "detail": "The condition is absent." }
+        ],
+        "violated": "C1",
+        "suggested_direction": "Restore the condition.",
+        "verify_fix": "Search for the restored condition."
+      }
+    }
+  ],
+  "expected_errors": ["ART-FINDING-DISPOSITION"]
+}
+

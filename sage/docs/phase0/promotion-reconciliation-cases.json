@@ -1,0 +1,76 @@
+{
+  "fixture_version": "1.0",
+  "projection": "KnowledgeRecordProjection/v1",
+  "canonicalization": "sage-json-v1",
+  "cases": [
+    {
+      "case_id": "equivalent-format-and-local-metadata",
+      "left": {
+        "stable_id": "KI-example-1",
+        "class": "execution",
+        "status": "active",
+        "rule": "Use the narrow check.\r\nPreserve the evidence.",
+        "qualifier": "When one predicate settles the claim.",
+        "recognizer": "A broad suite is proposed for one predicate.",
+        "falsifier": "The narrow check cannot exercise the behavior.",
+        "provenance": ["run:b", "run:a"],
+        "stored_integrity_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd",
+        "local": { "use_count": 4, "last_used": "2026-08-30" }
+      },
+      "right": {
+        "local": { "use_count": 99, "last_used": "2026-08-31" },
+        "provenance": ["run:a", "run:b"],
+        "falsifier": "The narrow check cannot exercise the behavior.",
+        "recognizer": "A broad suite is proposed for one predicate.",
+        "qualifier": "When one predicate settles the claim.",
+        "rule": "Use the narrow check.\nPreserve the evidence.",
+        "status": "active",
+        "class": "execution",
+        "stable_id": "KI-example-1",
+        "stored_integrity_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd"
+      },
+      "expected": "equivalent"
+    },
+    {
+      "case_id": "divergent-portable-content",
+      "left_ref": "equivalent-format-and-local-metadata:left",
+      "right_patch": { "rule": "Always run the broad suite." },
+      "right_stored_integrity_sha256": "11a33d5d2f3ddba219de0a240f76b36eb1e3ecf3dc15f217cbac4f7575165e92",
+      "expected": "conflict"
+    },
+    {
+      "case_id": "same-hash-unequal-bytes",
+      "left_ref": "equivalent-format-and-local-metadata:left",
+      "right_patch": { "rule": "Different portable bytes." },
+      "forced_hash_equal": true,
+      "forced_stored_integrity_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd",
+      "expected": "collision_error"
+    },
+    {
+      "case_id": "stale-stored-integrity",
+      "record_ref": "equivalent-format-and-local-metadata:left",
+      "stored_integrity_override": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "expected": "integrity_error"
+    },
+    {
+      "case_id": "idempotent-rerun",
+      "repository_ref": "equivalent-format-and-local-metadata:left",
+      "overlay_ref": "equivalent-format-and-local-metadata:right",
+      "applications": 2,
+      "expected_after_each_application": [
+        {
+          "repository_active": [{ "stable_id": "KI-example-1", "projection_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd" }],
+          "overlay_active": [],
+          "overlay_archive": [{ "stable_id": "KI-example-1", "projection_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd", "reconciled_to": "repository:KI-example-1" }]
+        },
+        {
+          "repository_active": [{ "stable_id": "KI-example-1", "projection_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd" }],
+          "overlay_active": [],
+          "overlay_archive": [{ "stable_id": "KI-example-1", "projection_sha256": "ddaa8738d735be71c52121165f82677bb91aff6725c632a0fa407b9acc88a2bd", "reconciled_to": "repository:KI-example-1" }]
+        }
+      ],
+      "expected_state_sha256": "2761d1a2851de8d69ccf2ece23322b6168cbd71f7204445aec3eac1db32ad9a3",
+      "expected": "idempotent"
+    }
+  ]
+}

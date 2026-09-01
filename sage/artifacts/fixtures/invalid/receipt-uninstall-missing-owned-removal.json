@@ -1,0 +1,10 @@
+{
+  "base": "../ownership-receipt.uninstall.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/journal/5/entry_ids", "value": [] },
+    { "op": "replace", "path": "/operation/journal/5/precondition/subjects", "value": [] },
+    { "op": "replace", "path": "/operation/journal/5/postcondition/subjects", "value": [] }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-OPERATION-COVERAGE"]
+}

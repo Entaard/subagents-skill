@@ -1,0 +1,9 @@
+{
+  "base": "../ownership-receipt.update.example.json",
+  "patch": [
+    { "op": "replace", "path": "/backups/2/sha256", "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+    { "op": "replace", "path": "/operation/journal/1/postcondition/backup_subjects/0/content_sha256", "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-ROLLBACK-BACKUP"]
+}

@@ -1,0 +1,8 @@
+{
+  "base": "../ownership-receipt.update.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/prior_receipt_sha256", "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-PRIOR"]
+}

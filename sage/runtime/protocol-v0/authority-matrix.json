@@ -1,0 +1,30 @@
+{
+  "matrix_version": "0.1-provisional",
+  "default": "deny",
+  "authority_source": "authenticated_connection_principal",
+  "authenticated_scope_required": true,
+  "payload_authority_fields": "forbidden",
+  "operations": {
+    "CreateRun": ["operator"],
+    "ProposePlanRevision": ["policy_actor"],
+    "CommitPlanRevision": ["scheduler"],
+    "AdmitAttempt": ["scheduler"],
+    "BindWorker": ["scheduler"],
+    "SteerAttempt": ["policy_actor"],
+    "InterruptAttempt": ["operator", "policy_actor"],
+    "RecordFinding": ["policy_actor"],
+    "DispositionFinding": ["policy_actor"],
+    "AcceptResult": ["policy_actor"],
+    "RecordVerification": ["policy_actor"],
+    "AdoptArtifact": ["policy_actor"],
+    "GrantLease": ["scheduler"],
+    "ReleaseLease": ["scheduler"],
+    "RecordApproval": ["approval_channel"],
+    "BeginDrain": ["operator", "scheduler"],
+    "CloseRun": ["operator"]
+  },
+  "non_request_principals": {
+    "adapter": "observation endpoint limited to assigned handles",
+    "worker": "result and artifact endpoint limited to own attempt"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/status", "value": "running" },
+    { "op": "copy", "from": "/plan/revisions/0", "path": "/plan/revisions/-" },
+    { "op": "replace", "path": "/plan/revisions/1/created_at", "value": "2026-08-31T02:40:00Z" },
+    { "op": "replace", "path": "/plan/revisions/1/admitted_at", "value": "2026-08-31T02:41:00Z" }
+  ],
+  "expected_errors": ["ART-DUPLICATE-REVISION", "ART-DUPLICATE-UNIT", "ART-PLAN-COVERAGE", "ART-PLAN-PRIOR", "ART-PLAN-SEQUENCE"]
+}

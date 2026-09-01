@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "replace", "path": "/attempts/0/state", "value": "running" },
+    { "op": "replace", "path": "/attempts/0/ended_at", "value": null }
+  ],
+  "expected_errors": ["ART-COMPLETED-RESULT", "ART-RESULT-TERMINAL"]
+}

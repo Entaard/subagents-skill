@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "remove", "path": "/verifications/0" }
+  ],
+  "expected_errors": ["ART-COMPLETED-VERIFICATION"]
+}
+

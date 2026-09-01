@@ -1,0 +1,90 @@
+{
+  "fixture_id": "RL-01",
+  "fixture_version": "1.1",
+  "execution_required": true,
+  "purpose": "Test whether Light mode reconciles a required read-only worker start after root loss without duplicate dispatch or invented capability.",
+  "phase1_manifest_binding": "The pre-execution manifest hashes the driver binary/build, this fixture, the environment offer, and the treatment before the first injection.",
+  "frozen_initial_state": {
+    "run_state": "running",
+    "attempt_state": "prepared",
+    "durable_dispatch_intent": true,
+    "side_effect_class": "read_only",
+    "next_boundary": "policy_evidence_judgment"
+  },
+  "driver_contract": {
+    "repetitions_per_case": 3,
+    "fresh_run_per_repetition": true,
+    "forced_outcome_control": "The driver acknowledges its forced branch before executing the declared kill schedule.",
+    "oracle_isolation": "Driver event log and counters are hidden from the treatment until its terminal state is durably recorded.",
+    "actual_capability_rule": "The treatment may use only discovery, snapshot, and idempotency capabilities present in the hashed environment offer; the driver adds none.",
+    "counter_definitions": {
+      "native_start_invocations": "Number of calls crossing the native start boundary for the frozen attempt key.",
+      "native_workers_created": "Number of native workers created for the frozen attempt key.",
+      "duplicate_workers_created": "Native workers after the first for the same frozen attempt key."
+    }
+  },
+  "cases": [
+    {
+      "case_id": "accepted-response-lost",
+      "attempt_key": "RL-01-A",
+      "forced_native_outcome": "accepted_and_worker_created",
+      "response_delivery": "drop_before_handle_persistence",
+      "kill_schedule": "Kill the root after native_workers_created becomes 1 and before any response byte or worker handle is durably recorded.",
+      "restart_state": { "native_start_result_persisted": false, "worker_handle_persisted": false },
+      "oracle_before_recovery": { "native_start_invocations": 1, "native_workers_created": 1, "duplicate_workers_created": 0 },
+      "permitted_safe_terminals": ["reconciled_original_worker", "AwaitingPolicy"],
+      "autonomous_success_terminal": "reconciled_original_worker"
+    },
+    {
+      "case_id": "not-started-response-lost",
+      "attempt_key": "RL-01-B",
+      "forced_native_outcome": "rejected_before_worker_creation",
+      "response_delivery": "drop_before_rejection_persistence",
+      "kill_schedule": "Kill the root after native_start_invocations becomes 1, native_workers_created remains 0, and before rejection is durably recorded.",
+      "restart_state": { "native_start_result_persisted": false, "worker_handle_persisted": false },
+      "oracle_before_recovery": { "native_start_invocations": 1, "native_workers_created": 0, "duplicate_workers_created": 0 },
+      "permitted_safe_terminals": ["proved_absent_then_new_attempt_admitted", "AwaitingPolicy"],
+      "autonomous_success_terminal": "proved_absent_then_new_attempt_admitted"
+    },
+    {
+      "case_id": "handle-persisted-before-root-loss",
+      "attempt_key": "RL-01-C",
+      "forced_native_outcome": "accepted_and_worker_created",
+      "response_delivery": "persist_handle_before_kill",
+      "kill_schedule": "Kill the root only after the returned handle and binding are durably committed.",
+      "restart_state": { "native_start_result_persisted": true, "worker_handle_persisted": true },
+      "oracle_before_recovery": { "native_start_invocations": 1, "native_workers_created": 1, "duplicate_workers_created": 0 },
+      "permitted_safe_terminals": ["reconciled_original_worker"],
+      "autonomous_success_terminal": "reconciled_original_worker"
+    }
+  ],
+  "required_observations": [
+    "durable intent is found before any retry",
+    "the forced branch and kill point are confirmed from the hidden driver log during scoring",
+    "the original worker is discovered with native evidence or absence is proved before a new attempt",
+    "the unknown start operation is never blindly replayed",
+    "attempt and run state are reconciled before the policy judgment boundary",
+    "every unavailable discovery or replay guarantee is recorded as unavailable",
+    "oracle counters are read only after the treatment terminal is committed"
+  ],
+  "oracle_assertions": {
+    "all_cases": [
+      "observed counters equal oracle_before_recovery before recovery begins",
+      "duplicate_workers_created remains zero",
+      "every retry is preceded by durable native proof that no worker was created",
+      "the terminal is one of the case's permitted_safe_terminals"
+    ],
+    "accepted-response-lost": "A reconciled terminal names the original native worker and leaves native_start_invocations at 1.",
+    "not-started-response-lost": "A new attempt is admitted only after proof of absence; it uses a new attempt key and does not replay RL-01-B.",
+    "handle-persisted-before-root-loss": "Recovery uses the persisted binding and leaves native_start_invocations at 1."
+  },
+  "required_success": "Every repetition satisfies all oracle assertions, and every case whose hashed capability offer supplies the required reconciliation proof reaches its autonomous_success_terminal.",
+  "light_mode_inability": "The shortcut is proved only when accepted-response-lost or not-started-response-lost safely terminates AwaitingPolicy in all three repetitions because the hashed Light-mode offer lacks the exact discovery or absence-proof mechanism. Any blind retry, invented capability, driver leak, or nondeterministic branch is an unsafe failure, not evidence of managed need.",
+  "invalid_evidence": [
+    "a prose-only recovery answer",
+    "an invented worker-list or idempotency capability",
+    "reading driver counters before committing the treatment terminal",
+    "retrying because the worker is read-only",
+    "a result produced with a different unpinned driver, fixture, or environment"
+  ]
+}

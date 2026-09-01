@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/attempts/1/brief_id", "value": "B-SCOUT" },
+    { "op": "replace", "path": "/attempts/1/brief_hash", "value": "8888888888888888888888888888888888888888888888888888888888888888" }
+  ],
+  "expected_errors": ["ART-BINDING"]
+}

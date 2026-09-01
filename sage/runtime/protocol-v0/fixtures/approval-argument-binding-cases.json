@@ -1,0 +1,49 @@
+{
+  "fixture_version": "0.1-provisional",
+  "descriptor_version": "ActionArguments/v1",
+  "canonicalization": "sage-json-v1+sha256",
+  "cases": [
+    {
+      "case_id": "exact-match",
+      "arguments": { "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "destination_id": "example-1", "visibility": "private" },
+      "recorded_arguments_sha256": "f34bca26f6a8a564252341e9ad02c64afee57fa42f6f55f8f16edc37e9cdaf5c",
+      "expected": "match"
+    },
+    {
+      "case_id": "key-order-equivalent",
+      "arguments": { "visibility": "private", "destination_id": "example-1", "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+      "recorded_arguments_sha256": "f34bca26f6a8a564252341e9ad02c64afee57fa42f6f55f8f16edc37e9cdaf5c",
+      "expected": "match"
+    },
+    {
+      "case_id": "newline-normalized",
+      "arguments": { "note": "line1\r\nline2" },
+      "recorded_arguments_sha256": "7cf1eb077508ef3a617c858626767b2d255a0794679448bc1d6f93c4fd937cda",
+      "expected": "match"
+    },
+    {
+      "case_id": "nfc-key-normalized",
+      "arguments": { "é": "stable" },
+      "recorded_arguments_sha256": "98f96a9960ec695dd26176a8b73487c3d4a1d607cace83cc8869aa7457d9e5be",
+      "expected": "match"
+    },
+    {
+      "case_id": "different-destination",
+      "arguments": { "artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "destination_id": "example-2", "visibility": "private" },
+      "recorded_arguments_sha256": "f34bca26f6a8a564252341e9ad02c64afee57fa42f6f55f8f16edc37e9cdaf5c",
+      "expected": "mismatch"
+    },
+    {
+      "case_id": "floating-point-rejected",
+      "arguments": { "retry_count": 1.5 },
+      "recorded_arguments_sha256": null,
+      "expected": "invalid"
+    },
+    {
+      "case_id": "normalized-key-collision-rejected",
+      "arguments": { "é": 1, "é": 2 },
+      "recorded_arguments_sha256": null,
+      "expected": "invalid"
+    }
+  ]
+}

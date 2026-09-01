@@ -1,0 +1,13 @@
+{
+  "message_kind": "transition",
+  "protocol_version": "0.1-provisional",
+  "transition_id": "transition-plan-commit-1",
+  "run_id": "run-runtime",
+  "run_seq": 2,
+  "run_version": 2,
+  "command_id": "command-plan-commit-1",
+  "authenticated_principal": "scheduler",
+  "operation": "CommitPlanRevision",
+  "accepted_at": "2026-08-31T05:02:00Z",
+  "state_sha256": "7777777777777777777777777777777777777777777777777777777777777777"
+}

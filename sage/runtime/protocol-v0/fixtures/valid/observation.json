@@ -1,0 +1,23 @@
+{
+  "message_kind": "observation",
+  "protocol_version": "0.1-provisional",
+  "event_id": "evt-1",
+  "run_seq": 42,
+  "occurred_at": "2026-08-31T05:02:00Z",
+  "observed_at": "2026-08-31T05:02:01Z",
+  "run_id": "run-runtime",
+  "unit_id": "U1",
+  "attempt_id": "attempt-1",
+  "worker_ref": "opaque-worker-1",
+  "causation_id": null,
+  "adapter": "example-adapter",
+  "adapter_version": "0.0-test",
+  "source_event_id": "native-event-7",
+  "source_epoch": "connection-1",
+  "source_seq": 7,
+  "source_cursor": "cursor-7",
+  "delivery": "snapshot-reconcilable",
+  "type": "worker.completed",
+  "payload": { "native_state": "idle-after-result" }
+}
+

@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sage.local/schemas/runtime-envelope-v0.schema.json",
+  "title": "Sage runtime protocol v0 provisional envelopes",
+  "description": "Provisional single-production-adapter draft; not cross-harness stable.",
+  "oneOf": [
+    { "$ref": "#/$defs/EnvironmentOffer" },
+    { "$ref": "#/$defs/CapabilitySnapshot" },
+    { "$ref": "#/$defs/Request" },
+    { "$ref": "#/$defs/Transition" },
+    { "$ref": "#/$defs/Observation" },
+    { "$ref": "#/$defs/ApprovalRecord" }
+  ],
+  "$defs": {
+    "Id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "Timestamp": { "type": "string", "format": "date-time" },
+    "ProtocolVersion": { "const": "0.1-provisional" },
+    "Operation": { "enum": ["CreateRun", "ProposePlanRevision", "CommitPlanRevision", "AdmitAttempt", "BindWorker", "SteerAttempt", "InterruptAttempt", "RecordFinding", "DispositionFinding", "AcceptResult", "RecordVerification", "AdoptArtifact", "GrantLease", "ReleaseLease", "RecordApproval", "BeginDrain", "CloseRun"] },
+    "CapabilityRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "semantic_version", "available", "authority_source", "trust_state", "scope", "control_strength", "delivery", "durability", "restart_boundary", "failure_behavior", "evidence", "uncovered_paths"],
+      "properties": {
+        "operation": { "type": "string", "minLength": 1 },
+        "semantic_version": { "type": "string", "minLength": 1 },
+        "available": { "type": "boolean" },
+        "authority_source": { "type": "string", "minLength": 1 },
+        "trust_state": { "enum": ["trusted", "untrusted", "unknown", "not_applicable"] },
+        "scope": { "enum": ["environment", "run", "worker", "turn", "tool_family", "resource", "workspace"] },
+        "control_strength": { "enum": ["enforced", "advisory", "none", "not_applicable"] },
+        "delivery": { "enum": ["replayable", "snapshot-reconcilable", "ephemeral", "not_applicable"] },
+        "durability": { "enum": ["process", "session", "restart", "durable_store", "none", "unknown"] },
+        "restart_boundary": { "type": "string", "minLength": 1 },
+        "failure_behavior": { "enum": ["fail-closed", "fail-open", "unknown", "not_applicable"] },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "uncovered_paths": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "RequestedEffective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_model", "effective_model", "requested_effort", "effective_effort", "requested_permissions", "effective_permissions", "requested_isolation", "effective_isolation"],
+      "properties": {
+        "requested_model": { "type": "string", "minLength": 1 },
+        "effective_model": { "type": ["string", "null"] },
+        "requested_effort": { "type": "string", "minLength": 1 },
+        "effective_effort": { "type": ["string", "null"] },
+        "requested_permissions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "effective_permissions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "requested_isolation": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "effective_isolation": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "EnvironmentOffer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "offer_id", "adapter_kind", "adapter_version", "environment_fingerprint", "working_directory_id", "configuration_sha256", "trust_sha256", "approval_policy_sha256", "capabilities", "observed_at"],
+      "properties": {
+        "message_kind": { "const": "environment_offer" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "offer_id": { "$ref": "#/$defs/Id" },
+        "adapter_kind": { "type": "string", "minLength": 1 },
+        "adapter_version": { "type": "string", "minLength": 1 },
+        "environment_fingerprint": { "$ref": "#/$defs/Sha256" },
+        "working_directory_id": { "$ref": "#/$defs/Sha256" },
+        "configuration_sha256": { "$ref": "#/$defs/Sha256" },
+        "trust_sha256": { "$ref": "#/$defs/Sha256" },
+        "approval_policy_sha256": { "$ref": "#/$defs/Sha256" },
+        "capabilities": { "type": "array", "items": { "$ref": "#/$defs/CapabilityRecord" } },
+        "observed_at": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "CapabilitySnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "snapshot_id", "offer_id", "run_id", "attempt_id", "worker_ref", "turn_ref", "requested_effective", "capabilities", "observed_at"],
+      "properties": {
+        "message_kind": { "const": "capability_snapshot" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "snapshot_id": { "$ref": "#/$defs/Id" },
+        "offer_id": { "$ref": "#/$defs/Id" },
+        "run_id": { "$ref": "#/$defs/Id" },
+        "attempt_id": { "$ref": "#/$defs/Id" },
+        "worker_ref": { "type": ["string", "null"] },
+        "turn_ref": { "type": ["string", "null"] },
+        "requested_effective": { "$ref": "#/$defs/RequestedEffective" },
+        "capabilities": { "type": "array", "items": { "$ref": "#/$defs/CapabilityRecord" } },
+        "observed_at": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "command_id", "operation", "run_id", "idempotency_key", "expected_run_version", "payload_sha256", "payload"],
+      "properties": {
+        "message_kind": { "const": "request" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "command_id": { "$ref": "#/$defs/Id" },
+        "operation": { "$ref": "#/$defs/Operation" },
+        "run_id": { "type": ["string", "null"], "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "idempotency_key": { "type": "string", "minLength": 16 },
+        "expected_run_version": { "type": ["integer", "null"], "minimum": 0 },
+        "payload_sha256": { "$ref": "#/$defs/Sha256" },
+        "payload": { "type": "object" }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "transition_id", "run_id", "run_seq", "run_version", "command_id", "authenticated_principal", "operation", "accepted_at", "state_sha256"],
+      "properties": {
+        "message_kind": { "const": "transition" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "transition_id": { "$ref": "#/$defs/Id" },
+        "run_id": { "$ref": "#/$defs/Id" },
+        "run_seq": { "type": "integer", "minimum": 1 },
+        "run_version": { "type": "integer", "minimum": 1 },
+        "command_id": { "$ref": "#/$defs/Id" },
+        "authenticated_principal": { "enum": ["operator", "policy_actor", "scheduler", "adapter", "approval_channel", "worker"] },
+        "operation": { "$ref": "#/$defs/Operation" },
+        "accepted_at": { "$ref": "#/$defs/Timestamp" },
+        "state_sha256": { "$ref": "#/$defs/Sha256" }
+      }
+    },
+    "Observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "event_id", "run_seq", "occurred_at", "observed_at", "run_id", "unit_id", "attempt_id", "worker_ref", "causation_id", "adapter", "adapter_version", "source_event_id", "source_epoch", "source_seq", "source_cursor", "delivery", "type", "payload"],
+      "properties": {
+        "message_kind": { "const": "observation" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "event_id": { "$ref": "#/$defs/Id" },
+        "run_seq": { "type": "integer", "minimum": 1 },
+        "occurred_at": { "type": ["string", "null"], "format": "date-time" },
+        "observed_at": { "$ref": "#/$defs/Timestamp" },
+        "run_id": { "$ref": "#/$defs/Id" },
+        "unit_id": { "type": ["string", "null"], "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "attempt_id": { "type": ["string", "null"], "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "worker_ref": { "type": ["string", "null"] },
+        "causation_id": { "type": ["string", "null"] },
+        "adapter": { "type": "string", "minLength": 1 },
+        "adapter_version": { "type": "string", "minLength": 1 },
+        "source_event_id": { "type": ["string", "null"] },
+        "source_epoch": { "type": ["string", "null"] },
+        "source_seq": { "type": ["integer", "null"], "minimum": 0 },
+        "source_cursor": { "type": ["string", "null"] },
+        "delivery": { "enum": ["replayable", "snapshot-reconcilable", "ephemeral"] },
+        "type": { "enum": ["plan.committed", "attempt.admitted", "worker.prepared", "worker.started", "worker.idle", "worker.completed", "worker.interrupted", "worker.failed", "worker.lost", "worker.unknown", "turn.started", "turn.completed", "message.received", "tool.started", "tool.completed", "approval.requested", "approval.resolved", "usage.updated", "context.updated", "artifact.received", "result.received", "finding.recorded", "finding.dispositioned", "lease.updated", "capability.degraded", "capability.restored", "compaction.observed", "recovery.updated"] },
+        "payload": { "type": "object" }
+      }
+    },
+    "ApprovalRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message_kind", "protocol_version", "approval_id", "record_version", "descriptor_version", "canonicalization", "descriptor", "action_digest", "decision", "operator_subject", "channel_evidence_sha256", "issued_at", "expires_at", "revoked_at", "consumptions"],
+      "properties": {
+        "message_kind": { "const": "approval_record" },
+        "protocol_version": { "$ref": "#/$defs/ProtocolVersion" },
+        "approval_id": { "$ref": "#/$defs/Id" },
+        "record_version": { "type": "integer", "minimum": 0 },
+        "descriptor_version": { "const": "ActionDescriptor/v1" },
+        "canonicalization": { "const": "sage-json-v1+sha256" },
+        "descriptor": { "$ref": "#/$defs/ActionDescriptor" },
+        "action_digest": { "$ref": "#/$defs/Sha256" },
+        "decision": { "enum": ["allow", "deny"] },
+        "operator_subject": { "type": "string", "minLength": 1 },
+        "channel_evidence_sha256": { "$ref": "#/$defs/Sha256" },
+        "issued_at": { "$ref": "#/$defs/Timestamp" },
+        "expires_at": { "$ref": "#/$defs/Timestamp" },
+        "revoked_at": { "type": ["string", "null"], "format": "date-time" },
+        "consumptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["consumption_id", "native_request_ref", "transition_id", "prior_approval_version", "committed_approval_version", "consumed_at"],
+            "properties": {
+              "consumption_id": { "$ref": "#/$defs/Id" },
+              "native_request_ref": { "type": "string", "minLength": 1 },
+              "transition_id": { "$ref": "#/$defs/Id" },
+              "prior_approval_version": { "type": "integer", "minimum": 0 },
+              "committed_approval_version": { "type": "integer", "minimum": 1 },
+              "consumed_at": { "$ref": "#/$defs/Timestamp" }
+            }
+          }
+        }
+      }
+    },
+    "ActionDescriptor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "unit_id", "attempt_id", "resource_id", "lease_id", "fencing_token", "operation_class", "operation_scope", "arguments_descriptor_version", "arguments_canonicalization", "arguments_sha256", "intended_side_effects", "working_directory_id", "environment_sha256", "permission_delta", "native_thread_ref", "native_turn_ref", "native_item_ref", "nonce", "reuse", "user_authorization_ref", "user_words_sha256"],
+      "properties": {
+        "run_id": { "$ref": "#/$defs/Id" },
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "attempt_id": { "$ref": "#/$defs/Id" },
+        "resource_id": { "$ref": "#/$defs/Id" },
+        "lease_id": { "$ref": "#/$defs/Id" },
+        "fencing_token": { "type": "integer", "minimum": 1 },
+        "operation_class": { "type": "string", "minLength": 1 },
+        "operation_scope": { "type": "string", "minLength": 1 },
+        "arguments_descriptor_version": { "const": "ActionArguments/v1" },
+        "arguments_canonicalization": { "const": "sage-json-v1+sha256" },
+        "arguments_sha256": { "$ref": "#/$defs/Sha256" },
+        "intended_side_effects": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "working_directory_id": { "$ref": "#/$defs/Sha256" },
+        "environment_sha256": { "$ref": "#/$defs/Sha256" },
+        "permission_delta": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "native_thread_ref": { "type": ["string", "null"] },
+        "native_turn_ref": { "type": ["string", "null"] },
+        "native_item_ref": { "type": ["string", "null"] },
+        "nonce": { "type": "string", "minLength": 16 },
+        "reuse": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "max_uses"],
+          "properties": {
+            "mode": { "enum": ["one_shot", "bounded"] },
+            "max_uses": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "user_authorization_ref": { "type": "string", "minLength": 1 },
+        "user_words_sha256": { "$ref": "#/$defs/Sha256" }
+      }
+    },
+    "WorkerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter", "native_id", "parent_ref", "durable", "event_cursor", "requested_model", "effective_model", "effective_permissions", "isolation_ref"],
+      "properties": {
+        "adapter": { "type": "string", "minLength": 1 },
+        "native_id": { "type": "string", "minLength": 1 },
+        "parent_ref": { "type": ["string", "null"] },
+        "durable": { "type": "boolean" },
+        "event_cursor": { "type": ["string", "null"] },
+        "requested_model": { "type": "string", "minLength": 1 },
+        "effective_model": { "type": ["string", "null"] },
+        "effective_permissions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "isolation_ref": { "type": ["string", "null"] }
+      }
+    },
+    "TurnRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["worker_ref", "native_turn_id", "expected_worker_version", "started_at", "side_effect_class"],
+      "properties": {
+        "worker_ref": { "type": "string", "minLength": 1 },
+        "native_turn_id": { "type": "string", "minLength": 1 },
+        "expected_worker_version": { "type": "integer", "minimum": 0 },
+        "started_at": { "$ref": "#/$defs/Timestamp" },
+        "side_effect_class": { "enum": ["read_only", "reversible", "side_effecting"] }
+      }
+    }
+  }
+}

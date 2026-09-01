@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/bounds/planned_agent_count", "value": 6 },
+    { "op": "replace", "path": "/briefs/0/caps/planned_agent_count", "value": 6 }
+  ],
+  "expected_errors": ["ART-ADMISSION-POLICY"]
+}

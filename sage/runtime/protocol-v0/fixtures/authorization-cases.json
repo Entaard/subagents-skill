@@ -1,0 +1,18 @@
+{
+  "fixture_version": "0.1-provisional",
+  "matrix": "../authority-matrix.json",
+  "cases": [
+    { "case_id": "operator-create", "principal": "operator", "operation": "CreateRun", "expected": "allow" },
+    { "case_id": "policy-propose", "principal": "policy_actor", "operation": "ProposePlanRevision", "expected": "allow" },
+    { "case_id": "scheduler-commit", "principal": "scheduler", "operation": "CommitPlanRevision", "expected": "allow" },
+    { "case_id": "policy-cannot-commit", "principal": "policy_actor", "operation": "CommitPlanRevision", "expected": "deny" },
+    { "case_id": "scheduler-admit", "principal": "scheduler", "operation": "AdmitAttempt", "expected": "allow" },
+    { "case_id": "policy-cannot-admit", "principal": "policy_actor", "operation": "AdmitAttempt", "expected": "deny" },
+    { "case_id": "policy-accept-result", "principal": "policy_actor", "operation": "AcceptResult", "expected": "allow" },
+    { "case_id": "worker-cannot-accept-result", "principal": "worker", "operation": "AcceptResult", "expected": "deny" },
+    { "case_id": "approval-channel-records", "principal": "approval_channel", "operation": "RecordApproval", "expected": "allow" },
+    { "case_id": "operator-cannot-self-record-approval", "principal": "operator", "operation": "RecordApproval", "expected": "deny" },
+    { "case_id": "adapter-cannot-request", "principal": "adapter", "operation": "RecordFinding", "expected": "deny" },
+    { "case_id": "unknown-principal-denied", "principal": "unrecognized", "operation": "CreateRun", "expected": "deny" }
+  ]
+}

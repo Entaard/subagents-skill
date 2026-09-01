@@ -466,40 +466,41 @@ The `SKILL.md` entrypoint should remain a short six-step spine:
 Keep conditional mechanisms behind precise pointers. Split by owner, not by `explore`, `plan`, `implement`, `verify`, and `report`. A target source layout is:
 
 ```text
-policy/
-  delegation.md       safe/worth tests, placement, decomposition
-  contracts.md        briefs, reports, findings, dispositions
-  topologies.md       orchestration patterns and evidence menus
-  review.md           freeze, review loop, triage, completion
-  recovery.md         failure signatures, reconciliation, handover
-  memory.md           log-only run behavior and promotion boundary
+sage/
+  policy/
+    delegation.md       safe/worth tests, placement, decomposition
+    contracts.md        briefs, reports, findings, dispositions
+    topologies.md       orchestration patterns and evidence menus
+    review.md           freeze, review loop, triage, completion
+    recovery.md         failure signatures, reconciliation, handover
+    memory.md           log-only run behavior and promotion boundary
 
-skills/sage/
-  SKILL.md             explicit router and six-step spine
-  agents/openai.yaml
-  references/
-    codex.md           Codex-native tool and capability mapping
-    guarantees.md      native vs managed guarantees
+  skills/sage/
+    SKILL.md             explicit router and six-step spine
+    agents/openai.yaml
+    references/
+      codex.md           Codex-native tool and capability mapping
+      guarantees.md      native vs managed guarantees
 
-artifacts/
-  schemas/             stable briefs, results, plans, run records
-  fixtures/
+  artifacts/
+    schemas/             stable briefs, results, plans, run records
+    fixtures/
 
-runtime/
-  protocol-v0/         provisional while Codex is the sole production adapter
-  core/                state, store, scheduler, reconciliation, views
+  runtime/
+    protocol-v0/         provisional while Codex is the sole production adapter
+    core/                state, store, scheduler, reconciliation, views
 
-adapters/
-  codex/
-  in-memory/           core tests only; not a portability claim
+  adapters/
+    codex/
+    in-memory/           core tests only; not a portability claim
 
-plugins/codex-sage/
-  .codex-plugin/plugin.json
-  skills/sage/         generated from the canonical skill source
-  hooks/
-    hooks.json
-    handlers/
-  .mcp.json            optional role-limited managed-mode client
+  plugins/codex-sage/
+    .codex-plugin/plugin.json
+    skills/sage/         generated from the canonical skill source
+    hooks/
+      hooks.json
+      handlers/
+    .mcp.json            optional role-limited managed-mode client
 ```
 
 Packaging may copy canonical policy into a distribution archive, but generated files carry a source hash and the build fails on drift. Nobody hand-edits a packaged copy.

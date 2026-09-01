@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "sage.run-record",
+  "run_id": "run-handover",
+  "policy_version": "phase0",
+  "status": "handed_over",
+  "created_at": "2026-08-31T04:00:00Z",
+  "updated_at": "2026-08-31T04:20:00Z",
+  "objective": "Complete a bounded review across a policy-actor handover.",
+  "plan": {
+    "plan_id": "plan-handover",
+    "current_revision": 1,
+    "revisions": [
+      {
+        "revision": 1,
+        "kind": "complete",
+        "reason": "The review boundary and criterion were known.",
+        "expected_prior_revision": null,
+        "created_at": "2026-08-31T04:00:00Z",
+        "admitted_at": "2026-08-31T04:01:00Z",
+        "admission_policy": { "profile": "bounded-observed", "profile_version": "1.0", "control_strength": "advisory", "usage_provenance": "estimated", "sensor_id": "fixture-plan-estimate", "sensor_evidence": [{ "kind": "measurement", "locator": "fixture://handover-estimate", "detail": "Frozen pre-handover estimate." }], "limit_authority": "policy_actor", "compatibility_profile": "estimate-multiple/baseline-v1", "estimate_multiple": null },
+        "bounds": { "max_units": 1, "max_attempts_per_unit": 2, "max_concurrency": 1, "max_plan_revisions": 2, "max_admission_seconds": 1800, "planned_agent_count": 1, "max_admitted_agents": 1, "spend_limit": 20000, "spend_unit": "tokens", "uncapped_attended": false, "no_progress_revision_limit": 2 },
+        "units": [
+          {
+            "unit_id": "U-LONG",
+            "unit_spec_revision": 1,
+            "owner": "worker",
+            "objective": "Review the bounded corpus for missing completion duties.",
+            "done_when": "Every named completion duty has evidence or a finding.",
+            "effect_class": "read_only",
+            "dependencies": [],
+            "acceptance_criteria": [{ "criterion_id": "C-COVERAGE", "text": "Every named completion duty is accounted for.", "evidence_class": "agent_observable", "required": true }],
+            "required_capabilities": ["workspace.read", "worker.reconcile"],
+            "preferred_capabilities": [{ "predicate": "context.pressure.observable", "fallback": "explicit durable handover" }],
+            "placement_requirements": {
+              "corpus_size": "large",
+              "ambiguity": "medium",
+              "reasoning_steps": "many",
+              "tool_needs": ["read", "search"],
+              "latency_preference": "quality_first",
+              "cost_ceiling": 20000,
+              "independence_required": true,
+              "verification_criticality": "high"
+            },
+            "estimated_spend": 14000
+          }
+        ],
+        "prior_units": []
+      }
+    ]
+  },
+  "briefs": [
+    {
+      "brief_id": "B-LONG",
+      "brief_revision": 1,
+      "plan_revision": 1,
+      "unit_id": "U-LONG",
+      "unit_spec_revision": 1,
+      "brief_hash": "4545454545454545454545454545454545454545454545454545454545454545",
+      "role": "reviewer",
+      "objective": "Audit completion-duty coverage.",
+      "inputs": [{ "locator": "fixture://completion-corpus", "classification": "internal", "sha256": "5656565656565656565656565656565656565656565656565656565656565656", "purpose": "Review ground truth" }],
+      "scope": ["fixture://completion-corpus"],
+      "allowed_effects": ["read"],
+      "allowed_resources": ["resource-completion-corpus"],
+      "required_tools": ["read", "search"],
+      "caps": { "max_units": 1, "max_attempts_per_unit": 2, "max_concurrency": 1, "max_plan_revisions": 2, "max_admission_seconds": 1800, "planned_agent_count": 1, "max_admitted_agents": 1, "spend_limit": 20000, "spend_unit": "tokens", "uncapped_attended": false, "no_progress_revision_limit": 2 },
+      "must_not": ["infer completion from worker idleness"],
+      "baseline": "sha256:5656565656565656565656565656565656565656565656565656565656565656",
+      "done_when": "The coverage report has one row per duty.",
+      "requested_model": "quality-review-profile",
+      "requested_effort": "high",
+      "return_fields": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"]
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "A-LONG-1",
+      "plan_revision": 1,
+      "unit_id": "U-LONG",
+      "unit_spec_revision": 1,
+      "brief_id": "B-LONG",
+      "brief_revision": 1,
+      "brief_hash": "4545454545454545454545454545454545454545454545454545454545454545",
+      "state": "unknown",
+      "side_effect_class": "read_only",
+      "worker_ref": "opaque-worker-long",
+      "turn_ref": "opaque-turn-long",
+      "effective_placement": { "requested_model": "quality-review-profile", "effective_model": "resolved-quality-review", "requested_effort": "high", "effective_effort": "high", "capability_snapshot_id": "cap-long" },
+      "started_at": "2026-08-31T04:02:00Z",
+      "ended_at": null,
+      "result_id": null
+    }
+  ],
+  "results": [],
+  "artifacts": [
+    { "artifact_id": "ART-HANDOFF", "kind": "handoff", "media_type": "text/markdown", "classification": "confidential", "sha256": "6767676767676767676767676767676767676767676767676767676767676767", "locator": "fixture://handoff", "produced_by_attempt": null, "adoption": "adopted", "adopted_under_plan_revision": 1 },
+    { "artifact_id": "ART-HANDOFF-RECORD", "kind": "rendered_run_record", "media_type": "text/markdown", "classification": "confidential", "sha256": "7878787878787878787878787878787878787878787878787878787878787878", "locator": "fixture://handover-run.md", "produced_by_attempt": null, "adoption": "adopted", "adopted_under_plan_revision": 1 }
+  ],
+  "assumptions": [],
+  "gaps": [
+    {
+      "gap_id": "G-RECONCILE",
+      "description": "The worker's terminal state was not proven before handover.",
+      "impact": "The result cannot be accepted and no retry is safe until reconciliation.",
+      "evidence_checked": [{ "kind": "observation", "locator": "fixture://worker-snapshot", "detail": "Snapshot did not distinguish active from lost." }],
+      "owner": "successor-policy-actor",
+      "next_action": "Reconcile opaque-worker-long before any new attempt.",
+      "status": "open"
+    }
+  ],
+  "findings": [],
+  "dispositions": [],
+  "verifications": [],
+  "decisions": [
+    {
+      "decision_id": "D-HANDOVER",
+      "kind": "other",
+      "decision": "Stop admission and transfer through ART-HANDOFF.",
+      "reason": "The policy actor reached its handover threshold while the worker state was ambiguous.",
+      "recorded_at": "2026-08-31T04:19:00Z",
+      "affects": ["A-LONG-1", "ART-HANDOFF"],
+      "adoption": null
+    }
+  ],
+  "coordination_outcome": {
+    "state": "open",
+    "assessment": "The run has not yet produced enough evidence to judge coordination.",
+    "unique_contributions": [],
+    "duplicated_work": [],
+    "interventions": 1,
+    "protocol_failures": 0,
+    "critical_path_effect": "Paused for reconciliation.",
+    "root_context_effect": "State was transferred through a durable artifact.",
+    "evidence": [{ "kind": "artifact", "locator": "fixture://handoff", "sha256": "6767676767676767676767676767676767676767676767676767676767676767", "detail": "Durable current-run state." }]
+  },
+  "completion": {
+    "state": "open",
+    "criteria_status": "open",
+    "checks_status": "open",
+    "findings_status": "open",
+    "scope_status": "inside_scope",
+    "human_items": [],
+    "claim": "",
+    "claimed_at": null,
+    "deliverable": "A durable handoff; the requested review is not complete."
+  },
+  "rendered_run_record": {
+    "artifact_id": "ART-HANDOFF-RECORD",
+    "media_type": "text/markdown",
+    "generator_version": "phase0-fixture",
+    "source_state_sha256": "8989898989898989898989898989898989898989898989898989898989898989"
+  }
+}

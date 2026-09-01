@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/1/prior_units/0/disposition", "value": "carried" }
+  ],
+  "expected_errors": ["ART-PLAN-DISPOSITION"]
+}

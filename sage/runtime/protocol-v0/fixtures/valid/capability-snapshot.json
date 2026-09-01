@@ -1,0 +1,39 @@
+{
+  "message_kind": "capability_snapshot",
+  "protocol_version": "0.1-provisional",
+  "snapshot_id": "cap-1",
+  "offer_id": "offer-1",
+  "run_id": "run-runtime",
+  "attempt_id": "attempt-1",
+  "worker_ref": "opaque-worker-1",
+  "turn_ref": "opaque-turn-1",
+  "requested_effective": {
+    "requested_model": "balanced-profile",
+    "effective_model": "resolved-model",
+    "requested_effort": "medium",
+    "effective_effort": "medium",
+    "requested_permissions": ["workspace.read"],
+    "effective_permissions": ["workspace.read"],
+    "requested_isolation": ["read_only"],
+    "effective_isolation": ["read_only"]
+  },
+  "capabilities": [
+    {
+      "operation": "workspace.read",
+      "semantic_version": "1",
+      "available": true,
+      "authority_source": "sandbox probe",
+      "trust_state": "trusted",
+      "scope": "workspace",
+      "control_strength": "enforced",
+      "delivery": "not_applicable",
+      "durability": "process",
+      "restart_boundary": "worker process",
+      "failure_behavior": "fail-closed",
+      "evidence": ["write probe denied"],
+      "uncovered_paths": []
+    }
+  ],
+  "observed_at": "2026-08-31T05:01:00Z"
+}
+

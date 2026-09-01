@@ -1,0 +1,7 @@
+{
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/journal/0/precondition", "value": "oops" }
+  ],
+  "expected_errors": ["RECEIPT-JOURNAL-HASH", "RECEIPT-PRECONDITION", "SCHEMA-TYPE"]
+}

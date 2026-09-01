@@ -1,0 +1,9 @@
+{
+  "base": "../ownership-receipt.update.example.json",
+  "patch": [
+    { "op": "remove", "path": "/entries/0/backup_ids/0" },
+    { "op": "remove", "path": "/backups/0" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-BACKUP", "RECEIPT-PRIOR-BACKUP"]
+}

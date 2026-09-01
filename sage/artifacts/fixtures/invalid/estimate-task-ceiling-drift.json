@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/admission_policy/estimate_multiple/task_estimate", "value": 200000 }
+  ],
+  "expected_errors": ["ART-ADMISSION-POLICY"]
+}

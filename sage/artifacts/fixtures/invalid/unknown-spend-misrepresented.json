@@ -1,0 +1,11 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/bounds/spend_limit", "value": null },
+    { "op": "replace", "path": "/plan/revisions/0/bounds/spend_unit", "value": null },
+    { "op": "replace", "path": "/briefs/0/caps/spend_limit", "value": null },
+    { "op": "replace", "path": "/briefs/0/caps/spend_unit", "value": null }
+  ],
+  "expected_errors": ["ART-ADMISSION-POLICY"]
+}

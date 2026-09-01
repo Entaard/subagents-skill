@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/admission_policy/profile", "value": "uncapped-observed" }
+  ],
+  "expected_errors": ["ART-ADMISSION-POLICY"]
+}

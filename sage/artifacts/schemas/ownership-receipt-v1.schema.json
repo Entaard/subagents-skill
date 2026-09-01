@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sage.local/schemas/ownership-receipt-v1.schema.json",
+  "title": "Sage ownership receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receipt_version", "installation_id", "mode", "installer_version", "source", "protected_paths", "roots", "entries", "config_entries", "backups", "retention_policies", "preservation", "operation"],
+  "properties": {
+    "receipt_version": { "const": "1.0" },
+    "installation_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "mode": { "enum": ["light", "managed"] },
+    "installer_version": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "revision", "manifest_sha256"],
+      "properties": {
+        "repository": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+        "revision": { "type": "string", "minLength": 1 },
+        "manifest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "protected_paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path_class", "canonical_path", "canonical_path_sha256", "resource_identity"],
+        "properties": {
+          "path_class": { "enum": ["source_checkout", "project_workspace"] },
+          "canonical_path": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+          "canonical_path_sha256": { "$ref": "#/$defs/Sha256" },
+          "resource_identity": { "$ref": "#/$defs/ResourceIdentity" }
+        }
+      }
+    },
+    "roots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["root_id", "canonical_path", "canonical_path_sha256", "destination_policy_id", "resource_identity", "identity"],
+        "properties": {
+          "root_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "canonical_path": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+          "canonical_path_sha256": { "$ref": "#/$defs/Sha256" },
+          "destination_policy_id": { "type": "string", "minLength": 1 },
+          "resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "identity": { "$ref": "#/$defs/FsIdentity" }
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entry_id", "root_id", "relative_path", "entry_class", "expected_type", "ownership_marker", "resource_identity", "identity", "parent_resource_identity", "parent_identity", "cleanup_order", "retention_class", "backup_ids"],
+        "properties": {
+          "entry_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "root_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "relative_path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*\\u0000)(?!.*\/$).+"
+          },
+          "entry_class": { "enum": ["created", "replaced", "runtime_data", "backup", "receipt"] },
+          "expected_type": { "enum": ["file", "directory", "symlink", "service"] },
+          "ownership_marker": { "type": "string", "minLength": 1 },
+          "resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "identity": { "$ref": "#/$defs/FsIdentity" },
+          "parent_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "parent_identity": { "$ref": "#/$defs/FsIdentity" },
+          "content_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "cleanup_order": { "type": "integer", "minimum": 0 },
+          "retention_class": { "enum": ["distribution", "run_history", "promoted_overlay", "cache", "log", "secret_free_state"] },
+          "backup_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true }
+        }
+      }
+    },
+    "config_entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entry_id", "config_path", "destination_policy_id", "selector", "installed_digest", "current_identity", "current_resource_identity", "parent_identity", "parent_resource_identity", "prior_state", "prior_file_state", "prior_content_sha256", "prior_identity", "prior_resource_identity", "prior_backup_ids"],
+        "properties": {
+          "entry_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "config_path": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+          "destination_policy_id": { "type": "string", "minLength": 1 },
+          "selector": { "type": "string", "minLength": 1 },
+          "installed_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "current_identity": { "$ref": "#/$defs/FsIdentity" },
+          "current_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "parent_identity": { "$ref": "#/$defs/FsIdentity" },
+          "parent_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "prior_state": { "enum": ["absent", "present"] },
+          "prior_file_state": { "enum": ["absent", "present"] },
+          "prior_content_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+          "prior_identity": {
+            "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/FsIdentity" }]
+          },
+          "prior_resource_identity": {
+            "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/ResourceIdentity" }]
+          },
+          "prior_backup_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true }
+        }
+      }
+    },
+    "backups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["backup_id", "purpose", "owner_kind", "owner_entry_id", "original_path", "original_identity", "original_resource_identity", "backup_root_id", "backup_relative_path", "backup_path", "original_type", "mode", "sha256", "backup_identity", "backup_resource_identity", "parent_identity", "parent_resource_identity", "restored"],
+        "properties": {
+          "backup_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "purpose": { "enum": ["displaced_user", "config_prior", "operation_rollback"] },
+          "owner_kind": { "enum": ["entry", "config"] },
+          "owner_entry_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "original_path": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+          "original_identity": { "$ref": "#/$defs/FsIdentity" },
+          "original_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "backup_root_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "backup_relative_path": { "$ref": "#/$defs/CanonicalRelativePath" },
+          "backup_path": { "$ref": "#/$defs/CanonicalAbsolutePath" },
+          "original_type": { "enum": ["file", "directory", "symlink"] },
+          "mode": { "type": "string", "pattern": "^[0-7]{3,4}$" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "backup_identity": { "$ref": "#/$defs/FsIdentity" },
+          "backup_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "parent_identity": { "$ref": "#/$defs/FsIdentity" },
+          "parent_resource_identity": { "$ref": "#/$defs/ResourceIdentity" },
+          "restored": { "type": "boolean" }
+        }
+      }
+    },
+    "retention_policies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["policy_id", "retention_class", "disposition", "expires_at", "legal_hold_ref", "export_owner"],
+        "properties": {
+          "policy_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "retention_class": { "enum": ["distribution", "run_history", "promoted_overlay", "cache", "log", "secret_free_state"] },
+          "disposition": { "enum": ["remove_on_complete_removal", "retain_on_keep_data", "expire_at"] },
+          "expires_at": { "type": ["string", "null"], "format": "date-time" },
+          "legal_hold_ref": { "type": ["string", "null"] },
+          "export_owner": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "preservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preserve_on_update", "keep_data", "keep_data_entry_ids", "retention_receipt_id"],
+      "properties": {
+        "preserve_on_update": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "enum": ["run_history", "current_run_recovery", "promoted_overlay", "retention_settings", "backups"] },
+          "uniqueItems": true
+        },
+        "keep_data": { "type": "boolean" },
+        "keep_data_entry_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true },
+        "retention_receipt_id": { "type": ["string", "null"] }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "kind", "state", "prior_receipt_sha256", "intended_receipt_sha256", "journal"],
+      "properties": {
+        "operation_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "kind": { "enum": ["install", "update", "uninstall"] },
+        "state": { "enum": ["pending", "committed", "recovery_required", "rolled_back"] },
+        "prior_receipt_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "intended_receipt_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "journal": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sequence", "phase", "recorded_at", "operation_id", "intended_receipt_sha256", "prior_receipt_sha256", "entry_ids", "config_entry_ids", "backup_ids", "precondition", "precondition_sha256", "postcondition", "postcondition_sha256", "prior_journal_sha256", "journal_entry_sha256"],
+            "properties": {
+              "sequence": { "type": "integer", "minimum": 1 },
+              "phase": { "enum": ["preflight_complete", "backups_durable", "stage_verified", "replacement_applied", "structured_edit_applied", "health_verified", "receipt_committed", "admissions_stopped", "processes_stopped", "user_content_restored", "structured_config_restored", "owned_entry_removed", "retention_receipt_committed", "removal_verified", "ownership_receipt_removed", "cleanup_complete"] },
+              "recorded_at": { "type": "string", "format": "date-time" },
+              "operation_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+              "intended_receipt_sha256": { "$ref": "#/$defs/Sha256" },
+              "prior_receipt_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+              "entry_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true },
+              "config_entry_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true },
+              "backup_ids": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true },
+              "precondition": { "$ref": "#/$defs/StateProof" },
+              "precondition_sha256": { "$ref": "#/$defs/Sha256" },
+              "postcondition": { "$ref": "#/$defs/StateProof" },
+              "postcondition_sha256": { "$ref": "#/$defs/Sha256" },
+              "prior_journal_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+              "journal_entry_sha256": { "$ref": "#/$defs/Sha256" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "CanonicalAbsolutePath": {
+      "type": "string",
+      "minLength": 2,
+      "pattern": "^/(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*\\u0000)(?!.*\/$).+"
+    },
+    "CanonicalRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*\\u0000)(?!.*\/$).+"
+    },
+    "ResourceIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "volume_id", "object_id", "ancestor_object_ids", "case_sensitivity", "unicode_normalization", "resolved_path_sha256"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "volume_id": { "type": "string", "minLength": 1 },
+        "object_id": { "type": "string", "minLength": 1 },
+        "ancestor_object_ids": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "case_sensitivity": { "enum": ["sensitive", "insensitive"] },
+        "unicode_normalization": { "enum": ["NFC", "NFD", "none"] },
+        "resolved_path_sha256": { "$ref": "#/$defs/Sha256" }
+      }
+    },
+    "StateSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_id", "subject_kind", "state", "basis", "basis_sha256", "target_path_sha256", "resolved_resource_identity", "ancestor_chain_sha256", "device", "inode", "link_count", "expected_type", "observed_type", "ownership_marker_sha256", "content_sha256", "symlink_target_sha256", "selector_state", "parent_resource_identity", "parent_identity"],
+      "properties": {
+        "entry_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "subject_kind": { "enum": ["entry", "config"] },
+        "state": { "enum": ["present", "absent"] },
+        "basis": { "enum": ["live_parent", "prior_receipt", "intended_receipt", "backup_original"] },
+        "basis_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "target_path_sha256": { "$ref": "#/$defs/Sha256" },
+        "resolved_resource_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/ResourceIdentity" }] },
+        "ancestor_chain_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "device": { "type": ["integer", "null"], "minimum": 0 },
+        "inode": { "type": ["integer", "null"], "minimum": 1 },
+        "link_count": { "type": ["integer", "null"], "minimum": 1 },
+        "expected_type": { "enum": ["file", "directory", "symlink", "service"] },
+        "observed_type": { "type": ["string", "null"], "enum": ["file", "directory", "symlink", "service", null] },
+        "ownership_marker_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "content_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "symlink_target_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "selector_state": { "type": ["string", "null"], "enum": ["present", "absent", null] },
+        "parent_resource_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/ResourceIdentity" }] },
+        "parent_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/FsIdentity" }] }
+      }
+    },
+    "StateProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proof_version", "operation_id", "observed_at", "subjects", "backup_subjects"],
+      "properties": {
+        "proof_version": { "const": "StateProof/v2" },
+        "operation_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "subjects": { "type": "array", "items": { "$ref": "#/$defs/StateSubject" } },
+        "backup_subjects": { "type": "array", "items": { "$ref": "#/$defs/BackupStateSubject" } }
+      }
+    },
+    "BackupStateSubject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backup_id", "state", "basis", "target_path_sha256", "resolved_resource_identity", "ancestor_chain_sha256", "device", "inode", "link_count", "observed_type", "content_sha256", "symlink_target_sha256", "parent_resource_identity", "parent_identity"],
+      "properties": {
+        "backup_id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "state": { "enum": ["present", "absent"] },
+        "basis": { "enum": ["live_parent", "intended_receipt"] },
+        "target_path_sha256": { "$ref": "#/$defs/Sha256" },
+        "resolved_resource_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/ResourceIdentity" }] },
+        "ancestor_chain_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "device": { "type": ["integer", "null"], "minimum": 0 },
+        "inode": { "type": ["integer", "null"], "minimum": 1 },
+        "link_count": { "type": ["integer", "null"], "minimum": 1 },
+        "observed_type": { "type": ["string", "null"], "enum": ["file", "directory", "symlink", null] },
+        "content_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "symlink_target_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "parent_resource_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/ResourceIdentity" }] },
+        "parent_identity": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/FsIdentity" }] }
+      }
+    },
+    "FsIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device", "inode", "link_count", "ancestor_chain_sha256", "symlink_target_sha256", "verified_at"],
+      "properties": {
+        "device": { "type": "integer", "minimum": 0 },
+        "inode": { "type": "integer", "minimum": 1 },
+        "link_count": { "type": "integer", "minimum": 1 },
+        "ancestor_chain_sha256": { "$ref": "#/$defs/Sha256" },
+        "symlink_target_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "verified_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

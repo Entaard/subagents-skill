@@ -1,0 +1,11 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/journal/5/recorded_at", "value": "2026-08-31T06:00:35Z" },
+    { "op": "replace", "path": "/operation/journal/5/precondition/observed_at", "value": "2026-08-31T06:00:35Z" },
+    { "op": "replace", "path": "/operation/journal/5/postcondition/observed_at", "value": "2026-08-31T06:00:35Z" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-JOURNAL-ORDER", "RECEIPT-PRECONDITION"]
+}

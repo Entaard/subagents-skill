@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/briefs/0/caps/max_concurrency", "value": 2 }
+  ],
+  "expected_errors": ["ART-BOUNDS-BINDING"]
+}

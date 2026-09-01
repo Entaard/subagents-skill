@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "remove", "path": "/results/0/uncertainty" }
+  ],
+  "expected_errors": ["SCHEMA-REQUIRED"]
+}

@@ -1,0 +1,257 @@
+{
+  "study_id": "sage-light-policy-value-pilot-v1",
+  "task_manifest_version": "1.0",
+  "baseline_revision": "6b657a99b799a93dab1897b349bd32c53b223190",
+  "snapshot_rule": "Read tracked files exactly from baseline_revision; do not read later repository changes except this task manifest and rubric.",
+  "independence_rule": "A unit is independently dispatchable from the same frozen inputs and has no data, control, or mutation dependency on another unit before final synthesis.",
+  "wall_time_eligible_task_ids": [
+    "P1-T01", "P1-T02", "P1-T03", "P1-T04", "P1-T05", "P1-T06", "P1-T07", "P1-T08", "P1-T09", "P1-T10",
+    "P1-T11", "P1-T12", "P1-T13", "P1-T14", "P1-T15", "P1-T16", "P1-T17", "P1-T18", "P1-T19"
+  ],
+  "independence_assessments": {
+    "P1-T01": "Four obligation classes can be inventoried directly from the frozen corpus before synthesis.",
+    "P1-T02": "The four audit lenses share inputs but neither consumes another lens's result.",
+    "P1-T03": "Each lifecycle surface can independently identify loss or duplication from frozen sources; ordering is integrated only in synthesis.",
+    "P1-T04": "Each tool-to-policy surface can be mapped without another surface's output.",
+    "P1-T05": "Ownership, configuration, and recovery are disjoint read-only review lenses.",
+    "P1-T06": "Parser, references, and final-state coverage have separate predicates and reproductions.",
+    "P1-T07": "Session identity, arithmetic, and ambiguity behavior can each be tested from frozen inputs.",
+    "P1-T08": "The four promotion surfaces have independent source evidence before synthesis.",
+    "P1-T09": "Each competing hypothesis builds its own case from the same corpus before adjudication.",
+    "P1-T10": "Each root-cause hypothesis is independently falsifiable from the frozen corpus.",
+    "P1-T11": "Each idle-state hypothesis independently names evidence and a safe consequence before adjudication.",
+    "P1-T12": "Specification, capability, and criterion diagnoses independently inspect the same failure record.",
+    "P1-T13": "Runtime reads, journal semantics, and baseline/proposal distinction are separate evidence searches.",
+    "P1-T14": "Ownership, backup, configuration, and partial-failure attacks are separately dispatchable.",
+    "P1-T15": "The four write-path attacks require no intermediate result from one another.",
+    "P1-T16": "Dispatch, identity, effective-model observation, and coverage are separate guarantees.",
+    "P1-T17": "Worker, finding, and human-criterion state can be derived independently before handoff synthesis.",
+    "P1-T18": "Run evidence, gaps, promotion input, and future access are separate classification lenses.",
+    "P1-T19": "Lifecycle, verification, finding, and completion inferences can be rejected independently.",
+    "P1-T20": "External intent, worker discovery, and judgment are sequential recovery stages, so this task is not wall-time eligible."
+  },
+  "corpus_sets": {
+    "policy": [
+      "sage-claude/SKILL.md",
+      "sage-claude/references/dispatch.md",
+      "sage-claude/references/topologies.md"
+    ],
+    "host": [
+      "sage-claude/references/harness.md",
+      "claude-agents/explorer.md",
+      "claude-agents/implementer.md",
+      "claude-agents/orchestrator.md",
+      "claude-agents/verifier.md",
+      "claude-agents/web-researcher.md",
+      "claude-agents-alt/README.md",
+      "claude-agents-alt/explorer-alt.md.in",
+      "claude-agents-alt/verifier-alt.md.in",
+      "claude-agents-alt/web-researcher-alt.md.in"
+    ],
+    "memory": [
+      "sage-claude/references/memory.md",
+      "claude-skills/sage-promote/SKILL.md",
+      "docs/designs/2026-08-27-sage-memory-v3-design.md",
+      "docs/designs/2026-08-28-sage-memory-clone-model.md"
+    ],
+    "lifecycle": [
+      "install.sh",
+      "uninstall.sh",
+      "claude-skills/sage-promote/SKILL.md"
+    ],
+    "tooling": [
+      "sage-claude/bin/sage-lint.sh",
+      "sage-claude/bin/sage-watch.sh",
+      "sage-claude/bin/sage-index.sh",
+      "sage-claude/bin/sage-alt-guard.sh"
+    ],
+    "design": [
+      "2026-08-28-sage-cortex-extraction.md",
+      "2026-08-31-sage-codex-proposal.md",
+      "sage-learns-from-superpowers.md"
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "P1-T01",
+      "stratum": "broad_sweep",
+      "corpus_set_ids": ["policy", "memory", "lifecycle"],
+      "prompt": "Inventory every safety, evidence, completion, promotion, installation, and removal obligation in the bounded corpus. Group by semantic owner, cite each source, flag contradictions, and state what remains unaccounted for.",
+      "required_output": "A cited owner matrix, contradiction list, and explicit coverage gaps.",
+      "preclassified_independent_units": ["safety and evidence", "completion and run records", "promotion and memory", "installation and removal"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T02",
+      "stratum": "broad_sweep",
+      "corpus_set_ids": ["policy", "host"],
+      "prompt": "Audit the delegation system from four independent angles: unit safety/value, model placement, writer isolation, and handover authority. Report only evidence-backed contradictions or uncovered obligations.",
+      "required_output": "Four-lens findings with severity, evidence, and a deduplicated synthesis.",
+      "preclassified_independent_units": ["delegation", "placement", "isolation", "handover"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T03",
+      "stratum": "broad_sweep",
+      "corpus_set_ids": ["memory", "lifecycle"],
+      "prompt": "Trace one promoted knowledge item through creation, installation, update, use, global promotion, reconciliation, and uninstall. Find every place where the item or its provenance can be duplicated, lost, or read at the wrong time.",
+      "required_output": "A lifecycle trace and evidence-backed failure list.",
+      "preclassified_independent_units": ["promotion path", "install/update path", "runtime read path", "uninstall path"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T04",
+      "stratum": "broad_sweep",
+      "corpus_set_ids": ["policy", "tooling"],
+      "prompt": "Map each policy bookkeeping duty to the deterministic check or observation that can witness it. Distinguish enforced, advisory, and unobservable duties and cite exact evidence.",
+      "required_output": "A policy-to-sensor matrix with honest blind spots.",
+      "preclassified_independent_units": ["ledger integrity", "liveness and spend", "model-family guard", "memory indexing"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T05",
+      "stratum": "contract_review",
+      "corpus_set_ids": ["lifecycle"],
+      "prompt": "Review uninstall safety against the installer from three disjoint lenses: ownership proof, structured configuration restoration, and interrupted-operation recovery. Return blocker/major findings only, or a supported no-findings verdict.",
+      "required_output": "Three separate verdicts plus root-cause-deduplicated findings.",
+      "preclassified_independent_units": ["ownership proof", "configuration restoration", "interruption recovery"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T06",
+      "stratum": "contract_review",
+      "corpus_set_ids": ["tooling", "policy"],
+      "prompt": "Review the ledger linter for false negatives that could permit an invalid completion record. Use separate lenses for parsing boundaries, identifier/reference integrity, and final-state coverage. Do not propose style changes.",
+      "required_output": "Reproducible blocker/major findings or explicit no-findings per lens.",
+      "preclassified_independent_units": ["parser boundaries", "reference integrity", "final-state coverage"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T07",
+      "stratum": "contract_review",
+      "corpus_set_ids": ["tooling", "host"],
+      "prompt": "Review the watchdog and its documented arithmetic for three failure classes: wrong-session attribution, spend/occupancy miscalculation, and unsafe action on ambiguous state. Reproduce claims with commands where the bounded corpus permits.",
+      "required_output": "Three verdicts separating measured facts from inferences.",
+      "preclassified_independent_units": ["session identity", "token arithmetic", "ambiguity behavior"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T08",
+      "stratum": "contract_review",
+      "corpus_set_ids": ["memory", "tooling"],
+      "prompt": "Review the promotion workflow for stable-ID and evidence errors. Inspect consolidation, confirmation counts, contradiction handling, and template-to-install landing as separate surfaces.",
+      "required_output": "A four-surface review with exact source evidence and final dispositions recommended.",
+      "preclassified_independent_units": ["consolidation", "counts", "contradictions", "landing"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T09",
+      "stratum": "competing_hypotheses",
+      "corpus_set_ids": ["design", "policy"],
+      "prompt": "Test three competing explanations for Sage's complexity: policy coupling, host-mechanic leakage, or evidence/bookkeeping accumulation. Each explanation must try to falsify the others from the bounded corpus. Adjudicate on cited evidence.",
+      "required_output": "Three hypothesis cases and one evidence-weighted adjudication.",
+      "preclassified_independent_units": ["policy coupling hypothesis", "host leakage hypothesis", "bookkeeping hypothesis"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T10",
+      "stratum": "competing_hypotheses",
+      "corpus_set_ids": ["memory", "lifecycle"],
+      "prompt": "Explain possible installed/source memory drift using three competing root causes: wrong writer ownership, non-idempotent synchronization, or ambiguous stable identity. Build and falsify each case before choosing.",
+      "required_output": "Competing root-cause analysis with discriminating tests.",
+      "preclassified_independent_units": ["writer ownership", "synchronization", "identity"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T11",
+      "stratum": "competing_hypotheses",
+      "corpus_set_ids": ["policy", "host", "tooling"],
+      "prompt": "A worker is reported idle with no accepted result. Test three hypotheses: normal between-turn idle, lost native completion, or observer/parser failure. State what evidence would settle each and what action is safe now.",
+      "required_output": "Three falsifiable hypotheses, evidence gaps, and one safe disposition.",
+      "preclassified_independent_units": ["normal idle", "lost completion", "observer failure"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T12",
+      "stratum": "competing_hypotheses",
+      "corpus_set_ids": ["policy", "design"],
+      "prompt": "A review loop keeps finding majors after fixes. Test whether the cause is a bad brief, insufficient model capability, or a false completion criterion. Use the failure-ladder evidence and give a revised plan only after adjudication.",
+      "required_output": "Three competing diagnoses, evidence-based choice, and bounded revision.",
+      "preclassified_independent_units": ["specification failure", "capability failure", "criterion failure"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T13",
+      "stratum": "adversarial_verification",
+      "corpus_set_ids": ["memory", "policy"],
+      "prompt": "Try to refute this claim: an ordinary Sage run reads promoted knowledge but never raw prior-run logs for task-time guidance. Use only the bounded corpus and distinguish current behavior from proposed behavior.",
+      "required_output": "Refuted, supported, or unresolved verdict with decisive citations and scope qualification.",
+      "preclassified_independent_units": ["runtime read path", "journal semantics", "proposal/current distinction"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T14",
+      "stratum": "adversarial_verification",
+      "corpus_set_ids": ["lifecycle"],
+      "prompt": "Try to refute this claim: complete uninstall removes all owned Sage state while preserving every unrelated byte. Attack ownership ambiguity, backup restoration, structured config edits, and partial failure.",
+      "required_output": "Claim verdict with executable or line-level counterevidence.",
+      "preclassified_independent_units": ["ownership ambiguity", "backup restoration", "config precision", "partial failure"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T15",
+      "stratum": "adversarial_verification",
+      "corpus_set_ids": ["policy", "host"],
+      "prompt": "Try to refute this claim: one writer per working tree prevents every Sage-caused shared-tree corruption. Attack alternate write paths, parent writes, generated files, and isolation assumptions.",
+      "required_output": "Qualified verdict, counterexamples, and the strongest supportable guarantee.",
+      "preclassified_independent_units": ["alternate write paths", "parent mutations", "generated/shared files", "isolation"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T16",
+      "stratum": "adversarial_verification",
+      "corpus_set_ids": ["tooling", "host"],
+      "prompt": "Try to refute this claim: the alt-model guard proves checker model-family diversity. Separate dispatch-argument enforcement, installed identity, effective model observation, and uncovered tool paths.",
+      "required_output": "Qualified verdict with each guarantee and gap stated separately.",
+      "preclassified_independent_units": ["dispatch guard", "identity", "effective model", "coverage"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T17",
+      "stratum": "handover_and_evidence",
+      "corpus_set_ids": ["policy", "host"],
+      "prompt": "Construct the minimum durable handoff needed to resume a read-only run with one completed worker, one unknown worker, one open finding, and one human-only criterion. Explain why each field is required.",
+      "required_output": "A bounded handoff artifact and field-by-field recovery rationale.",
+      "preclassified_independent_units": ["worker reconciliation", "finding state", "human criterion"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T18",
+      "stratum": "handover_and_evidence",
+      "corpus_set_ids": ["policy", "memory"],
+      "prompt": "Given a completed research sweep with conflicting sources, produce the final evidence and memory disposition: what enters the run record, what becomes a gap, what can be promoted later, and what must not be read by the next active run.",
+      "required_output": "A four-class disposition with citations to governing rules.",
+      "preclassified_independent_units": ["run evidence", "gap", "promotion input", "future runtime access"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T19",
+      "stratum": "handover_and_evidence",
+      "corpus_set_ids": ["policy", "tooling"],
+      "prompt": "Audit a hypothetical run record that says: worker idle, result accepted, no verification row, finding pending, coordination successful, run complete. Classify every invalid inference and state the minimum safe next state.",
+      "required_output": "An invariant-by-invariant rejection and safe recovery state.",
+      "preclassified_independent_units": ["worker/result lifecycle", "verification", "finding", "coordination/completion"],
+      "three_plus_independent_units": true
+    },
+    {
+      "task_id": "P1-T20",
+      "stratum": "handover_and_evidence",
+      "corpus_set_ids": ["policy", "host"],
+      "prompt": "Simulate resume after root loss from this state: a read-only worker start may have succeeded, its handle was not persisted, no side effect is known, and the next boundary requires evidence judgment. Give the exact reconciliation order, retry rule, and terminal pause state without inventing host capabilities.",
+      "required_output": "A deterministic recovery sequence and explicit policy boundary.",
+      "preclassified_independent_units": ["external intent", "worker discovery", "judgment boundary"],
+      "three_plus_independent_units": false,
+      "deterministic_root_loss_fixture": false
+    }
+  ]
+}

@@ -1,0 +1,835 @@
+{
+  "inventory_version": "1.0",
+  "baseline_commit": "6b657a99b799a93dab1897b349bd32c53b223190",
+  "owner_categories": ["policy", "artifact_schema", "runtime", "codex_experience", "adapter", "promotion_workflow"],
+  "required_obligation_classes": ["safety", "evidence", "completion", "promotion", "installation", "removal"],
+  "baseline_sources": [
+    { "path": "sage-claude/SKILL.md", "role": "current orchestration policy and six-step experience" },
+    { "path": "sage-claude/references/dispatch.md", "role": "brief, report, finding, snapshot, ledger, and handoff contracts" },
+    { "path": "sage-claude/references/harness.md", "role": "current host mechanics and measured capability facts" },
+    { "path": "sage-claude/references/memory.md", "role": "current memory classes, journal, and knowledge item rules" },
+    { "path": "sage-claude/references/topologies.md", "role": "topologies and evidence menus" },
+    { "path": "sage-claude/references/authoring.md", "role": "behavior-shaping guidance rules" },
+    { "path": "sage-claude/bin/sage-lint.sh", "role": "ledger and corpus deterministic checks" },
+    { "path": "sage-claude/bin/sage-watch.sh", "role": "current host observation probe" },
+    { "path": "sage-claude/bin/sage-index.sh", "role": "promoted-knowledge index" },
+    { "path": "sage-claude/bin/sage-alt-guard.sh", "role": "current alternate-model dispatch guard" },
+    { "path": "claude-skills/sage-promote/SKILL.md", "role": "current promotion workflow" },
+    { "path": "install.sh", "role": "current install and update implementation" },
+    { "path": "uninstall.sh", "role": "current removal implementation" },
+    { "glob": "claude-agents/*.md", "role": "current worker role and tool profiles" },
+    { "glob": "claude-agents-alt/*.md.in", "role": "current alternate-family role templates" },
+    { "glob": "sage-claude/memory/shared/*.md", "role": "portable promoted-knowledge instances" },
+    { "glob": "sage-claude/memory/local-seed/**/*.md", "role": "installed-local knowledge and journal seed" }
+  ],
+  "invariants": [
+    {
+      "id": "POL-AXIOM-PLACEMENT",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#axioms",
+      "obligation": "Sage adds placement, boundaries, and evidence rather than intelligence; cost breaks ties only among capable placements.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "POL-AXIOM-CHECKABLE",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#axioms",
+      "obligation": "Every claim is checkable or explicitly a hypothesis, including the policy actor's own fixes.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "POL-AXIOM-CONFLICT",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#axioms",
+      "obligation": "Conflict is deliberately purchased and settled with evidence; agreement alone is not evidence.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "POL-AXIOM-LEGIBILITY",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#axioms",
+      "obligation": "Autonomy records a complete legible run even when presentation remains quiet.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "POL-POLICY-ACTOR-OWNS-JUDGMENT",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#axioms",
+      "obligation": "Goals, risk, decomposition, triage, integration, and completion stay with the policy actor.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "POL-ZERO-DELEGATION",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "Zero delegated units is a valid, recorded coordination decision.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-SAFE-DELEGATION",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "Delegation requires a bounded deliverable, low policy interaction, packageable context, falsifiable result, and safe effects.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-WORTH-DELEGATION",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "A safe unit is delegated only for material parallelism, context protection, independent evidence, or cohesive ownership.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-CONTEXT-BOUNDARY-DECOMPOSITION",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "Split at context and intervention boundaries rather than sequential job titles; independent review is the exception.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-UNIT-INDEPENDENCE",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "Concurrent units are separately checkable and exchange no undeclared mid-flight information.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-ONE-WRITER",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "One writer owns a shared mutable resource; parallel writers require effective isolation and an integration owner.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }, { "path": "sage-claude/references/dispatch.md", "section": "Snapshot protocol" }]
+    },
+    {
+      "id": "POL-BARRIER-OR-PIPELINE",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#qualify-and-decompose",
+      "obligation": "Use barriers only for whole-wave dependencies or stabilization; otherwise pipeline per item.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-BOUNDED-BOOTSTRAP",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#bootstrap-discovery",
+      "obligation": "Scout-before-plan is an optional bounded read-only bootstrap that ends in a complete plan or explicit planning gap.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }]
+    },
+    {
+      "id": "POL-RISK-RUBRIC",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#risk-and-bounded-admission",
+      "obligation": "Risk combines impact, coupling, novelty, reversibility, verification, compatibility, and human dependence, with hard high-risk triggers.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Risk rubric" }]
+    },
+    {
+      "id": "POL-BOUNDED-ADMISSION",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#admission-policy-profiles",
+      "obligation": "Plans select a versioned finite admission profile; the baseline estimate-multiple profile preserves separate projected task, unit, and agent ceilings and honest sensor provenance.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Rails" }]
+    },
+    {
+      "id": "POL-PLACEMENT-REQUIREMENTS",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#placement",
+      "obligation": "Portable placement describes task requirements rather than concrete model tiers.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 2 — Plan and record" }, { "path": "sage-claude/references/harness.md", "section": "Models and effort" }]
+    },
+    {
+      "id": "POL-PRESERVE-EXPLICIT-MODEL",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#placement",
+      "obligation": "A user's explicit concrete model choice is preserved rather than reinterpreted.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Models and effort" }]
+    },
+    {
+      "id": "POL-ESTIMATE-FROM-CORPUS",
+      "owner": "policy",
+      "canonical": "sage/policy/delegation.md#planning-and-estimation",
+      "obligation": "Estimate from corpus and evidence lenses, price discovery separately, and establish one measurement method for shared metrics.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 2 — Plan and record" }]
+    },
+    {
+      "id": "POL-BRIEF-CONTENT",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#task-brief",
+      "obligation": "Every brief has explicit sources, scope, effects, tools, caps, exclusions, baseline, completion, placement, and result contract.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Task brief" }]
+    },
+    {
+      "id": "POL-BLIND-AUTHOR-FIREWALL",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#task-brief",
+      "obligation": "A blind test author sees observable requirements and criteria, not implementation decisions or candidate code.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Task brief" }, { "path": "sage-claude/references/topologies.md", "section": "10. Blind acceptance suite (the independent test designer)" }]
+    },
+    {
+      "id": "POL-REPORT-UNPRIVILEGED",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#result-and-artifact",
+      "obligation": "Worker reports are unprivileged claims and include result, evidence, changes, checks, uncertainty, and next action.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Agent report" }, { "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-ASSUMPTION-FALSIFIER",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#assumption-gap-and-decision",
+      "obligation": "A resolved ambiguity records choice, alternatives, impact, and an observable falsifier when decided.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Assumption log" }]
+    },
+    {
+      "id": "POL-GAP-AWAITING-HUMAN",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#assumption-gap-and-decision",
+      "obligation": "Missing evidence or capability is an explicit gap; required human judgment uses AwaitingHuman rather than guessed completion.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/references/topologies.md", "section": "Evidence menus by domain" }, { "path": "sage-claude/SKILL.md", "section": "Stop rule" }]
+    },
+    {
+      "id": "POL-PLAN-AMENDMENT-DECISION",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#plans-and-revisions",
+      "obligation": "Scope, dependency, criteria, unit, model, and bound changes are recorded revisions; abandoned disagreements are never silently discarded.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Decisions and deviations" }]
+    },
+    {
+      "id": "POL-FINDING-CONTENT",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#finding-and-disposition",
+      "obligation": "Findings carry severity, confidence, subject, failure, evidence, violated boundary, direction, and verification method.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Finding schema" }]
+    },
+    {
+      "id": "POL-FINDING-DISPOSITION",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#finding-and-disposition",
+      "obligation": "Every finding has exactly one accepted, evidence-rejected, owned-deferred, or user-decision disposition and explicit resolution state.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Finding schema" }, { "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-EVIDENCE-CLASSES",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#verification",
+      "obligation": "Criteria are classified as machine, agent-observable, or human-only before work; verification has pass, fail, or AwaitingHuman.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/topologies.md", "section": "Evidence menus by domain" }]
+    },
+    {
+      "id": "POL-LIFECYCLE-FACTS-DISTINCT",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#verification",
+      "obligation": "Result receipt, acceptance, worker terminal state, verification, and unit completion are distinct facts.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-COORDINATION-OUTCOME",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#coordination-outcome",
+      "obligation": "Every run records evidence for whether orchestration helped, harmed, or was inconclusive, including zero-delegation runs.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 6 — Record and surface" }]
+    },
+    {
+      "id": "POL-TOPOLOGY-CATALOG",
+      "owner": "policy",
+      "canonical": "sage/policy/topologies.md#orchestration-topologies",
+      "obligation": "The independent sweep, implement-review-fix, migration, bake-off, discovery, adversarial, deep-read, hypothesis, critic, blind-suite, plan-critic, and behavioral patterns retain their triggers and stops.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/topologies.md", "section": "Orchestration topologies" }]
+    },
+    {
+      "id": "POL-DOMAIN-EVIDENCE-MENUS",
+      "owner": "policy",
+      "canonical": "sage/policy/topologies.md#evidence-menus",
+      "obligation": "Software, research/writing, and data/analysis completion use domain-appropriate evidence.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/topologies.md", "section": "Evidence menus by domain" }]
+    },
+    {
+      "id": "POL-SNAPSHOT-BASELINE",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#snapshot-and-freeze",
+      "obligation": "Mutation begins from a recorded recoverable baseline that preserves unrelated dirty and untracked work.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Snapshot protocol" }]
+    },
+    {
+      "id": "POL-FREEZE-TRIAGE-LEASE",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#snapshot-and-freeze",
+      "obligation": "One writer stabilizes and freezes, reviewers share the freeze, the policy actor triages, and a new lease precedes fixes.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Snapshot protocol" }]
+    },
+    {
+      "id": "POL-DETERMINISTIC-BEFORE-MODEL",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#evidence-before-agreement",
+      "obligation": "Run deterministic checks before model review and execute packaging behavior when it affects the deliverable.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-SPEC-QUALITY-SEPARATE",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#evidence-before-agreement",
+      "obligation": "Specification compliance and quality are separate complete verdicts from clean independent contexts.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-ADVERSARIAL-OWN-FIXES",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#evidence-before-agreement",
+      "obligation": "High-stakes claims receive refutation and medium-or-higher risk includes an adversarial pass over policy-actor fixes and completion.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "POL-REVIEW-LOOP-STOP",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#triage-and-conflict",
+      "obligation": "Post-fix blocker/major review stops on one dry round; unknown-size discovery uses two consecutive dry rounds.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Stop rule" }, { "path": "sage-claude/references/topologies.md", "section": "5. Loop-until-dry (unknown-size discovery)" }]
+    },
+    {
+      "id": "POL-AUTHORING-FORM",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#behavior-shaping-guidance",
+      "obligation": "Behavior-shaping guidance names its baseline failure and uses the matching prohibition, recipe, structural slot, or observable condition.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/references/authoring.md", "section": "Match the form to the failure" }]
+    },
+    {
+      "id": "POL-AUTHORING-COMPRESSION-FLOOR",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#behavior-shaping-guidance",
+      "obligation": "Guidance edits preserve qualifiers, concrete checks, completion criteria, precedence, evidence strength, and enforcement status.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/references/authoring.md", "section": "Anchoring — a line to hold, not a repair to make" }, { "path": "sage-claude/references/memory.md", "section": "The compression floor" }]
+    },
+    {
+      "id": "POL-COMPLETION-GATE",
+      "owner": "policy",
+      "canonical": "sage/policy/review.md#completion",
+      "obligation": "Completion requires final unit states, accepted results, terminal attempts, evidence, dispositions, verified fixes, scope, final assumptions/gaps/coordination, and no pending required human item.",
+      "classes": ["completion", "safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Stop rule" }, { "path": "sage-claude/SKILL.md", "section": "Step 6 — Record and surface" }]
+    },
+    {
+      "id": "POL-FAILURE-SIGNATURE-LADDER",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#failure-signatures",
+      "obligation": "Retries follow specification, capability, and blocked signatures; two same-signature failures reopen the plan rather than extending the loop.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 4 — Execute and watch" }]
+    },
+    {
+      "id": "POL-FOUR-RAILS",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#safety-rails",
+      "obligation": "External/destructive action, concurrent unisolated writers, off-lease mutation, and exceeded bounds pause admission and surface.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Rails" }]
+    },
+    {
+      "id": "POL-HUMAN-RELEASE",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#safety-rails",
+      "obligation": "A destructive or externally visible action requires an exact, prior human release and recorded decision.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Rails" }]
+    },
+    {
+      "id": "POL-RECONCILE-BEFORE-RETRY",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#reconciliation",
+      "obligation": "Unknown external effects and workers are reconciled before retry; unknown side effects freeze acceptance and reuse.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Handover" }, { "path": "sage-claude/references/dispatch.md", "section": "The handoff note" }]
+    },
+    {
+      "id": "POL-HANDOVER-THRESHOLD",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#context-handover",
+      "obligation": "The default handover threshold is 30 percent of effective context; missing sensing is unavailable rather than removed or fabricated.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Handover" }]
+    },
+    {
+      "id": "POL-DURABLE-HANDOFF",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#context-handover",
+      "obligation": "Handover records plan, attempts, leases, baseline, assumptions, gaps, findings, rails, handles, and next action in a durable artifact.",
+      "classes": ["completion", "safety"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "The handoff note" }, { "path": "sage-claude/SKILL.md", "section": "Handover" }]
+    },
+    {
+      "id": "POL-RESUME-VERIFY-BASELINE",
+      "owner": "policy",
+      "canonical": "sage/policy/recovery.md#stop-and-resume",
+      "obligation": "Resume reads durable artifacts, verifies the baseline and resource identity, then creates revisions or attempts instead of rewriting history.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Handover" }]
+    },
+    {
+      "id": "MEM-THREE-CLASSES",
+      "owner": "policy",
+      "canonical": "sage/policy/memory.md#memory-boundary",
+      "obligation": "Promoted knowledge, current-run log, and closed-run log have distinct runtime and promotion access.",
+      "classes": ["promotion", "safety"],
+      "baseline": [{ "path": "sage-claude/references/memory.md", "section": "The shape" }, { "path": "sage-claude/SKILL.md", "section": "Step 6 — Record and surface" }]
+    },
+    {
+      "id": "MEM-CURRENT-RUN-FACTS-ONLY",
+      "owner": "policy",
+      "canonical": "sage/policy/memory.md#memory-boundary",
+      "obligation": "An active run appends facts and may read its own state for coordination, but derives no lesson or policy edit.",
+      "classes": ["promotion", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/memory.md", "section": "Append at Step 6" }]
+    },
+    {
+      "id": "ART-RUN-PLAN",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/RunPlan",
+      "obligation": "Run plans carry immutable numbered revisions and current revision identity.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Plan" }]
+    },
+    {
+      "id": "ART-PLAN-REVISION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/PlanRevision",
+      "obligation": "Revisions bind reason, expected prior revision, bounds, units, and disposition of every prior unit.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Decisions and deviations" }]
+    },
+    {
+      "id": "ART-UNIT-SPEC-REVISION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/UnitSpecRevision",
+      "obligation": "Stable logical unit IDs have immutable spec revisions with owner, effects, dependencies, criteria, capabilities, placement requirements, and estimate.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Plan" }, { "path": "sage-claude/references/dispatch.md", "section": "Unit table" }]
+    },
+    {
+      "id": "ART-BRIEF-REVISION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/BriefRevision",
+      "obligation": "Every attempt can prove its exact plan, unit, brief revision, and brief hash.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Task brief" }]
+    },
+    {
+      "id": "ART-ATTEMPT",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Attempt",
+      "obligation": "Attempt identity, immutable bindings, lifecycle, side-effect class, requested/effective placement, handles, and result link are explicit.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Unit table" }]
+    },
+    {
+      "id": "ART-RESULT",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Result",
+      "obligation": "Result shape and acceptance are separate from attempt lifecycle and verification.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Agent report" }]
+    },
+    {
+      "id": "ART-ASSUMPTION-GAP",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Assumption",
+      "obligation": "Assumptions and gaps have stable IDs, evidence-bearing content, and explicit states.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Assumption log" }, { "path": "sage-claude/references/dispatch.md", "section": "Run record" }]
+    },
+    {
+      "id": "ART-FINDING-DISPOSITION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Disposition",
+      "obligation": "Findings and their decisions/resolution/verification links are separately representable and cross-referenced.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Findings and dispositions" }]
+    },
+    {
+      "id": "ART-VERIFICATION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Verification",
+      "obligation": "Verification binds subject, criterion, method, evidence class, verdict, evidence, actor, and time.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 5 — Verify and integrate" }]
+    },
+    {
+      "id": "ART-COORDINATION-OUTCOME",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/CoordinationOutcome",
+      "obligation": "Coordination outcome carries assessment, contributions, duplication, interventions, failures, effects, and evidence.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Run record" }]
+    },
+    {
+      "id": "ART-COMPLETION",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/Completion",
+      "obligation": "Completion records criteria, checks, findings, scope, human items, claim, time, and deliverable without conflating paused states.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Run record" }]
+    },
+    {
+      "id": "ART-RENDERED-RECORD",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/sage-artifact-v1.schema.json#/$defs/RenderedRunRecord",
+      "obligation": "Rendered Markdown is a hash-bound disposable projection of structured state and is never parsed as authority.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "The ledger" }]
+    },
+    {
+      "id": "ART-OWNERSHIP-RECEIPT-SHAPE",
+      "owner": "artifact_schema",
+      "canonical": "sage/artifacts/schemas/ownership-receipt-v1.schema.json",
+      "obligation": "The versioned receipt representation makes protected roots, canonical path identities, backups, prior configuration state, retention, intent digest, and recovery bindings explicit.",
+      "classes": ["installation", "removal", "safety", "evidence"],
+      "baseline": [{ "path": "install.sh", "section": "script" }, { "path": "uninstall.sh", "section": "script" }]
+    },
+    {
+      "id": "RUN-AUTHENTICATED-PRINCIPALS",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/security-and-privacy.md#authenticated-principals",
+      "obligation": "Operator, policy actor, scheduler, adapter, approval channel, and worker authority comes from deny-by-default authenticated endpoints with an exact operation allow-list, never payload claims.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Rails" }]
+    },
+    {
+      "id": "RUN-REQUEST-TRANSITION-OBSERVATION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/state-model.md#three-kinds-of-fact",
+      "obligation": "Intent, accepted transition, and native observation are distinct; observations never mutate state directly.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Unit table" }]
+    },
+    {
+      "id": "RUN-IDEMPOTENCY-BEFORE-VERSION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/state-model.md#three-kinds-of-fact",
+      "obligation": "Principal-scoped idempotency lookup precedes optimistic-version validation; same key/different body rejects.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 4 — Execute and watch" }]
+    },
+    {
+      "id": "RUN-LIFECYCLE-DISTINCTIONS",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/state-model.md#lifecycle-distinctions",
+      "obligation": "Prepared, running, idle, turn complete, result received/accepted, verification, and unit completion are distinct transitions.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Transcripts and the token arithmetic" }]
+    },
+    {
+      "id": "RUN-SERVER-SEQUENCE",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/state-model.md#lifecycle-distinctions",
+      "obligation": "Server run sequence orders ingestion only; native epoch/sequence and timestamps retain their narrower meanings.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/bin/sage-watch.sh", "section": "header manual" }]
+    },
+    {
+      "id": "RUN-CAPABILITY-RECORD",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Capabilities record operation, authority, scope, strength, delivery, durability, failure behavior, evidence, and uncovered paths.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Limits and knobs" }]
+    },
+    {
+      "id": "RUN-CAPABILITY-DEGRADATION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Required-capability degradation stops admission and safety-sensitive work; restoration is not retroactive.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 4 — Execute and watch" }]
+    },
+    {
+      "id": "RUN-OPAQUE-WORKER-TURN",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#opaque-identities",
+      "obligation": "Worker and turn identities are opaque and explicit; turn-scoped control cannot target a later turn.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Spawning" }]
+    },
+    {
+      "id": "RUN-CRASH-SAFE-EXTERNAL-INTENT",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#external-transaction-boundary",
+      "obligation": "External operations persist intent before call, handle after response, and reconcile ambiguity before retry.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Handover" }]
+    },
+    {
+      "id": "RUN-RECONCILIATION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/state-model.md#reconciliation",
+      "obligation": "Restart reconciles unresolved intents then workers/turns, validates hashes, creates new attempts, and pauses at judgment boundaries.",
+      "classes": ["safety", "completion"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "The handoff note" }]
+    },
+    {
+      "id": "RUN-APPROVAL-DIGEST",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/security-and-privacy.md#approval-semantics",
+      "obligation": "Approvals hash a versioned action descriptor binding run/unit/attempt/lease/fence/native context/cwd/environment/permission delta/user words and atomically compare-and-consume one-shot or bounded use.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Rails" }]
+    },
+    {
+      "id": "RUN-RESOURCE-LEASE-FENCING",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/security-and-privacy.md#threat-boundaries",
+      "obligation": "Managed writers require canonical resource identity, deployment-wide owner epochs, fencing, and a validating write or stronger isolation boundary.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "Snapshot protocol" }]
+    },
+    {
+      "id": "RUN-DATA-CLASSIFICATION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/security-and-privacy.md#data-classification",
+      "obligation": "Public, internal, confidential, and restricted data are classified and redacted before persistence; raw sensitive payload retention is opt-in.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/dispatch.md", "section": "The ledger" }]
+    },
+    {
+      "id": "RUN-RETENTION-DELETION",
+      "owner": "runtime",
+      "canonical": "sage/runtime/protocol-v0/security-and-privacy.md#retention-and-deletion",
+      "obligation": "Each run binds retention for a separately deletable audit partition; deletion covers payloads, keys, indexes, outbox, backups, and replicas and appends a minimal truthful partial-or-complete tombstone.",
+      "classes": ["safety", "removal"],
+      "baseline": [{ "path": "uninstall.sh", "section": "script" }]
+    },
+    {
+      "id": "EXP-EXPLICIT-INVOCATION",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/ownership-boundaries.md#codex-experience",
+      "obligation": "Sage is explicit because it changes control flow and spend; report and resume remain explicit entrypoints.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
+    },
+    {
+      "id": "EXP-SIX-STEP-SPINE",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/ownership-boundaries.md#codex-experience",
+      "obligation": "The experience preserves qualify/decompose, plan, brief/dispatch, supervise/revise, verify/integrate, and close/render.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 1 — Decompose" }, { "path": "sage-claude/SKILL.md", "section": "Step 6 — Record and surface" }]
+    },
+    {
+      "id": "EXP-LIGHT-ADVISORY",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/ownership-boundaries.md#codex-experience",
+      "obligation": "Native Light-mode bookkeeping and controls are reported as advisory unless an effective boundary proves enforcement.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 4 — Execute and watch" }]
+    },
+    {
+      "id": "POL-USER-RESULT",
+      "owner": "policy",
+      "canonical": "sage/policy/contracts.md#user-facing-run-result",
+      "obligation": "The user receives the deliverable, concise run line, paths, capability summary, and surfaced safety/human items.",
+      "classes": ["completion"],
+      "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Step 6 — Record and surface" }]
+    },
+    {
+      "id": "EXP-UNIVERSAL-INSTALL-UPDATE",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/lifecycle-contract.md#install-and-update",
+      "obligation": "One repository-root installer preflights, stages, verifies, atomically replaces, preserves user state, health-checks, and converges after interruption.",
+      "classes": ["installation", "safety"],
+      "baseline": [{ "path": "install.sh", "section": "script" }]
+    },
+    {
+      "id": "EXP-OWNERSHIP-RECEIPT",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/lifecycle-contract.md#ownership-receipt",
+      "obligation": "The receipt proves approved non-overlapping roots, canonical paths, lstat/no-follow identity, backups, retention, intent digest, and every recovery operation without broad deletion targets.",
+      "classes": ["installation", "removal", "safety"],
+      "baseline": [{ "path": "install.sh", "section": "script" }, { "path": "uninstall.sh", "section": "script" }]
+    },
+    {
+      "id": "EXP-UPDATE-PRESERVATION",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/lifecycle-contract.md#install-and-update",
+      "obligation": "Update preserves run history, current recovery, installed promotion, retention settings, unrelated bytes, and displaced-user backups.",
+      "classes": ["installation", "safety"],
+      "baseline": [{ "path": "install.sh", "section": "script" }]
+    },
+    {
+      "id": "EXP-COMPLETE-REMOVAL",
+      "owner": "codex_experience",
+      "canonical": "sage/docs/phase0/lifecycle-contract.md#complete-removal",
+      "obligation": "Confirmed complete removal stops processes, restores user content/config, removes only proven owned state, supports dry-run and keep-data, and reports ambiguity.",
+      "classes": ["removal", "safety"],
+      "baseline": [{ "path": "uninstall.sh", "section": "script" }]
+    },
+    {
+      "id": "ADP-HOST-TOOL-MAPPING",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#candidate-operations-not-a-frozen-port",
+      "obligation": "Concrete spawn, steer, follow-up, interrupt, inspect, wait, and result operations are versioned host mappings, not policy nouns.",
+      "classes": ["safety"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Spawning" }]
+    },
+    {
+      "id": "ADP-MODEL-EFFORT-RESOLUTION",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "A calibrated host profile resolves current model and effort and records requested/effective identity without silent overrides.",
+      "classes": ["evidence", "safety"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Resolving a tier to a model — do this at plan time" }]
+    },
+    {
+      "id": "ADP-WORKER-ROLE-PROFILES",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Reader, writer, verifier, web, orchestrator, and alternate profiles expose their effective tools, bounds, effort, and isolation rather than trusting role names.",
+      "classes": ["safety"],
+      "baseline": [{ "glob": "claude-agents/*.md" }, { "glob": "claude-agents-alt/*.md.in" }]
+    },
+    {
+      "id": "ADP-OBSERVATION-DELIVERY",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Native events declare replayable, snapshot-reconcilable, or ephemeral delivery and never overclaim cursors.",
+      "classes": ["evidence"],
+      "baseline": [{ "path": "sage-claude/references/harness.md", "section": "Transcripts and the token arithmetic" }]
+    },
+    {
+      "id": "ADP-CONTEXT-SENSOR",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Context-window, pressure, and compaction evidence is a versioned capability with provenance and honest degradation.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/bin/sage-watch.sh", "section": "header manual" }, { "path": "sage-claude/references/harness.md", "section": "Transcripts and the token arithmetic" }]
+    },
+    {
+      "id": "ADP-LEDGER-INTEGRITY-CHECK",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#deterministic-adapter-checks",
+      "obligation": "The current text-ledger checker validates only documented integrity predicates and reports its blind spots and inability to run.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "sage-claude/bin/sage-lint.sh", "section": "header manual" }]
+    },
+    {
+      "id": "ADP-ALT-DISPATCH-GUARD",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#capability-evidence",
+      "obligation": "Alternate-family dispatch argument guarding and effective-family observation are separate host capabilities with uncovered paths recorded.",
+      "classes": ["safety", "evidence"],
+      "baseline": [{ "path": "sage-claude/bin/sage-alt-guard.sh", "section": "header manual" }, { "path": "claude-agents-alt/README.md", "section": "README" }]
+    },
+    {
+      "id": "ADP-KNOWLEDGE-INDEX",
+      "owner": "adapter",
+      "canonical": "sage/runtime/protocol-v0/adapter-contract.md#deterministic-adapter-checks",
+      "obligation": "Selective promoted-knowledge loading uses a deterministic index that quarantines malformed items rather than broad raw-log search.",
+      "classes": ["promotion", "evidence"],
+      "baseline": [{ "path": "sage-claude/bin/sage-index.sh", "section": "header manual" }]
+    },
+    {
+      "id": "PRO-MANUAL-CLOSED-RUN-ONLY",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#promotion-contract",
+      "obligation": "Promotion is user-invoked, reads closed runs, and never runs inside an active Sage task.",
+      "classes": ["promotion", "safety"],
+      "baseline": [{ "path": "sage-claude/references/memory.md", "section": "Promotion, consolidation, eviction" }, { "path": "claude-skills/sage-promote/SKILL.md", "section": "Sage promote" }]
+    },
+    {
+      "id": "PRO-PROMOTED-KNOWLEDGE-SHAPE",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#portable-projection-and-equivalence",
+      "obligation": "A versioned canonical portable projection defines stable-ID content equivalence and integrity while excluding machine-local statistics.",
+      "classes": ["promotion", "evidence"],
+      "baseline": [{ "path": "sage-claude/references/memory.md", "section": "Knowledge items" }, { "glob": "sage-claude/memory/shared/*.md" }, { "glob": "sage-claude/memory/local-seed/**/*.md" }]
+    },
+    {
+      "id": "PRO-CONSOLIDATION-EVIDENCE",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#inputs-and-knowledge-records",
+      "obligation": "Consolidation groups closed-run facts, checks provenance, confirmations, contradictions, recognizers, and falsifiers without repairing malformed input in place.",
+      "classes": ["promotion", "evidence"],
+      "baseline": [{ "path": "claude-skills/sage-promote/SKILL.md", "section": "Consolidation" }]
+    },
+    {
+      "id": "PRO-REMOVAL-BAR",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#inputs-and-knowledge-records",
+      "obligation": "Disuse alone never removes knowledge; falsification or explicit user decision with retained evidence is required.",
+      "classes": ["promotion", "removal"],
+      "baseline": [{ "path": "sage-claude/references/memory.md", "section": "The removal bar" }]
+    },
+    {
+      "id": "PRO-INSTALLED-DEFAULT",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#installed-promotion-default",
+      "obligation": "Default promotion writes only the installed overlay and leaves the source repository untouched.",
+      "classes": ["promotion", "installation"],
+      "baseline": [{ "path": "claude-skills/sage-promote/SKILL.md", "section": "What it writes" }]
+    },
+    {
+      "id": "PRO-GLOBAL-EXPLICIT",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#global-promotion-explicit",
+      "obligation": "Explicit global promotion writes only source and prints the later install/update command; it does not mutate installation.",
+      "classes": ["promotion", "installation"],
+      "baseline": [{ "path": "claude-skills/sage-promote/SKILL.md", "section": "What it writes" }]
+    },
+    {
+      "id": "PRO-STABLE-ID-RECONCILIATION",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#stable-id-reconciliation",
+      "obligation": "Install/update reconciles source and overlay by stable ID, archives duplicates/conflicts intact, and never auto-merges divergent rule text.",
+      "classes": ["promotion", "installation"],
+      "baseline": [{ "path": "install.sh", "section": "script" }, { "path": "docs/designs/2026-08-28-sage-memory-clone-model.md", "section": "The model" }]
+    },
+    {
+      "id": "PRO-UPDATE-PRESERVES-OVERLAY",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#stable-id-reconciliation",
+      "obligation": "Every update preserves installed-only promotion and makes reconciliation idempotent.",
+      "classes": ["promotion", "installation"],
+      "baseline": [{ "path": "install.sh", "section": "script" }]
+    },
+    {
+      "id": "PRO-COMPLETE-UNINSTALL-DATA",
+      "owner": "promotion_workflow",
+      "canonical": "sage/docs/phase0/promotion-contract.md#completion-and-removal",
+      "obligation": "Complete uninstall removes installed promotion only with explicit confirmation; keep-data preserves it, and source promotion is never deleted.",
+      "classes": ["promotion", "removal", "safety"],
+      "baseline": [{ "path": "uninstall.sh", "section": "script" }]
+    }
+  ]
+}

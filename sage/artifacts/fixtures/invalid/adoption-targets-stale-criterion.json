@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/1/prior_units/0/result_adoptions/0/target_criterion_ids/0", "value": "C-MAP" },
+    { "op": "replace", "path": "/decisions/0/adoption/target_criterion_ids/0", "value": "C-MAP" }
+  ],
+  "expected_errors": ["ART-PLAN-ADOPTION"]
+}

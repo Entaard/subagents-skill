@@ -1,0 +1,10 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/observation.json",
+  "patch": [
+    { "op": "replace", "path": "/delivery", "value": "replayable" },
+    { "op": "replace", "path": "/source_cursor", "value": null }
+  ],
+  "expected_errors": ["RUNTIME-REPLAY-EVIDENCE"]
+}
+

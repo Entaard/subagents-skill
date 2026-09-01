@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/decisions/0/adoption/result_id", "value": "R-REVIEW" }
+  ],
+  "expected_errors": ["ART-PLAN-ADOPTION"]
+}

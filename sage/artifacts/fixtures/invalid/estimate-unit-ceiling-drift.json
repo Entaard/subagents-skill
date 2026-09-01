@@ -1,0 +1,10 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/zero-delegation.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/admission_policy/estimate_multiple/task_estimate", "value": 50000 },
+    { "op": "replace", "path": "/plan/revisions/0/admission_policy/estimate_multiple/unit_ceilings/0/estimate", "value": 50000 },
+    { "op": "replace", "path": "/plan/revisions/0/units/0/estimated_spend", "value": 50000 }
+  ],
+  "expected_errors": ["ART-ADMISSION-POLICY"]
+}

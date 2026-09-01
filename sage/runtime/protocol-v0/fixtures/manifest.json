@@ -1,0 +1,34 @@
+{
+  "manifest_version": "0.1-provisional",
+  "schema": "../schemas/runtime-envelope-v0.schema.json",
+  "valid": [
+    "valid/environment-offer.json",
+    "valid/capability-snapshot.json",
+    "valid/create-run-request.json",
+    "valid/record-finding-request.json",
+    "valid/observation.json",
+    "valid/plan-commit-transition.json",
+    "valid/approval-record.json"
+  ],
+  "invalid": [
+    { "path": "invalid/caller-principal.json", "expected_errors": ["SCHEMA-ADDITIONAL"] },
+    { "path": "invalid/payload-principal.json", "expected_errors": ["RUNTIME-CALLER-AUTHORITY"] },
+    { "path": "invalid/create-with-version.json", "expected_errors": ["RUNTIME-CREATE-VERSION"] },
+    { "path": "invalid/mutation-without-version.json", "expected_errors": ["RUNTIME-EXPECTED-VERSION"] },
+    { "path": "invalid/replayable-without-cursor.json", "expected_errors": ["RUNTIME-REPLAY-EVIDENCE"] },
+    { "path": "invalid/approval-time-order.json", "expected_errors": ["RUNTIME-APPROVAL-TIME"] },
+    { "path": "invalid/payload-hash-mismatch.json", "expected_errors": ["RUNTIME-PAYLOAD-HASH"] },
+    { "path": "invalid/approval-digest-mismatch.json", "expected_errors": ["RUNTIME-ACTION-DIGEST"] },
+    { "path": "invalid/approval-denied-consumed.json", "expected_errors": ["RUNTIME-APPROVAL-DENIED"] },
+    { "path": "invalid/approval-revoked-before-consumption.json", "expected_errors": ["RUNTIME-APPROVAL-TIME"] },
+    { "path": "invalid/approval-one-shot-replay.json", "expected_errors": ["RUNTIME-APPROVAL-REUSE"] },
+    { "path": "invalid/credential-payload.json", "expected_errors": ["SCHEMA-ADDITIONAL"] }
+    ,{ "path": "invalid/transition-worker-closes-run.json", "expected_errors": ["RUNTIME-TRANSITION-AUTHORITY"] }
+    ,{ "path": "invalid/transition-policy-commits-plan.json", "expected_errors": ["RUNTIME-TRANSITION-AUTHORITY"] }
+    ,{ "path": "invalid/transition-unknown-operation.json", "expected_errors": ["RUNTIME-TRANSITION-AUTHORITY", "SCHEMA-ENUM"] }
+  ],
+  "sequences": ["sequences/idempotency-sequence.json"],
+  "approval_argument_cases": "approval-argument-binding-cases.json",
+  "authorization_cases": "authorization-cases.json",
+  "retention_cases": "retention-deletion-cases.json"
+}

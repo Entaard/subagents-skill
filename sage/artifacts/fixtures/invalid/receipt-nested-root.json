@@ -1,0 +1,12 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/roots/1/canonical_path", "value": "/opt/sage-example/state" },
+    { "op": "replace", "path": "/roots/1/canonical_path_sha256", "value": "016369e015e702ef8d2c3d843be87cac356f7e52417b43f16511ec769110847b" },
+    { "op": "replace", "path": "/roots/1/resource_identity/object_id", "value": "object-opt-sage-state" },
+    { "op": "replace", "path": "/roots/1/resource_identity/ancestor_object_ids", "value": ["object-root", "object-opt", "object-opt-sage"] },
+    { "op": "replace", "path": "/roots/1/resource_identity/resolved_path_sha256", "value": "016369e015e702ef8d2c3d843be87cac356f7e52417b43f16511ec769110847b" }
+  ],
+  "expected_errors": ["RECEIPT-BACKUP", "RECEIPT-INTENT-HASH", "RECEIPT-RESOURCE-IDENTITY", "RECEIPT-RESOURCE-ROOT", "RECEIPT-ROOT-OVERLAP"]
+}

@@ -1,0 +1,17 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/status", "value": "running" },
+    { "op": "copy", "from": "/plan/revisions/0", "path": "/plan/revisions/-" },
+    { "op": "replace", "path": "/plan/revisions/1/revision", "value": 2 },
+    { "op": "replace", "path": "/plan/revisions/1/expected_prior_revision", "value": 1 },
+    { "op": "replace", "path": "/plan/revisions/1/reason", "value": "Carry the same immutable unit into a later plan." },
+    { "op": "replace", "path": "/plan/revisions/1/created_at", "value": "2026-08-31T02:40:00Z" },
+    { "op": "replace", "path": "/plan/revisions/1/admitted_at", "value": "2026-08-31T02:41:00Z" },
+    { "op": "add", "path": "/plan/revisions/1/prior_units/-", "value": { "unit_id": "U-WRITE", "unit_spec_revision": 1, "disposition": "carried", "reason": "Still required.", "result_adoptions": [] } },
+    { "op": "replace", "path": "/plan/revisions/1/units/0/objective", "value": "Conflicting content under the same unit revision." },
+    { "op": "replace", "path": "/plan/current_revision", "value": 2 }
+  ],
+  "expected_errors": ["ART-UNIT-IMMUTABLE"]
+}

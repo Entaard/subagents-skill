@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/config_entries/0/prior_backup_ids", "value": [] }
+  ],
+  "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-CONFIG-PRIOR", "RECEIPT-INTENT-HASH"]
+}

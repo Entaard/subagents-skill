@@ -1,0 +1,30 @@
+{
+  "fixture_version": "0.1-provisional",
+  "cases": [
+    {
+      "case_id": "retention-expiry",
+      "condition": "retention expiry passed and no legal hold exists",
+      "required_outcome": ["partition payload removed", "secondary indexes removed", "replicas confirmed", "minimal tombstone appended"]
+    },
+    {
+      "case_id": "active-legal-hold",
+      "condition": "a scoped unexpired legal hold covers confidential artifacts",
+      "required_outcome": ["covered artifacts preserved", "uncovered expired classes processed", "hold scope and review time recorded"]
+    },
+    {
+      "case_id": "complete-deletion",
+      "condition": "authorized deletion completes on store, outbox, backups, indexes, keys, and replicas",
+      "required_outcome": ["no protected locator remains", "complete tombstone appended", "raw content is not replayable"]
+    },
+    {
+      "case_id": "partial-replica-failure",
+      "condition": "one declared replica cannot prove deletion",
+      "required_outcome": ["status remains partial", "failed replica and next action named", "completed targets are not replayed", "full deletion is not claimed"]
+    },
+    {
+      "case_id": "installation-backup-excluded",
+      "condition": "run deletion encounters an installation receipt backup awaiting displaced-user or configuration restoration",
+      "required_outcome": ["installation backup preserved", "run deletion records it as out of scope", "lifecycle receipt remains sole disposition authority"]
+    }
+  ]
+}

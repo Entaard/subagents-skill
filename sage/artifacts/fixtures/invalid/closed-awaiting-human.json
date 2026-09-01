@@ -1,0 +1,12 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/status", "value": "completed" },
+    { "op": "replace", "path": "/completion/state", "value": "closed" },
+    { "op": "replace", "path": "/completion/criteria_status", "value": "pass" },
+    { "op": "replace", "path": "/completion/claimed_at", "value": "2026-08-31T03:31:00Z" },
+    { "op": "replace", "path": "/completion/claim", "value": "Complete despite the pending human item." }
+  ],
+  "expected_errors": ["ART-COMPLETED-AWAITING", "ART-COMPLETED-VERIFICATION"]
+}

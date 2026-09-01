@@ -1,0 +1,8 @@
+{
+  "base": "../ownership-receipt.update.example.json",
+  "patch": [
+    { "op": "replace", "path": "/backups/0/backup_resource_identity/object_id", "value": "object-var-lib-sage-backup-entry-skill-mutated" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-PRIOR-BACKUP"]
+}

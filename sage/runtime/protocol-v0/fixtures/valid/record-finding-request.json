@@ -1,0 +1,11 @@
+{
+  "message_kind": "request",
+  "protocol_version": "0.1-provisional",
+  "command_id": "cmd-finding-1",
+  "operation": "RecordFinding",
+  "run_id": "run-runtime",
+  "idempotency_key": "connection-key-finding-0001",
+  "expected_run_version": 4,
+  "payload_sha256": "fec3a6c535ab3ecf8dbb6b3f3ff85db2c6bf62499613e9a93f7b347b20da126a",
+  "payload": { "finding_artifact_id": "artifact-finding-1" }
+}

@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "remove", "path": "/plan/revisions/1/prior_units/0" },
+    { "op": "remove", "path": "/decisions/0" }
+  ],
+  "expected_errors": ["ART-PLAN-COVERAGE"]
+}

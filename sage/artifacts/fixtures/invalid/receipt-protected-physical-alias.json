@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/roots/0/resource_identity/object_id", "value": "object-source-sage" },
+    { "op": "replace", "path": "/roots/0/resource_identity/ancestor_object_ids", "value": ["object-root", "object-source"] }
+  ],
+  "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PROTECTED-OVERLAP", "RECEIPT-RESOURCE-ROOT"]
+}

@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/approval-record.json",
+  "patch": [
+    { "op": "replace", "path": "/decision", "value": "deny" }
+  ],
+  "expected_errors": ["RUNTIME-APPROVAL-DENIED"]
+}

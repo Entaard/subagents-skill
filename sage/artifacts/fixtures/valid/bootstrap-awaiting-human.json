@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "sage.run-record",
+  "run_id": "run-bootstrap-human",
+  "policy_version": "phase0",
+  "status": "AwaitingHuman",
+  "created_at": "2026-08-31T03:00:00Z",
+  "updated_at": "2026-08-31T03:30:00Z",
+  "objective": "Map an unfamiliar corpus, then review a subjective compatibility criterion.",
+  "plan": {
+    "plan_id": "plan-bootstrap-human",
+    "current_revision": 1,
+    "revisions": [
+      {
+        "revision": 0,
+        "kind": "bootstrap",
+        "reason": "A bounded source map was required before a complete review plan could be written.",
+        "expected_prior_revision": null,
+        "created_at": "2026-08-31T03:00:00Z",
+        "admitted_at": "2026-08-31T03:00:30Z",
+        "admission_policy": { "profile": "bounded-observed", "profile_version": "1.0", "control_strength": "advisory", "usage_provenance": "estimated", "sensor_id": "fixture-plan-estimate", "sensor_evidence": [{ "kind": "measurement", "locator": "fixture://bootstrap-estimate", "detail": "Bounded discovery estimate." }], "limit_authority": "policy_actor", "compatibility_profile": "estimate-multiple/baseline-v1", "estimate_multiple": null },
+        "bounds": {
+          "max_units": 1,
+          "max_attempts_per_unit": 1,
+          "max_concurrency": 1,
+          "max_plan_revisions": 2,
+          "max_admission_seconds": 900,
+          "planned_agent_count": 1,
+          "max_admitted_agents": 1,
+          "spend_limit": 5000,
+          "spend_unit": "tokens",
+          "uncapped_attended": false,
+          "no_progress_revision_limit": 1
+        },
+        "units": [
+          {
+            "unit_id": "U-SCOUT",
+            "unit_spec_revision": 1,
+            "owner": "worker",
+            "objective": "Produce a source and dependency map only.",
+            "done_when": "Every file in the bounded corpus is assigned one review surface.",
+            "effect_class": "read_only",
+            "dependencies": [],
+            "acceptance_criteria": [
+              { "criterion_id": "C-MAP", "text": "Every bounded input file appears exactly once in the source map.", "evidence_class": "machine", "required": true }
+            ],
+            "required_capabilities": ["workspace.read"],
+            "preferred_capabilities": [],
+            "placement_requirements": {
+              "corpus_size": "medium",
+              "ambiguity": "low",
+              "reasoning_steps": "few",
+              "tool_needs": ["read", "search"],
+              "latency_preference": "low_latency",
+              "cost_ceiling": 5000,
+              "independence_required": false,
+              "verification_criticality": "medium"
+            },
+            "estimated_spend": 3000
+          }
+        ],
+        "prior_units": []
+      },
+      {
+        "revision": 1,
+        "kind": "complete",
+        "reason": "The source map established the review boundary and one human-only criterion.",
+        "expected_prior_revision": 0,
+        "created_at": "2026-08-31T03:10:00Z",
+        "admitted_at": "2026-08-31T03:11:00Z",
+        "admission_policy": { "profile": "bounded-observed", "profile_version": "1.0", "control_strength": "advisory", "usage_provenance": "estimated", "sensor_id": "fixture-plan-estimate", "sensor_evidence": [{ "kind": "measurement", "locator": "fixture://review-estimate", "detail": "Complete-plan estimate." }], "limit_authority": "policy_actor", "compatibility_profile": "estimate-multiple/baseline-v1", "estimate_multiple": null },
+        "bounds": {
+          "max_units": 1,
+          "max_attempts_per_unit": 1,
+          "max_concurrency": 1,
+          "max_plan_revisions": 2,
+          "max_admission_seconds": 1800,
+          "planned_agent_count": 1,
+          "max_admitted_agents": 1,
+          "spend_limit": 12000,
+          "spend_unit": "tokens",
+          "uncapped_attended": false,
+          "no_progress_revision_limit": 1
+        },
+        "units": [
+          {
+            "unit_id": "U-REVIEW",
+            "unit_spec_revision": 1,
+            "owner": "worker",
+            "objective": "Review the mapped artifact and isolate the subjective release criterion.",
+            "done_when": "Machine-checkable review is complete and the subjective choice is explicitly routed to a human.",
+            "effect_class": "read_only",
+            "dependencies": [],
+            "acceptance_criteria": [
+              { "criterion_id": "C-MAP-REUSED", "text": "The accepted scout map is rechecked against the current bounded corpus before reuse.", "evidence_class": "machine", "required": true },
+              { "criterion_id": "C-STRUCTURE", "text": "All mapped sections retain their required fields.", "evidence_class": "machine", "required": true },
+              { "criterion_id": "C-TONE", "text": "The revised wording matches the product voice.", "evidence_class": "human_only", "required": true }
+            ],
+            "required_capabilities": ["workspace.read"],
+            "preferred_capabilities": [
+              { "predicate": "human.release.available", "fallback": "pause in AwaitingHuman" }
+            ],
+            "placement_requirements": {
+              "corpus_size": "medium",
+              "ambiguity": "high",
+              "reasoning_steps": "many",
+              "tool_needs": ["read", "search"],
+              "latency_preference": "quality_first",
+              "cost_ceiling": 12000,
+              "independence_required": true,
+              "verification_criticality": "high"
+            },
+            "estimated_spend": 8000
+          }
+        ],
+        "prior_units": [
+          {
+            "unit_id": "U-SCOUT",
+            "unit_spec_revision": 1,
+            "disposition": "removed",
+            "reason": "Discovery completed and the implementation plan owns no scout unit.",
+            "result_adoptions": [
+              { "result_id": "R-SCOUT", "decision_id": "D-ADOPT-MAP", "target_plan_revision": 1, "target_criterion_ids": ["C-MAP-REUSED"] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "briefs": [
+    {
+      "brief_id": "B-SCOUT",
+      "brief_revision": 1,
+      "plan_revision": 0,
+      "unit_id": "U-SCOUT",
+      "unit_spec_revision": 1,
+      "brief_hash": "8888888888888888888888888888888888888888888888888888888888888888",
+      "role": "scout",
+      "objective": "Produce a bounded source map.",
+      "inputs": [{ "locator": "fixture://bounded-corpus", "classification": "internal", "sha256": "9999999999999999999999999999999999999999999999999999999999999999", "purpose": "Discovery boundary" }],
+      "scope": ["fixture://bounded-corpus"],
+      "allowed_effects": ["read"],
+      "allowed_resources": ["resource-bounded-corpus"],
+      "required_tools": ["read", "search"],
+      "caps": { "max_units": 1, "max_attempts_per_unit": 1, "max_concurrency": 1, "max_plan_revisions": 2, "max_admission_seconds": 900, "planned_agent_count": 1, "max_admitted_agents": 1, "spend_limit": 5000, "spend_unit": "tokens", "uncapped_attended": false, "no_progress_revision_limit": 1 },
+      "must_not": ["modify files", "perform the later review"],
+      "baseline": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+      "done_when": "The source map accounts for the bounded corpus.",
+      "requested_model": "fast-reader-profile",
+      "requested_effort": "low",
+      "return_fields": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"]
+    },
+    {
+      "brief_id": "B-REVIEW",
+      "brief_revision": 1,
+      "plan_revision": 1,
+      "unit_id": "U-REVIEW",
+      "unit_spec_revision": 1,
+      "brief_hash": "abababababababababababababababababababababababababababababababab",
+      "role": "reviewer",
+      "objective": "Review structure and identify the human-only release item.",
+      "inputs": [
+        { "locator": "fixture://bounded-corpus", "classification": "internal", "sha256": "9999999999999999999999999999999999999999999999999999999999999999", "purpose": "Review subject" },
+        { "locator": "fixture://source-map", "classification": "internal", "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd", "purpose": "Adopted bootstrap evidence" }
+      ],
+      "scope": ["fixture://bounded-corpus"],
+      "allowed_effects": ["read"],
+      "allowed_resources": ["resource-bounded-corpus"],
+      "required_tools": ["read", "search"],
+      "caps": { "max_units": 1, "max_attempts_per_unit": 1, "max_concurrency": 1, "max_plan_revisions": 2, "max_admission_seconds": 1800, "planned_agent_count": 1, "max_admitted_agents": 1, "spend_limit": 12000, "spend_unit": "tokens", "uncapped_attended": false, "no_progress_revision_limit": 1 },
+      "must_not": ["decide the human-only tone criterion"],
+      "baseline": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+      "done_when": "Machine structure is verified and the subjective item is surfaced.",
+      "requested_model": "quality-review-profile",
+      "requested_effort": "high",
+      "return_fields": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"]
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "A-SCOUT",
+      "plan_revision": 0,
+      "unit_id": "U-SCOUT",
+      "unit_spec_revision": 1,
+      "brief_id": "B-SCOUT",
+      "brief_revision": 1,
+      "brief_hash": "8888888888888888888888888888888888888888888888888888888888888888",
+      "state": "completed",
+      "side_effect_class": "read_only",
+      "worker_ref": "opaque-worker-scout",
+      "turn_ref": "opaque-turn-scout",
+      "effective_placement": { "requested_model": "fast-reader-profile", "effective_model": "resolved-fast-reader", "requested_effort": "low", "effective_effort": "low", "capability_snapshot_id": "cap-scout" },
+      "started_at": "2026-08-31T03:01:00Z",
+      "ended_at": "2026-08-31T03:08:00Z",
+      "result_id": "R-SCOUT"
+    },
+    {
+      "attempt_id": "A-REVIEW",
+      "plan_revision": 1,
+      "unit_id": "U-REVIEW",
+      "unit_spec_revision": 1,
+      "brief_id": "B-REVIEW",
+      "brief_revision": 1,
+      "brief_hash": "abababababababababababababababababababababababababababababababab",
+      "state": "completed",
+      "side_effect_class": "read_only",
+      "worker_ref": "opaque-worker-review-human",
+      "turn_ref": "opaque-turn-review-human",
+      "effective_placement": { "requested_model": "quality-review-profile", "effective_model": "resolved-quality-review", "requested_effort": "high", "effective_effort": "high", "capability_snapshot_id": "cap-review-human" },
+      "started_at": "2026-08-31T03:12:00Z",
+      "ended_at": "2026-08-31T03:24:00Z",
+      "result_id": "R-REVIEW"
+    }
+  ],
+  "results": [
+    {
+      "result_id": "R-SCOUT",
+      "attempt_id": "A-SCOUT",
+      "status": "completed",
+      "result": "The bounded corpus is mapped.",
+      "evidence": [{ "kind": "artifact", "locator": "fixture://source-map", "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd", "detail": "One row per input file." }],
+      "files_changed": [],
+      "checks_run": [{ "check": "map coverage", "outcome": "pass", "evidence": [{ "kind": "measurement", "locator": "fixture://map-count", "detail": "Input and map counts match." }] }],
+      "uncertainty": [],
+      "recommended_next_action": "Commit the complete review plan.",
+      "content_hash": "dededededededededededededededededededededededededededededededede",
+      "received_at": "2026-08-31T03:08:00Z",
+      "acceptance": "accepted",
+      "accepted_at": "2026-08-31T03:10:00Z"
+    },
+    {
+      "result_id": "R-REVIEW",
+      "attempt_id": "A-REVIEW",
+      "status": "partial",
+      "result": "Structure passes; product voice requires human judgment.",
+      "evidence": [{ "kind": "command", "locator": "command://structure-check", "detail": "Every required field is present." }],
+      "files_changed": [],
+      "checks_run": [{ "check": "structure check", "outcome": "pass", "evidence": [{ "kind": "command", "locator": "command://structure-check", "detail": "All sections passed." }] }],
+      "uncertainty": ["Product voice is subjective."],
+      "recommended_next_action": "Ask the designated human to rule on C-TONE.",
+      "content_hash": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+      "received_at": "2026-08-31T03:24:00Z",
+      "acceptance": "accepted",
+      "accepted_at": "2026-08-31T03:25:00Z"
+    }
+  ],
+  "artifacts": [
+    { "artifact_id": "ART-MAP", "kind": "source_map", "media_type": "application/json", "classification": "internal", "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd", "locator": "fixture://source-map", "produced_by_attempt": "A-SCOUT", "adoption": "adopted", "adopted_under_plan_revision": 1 },
+    { "artifact_id": "ART-HUMAN-RECORD", "kind": "rendered_run_record", "media_type": "text/markdown", "classification": "internal", "sha256": "1212121212121212121212121212121212121212121212121212121212121212", "locator": "fixture://bootstrap-awaiting-human.md", "produced_by_attempt": null, "adoption": "adopted", "adopted_under_plan_revision": 1 }
+  ],
+  "assumptions": [
+    { "assumption_id": "ASM-VOICE", "choice": "Treat product voice as human-only.", "alternatives": ["Let a reviewer decide subjectively"], "impact": "The run pauses before completion.", "falsifier": "A project-owned machine-checkable voice rubric is supplied.", "status": "carried_as_risk", "recorded_at": "2026-08-31T03:11:00Z" }
+  ],
+  "gaps": [
+    { "gap_id": "G-HUMAN", "description": "No authenticated human voice verdict is present.", "impact": "The required C-TONE criterion cannot pass.", "evidence_checked": [{ "kind": "observation", "locator": "fixture://approval-state", "detail": "No decision recorded." }], "owner": "designated-human", "next_action": "Review the wording and record pass or fail for C-TONE.", "status": "AwaitingHuman" }
+  ],
+  "findings": [],
+  "dispositions": [],
+  "verifications": [
+    { "verification_id": "V-MAP", "subject_kind": "unit", "subject_id": "U-SCOUT", "criterion_id": "C-MAP", "method": "Count and uniqueness check", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "measurement", "locator": "fixture://map-count", "detail": "Counts match and paths are unique." }], "verified_by": "policy_actor", "verified_at": "2026-08-31T03:09:00Z" },
+    { "verification_id": "V-MAP-REUSED", "subject_kind": "unit", "subject_id": "U-REVIEW", "criterion_id": "C-MAP-REUSED", "method": "Current-corpus digest and coverage comparison", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "measurement", "locator": "fixture://map-reuse-check", "detail": "The accepted map still covers the current bounded corpus." }], "verified_by": "policy_actor", "verified_at": "2026-08-31T03:10:30Z" },
+    { "verification_id": "V-STRUCTURE", "subject_kind": "unit", "subject_id": "U-REVIEW", "criterion_id": "C-STRUCTURE", "method": "Schema-like structure check", "evidence_class": "machine", "verdict": "pass", "evidence": [{ "kind": "command", "locator": "command://structure-check", "detail": "All required fields present." }], "verified_by": "reviewer", "verified_at": "2026-08-31T03:24:00Z" },
+    { "verification_id": "V-TONE", "subject_kind": "unit", "subject_id": "U-REVIEW", "criterion_id": "C-TONE", "method": "Designated human review", "evidence_class": "human_only", "verdict": "AwaitingHuman", "evidence": [{ "kind": "observation", "locator": "fixture://human-checkpoint", "detail": "No designated human verdict has been recorded." }], "verified_by": "unassigned-human", "verified_at": "2026-08-31T03:25:00Z" }
+  ],
+  "decisions": [
+    { "decision_id": "D-ADOPT-MAP", "kind": "adoption", "decision": "Adopt R-SCOUT under the current map-reuse criterion for revision 1.", "reason": "Its accepted evidence is rechecked against C-MAP-REUSED and its integrity hash matches ART-MAP.", "recorded_at": "2026-08-31T03:10:30Z", "affects": ["R-SCOUT", "ART-MAP", "plan-bootstrap-human", "C-MAP-REUSED"], "adoption": { "prior_unit_id": "U-SCOUT", "prior_unit_spec_revision": 1, "result_id": "R-SCOUT", "target_plan_revision": 1, "target_criterion_ids": ["C-MAP-REUSED"] } }
+  ],
+  "coordination_outcome": {
+    "state": "beneficial",
+    "assessment": "The bounded scout kept corpus mapping out of policy context and enabled a complete review plan.",
+    "unique_contributions": ["The scout produced the complete source map."],
+    "duplicated_work": [],
+    "interventions": 0,
+    "protocol_failures": 0,
+    "critical_path_effect": "Discovery preceded the dependent review as required.",
+    "root_context_effect": "Only the source map was loaded for planning.",
+    "evidence": [{ "kind": "artifact", "locator": "fixture://source-map", "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd", "detail": "Bounded scout result." }]
+  },
+  "completion": {
+    "state": "AwaitingHuman",
+    "criteria_status": "AwaitingHuman",
+    "checks_status": "pass",
+    "findings_status": "resolved",
+    "scope_status": "inside_scope",
+    "human_items": ["C-TONE requires the designated human's product-voice verdict."],
+    "claim": "",
+    "claimed_at": null,
+    "deliverable": "Machine review is complete; the subjective release is paused."
+  },
+  "rendered_run_record": {
+    "artifact_id": "ART-HUMAN-RECORD",
+    "media_type": "text/markdown",
+    "generator_version": "phase0-fixture",
+    "source_state_sha256": "3434343434343434343434343434343434343434343434343434343434343434"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/approval-record.json",
+  "patch": [
+    { "op": "replace", "path": "/descriptor/fencing_token", "value": 8 }
+  ],
+  "expected_errors": ["RUNTIME-ACTION-DIGEST"]
+}

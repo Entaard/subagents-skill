@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/create-run-request.json",
+  "patch": [
+    { "op": "replace", "path": "/expected_run_version", "value": 0 }
+  ],
+  "expected_errors": ["RUNTIME-CREATE-VERSION"]
+}
+

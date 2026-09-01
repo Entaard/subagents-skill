@@ -1,0 +1,113 @@
+{
+  "review_version": "1.0",
+  "reviewed_on": "2026-09-01",
+  "status": "pass",
+  "scope": [
+    "authenticated principal and transition authority",
+    "approval argument binding and atomic consumption",
+    "data classification, redaction, retention, and deletion",
+    "ownership receipt, backup, update, and complete-removal safety",
+    "Phase 1 evaluation safety and preregistration gates"
+  ],
+  "reviewers": [
+    {
+      "review_id": "security-evaluation-review",
+      "status": "pass",
+      "focus": "authority, privacy, approval, evaluation, and lifecycle adversarial review"
+    },
+    {
+      "review_id": "schema-checker-review",
+      "status": "pass",
+      "focus": "schema, semantic-checker, generated-type, chronology, and malformed-input review"
+    },
+    {
+      "review_id": "policy-ownership-review",
+      "status": "pass",
+      "focus": "invariant ownership, policy extraction, lifecycle proof, and exit-gate review"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AP-001",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "Committed lifecycle phases originally lacked exact entry, config, and backup coverage.",
+      "resolution": "The checker derives exact operation-specific target sets, rejects empty proxy rows, and has hash-consistent coverage-gap fixtures."
+    },
+    {
+      "id": "AP-002",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "A nonempty entry or backup target could physically equal its declared root.",
+      "resolution": "Resource descent is strict, immediate parents are path- and ancestry-bound, and equal-root fixtures reject the alias."
+    },
+    {
+      "id": "AP-003",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "The first receipt proof design compared update preconditions with intended post-state and could not prove absence.",
+      "resolution": "StateProof/v2 separates preconditions and postconditions, binds update/uninstall to an externally resolved prior receipt, and anchors absence to an exact live parent."
+    },
+    {
+      "id": "AP-004",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "State-proof timestamps did not enforce causal order.",
+      "resolution": "The checker requires precondition no later than postcondition, postcondition no later than its row, and cross-row proof monotonicity."
+    },
+    {
+      "id": "AP-005",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "Duplicate restoration-purpose backups could suppress an exact restored-target postcondition.",
+      "resolution": "Each replaced entry and present prior config file has exactly one purpose-matching restoration backup; duplicate fixtures reject ambiguity."
+    },
+    {
+      "id": "AP-006",
+      "severity": "major",
+      "status": "resolved",
+      "summary": "Inherited backups could be changed or dropped despite a valid prior-receipt digest.",
+      "resolution": "Update/uninstall compare immutable inherited backup projections with the predecessor, permit only the typed restoration transition, and derive restoration proof from prior backup records."
+    },
+    {
+      "id": "AP-007",
+      "severity": "minor",
+      "status": "resolved",
+      "summary": "A malformed StateProof could abort semantic fixture validation after the schema had rejected it.",
+      "resolution": "Semantic proof checks now type-guard malformed proof values and the exact malformed-input fixture completes without a crash."
+    }
+  ],
+  "challenged_suggestions": [
+    {
+      "id": "CH-001",
+      "disposition": "withdrawn",
+      "summary": "Persist raw approval arguments in every approval record.",
+      "reason": "The approved privacy boundary deliberately persists a canonical digest and protected locator while compare-and-consume checks authenticated transient live arguments."
+    },
+    {
+      "id": "CH-002",
+      "disposition": "corrected",
+      "summary": "Remove every non-retained entry after uninstall restoration.",
+      "reason": "A displaced-user entry becomes user-owned when restored and must be excluded from owned-entry removal or the uninstall would delete the restored content."
+    },
+    {
+      "id": "CH-003",
+      "disposition": "withdrawn",
+      "summary": "Require result acceptance to occur after worker termination.",
+      "reason": "The contract requires result acceptance, terminal state, and verification before unit completion but intentionally permits result submission before worker cleanup ends."
+    }
+  ],
+  "evidence": [
+    "sage/runtime/protocol-v0/authority-matrix.json",
+    "sage/runtime/protocol-v0/security-and-privacy.md",
+    "sage/runtime/protocol-v0/fixtures/authorization-cases.json",
+    "sage/runtime/protocol-v0/fixtures/approval-argument-binding-cases.json",
+    "sage/runtime/protocol-v0/fixtures/retention-deletion-cases.json",
+    "sage/artifacts/schemas/ownership-receipt-v1.schema.json",
+    "sage/artifacts/fixtures/manifest.json",
+    "sage/docs/phase0/lifecycle-contract.md",
+    "sage/evaluation/phase-1/PREREGISTRATION.sha256",
+    "sage/scripts/check-phase0.py"
+  ],
+  "open_blockers": []
+}

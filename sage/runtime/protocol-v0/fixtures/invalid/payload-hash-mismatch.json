@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/record-finding-request.json",
+  "patch": [
+    { "op": "replace", "path": "/payload/finding_artifact_id", "value": "artifact-finding-other" }
+  ],
+  "expected_errors": ["RUNTIME-PAYLOAD-HASH"]
+}

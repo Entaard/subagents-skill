@@ -1,0 +1,10 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "copy", "from": "/entries/0", "path": "/entries/-" },
+    { "op": "replace", "path": "/entries/2/entry_id", "value": "entry-skill-alias" },
+    { "op": "replace", "path": "/entries/2/relative_path", "value": "skills/sage/." }
+  ],
+  "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-OPERATION-COVERAGE", "RECEIPT-PATH-TRAVERSAL", "SCHEMA-PATTERN"]
+}

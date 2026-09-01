@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/record-finding-request.json",
+  "patch": [
+    { "op": "add", "path": "/payload/principal", "value": "scheduler" },
+    { "op": "replace", "path": "/payload_sha256", "value": "78b23e02720e5db6b1ba9a995012f99f24f3e6db297ff3d0f0332fcbf05bc827" }
+  ],
+  "expected_errors": ["RUNTIME-CALLER-AUTHORITY"]
+}

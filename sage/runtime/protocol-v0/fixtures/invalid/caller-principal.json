@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/record-finding-request.json",
+  "patch": [
+    { "op": "add", "path": "/principal", "value": "scheduler" }
+  ],
+  "expected_errors": ["SCHEMA-ADDITIONAL"]
+}
+

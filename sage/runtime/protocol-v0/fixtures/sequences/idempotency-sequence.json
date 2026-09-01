@@ -1,0 +1,37 @@
+{
+  "fixture_version": "0.1-provisional",
+  "base": "../valid/record-finding-request.json",
+  "steps": [
+    {
+      "step_id": "first-accept",
+      "authenticated_connection_principal": "policy-connection-a",
+      "current_run_version": 4,
+      "patch": [],
+      "expected": "accepted"
+    },
+    {
+      "step_id": "stale-version-replay",
+      "authenticated_connection_principal": "policy-connection-a",
+      "current_run_version": 5,
+      "patch": [],
+      "expected": "replayed"
+    },
+    {
+      "step_id": "same-key-different-body",
+      "authenticated_connection_principal": "policy-connection-a",
+      "current_run_version": 5,
+      "patch": [
+        { "op": "replace", "path": "/payload/finding_artifact_id", "value": "artifact-finding-2" },
+        { "op": "replace", "path": "/payload_sha256", "value": "4b0374a00a54409adf328ad0cd09f3a18c1b21ec6e5ec9519cb1a190beb3cb0f" }
+      ],
+      "expected": "idempotency_conflict"
+    },
+    {
+      "step_id": "separate-principal-namespace",
+      "authenticated_connection_principal": "policy-connection-b",
+      "current_run_version": 4,
+      "patch": [],
+      "expected": "accepted"
+    }
+  ]
+}

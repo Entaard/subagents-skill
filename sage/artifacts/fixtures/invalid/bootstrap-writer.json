@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/bootstrap-awaiting-human.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/units/0/effect_class", "value": "mutating" }
+  ],
+  "expected_errors": ["ART-BOOTSTRAP-READONLY"]
+}
+

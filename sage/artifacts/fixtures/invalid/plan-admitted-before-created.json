@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/plan/revisions/0/created_at", "value": "2026-08-31T02:01:30Z" }
+  ],
+  "expected_errors": ["ART-PLAN-CHRONOLOGY"]
+}

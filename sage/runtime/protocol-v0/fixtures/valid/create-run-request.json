@@ -1,0 +1,11 @@
+{
+  "message_kind": "request",
+  "protocol_version": "0.1-provisional",
+  "command_id": "cmd-create-1",
+  "operation": "CreateRun",
+  "run_id": null,
+  "idempotency_key": "connection-key-create-0001",
+  "expected_run_version": null,
+  "payload_sha256": "acae3967b8ee109eb089992b1cded8cad5443c118b8245c7bb8e1ab012ffc4b9",
+  "payload": { "objective_hash": "2222222222222222222222222222222222222222222222222222222222222222" }
+}

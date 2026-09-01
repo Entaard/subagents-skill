@@ -1,0 +1,8 @@
+{
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/journal/3/postcondition/observed_at", "value": "2026-08-30T00:00:00Z" }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-POSTCONDITION"]
+}

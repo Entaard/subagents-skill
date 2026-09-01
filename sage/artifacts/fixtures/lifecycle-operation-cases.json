@@ -1,0 +1,82 @@
+{
+  "fixture_version": "1.0",
+  "cases": [
+    {
+      "case_id": "committed-install",
+      "kind": "install",
+      "state": "committed",
+      "has_backups": false,
+      "has_entries": true,
+      "has_config": true,
+      "keep_data": false,
+      "phases": ["preflight_complete", "stage_verified", "replacement_applied", "structured_edit_applied", "health_verified", "receipt_committed", "cleanup_complete"],
+      "expected_errors": []
+    },
+    {
+      "case_id": "committed-update-with-backup",
+      "kind": "update",
+      "state": "committed",
+      "has_backups": true,
+      "has_entries": true,
+      "has_config": true,
+      "keep_data": false,
+      "phases": ["preflight_complete", "backups_durable", "stage_verified", "replacement_applied", "structured_edit_applied", "health_verified", "receipt_committed", "cleanup_complete"],
+      "expected_errors": []
+    },
+    {
+      "case_id": "committed-uninstall",
+      "kind": "uninstall",
+      "state": "committed",
+      "has_backups": true,
+      "has_entries": true,
+      "has_config": true,
+      "keep_data": false,
+      "phases": ["preflight_complete", "admissions_stopped", "processes_stopped", "user_content_restored", "structured_config_restored", "owned_entry_removed", "removal_verified", "ownership_receipt_removed", "cleanup_complete"],
+      "expected_errors": []
+    },
+    {
+      "case_id": "committed-uninstall-keep-data",
+      "kind": "uninstall",
+      "state": "committed",
+      "has_backups": true,
+      "has_entries": true,
+      "has_config": true,
+      "keep_data": true,
+      "phases": ["preflight_complete", "admissions_stopped", "processes_stopped", "user_content_restored", "structured_config_restored", "owned_entry_removed", "retention_receipt_committed", "removal_verified", "ownership_receipt_removed", "cleanup_complete"],
+      "expected_errors": []
+    },
+    {
+      "case_id": "uninstall-cannot-use-install-phase",
+      "kind": "uninstall",
+      "state": "pending",
+      "has_backups": false,
+      "has_entries": true,
+      "has_config": false,
+      "keep_data": false,
+      "phases": ["preflight_complete", "replacement_applied"],
+      "expected_errors": ["RECEIPT-JOURNAL-ORDER"]
+    },
+    {
+      "case_id": "committed-uninstall-missing-removal-proof",
+      "kind": "uninstall",
+      "state": "committed",
+      "has_backups": false,
+      "has_entries": true,
+      "has_config": true,
+      "keep_data": false,
+      "phases": ["preflight_complete", "admissions_stopped", "processes_stopped", "cleanup_complete"],
+      "expected_errors": ["RECEIPT-JOURNAL"]
+    },
+    {
+      "case_id": "install-cannot-use-uninstall-phase",
+      "kind": "install",
+      "state": "pending",
+      "has_backups": false,
+      "has_entries": true,
+      "has_config": false,
+      "keep_data": false,
+      "phases": ["preflight_complete", "owned_entry_removed"],
+      "expected_errors": ["RECEIPT-JOURNAL-ORDER"]
+    }
+  ]
+}

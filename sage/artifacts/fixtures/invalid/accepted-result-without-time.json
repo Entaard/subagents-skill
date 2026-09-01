@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/results/0/accepted_at", "value": null }
+  ],
+  "expected_errors": ["ART-RESULT-ACCEPTANCE"]
+}

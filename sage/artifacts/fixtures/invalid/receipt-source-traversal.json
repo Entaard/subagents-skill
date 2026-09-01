@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/source/repository", "value": "/source/sage/../other" }
+  ],
+  "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "SCHEMA-PATTERN"]
+}

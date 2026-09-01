@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/approval-record.json",
+  "patch": [
+    { "op": "replace", "path": "/consumptions/0/consumed_at", "value": "2026-08-31T05:02:00Z" }
+  ],
+  "expected_errors": ["RUNTIME-APPROVAL-TIME"]
+}

@@ -1,0 +1,123 @@
+{
+  "manifest_version": "1.0",
+  "schema": "../schemas/sage-artifact-v1.schema.json",
+  "valid": [
+    {
+      "path": "valid/zero-delegation.json",
+      "provenance": {
+        "kind": "sanitized-semantic-capture",
+        "source_records": ["sage-claude/SKILL.md#Step 1 — Decompose"],
+        "captured_features": ["zero delegated units", "parent-owned unit", "objective verification", "coordination outcome"]
+      }
+    },
+    {
+      "path": "valid/review-run.json",
+      "provenance": {
+        "kind": "sanitized-current-run",
+        "source_records": [".claude/plans/sage-ledger-88fe83d9.md"],
+        "captured_features": ["mutating unit", "frozen review", "finding disposition", "assumption", "gap", "verification", "completion", "coordination outcome"]
+      }
+    },
+    {
+      "path": "valid/bootstrap-awaiting-human.json",
+      "provenance": {
+        "kind": "sanitized-composite-current-run",
+        "source_records": ["sage-claude/SKILL.md#Step 1 — Decompose", "sage-claude/references/topologies.md#Evidence menus by domain"],
+        "captured_features": ["bounded read-only bootstrap", "complete plan revision", "prior-unit disposition", "result adoption", "AwaitingHuman"]
+      }
+    },
+    {
+      "path": "valid/interrupted-handover.json",
+      "provenance": {
+        "kind": "sanitized-current-run",
+        "source_records": [".claude/plans/sage-handoff-243a9ad7-20260829T0058.md"],
+        "captured_features": ["durable handoff", "unknown attempt", "open gap", "no false completion"]
+      }
+    }
+  ],
+  "invalid": [
+    { "path": "invalid/bootstrap-writer.json", "expected_errors": ["ART-BOOTSTRAP-READONLY"] },
+    { "path": "invalid/completed-missing-verification.json", "expected_errors": ["ART-COMPLETED-VERIFICATION"] },
+    { "path": "invalid/untriaged-finding.json", "expected_errors": ["ART-FINDING-DISPOSITION"] },
+    { "path": "invalid/result-before-terminal.json", "expected_errors": ["ART-COMPLETED-RESULT", "ART-RESULT-TERMINAL"] },
+    { "path": "invalid/closed-awaiting-human.json", "expected_errors": ["ART-COMPLETED-AWAITING", "ART-COMPLETED-VERIFICATION"] },
+    { "path": "invalid/revision-drops-unit.json", "expected_errors": ["ART-PLAN-COVERAGE"] },
+    { "path": "invalid/malformed-result.json", "expected_errors": ["SCHEMA-REQUIRED"] },
+    { "path": "invalid/duplicate-plan-revision.json", "expected_errors": ["ART-DUPLICATE-REVISION", "ART-DUPLICATE-UNIT", "ART-PLAN-COVERAGE", "ART-PLAN-PRIOR", "ART-PLAN-SEQUENCE"] },
+    { "path": "invalid/conflicting-unit-spec.json", "expected_errors": ["ART-UNIT-IMMUTABLE"] },
+    { "path": "invalid/stale-current-revision.json", "expected_errors": ["ART-PLAN-CURRENT"] },
+    { "path": "invalid/attempt-wrong-brief-revision.json", "expected_errors": ["ART-BINDING"] },
+    { "path": "invalid/accepted-finding-without-verification.json", "expected_errors": ["ART-FINDING-VERIFICATION"] },
+    { "path": "invalid/accepted-result-without-time.json", "expected_errors": ["ART-RESULT-ACCEPTANCE"] },
+    { "path": "invalid/rejected-finding-without-evidence.json", "expected_errors": ["ART-FINDING-EVIDENCE", "SCHEMA-MIN-ITEMS"] },
+    { "path": "invalid/carried-prior-unit-absent.json", "expected_errors": ["ART-PLAN-DISPOSITION"] },
+    { "path": "invalid/adopted-result-wrong-unit.json", "expected_errors": ["ART-PLAN-ADOPTION"] },
+    { "path": "invalid/superseded-without-replacement.json", "expected_errors": ["ART-PLAN-DISPOSITION"] },
+    { "path": "invalid/uncapped-without-attendance.json", "expected_errors": ["ART-ADMISSION-POLICY"] },
+    { "path": "invalid/unknown-spend-misrepresented.json", "expected_errors": ["ART-ADMISSION-POLICY"] },
+    { "path": "invalid/brief-cap-drift.json", "expected_errors": ["ART-BOUNDS-BINDING"] },
+    { "path": "invalid/estimate-task-ceiling-drift.json", "expected_errors": ["ART-ADMISSION-POLICY"] },
+    { "path": "invalid/estimate-unit-ceiling-drift.json", "expected_errors": ["ART-ADMISSION-POLICY"] },
+    { "path": "invalid/estimate-agent-ceiling-drift.json", "expected_errors": ["ART-ADMISSION-POLICY"] },
+    { "path": "invalid/estimate-profile-constant-drift.json", "expected_errors": ["ART-ADMISSION-POLICY", "SCHEMA-TYPE"] },
+    { "path": "invalid/adoption-after-plan-creation.json", "expected_errors": ["ART-PLAN-ADOPTION"] },
+    { "path": "invalid/adoption-targets-stale-criterion.json", "expected_errors": ["ART-PLAN-ADOPTION"] },
+    { "path": "invalid/adoption-decision-mismatch.json", "expected_errors": ["ART-PLAN-ADOPTION"] },
+    { "path": "invalid/plan-admitted-before-created.json", "expected_errors": ["ART-PLAN-CHRONOLOGY"] },
+    { "path": "invalid/attempt-before-plan-admission.json", "expected_errors": ["ART-ATTEMPT-CHRONOLOGY"] },
+    { "path": "invalid/result-before-attempt.json", "expected_errors": ["ART-RESULT-CHRONOLOGY"] },
+    { "path": "invalid/result-accepted-before-received.json", "expected_errors": ["ART-RESULT-CHRONOLOGY"] }
+  ],
+  "lifecycle": {
+    "schema": "../schemas/ownership-receipt-v1.schema.json",
+    "operation_cases": "lifecycle-operation-cases.json",
+    "backup_cases": "backup-binding-cases.json",
+    "valid": [
+      { "path": "ownership-receipt.example.json", "prior": null },
+      { "path": "ownership-receipt.update.example.json", "prior": "ownership-receipt.example.json" },
+      { "path": "ownership-receipt.uninstall.example.json", "prior": "ownership-receipt.update.example.json" }
+    ],
+    "invalid": [
+      { "path": "invalid/receipt-path-traversal.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "SCHEMA-PATTERN"] },
+      { "path": "invalid/receipt-root-traversal.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "RECEIPT-RESOURCE-IDENTITY", "SCHEMA-PATTERN"] },
+      { "path": "invalid/receipt-entry-alias.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-OPERATION-COVERAGE", "RECEIPT-PATH-TRAVERSAL", "SCHEMA-PATTERN"] },
+      { "path": "invalid/receipt-config-traversal.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "RECEIPT-RESOURCE-IDENTITY", "SCHEMA-PATTERN"] },
+      { "path": "invalid/receipt-journal-order.json", "expected_errors": ["RECEIPT-JOURNAL-ORDER", "RECEIPT-PRECONDITION"] },
+      { "path": "invalid/receipt-journal-binding.json", "expected_errors": ["RECEIPT-JOURNAL-BINDING", "RECEIPT-JOURNAL-HASH"] },
+      { "path": "invalid/receipt-intent-tamper.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-POSTCONDITION"] },
+      { "path": "invalid/receipt-replaced-without-backup.json", "expected_errors": ["RECEIPT-BACKUP", "RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH"] },
+      { "path": "invalid/receipt-empty-preservation.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PRESERVATION", "SCHEMA-MIN-ITEMS"] },
+      { "path": "invalid/receipt-config-missing-prior-backup.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-CONFIG-PRIOR", "RECEIPT-INTENT-HASH"] }
+      ,{ "path": "invalid/receipt-source-traversal.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "SCHEMA-PATTERN"] }
+      ,{ "path": "invalid/receipt-nested-root.json", "expected_errors": ["RECEIPT-BACKUP", "RECEIPT-INTENT-HASH", "RECEIPT-RESOURCE-IDENTITY", "RECEIPT-RESOURCE-ROOT", "RECEIPT-ROOT-OVERLAP"] }
+      ,{ "path": "invalid/receipt-protected-physical-alias.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PROTECTED-OVERLAP", "RECEIPT-RESOURCE-ROOT"] }
+      ,{ "path": "invalid/receipt-non-nfc-alias.json", "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL"] }
+      ,{ "path": "invalid/receipt-config-protected-alias.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PARENT-IDENTITY", "RECEIPT-POSTCONDITION", "RECEIPT-PROTECTED-OVERLAP"] }
+      ,{ "path": "invalid/receipt-entry-protected-alias.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PARENT-IDENTITY", "RECEIPT-POSTCONDITION", "RECEIPT-PROTECTED-OVERLAP", "RECEIPT-RESOURCE-ROOT"] }
+      ,{ "path": "invalid/receipt-entry-outside-root.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PARENT-IDENTITY", "RECEIPT-POSTCONDITION", "RECEIPT-RESOURCE-ROOT"] }
+      ,{ "path": "invalid/receipt-entry-equals-root.json", "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PARENT-IDENTITY", "RECEIPT-POSTCONDITION", "RECEIPT-RESOURCE-ROOT"] }
+      ,{ "path": "invalid/receipt-install-missing-backup-coverage.json", "expected_errors": ["RECEIPT-OPERATION-COVERAGE"] }
+      ,{ "path": "invalid/receipt-update-intended-state-as-precondition.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-PRECONDITION"] }
+      ,{ "path": "invalid/receipt-update-wrong-prior-digest.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-PRIOR"] }
+      ,{ "path": "invalid/receipt-update-rollback-not-prior-state.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-ROLLBACK-BACKUP"] }
+      ,{ "path": "invalid/receipt-update-mutates-inherited-backup.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-PRIOR-BACKUP"] }
+      ,{ "path": "invalid/receipt-uninstall-mutates-inherited-backup.json", "prior": "ownership-receipt.update.example.json", "expected_errors": ["RECEIPT-PRIOR-BACKUP"] }
+      ,{ "path": "invalid/receipt-update-aliases-inherited-backup.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-PRIOR-BACKUP"] }
+      ,{ "path": "invalid/receipt-update-drops-inherited-backup.json", "prior": "ownership-receipt.example.json", "expected_errors": ["RECEIPT-BACKUP", "RECEIPT-PRIOR-BACKUP"] }
+      ,{ "path": "invalid/receipt-absence-claims-target-identity.json", "expected_errors": ["RECEIPT-PRECONDITION"] }
+      ,{ "path": "invalid/receipt-postcondition-before-precondition.json", "expected_errors": ["RECEIPT-POSTCONDITION"] }
+      ,{ "path": "invalid/receipt-malformed-state-proof.json", "expected_errors": ["RECEIPT-JOURNAL-HASH", "RECEIPT-PRECONDITION", "SCHEMA-TYPE"] }
+      ,{ "path": "invalid/receipt-uninstall-missing-user-restoration.json", "prior": "ownership-receipt.update.example.json", "expected_errors": ["RECEIPT-OPERATION-COVERAGE"] }
+      ,{ "path": "invalid/receipt-uninstall-missing-config-restoration.json", "prior": "ownership-receipt.update.example.json", "expected_errors": ["RECEIPT-OPERATION-COVERAGE"] }
+      ,{ "path": "invalid/receipt-uninstall-missing-owned-removal.json", "prior": "ownership-receipt.update.example.json", "expected_errors": ["RECEIPT-OPERATION-COVERAGE"] }
+    ]
+  },
+  "sanitization": {
+    "absolute_user_paths": "replaced by fixture locators",
+    "native_worker_handles": "opaque synthetic references",
+    "prompts_and_results": "short invented text preserving only behavior shape",
+    "credentials": "none retained",
+    "timestamps": "fixed synthetic UTC values",
+    "integrity_values": "synthetic non-secret hashes"
+  }
+}

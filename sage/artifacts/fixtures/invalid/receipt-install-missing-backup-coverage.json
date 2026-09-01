@@ -1,0 +1,14 @@
+{
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/operation/journal/1/entry_ids", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/config_entry_ids", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/backup_ids", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/precondition/subjects", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/precondition/backup_subjects", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/postcondition/subjects", "value": [] },
+    { "op": "replace", "path": "/operation/journal/1/postcondition/backup_subjects", "value": [] }
+  ],
+  "refresh_integrity": true,
+  "expected_errors": ["RECEIPT-OPERATION-COVERAGE"]
+}

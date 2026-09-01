@@ -1,0 +1,593 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sage.local/schemas/sage-artifact-v1.schema.json",
+  "title": "Sage artifact schema v1",
+  "description": "Portable structured record for Light and Managed Sage runs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "run_id",
+    "policy_version",
+    "status",
+    "created_at",
+    "updated_at",
+    "objective",
+    "plan",
+    "briefs",
+    "attempts",
+    "results",
+    "artifacts",
+    "assumptions",
+    "gaps",
+    "findings",
+    "dispositions",
+    "verifications",
+    "decisions",
+    "coordination_outcome",
+    "completion",
+    "rendered_run_record"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "artifact_kind": { "const": "sage.run-record" },
+    "run_id": { "$ref": "#/$defs/Id" },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": ["planning", "running", "AwaitingHuman", "handed_over", "stopped", "failed", "completed"]
+    },
+    "created_at": { "$ref": "#/$defs/Timestamp" },
+    "updated_at": { "$ref": "#/$defs/Timestamp" },
+    "objective": { "type": "string", "minLength": 1 },
+    "plan": { "$ref": "#/$defs/RunPlan" },
+    "briefs": { "type": "array", "items": { "$ref": "#/$defs/BriefRevision" } },
+    "attempts": { "type": "array", "items": { "$ref": "#/$defs/Attempt" } },
+    "results": { "type": "array", "items": { "$ref": "#/$defs/Result" } },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/Artifact" } },
+    "assumptions": { "type": "array", "items": { "$ref": "#/$defs/Assumption" } },
+    "gaps": { "type": "array", "items": { "$ref": "#/$defs/Gap" } },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/Finding" } },
+    "dispositions": { "type": "array", "items": { "$ref": "#/$defs/Disposition" } },
+    "verifications": { "type": "array", "items": { "$ref": "#/$defs/Verification" } },
+    "decisions": { "type": "array", "items": { "$ref": "#/$defs/Decision" } },
+    "coordination_outcome": { "$ref": "#/$defs/CoordinationOutcome" },
+    "completion": { "$ref": "#/$defs/Completion" },
+    "rendered_run_record": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/RenderedRunRecord" }
+      ]
+    }
+  },
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EvidencePointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "locator", "detail"],
+      "properties": {
+        "kind": { "enum": ["artifact", "file", "command", "source", "measurement", "observation"] },
+        "locator": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/Sha256" },
+        "detail": { "type": "string", "minLength": 1 }
+      }
+    },
+    "Criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criterion_id", "text", "evidence_class", "required"],
+      "properties": {
+        "criterion_id": { "$ref": "#/$defs/Id" },
+        "text": { "type": "string", "minLength": 1 },
+        "evidence_class": { "enum": ["machine", "agent_observable", "human_only"] },
+        "required": { "type": "boolean" }
+      }
+    },
+    "Bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_units", "max_attempts_per_unit", "max_concurrency", "max_plan_revisions", "max_admission_seconds", "planned_agent_count", "max_admitted_agents", "spend_limit", "spend_unit", "uncapped_attended"],
+      "properties": {
+        "max_units": { "type": "integer", "minimum": 1 },
+        "max_attempts_per_unit": { "type": "integer", "minimum": 1 },
+        "max_concurrency": { "type": "integer", "minimum": 1 },
+        "max_plan_revisions": { "type": "integer", "minimum": 1 },
+        "max_admission_seconds": { "type": "integer", "minimum": 1 },
+        "planned_agent_count": { "type": "integer", "minimum": 0 },
+        "max_admitted_agents": { "type": "integer", "minimum": 1 },
+        "spend_limit": {
+          "oneOf": [{ "type": "null" }, { "type": "number", "exclusiveMinimum": 0 }]
+        },
+        "spend_unit": {
+          "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
+        },
+        "uncapped_attended": { "type": "boolean" },
+        "no_progress_revision_limit": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "AdmissionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "profile_version", "control_strength", "usage_provenance", "sensor_id", "sensor_evidence", "limit_authority", "compatibility_profile", "estimate_multiple"],
+      "properties": {
+        "profile": { "enum": ["bounded-observed", "fixed", "estimate-multiple", "uncapped-observed", "custom"] },
+        "profile_version": { "type": "string", "minLength": 1 },
+        "control_strength": { "enum": ["enforced", "advisory", "mixed"] },
+        "usage_provenance": { "enum": ["measured", "provider-reported", "estimated", "unknown"] },
+        "sensor_id": { "type": "string", "minLength": 1 },
+        "sensor_evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "limit_authority": { "type": "string", "minLength": 1 },
+        "compatibility_profile": {
+          "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
+        },
+        "estimate_multiple": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/EstimateMultipleProfile" }]
+        }
+      }
+    },
+    "UnitSpendCeiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit_id", "unit_spec_revision", "estimate", "ceiling"],
+      "properties": {
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "estimate": { "type": "number", "minimum": 0 },
+        "ceiling": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "EstimateMultipleProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_id", "task_multiplier", "task_floor", "unit_multiplier", "unit_floor", "agent_multiplier", "agent_floor", "task_estimate", "task_ceiling", "unit_ceilings"],
+      "properties": {
+        "profile_id": { "const": "estimate-multiple/baseline-v1" },
+        "task_multiplier": { "const": 4 },
+        "task_floor": { "const": 500000 },
+        "unit_multiplier": { "const": 4 },
+        "unit_floor": { "const": 150000 },
+        "agent_multiplier": { "const": 2 },
+        "agent_floor": { "const": 10 },
+        "task_estimate": { "type": "number", "minimum": 0 },
+        "task_ceiling": { "type": "number", "exclusiveMinimum": 0 },
+        "unit_ceilings": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/UnitSpendCeiling" } }
+      }
+    },
+    "PlacementRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corpus_size", "ambiguity", "reasoning_steps", "tool_needs", "latency_preference", "cost_ceiling", "independence_required", "verification_criticality"],
+      "properties": {
+        "corpus_size": { "enum": ["small", "medium", "large", "unknown"] },
+        "ambiguity": { "enum": ["low", "medium", "high"] },
+        "reasoning_steps": { "enum": ["few", "many", "open_ended"] },
+        "tool_needs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "latency_preference": { "enum": ["low_latency", "balanced", "quality_first"] },
+        "cost_ceiling": { "type": "number", "exclusiveMinimum": 0 },
+        "independence_required": { "type": "boolean" },
+        "verification_criticality": { "enum": ["low", "medium", "high"] },
+        "explicit_model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "PreferredCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "fallback"],
+      "properties": {
+        "predicate": { "type": "string", "minLength": 1 },
+        "fallback": { "type": "string", "minLength": 1 }
+      }
+    },
+    "UnitSpecRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id",
+        "unit_spec_revision",
+        "owner",
+        "objective",
+        "done_when",
+        "effect_class",
+        "dependencies",
+        "acceptance_criteria",
+        "required_capabilities",
+        "preferred_capabilities",
+        "placement_requirements",
+        "estimated_spend"
+      ],
+      "properties": {
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "owner": { "enum": ["policy_actor", "worker"] },
+        "objective": { "type": "string", "minLength": 1 },
+        "done_when": { "type": "string", "minLength": 1 },
+        "effect_class": { "enum": ["read_only", "mutating"] },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "acceptance_criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Criterion" } },
+        "required_capabilities": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "preferred_capabilities": { "type": "array", "items": { "$ref": "#/$defs/PreferredCapability" } },
+        "placement_requirements": { "$ref": "#/$defs/PlacementRequirements" },
+        "estimated_spend": { "type": "number", "minimum": 0 }
+      }
+    },
+    "PriorUnitDisposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit_id", "unit_spec_revision", "disposition", "reason", "result_adoptions"],
+      "properties": {
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "disposition": { "enum": ["carried", "superseded", "removed"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "replacement_unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "result_adoptions": { "type": "array", "items": { "$ref": "#/$defs/ResultAdoption" }, "uniqueItems": true }
+      }
+    },
+    "ResultAdoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result_id", "decision_id", "target_plan_revision", "target_criterion_ids"],
+      "properties": {
+        "result_id": { "$ref": "#/$defs/Id" },
+        "decision_id": { "$ref": "#/$defs/Id" },
+        "target_plan_revision": { "type": "integer", "minimum": 0 },
+        "target_criterion_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true }
+      }
+    },
+    "PlanRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["revision", "kind", "reason", "expected_prior_revision", "created_at", "admitted_at", "admission_policy", "bounds", "units", "prior_units"],
+      "properties": {
+        "revision": { "type": "integer", "minimum": 0 },
+        "kind": { "enum": ["bootstrap", "complete"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "expected_prior_revision": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "integer", "minimum": 0 }
+          ]
+        },
+        "created_at": { "$ref": "#/$defs/Timestamp" },
+        "admitted_at": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/Timestamp" }
+          ]
+        },
+        "admission_policy": { "$ref": "#/$defs/AdmissionPolicy" },
+        "bounds": { "$ref": "#/$defs/Bounds" },
+        "units": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/UnitSpecRevision" } },
+        "prior_units": { "type": "array", "items": { "$ref": "#/$defs/PriorUnitDisposition" } }
+      }
+    },
+    "RunPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_id", "current_revision", "revisions"],
+      "properties": {
+        "plan_id": { "$ref": "#/$defs/Id" },
+        "current_revision": { "type": "integer", "minimum": 0 },
+        "revisions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/PlanRevision" } }
+      }
+    },
+    "InputPointer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locator", "classification", "sha256", "purpose"],
+      "properties": {
+        "locator": { "type": "string", "minLength": 1 },
+        "classification": { "enum": ["public", "internal", "confidential", "restricted"] },
+        "sha256": { "$ref": "#/$defs/Sha256" },
+        "purpose": { "type": "string", "minLength": 1 }
+      }
+    },
+    "BriefRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "brief_id",
+        "brief_revision",
+        "plan_revision",
+        "unit_id",
+        "unit_spec_revision",
+        "brief_hash",
+        "role",
+        "objective",
+        "inputs",
+        "scope",
+        "allowed_effects",
+        "allowed_resources",
+        "required_tools",
+        "caps",
+        "must_not",
+        "baseline",
+        "done_when",
+        "requested_model",
+        "requested_effort",
+        "return_fields"
+      ],
+      "properties": {
+        "brief_id": { "$ref": "#/$defs/Id" },
+        "brief_revision": { "type": "integer", "minimum": 1 },
+        "plan_revision": { "type": "integer", "minimum": 0 },
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "brief_hash": { "$ref": "#/$defs/Sha256" },
+        "role": { "type": "string", "minLength": 1 },
+        "objective": { "type": "string", "minLength": 1 },
+        "inputs": { "type": "array", "items": { "$ref": "#/$defs/InputPointer" } },
+        "scope": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "allowed_effects": { "type": "array", "minItems": 1, "items": { "enum": ["read", "write", "execute", "network", "external_action"] }, "uniqueItems": true },
+        "allowed_resources": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "required_tools": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "caps": { "$ref": "#/$defs/Bounds" },
+        "must_not": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "baseline": { "type": "string", "minLength": 1 },
+        "done_when": { "type": "string", "minLength": 1 },
+        "requested_model": { "type": "string", "minLength": 1 },
+        "requested_effort": { "type": "string", "minLength": 1 },
+        "return_fields": {
+          "type": "array",
+          "minItems": 7,
+          "uniqueItems": true,
+          "items": { "enum": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"] }
+        }
+      }
+    },
+    "EffectivePlacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_model", "effective_model", "requested_effort", "effective_effort", "capability_snapshot_id"],
+      "properties": {
+        "requested_model": { "type": "string", "minLength": 1 },
+        "effective_model": { "type": "string", "minLength": 1 },
+        "requested_effort": { "type": "string", "minLength": 1 },
+        "effective_effort": { "type": "string", "minLength": 1 },
+        "capability_snapshot_id": { "$ref": "#/$defs/Id" }
+      }
+    },
+    "Attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "plan_revision", "unit_id", "unit_spec_revision", "brief_id", "brief_revision", "brief_hash", "state", "side_effect_class", "effective_placement", "started_at", "ended_at", "result_id"],
+      "properties": {
+        "attempt_id": { "$ref": "#/$defs/Id" },
+        "plan_revision": { "type": "integer", "minimum": 0 },
+        "unit_id": { "$ref": "#/$defs/Id" },
+        "unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "brief_id": { "$ref": "#/$defs/Id" },
+        "brief_revision": { "type": "integer", "minimum": 1 },
+        "brief_hash": { "$ref": "#/$defs/Sha256" },
+        "state": { "enum": ["planned", "admitted", "prepared", "running", "idle", "completed", "interrupted", "failed", "lost", "unknown", "abandoned"] },
+        "side_effect_class": { "enum": ["read_only", "reversible", "side_effecting"] },
+        "worker_ref": { "type": "string", "minLength": 1 },
+        "turn_ref": { "type": "string", "minLength": 1 },
+        "effective_placement": { "$ref": "#/$defs/EffectivePlacement" },
+        "started_at": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Timestamp" }]
+        },
+        "ended_at": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Timestamp" }]
+        },
+        "result_id": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Id" }]
+        }
+      }
+    },
+    "CheckOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check", "outcome", "evidence"],
+      "properties": {
+        "check": { "type": "string", "minLength": 1 },
+        "outcome": { "enum": ["pass", "fail", "not_run"] },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/EvidencePointer" } }
+      }
+    },
+    "Result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result_id", "attempt_id", "status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action", "content_hash", "received_at", "acceptance", "accepted_at"],
+      "properties": {
+        "result_id": { "$ref": "#/$defs/Id" },
+        "attempt_id": { "$ref": "#/$defs/Id" },
+        "status": { "enum": ["completed", "partial", "blocked"] },
+        "result": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "files_changed": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "checks_run": { "type": "array", "items": { "$ref": "#/$defs/CheckOutcome" } },
+        "uncertainty": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "recommended_next_action": { "type": "string" },
+        "content_hash": { "$ref": "#/$defs/Sha256" },
+        "received_at": { "$ref": "#/$defs/Timestamp" },
+        "acceptance": { "enum": ["pending", "accepted", "rejected"] },
+        "accepted_at": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Timestamp" }]
+        }
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "kind", "media_type", "classification", "sha256", "locator", "produced_by_attempt", "adoption"],
+      "properties": {
+        "artifact_id": { "$ref": "#/$defs/Id" },
+        "kind": { "type": "string", "minLength": 1 },
+        "media_type": { "type": "string", "minLength": 1 },
+        "classification": { "enum": ["public", "internal", "confidential", "restricted"] },
+        "sha256": { "$ref": "#/$defs/Sha256" },
+        "locator": { "type": "string", "minLength": 1 },
+        "produced_by_attempt": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Id" }]
+        },
+        "adoption": { "enum": ["pending", "adopted", "rejected", "superseded"] },
+        "adopted_under_plan_revision": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "Assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assumption_id", "choice", "alternatives", "impact", "falsifier", "status", "recorded_at"],
+      "properties": {
+        "assumption_id": { "$ref": "#/$defs/Id" },
+        "choice": { "type": "string", "minLength": 1 },
+        "alternatives": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "impact": { "type": "string", "minLength": 1 },
+        "falsifier": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "confirmed", "falsified", "carried_as_risk", "superseded"] },
+        "recorded_at": { "$ref": "#/$defs/Timestamp" },
+        "correction": { "type": "string", "minLength": 1 }
+      }
+    },
+    "Gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "description", "impact", "evidence_checked", "owner", "next_action", "status"],
+      "properties": {
+        "gap_id": { "$ref": "#/$defs/Id" },
+        "description": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string", "minLength": 1 },
+        "evidence_checked": { "type": "array", "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "owner": { "type": "string", "minLength": 1 },
+        "next_action": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "closed", "accepted_risk", "AwaitingHuman"] }
+      }
+    },
+    "Finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finding_id", "severity", "confidence", "location", "failure_mode", "impact", "evidence", "violated", "suggested_direction", "verify_fix"],
+      "properties": {
+        "finding_id": { "$ref": "#/$defs/Id" },
+        "severity": { "enum": ["blocker", "major", "minor"] },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "location": { "type": "string", "minLength": 1 },
+        "failure_mode": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "violated": { "type": "string", "minLength": 1 },
+        "suggested_direction": { "type": "string", "minLength": 1 },
+        "verify_fix": { "type": "string", "minLength": 1 }
+      }
+    },
+    "Disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition_id", "finding_id", "decision", "status", "rationale", "evidence", "owner", "verification_ids", "recorded_at"],
+      "properties": {
+        "disposition_id": { "$ref": "#/$defs/Id" },
+        "finding_id": { "$ref": "#/$defs/Id" },
+        "decision": { "enum": ["accepted", "rejected", "deferred", "user_decision"] },
+        "status": { "enum": ["open", "resolved", "AwaitingHuman"] },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "owner": { "type": "string", "minLength": 1 },
+        "verification_ids": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "recorded_at": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "Verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verification_id", "subject_kind", "subject_id", "criterion_id", "method", "evidence_class", "verdict", "evidence", "verified_by", "verified_at"],
+      "properties": {
+        "verification_id": { "$ref": "#/$defs/Id" },
+        "subject_kind": { "enum": ["unit", "result", "artifact", "finding", "run"] },
+        "subject_id": { "$ref": "#/$defs/Id" },
+        "criterion_id": { "$ref": "#/$defs/Id" },
+        "method": { "type": "string", "minLength": 1 },
+        "evidence_class": { "enum": ["machine", "agent_observable", "human_only"] },
+        "verdict": { "enum": ["pass", "fail", "AwaitingHuman"] },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidencePointer" } },
+        "verified_by": { "type": "string", "minLength": 1 },
+        "verified_at": { "$ref": "#/$defs/Timestamp" }
+      }
+    },
+    "Decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_id", "kind", "decision", "reason", "recorded_at", "affects", "adoption"],
+      "properties": {
+        "decision_id": { "$ref": "#/$defs/Id" },
+        "kind": { "enum": ["plan_revision", "scope", "placement", "finding", "approval", "adoption", "abandoned_disagreement", "other"] },
+        "decision": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "recorded_at": { "$ref": "#/$defs/Timestamp" },
+        "affects": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+        "adoption": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/AdoptionDecision" }]
+        }
+      }
+    },
+    "AdoptionDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prior_unit_id", "prior_unit_spec_revision", "result_id", "target_plan_revision", "target_criterion_ids"],
+      "properties": {
+        "prior_unit_id": { "$ref": "#/$defs/Id" },
+        "prior_unit_spec_revision": { "type": "integer", "minimum": 1 },
+        "result_id": { "$ref": "#/$defs/Id" },
+        "target_plan_revision": { "type": "integer", "minimum": 0 },
+        "target_criterion_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true }
+      }
+    },
+    "CoordinationOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "assessment", "unique_contributions", "duplicated_work", "interventions", "protocol_failures", "critical_path_effect", "root_context_effect", "evidence"],
+      "properties": {
+        "state": { "enum": ["open", "beneficial", "harmful", "inconclusive", "not_delegated"] },
+        "assessment": { "type": "string", "minLength": 1 },
+        "unique_contributions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "duplicated_work": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "interventions": { "type": "integer", "minimum": 0 },
+        "protocol_failures": { "type": "integer", "minimum": 0 },
+        "critical_path_effect": { "type": "string", "minLength": 1 },
+        "root_context_effect": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/EvidencePointer" } }
+      }
+    },
+    "Completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "criteria_status", "checks_status", "findings_status", "scope_status", "human_items", "claim", "claimed_at", "deliverable"],
+      "properties": {
+        "state": { "enum": ["open", "AwaitingHuman", "eligible", "closed", "stopped"] },
+        "criteria_status": { "enum": ["open", "pass", "fail", "AwaitingHuman"] },
+        "checks_status": { "enum": ["open", "pass", "fail"] },
+        "findings_status": { "enum": ["open", "resolved", "AwaitingHuman"] },
+        "scope_status": { "enum": ["open", "inside_scope", "outside_scope"] },
+        "human_items": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "claim": { "type": "string" },
+        "claimed_at": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Timestamp" }]
+        },
+        "deliverable": { "type": "string" }
+      }
+    },
+    "RenderedRunRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "media_type", "generator_version", "source_state_sha256"],
+      "properties": {
+        "artifact_id": { "$ref": "#/$defs/Id" },
+        "media_type": { "const": "text/markdown" },
+        "generator_version": { "type": "string", "minLength": 1 },
+        "source_state_sha256": { "$ref": "#/$defs/Sha256" }
+      }
+    }
+  }
+}

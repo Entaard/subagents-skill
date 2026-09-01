@@ -1,0 +1,9 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/dispositions/0/decision", "value": "rejected" },
+    { "op": "replace", "path": "/dispositions/0/evidence", "value": [] }
+  ],
+  "expected_errors": ["ART-FINDING-EVIDENCE", "SCHEMA-MIN-ITEMS"]
+}

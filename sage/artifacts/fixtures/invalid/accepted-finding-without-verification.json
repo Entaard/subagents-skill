@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "artifact-mutation",
+  "base": "../valid/review-run.json",
+  "patch": [
+    { "op": "replace", "path": "/dispositions/0/verification_ids", "value": [] }
+  ],
+  "expected_errors": ["ART-FINDING-VERIFICATION"]
+}

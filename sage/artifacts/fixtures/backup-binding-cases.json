@@ -1,0 +1,54 @@
+{
+  "fixture_version": "1.0",
+  "base": "ownership-receipt.example.json",
+  "common_patch": [],
+  "binding_cases": [
+    { "case_id": "exact-owner-and-roots", "patch": [], "expected_errors": [] },
+    { "case_id": "mismatched-owner", "patch": [{ "op": "replace", "path": "/backups/0/owner_entry_id", "value": "entry-overlay" }], "expected_errors": ["RECEIPT-BACKUP-BINDING"] },
+    { "case_id": "protected-original", "patch": [
+      { "op": "replace", "path": "/backups/0/original_path", "value": "/source/sage" },
+      { "op": "replace", "path": "/backups/0/original_resource_identity/object_id", "value": "object-source-sage" },
+      { "op": "replace", "path": "/backups/0/original_resource_identity/ancestor_object_ids", "value": ["object-root", "object-source"] },
+      { "op": "replace", "path": "/backups/0/original_resource_identity/resolved_path_sha256", "value": "ddadb04a17bf4fc6b01512d1e524a400f4321b91e22c335ef41a39d3f47d7610" }
+    ], "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-PROTECTED-OVERLAP"] },
+    { "case_id": "backup-outside-root", "patch": [
+      { "op": "replace", "path": "/backups/0/backup_resource_identity/object_id", "value": "object-detached-backup" },
+      { "op": "replace", "path": "/backups/0/backup_resource_identity/ancestor_object_ids", "value": ["object-root", "object-detached"] }
+    ], "expected_errors": ["RECEIPT-RESOURCE-ROOT"] },
+    { "case_id": "backup-equals-root", "patch": [
+      { "op": "replace", "path": "/backups/0/backup_resource_identity/object_id", "value": "object-var-lib-sage" },
+      { "op": "replace", "path": "/backups/0/backup_resource_identity/ancestor_object_ids", "value": ["object-root", "object-var", "object-var-lib"] }
+    ], "expected_errors": ["RECEIPT-RESOURCE-ROOT"] },
+    { "case_id": "multiply-referenced", "patch": [{ "op": "add", "path": "/entries/1/backup_ids/-", "value": "backup-entry-skill" }], "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-BACKUP-CARDINALITY"] },
+    { "case_id": "duplicate-displaced-purpose", "patch": [
+      { "op": "copy", "from": "/backups/0", "path": "/backups/-" },
+      { "op": "replace", "path": "/backups/2/backup_id", "value": "backup-entry-skill-duplicate" },
+      { "op": "add", "path": "/entries/0/backup_ids/-", "value": "backup-entry-skill-duplicate" }
+    ], "expected_errors": ["RECEIPT-BACKUP-CARDINALITY"] },
+    { "case_id": "duplicate-config-prior-purpose", "patch": [
+      { "op": "copy", "from": "/backups/1", "path": "/backups/-" },
+      { "op": "replace", "path": "/backups/2/backup_id", "value": "backup-config-duplicate" },
+      { "op": "add", "path": "/config_entries/0/prior_backup_ids/-", "value": "backup-config-duplicate" }
+    ], "expected_errors": ["RECEIPT-BACKUP-CARDINALITY"] }
+  ],
+  "restoration_cases": [
+    {
+      "case_id": "exact-live-backup",
+      "subject": { "backup_id": "backup-entry-skill", "state": "present", "basis": "intended_receipt", "target_path_sha256": "85dc46ca521de12d7f6cfad3dc2266cadd94d369b816da0b68baa1ae7b7cb4c8", "resolved_resource_identity": { "provider": "posix-fixture", "volume_id": "volume-1", "object_id": "object-var-lib-sage-backup-entry-skill", "ancestor_object_ids": ["object-root", "object-var", "object-var-lib", "object-var-lib-sage", "object-var-lib-sage-backups"], "case_sensitivity": "sensitive", "unicode_normalization": "NFC", "resolved_path_sha256": "85dc46ca521de12d7f6cfad3dc2266cadd94d369b816da0b68baa1ae7b7cb4c8" }, "ancestor_chain_sha256": "3333333333333333333333333333333333333333333333333333333333333333", "device": 1, "inode": 1901, "link_count": 1, "observed_type": "directory", "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "symlink_target_sha256": null, "parent_resource_identity": null, "parent_identity": null },
+      "expected": "allow"
+    },
+    {
+      "case_id": "changed-backup-content",
+      "subject_ref": "exact-live-backup",
+      "patch": [{ "op": "replace", "path": "/content_sha256", "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" }],
+      "expected": "block"
+    },
+    {
+      "case_id": "aliased-backup-source",
+      "subject_ref": "exact-live-backup",
+      "patch": [{ "op": "replace", "path": "/resolved_resource_identity/object_id", "value": "object-aliased-backup" }],
+      "expected": "block"
+    },
+    { "case_id": "missing-backup-subject", "subject": null, "expected": "block" }
+  ]
+}

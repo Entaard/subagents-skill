@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "sage.run-record",
+  "run_id": "run-zero",
+  "policy_version": "phase0",
+  "status": "completed",
+  "created_at": "2026-08-31T01:00:00Z",
+  "updated_at": "2026-08-31T01:05:00Z",
+  "objective": "Check one local fact whose explanation would cost more than doing it inline.",
+  "plan": {
+    "plan_id": "plan-zero",
+    "current_revision": 1,
+    "revisions": [
+      {
+        "revision": 1,
+        "kind": "complete",
+        "reason": "The task was already decomposable without discovery.",
+        "expected_prior_revision": null,
+        "created_at": "2026-08-31T01:00:00Z",
+        "admitted_at": "2026-08-31T01:00:10Z",
+        "admission_policy": { "profile": "estimate-multiple", "profile_version": "1.0", "control_strength": "advisory", "usage_provenance": "estimated", "sensor_id": "fixture-plan-estimate", "sensor_evidence": [{ "kind": "measurement", "locator": "fixture://zero-estimate", "detail": "Frozen inline estimate." }], "limit_authority": "policy_actor", "compatibility_profile": "estimate-multiple/baseline-v1", "estimate_multiple": { "profile_id": "estimate-multiple/baseline-v1", "task_multiplier": 4, "task_floor": 500000, "unit_multiplier": 4, "unit_floor": 150000, "agent_multiplier": 2, "agent_floor": 10, "task_estimate": 1000, "task_ceiling": 500000, "unit_ceilings": [{ "unit_id": "U1", "unit_spec_revision": 1, "estimate": 400, "ceiling": 150000 }] } },
+        "bounds": {
+          "max_units": 1,
+          "max_attempts_per_unit": 1,
+          "max_concurrency": 1,
+          "max_plan_revisions": 1,
+          "max_admission_seconds": 1800,
+          "planned_agent_count": 0,
+          "max_admitted_agents": 10,
+          "spend_limit": 500000,
+          "spend_unit": "normalized_tokens",
+          "uncapped_attended": false,
+          "no_progress_revision_limit": 1
+        },
+        "units": [
+          {
+            "unit_id": "U1",
+            "unit_spec_revision": 1,
+            "owner": "policy_actor",
+            "objective": "Inspect the named file and report whether the marker exists.",
+            "done_when": "One command records presence or absence of the marker.",
+            "effect_class": "read_only",
+            "dependencies": [],
+            "acceptance_criteria": [
+              {
+                "criterion_id": "C1",
+                "text": "The answer matches a direct search of the named file.",
+                "evidence_class": "machine",
+                "required": true
+              }
+            ],
+            "required_capabilities": ["workspace.read", "command.capture"],
+            "preferred_capabilities": [],
+            "placement_requirements": {
+              "corpus_size": "small",
+              "ambiguity": "low",
+              "reasoning_steps": "few",
+              "tool_needs": ["search"],
+              "latency_preference": "low_latency",
+              "cost_ceiling": 1000,
+              "independence_required": false,
+              "verification_criticality": "low"
+            },
+            "estimated_spend": 400
+          }
+        ],
+        "prior_units": []
+      }
+    ]
+  },
+  "briefs": [
+    {
+      "brief_id": "B1",
+      "brief_revision": 1,
+      "plan_revision": 1,
+      "unit_id": "U1",
+      "unit_spec_revision": 1,
+      "brief_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "role": "policy_actor",
+      "objective": "Inspect one marker.",
+      "inputs": [
+        {
+          "locator": "fixture://source.txt",
+          "classification": "internal",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "purpose": "Source of truth"
+        }
+      ],
+      "scope": ["fixture://source.txt"],
+      "allowed_effects": ["read", "execute"],
+      "allowed_resources": ["fixture-source"],
+      "required_tools": ["search"],
+      "caps": {
+        "max_units": 1,
+        "max_attempts_per_unit": 1,
+        "max_concurrency": 1,
+        "max_plan_revisions": 1,
+        "max_admission_seconds": 1800,
+        "planned_agent_count": 0,
+        "max_admitted_agents": 10,
+        "spend_limit": 500000,
+        "spend_unit": "normalized_tokens",
+        "uncapped_attended": false,
+        "no_progress_revision_limit": 1
+      },
+      "must_not": ["modify the source"],
+      "baseline": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "done_when": "The search result is captured.",
+      "requested_model": "user-selected-root-model",
+      "requested_effort": "low",
+      "return_fields": ["status", "result", "evidence", "files_changed", "checks_run", "uncertainty", "recommended_next_action"]
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "A1",
+      "plan_revision": 1,
+      "unit_id": "U1",
+      "unit_spec_revision": 1,
+      "brief_id": "B1",
+      "brief_revision": 1,
+      "brief_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "state": "completed",
+      "side_effect_class": "read_only",
+      "effective_placement": {
+        "requested_model": "user-selected-root-model",
+        "effective_model": "user-selected-root-model",
+        "requested_effort": "low",
+        "effective_effort": "low",
+        "capability_snapshot_id": "cap-zero"
+      },
+      "started_at": "2026-08-31T01:01:00Z",
+      "ended_at": "2026-08-31T01:02:00Z",
+      "result_id": "R1"
+    }
+  ],
+  "results": [
+    {
+      "result_id": "R1",
+      "attempt_id": "A1",
+      "status": "completed",
+      "result": "The marker exists once.",
+      "evidence": [
+        { "kind": "command", "locator": "command://search-marker", "detail": "Exit 0; one matching line." }
+      ],
+      "files_changed": [],
+      "checks_run": [
+        {
+          "check": "search marker",
+          "outcome": "pass",
+          "evidence": [
+            { "kind": "command", "locator": "command://search-marker", "detail": "One match." }
+          ]
+        }
+      ],
+      "uncertainty": [],
+      "recommended_next_action": "",
+      "content_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "received_at": "2026-08-31T01:02:00Z",
+      "acceptance": "accepted",
+      "accepted_at": "2026-08-31T01:03:00Z"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "ART-RECORD",
+      "kind": "rendered_run_record",
+      "media_type": "text/markdown",
+      "classification": "internal",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "locator": "fixture://zero-run.md",
+      "produced_by_attempt": null,
+      "adoption": "adopted",
+      "adopted_under_plan_revision": 1
+    }
+  ],
+  "assumptions": [],
+  "gaps": [],
+  "findings": [],
+  "dispositions": [],
+  "verifications": [
+    {
+      "verification_id": "V1",
+      "subject_kind": "unit",
+      "subject_id": "U1",
+      "criterion_id": "C1",
+      "method": "Direct search",
+      "evidence_class": "machine",
+      "verdict": "pass",
+      "evidence": [
+        { "kind": "command", "locator": "command://search-marker", "detail": "One match." }
+      ],
+      "verified_by": "policy_actor",
+      "verified_at": "2026-08-31T01:03:00Z"
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "D1",
+      "kind": "other",
+      "decision": "Keep the only unit inline.",
+      "reason": "Explaining and dispatching it would cost more than the check.",
+      "recorded_at": "2026-08-31T01:00:00Z",
+      "affects": ["U1"],
+      "adoption": null
+    }
+  ],
+  "coordination_outcome": {
+    "state": "not_delegated",
+    "assessment": "Inline ownership was the least costly safe coordination decision.",
+    "unique_contributions": [],
+    "duplicated_work": [],
+    "interventions": 0,
+    "protocol_failures": 0,
+    "critical_path_effect": "No dispatch overhead.",
+    "root_context_effect": "Negligible local read.",
+    "evidence": [
+      { "kind": "measurement", "locator": "fixture://plan-zero", "detail": "One bounded lookup." }
+    ]
+  },
+  "completion": {
+    "state": "closed",
+    "criteria_status": "pass",
+    "checks_status": "pass",
+    "findings_status": "resolved",
+    "scope_status": "inside_scope",
+    "human_items": [],
+    "claim": "The marker check is complete with direct evidence.",
+    "claimed_at": "2026-08-31T01:04:00Z",
+    "deliverable": "The marker exists once."
+  },
+  "rendered_run_record": {
+    "artifact_id": "ART-RECORD",
+    "media_type": "text/markdown",
+    "generator_version": "phase0-fixture",
+    "source_state_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  }
+}

@@ -1,0 +1,993 @@
+{
+  "receipt_version": "1.0",
+  "installation_id": "install-example",
+  "mode": "light",
+  "installer_version": "phase0-contract",
+  "source": {
+    "repository": "/source/sage",
+    "revision": "fixture-revision",
+    "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "protected_paths": [
+    {
+      "path_class": "source_checkout",
+      "canonical_path": "/source/sage",
+      "canonical_path_sha256": "ddadb04a17bf4fc6b01512d1e524a400f4321b91e22c335ef41a39d3f47d7610",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-source-sage",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-source"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "ddadb04a17bf4fc6b01512d1e524a400f4321b91e22c335ef41a39d3f47d7610"
+      }
+    },
+    {
+      "path_class": "project_workspace",
+      "canonical_path": "/workspace/project",
+      "canonical_path_sha256": "e3af8a7251583e76fee1fc45993af40a380512ed7b704d61e7869aa9b57391ad",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-workspace-project",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-workspace"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "e3af8a7251583e76fee1fc45993af40a380512ed7b704d61e7869aa9b57391ad"
+      }
+    }
+  ],
+  "roots": [
+    {
+      "root_id": "distribution",
+      "canonical_path": "/opt/sage-example",
+      "canonical_path_sha256": "9658f2714d8871ca38deafa0836ee70139cbb32229ca6942536e61a1ae5e38b0",
+      "destination_policy_id": "destination-policy-light-v1",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-opt-sage",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-opt"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "9658f2714d8871ca38deafa0836ee70139cbb32229ca6942536e61a1ae5e38b0"
+      },
+      "identity": {
+        "device": 1,
+        "inode": 1001,
+        "link_count": 1,
+        "ancestor_chain_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:00Z"
+      }
+    },
+    {
+      "root_id": "state",
+      "canonical_path": "/var/lib/sage-example",
+      "canonical_path_sha256": "74f42813c7f9f7f0773f32dd3f04f27fdc1770c9b4f42ecf244bbefa2051be88",
+      "destination_policy_id": "destination-policy-light-v1",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "74f42813c7f9f7f0773f32dd3f04f27fdc1770c9b4f42ecf244bbefa2051be88"
+      },
+      "identity": {
+        "device": 1,
+        "inode": 1002,
+        "link_count": 1,
+        "ancestor_chain_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:00Z"
+      }
+    }
+  ],
+  "entries": [
+    {
+      "entry_id": "entry-skill",
+      "root_id": "distribution",
+      "relative_path": "skills/sage",
+      "entry_class": "replaced",
+      "expected_type": "directory",
+      "ownership_marker": "sage-owned:install-example:entry-skill:v2",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-opt-sage-skills-sage-v2",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-opt",
+          "object-opt-sage",
+          "object-opt-sage-skills"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+      },
+      "identity": {
+        "device": 1,
+        "inode": 2101,
+        "link_count": 1,
+        "ancestor_chain_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T07:00:30Z"
+      },
+      "cleanup_order": 20,
+      "retention_class": "distribution",
+      "backup_ids": [
+        "backup-entry-skill",
+        "backup-entry-skill-v1-rollback"
+      ],
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-opt-sage-skills",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-opt",
+          "object-opt-sage"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "a84640ad9e660301f7a0a8d139b3351848672502ca1e8b520e95da106a0db6d8"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1051,
+        "link_count": 1,
+        "ancestor_chain_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:00Z"
+      },
+      "content_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    {
+      "entry_id": "entry-overlay",
+      "root_id": "state",
+      "relative_path": "promoted-overlay",
+      "entry_class": "runtime_data",
+      "expected_type": "directory",
+      "ownership_marker": "sage-owned:install-example:entry-overlay",
+      "resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-promoted-overlay",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "374756cd7dca4f46db6482b4e22f0c21884e85e595953a3b82b44365b63bf280"
+      },
+      "identity": {
+        "device": 1,
+        "inode": 1102,
+        "link_count": 1,
+        "ancestor_chain_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T06:00:50Z"
+      },
+      "cleanup_order": 10,
+      "retention_class": "promoted_overlay",
+      "backup_ids": [],
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "74f42813c7f9f7f0773f32dd3f04f27fdc1770c9b4f42ecf244bbefa2051be88"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1002,
+        "link_count": 1,
+        "ancestor_chain_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:00Z"
+      }
+    }
+  ],
+  "config_entries": [
+    {
+      "entry_id": "config-explicit-skill",
+      "config_path": "/etc/sage-example/config.json",
+      "destination_policy_id": "destination-policy-light-v1",
+      "selector": "/skills/sage",
+      "installed_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "current_identity": {
+        "device": 1,
+        "inode": 1201,
+        "link_count": 1,
+        "ancestor_chain_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T06:00:50Z"
+      },
+      "current_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-etc-sage-example-config",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-etc",
+          "object-etc-sage-example"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "b384d6701462ce8f059bdef42562fc844711f52decb4e03972c43b90a6520f01"
+      },
+      "prior_state": "absent",
+      "prior_content_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "prior_identity": {
+        "device": 1,
+        "inode": 1200,
+        "link_count": 1,
+        "ancestor_chain_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-etc-sage-example",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-etc"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "8b91bbf761ed2125083f98c24133903fd13753ee6f4b1a7dd25caa0fc0df8c03"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1003,
+        "link_count": 1,
+        "ancestor_chain_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:00Z"
+      },
+      "prior_file_state": "present",
+      "prior_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-etc-sage-config-prior",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-etc",
+          "object-etc-sage-example"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "b384d6701462ce8f059bdef42562fc844711f52decb4e03972c43b90a6520f01"
+      },
+      "prior_backup_ids": [
+        "backup-config-explicit-skill"
+      ]
+    }
+  ],
+  "backups": [
+    {
+      "backup_id": "backup-entry-skill",
+      "purpose": "displaced_user",
+      "owner_kind": "entry",
+      "owner_entry_id": "entry-skill",
+      "original_path": "/opt/sage-example/skills/sage",
+      "original_identity": {
+        "device": 1,
+        "inode": 901,
+        "link_count": 1,
+        "ancestor_chain_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "original_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-opt-sage-skills-sage-prior",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-opt",
+          "object-opt-sage",
+          "object-opt-sage-skills"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+      },
+      "backup_root_id": "state",
+      "backup_relative_path": "backups/entry-skill",
+      "backup_path": "/var/lib/sage-example/backups/entry-skill",
+      "original_type": "directory",
+      "mode": "0755",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "backup_identity": {
+        "device": 1,
+        "inode": 1901,
+        "link_count": 1,
+        "ancestor_chain_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T06:00:05Z"
+      },
+      "backup_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backup-entry-skill",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage",
+          "object-var-lib-sage-backups"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "85dc46ca521de12d7f6cfad3dc2266cadd94d369b816da0b68baa1ae7b7cb4c8"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1800,
+        "link_count": 1,
+        "ancestor_chain_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backups",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "c064dced50e1cdd5b88f804837bcadb0488c6729c7b0dc92a865b1e7d7dafb9f"
+      },
+      "restored": false
+    },
+    {
+      "backup_id": "backup-config-explicit-skill",
+      "purpose": "config_prior",
+      "owner_kind": "config",
+      "owner_entry_id": "config-explicit-skill",
+      "original_path": "/etc/sage-example/config.json",
+      "original_identity": {
+        "device": 1,
+        "inode": 1200,
+        "link_count": 1,
+        "ancestor_chain_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "original_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-etc-sage-config-prior",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-etc",
+          "object-etc-sage-example"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "b384d6701462ce8f059bdef42562fc844711f52decb4e03972c43b90a6520f01"
+      },
+      "backup_root_id": "state",
+      "backup_relative_path": "backups/config-explicit-skill",
+      "backup_path": "/var/lib/sage-example/backups/config-explicit-skill",
+      "original_type": "file",
+      "mode": "0644",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "backup_identity": {
+        "device": 1,
+        "inode": 1902,
+        "link_count": 1,
+        "ancestor_chain_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T06:00:05Z"
+      },
+      "backup_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backup-config",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage",
+          "object-var-lib-sage-backups"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "059349bac41ac8fac97060e1e35674a8036ccf69471be2421657e1849f80e40b"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1800,
+        "link_count": 1,
+        "ancestor_chain_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backups",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "c064dced50e1cdd5b88f804837bcadb0488c6729c7b0dc92a865b1e7d7dafb9f"
+      },
+      "restored": false
+    },
+    {
+      "backup_id": "backup-entry-skill-v1-rollback",
+      "purpose": "operation_rollback",
+      "owner_kind": "entry",
+      "owner_entry_id": "entry-skill",
+      "original_path": "/opt/sage-example/skills/sage",
+      "original_identity": {
+        "device": 1,
+        "inode": 1101,
+        "link_count": 1,
+        "ancestor_chain_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T06:00:50Z"
+      },
+      "original_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-opt-sage-skills-sage",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-opt",
+          "object-opt-sage",
+          "object-opt-sage-skills"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+      },
+      "backup_root_id": "state",
+      "backup_relative_path": "backups/entry-skill-v1-rollback",
+      "backup_path": "/var/lib/sage-example/backups/entry-skill-v1-rollback",
+      "original_type": "directory",
+      "mode": "0755",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "backup_identity": {
+        "device": 1,
+        "inode": 1903,
+        "link_count": 1,
+        "ancestor_chain_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T07:00:10Z"
+      },
+      "backup_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backup-entry-skill-v1",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage",
+          "object-var-lib-sage-backups"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "9fdb25b5db9250b2da44e2aa4c0a536edf0e40e1385a820d9d5291cdd7a52684"
+      },
+      "parent_identity": {
+        "device": 1,
+        "inode": 1800,
+        "link_count": 1,
+        "ancestor_chain_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "symlink_target_sha256": null,
+        "verified_at": "2026-08-31T05:59:30Z"
+      },
+      "parent_resource_identity": {
+        "provider": "posix-fixture",
+        "volume_id": "volume-1",
+        "object_id": "object-var-lib-sage-backups",
+        "ancestor_object_ids": [
+          "object-root",
+          "object-var",
+          "object-var-lib",
+          "object-var-lib-sage"
+        ],
+        "case_sensitivity": "sensitive",
+        "unicode_normalization": "NFC",
+        "resolved_path_sha256": "c064dced50e1cdd5b88f804837bcadb0488c6729c7b0dc92a865b1e7d7dafb9f"
+      },
+      "restored": false
+    }
+  ],
+  "retention_policies": [
+    {
+      "policy_id": "retention-distribution-v1",
+      "retention_class": "distribution",
+      "disposition": "remove_on_complete_removal",
+      "expires_at": null,
+      "legal_hold_ref": null,
+      "export_owner": null
+    },
+    {
+      "policy_id": "retention-overlay-v1",
+      "retention_class": "promoted_overlay",
+      "disposition": "retain_on_keep_data",
+      "expires_at": null,
+      "legal_hold_ref": null,
+      "export_owner": null
+    }
+  ],
+  "preservation": {
+    "preserve_on_update": [
+      "run_history",
+      "current_run_recovery",
+      "promoted_overlay",
+      "retention_settings",
+      "backups"
+    ],
+    "keep_data": false,
+    "keep_data_entry_ids": [],
+    "retention_receipt_id": null
+  },
+  "operation": {
+    "operation_id": "operation-update-1",
+    "kind": "update",
+    "state": "committed",
+    "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+    "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+    "journal": [
+      {
+        "sequence": 1,
+        "phase": "preflight_complete",
+        "recorded_at": "2026-08-31T07:00:00Z",
+        "entry_ids": [],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:00Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "ef8048883f3a26ca810774e09609ee048318c4277c3af81397e3e20fae64f45b",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:00Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "ef8048883f3a26ca810774e09609ee048318c4277c3af81397e3e20fae64f45b",
+        "prior_journal_sha256": null,
+        "journal_entry_sha256": "4cc1655b3114e1d3a23cc3acc679773470007fcda630e50a514d62cc893850f4"
+      },
+      {
+        "sequence": 2,
+        "phase": "backups_durable",
+        "recorded_at": "2026-08-31T07:00:10Z",
+        "entry_ids": [
+          "entry-skill"
+        ],
+        "config_entry_ids": [],
+        "backup_ids": [
+          "backup-entry-skill-v1-rollback"
+        ],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:10Z",
+          "subjects": [
+            {
+              "entry_id": "entry-skill",
+              "subject_kind": "entry",
+              "state": "present",
+              "basis": "prior_receipt",
+              "basis_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+              "target_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095",
+              "resolved_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-opt-sage-skills-sage",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-opt",
+                  "object-opt-sage",
+                  "object-opt-sage-skills"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+              },
+              "ancestor_chain_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+              "device": 1,
+              "inode": 1101,
+              "link_count": 1,
+              "expected_type": "directory",
+              "observed_type": "directory",
+              "ownership_marker_sha256": "58b2a1cb3c5cb09d4644ed7aa7664831fe24e9b313535b62e8595b5a0c4d59c8",
+              "content_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "symlink_target_sha256": null,
+              "selector_state": null,
+              "parent_resource_identity": null,
+              "parent_identity": null
+            }
+          ],
+          "backup_subjects": [
+            {
+              "backup_id": "backup-entry-skill-v1-rollback",
+              "state": "absent",
+              "basis": "live_parent",
+              "target_path_sha256": "9fdb25b5db9250b2da44e2aa4c0a536edf0e40e1385a820d9d5291cdd7a52684",
+              "resolved_resource_identity": null,
+              "ancestor_chain_sha256": null,
+              "device": null,
+              "inode": null,
+              "link_count": null,
+              "observed_type": null,
+              "content_sha256": null,
+              "symlink_target_sha256": null,
+              "parent_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-var-lib-sage-backups",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-var",
+                  "object-var-lib",
+                  "object-var-lib-sage"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "c064dced50e1cdd5b88f804837bcadb0488c6729c7b0dc92a865b1e7d7dafb9f"
+              },
+              "parent_identity": {
+                "device": 1,
+                "inode": 1800,
+                "link_count": 1,
+                "ancestor_chain_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+                "symlink_target_sha256": null,
+                "verified_at": "2026-08-31T05:59:30Z"
+              }
+            }
+          ]
+        },
+        "precondition_sha256": "764d8913e050f73d2f9195c368561b47b8b8c68d652025c0eb3cbc42f5481800",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:10Z",
+          "subjects": [
+            {
+              "entry_id": "entry-skill",
+              "subject_kind": "entry",
+              "state": "present",
+              "basis": "prior_receipt",
+              "basis_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+              "target_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095",
+              "resolved_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-opt-sage-skills-sage",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-opt",
+                  "object-opt-sage",
+                  "object-opt-sage-skills"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+              },
+              "ancestor_chain_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+              "device": 1,
+              "inode": 1101,
+              "link_count": 1,
+              "expected_type": "directory",
+              "observed_type": "directory",
+              "ownership_marker_sha256": "58b2a1cb3c5cb09d4644ed7aa7664831fe24e9b313535b62e8595b5a0c4d59c8",
+              "content_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "symlink_target_sha256": null,
+              "selector_state": null,
+              "parent_resource_identity": null,
+              "parent_identity": null
+            }
+          ],
+          "backup_subjects": [
+            {
+              "backup_id": "backup-entry-skill-v1-rollback",
+              "state": "present",
+              "basis": "intended_receipt",
+              "target_path_sha256": "9fdb25b5db9250b2da44e2aa4c0a536edf0e40e1385a820d9d5291cdd7a52684",
+              "resolved_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-var-lib-sage-backup-entry-skill-v1",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-var",
+                  "object-var-lib",
+                  "object-var-lib-sage",
+                  "object-var-lib-sage-backups"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "9fdb25b5db9250b2da44e2aa4c0a536edf0e40e1385a820d9d5291cdd7a52684"
+              },
+              "ancestor_chain_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+              "device": 1,
+              "inode": 1903,
+              "link_count": 1,
+              "observed_type": "directory",
+              "content_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "symlink_target_sha256": null,
+              "parent_resource_identity": null,
+              "parent_identity": null
+            }
+          ]
+        },
+        "postcondition_sha256": "9e18cc7a1e7e06bed934deb5c24c46b0bb662b040fce4bdbecb1976fbeee8fc1",
+        "prior_journal_sha256": "4cc1655b3114e1d3a23cc3acc679773470007fcda630e50a514d62cc893850f4",
+        "journal_entry_sha256": "12ed3518594d4294a438da59da46a44c07984399fa82d595511d0275d071dc17"
+      },
+      {
+        "sequence": 3,
+        "phase": "stage_verified",
+        "recorded_at": "2026-08-31T07:00:20Z",
+        "entry_ids": [],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:20Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "8754a4c8a2efd4a3546677689eb5a22a328b58fce639764792c25c5ea845fbd5",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:20Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "8754a4c8a2efd4a3546677689eb5a22a328b58fce639764792c25c5ea845fbd5",
+        "prior_journal_sha256": "12ed3518594d4294a438da59da46a44c07984399fa82d595511d0275d071dc17",
+        "journal_entry_sha256": "d8020626c454005306af83c71a3446e1cc8dbe03894d63e9560d000c9fcf8535"
+      },
+      {
+        "sequence": 4,
+        "phase": "replacement_applied",
+        "recorded_at": "2026-08-31T07:00:30Z",
+        "entry_ids": [
+          "entry-skill"
+        ],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:30Z",
+          "subjects": [
+            {
+              "entry_id": "entry-skill",
+              "subject_kind": "entry",
+              "state": "present",
+              "basis": "prior_receipt",
+              "basis_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+              "target_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095",
+              "resolved_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-opt-sage-skills-sage",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-opt",
+                  "object-opt-sage",
+                  "object-opt-sage-skills"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+              },
+              "ancestor_chain_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+              "device": 1,
+              "inode": 1101,
+              "link_count": 1,
+              "expected_type": "directory",
+              "observed_type": "directory",
+              "ownership_marker_sha256": "58b2a1cb3c5cb09d4644ed7aa7664831fe24e9b313535b62e8595b5a0c4d59c8",
+              "content_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "symlink_target_sha256": null,
+              "selector_state": null,
+              "parent_resource_identity": null,
+              "parent_identity": null
+            }
+          ],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "ffbd674a768fa98611620efdd5ae18d839d06f596bf0590672d6059959fdca5e",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:30Z",
+          "subjects": [
+            {
+              "entry_id": "entry-skill",
+              "subject_kind": "entry",
+              "state": "present",
+              "basis": "intended_receipt",
+              "basis_sha256": null,
+              "target_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095",
+              "resolved_resource_identity": {
+                "provider": "posix-fixture",
+                "volume_id": "volume-1",
+                "object_id": "object-opt-sage-skills-sage-v2",
+                "ancestor_object_ids": [
+                  "object-root",
+                  "object-opt",
+                  "object-opt-sage",
+                  "object-opt-sage-skills"
+                ],
+                "case_sensitivity": "sensitive",
+                "unicode_normalization": "NFC",
+                "resolved_path_sha256": "743e771744e3b4ff2645a89c41618a945e9d84ec5540c4c58bf61bdef615f095"
+              },
+              "ancestor_chain_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+              "device": 1,
+              "inode": 2101,
+              "link_count": 1,
+              "expected_type": "directory",
+              "observed_type": "directory",
+              "ownership_marker_sha256": "76bdd6eb0c2beb76382b2645769204ffcbf8cfbbec630fd126cfe9977c1c7110",
+              "content_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "symlink_target_sha256": null,
+              "selector_state": null,
+              "parent_resource_identity": null,
+              "parent_identity": null
+            }
+          ],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "5cfda7605c250756fddc7f429a607680c0df7a1ef17f878df944a699e4add21b",
+        "prior_journal_sha256": "d8020626c454005306af83c71a3446e1cc8dbe03894d63e9560d000c9fcf8535",
+        "journal_entry_sha256": "c261ae5e155a5a4be8b38807586e5bfb46938fb60ab3af47e45cbc58507805b9"
+      },
+      {
+        "sequence": 5,
+        "phase": "health_verified",
+        "recorded_at": "2026-08-31T07:00:40Z",
+        "entry_ids": [],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:40Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "b7bd660d50718f8e7a61ebe23482b6f20b719bd7e790e0f9c2dfc47b5e697444",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:40Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "b7bd660d50718f8e7a61ebe23482b6f20b719bd7e790e0f9c2dfc47b5e697444",
+        "prior_journal_sha256": "c261ae5e155a5a4be8b38807586e5bfb46938fb60ab3af47e45cbc58507805b9",
+        "journal_entry_sha256": "a000ea42b177c4fd79323303905d36cb6975e5bbc1c6dd0a7e8290e8ff1a9985"
+      },
+      {
+        "sequence": 6,
+        "phase": "receipt_committed",
+        "recorded_at": "2026-08-31T07:00:50Z",
+        "entry_ids": [],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:50Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "04753050a7c948b7a59c540f092bce73a1545a149d5ec8c76b9cab8a1eb58add",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:00:50Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "04753050a7c948b7a59c540f092bce73a1545a149d5ec8c76b9cab8a1eb58add",
+        "prior_journal_sha256": "a000ea42b177c4fd79323303905d36cb6975e5bbc1c6dd0a7e8290e8ff1a9985",
+        "journal_entry_sha256": "cb9cef3ed21809184081d565a06f483fa5532b22c45d9ab55662109485879288"
+      },
+      {
+        "sequence": 7,
+        "phase": "cleanup_complete",
+        "recorded_at": "2026-08-31T07:01:00Z",
+        "entry_ids": [],
+        "config_entry_ids": [],
+        "backup_ids": [],
+        "operation_id": "operation-update-1",
+        "intended_receipt_sha256": "3773cdb13b146f00fa056bc85e8a8c8431734ee5b4e837226d0432535c16733a",
+        "prior_receipt_sha256": "682a73db0846b658788783b96e8f6d74762203cc85a3fc18246b9061d88d0505",
+        "precondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:01:00Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "precondition_sha256": "b40ec802f1a74a132641a9f6da34ef66930877a9dcb9f75922e24a4b60b59230",
+        "postcondition": {
+          "proof_version": "StateProof/v2",
+          "operation_id": "operation-update-1",
+          "observed_at": "2026-08-31T07:01:00Z",
+          "subjects": [],
+          "backup_subjects": []
+        },
+        "postcondition_sha256": "b40ec802f1a74a132641a9f6da34ef66930877a9dcb9f75922e24a4b60b59230",
+        "prior_journal_sha256": "cb9cef3ed21809184081d565a06f483fa5532b22c45d9ab55662109485879288",
+        "journal_entry_sha256": "b25a2588c74c4e8f76f9a89329fd24c12e232a1adbddd8ecdec168dbe111a729"
+      }
+    ]
+  }
+}

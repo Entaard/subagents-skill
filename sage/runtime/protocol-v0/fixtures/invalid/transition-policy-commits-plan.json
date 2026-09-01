@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "runtime-mutation",
+  "base": "../valid/plan-commit-transition.json",
+  "patch": [
+    { "op": "replace", "path": "/authenticated_principal", "value": "policy_actor" }
+  ],
+  "expected_errors": ["RUNTIME-TRANSITION-AUTHORITY"]
+}

@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/preservation/preserve_on_update", "value": [] }
+  ],
+  "expected_errors": ["RECEIPT-INTENT-HASH", "RECEIPT-PRESERVATION", "SCHEMA-MIN-ITEMS"]
+}

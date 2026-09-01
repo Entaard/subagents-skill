@@ -1,0 +1,49 @@
+{
+  "message_kind": "approval_record",
+  "protocol_version": "0.1-provisional",
+  "approval_id": "approval-1",
+  "record_version": 1,
+  "descriptor_version": "ActionDescriptor/v1",
+  "canonicalization": "sage-json-v1+sha256",
+  "descriptor": {
+    "run_id": "run-runtime",
+    "unit_id": "U-PUBLISH",
+    "attempt_id": "attempt-1",
+    "resource_id": "resource-1",
+    "lease_id": "lease-1",
+    "fencing_token": 7,
+    "operation_class": "external_publish",
+    "operation_scope": "one artifact to one named destination",
+    "arguments_descriptor_version": "ActionArguments/v1",
+    "arguments_canonicalization": "sage-json-v1+sha256",
+    "arguments_sha256": "f34bca26f6a8a564252341e9ad02c64afee57fa42f6f55f8f16edc37e9cdaf5c",
+    "intended_side_effects": ["create one immutable artifact at destination example-1"],
+    "working_directory_id": "2222222222222222222222222222222222222222222222222222222222222222",
+    "environment_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "permission_delta": ["network.destination.example-1", "artifact.publish"],
+    "native_thread_ref": "opaque-thread-1",
+    "native_turn_ref": "opaque-turn-1",
+    "native_item_ref": "opaque-item-1",
+    "nonce": "approval-nonce-0001",
+    "reuse": { "mode": "one_shot", "max_uses": 1 },
+    "user_authorization_ref": "authorization://fixture/approval-1",
+    "user_words_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "action_digest": "f1b0b8a98a17a5e0147717a7f4c2fae09362386ef0328181817bbd71fa31b365",
+  "decision": "allow",
+  "operator_subject": "authenticated-operator-subject",
+  "channel_evidence_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+  "issued_at": "2026-08-31T05:03:00Z",
+  "expires_at": "2026-08-31T05:08:00Z",
+  "revoked_at": null,
+  "consumptions": [
+    {
+      "consumption_id": "consumption-1",
+      "native_request_ref": "opaque-native-approval-1",
+      "transition_id": "transition-approval-1",
+      "prior_approval_version": 0,
+      "committed_approval_version": 1,
+      "consumed_at": "2026-08-31T05:04:00Z"
+    }
+  ]
+}

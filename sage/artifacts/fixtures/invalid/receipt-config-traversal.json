@@ -1,0 +1,8 @@
+{
+  "fixture_kind": "receipt-mutation",
+  "base": "../ownership-receipt.example.json",
+  "patch": [
+    { "op": "replace", "path": "/config_entries/0/config_path", "value": "/etc/sage-example/../../etc/passwd" }
+  ],
+  "expected_errors": ["RECEIPT-BACKUP-BINDING", "RECEIPT-INTENT-HASH", "RECEIPT-PATH-TRAVERSAL", "RECEIPT-RESOURCE-IDENTITY", "SCHEMA-PATTERN"]
+}

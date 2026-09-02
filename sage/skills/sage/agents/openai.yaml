@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sage"
+  short_description: "Bounded Codex-native task orchestration"
+  default_prompt: "Use $sage to run this bounded task with native Codex workers, explicit evidence, verification, and durable run state."
+
+policy:
+  allow_implicit_invocation: false

@@ -9,7 +9,7 @@ Policy owner: `policy.delegation`
 3. Buy useful conflict through disjoint mandates, refutation, and a settling observation. Agreement alone is not evidence.
 4. Autonomy is legibility recorded rather than continuously displayed. Silence is a presentation choice, never a record-loss choice.
 
-The policy actor owns goals, risk, decomposition, triage, integration, and the completion claim. Workers propose and produce evidence. Zero delegated units is a valid outcome.
+The root policy actor declares and accepts the baseline, chooses acceptance criteria, grants the writer lease, accepts or adopts results, dispositions findings, settles conflicts, revises plans, and owns integration and the completion claim. Workers propose and produce evidence; none inherits those authorities from a brief or successful check. Zero delegated units remains valid for work with no independently valuable seat.
 
 ## Qualify and decompose
 
@@ -41,7 +41,7 @@ Completion criterion: the bootstrap ends with either a complete plan revision or
 
 Assess failure impact, coupling breadth, novelty, reversibility, automated-verification strength, compatibility, and human-decision dependence. Data migration, credentials, security, networking, irreversible conversion, public compatibility, core performance budgets, and behavior without a reliable oracle are high-risk triggers.
 
-Every admitted plan is bounded by default. It states finite unit, attempt, concurrency, plan-revision, and wall-clock-admission limits, plus a spend limit where a comparable sensor exists, including the work retained by the policy actor. An uncapped experiment is a separate, attended choice with external limits and finite no-progress and revision bounds; absence of a trustworthy spend sensor cannot be represented as zero.
+Planning may begin with every task-specific rail explicitly uncommitted. Before admitting any revision or dispatching any brief or attempt, the root commits finite unit, attempts-per-unit, concurrency, plan-revision, wall-clock-admission, admitted-agent, and no-progress bounds chosen for that task. There is no universal numeric default for those rails. A comparable spend limit includes work retained by the root; absence of a trustworthy spend sensor is unknown, never zero. An uncapped-spend experiment is a separate attended choice with an external limit and the same finite non-spend rails.
 
 ### Admission policy profiles
 
@@ -53,7 +53,7 @@ An admission profile is selected and versioned in the plan. It is one of:
 - `uncapped-observed`: no Sage spend ceiling, permitted only for an explicitly consented attended experiment under an external hard ceiling and the ordinary finite admission, failure, and revision stops;
 - `custom`: a named, versioned organization or user policy whose complete bounds and enforcement sources are recorded.
 
-The portable default is `bounded-observed`. Its initial values may be seeded from the compatibility profile only where the adapter proves comparable usage. Crossing any finite limit drains selected in-flight work, admits nothing new, records the exact measured, provider-reported, estimated, or unknown sensor and its provenance, and enters `AwaitingHuman`.
+The portable profile is `bounded-observed`, but its task-specific values have no universal seed. The compatibility profile may seed comparable spend rails only where the adapter proves comparable usage. Crossing any finite limit drains selected in-flight work, admits nothing new, records the exact measured, provider-reported, estimated, or unknown sensor and its provenance, and enters `AwaitingHuman`.
 
 The baseline compatibility profile is `estimate-multiple/baseline-v1`. It retains three separate projected ceilings:
 
@@ -80,3 +80,9 @@ Before dispatch, commit either the bounded bootstrap or a complete plan revision
 Estimate from the corpus a unit must hold and the lenses it must apply, not from output length or role name. Account for discovery separately from repair, and price review together with its fix verification and possible blocker/major follow-up. When a claim turns on a number, establish the measurement method and baseline before briefing workers; every unit comparing that number uses the same method.
 
 Completion criterion: every unit has a stable ID, immutable unit-spec revision, owner, effect class, dependencies, done-when sentence, requested capability predicates, placement requirements, and estimate before admission.
+
+## Root and worker ownership
+
+For substantial software mutations, the normal plan gives mutation to a dedicated writer and gives baseline/reproduction, acceptance, and accepted-fix verification to independent read-only workers. Writer self-checks stabilize its candidate but do not constitute independent acceptance. The root grants and later releases the writer lease, freezes the candidate, adopts accepted results, triages all review evidence, and uses a fresh fix-verification seat after accepted repairs.
+
+The root implements directly only when the mutation is small and tightly coupled to its judgment, no matching worker capability is available, or matching delegated attempts have exhausted their admitted failure bound. It runs settling commands itself only when the command is narrower and cheaper than dispatch. In Light mode these ownership rules are policy discipline backed by recorded hashes and native snapshots, not an externally enforced lease.

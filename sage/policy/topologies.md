@@ -10,7 +10,7 @@ Use for a broad question with genuinely independent subsystems, lenses, or sourc
 
 ## Implement, review, fix
 
-Use for one bounded mutation. Optional discovery precedes one writer under lease. Run deterministic checks, freeze the candidate, obtain separate specification and quality verdicts, triage, return accepted fixes to one writer, run targeted regression verification, and re-freeze. Continue blocker/major follow-up reviews until one dry round.
+Use for one bounded mutation. For a substantial change, the root declares the baseline, an independent read-only worker captures it and reproduces the target, and the root accepts the evidence before one dedicated writer receives the lease. Run deterministic checks, freeze the candidate, obtain independent fixed-point Standards and Spec verdicts, triage at the root, return accepted fixes to one writer, then assign independent fix verification and re-freeze. Writer feedback checks are not acceptance. Continue blocker/major follow-up reviews until one dry round.
 
 ## Migration pipeline
 
@@ -65,4 +65,3 @@ For software, use build, lint, type, focused and full tests as applicable; a run
 For research and writing, fetch every load-bearing source during the run, distinguish fetched content from snippets, surface conflicting sources, check recency against the run date, and use a completeness critic.
 
 For data and analysis, state input and coverage counts, spot-check transformations against raw records, rederive quoted figures independently, and check visualizations against their underlying table.
-

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sage.local/schemas/sage-handoff-v1.schema.json",
+  "title": "Sage handoff authority v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "objective", "plan_revision", "current_plan",
+    "reason", "recorded_at", "baselines", "attempts", "result_ids",
+    "assumption_ids", "gap_ids", "finding_ids", "human_items", "bounds",
+    "writer_control", "next_action"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "run_id": { "$ref": "#/$defs/Id" },
+    "objective": { "type": "string", "minLength": 1 },
+    "plan_revision": { "type": "integer", "minimum": 0 },
+    "current_plan": { "type": "object" },
+    "reason": { "type": "string", "minLength": 1 },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "baselines": { "type": "array", "items": { "$ref": "#/$defs/Baseline" } },
+    "attempts": { "type": "array", "items": { "$ref": "#/$defs/AttemptState" } },
+    "result_ids": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+    "assumption_ids": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+    "gap_ids": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+    "finding_ids": { "type": "array", "items": { "$ref": "#/$defs/Id" }, "uniqueItems": true },
+    "human_items": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "bounds": { "$ref": "#/$defs/Bounds" },
+    "writer_control": { "$ref": "#/$defs/WriterControl" },
+    "next_action": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "Id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "Sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "NullableId": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Id" }] },
+    "NullableString": { "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }] },
+    "PositiveBound": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
+    "Baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "kind", "device", "inode", "mode"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/Sha256" },
+        "kind": { "enum": ["file", "directory", "symlink"] },
+        "device": { "type": "integer", "minimum": 0 },
+        "inode": { "type": "integer", "minimum": 0 },
+        "mode": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "AttemptState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "state", "side_effect_class", "worker_ref", "turn_ref", "result_id"],
+      "properties": {
+        "attempt_id": { "$ref": "#/$defs/Id" },
+        "state": { "enum": ["planned", "admitted", "prepared", "running", "idle", "completed", "interrupted", "failed", "lost", "unknown", "abandoned"] },
+        "side_effect_class": { "enum": ["read_only", "reversible", "side_effecting"] },
+        "worker_ref": { "$ref": "#/$defs/NullableString" },
+        "turn_ref": { "$ref": "#/$defs/NullableString" },
+        "result_id": { "$ref": "#/$defs/NullableId" }
+      }
+    },
+    "Bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_units", "max_attempts_per_unit", "max_concurrency", "max_plan_revisions", "max_admission_seconds", "planned_agent_count", "max_admitted_agents", "spend_limit", "spend_unit", "uncapped_attended", "no_progress_revision_limit"],
+      "properties": {
+        "max_units": { "$ref": "#/$defs/PositiveBound" },
+        "max_attempts_per_unit": { "$ref": "#/$defs/PositiveBound" },
+        "max_concurrency": { "$ref": "#/$defs/PositiveBound" },
+        "max_plan_revisions": { "$ref": "#/$defs/PositiveBound" },
+        "max_admission_seconds": { "$ref": "#/$defs/PositiveBound" },
+        "planned_agent_count": { "type": "integer", "minimum": 0 },
+        "max_admitted_agents": { "$ref": "#/$defs/PositiveBound" },
+        "spend_limit": { "oneOf": [{ "type": "null" }, { "type": "number", "exclusiveMinimum": 0 }] },
+        "spend_unit": { "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }] },
+        "uncapped_attended": { "type": "boolean" },
+        "no_progress_revision_limit": { "$ref": "#/$defs/PositiveBound" }
+      }
+    },
+    "WriterControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "external_lease"],
+      "properties": {
+        "mode": { "const": "advisory_one_writer" },
+        "external_lease": { "const": "unavailable_in_light_mode" }
+      }
+    }
+  }
+}

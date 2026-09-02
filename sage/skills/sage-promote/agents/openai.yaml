@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sage Promote"
+  short_description: "Turn closed Sage logs into reviewed knowledge"
+  default_prompt: "Use $sage-promote to consolidate selected closed Sage runs, refute candidate rules, and explicitly land validated knowledge."
+
+policy:
+  allow_implicit_invocation: false

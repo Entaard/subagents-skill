@@ -8,6 +8,8 @@ Each file declares one policy owner. The Phase 0 [invariant inventory](../docs/p
 - [`contracts.md`](contracts.md) — briefs, results, assumptions, gaps, findings, decisions, and coordination outcomes.
 - [`topologies.md`](topologies.md) — orchestration patterns and their stopping conditions.
 - [`review.md`](review.md) — evidence, freeze/review/triage, behavior-shaping edits, and completion.
+- [`implementation.md`](implementation.md) — clean code, branch-routed testing/mocking, and code-level concurrency.
+- [`software-review.md`](software-review.md) — fixed-point Standards and Spec review with the full smell baseline and reusable reader briefs.
 - [`recovery.md`](recovery.md) — failure signatures, rails, reconciliation, and handover.
 - [`memory.md`](memory.md) — the three memory classes and the runtime/promotion access boundary.
 

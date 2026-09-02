@@ -16,7 +16,7 @@ Owns deterministic transition legality, authenticated roles, idempotency, depend
 
 ## Codex experience
 
-Owns explicit invocation, the six-step user flow, native Light-mode interaction, report/resume presentation, and the repository-root installation lifecycle. Phase 0 defines the lifecycle contract but leaves the skill and native mapping to Phase 1.
+Owns explicit invocation, the six-step user flow, native Light-mode interaction, report/resume presentation, and the `sage/` installation lifecycle. Phase 0 defines the lifecycle contract but leaves the skill and native mapping to Phase 1.
 
 ## Adapter
 
@@ -29,4 +29,3 @@ Owns consolidation of closed-run facts into candidate knowledge, falsifier testi
 ## Extraction rule
 
 The existing distribution remains the behavioral baseline during Phase 0. A source pointer in the inventory proves where an obligation came from; it does not make that host-specific file canonical. When a baseline mechanism cannot be made portable, its policy intent moves to policy and its concrete implementation moves to the adapter or experience owner. Assumptions, gaps, `AwaitingHuman`, verification, coordination checks, rails, and completion duties are never discarded as mere mechanics.
-

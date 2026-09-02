@@ -38,11 +38,10 @@ An unavailable or degraded capability is state, not mere telemetry. Stop new adm
 
 The default handover threshold is 30 percent of the policy actor's effective context window. A versioned host capability supplies the window and occupancy evidence. An unavailable sensor is recorded as unavailable; it does not remove the policy, invent a reading, or claim automatic enforcement. Explicit handover remains available.
 
-At the threshold, stop launching, harvest safe in-flight work, bring the current-run artifacts up to date, and write a durable handoff containing the run pointer, current plan and attempts, next action, leases, baseline, assumptions, gaps, findings, rails, and worker-handle map. A successor receives artifact pointers rather than conversation history. The original policy actor retains human-release and completion authority unless an authenticated transfer says otherwise.
+At the threshold, stop launching, harvest safe in-flight work, bring the current-run artifacts up to date, and write the mandatory hash-bound `handoff.json` authority, validated by `sage/artifacts/schemas/sage-handoff-v1.schema.json`. It contains the run pointer, current plan and attempts, next action, leases, baseline, assumptions, gaps, findings, rails, and worker-handle map. An optional `handoff.md` is only a deterministic projection regenerated from that JSON; resume never depends on Markdown. A successor receives artifact pointers rather than conversation history. The original policy actor retains human-release and completion authority unless an authenticated transfer says otherwise.
 
 Each later generation updates the same logical handoff and remains bound by the original run limits. A successor loss returns to reconciliation. A handover without a durable destination pauses and surfaces the gap.
 
 ## Stop and resume
 
-Stopping never erases obligations. Every unit, finding, assumption, gap, approval, and lease receives an explicit state; current-run facts remain append-only; unknown side effects remain unknown. Resume verifies the baseline and resource identity before any new admission and creates revisions or attempts rather than mutating history.
-
+Stopping never erases obligations. Every unit, finding, assumption, gap, approval, and lease receives an explicit state; current-run facts remain append-only; unknown side effects remain unknown. Resume fails closed when `handoff.json` is missing, malformed, hash-invalid, or stale, then verifies baseline and resource identity before any new admission. It creates revisions or attempts rather than mutating history and does not require `handoff.md`.

@@ -712,7 +712,7 @@ Define an `AdmissionPolicy` interface with at least:
 - `uncapped-observed`: no Sage token/cost ceiling, but launches and usage are logged; allowed only as an explicit attended experiment under provider or organization hard limits;
 - `custom`: organization or user policy.
 
-The Codex-first default is `bounded-observed`, seeded from the current Sage `4x` compatibility rail where the adapter can measure comparable usage. If spend telemetry is unavailable, finite admission, attempt, revision, and wall-clock limits still provide a real termination boundary. Crossing a limit drains selected in-flight work, admits nothing new, records the exact sensor/provenance, and enters `AwaitingHuman`.
+The Codex-first profile is `bounded-observed`, but a new planning artifact carries uncommitted task-specific rails rather than universal numeric defaults. Before any revision, brief, or attempt is admitted, the policy actor commits finite unit, attempts-per-unit, concurrency, plan-revision, admission-time, agent, and no-progress bounds for that task. The distinct `estimate-multiple/baseline-v1` compatibility profile retains the current Sage `4x` task/unit and `2x` agent projections only where the adapter can measure comparable usage. If spend telemetry is unavailable, the committed non-spend limits still provide a termination boundary. Crossing a limit drains selected in-flight work, admits nothing new, records the exact sensor/provenance, and enters `AwaitingHuman`.
 
 Every autonomous managed run retains:
 
@@ -732,8 +732,8 @@ The orchestrator handover remains a first-class Sage policy in both modes:
 - default threshold: parent context occupancy at **30 percent** of the effective context window;
 - initial implementation may hard-code `0.30`; a later setting such as `handover.context_fraction` may override it without changing the handover protocol;
 - Managed Codex uses supported usage/context events only when the driver proves both numerator and denominator;
-- Light mode uses a supported Codex pressure signal when one exists and relies on the durable handoff artifact plus compaction recovery otherwise;
-- where no reliable pressure sensor exists, report automatic threshold detection as unavailable and expose an explicit handover/resume path. Never invent a percentage from transcript size or unrelated token totals.
+- Light mode uses a supported Codex pressure signal when one exists and otherwise relies on mandatory hash-bound `handoff.json` plus compaction recovery; optional `handoff.md` is generated only from the JSON and is never resume authority;
+- where no reliable pressure sensor exists, report automatic threshold detection as unavailable and expose an explicit handover/resume path. Resume fails for missing, malformed, hash-invalid, or stale JSON and does not require Markdown. Never invent a percentage from transcript size or unrelated token totals.
 
 The policy is therefore always present; only its automatic sensor may be unavailable. A missing sensor is a recorded Light-mode limitation and potential evidence for Managed mode, not a reason to delete the 30 percent rule.
 
@@ -768,9 +768,11 @@ Use native collaboration tools for Light interactive mode. Capability-test the S
 
 Keep the core/driver seam small and semantic, with an in-memory adapter for core tests. This is a useful internal seam because production and tests need different adapters. It is not evidence that a second harness fits it. Do not add compatibility fields, abstract nouns, or lowest-common-denominator behavior for an adapter that is not being built.
 
-### Deferred portability proof — outside this plan
+### Post-Light milestone: alternative-family verification
 
-If cross-harness portability later becomes a release requirement, make that a separately approved phase. Use Codex plus OpenCode for the proof, revise runtime v0 from observed differences, and stabilize a portable v1 only after both pass the same semantic and crash tests.
+After Light mode is complete, any cross-harness or cross-family claim requires one separately approved milestone; this plan does not implement it and current Sage exposes no such support. The milestone first discovers a genuinely available alternative-family capability and proves effective model-family identity from runtime evidence rather than an alias or requested value. It then runs matched role, tool, permission, and sandbox probes; verifies typed safe failure for missing identity, capability, isolation, and lifecycle evidence; and compares the alternative lane with Codex on predeclared, matched quality and reliability tasks.
+
+Exit requires role/tool/sandbox parity for every claimed operation, no unsafe retry or silent fallback under injected failure, and quality/reliability results meeting the same declared acceptance thresholds as Codex. Any semantic difference revises runtime v0 before a portable v1 claim. Landing an adapter, enabling the lane, or declaring support requires explicit approval after those results are reviewed.
 
 The eventual proof should standardize semantics rather than harness nouns:
 

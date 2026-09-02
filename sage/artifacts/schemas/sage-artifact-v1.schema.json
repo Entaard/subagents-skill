@@ -98,15 +98,15 @@
     "Bounds": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["max_units", "max_attempts_per_unit", "max_concurrency", "max_plan_revisions", "max_admission_seconds", "planned_agent_count", "max_admitted_agents", "spend_limit", "spend_unit", "uncapped_attended"],
+      "required": ["max_units", "max_attempts_per_unit", "max_concurrency", "max_plan_revisions", "max_admission_seconds", "planned_agent_count", "max_admitted_agents", "spend_limit", "spend_unit", "uncapped_attended", "no_progress_revision_limit"],
       "properties": {
-        "max_units": { "type": "integer", "minimum": 1 },
-        "max_attempts_per_unit": { "type": "integer", "minimum": 1 },
-        "max_concurrency": { "type": "integer", "minimum": 1 },
-        "max_plan_revisions": { "type": "integer", "minimum": 1 },
-        "max_admission_seconds": { "type": "integer", "minimum": 1 },
+        "max_units": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
+        "max_attempts_per_unit": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
+        "max_concurrency": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
+        "max_plan_revisions": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
+        "max_admission_seconds": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
         "planned_agent_count": { "type": "integer", "minimum": 0 },
-        "max_admitted_agents": { "type": "integer", "minimum": 1 },
+        "max_admitted_agents": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] },
         "spend_limit": {
           "oneOf": [{ "type": "null" }, { "type": "number", "exclusiveMinimum": 0 }]
         },
@@ -114,7 +114,7 @@
           "oneOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
         },
         "uncapped_attended": { "type": "boolean" },
-        "no_progress_revision_limit": { "type": "integer", "minimum": 1 }
+        "no_progress_revision_limit": { "oneOf": [{ "type": "null" }, { "type": "integer", "minimum": 1 }] }
       }
     },
     "AdmissionPolicy": {

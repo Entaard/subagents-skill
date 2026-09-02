@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "generator": "generate-skill-bundle.py",
+  "files": [
+    {
+      "source": "sage/docs/phase0/promotion-contract.md",
+      "source_sha256": "5ff6538b3b6b0655b91bef58704fdb3225cad1b27f89c0feb856b97890a5c049",
+      "generated": "references/promotion-contract.md",
+      "generated_sha256": "64f0e0194129094202ad4156dc634a0ac47e3f166691306540fb2d7e8d35592a"
+    }
+  ]
+}

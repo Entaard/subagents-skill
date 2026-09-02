@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "generator": "generate-skill-bundle.py",
+  "files": [
+    {
+      "source": "sage/docs/phase0/promotion-contract.md",
+      "source_sha256": "5ff6538b3b6b0655b91bef58704fdb3225cad1b27f89c0feb856b97890a5c049",
+      "generated": "references/docs/phase0/promotion-contract.md",
+      "generated_sha256": "64f0e0194129094202ad4156dc634a0ac47e3f166691306540fb2d7e8d35592a"
+    },
+    {
+      "source": "sage/policy/contracts.md",
+      "source_sha256": "ce8413583b15e8f6a34610ef9a767374056a99c2d5738f7ec849305e2667a898",
+      "generated": "references/policy/contracts.md",
+      "generated_sha256": "30a08b19b6508b17057a3e11119ba445870f5ae89af0b1db6396cea3fbde66ee"
+    },
+    {
+      "source": "sage/policy/delegation.md",
+      "source_sha256": "5dba5a887b495e5743685ef351f4c0175c4a7941556bca2e3c8139ec9766ebf5",
+      "generated": "references/policy/delegation.md",
+      "generated_sha256": "bb1f61c57a06db5069fb7560cf9974545e1d6675878ca1b2c151624c3de02d7a"
+    },
+    {
+      "source": "sage/policy/implementation.md",
+      "source_sha256": "de8a135a3451cf6a9b5bf89e0b61aa4faad0a93267b60c77d2879e12c26dcbe1",
+      "generated": "references/policy/implementation.md",
+      "generated_sha256": "c436d3018539861fc10d9ee5cb560de6d5c7fd6a655cabb0771b636a0dfeed08"
+    },
+    {
+      "source": "sage/policy/memory.md",
+      "source_sha256": "fc37ec2836e7db57e8d394625b306c792d994347aec56bcf591406b2af614313",
+      "generated": "references/policy/memory.md",
+      "generated_sha256": "fde1aaa2c84af6b8da384d69ced332be98376e6d48b639520614787e6eb53f20"
+    },
+    {
+      "source": "sage/policy/recovery.md",
+      "source_sha256": "9f4744c5f049abdb3c7aee3f89c46685f5e955a2afb0cf654d903a00e8ef3f74",
+      "generated": "references/policy/recovery.md",
+      "generated_sha256": "19fed76ec5f397b9a5215cd4eee2b8fd56df9bf9ecd046410bcf68694ead873e"
+    },
+    {
+      "source": "sage/policy/review.md",
+      "source_sha256": "25ef62d46df48517d093c52499986e3b456b39acf390531d5f6053d6f2c90caf",
+      "generated": "references/policy/review.md",
+      "generated_sha256": "f2115aa190d6e177a4ece67386ab0130563f03d86c93880af5da4529a07fd034"
+    },
+    {
+      "source": "sage/policy/software-review.md",
+      "source_sha256": "775e759109fc8734eb14088d548db074c4389e5d7d6c90b4292e00686e7b34db",
+      "generated": "references/policy/software-review.md",
+      "generated_sha256": "48604fdb0934374f298e9e10ababadaf46a17cebe4992adb9a3cff04c9ce48a2"
+    },
+    {
+      "source": "sage/policy/topologies.md",
+      "source_sha256": "d8486514353fe747104d3a02efadc407d0c28edac770f08860a473946d33bb78",
+      "generated": "references/policy/topologies.md",
+      "generated_sha256": "388c660f7e2006861b820f7a119077a33b64750bfa94c4ab188504b6a7535788"
+    }
+  ]
+}

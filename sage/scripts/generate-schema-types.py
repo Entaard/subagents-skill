@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY_ROOT = ROOT.parent
 TARGETS = (
     ("artifacts/schemas/sage-artifact-v1.schema.json", "artifacts/generated/sage-artifact-v1.ts", "SageArtifactV1"),
+    ("artifacts/schemas/knowledge-record-v1.schema.json", "artifacts/generated/knowledge-record-v1.ts", "KnowledgeRecordV1"),
+    ("artifacts/schemas/sage-handoff-v1.schema.json", "artifacts/generated/sage-handoff-v1.ts", "SageHandoffV1"),
     ("artifacts/schemas/ownership-receipt-v1.schema.json", "artifacts/generated/ownership-receipt-v1.ts", "OwnershipReceiptV1"),
     ("runtime/protocol-v0/schemas/runtime-envelope-v0.schema.json", "runtime/protocol-v0/generated/runtime-envelope-v0.ts", "RuntimeEnvelopeV0"),
 )

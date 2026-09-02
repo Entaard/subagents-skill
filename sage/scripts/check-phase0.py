@@ -24,6 +24,24 @@ from typing import Any, Iterable
 # and repository history remain rooted in the enclosing Git repository.
 ROOT = Path(__file__).resolve().parent.parent
 REPOSITORY_ROOT = ROOT.parent
+COMMITTED_BOUND_FIELDS = (
+    "max_units",
+    "max_attempts_per_unit",
+    "max_concurrency",
+    "max_plan_revisions",
+    "max_admission_seconds",
+    "max_admitted_agents",
+    "no_progress_revision_limit",
+)
+
+
+def _uncommitted_bound_fields(revision: dict[str, Any]) -> list[str]:
+    bounds = revision.get("bounds", {})
+    return [name for name in COMMITTED_BOUND_FIELDS if bounds.get(name) is None]
+
+
+def _revision_is_admitted(revision: dict[str, Any]) -> bool:
+    return revision.get("admitted_at") is not None and not _uncommitted_bound_fields(revision)
 
 
 @dataclasses.dataclass(frozen=True)
@@ -294,6 +312,13 @@ def artifact_semantic_issues(run: dict[str, Any]) -> list[Issue]:
                 issues.append(Issue("ART-PLAN-DISPOSITION", f"$/plan/revisions/{index}/prior_units/{disposition_index}/replacement_unit_spec_revision", "only superseded units may name a replacement"))
         admission = revision.get("admission_policy", {})
         bounds = revision.get("bounds", {})
+        uncommitted_bounds = _uncommitted_bound_fields(revision)
+        if revision.get("admitted_at") is not None and uncommitted_bounds:
+            issues.append(Issue(
+                "ART-ADMISSION-UNCOMMITTED",
+                f"$/plan/revisions/{index}/bounds",
+                f"admitted revision has uncommitted bounds {uncommitted_bounds}",
+            ))
         spend_limit = bounds.get("spend_limit")
         spend_unit = bounds.get("spend_unit")
         if (spend_limit is None) != (spend_unit is None):
@@ -399,6 +424,13 @@ def artifact_semantic_issues(run: dict[str, Any]) -> list[Issue]:
         if key not in unit_specs:
             issues.append(Issue("ART-BINDING", f"$/briefs/{index}", "brief does not bind an existing unit spec"))
         revision = revisions_by_number.get(brief.get("plan_revision"))
+        if revision:
+            if not _revision_is_admitted(revision):
+                issues.append(Issue(
+                    "ART-BRIEF-BEFORE-ADMISSION",
+                    f"$/briefs/{index}",
+                    "brief requires an admitted revision with every finite task-specific bound committed",
+                ))
         if revision and brief.get("caps") != revision.get("bounds"):
             issues.append(Issue("ART-BOUNDS-BINDING", f"$/briefs/{index}/caps", "brief caps differ from the exact admitted plan bounds"))
         if revision and revision.get("kind") == "bootstrap":
@@ -427,6 +459,13 @@ def artifact_semantic_issues(run: dict[str, Any]) -> list[Issue]:
         ):
             issues.append(Issue("ART-BINDING", f"$/attempts/{index}", "attempt tuple or hash differs from its exact brief revision"))
         revision = revisions_by_number.get(attempt.get("plan_revision"))
+        if revision:
+            if not _revision_is_admitted(revision):
+                issues.append(Issue(
+                    "ART-ATTEMPT-BEFORE-ADMISSION",
+                    f"$/attempts/{index}",
+                    "attempt requires an admitted revision with every finite task-specific bound committed",
+                ))
         if revision and revision.get("kind") == "bootstrap" and attempt.get("side_effect_class") != "read_only":
             issues.append(Issue("ART-BOOTSTRAP-READONLY", f"$/attempts/{index}/side_effect_class", "bootstrap attempt is not read-only"))
         try:
@@ -1429,7 +1468,12 @@ def receipt_semantic_issues(receipt: dict[str, Any], prior_receipt: dict[str, An
             actual_backups = {value for row in phase_rows for value in row.get("backup_ids", [])}
             expected_any = bool(expected_entries or expected_configs or expected_backups)
             empty_proxy = any(not (row.get("entry_ids") or row.get("config_entry_ids") or row.get("backup_ids")) for row in phase_rows)
-            if (actual_entries, actual_configs, actual_backups) != (expected_entries, expected_configs, expected_backups) or empty_proxy or (not expected_any and phase_rows):
+            empty_cleanup_is_required = operation_kind == "uninstall" and phase == "cleanup_complete" and not expected_any
+            if (
+                (actual_entries, actual_configs, actual_backups) != (expected_entries, expected_configs, expected_backups)
+                or (empty_proxy and not empty_cleanup_is_required)
+                or (not expected_any and phase_rows and not empty_cleanup_is_required)
+            ):
                 issues.append(Issue("RECEIPT-OPERATION-COVERAGE", "$/operation/journal", f"{phase} coverage differs from the exact expected entry/config/backup sets"))
         if operation_kind == "uninstall":
             unrestored = {key for key in restoration_backup_ids if backups_by_id.get(key, {}).get("restored") is not True}
@@ -2209,7 +2253,16 @@ def inventory_issues() -> list[Issue]:
         if marker in policy_markers:
             issues.append(Issue("OWNER-DUPLICATE-POLICY", str(policy_path.relative_to(ROOT)), f"also declared in {policy_markers[marker]}"))
         policy_markers[marker] = str(policy_path.relative_to(ROOT))
-    expected_markers = {f"policy.{name}" for name in ("delegation", "contracts", "topologies", "review", "recovery", "memory")}
+    expected_markers = {
+        "policy.contracts",
+        "policy.delegation",
+        "policy.implementation",
+        "policy.memory",
+        "policy.recovery",
+        "policy.review",
+        "policy.software-review",
+        "policy.topologies",
+    }
     if set(policy_markers) != expected_markers:
         issues.append(Issue("OWNER-POLICY-MARKER", "policy/", f"found {sorted(policy_markers)}, expected {sorted(expected_markers)}"))
     return issues

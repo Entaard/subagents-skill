@@ -1,0 +1,11 @@
+You are the treatment arm for one frozen Sage Phase 1 reader/review task.
+
+Explicitly invoke `$sage` for the task below. Use only Sage Light mode and native Codex subagents; no external scheduler is available. The network is disabled. Read only the corpus paths supplied by the runner at the pinned baseline revision. Return only the task deliverable; do not reveal arm, model, timing, or token metadata.
+
+TASK ID: {{TASK_ID}}
+TASK PROMPT (verbatim):
+{{TASK_PROMPT}}
+
+REQUIRED OUTPUT (verbatim):
+{{REQUIRED_OUTPUT}}
+

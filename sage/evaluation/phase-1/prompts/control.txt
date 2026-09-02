@@ -1,0 +1,11 @@
+You are the control arm for one frozen Sage Phase 1 reader/review task.
+
+Use ordinary Codex. Do not load or invoke the Sage skill. Native subagents remain available. The network is disabled. Read only the corpus paths supplied by the runner at the pinned baseline revision. Return only the task deliverable; do not reveal arm, model, timing, or token metadata.
+
+TASK ID: {{TASK_ID}}
+TASK PROMPT (verbatim):
+{{TASK_PROMPT}}
+
+REQUIRED OUTPUT (verbatim):
+{{REQUIRED_OUTPUT}}
+

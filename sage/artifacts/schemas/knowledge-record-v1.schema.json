@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sage.local/schemas/knowledge-record-v1.schema.json",
+  "title": "Sage promoted knowledge record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "stable_id",
+    "class",
+    "status",
+    "rule",
+    "qualifier",
+    "recognizer",
+    "falsifier",
+    "provenance",
+    "stored_integrity_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "stable_id": {
+      "type": "string",
+      "pattern": "^sage-knowledge-v1:[A-Za-z0-9._-]+$"
+    },
+    "class": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["active", "retired"] },
+    "rule": { "type": "string", "minLength": 1 },
+    "qualifier": { "type": "string", "minLength": 1 },
+    "recognizer": { "type": "string", "minLength": 1 },
+    "falsifier": { "type": "string", "minLength": 1 },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "stored_integrity_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "local": { "type": "object" },
+    "promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "reviewed", "review_evidence", "expected_prior_sha256"],
+      "allOf": [
+        {
+          "if": {
+            "properties": { "action": { "enum": ["create", "revise"] } },
+            "required": ["action"]
+          },
+          "then": {
+            "required": ["evidence_class", "promotion_actor", "independent_refutation", "independence_review", "expected_utility", "novelty_review", "behavioral_evaluation"]
+          }
+        }
+      ],
+      "properties": {
+        "action": { "enum": ["create", "revise", "retire"] },
+        "evidence_class": { "enum": ["deterministic_invariant", "empirical_heuristic", "shared_policy_guidance"] },
+        "promotion_actor": { "type": "string", "minLength": 1 },
+        "reviewed": { "const": true },
+        "review_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "independent_refutation": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "independence_review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["judgment", "evidence", "limitations"],
+          "properties": {
+            "judgment": { "const": "independent" },
+            "evidence": { "type": "string", "minLength": 1 },
+            "limitations": { "type": "string", "minLength": 1 }
+          }
+        },
+        "expected_utility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["recognizer", "expected_benefit", "expected_cost", "net_assessment"],
+          "properties": {
+            "recognizer": { "type": "string", "minLength": 1 },
+            "expected_benefit": { "type": "string", "minLength": 1 },
+            "expected_cost": { "type": "string", "minLength": 1 },
+            "net_assessment": { "enum": ["positive", "non_positive", "uncertain"] }
+          }
+        },
+        "novelty_review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["compared_stable_ids", "peer_dispositions", "disposition", "rationale"],
+          "properties": {
+            "compared_stable_ids": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^sage-knowledge-v1:[A-Za-z0-9._-]+$" },
+              "uniqueItems": true
+            },
+            "peer_dispositions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["stable_id", "disposition", "rationale"],
+                "properties": {
+                  "stable_id": { "type": "string", "pattern": "^sage-knowledge-v1:[A-Za-z0-9._-]+$" },
+                  "disposition": { "enum": ["distinct", "overlap_accepted"] },
+                  "rationale": { "type": "string", "minLength": 1 }
+                }
+              }
+            },
+            "disposition": { "enum": ["novel", "revise_existing", "overlap_accepted"] },
+            "rationale": { "type": "string", "minLength": 1 }
+          }
+        },
+        "behavioral_evaluation": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "expected_prior_sha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "retirement_basis": {
+          "enum": ["falsifier_fired", "user_decision"]
+        },
+        "retirement_reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "canonical_ref", "recorded_at"],
+      "properties": {
+        "outcome": { "enum": ["equivalent_archived", "conflict_archived"] },
+        "canonical_ref": { "type": "string", "minLength": 1 },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 Canonical owner: `codex_experience`
 
-One repository-root `install.sh` is the only install and update entrypoint. One repository-root `uninstall.sh` is the only complete-removal entrypoint. Phase 0 specifies the contract; implementation and migration of the current scripts occur later.
+`sage/install.sh` is the only Sage-for-Codex install and update entrypoint. `sage/uninstall.sh` is its complete-removal entrypoint. The repository-root scripts remain owned by the preserved `sage-claude` distribution.
 
 ## Ownership receipt
 

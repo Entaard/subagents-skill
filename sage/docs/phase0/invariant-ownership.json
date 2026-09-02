@@ -15,6 +15,11 @@
     { "path": "sage-claude/bin/sage-index.sh", "role": "promoted-knowledge index" },
     { "path": "sage-claude/bin/sage-alt-guard.sh", "role": "current alternate-model dispatch guard" },
     { "path": "claude-skills/sage-promote/SKILL.md", "role": "current promotion workflow" },
+    { "path": "claude-skills/clean-code/SKILL.md", "role": "clean-code and test-loop source clauses" },
+    { "path": "claude-skills/clean-code/tests.md", "role": "observable public-seam testing source clauses" },
+    { "path": "claude-skills/clean-code/mocking.md", "role": "system-boundary mocking source clauses" },
+    { "path": "claude-skills/concurrency/SKILL.md", "role": "implementation-concurrency source clauses" },
+    { "path": "claude-skills/diff-review/SKILL.md", "role": "two-axis fixed-point review and smell baseline" },
     { "path": "install.sh", "role": "current install and update implementation" },
     { "path": "uninstall.sh", "role": "current removal implementation" },
     { "glob": "claude-agents/*.md", "role": "current worker role and tool profiles" },
@@ -23,6 +28,27 @@
     { "glob": "sage-claude/memory/local-seed/**/*.md", "role": "installed-local knowledge and journal seed" }
   ],
   "invariants": [
+    {
+      "id": "POL-SOFTWARE-IMPLEMENTATION",
+      "owner": "policy",
+      "canonical": "sage/policy/implementation.md#clean-code",
+      "obligation": "Mutation writers apply the one-read clean-code rules, branch-routed public-seam testing and boundary mocking, and the ownership test when code-level concurrency is observable.",
+      "classes": ["evidence", "completion"],
+      "baseline": [
+        { "path": "claude-skills/clean-code/SKILL.md", "section": "Clean code rules for an implementer agent" },
+        { "path": "claude-skills/clean-code/tests.md", "section": "Good and bad tests" },
+        { "path": "claude-skills/clean-code/mocking.md", "section": "When to mock" },
+        { "path": "claude-skills/concurrency/SKILL.md", "section": "Concurrency rules for an implementer agent" }
+      ]
+    },
+    {
+      "id": "POL-SOFTWARE-FIXED-POINT-REVIEW",
+      "owner": "policy",
+      "canonical": "sage/policy/software-review.md#pin-the-fixed-point",
+      "obligation": "Every software review uses separate Standards and Spec verdicts against one fixed point, gives Standards all 17 smells and repository rules, and leaves triage to the root.",
+      "classes": ["evidence", "completion"],
+      "baseline": [{ "path": "claude-skills/diff-review/SKILL.md", "section": "diff-review" }]
+    },
     {
       "id": "POL-AXIOM-PLACEMENT",
       "owner": "policy",
@@ -58,8 +84,8 @@
     {
       "id": "POL-POLICY-ACTOR-OWNS-JUDGMENT",
       "owner": "policy",
-      "canonical": "sage/policy/delegation.md#axioms",
-      "obligation": "Goals, risk, decomposition, triage, integration, and completion stay with the policy actor.",
+      "canonical": "sage/policy/delegation.md#root-and-worker-ownership",
+      "obligation": "The root declares and accepts baselines, grants writer leases, chooses criteria, accepts or adopts results, dispositions findings, settles conflicts, revises plans, and owns completion.",
       "classes": ["safety", "completion"],
       "baseline": [{ "path": "sage-claude/SKILL.md", "section": "Sage" }]
     },
@@ -667,7 +693,7 @@
       "id": "EXP-UNIVERSAL-INSTALL-UPDATE",
       "owner": "codex_experience",
       "canonical": "sage/docs/phase0/lifecycle-contract.md#install-and-update",
-      "obligation": "One repository-root installer preflights, stages, verifies, atomically replaces, preserves user state, health-checks, and converges after interruption.",
+      "obligation": "The Sage-for-Codex installer under sage/ preflights, stages, verifies, atomically replaces, preserves user state, health-checks, and converges after interruption without changing the repository-root Claude installer.",
       "classes": ["installation", "safety"],
       "baseline": [{ "path": "install.sh", "section": "script" }]
     },

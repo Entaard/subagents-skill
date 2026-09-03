@@ -52,6 +52,8 @@ Suggested direction:
 How to verify a fix:
 ```
 
+- **`ID:` must match the id shape `bin/sage-lint.sh` recognises, or its `triage-orphan` check silently skips that id** — that check's header comment in the script documents the grammar, its examples and its deliberate misses; read it there before inventing an id style. A duplicate `m7` once sat in the same table as a duplicate `O-1` and a duplicate `DIV-1` that the lint did catch, and it was found only by hand.
+
 - **Blocker**: crash, corruption, security failure, broken build, unusable core path, failed mandatory criterion.
 - **Major**: credible user-visible incorrectness, regression, serious performance or near-term maintainability failure.
 - **Minor**: bounded improvement; never blocks acceptance.

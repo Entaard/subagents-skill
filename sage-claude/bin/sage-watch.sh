@@ -6,24 +6,28 @@
 #   Probe:  SAGE_WINDOW=<n> [SAGE_COMPACT_AT=<n>] sage-watch.sh --status <subagents-dir>
 #
 #   SAGE_WINDOW always (unset, it assumes 1006380, the 1M window). SAGE_COMPACT_AT where the
-#   user stated a compaction point.
-#   SAGE_CHECKPOINT_TURN=<turn> at close, for saving-post-rung. Amounts take a k/K/m/M
-#   suffix; SAGE_CHECKPOINT_TURN is a bare integer.
+#   user stated a compaction point; a `compact_boundary` already in the transcript outranks
+#   it — measured beats stated. SAGE_STATE_DIR where the rung's markers live (default
+#   `${TMPDIR:-/tmp}/sage-watch`). SAGE_CHECKPOINT_TURN=<turn> at close, for saving-post-rung.
+#   Amounts take a k/K/m/M suffix; SAGE_CHECKPOINT_TURN is a bare integer.
 #
 #   ONE RUNG, `occ-checkpoint`, ladder mode and an explicit dir only, once per compaction
-#   segment. On it the parent checkpoints: `../SKILL.md` `## Compaction and resume`.
+#   segment: the first sample that sees the segment at or past the rung fires, then one marker
+#   keeps it silent until the next compaction. On it the parent checkpoints:
+#   `../SKILL.md` `## Compaction and resume`.
 #
 #     sage-watch occ-checkpoint checkpoint <session> [parent] "session transcript" \
-#       occupancy=302k window=1006380 compact-at=177779 source=measured rung=147779 pct=30%
+#       occupancy=148k window=200000 compact-at=177779 source=measured rung=147779 pct=83%
 #
-#   `--status` fires nothing; one parent line, then one line per unit:
+#   `--status` fires nothing; one parent line, then one line per unit. `pct=` is occupancy
+#   against `compact-at`, so 100% is the compaction itself. rung = compact-at minus
+#   max(5% of compact-at, 30000):
 #
-#     sage-watch status <session> [parent] "session transcript" model=<id> occupancy=160k \
-#       window=1006380 compact-at=<int> source=<measured|stated|assumed> rung=<int> \
-#       pct=16% compact=<n> turns=<n> occ-sum=<int> crossed-at=<turn|none> \
-#       saving-post-rung=<int>
-#     sage-watch status <agent-id> [<type>] "<desc>" done=yes spend=205k raw=496k \
-#       occupancy=173k idle=2379s repeat=1 records=44 compact=<n> model=<id>
+#     sage-watch status <session> [parent] "session transcript" model=claude-opus-5 \
+#       occupancy=146k window=1006380 compact-at=177779 source=measured rung=147779 \
+#       pct=82% compact=15 turns=188 occ-sum=28338505 crossed-at=4 saving-post-rung=16744418
+#     sage-watch status <agent-id> [explorer] "<desc>" done=yes spend=83k raw=235k \
+#       occupancy=75k idle=<s>s repeat=1 records=58 compact=0 model=claude-haiku-4-5-20251001
 #
 #   FAIL OPEN. `--status` printing nothing on stdout AND nothing on stderr means the
 #   sensor cannot run on this layout: disable it and write one ledger line. A line on
@@ -33,14 +37,22 @@
 #   The rest of this header is the maintainer's manual.
 # END RUN BLOCK
 #
+# The three sample lines above are real. With T1 = the a58bd85c session directory under
+# ~/.claude/projects/-mnt-c-Code-OrangeLogic-Testing-Tools:
+#   sage-watch.sh --status "$T1/subagents" | head -2        -> the two `--status` lines
+#     (idle= varies with the clock, so the sample leaves it as <s>)
+#   head -n 1253 "$T1.jsonl" > d/sess.jsonl; mkdir -p d/sess/subagents
+#   SAGE_WINDOW=200000 SAGE_STATE_DIR=$(mktemp -d) sage-watch.sh d/sess/subagents  -> the rung line
+#
 # It reads the in-flight subagent transcripts of one session, watches the single
 # parent-occupancy rung — the checkpoint rule in `../SKILL.md` ## Compaction and resume,
 # and `../references/execute.md` — and prints ONE LINE PER FIRED RUNG. A healthy sample
 # prints nothing and exits 0. It is hosted on `Monitor` with `persistent: true`, where
 # every stdout line becomes a notification, so silence is the default output.
 #
-# It never writes a file, never calls `TaskStop`, never kills a process, and never
-# touches a transcript. It reports; the parent acts.
+# It writes nothing but one empty marker directory per fired rung (THE LADDER below), never
+# calls `TaskStop`, never kills a process, and never touches a transcript. It reports; the
+# parent acts.
 #
 # ---------------------------------------------------------------------------
 # USAGE
@@ -86,6 +98,10 @@
 #                      THE COMPACTION POINT below falls through to `assumed`. A
 #                      `compact_boundary` in the transcript outranks it: measured beats
 #                      stated.
+#   SAGE_STATE_DIR     Env. Where the rung's markers live, one empty directory per project,
+#                      session and compaction count (THE LADDER below). Default
+#                      `${TMPDIR:-/tmp}/sage-watch`. A directory that cannot be created or
+#                      written leaves the rung firing on every sample: loud, never silent.
 #   SAGE_CHECKPOINT_TURN
 #                      Env, `--status` only, a BARE integer (no suffix). The turn the
 #                      checkpoint rung actually fired at, as recorded in the ledger's
@@ -158,8 +174,13 @@
 #   spend      sum of `input + cache_creation + output` over DEDUPLICATED records.
 #              Excludes `cache_read` — re-read context is not spend.
 #   occupancy  `input + cache_creation + cache_read` on the SINGLE MOST RECENT assistant
-#              record. Includes `cache_read` — those tokens are in the window.
-#              Point-in-time, never a sum. Reported by --status; fires no rung here.
+#              record that is not an API error. Includes `cache_read` — those tokens are in
+#              the window. Point-in-time, never a sum. Reported by --status; fires no rung
+#              here. An API-error record (`isApiErrorMessage`, model `<synthetic>`) carries
+#              zero usage: read as the newest turn it reported a live 344k parent as empty
+#              and a unit's model as `<synthetic>`, so `model`, `occupancy`, `turns` and
+#              `occ-sum` all skip such records. `done` and `records` still see them — an
+#              API error ends the unit's turn, and the raw count stays raw.
 #   idle       now minus the last record timestamp, which PROBE requires to be a string:
 #              a numeric or null one yields `-`, never a stale age (see the probe
 #              block). Reliable for liveness, noisy as a stall
@@ -197,12 +218,16 @@
 #              measured on a 200k window only, and is unknown on 1M. Treat an `assumed`
 #              compact-at as a placeholder, not a figure to price anything with.
 #
-#   rung = compact-at - max(WINDOW * 5 / 100, 30000)      (integer arithmetic)
+#   rung = compact-at - max(compact-at * 5 / 100, 30000)      (integer arithmetic)
+#   pct  = occupancy * 100 / compact-at
 #
-# The 30000 floor exists because 5% of a 200k window is 10k, which is about one minute of
-# measured parent burn and less than one large tool result — no room to bring a ledger
-# current in. Both of those are ESTIMATES too: per-turn growth has not been measured, so
-# the floor is a judgement, not a derivation. Re-measure before tightening it.
+# Both take `compact-at`, never WINDOW: a 200k session left on the 1M default read pct=14%
+# at a true 83% and took its margin as 50k of a 178k trigger, so a measured compaction
+# point that left the window out of both figures was still printing the window's fiction.
+# The 30000 floor exists because 5% of a 178k compaction point is under 9k, which is about
+# one minute of measured parent burn and less than one large tool result — no room to
+# bring a ledger current in. Both of those are ESTIMATES too: per-turn growth has not been
+# measured, so the floor is a judgement, not a derivation. Re-measure before tightening it.
 #
 # ---------------------------------------------------------------------------
 # THE LADDER — nothing in it recalls an agent automatically
@@ -218,16 +243,30 @@
 # is a SINGLE line, not per-agent, and it runs only when <subagents-dir> was passed
 # explicitly (DISCOVERY RULE above).
 #
-# FIRE ONCE PER SEGMENT, and STATELESSLY — no acknowledgement variable, nothing written
-# anywhere. A segment is the run of records AFTER the newest `compact_boundary` in FILE
-# order (or after the start of file, when there is none). Over that segment's assistant
-# records, deduplicated by `message.id` keeping each id's LAST record and held in
-# first-appearance order, the rung fires only when the LAST record is at or past the rung
-# AND no earlier record in the segment was. So the sample that first crosses fires; every
-# sample after it is silent, because an earlier record in the same segment has now crossed
-# too; and the next compaction starts a fresh segment, which can cross and fire again.
-# The transcript itself is the state, which is why this survives a compaction with no
-# variable to set and nothing to reset when the parent is restarted or resumed.
+# FIRE ONCE PER SEGMENT, with ONE MARKER as the latch. A segment is the run of records
+# AFTER the newest `compact_boundary` in FILE order (or after the start of file, when there
+# is none). The rung is LEVEL-triggered: it fires when ANY assistant record in the segment
+# is at or past the rung, so a sample that lands turns after the crossing still sees it.
+# Firing claims `<SAGE_STATE_DIR>/<project-slug>.<session-id>.<compaction-count>.fired` with
+# one `mkdir`, which succeeds for exactly one sample even when two overlap; a sample that
+# finds the marker stays silent, so an unchanged transcript sampled three times prints one
+# line, not three. The project slug is in the key because two fixture sessions with the same
+# directory name in different projects must not share a marker. The next compaction raises
+# the count, which is a fresh marker name, so
+# the next segment can cross and fire again. The marker is keyed by facts the transcript
+# carries, which is why a restarted or resumed parent needs nothing reset: the same session
+# and count find the same marker. The test must be a level test with a latch: an edge test
+# ("the newest record is the first past the rung") holds only between the crossing turn
+# and the next one, and a 60-second sampler misses 11 of 15 such crossings on the
+# reference parent while repeating on every idle sample.
+#
+# WHAT SAMPLING STILL CANNOT SEE: a segment that begins and ends between two samples. Its
+# compaction has already happened when the next sample lands, and a checkpoint fired then
+# would bring the ledger current for a window the compaction has already summarised, so
+# the rung does not fire on past segments. At the 60-second cadence `../references/execute.md` sets, every
+# crossing segment of the reference parent (each 4 to 30 minutes long) was seen, and at 120
+# seconds too; replaying
+# it at 300 seconds missed 3 of 15 and at 3600 seconds 12 of 15. The cadence is the bound.
 #
 # OUTPUT LINE SHAPE, fixed field order:
 #
@@ -246,8 +285,8 @@
 # `compact=` above zero on a UNIT line says that unit compacted mid-work, so its report was
 # written from a summary of its own transcript rather than from the transcript — the parent
 # treats that as a deviation to record (`../references/execute.md`). `model=` is the
-# `message.model` of that unit's newest deduplicated assistant record, `unknown` when it
-# has none.
+# `message.model` of that unit's newest assistant record that is not an API error, `unknown`
+# when it has none.
 #
 # A stale second positional argument prints one extra `note` line, `--status` only, before
 # every other line:
@@ -262,13 +301,16 @@
 # (never under discovery); `--status` prints it whether the dir was explicit or discovered:
 #
 #   sage-watch occ-checkpoint checkpoint <session-id> [parent] "session transcript" \
-#              occupancy=302k window=1006380 compact-at=177779 source=measured \
-#              rung=147779 pct=30%
+#              occupancy=148k window=200000 compact-at=177779 source=measured \
+#              rung=147779 pct=83%
 #
 #   sage-watch status <session-id> [parent] "session transcript" model=claude-opus-5 \
-#              occupancy=160k window=1006380 compact-at=177779 source=measured \
-#              rung=147779 pct=16% compact=15 turns=188 occ-sum=17262417 \
-#              crossed-at=42 saving-post-rung=9330288
+#              occupancy=146k window=1006380 compact-at=177779 source=measured \
+#              rung=147779 pct=82% compact=15 turns=188 occ-sum=28338505 \
+#              crossed-at=4 saving-post-rung=16744418
+#
+# (The same two real lines as the RUN BLOCK's samples; the note under END RUN BLOCK gives
+# the commands that reproduce them.)
 #
 # `compact-at`, `rung`, `occ-sum` and `saving-post-rung` print RAW, never `tok()`-shortened,
 # for the same reason `window=` does: the parent copies them straight into the ledger and a
@@ -276,17 +318,20 @@
 #
 # The `--status`-only fields after `pct=`:
 #   compact            how many `compact_boundary` records the parent transcript holds.
-#   turns              the deduplicated assistant record count over the WHOLE transcript.
-#   occ-sum            the sum of occupancy over those records (THE ARITHMETIC above).
+#   turns              the deduplicated assistant record count over the WHOLE transcript,
+#                      API-error records excluded (THE ARITHMETIC above).
+#   occ-sum            the sum of occupancy over those records.
 #   crossed-at         the 1-based index, in that same deduplicated first-appearance
 #                      order, of the first record at or past `rung` — or `none`. It is a
 #                      WHOLE-transcript figure, so it does not reset at a compaction the
 #                      way the rung's own fire test does.
 #   saving-post-rung   what a fresh window after the checkpoint could have saved: with T
 #                      = `SAGE_CHECKPOINT_TURN` when set to a positive integer, else
-#                      `crossed-at` (0 for `none`), the sum over deduplicated records
-#                      indexed above T of `max(occupancy - 60000, 0)`. The 60000 is the
-#                      floor a resumed parent would have carried anyway — skill, ledger
+#                      `crossed-at`, the sum over deduplicated records indexed above T of
+#                      `max(occupancy - 60000, 0)`. With neither a checkpoint turn nor a
+#                      crossing there is no origin and the field is 0 — a run that never
+#                      reached the rung had nothing a reset could have saved. The 60000 is
+#                      the floor a resumed parent would have carried anyway — skill, ledger
 #                      and re-read state — so what is left is the avoidable part. Price it
 #                      at the cache-read rate for `model=`, not the input rate.
 #
@@ -295,8 +340,9 @@
 # discovery resolved. `--status` prints this line first, explicit dir or discovered —
 # EXCEPT the five fail-open cases that print no parent line at all: the parent transcript
 # is missing, unreadable, or unparseable, it carries no assistant records, or its
-# occupancy reads 0. The ladder prints the line only under an explicit dir, and only on
-# the one sample per segment where `occ-checkpoint` fires.
+# occupancy reads 0 — the newest non-error assistant record carries no usage. The ladder
+# prints the line only under an explicit dir, and only on the one sample per segment where
+# `occ-checkpoint` fires.
 # `done` takes three values on `--status`: `yes` (clause a or b), `stale` (clause c — the
 # transcript is older than IDLE_CEIL, so the unit is presumed gone), and `no`.
 #
@@ -320,16 +366,17 @@
 #     probe has no actionable claim left to make. Machine sleep lands here too, and going
 #     quiet after it is the fail-open answer.
 #   - THE SENSOR CANNOT SEE THE WINDOW. It never could and nothing here changed that. It
-#     trusts `SAGE_WINDOW` for `pct=` and for the rung's margin, and a wrong value moves
-#     both: SMALLER than the real window fires EARLY and LOUD — measured: 900k against a
-#     real ~1,006,380 read 32% actual occupancy as 30% — and LARGER fires LATE or never —
-#     measured: 10m against the same occupancy read `pct=4%`. Neither direction goes silent
-#     on its own; a value that parses to 0 is treated as unparseable and falls back to the
-#     1006380 default (below), so it cannot zero out the percentage. A window under the
-#     30000 `assumed` reserve yields a negative compact-at, and so a rung that fires on the
-#     first sample — loud, not silent, which is the intended direction. Only discovery mode
-#     (above) silences the rung outright. Pass the resolved window explicitly rather than
-#     trusting the built-in default.
+#     trusts `SAGE_WINDOW` for the `assumed` compaction point only, and until the first
+#     boundary a wrong value moves `pct=` and the rung together: SMALLER than the real
+#     window fires EARLY and LOUD, LARGER fires LATE or never — measured: a 200k session
+#     left on the 1M default sat at 83% of its real trigger while the rung waited above
+#     900k (a58bd85c, before its first boundary). Neither direction goes silent on its own; a
+#     value that parses to 0 is treated as unparseable and falls back to the 1006380
+#     default (below), so it cannot zero out the percentage. A window under the 30000
+#     `assumed` reserve yields a negative compact-at, and so a rung that fires at the first
+#     sample holding any assistant record — loud, not silent, which is the intended
+#     direction. Only discovery mode (above) silences the rung outright. Pass the resolved
+#     window explicitly rather than trusting the built-in default.
 #   - What it CAN see is the compaction trigger, and only once one has fired: `measured`
 #     needs a `compact_boundary` already in the transcript. Before the first compaction it
 #     trusts `SAGE_COMPACT_AT`, and with neither it ASSUMES, on a reserve measured at one
@@ -337,15 +384,19 @@
 #     weakest figure this script prints.
 #   - `occ-checkpoint` fires ONCE per compaction segment and then goes quiet even though
 #     occupancy keeps climbing. A checkpoint that the parent misses, ignores, or dispatches
-#     past is not re-raised until the next compaction resets the segment.
+#     past is not re-raised until the next compaction resets the segment — or until someone
+#     deletes that segment's marker under SAGE_STATE_DIR, which re-arms it by hand.
 #
 # FAIL OPEN. An absent signal means no alarm, never a recall.
 
 IDLE_CEIL=21600         # 6h. Past this a not-yet-finished unit is presumed gone, not stalled
 COMPACT_RESERVE=30000   # `assumed` compact-at = WINDOW - this. Measured on 200k only
-CHECKPOINT_MARGIN_PCT=5 # rung = compact-at - max(this% of WINDOW, CHECKPOINT_MARGIN_FLOOR)
+CHECKPOINT_MARGIN_PCT=5 # rung = compact-at - max(this% of compact-at, CHECKPOINT_MARGIN_FLOOR)
 CHECKPOINT_MARGIN_FLOOR=30000
 RESUME_FLOOR=60000      # what a resumed parent carries anyway; saving-post-rung nets it off
+# One marker directory per fired rung lives here, keyed by project, session and compaction
+# count. It is the only thing this script ever writes (THE LADDER above).
+STATE_DIR="${SAGE_STATE_DIR:-${TMPDIR:-/tmp}/sage-watch}"
 
 # WINDOW: an integer, or an integer with a k/K (x1000) or m/M (x1000000) suffix. An
 # unparseable or unset SAGE_WINDOW falls back to the measured figure in
@@ -550,8 +601,8 @@ emit() {  # rung action id type desc figures...
 # occupancy sensor and `--status`, so it moves only against a fixture AND a whole-corpus
 # regression, and it moves by APPENDING fields, never by reordering them: every caller
 # reads positionally, and both callers absorb the tail they do not use.
-# Fields 10 to 14 are the compaction set: `model` (the newest deduplicated assistant
-# record's `message.model`, `unknown` with no assistant record), `compact` (how many
+# Fields 10 to 14 are the compaction set: `model` (the newest non-error assistant record's
+# `message.model`, `unknown` with none — THE ARITHMETIC above says why), `compact` (how many
 # `compact_boundary` records the file holds), `max_pretokens` (the largest
 # `compactMetadata.preTokens` across them, 0 with none -- `numbers` drops a null or string
 # one so `max` never returns a non-integer), `turns` (the deduplicated count, against
@@ -574,8 +625,9 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
 
 [inputs | fromjson? | select(type == "object")] as $all
 | [$all[] | select((.type? == "assistant") and (.message?.id? != null))] as $asst
+| [$asst[] | select(((.isApiErrorMessage? // false) != true) and (.message.model? != "<synthetic>"))] as $real
 | [$all[] | select((.type? == "system") and (.subtype? == "compact_boundary"))] as $bnd
-| ($asst | group_by(.message.id) | map(.[-1])) as $ded
+| ($real | group_by(.message.id) | map(.[-1])) as $ded
 | [$ded[] | (.message.content? // []) | if type == "array" then .[] else empty end
    | select(.type? == "tool_use")
    | {n: (.name // "?"), i: ((.input // {}) | tojson)}] as $calls
@@ -594,7 +646,7 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
 | [ $done,
     ([$ded[]  | .message.usage? // {} | spend_of] | add // 0),
     ([$asst[] | .message.usage? // {} | spend_of] | add // 0),
-    (if ($asst | length) == 0 then 0 else ($asst[-1].message.usage? // {} | occ_of) end),
+    (if ($real | length) == 0 then 0 else ($real[-1].message.usage? // {} | occ_of) end),
     (if ($stamps | length) == 0 then -1
      elif (($stamps[-1] | type) != "string") then -1
      else ($stamps[-1] | sub("\\.[0-9]+Z$"; "Z") | (fromdateiso8601? // -1)) end),
@@ -602,7 +654,7 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
     ($asst | length),
     (if $top == null then "-" else ($top.n | flat) end),
     (if $top == null then "-" else ($top.i | flat | .[0:70]) end),
-    (if ($asst | length) == 0 then "unknown" else ($asst[-1].message.model // "unknown" | flat) end),
+    (if ($real | length) == 0 then "unknown" else ($real[-1].message.model // "unknown" | flat) end),
     ($bnd | length),
     ([$bnd[] | .compactMetadata?.preTokens? | numbers] | max // 0),
     ($ded | length),
@@ -628,9 +680,24 @@ compact_at_of() {  # compact_at_of <max_pretokens> — echoes "<integer> <source
 }
 
 checkpoint_rung_of() {  # checkpoint_rung_of <compact-at> — echoes an integer
-  local margin=$((WINDOW * CHECKPOINT_MARGIN_PCT / 100))
+  local margin=$(($1 * CHECKPOINT_MARGIN_PCT / 100))
   [ "$margin" -ge "$CHECKPOINT_MARGIN_FLOOR" ] || margin=$CHECKPOINT_MARGIN_FLOOR
   printf '%d' $(($1 - margin))
+}
+
+# The latch behind FIRE ONCE PER SEGMENT (THE LADDER above): one empty marker directory per
+# session and compaction count, claimed with a bare `mkdir` so that two samples running at
+# once cannot both win. A state dir that cannot be written leaves the rung loud, never silent.
+fired_marker_of() {  # fired_marker_of <project-slug> <session-id> <compaction-count> — echoes a path
+  printf '%s/%s.%s.%s.fired' "$STATE_DIR" "$1" "$2" "$3"
+}
+claim_rung_fired() {  # claim_rung_fired <project-slug> <session-id> <compaction-count> — true once per segment
+  local marker
+  marker=$(fired_marker_of "$1" "$2" "$3")
+  mkdir -p "$STATE_DIR" 2>/dev/null || return 0
+  mkdir "$marker" 2>/dev/null && return 0
+  [ -e "$marker" ] && return 1
+  return 0
 }
 
 # ---------------------------------------------------------------------------
@@ -642,14 +709,14 @@ checkpoint_rung_of() {  # checkpoint_rung_of <compact-at> — echoes an integer
 # `dedup_ordered` keeps each id's LAST record and holds first-appearance order, which is
 # the turn numbering `crossed-at` and `SAGE_CHECKPOINT_TURN` both index into; `group_by`
 # would number the same turns by id and hand the parent an index it cannot act on.
-# `fires` is the once-per-segment test (THE LADDER above): the segment's last record is at
-# or past the rung and no earlier one in the segment was. Reading only the segment is what
-# makes it stateless — a compaction truncates the evidence, so the next climb is a first
-# crossing again, with nothing to acknowledge and nothing to reset.
+# `fires` is the level test (THE LADDER above): any record in the current segment is at or
+# past the rung. The once-per-segment latch is the marker the shell claims, not this program.
 CHECKPOINT='
 def num($x): if ($x|type) == "number" then $x else 0 end;
 def occ_of: num(.input_tokens) + num(.cache_creation_input_tokens) + num(.cache_read_input_tokens);
-def assistants: [.[] | select((.type? == "assistant") and (.message?.id? != null))];
+def assistants: [.[] | select((.type? == "assistant") and (.message?.id? != null)
+                             and ((.isApiErrorMessage? // false) != true)
+                             and (.message.model? != "<synthetic>"))];
 def dedup_ordered:
   reduce .[] as $r ({order: [], byid: {}};
       .order = (if .byid[$r.message.id] == null then .order + [$r.message.id] else .order end)
@@ -666,12 +733,10 @@ def occupancies: assistants | dedup_ordered | map(.message.usage? // {} | occ_of
 | ([$occs | to_entries[] | select(.value >= $rung) | .key + 1][0] // 0) as $crossed
 | (if $cpt > 0 then $cpt else $crossed end) as $origin
 | [ $crossed,
-    ([$occs | to_entries[] | select(.key + 1 > $origin)
-      | .value - $floor | if . > 0 then . else 0 end] | add // 0),
-    (if ($seg | length) == 0 then 0
-     elif ($seg[-1] < $rung) then 0
-     elif ([$seg[:-1][] | select(. >= $rung)] | length) > 0 then 0
-     else 1 end)
+    (if $origin == 0 then 0
+     else ([$occs | to_entries[] | select(.key + 1 > $origin)
+            | .value - $floor | if . > 0 then . else 0 end] | add // 0) end),
+    (if ([$seg[] | select(. >= $rung)] | length) > 0 then 1 else 0 end)
   ] | @tsv
 '
 
@@ -686,6 +751,7 @@ def occupancies: assistants | dedup_ordered | map(.message.usage? // {} | occ_of
 if [ "$STATUS" -eq 1 ] || [ "$EXPLICIT_DIR" -eq 1 ]; then
   session_dir=$(dirname "$DIR")
   session_id=$(basename "$session_dir")
+  project_slug=$(basename "$(dirname "$session_dir")")
   parent_transcript="$(dirname "$session_dir")/$session_id.jsonl"
 
   if [ -f "$parent_transcript" ] && [ -r "$parent_transcript" ]; then
@@ -706,10 +772,10 @@ EOF
       esac
       [ -n "$p_model" ] || p_model=unknown
       if [ -n "$p_occ" ] && [ "$p_recs" -ge 1 ] && [ "$p_occ" -gt 0 ]; then
-        p_pct=$(pct "$p_occ" "$WINDOW")
         evidence=$(compact_at_of "$p_pretok")
         compact_at="${evidence%% *}"
         at_source="${evidence#* }"
+        p_pct=$(pct "$p_occ" "$compact_at")
         rung=$(checkpoint_rung_of "$compact_at")
 
         crow=$("$JQ" -R -n -r --argjson rung "$rung" --argjson cpt "$CHECKPOINT_TURN" \
@@ -729,7 +795,7 @@ EOF
           printf 'sage-watch status %s [parent] "session transcript" model=%s occupancy=%s window=%s compact-at=%s source=%s rung=%s pct=%s%% compact=%s turns=%s occ-sum=%s crossed-at=%s saving-post-rung=%s\n' \
             "$session_id" "$p_model" "$(tok "$p_occ")" "$WINDOW" "$compact_at" "$at_source" \
             "$rung" "$p_pct" "$p_compact" "$p_turns" "$p_occsum" "$crossed_s" "$saving"
-        elif [ "$EXPLICIT_DIR" -eq 1 ] && [ "$fires" -eq 1 ]; then
+        elif [ "$EXPLICIT_DIR" -eq 1 ] && [ "$fires" -eq 1 ] && claim_rung_fired "$project_slug" "$session_id" "$p_compact"; then
           emit occ-checkpoint checkpoint "$session_id" parent "session transcript" \
             "occupancy=$(tok "$p_occ") window=$WINDOW compact-at=$compact_at source=$at_source rung=$rung pct=${p_pct}%"
         fi

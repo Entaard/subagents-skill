@@ -520,8 +520,8 @@
 #       protects anyway: `150k`/`500k` (the budget rail's own floors), `296k` (the anti-band
 #       observation "one point under the threshold... during a run actually at 11%"), `1–2k`
 #       (the report-size bound the brief contract computes with, both hyphens the corpus uses),
-#       and `30% of the` (the handover threshold, a computed predicate, never a population
-#       statistic). A hit is suppressed when the LINE containing it contains one of these
+#       and `max(5% of the compaction point, 30k)` (the checkpoint rung's margin, a computed
+#       predicate, never a population statistic). A hit is suppressed when the LINE containing it contains one of these
 #       substrings verbatim — a line match, not a token match, because the surrounding words are
 #       what make a figure a threshold rather than a statistic, and a token-only match would
 #       suppress a genuine `296k` appearing in an unrelated, unprotected sentence.
@@ -986,7 +986,7 @@ $_rf"
   # memory contract's "uses: 0" case) is the load-bearing anecdote itself, shape 1
   # in the lens's own vocabulary — the rule is unrecognisable without the concrete case, the
   # same reasoning that protects P-08's `296k`/`29%` anti-band anecdote.
-  FIGURE_EXCEPTIONS='150k|500k|296k|1–2k|max(5% of window, 30k)|200k and a 1M|sage-memory-v3 note, cross-machine half revised|≤10k words|including rules at counts of 24, 13 and 12|fetch-heavy research runs 70'
+  FIGURE_EXCEPTIONS='150k|500k|296k|1–2k|max(5% of the compaction point, 30k)|200k and a 1M|sage-memory-v3 note, cross-machine half revised|≤10k words|including rules at counts of 24, 13 and 12|fetch-heavy research runs 70'
 
   while IFS= read -r FFILE; do
     [ -n "$FFILE" ] || continue

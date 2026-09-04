@@ -22,7 +22,7 @@ Your job here: launch the wave, keep the ledger current while it runs, pick the 
 
 | Trigger | Action | Seen by |
 | --- | --- | --- |
-| Parent occupancy crosses the checkpoint rung (`compact-at` minus `max(5% of window, 30k)`) | Checkpoint: bring the ledger current, restamp `### Resume state` with `checkpoint: turn <n>`, write one `### Decisions and deviations` row with room remaining, work remaining and reserve, and surface it. Never a handover. | watchdog + you |
+| Parent occupancy crosses the checkpoint rung (`compact-at` minus `max(5% of the compaction point, 30k)`; it fires once per compaction segment, latched by a marker file under `SAGE_STATE_DIR`) | Checkpoint: bring the ledger current, restamp `### Resume state` with `checkpoint: turn <n>`, write one `### Decisions and deviations` row with room remaining, work remaining and reserve, and surface it. Never a handover. | watchdog + you |
 
 The probe reads the parent transcript itself, but only when the subagents dir was passed explicitly — discovery can resolve a different session's directory, so the checkpoint must never fire on it (`../bin/sage-watch.sh` header, DISCOVERY RULE).
 

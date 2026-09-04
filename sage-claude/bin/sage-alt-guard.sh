@@ -18,10 +18,10 @@
 #   report comes back, and the run believes it bought a second model family when it
 #   bought another in-family agent at a higher price.
 #
-#   `../references/harness.md` states the rule once, in "The alt lane" ("pass no `model` at all"). It has a measured
+#   `../references/alt-lane.md` states the rule once ("pass no `model` at all"). It has a measured
 #   failure anyway: one run spent real money proving three alt dispatches that tested
-#   nothing, and no agent noticed (figure and full account: ../references/harness.md,
-#   "## The alt lane"). It is the only rule in the corpus that is absolute, has a
+#   nothing, and no agent noticed (figure and full account:
+#   `../references/harness-measurements.md`, Spawning measurements). It is the only rule in the corpus that is absolute, has a
 #   deterministic predicate, and has zero legitimate exceptions — which is what makes it
 #   the one worth enforcing rather than asking for.
 #
@@ -154,7 +154,7 @@ decide() {
   reason="sage: dispatch \`$role\` with NO model parameter. The parameter wins over the agent \
 file, so passing model=\"$model\" replaces the outside-family model this row exists to buy — the \
 dispatch would succeed and test nothing. Remove the model parameter and dispatch again. \
-(~/.claude/skills/sage/references/harness.md, The alt lane.)"
+(~/.claude/skills/sage/references/alt-lane.md.)"
 
   # Both documented deny forms in one object (see the header): the legacy top-level pair
   # first — proven live, byte-identical to what it always emitted — then the

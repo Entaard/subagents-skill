@@ -38,7 +38,7 @@ Edit this block to tune the skill.
 | Fix rounds per unit | No attempt count — the rung is picked by the failure's **signature** (`references/execute.md`, the failure ladder) |
 | Review depth | one full round (1–2 disjoint lenses) + one fix-verification round, then blocker/major-only rounds until a **dry round** (`references/verify.md`) |
 | Watchdog | on whenever the transcript directory resolves; an occupancy sensor, notify-only (`references/execute.md`) |
-| Checkpoint rung | parent occupancy crosses the expected compaction point minus a margin of `max(5% of window, 30k)` → bring the ledger current and restamp `### Resume state`; never a handover (`bin/sage-watch.sh` run block) |
+| Checkpoint rung | parent occupancy crosses the expected compaction point minus a margin of `max(5% of the compaction point, 30k)` → bring the ledger current and restamp `### Resume state`; never a handover (`bin/sage-watch.sh` run block) |
 | Cortex word budget | 2,500 words — `bin/sage-lint.sh --corpus` fires when this file exceeds it |
 | Run-loaded word budget | 20,000 words — this file, every file a step names, and every script run block up to its `# END RUN BLOCK` marker; the lint fires when the sum exceeds it |
 
@@ -125,7 +125,8 @@ A unit whose `--status` line shows `compact=` above zero reported from a summary
 - `references/verify.md` — Step 5: review, adversarial verification, triage, the commit gate.
 - `references/record.md` — Step 6: the run record, the printed items, surfaced events, the closing obligations.
 - `references/topologies.md` — the orchestration patterns and the per-domain evidence menus. Read at Step 1.
-- `references/harness.md` — the run sheet: Claude Code mechanics, tier-to-model resolution, the alt lane, agent-file fields, the token arithmetic. Read at Step 2.
+- `references/harness.md` — the run sheet: Claude Code mechanics, tier-to-model resolution, agent-file fields, the token arithmetic. Read at Step 2.
+- `references/alt-lane.md` — the alt lane. Read only when an alt agent is in your live agent list.
 - `references/harness-measurements.md` — every dated figure behind the run sheet. A maintainer and `/sage-promote` read it; a run never does.
 - `references/memory.md` — the memory boundary, the Step 2 read, the Step 6 append, the journal grammar, the hint.
 - `references/authoring.md` — which form a piece of guidance should take. Read only when authoring corpus text, never during a run.

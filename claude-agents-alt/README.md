@@ -20,7 +20,7 @@ the agent could act on wrongly. A verifier reading its own prompt confirmed the 
 2026-08.
 
 **Parent-facing rules live in Sage's corpus, where the parent actually reads them:**
-`sage-claude/references/harness.md` under "The alt lane", with a shorter statement in `SKILL.md`.
+`sage-claude/references/alt-lane.md`, with a shorter statement in `references/harness.md`.
 Put a new parent rule there. Put only agent-actionable text in a template.
 
 ## The rules that moved here
@@ -70,4 +70,4 @@ Check with `diff <(sed 's/__ALT_MODEL__/MODEL/' <role>-alt.md.in) ../claude-agen
 Each twin also carries the `MODEL-FAMILY:` self-identification rule, because the family claim is
 measured from the report rather than assumed. A model that cannot observe its own identity writes
 `unknown`, which is an absent measurement rather than a same-family verdict; the parent settles it
-from the unit's transcript. That procedure is in the two "The alt lane" sections named above.
+from the unit's transcript. That procedure is in `sage-claude/references/alt-lane.md`.

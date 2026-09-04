@@ -20,6 +20,8 @@ Each figure carries its date, its population and the dedup rule it was computed 
 
 **`unknown` is an absent measurement, 2026-08-18.** An `explorer-alt` unit that really ran on `gpt-5.6-luna` reported `unknown` in its `MODEL-FAMILY:` line in the same run, because a model that cannot observe its own identity writes `unknown` honestly.
 
+**Spawn-depth limit history, changelog read 2026-08-20.** `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` was fixed at 5 through v2.1.216, dropped to 1 in v2.1.217, and reached its current 3 in v2.1.219; `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` (200, v2.1.212) was removed in v2.1.224. Three moves in three releases is why the run sheet says to check the limits table rather than trust it.
+
 ## Dedup distribution
 
 **Sidecar census, 2026-08-18, 212 sidecars.** `model` is **absent on 43%** of them; `parentAgentId` is present only on a nested spawn. This is a wider population than the transcript figures below, which is why it is counted separately rather than called "the same".

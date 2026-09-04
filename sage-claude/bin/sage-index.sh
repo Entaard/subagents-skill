@@ -13,7 +13,7 @@
 #   Fields missing from a file's frontmatter print as an em dash. A shared KI's band column is
 #   an em dash by design: the band is machine tracking, printed on its stats sidecar's row once
 #   a promote pass has written it -- an em dash there too until one has, with the sidecar's
-#   count as the interim signal (references/memory.md, The shape). `status` sits second-to-last
+#   count as the interim signal (the memory contract beside sage-promote, The shape). `status` sits second-to-last
 #   because its value is free payload that may run to paragraphs; every field before it is
 #   positional, so `cut -d'|' -f6` reliably reads last-used. The body excerpt is the first
 #   non-empty line after the frontmatter, truncated. Nothing is stored: the index is computed
@@ -21,7 +21,7 @@
 #
 # OUTPUT -- --stale mode
 #   The disuse NOTICE, and it is a notice only: nothing in this ecosystem removes a knowledge
-#   item for being unused (references/memory.md, "Knowledge items"). One line per KI whose age
+#   item for being unused (the memory contract beside sage-promote, "Knowledge items"). One line per KI whose age
 #   since last use is >= <months>, oldest first:
 #
 #     <id> | <kind> | last-used <date|never> | created <date|unknown> | <n> months
@@ -33,7 +33,7 @@
 #   Exit 0 whether or not anything is stale: an empty stale list is a result, not a failure.
 #
 #   A file under shared/ is SKIPPED here, and its stats sidecar stands in for it: a portable KI
-#   carries no date at all by design (references/memory.md, the field contract), so walking it
+#   carries no date at all by design (the memory contract beside sage-promote, the field contract), so walking it
 #   would mark every shared rule permanently unassessable. The sidecar reports under the id its
 #   `for:` names, tagged `via stats sidecar`, so the notice names the rule and not the sidecar.
 #   Two ways that indirection can break, and BOTH are reported rather than swallowed: a shared KI
@@ -48,7 +48,7 @@
 #
 # MALFORMED FILES
 #   A file with no opening frontmatter fence, an unclosed fence, or no id: is named on stderr
-#   and skipped -- the quarantine rule in references/memory.md, "Structural invariants". It
+#   and skipped -- the quarantine rule in the memory contract beside sage-promote, "Structural invariants". It
 #   never aborts the walk: one bad KI costs one line of stderr, not the index.
 #
 # EXIT CODES

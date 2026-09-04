@@ -18,7 +18,7 @@
 #   report comes back, and the run believes it bought a second model family when it
 #   bought another in-family agent at a higher price.
 #
-#   `../SKILL.md` states the rule three times ("pass no `model` at all"). It has a measured
+#   `../references/harness.md` states the rule once, in "The alt lane" ("pass no `model` at all"). It has a measured
 #   failure anyway: one run spent real money proving three alt dispatches that tested
 #   nothing, and no agent noticed (figure and full account: ../references/harness.md,
 #   "## The alt lane"). It is the only rule in the corpus that is absolute, has a

@@ -1,8 +1,32 @@
 #!/usr/bin/env bash
+# sage-lint.sh — deterministic record-integrity checker for one sage ledger.
 #
-# sage-lint.sh — deterministic record-integrity checker for ONE sage ledger (the single
-# markdown file, `.claude/plans/sage-ledger-<session>.md`, that records one orchestration
-# run — see `../references/dispatch.md` `## The ledger` for the prescribed shape).
+# RUN BLOCK. Two invocations, nothing else to configure:
+#
+#   sage-lint.sh <ledger-path>     check one ledger
+#   sage-lint.sh --corpus <dir>    check a sage skill directory's own corpus
+#
+# One line per violation, fixed field order:
+#
+#   sage-lint <check-id> <path>:<line> <message>
+#
+# A clean file prints NOTHING — no summary line, no "0 violations". Exit 0 clean, 1
+# violations were printed, 2 usage error (nothing was read), 3 the path is unreadable, is a
+# directory, or is not a ledger at all.
+#
+# The eleven ledger check ids: header state-enum triage-orphan triage-state findings-shape
+# plan-unit disclosure-home sections amend-tag splice secret-shape.
+#
+# Empty stdout WITH a line on stderr is not a clean file: a core tool (awk, sed, grep, sort,
+# cut, head) is missing. Install it and run again. Never disable this lint — not for that,
+# and not to quiet a violation. A violation still standing at Step 6 is a surfaced event,
+# written into the run record with the reason it stands.
+#
+# Everything below is the maintainer's manual: what each check reads, what it cannot see.
+# END RUN BLOCK
+#
+# The one file it checks is `.claude/plans/sage-ledger-<session>.md`, the record of one
+# orchestration run — see `../references/dispatch.md` `## The ledger` for the prescribed shape.
 #
 # It reads the one file it is given, prints ONE LINE PER VIOLATION, and prints NOTHING on a
 # clean ledger. It is a text linter: awk/sed/grep only, no `jq`, no network, no writes of any
@@ -18,8 +42,9 @@
 #   <ledger-path>       The one file to check. Required, exactly one.
 #   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a
 #                        twelfth ledger check: it checks a sage skill DIRECTORY's own
-#                        corpus for
-#                        dangling `.md` citations, not a ledger. `<dir>` must carry a
+#                        corpus for dangling `.md` citations, credential shapes in its
+#                        memory, and machine-local facts in its portable memory template,
+#                        not a ledger. `<dir>` must carry a
 #                        readable `SKILL.md`; `--corpus` with no following argument, or with
 #                        more than one argument total, is a usage error (exit 2) exactly like
 #                        the ledger form.
@@ -57,23 +82,10 @@
 #     Fires: line 1 is not a one-line HTML comment containing the literal text
 #       `sage occupancy duty` — three messages, one each for: the phrase is absent from the
 #       whole file; it is present but on a line other than 1; or the comment opens on line 1
-#       but does not close on line 1 (a multi-line comment — the fields cannot be read from
-#       line 1, so `header-fields` has nothing to parse and stays silent).
-#     Cannot see: a header restamped with stale figures — this check only looks at whether
-#       the comment exists and sits first, never whether its numbers are current.
-#
-#   header-fields
-#     Reads: the same line 1 comment, ONLY when `header` found it there (a check that has
-#       nothing to parse stays silent rather than re-reporting `header`'s own finding).
-#     Fires: the comment carries no `Generation: <N>` field, or N is not a bare positive
-#       integer (this is what catches both a literal `0` and a fraction like `0/3` — neither
-#       is "a generation", one is the zero-eth and the other is not a count at all); or the
-#       comment carries no `role:` field, or the role word is none of `parent`,
-#       `supervisor` or `successor`. All three are legal actors; WHICH one writes the field
-#       when is defined in `../references/dispatch.md` `## The ledger` and is deliberately
-#       not restated here.
-#     Cannot see: whether the Generation number is actually RIGHT for this run — only that it
-#       is a well-formed positive integer.
+#       but does not close on line 1 (a multi-line comment).
+#     Cannot see: anything INSIDE the comment. The occupancy figures it carries are restamped
+#       prose, not fields: this check looks at whether the comment exists and sits first,
+#       never at what it says or whether its numbers are current.
 #
 #   state-enum
 #     Reads: the Unit table's header row (to find the column literally labelled `state`,
@@ -105,9 +117,13 @@
 #       has a triage row". Candidate ids (things that might be orphans) are harvested from
 #       two places: (a) the first column of tables OUTSIDE every prescribed section, plus
 #       tables under `Run record` (whose summaries can cite ids that were never triaged).
-#       `Plan`, `Unit table`, `Assumption log` and `Decisions and deviations` each carry
-#       their own id/index namespace (plan/unit ids, `A1`, `A2`..., `D1`, `D2`...) and the
-#       Findings section supplies the triage set — none of the five is a candidate source.
+#       `Plan`, `Unit table`, `Assumption log`, `Decisions and deviations`, `Resume state`
+#       and `Open questions and discarded approaches` each carry their own id/index namespace
+#       (plan/unit ids, `A1`, `A2`..., `D1`, `D2`..., a resume checkpoint, an `open`/
+#       `discarded` kind) and the Findings section supplies the triage set — none of the
+#       seven is a candidate source. `Resume state` and `Open questions and discarded
+#       approaches` are prescribed HERE, and in every other check that keys on a section
+#       name, but NOT in `sections`: see that check's entry for why.
 #       The exclusion is by prescribed SECTION, never by a table's header label: an earlier
 #       draft also dropped any table whose first column was labelled `id`/`#`/`when`/
 #       `assumption`, and that let a fix table headed `id`, holding an untriaged blocker,
@@ -312,10 +328,16 @@
 #
 #   sections
 #     Reads: every `##`/`###` heading line in the document (outside fences), compared against
-#       the six prescribed names: `Plan`, `Unit table`, `Assumption log`,
+#       the six REQUIRED names: `Plan`, `Unit table`, `Assumption log`,
 #       `Decisions and deviations`, `Findings and dispositions`, `Run record`.
-#     Fires: a prescribed name that appears zero times (missing), or more than once
+#     Fires: a required name that appears zero times (missing), or more than once
 #       (repeated) — one violation per offending name, not per extra occurrence.
+#     `Resume state` and `Open questions and discarded approaches` are deliberately NOT on
+#       that list, though `triage-orphan` and every other section-keyed check treats them as
+#       prescribed. `../references/dispatch.md` `## The ledger` added them after the ledgers
+#       already on this machine were written, and requiring them here would fail 21 real
+#       ledgers for predating the rule — the same fail-quiet reasoning `amend-tag` applies to
+#       its own precondition. Adding a name to this list is a corpus decision, not a spec one.
 #     Cannot see: a heading text that is CLOSE but not exact (`### Decisions and deviations
 #       (continued)` does not count as a second `Decisions and deviations` — it is a
 #       different heading string, and this check does not guess at near-misses). Where that
@@ -351,6 +373,26 @@
 #       guesswork. Measured: zero findings across the 18 ledgers in `.claude/plans/`, three
 #       on the spliced fixture.
 #
+#   secret-shape
+#     Reads: every line of the ledger outside a fenced (```) code block — $SANITIZED, the same
+#       fence-blanked text every check above reads.
+#     Fires: one line per match of one of SIX fixed credential shapes — an AWS access key id
+#       (`AKIA` and sixteen upper-case-or-digit characters), a PEM private key header
+#       (`-----BEGIN ... PRIVATE KEY-----`), a GitHub token (`ghp_` and thirty-six), a Slack
+#       token (`xox[baprs]-` and ten or more), a `Bearer` token (twenty or more) and an
+#       OpenAI-style key (`sk-` and twenty or more).
+#     The message NEVER echoes the match. It names the shape and the FIRST FOUR characters,
+#       and that is deliberate: this line is written into the run record and into
+#       notifications, so copying the secret into either would widen the very leak the check
+#       exists to catch. A hit at Step 6 is a surfaced event like any other lint line
+#       (`../references/record.md`).
+#     Engine: awk, one program shared with the corpus arm below. `grep -E` would give brace
+#       intervals (`{16}`) on both GNU and BSD grep, and awk gives none on mawk or BSD awk, so
+#       the shapes are BUILT by repeating a character class instead — one engine, one fence
+#       convention, one copy of the six shapes, and the file's interval-free rule kept.
+#     Cannot see: anything but these six formats. No generic high-entropy detection, no other
+#       vendor's spelling, nothing inside a fence, and nothing split across two lines.
+#
 # ---------------------------------------------------------------------------
 # CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a twelfth ledger check.
 # It never reads a ledger and the eleven checks above never run in it. `corpus-citation` exists
@@ -361,7 +403,7 @@
 #
 #   corpus-citation
 #     Reads: `<dir>/SKILL.md`, every `<dir>/references/*.md`, every `<dir>/bin/*.sh`, and the
-#       five sage agent files (found as described below) — each OUTSIDE its own fenced (```)
+#       four sage agent files (found as described below) — each OUTSIDE its own fenced (```)
 #       code blocks — the same fence-blanking convention the ledger's "is a ledger" test uses
 #       above, reused rather than re-written, so a path quoted inside a fence as an example is
 #       never treated as a citation. `bin/*.sh` was added because a script header can cite a
@@ -369,11 +411,11 @@
 #       citations.
 #     Finding the agent files: the first of these that exists —
 #       `$SAGE_AGENT_DIR`, then `<dir>/../claude-agents`, then `~/.claude/agents` — supplies
-#       the directory, and ONLY these five basenames are read from it:
-#       explorer.md, implementer.md, orchestrator.md, verifier.md, web-researcher.md.
+#       the directory, and ONLY these four basenames are read from it:
+#       explorer.md, implementer.md, verifier.md, web-researcher.md.
 #       `~/.claude/agents/` is the user's own directory and holds agents unrelated to this
 #       corpus, so nothing else there is read. No directory found in that order → scan none of
-#       the five and stay silent, the same FAIL-QUIET spirit as a missing `references/`.
+#       the four and stay silent, the same FAIL-QUIET spirit as a missing `references/`.
 #     What counts as a citation: a backtick-wrapped span whose entire content is a `.md` path
 #       — letters, digits, `.`, `_`, `-`, `/` — immediately followed by nothing but the
 #       closing backtick. Resolved relative to the CITING FILE'S OWN DIRECTORY for `SKILL.md`
@@ -431,7 +473,7 @@
 #       - a `~`-rooted span (`~/.claude/CLAUDE.md`) — it names a path outside this corpus
 #         entirely (the user's global config, an installed file, never a file this corpus
 #         ships), so it is skipped, not resolved and not flagged;
-#       - any agent basename other than the five named above, or any file under a `bin/`,
+#       - any agent basename other than the four named above, or any file under a `bin/`,
 #         `references/` or agent directory this dir-discovery order never reaches — a
 #         second sage install with `SAGE_AGENT_DIR` unset and no `<dir>/../claude-agents`
 #         reads `~/.claude/agents` and nothing else, silently, per FAIL QUIET.
@@ -442,12 +484,14 @@
 #       that rule until now; a prior audit found violations the exception list below has to
 #       carry, and a wrong exception list would either miss real ones or drown the caller in
 #       protected figures re-reported forever.
-#     Reads: `<dir>/SKILL.md` and every `<dir>/references/*.md` **except `../references/harness.md`**
+#     Reads: `<dir>/SKILL.md` and every `<dir>/references/*.md` **except `../references/harness.md`
+#       and `../references/harness-measurements.md`**
 #       — outside fenced code blocks, same fence convention as `corpus-citation`. `bin/*.sh` and
-#       the five agent files are OUT OF SCOPE, on purpose, for the same reason `corpus-citation`
+#       the four agent files are OUT OF SCOPE, on purpose, for the same reason `corpus-citation`
 #       gave `bin/` a pass: a script header legitimately carries the measurement it documents.
-#       `../references/harness.md` is excluded the same way and for the same reason, not a
-#       narrower one: it is the corpus's own declared destination for exactly this data —
+#       `../references/harness-measurements.md` is excluded the same way and for the same reason,
+#       not a narrower one: it is the corpus's own declared destination for exactly this data, and
+#       `../references/harness.md` keeps the two verification dates a run reads as its docs-drift trigger —
 #       "harness facts go to harness.md with their measurement, date and population" is
 #       `../SKILL.md`'s own instruction, restated at half a dozen citation sites — so treating
 #       its normal contents as
@@ -496,17 +540,65 @@
 #       rather than detecting one instance of it — the repo's 2026-08-28-sage-cortex-extraction.md
 #       §8, closing paragraph. `../SKILL.md` has never once shrunk in the history this repo can measure.
 #     Reads: `<dir>/SKILL.md`'s `## Defaults` section, outside fenced code blocks (same fence
-#       convention `corpus-figure` uses immediately above, reused rather than re-written), one
-#       row, for a budget declared as `Cortex word budget | <N> words`, `<N>` a bare positive
-#       integer (commas allowed, e.g. `12,500`). **No such row → silent, always** — the same
-#       fail-quiet spirit `corpus-citation` and the eleven ledger checks already carry: an
-#       undeclared budget is not a violation, it is a knob nobody has turned yet.
-#     Fires: at most once, when a budget IS declared and `wc -w <dir>/SKILL.md` exceeds it —
-#       `<check-id>` `cortex-budget`, naming the measured word count and the declared budget.
+#       convention `corpus-figure` uses immediately above, reused rather than re-written), for
+#       TWO rows — `Cortex word budget | <N> words` and `Run-loaded word budget | <N> words`,
+#       each `<N>` a bare positive integer (commas allowed, e.g. `12,500`). **No such row →
+#       silent, always**, per row and independently — the same fail-quiet spirit
+#       `corpus-citation` and the eleven ledger checks already carry: an undeclared budget is not
+#       a violation, it is a knob nobody has turned yet. One check id covers both rows: they
+#       bound the same thing, what a run has to read, at two radii.
+#     The cortex row bounds `wc -w <dir>/SKILL.md` alone — the router a run always loads.
+#     The run-loaded row bounds the whole set a run actually reads, computed as: SKILL.md's
+#       own words; plus every distinct `references/<name>.md` cited in a backtick span inside
+#       a `## Step <1-6>` section (heading to the next `## `, fenced lines excluded), whole;
+#       plus, for every `bin/<name>.sh` cited the same way, only its RUN BLOCK — line 1
+#       through the first `# END RUN BLOCK`, which is all a run is told to read. A script with
+#       no marker counts entire, deliberately: a missing marker then shows as a loud total
+#       instead of as silence. A cited file that does not exist counts zero, because
+#       `corpus-citation` already reports it and two lines about one defect say nothing new.
+#     A file no step section names is OUTSIDE this total even when the corpus ships it and
+#       `## References` lists it — `references/authoring.md`,
+#       `references/harness-measurements.md`, `bin/sage-alt-guard.sh` are the live examples. A run never loads them; a maintainer
+#       and `/sage-promote` do, and the budget bounds runs.
+#     Fires: at most once per row — `<check-id>` `cortex-budget` both times, the cortex line
+#       naming the measured word count and the declared budget, the run-loaded line naming the
+#       total, the budget, and every file counted with its own figure.
 #     Cannot see: a budget declared in the wrong table, spelled with a different label, or a
 #       negative or zero figure (any of those read as "no budget declared" and stay silent,
 #       never crash and never misreport a huge violation on a typo) — a caller who suspects a
-#       silent budget checks `## Defaults` by hand.
+#       silent budget checks `## Defaults` by hand. Nor can it see a file a step section names
+#       in prose rather than in a backtick span, or one a reference file itself pulls in: this
+#       is a one-hop scan of SKILL.md's own step sections, never a transitive closure, so a
+#       real run that follows a citation out of a step file reads more than this total says.
+#
+#   secret-shape (the ledger check's six shapes, over the memory corpus)
+#     Why here: a knowledge item is committed to a repository, and the leak that matters in a
+#       repository is a credential, a private path, or a user's identity.
+#     Reads: every `.md` file under `<dir>/memory/` — `journal.md`, and every file one
+#       directory down (`shared/`, `local/`, `local-seed/`, `archive/`) — outside fences.
+#     Fires: exactly as the ledger check above, with the memory file's path, and with the same
+#       four-character message that never echoes the match.
+#     Cannot see: a file more than one directory below `memory/` (the shipped layout has
+#       none), plus everything the ledger check cannot see.
+#
+#   shared-leak
+#     Reads: `<dir>/memory/shared/*.md` ONLY — the portable template that ships to every
+#       machine — outside fences. `local/`, `local-seed/` and the journal are per-machine BY
+#       DESIGN, so a machine-local fact is correct there and reading them would report every
+#       file for doing its job.
+#     Fires: one line per hit, three shapes — an absolute path (a token opening `/Users/`,
+#       `/home/`, `/root/`, `/mnt/`, `/tmp/`, `/private/`, or a `C:\` drive prefix); a session
+#       id (a 36-character hex UUID, or a bare 8-hex token immediately after `run ` or
+#       `session `, kept that narrow because eight hex characters alone are also a commit sha
+#       and a hundred ordinary words); and a `k`-suffixed absolute cost, `corpus-figure`'s own
+#       cost pattern reused rather than re-written.
+#     The message DOES echo the token, to 24 characters: a path or a session id is not a
+#       secret, and naming it is what makes the line editable. `secret-shape` above is the
+#       opposite case and says so in its own entry.
+#     Not part of `corpus-figure`: that check rules SKILL.md and references/, this one rules
+#       the shared memory template, and one id per scope keeps either one suppressible alone.
+#     Cannot see: a relative path, a hostname, or a user name written as a plain word — all
+#       machine-local, none with a shape to key on, all silence per FAIL QUIET.
 #
 #     Exit codes for this mode only: 0 clean, 1 dirty (same meaning as the ledger form), 2 a
 #       `--corpus` usage error, 3 `<dir>` is missing/unreadable/not a directory, or carries no
@@ -592,8 +684,9 @@ usage() {
   printf '%s\n' \
     'sage-lint.sh <ledger-path>       check one ledger, one violation per line, silent if clean' \
     'sage-lint.sh --corpus <dir>      check a sage skill dir'"'"'s own .md citations, dated/' \
-    '                                  absolute figures, and cortex word budget, across' \
-    '                                  SKILL.md, references/, bin/*.sh, and the five sage' \
+    '                                  absolute figures, its two word budgets, and credential and' \
+    '                                  machine-local shapes in its memory, across SKILL.md,' \
+    '                                  references/, bin/*.sh, memory/, and the four sage' \
     '                                  agent files (separate mode)' \
     'sage-lint.sh --help              this reminder' \
     '' \
@@ -601,9 +694,10 @@ usage() {
     '       which), 1 dirty, 2 usage error, 3 path unreadable/dir/not-a-ledger (or, in' \
     '       --corpus mode, dir unreadable/not-a-dir/no SKILL.md).' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
-    'Checks: header header-fields state-enum triage-orphan triage-state findings-shape' \
-    '        plan-unit disclosure-home sections amend-tag splice (ledger mode, all eleven)' \
-    '        corpus-citation corpus-figure cortex-budget          (--corpus mode, its three checks)'
+    'Checks: header state-enum triage-orphan triage-state findings-shape plan-unit' \
+    '        disclosure-home sections amend-tag splice secret-shape  (ledger mode, all eleven)' \
+    '        corpus-citation corpus-figure cortex-budget secret-shape shared-leak' \
+    '                                                     (--corpus mode, its five checks)'
 }
 
 # Core-tool preflight. Without it this script INVENTS violations instead of failing quiet:
@@ -623,6 +717,45 @@ preflight_tools() {  # preflight_tools <noun-for-the-stderr-message>
     fi
   done
 }
+
+# ---------------------------------------------------------------------------
+# secret-shape's one awk program, shared by the ledger check and the corpus memory scan (see
+# THE CHECKS and CORPUS MODE above). The six shapes are BUILT in BEGIN by repeating a
+# character class instead of written with a `{n}` interval, because mawk and BSD awk have no
+# brace intervals -- the same interval-free rule the rest of this file runs under. Fence
+# blanking is done here too, so ledger mode can feed it the already-blanked $SANITIZED and
+# corpus mode can feed it a raw file, with one copy of the shapes between them.
+AWK_SECRET='
+  function rep(cls, n,   s, i) { s = ""; for (i = 0; i < n; i++) s = s cls; return s }
+  function shape(nm, pat) { ns++; sname[ns] = nm; spat[ns] = pat }
+  BEGIN {
+    ns = 0
+    shape("aws access key id", "AKIA" rep("[0-9A-Z]", 16))
+    shape("pem private key", "-----BEGIN [A-Z ]*PRIVATE KEY-----")
+    shape("github token", "ghp_" rep("[A-Za-z0-9]", 36))
+    shape("slack token", "xox[baprs]-" rep("[A-Za-z0-9-]", 10) "[A-Za-z0-9-]*")
+    shape("bearer token", "Bearer " rep("[A-Za-z0-9._-]", 20) "[A-Za-z0-9._-]*")
+    shape("openai key", "sk-" rep("[A-Za-z0-9]", 20) "[A-Za-z0-9]*")
+  }
+  {
+    t = $0
+    sub(/^[ \t]+/, "", t)
+    if (t ~ /^```/) { infence = !infence; next }
+    if (infence) next
+    for (i = 1; i <= ns; i++) {
+      rest = $0
+      while (match(rest, spat[i])) {
+        start = RSTART
+        len = RLENGTH
+        # The first four characters and nothing more: this line is written into the ledger
+        # and into notifications, so echoing the match would widen the leak it reports.
+        printf "sage-lint secret-shape %s:%d carries a credential-shaped string (%s, starts '"'"'%s'"'"')\n", \
+          FILE, NR, sname[i], substr(rest, start, 4)
+        rest = substr(rest, start + len)
+      }
+    }
+  }
+'
 
 # ---------------------------------------------------------------------------
 # Arguments
@@ -667,7 +800,7 @@ if [ -n "${CORPUS_DIR-}" ]; then
 
   preflight_tools "corpus"
 
-  # SKILL.md plus every references/*.md sibling seed the corpus; bin/*.sh and the five agent
+  # SKILL.md plus every references/*.md sibling seed the corpus; bin/*.sh and the four agent
   # files join below. No references/ dir is not an error — SKILL.md alone still gets checked
   # (fail quiet, same spirit as the ledger side).
   CORPUS_FILES="$SKILL_FILE"
@@ -687,11 +820,11 @@ $_bf"
     done
   fi
 
-  # The five sage agent files join too. Directory discovery, first that exists:
-  # $SAGE_AGENT_DIR, then <dir>/../claude-agents, then ~/.claude/agents. Only the five
+  # The four sage agent files join too. Directory discovery, first that exists:
+  # $SAGE_AGENT_DIR, then <dir>/../claude-agents, then ~/.claude/agents. Only the four
   # basenames below are read from it — ~/.claude/agents/ is the user's own directory and
   # holds agents unrelated to this corpus. No directory found in that order → scan none of
-  # the five, silently (see CORPUS MODE, header above).
+  # the four, silently (see CORPUS MODE, header above).
   AGENT_DIR=""
   for _cand in "${SAGE_AGENT_DIR-}" "$CORPUS_DIR/../claude-agents" "$HOME/.claude/agents"; do
     if [ -n "$_cand" ] && [ -d "$_cand" ]; then
@@ -700,7 +833,7 @@ $_bf"
     fi
   done
   if [ -n "$AGENT_DIR" ]; then
-    for _an in explorer implementer orchestrator verifier web-researcher; do
+    for _an in explorer implementer verifier web-researcher; do
       _af="$AGENT_DIR/$_an.md"
       [ -e "$_af" ] && CORPUS_FILES="$CORPUS_FILES
 $_af"
@@ -720,14 +853,14 @@ $1"; fi
       */*) CDIR="${CFILE%/*}" ;;
       *)   CDIR="." ;;
     esac
-    # The five agent files resolve corpus-relative to <dir>, never to their own directory
+    # The four agent files resolve corpus-relative to <dir>, never to their own directory
     # (see CORPUS MODE, header above, "The one exception, and why"): an agent file carries no
     # references/ of its own, and every sage path it names is a sage-corpus path.
     if [ -n "$AGENT_DIR" ] && [ "$CDIR" = "$AGENT_DIR" ]; then
       CDIR="$CORPUS_DIR"
     fi
     # A bin/*.sh file additionally resolves corpus-relative to <dir> (see the fallback below):
-    # unlike the five agent files, a script under bin/ already cites most corpus paths
+    # unlike the four agent files, a script under bin/ already cites most corpus paths
     # `../`-prefixed and those keep resolving from the script's own directory; this flag only
     # widens resolution for the bare corpus-relative spelling.
     case "$CFILE" in
@@ -818,13 +951,15 @@ EOF
   # ---------------------------------------------------------------------------
   # corpus-figure — see CORPUS MODE, header above, for what it reads, the three shapes it
   # matches, and why the exception list holds exactly these entries. `bin/*.sh`, the agent
-  # files, and ../references/harness.md are never in FIGURE_FILES: excluded above `CORPUS_FILES`
+  # files, ../references/harness.md and ../references/harness-measurements.md are never in FIGURE_FILES: excluded above `CORPUS_FILES`
   # is built for `corpus-citation`, this list is built separately and on purpose.
   FIGURE_FILES="$SKILL_FILE"
   if [ -d "$CORPUS_DIR/references" ]; then
     for _rf in "$CORPUS_DIR"/references/*.md; do
       [ -e "$_rf" ] || continue
-      [ "$(basename "$_rf")" = "harness.md" ] && continue
+      # harness.md is the run sheet of harness rules; harness-measurements.md is the declared
+      # home of every dated figure behind it. Both carry figures by design (header above).
+      case "$(basename "$_rf")" in harness.md|harness-measurements.md) continue ;; esac
       FIGURE_FILES="$FIGURE_FILES
 $_rf"
     done
@@ -848,10 +983,10 @@ $_rf"
   # quotes to show a FORMAT rather than assert a fact about this machine — the same shape
   # `../references/dispatch.md`'s own worked ledger table uses, fenced off there and quoted
   # in-line here. A real per-machine measurement narrated as evidence for a rule (the
-  # `references/memory.md:76` "uses: 0" case) is the load-bearing anecdote itself, shape 1
+  # memory contract's "uses: 0" case) is the load-bearing anecdote itself, shape 1
   # in the lens's own vocabulary — the rule is unrecognisable without the concrete case, the
   # same reasoning that protects P-08's `296k`/`29%` anti-band anecdote.
-  FIGURE_EXCEPTIONS='150k|500k|296k|1–2k|30% of the|sage-memory-v3 note, cross-machine half revised|≤10k words|including rules at counts of 24, 13 and 12|fetch-heavy research runs 70'
+  FIGURE_EXCEPTIONS='150k|500k|296k|1–2k|max(5% of window, 30k)|200k and a 1M|sage-memory-v3 note, cross-machine half revised|≤10k words|including rules at counts of 24, 13 and 12|fetch-heavy research runs 70'
 
   while IFS= read -r FFILE; do
     [ -n "$FFILE" ] || continue
@@ -921,31 +1056,204 @@ $FIGURE_FILES
 EOF
 
   # ---------------------------------------------------------------------------
-  # cortex-budget — see CORPUS MODE, header above. Fail quiet on an undeclared budget: no row,
-  # no violation, ever. Reads only the `## Defaults` section, outside fenced code blocks, same
-  # fence convention `corpus-figure` uses immediately above — so a budget row quoted as an
-  # example (fenced, or under a different heading) is never read as the real one.
-  BUDGET_LINE=$(awk '
+  # cortex-budget — two declared budgets, one check id. See CORPUS MODE, header above, for
+  # what each row bounds and what neither can see.
+
+  # declared_budget <label> — the bare positive integer that `| <label> | <N> words` declares
+  # in SKILL.md's `## Defaults` section, or nothing at all. Commas are stripped (`12,500`).
+  # Outside fenced code blocks, same fence convention `corpus-figure` uses above, so a budget
+  # row quoted as an example (fenced, or under another heading) is never read as the real one.
+  # No row, or a figure that is not a positive integer, prints nothing and the caller stays
+  # silent: an undeclared budget is a knob nobody has turned yet, not a violation.
+  declared_budget() {  # declared_budget <row-label>
+    awk -v label="$1" '
+      {
+        t = $0
+        sub(/^[ \t]+/, "", t)
+        if (t ~ /^```/) { infence = !infence; next }
+        if (infence) next
+        if (t ~ /^## /) { indefaults = (t ~ /^## Defaults[ \t]*$/); next }
+        if (!indefaults) next
+        if (t ~ ("^\\| *" label " *\\|")) {
+          split(t, cell, "|")
+          v = cell[3]
+          gsub(/,/, "", v)
+          sub(/^[ \t]+/, "", v)
+          if (match(v, /^[1-9][0-9]*/)) print substr(v, 1, RLENGTH)
+          exit
+        }
+      }
+    ' "$SKILL_FILE" 2>/dev/null
+  }
+
+  # run_loaded_files — every distinct `references/<name>.md` and `bin/<name>.sh` that a
+  # `## Step N` section of SKILL.md cites inside a backtick span, in citation order. A step
+  # section runs from its `## Step <1-6>` heading to the next `## ` heading; fenced lines
+  # never count. The token is matched INSIDE the span rather than as the whole span, unlike
+  # `corpus-citation`'s whole-span rule: Step 4 names a script inside a command span
+  # (`sed -n '1,/^# END RUN BLOCK/p' .../sage-watch.sh`), a run loads that run block, and a
+  # whole-span test would leave it out of the total. Paths resolve corpus-relative to <dir>,
+  # so the same script named by its installed `~/.claude/skills/sage/` path still resolves.
+  run_loaded_files() {
+    awk '
+      {
+        t = $0
+        sub(/^[ \t]+/, "", t)
+        if (t ~ /^```/) { infence = !infence; next }
+        if (infence) next
+        if (t ~ /^## /) { instep = (t ~ /^## Step [1-6]/); next }
+        if (!instep) next
+        line = $0
+        while (match(line, /`[^`]*`/)) {
+          spanstart = RSTART
+          spanlen = RLENGTH
+          span = substr(line, spanstart + 1, spanlen - 2)
+          rest = span
+          while (match(rest, /references\/[A-Za-z0-9_.-]+\.md/)) {
+            print substr(rest, RSTART, RLENGTH)
+            rest = substr(rest, RSTART + RLENGTH)
+          }
+          rest = span
+          while (match(rest, /bin\/[A-Za-z0-9_.-]+\.sh/)) {
+            print substr(rest, RSTART, RLENGTH)
+            rest = substr(rest, RSTART + RLENGTH)
+          }
+          line = substr(line, spanstart + spanlen)
+        }
+      }
+    ' "$SKILL_FILE" 2>/dev/null | awk '!seen[$0]++'
+  }
+
+  # run_loaded_words <corpus-relative-path> — the words a run actually loads from this file:
+  # a reference file whole, a script only through its `# END RUN BLOCK` marker. A script with
+  # no marker counts entire, so a missing marker shows up as a loud total rather than as
+  # silence. A cited file that does not exist counts zero — `corpus-citation` is what reports
+  # that, and reporting it twice would say nothing new.
+  run_loaded_words() {  # run_loaded_words <corpus-relative-path>
+    if [ ! -e "$CORPUS_DIR/$1" ]; then
+      printf '0'
+      return 0
+    fi
+    case "$1" in
+      *.sh) sed -n '1,/^# END RUN BLOCK/p' "$CORPUS_DIR/$1" 2>/dev/null | wc -w | tr -d ' ' ;;
+      *) wc -w < "$CORPUS_DIR/$1" | tr -d ' ' ;;
+    esac
+  }
+
+  SKILL_WORDS=$(wc -w < "$SKILL_FILE" | tr -d ' ')
+
+  CORTEX_BUDGET=$(declared_budget "Cortex word budget")
+  if [ -n "$CORTEX_BUDGET" ] && [ "$SKILL_WORDS" -gt "$CORTEX_BUDGET" ]; then
+    add "sage-lint cortex-budget $SKILL_FILE:1 SKILL.md is $SKILL_WORDS words, over the ## Defaults budget of $CORTEX_BUDGET words"
+  fi
+
+  RUN_BUDGET=$(declared_budget "Run-loaded word budget")
+  if [ -n "$RUN_BUDGET" ]; then
+    RUN_TOTAL="$SKILL_WORDS"
+    RUN_DETAIL="SKILL.md $SKILL_WORDS"
+    while IFS= read -r RFILE; do
+      [ -n "$RFILE" ] || continue
+      RWORDS=$(run_loaded_words "$RFILE")
+      RUN_TOTAL=$((RUN_TOTAL + RWORDS))
+      RUN_DETAIL="$RUN_DETAIL, $RFILE $RWORDS"
+    done <<EOF
+$(run_loaded_files)
+EOF
+    if [ "$RUN_TOTAL" -gt "$RUN_BUDGET" ]; then
+      add "sage-lint cortex-budget $SKILL_FILE:1 a run loads $RUN_TOTAL words, over the ## Defaults run-loaded budget of $RUN_BUDGET words: $RUN_DETAIL"
+    fi
+  fi
+
+  # ---------------------------------------------------------------------------
+  # secret-shape over the memory corpus, then shared-leak over the portable template only.
+  # See CORPUS MODE, header above, for what each reads and what neither can see.
+
+  for _mf in "$CORPUS_DIR"/memory/*.md "$CORPUS_DIR"/memory/*/*.md; do
+    [ -e "$_mf" ] || continue
+    add "$(awk -v FILE="$_mf" "$AWK_SECRET" "$_mf" 2>/dev/null)"
+  done
+
+  # Every shape is built from a repeated character class, never a `{n}` interval, for the
+  # reason AWK_SECRET states above: mawk and BSD awk have no brace intervals. The cost shape
+  # is `corpus-figure`'s own, reused rather than re-written, so the two never drift apart.
+  AWK_LEAK='
+    function rep(cls, n,   s, i) { s = ""; for (i = 0; i < n; i++) s = s cls; return s }
+    # A path or a session id is not a secret, so this message names the token that has to be
+    # edited out -- unlike secret-shape, which never echoes its match.
+    function report(kind, tok) {
+      if (length(tok) > 24) tok = substr(tok, 1, 24)
+      printf "sage-lint shared-leak %s:%d carries a machine-local %s ('"'"'%s'"'"')\n", FILE, NR, kind, tok
+    }
+    BEGIN {
+      hex = "[0-9a-fA-F]"
+      uuid_re = "(^|[^0-9A-Za-z-])" rep(hex, 8) "-" rep(hex, 4) "-" rep(hex, 4) "-" rep(hex, 4) "-" rep(hex, 12) "([^0-9A-Za-z-]|$)"
+      runid_re = "(^|[^A-Za-z])(run|session) " rep(hex, 8) "([^0-9A-Za-z]|$)"
+      unix_re = "(^|[^A-Za-z0-9_.~-])/(Users|home|root|mnt|tmp|private)/[^ \t`)\"]*"
+      win_re = "(^|[^A-Za-z0-9])[A-Za-z]:\\\\[^ \t`)\"]*"
+      cost_re = "(^|[^0-9.])[0-9]+(\\.[0-9]+)?k([^A-Za-z0-9]|$)"
+    }
     {
       t = $0
       sub(/^[ \t]+/, "", t)
       if (t ~ /^```/) { infence = !infence; next }
       if (infence) next
-      if (t ~ /^## /) { indefaults = (t ~ /^## Defaults[ \t]*$/); next }
-      if (!indefaults) next
-      if (t ~ /^\| *Cortex word budget *\|/) { print; exit }
-    }
-  ' "$SKILL_FILE" 2>/dev/null)
 
-  if [ -n "$BUDGET_LINE" ]; then
-    BUDGET=$(printf '%s' "$BUDGET_LINE" | sed -n 's/^| *Cortex word budget *| *\([0-9,]*\).*/\1/p' | tr -d ',')
-    if printf '%s' "$BUDGET" | grep -qE '^[1-9][0-9]*$'; then
-      WORDS=$(wc -w < "$SKILL_FILE" | tr -d ' ')
-      if [ "$WORDS" -gt "$BUDGET" ]; then
-        add "sage-lint cortex-budget $SKILL_FILE:1 SKILL.md is $WORDS words, over the ## Defaults budget of $BUDGET words"
-      fi
-    fi
-  fi
+      rest = $0
+      while (match(rest, unix_re)) {
+        start = RSTART
+        len = RLENGTH
+        seg = substr(rest, start, len)
+        report("absolute path", substr(seg, index(seg, "/")))
+        rest = substr(rest, start + len)
+      }
+
+      rest = $0
+      while (match(rest, win_re)) {
+        start = RSTART
+        len = RLENGTH
+        seg = substr(rest, start, len)
+        match(seg, /[A-Za-z]:\\/)
+        report("absolute path", substr(seg, RSTART))
+        rest = substr(rest, start + len)
+      }
+
+      rest = $0
+      while (match(rest, uuid_re)) {
+        start = RSTART
+        len = RLENGTH
+        seg = substr(rest, start, len)
+        sub(/^[^0-9A-Fa-f]+/, "", seg)
+        sub(/[^0-9A-Fa-f-]+$/, "", seg)
+        report("session id", seg)
+        rest = substr(rest, start + len)
+      }
+
+      rest = $0
+      while (match(rest, runid_re)) {
+        start = RSTART
+        len = RLENGTH
+        seg = substr(rest, start, len)
+        match(seg, /(run|session) /)
+        report("session id", substr(seg, RSTART + RLENGTH, 8))
+        rest = substr(rest, start + len)
+      }
+
+      rest = $0
+      while (match(rest, cost_re)) {
+        start = RSTART
+        len = RLENGTH
+        seg = substr(rest, start, len)
+        gsub(/[^0-9.k]/, "", seg)
+        report("absolute cost", seg)
+        rest = substr(rest, start + len)
+      }
+    }
+  '
+
+  for _sf in "$CORPUS_DIR"/memory/shared/*.md; do
+    [ -e "$_sf" ] || continue
+    add "$(awk -v FILE="$_sf" "$AWK_LEAK" "$_sf" 2>/dev/null)"
+  done
 
   if [ -n "$OUT" ]; then
     printf '%s\n' "$OUT"
@@ -1026,20 +1334,19 @@ $1"; fi
 }
 
 # ---------------------------------------------------------------------------
-# header / header-fields
+# header
 
 FIRST_HDR_LINE=$(awk '
   /sage occupancy duty/ && /<!--/ && /-->/ { print NR; exit }
 ' "$FILE" 2>/dev/null)
 
 # The third firing mode (see the header manual): the comment OPENS on line 1 and carries the
-# phrase, but does not CLOSE there — a multi-line comment, which is present, on line 1, and
-# still unreadable to the field parse. Reporting that as "absent" was factually wrong.
+# phrase, but does not CLOSE there -- a multi-line comment, which is present, on line 1, and
+# still not a one-line header comment. Reporting that as "absent" was factually wrong.
 HDR_OPEN_UNCLOSED=$(awk '
   NR == 1 { if (/<!--/ && /sage occupancy duty/ && $0 !~ /-->/) print 1; exit }
 ' "$FILE" 2>/dev/null)
 
-HEADER_OK=0
 if [ -z "$FIRST_HDR_LINE" ]; then
   if [ -n "$HDR_OPEN_UNCLOSED" ]; then
     add "sage-lint header $FILE:1 header comment opens on line 1 but does not close on line 1"
@@ -1048,44 +1355,6 @@ if [ -z "$FIRST_HDR_LINE" ]; then
   fi
 elif [ "$FIRST_HDR_LINE" != "1" ]; then
   add "sage-lint header $FILE:$FIRST_HDR_LINE header comment present but not on line 1"
-else
-  HEADER_OK=1
-fi
-
-if [ "$HEADER_OK" -eq 1 ]; then
-  LINE1=$(sed -n '1p' "$FILE" 2>/dev/null)
-
-  if printf '%s' "$LINE1" | grep -q 'Generation:'; then
-    # A bounded token, not everything-to-the-next-comma: the value is the run of digits and
-    # slashes right after `Generation:`, so `Generation: 1` and `Generation: 1.` are as
-    # legal as the stamped `Generation: 1,` — requiring the comma made this check fire on a
-    # legal header, the one broken-promise defect of the first release — while `0` and
-    # `0/3` still fail the positive-integer test below. The captured value is the WHOLE
-    # field, not a valid prefix of it: everything up to the first comma, the first blank, or
-    # the end of the line. Capturing a prefix instead let `12x`, `1-2` and `1-->` all read as
-    # a legal `1`. One trailing period is then stripped, because a header that ends the
-    # sentence (`Generation: 1.`) is legal and a comma-delimited one is the stamped form.
-    # Known gap: `.*` is greedy, so a line carrying `Generation:` TWICE is validated on the
-    # last one. Two such fields are themselves malformed, and this matches the behaviour of
-    # the comma-delimited version this replaced. `[[:blank:]]`, never `[ \t]`:
-    # BSD sed reads `\t` inside a bracket expression as two literal characters.
-    GEN=$(printf '%s' "$LINE1" | sed -n 's/.*Generation:[[:blank:]]*\([^,[:blank:]]*\).*/\1/p')
-    GEN=${GEN%.}
-    if ! printf '%s' "$GEN" | grep -qE '^[1-9][0-9]*$'; then
-      add "sage-lint header-fields $FILE:1 Generation is not a bare positive integer: '$GEN'"
-    fi
-  else
-    add "sage-lint header-fields $FILE:1 header comment carries no Generation: field"
-  fi
-
-  if printf '%s' "$LINE1" | grep -q 'role:'; then
-    ROLE=$(printf '%s' "$LINE1" | sed -n 's/.*role:[[:blank:]]*\([A-Za-z]*\).*/\1/p')
-    if [ "$ROLE" != "parent" ] && [ "$ROLE" != "supervisor" ] && [ "$ROLE" != "successor" ]; then
-      add "sage-lint header-fields $FILE:1 role is none of 'parent', 'supervisor', 'successor': '$ROLE'"
-    fi
-  else
-    add "sage-lint header-fields $FILE:1 header comment carries no role: field"
-  fi
 fi
 
 # ---------------------------------------------------------------------------
@@ -1184,6 +1453,8 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
     if (sec_match(h, "Decisions and deviations")) return "Decisions and deviations"
     if (sec_match(h, "Findings and dispositions")) return "Findings and dispositions"
     if (sec_match(h, "Run record")) return "Run record"
+    if (sec_match(h, "Resume state")) return "Resume state"
+    if (sec_match(h, "Open questions and discarded approaches")) return "Open questions and discarded approaches"
     return ""
   }
   function rstrip(s) { sub(/[ \t]+$/, "", s); return s }
@@ -1234,10 +1505,11 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
       if (section == "Findings and dispositions" && find_exact && find_idx == 0) find_idx = NR
       next
     }
-    # Assumption log, Plan, Unit table and Decisions and deviations each carry their own
-    # id/index namespace (`A1`, `#`-numbered rows, unit ids, `D1`) — never a source of
-    # finding-id candidates — and the Findings section itself supplies the triage set, not
-    # candidates. Exclusion is by prescribed SECTION only; a table header FIRST-column
+    # Assumption log, Plan, Unit table, Decisions and deviations, Resume state and Open
+    # questions and discarded approaches each carry their own id/index namespace (`A1`,
+    # `#`-numbered rows, unit ids, `D1`, a resume checkpoint, an `open`/`discarded` kind) —
+    # never a source of finding-id candidates — and the Findings section itself supplies the
+    # triage set, not candidates. Exclusion is by prescribed SECTION only; a table header FIRST-column
     # label such as `id` excludes nothing (a fix table headed `id` holding an untriaged
     # finding must fire — the label exclusion this replaces let exactly that escape).
     # Candidates come from tables OUTSIDE every prescribed section, plus the Run record
@@ -1622,6 +1894,12 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
 add "$CHK"
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# secret-shape
+
+CHK=$(awk -v FILE="$FILE" "$AWK_SECRET" <<<"$SANITIZED")
+add "$CHK"
+
 
 if [ -n "$OUT" ]; then
   printf '%s\n' "$OUT"

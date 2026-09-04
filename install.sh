@@ -11,8 +11,8 @@ set -euo pipefail
 # single file is placed, and with no line saying which tool was missing or that the install is now
 # half-done. Fail here instead, while nothing has been touched. This is a preflight rather than
 # four guards at the four call sites precisely because rsync is not optional — jq gets its guards
-# down at the two hook offers because those features are, and a guard belongs where the thing it
-# protects can legitimately be skipped.
+# down at the two optional hook sections because those features are, and a guard belongs where the
+# thing it protects can legitimately be skipped.
 if ! command -v rsync >/dev/null 2>&1; then
   echo "ERROR: rsync is required but was not found on PATH." >&2
   echo "  Every step of this installer copies through it (skills, agents, eco skills, output styles)." >&2
@@ -32,8 +32,8 @@ fi
 # the check entirely (exit 0, "the ledger was NOT checked") rather than fabricate a result, so an
 # installer that says nothing here just ships a linter that silently never runs. jq is NOT in this
 # list on purpose: sage-watch.sh and sage-alt-guard.sh both fail OPEN without it (a probe that
-# names the missing tool and skips the check, a guard that allows), and the two hook offers further
-# below already guard it and degrade gracefully -- jq being unavailable is not a reason to abort an
+# names the missing tool and skips the check, a guard that allows), and the two hook sections
+# further below already guard it and degrade gracefully -- jq being unavailable is not a reason to abort an
 # install that does not touch either of those optional features.
 missing_hard_tools=()
 for _tool in awk sed grep sort cut head; do
@@ -60,7 +60,7 @@ fi
 # without it (sage-watch.sh's --status probe names the miss and skips the check rather than
 # alarming; sage-alt-guard.sh allows rather than blocks) -- so its absence must never abort this
 # installer, and the two existing guards at the alt-lane guard hook offer and the compaction hook
-# offer below already handle that at the point each optional feature is offered. This is a
+# install below already handle that at the point each optional feature would be applied. This is a
 # SEPARATE, additional report: the whole point of an install-time preflight is that a user learns
 # once, up front, what degrades, instead of meeting the same fact three sentences at a time as
 # each optional feature quietly skips itself later in this run.
@@ -72,7 +72,7 @@ if ! command -v jq >/dev/null 2>&1 && ! [ -x /usr/bin/jq ]; then
   echo "NOTE: jq was not found on PATH or at /usr/bin/jq. Three optional features degrade without it:" >&2
   echo "  - the sage-watch.sh occupancy watchdog probe (fails open: reports it cannot run, fires no rungs)" >&2
   echo "  - the sage-alt-guard.sh alt-lane guard hook: this installer SKIPS OFFERING it (the guard needs jq)" >&2
-  echo "  - the SessionStart(compact) hook: this installer SKIPS OFFERING it too; a manual TIP prints instead" >&2
+  echo "  - the SessionStart(compact) hook: this installer SKIPS INSTALLING it; a manual TIP prints instead" >&2
   echo "  Install jq for all three to work fully; the install continues without it either way:" >&2
   echo "    macOS:         brew install jq" >&2
   echo "    Debian/Ubuntu: sudo apt install jq" >&2
@@ -189,7 +189,7 @@ migrate_legacy_bak() { # migrate_legacy_bak <path> <category>
 #
 #     <!-- sage-local-memory v3 -->
 #
-# which sage-claude/references/memory.md, "Structural invariants", declares as line 1 of
+# which claude-skills/sage-promote/references/memory-contract.md, "Structural invariants", declares as line 1 of
 # journal.md and requires every drain to preserve verbatim — so it survives the rewrites a byte
 # comparison cannot survive, and it moves only when the format really does. That makes the notice
 # ask the question that matters, is this file still the shape the current sage expects, and go
@@ -442,9 +442,10 @@ fi
 
 # Agent files have to live in ~/.claude/agents/; Claude Code does not discover them inside a skill
 # directory. No --delete here: other agents in that directory are not this script's to remove.
-# One narrow exception: the alt-agent removal pass below deletes a file at an alt agent's path
-# only when it carries the generated-file marker this script wrote. Even then, only after a
-# backup.
+# Two narrow exceptions, both of which identify this script's own output before deleting it and
+# both of which back it up first: the retired-orchestrator removal below, keyed on the description
+# this repo shipped, and the alt-agent removal pass further down, keyed on the generated-file
+# marker this script wrote.
 #
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
 # any project, based on their `description` field. All the descriptions are written to say they are
@@ -479,6 +480,23 @@ for f in "$agents_src"*.md; do
 done
 
 rsync -av ${skip_agents[@]+"${skip_agents[@]}"} "$agents_src" "$agents_dest"
+
+# claude-agents/ ships no orchestrator agent, so the rsync above cannot retire the one an earlier
+# version installed, and nothing here runs --delete. The description this repo gave that file is
+# what tells its copy apart from an agent of the user's own under the same generic name.
+retired_orchestrator="Successor unit for the sage orchestration skill"
+orchestrator_dest="${agents_dest}orchestrator.md"
+if [ -e "$orchestrator_dest" ] || [ -L "$orchestrator_dest" ]; then
+  if [ -f "$orchestrator_dest" ] && [ ! -L "$orchestrator_dest" ] &&
+     grep -m1 '^description:' "$orchestrator_dest" | grep -qF "$retired_orchestrator"; then
+    backup "$orchestrator_dest" agents
+    rm -f "$orchestrator_dest"
+    echo "Removed the retired orchestrator agent -> $orchestrator_dest (previous version saved to $backup_root/agents/orchestrator.md)"
+  else
+    echo "NOTE: $orchestrator_dest is an orchestrator.md of your own, not the retired sage one;"
+    echo "      leaving it in place."
+  fi
+fi
 
 # Alt agents are the same three reader roles, on a model outside this harness's own family
 # when the machine serves one. Never a different role. Never a name this repo hardcodes.
@@ -948,7 +966,7 @@ rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 # the agent file and silently deletes the outside-family model the row exists to buy. Prose has
 # stated it three times and a measured run broke it anyway (figure and full account:
 # sage-claude/references/harness.md, "## The alt lane"). Offered, never imposed, and offered with
-# the same care as the compact hook:
+# the same care as the compaction hook this installer writes:
 # ~/.claude/settings.json holds arbitrary other config that this script does not own.
 # The guard itself fails OPEN on every unrecognised payload — see sage-claude/bin/sage-alt-guard.sh.
 offer_alt_guard_hook() {
@@ -971,7 +989,7 @@ offer_alt_guard_hook() {
     return 0
   fi
   if [ -e "$settings" ]; then
-    # The same invalid-JSON pre-check as offer_compact_hook: a settings file that does not
+    # The same invalid-JSON pre-check as install_compact_hook: a settings file that does not
     # parse is bailed on BEFORE the prompt, not discovered at merge time after a backup.
     if ! jq empty "$settings" >/dev/null 2>&1; then
       echo "NOTE: $settings does not parse as JSON; leaving it untouched — no alt-lane guard hook offered."
@@ -996,13 +1014,13 @@ offer_alt_guard_hook() {
   esac
 
   # Past this point the user has answered `y`, so every bailout says why. A silent `return 0`
-  # here reads as "installed" and is not: the same guard shape offer_compact_hook uses, and for
+  # here reads as "installed" and is not: the same guard shape install_compact_hook uses, and for
   # the same reason — this function runs under `set -euo pipefail`, so an unguarded failure
   # would abort the whole installer after the already-printed sync results.
   if [ -e "$settings" ]; then
-    # A DISTINCT backup category from offer_compact_hook's `settings`: both offers can run
-    # in one install, backup() names the saved copy by basename inside its category, and a
-    # shared category made the second offer's backup overwrite the first's — leaving the
+    # A DISTINCT backup category from install_compact_hook's `settings`: both can write in
+    # one install, backup() names the saved copy by basename inside its category, and a
+    # shared category made the second edit's backup overwrite the first's — leaving the
     # only restore point post-first-edit, which is not the file the user started with.
     backup "$settings" settings-alt-guard || {
       echo "NOTE: could not back up $settings; leaving it untouched, no alt-lane guard hook added."
@@ -1053,14 +1071,20 @@ offer_alt_guard_hook() {
   echo "Added the alt-lane guard hook to $settings. Check it with: $guard --selftest"
 }
 
-# offer_compact_hook: sage's handoff note and ledger header carry the occupancy duty forward
-# through a compaction summary, but only a SessionStart(compact) hook makes a compacted session
-# actually re-read them (sage-claude/references/harness.md, Cautions). Offered here rather than
-# left as a suggestion, and offered carefully: this is the one place install.sh touches a file it
-# does not own the whole of — the user's ~/.claude/settings.json holds arbitrary other config.
-offer_compact_hook() {
+# install_compact_hook: the run ledger's `### Resume state` section carries a run's state across a
+# compaction, but only a SessionStart(compact) hook makes the compacted session actually go back
+# and read it (sage-claude/references/harness.md, Cautions). Installed rather than offered — a run
+# that loses its state is the failure this repo ships the hook for, and a prompt is answered "no"
+# by every non-interactive install. Written carefully all the same: this is the one place
+# install.sh touches a file it does not own the whole of — the user's ~/.claude/settings.json
+# holds arbitrary other config.
+install_compact_hook() {
   local settings="$HOME/.claude/settings.json" marker="sage-reanchor"
-  local cmd tmp reply
+  local cmd
+
+  # Claude Code runs this command through `sh -c`, and the message is single-quoted, so it must
+  # carry no apostrophe of its own: "the run ledger section", never "the run ledger's section".
+  cmd="echo '$marker: a compaction landed. Before dispatching anything: re-read the run ledger section ### Resume state (.claude/plans/sage-ledger-*.md; fallback: the session scratchpad), then ~/.claude/skills/sage/SKILL.md ## Compaction and resume, then the step file ### Resume state names.'"
 
   # A symlink is another owner's property, the same rule the installer already applies to
   # symlinked skills and shared memory — never write through it.
@@ -1081,29 +1105,34 @@ offer_compact_hook() {
       echo "      See the TIP below for the manual snippet."
       return 0
     fi
-    # Broader than a marker match: a user who already followed the previously shipped TIP
-    # snippet has a SessionStart(compact) hook whose command carries no marker at all. A
-    # marker-only check would double-install for exactly them.
-    if jq -e '.hooks.SessionStart[]? | select(.matcher == "compact")' "$settings" >/dev/null 2>&1; then
-      echo "NOTE: a SessionStart(compact) hook already exists in $settings; not adding another."
+    # An earlier version of this installer wrote a different message under this same marker.
+    # That machine is carried forward by rewriting the command where it stands: appending a
+    # second entry would leave the stale text firing beside the new one on every compaction.
+    if sage_compact_hook_exists "$settings" "$marker"; then
+      if sage_compact_hook_says "$settings" "$marker" "$cmd"; then
+        return 0
+      fi
+      backup "$settings" settings || {
+        echo "NOTE: could not back up $settings; leaving it untouched."
+        return 0
+      }
+      merge_into_settings "$settings" "$marker" "$cmd" \
+        '.hooks.SessionStart |= map(
+           if .matcher == "compact"
+           then .hooks |= map(if (.command // "") | contains($m) then .command = $cmd else . end)
+           else . end)' || return 0
+      echo "Rewrote sage's SessionStart(compact) hook in $settings (marker: $marker)."
+      return 0
+    fi
+
+    # A compact hook carrying no marker is the user's own, or the manual snippet an older TIP
+    # told them to paste. Neither is this installer's to rewrite.
+    if compact_hook_exists "$settings"; then
+      echo "NOTE: a SessionStart(compact) hook that is not sage's already exists in $settings;"
+      echo "      leaving it alone. The manual snippet in the TIP below shows sage's own hook."
       return 0
     fi
   fi
-
-  # No tty on stdin (a non-interactive install run) -> skip the prompt silently. The TIP below
-  # still carries the manual snippet for that path.
-  if [ ! -t 0 ]; then
-    return 0
-  fi
-
-  printf 'Add a SessionStart(compact) hook to %s so a compacted session re-reads its run ledger? [y/N] ' "$settings"
-  read -r reply || reply=""
-  case "$reply" in
-    y|Y|yes|YES|Yes) : ;;
-    *) return 0 ;;
-  esac
-
-  cmd="echo '$marker: a compaction landed. Re-read the run ledger before dispatching anything new: .claude/plans/sage-ledger-*.md (fallback: the session scratchpad). The ledger header carries the occupancy duty.'"
 
   # Every state-changing command below gets its own guard. This function runs after the
   # skill/agent/style syncs, under `set -euo pipefail`, so an unguarded failure here would
@@ -1125,36 +1154,63 @@ offer_compact_hook() {
     }
   fi
 
+  merge_into_settings "$settings" "$marker" "$cmd" \
+    '.hooks.SessionStart = ((.hooks.SessionStart // []) + [{"matcher": "compact", "hooks": [{"type": "command", "command": $cmd}]}])' || return 0
+  echo "Added a SessionStart(compact) hook to $settings (marker: $marker)."
+}
+
+# True when a SessionStart(compact) entry exists at all, whoever wrote it.
+compact_hook_exists() { # compact_hook_exists <settings>
+  jq -e '.hooks.SessionStart[]? | select(.matcher == "compact")' "$1" >/dev/null 2>&1
+}
+
+# True when one of those entries carries <marker> in a command, which is what identifies the hook
+# this installer wrote — including the version that wrote a different message.
+sage_compact_hook_exists() { # sage_compact_hook_exists <settings> <marker>
+  jq -e --arg m "$2" \
+    '[.hooks.SessionStart[]? | select(.matcher == "compact") | .hooks[]? | .command // ""]
+     | any(contains($m))' "$1" >/dev/null 2>&1
+}
+
+sage_compact_hook_says() { # sage_compact_hook_says <settings> <marker> <command>
+  jq -e --arg m "$2" --arg cmd "$3" \
+    '[.hooks.SessionStart[]? | select(.matcher == "compact") | .hooks[]? | .command // ""
+      | select(contains($m))] | all(. == $cmd)' "$1" >/dev/null 2>&1
+}
+
+# Applies <jq-filter> to <settings> with $m and $cmd bound, and reports failure instead of raising
+# it: the caller runs after the skill/agent/style syncs under `set -euo pipefail`, where an
+# unguarded non-zero exit aborts the installer into a truncated-looking install.
+merge_into_settings() { # merge_into_settings <settings> <marker> <command> <jq-filter>
+  local settings="$1" marker="$2" cmd="$3" filter="$4" tmp
+  # Beside the target, not in /tmp: same filesystem as the file it will be written into.
   tmp="$(mktemp "${settings}.XXXXXX")" || {
     echo "NOTE: could not create a temp file beside $settings; leaving it untouched."
-    return 0
+    return 1
   }
-  if ! jq --arg cmd "$cmd" \
-       '.hooks.SessionStart = ((.hooks.SessionStart // []) + [{"matcher": "compact", "hooks": [{"type": "command", "command": $cmd}]}])' \
-       "$settings" > "$tmp"; then
+  if ! jq --arg m "$marker" --arg cmd "$cmd" "$filter" "$settings" > "$tmp"; then
     echo "NOTE: failed to build the merged settings.json; leaving $settings untouched."
     rm -f "$tmp"
-    return 0
+    return 1
   fi
   if ! jq empty "$tmp" >/dev/null 2>&1; then
     echo "NOTE: the merged settings.json did not parse; leaving $settings untouched."
     rm -f "$tmp"
-    return 0
+    return 1
   fi
-  # An in-place write, not `mv`: $settings already exists by this point (created above when
-  # missing), and writing through it keeps its original mode and ownership rather than
+  # An in-place write, not `mv`: $settings already exists by this point (created by the caller
+  # when missing), and writing through it keeps its original mode and ownership rather than
   # inheriting mktemp's 0600.
   if ! cat "$tmp" > "$settings"; then
     echo "NOTE: could not write the merged settings.json into $settings; leaving it untouched."
     rm -f "$tmp"
-    return 0
+    return 1
   fi
   rm -f "$tmp"
-  echo "Added a SessionStart(compact) hook to $settings (marker: $marker)."
 }
 
 if [ -d "$sage_src" ]; then
-  offer_compact_hook
+  install_compact_hook
   offer_alt_guard_hook
 fi
 
@@ -1179,21 +1235,22 @@ if [ -d "$backup_root" ]; then
 fi
 echo
 cat <<'TIP'
-Optional, for long orchestration runs:
+For long orchestration runs:
 
+  Sage reads its own occupancy and checkpoints its ledger before the expected compaction.
   Triggering /compact is yours, not the model's. To compact earlier, set
-  CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>. Sage reads its own context
-  usage and hands over to a successor subagent at 30% of the live window rather than waiting for
-  a compaction.
+  CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>; if you set one, tell the run
+  with SAGE_COMPACT_AT=<size> so its sensor expects the right point. Verify those two knob names
+  against the current Claude Code docs before relying on them; this installer cannot check them.
 
-  If you skipped the compaction-hook prompt above (or ran this install non-interactively), add a
-  hook in ~/.claude/settings.json by hand that re-anchors a session after a compaction:
+  If a NOTE above says the compaction hook was not installed (no jq, or a symlinked settings
+  file), add it to ~/.claude/settings.json by hand:
 
     "hooks": {
       "SessionStart": [
         { "matcher": "compact",
           "hooks": [ { "type": "command",
-                       "command": "echo 'sage-reanchor: a compaction landed. Re-read the run ledger before dispatching anything new: .claude/plans/sage-ledger-*.md (fallback: the session scratchpad). The ledger header carries the occupancy duty.'" } ] }
+                       "command": "echo 'sage-reanchor: a compaction landed. Before dispatching anything: re-read the run ledger section ### Resume state (.claude/plans/sage-ledger-*.md; fallback: the session scratchpad), then ~/.claude/skills/sage/SKILL.md ## Compaction and resume, then the step file ### Resume state names.'" } ] }
       ]
     }
 TIP

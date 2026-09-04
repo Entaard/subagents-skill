@@ -56,7 +56,7 @@ usage() {
   cat <<'USAGE'
 uninstall.sh — remove what install.sh placed under ~/.claude/.
 
-  --sage-only   Remove the sage skill, its sage-promote companion, all five shipped agents,
+  --sage-only   Remove the sage skill, its sage-promote companion, all four shipped agents,
                 generated alt agents and its two settings hooks. Leaves the other ecosystem
                 skills and output styles.
   --dry-run     Print what would be removed and change nothing.

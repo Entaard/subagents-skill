@@ -1,12 +1,43 @@
 #!/usr/bin/env bash
-#
 # sage-watch.sh — the sage occupancy sensor. Notify only; it never recalls anything.
 #
+# RUN BLOCK
+#   Ladder: SAGE_WINDOW=<n> [SAGE_COMPACT_AT=<n>] sage-watch.sh <subagents-dir>
+#   Probe:  SAGE_WINDOW=<n> [SAGE_COMPACT_AT=<n>] sage-watch.sh --status <subagents-dir>
+#
+#   SAGE_WINDOW always (unset, it assumes 1006380, the 1M window). SAGE_COMPACT_AT where the
+#   user stated a compaction point.
+#   SAGE_CHECKPOINT_TURN=<turn> at close, for saving-post-rung. Amounts take a k/K/m/M
+#   suffix; SAGE_CHECKPOINT_TURN is a bare integer.
+#
+#   ONE RUNG, `occ-checkpoint`, ladder mode and an explicit dir only, once per compaction
+#   segment. On it the parent checkpoints: `../SKILL.md` `## Compaction and resume`.
+#
+#     sage-watch occ-checkpoint checkpoint <session> [parent] "session transcript" \
+#       occupancy=302k window=1006380 compact-at=177779 source=measured rung=147779 pct=30%
+#
+#   `--status` fires nothing; one parent line, then one line per unit:
+#
+#     sage-watch status <session> [parent] "session transcript" model=<id> occupancy=160k \
+#       window=1006380 compact-at=<int> source=<measured|stated|assumed> rung=<int> \
+#       pct=16% compact=<n> turns=<n> occ-sum=<int> crossed-at=<turn|none> \
+#       saving-post-rung=<int>
+#     sage-watch status <agent-id> [<type>] "<desc>" done=yes spend=205k raw=496k \
+#       occupancy=173k idle=2379s repeat=1 records=44 compact=<n> model=<id>
+#
+#   FAIL OPEN. `--status` printing nothing on stdout AND nothing on stderr means the
+#   sensor cannot run on this layout: disable it and write one ledger line. A line on
+#   stderr instead names a fixable cause — fix that and probe again. Exit 0 always,
+#   except exit 2 on unusable arguments.
+#
+#   The rest of this header is the maintainer's manual.
+# END RUN BLOCK
+#
 # It reads the in-flight subagent transcripts of one session, watches the single
-# parent-occupancy rung — the handover rule in `../SKILL.md` ## Handover — and
-# prints ONE LINE PER FIRED RUNG. A healthy sample prints nothing
-# and exits 0. It is hosted on `Monitor` with `persistent: true`, where every
-# stdout line becomes a notification, so silence is the default output.
+# parent-occupancy rung — the checkpoint rule in `../SKILL.md` ## Compaction and resume,
+# and `../references/execute.md` — and prints ONE LINE PER FIRED RUNG. A healthy sample
+# prints nothing and exits 0. It is hosted on `Monitor` with `persistent: true`, where
+# every stdout line becomes a notification, so silence is the default output.
 #
 # It never writes a file, never calls `TaskStop`, never kills a process, and never
 # touches a transcript. It reports; the parent acts.
@@ -44,15 +75,23 @@
 #                      exception -- it exits 2 and says so in either mode.
 #
 #   SAGE_WINDOW        Env. The live context window, in the same integer/k/K/m/M forms
-#                      as below. Defaults to 1006380 (the measured figure in
-#                      `../references/harness.md`) when unset, unparseable, or zero.
+#                      as below. Defaults to 1006380 (the 1M window as measured in
+#                      `../references/harness-measurements.md`, Compaction record) when unset, unparseable, or zero.
 #                      Drives the parent occupancy rung below — see BLIND SPOTS for
 #                      what a wrong value actually does (it is not silence).
-#   SAGE_OCC_ACK       Env. Any non-empty value suppresses the parent `occ-30pct` rung
-#                      ONLY — not `--status`, which always reports occupancy. Set by a
-#                      supervising parent after handover, so the handover alarm stops
-#                      repeating once it has been acted on. It is the only rung, so an
-#                      ack silences the ladder outright — see THE LADDER below.
+#   SAGE_COMPACT_AT    Env. The compaction point the USER stated — they ran
+#                      `/autocompact <size>`, or they are on a model variant whose
+#                      trigger sits below the window. Same integer/k/K/m/M forms. Unset,
+#                      unparseable, or zero means "not stated", and the evidence order in
+#                      THE COMPACTION POINT below falls through to `assumed`. A
+#                      `compact_boundary` in the transcript outranks it: measured beats
+#                      stated.
+#   SAGE_CHECKPOINT_TURN
+#                      Env, `--status` only, a BARE integer (no suffix). The turn the
+#                      checkpoint rung actually fired at, as recorded in the ledger's
+#                      `### Resume state`. It replaces `crossed-at` as the origin of
+#                      `saving-post-rung` — see THE PARENT LINE. Unset or unparseable
+#                      falls back to `crossed-at`.
 #
 # Exit status is 0 in every normal case, including a missing directory, no transcripts,
 # malformed JSON, a half-written final line, and a transcript with no assistant records.
@@ -71,11 +110,11 @@
 # Prefer passing the directory explicitly when the parent already knows the session id;
 # discovery is the fallback for a probe launched without one.
 #
-# The PARENT OCCUPANCY RUNG (occ-30pct — below) runs ONLY when <subagents-dir>
+# The PARENT OCCUPANCY RUNG (occ-checkpoint — below) runs ONLY when <subagents-dir>
 # was passed explicitly. Under discovery it is skipped entirely, unconditionally:
 # discovery picks the most recently modified subagents/ directory under the project slug,
 # which can belong to a DIFFERENT session than the one asking — measured on this machine:
-# 9 candidate directories, top two 1,832s apart — and a handover trigger must
+# 9 candidate directories, top two 1,832s apart — and a checkpoint trigger must
 # never fire on someone else's occupancy. `--status` is diagnostic, not a trigger, so it
 # does not carry that risk: it prints the parent line under discovery too, labeled with
 # whichever session id discovery resolved — subject to the fail-open cases in THE PARENT
@@ -129,21 +168,66 @@
 #   repeat     the largest count of one identical tool call (same name AND same input)
 #              across deduplicated records. Diagnostic only now — `--status` reports it,
 #              nothing on the ladder acts on it.
+#   turns      the DEDUPLICATED assistant record count. `records=` on a unit line is the
+#              raw count and stays raw; `turns=` on the parent line is this one. They are
+#              different figures on purpose — the raw/dedup gap is the inflation above.
+#   occ-sum    the sum of `occupancy` over the deduplicated records, in order — every
+#              turn's whole window, counted once per turn. This is the cache-read cost the
+#              `spend` formula excludes, and it is real money: cache reads bill at 0.1x the
+#              input price on most models, and 0.025x on Fable 5.1 and Mythos 5.1. That
+#              rate table is why `model=` is on the parent line — the parent needs the id
+#              to pick the row before it can price `saving-post-rung`.
+#
+# ---------------------------------------------------------------------------
+# THE COMPACTION POINT — where `compact-at`, `source` and the rung come from
+#
+# The sensor still CANNOT SEE THE WINDOW, and it cannot see the compaction trigger either
+# until one has fired. Three sources of evidence, in strict order, first hit wins:
+#
+#   measured   the parent transcript holds at least one `.type == "system"` record with
+#              `.subtype == "compact_boundary"`. compact-at = the LARGEST
+#              `.compactMetadata.preTokens` across them — the trigger observed on this
+#              session, on this harness, for this model. Largest, not last: preTokens is
+#              what was in the window when the trigger fired, and a compaction that fired
+#              early (a single huge tool result, a manual `/compact`) reads LOW and would
+#              drag the estimate down.
+#   stated     `SAGE_COMPACT_AT` parses to a positive integer. The user's own statement,
+#              trusted only until the session produces a boundary of its own.
+#   assumed    WINDOW minus a reserve of 30000. The reserve is an ESTIMATE: it was
+#              measured on a 200k window only, and is unknown on 1M. Treat an `assumed`
+#              compact-at as a placeholder, not a figure to price anything with.
+#
+#   rung = compact-at - max(WINDOW * 5 / 100, 30000)      (integer arithmetic)
+#
+# The 30000 floor exists because 5% of a 200k window is 10k, which is about one minute of
+# measured parent burn and less than one large tool result — no room to bring a ledger
+# current in. Both of those are ESTIMATES too: per-turn growth has not been measured, so
+# the floor is a judgement, not a derivation. Re-measure before tightening it.
 #
 # ---------------------------------------------------------------------------
 # THE LADDER — nothing in it recalls an agent automatically
 #
-#   rung        action    fires when (and parent occupancy is not presumed acted-on)
-#   occ-30pct   handover  parent occupancy >= 30% of SAGE_WINDOW  -> stop launching, run
-#                                                                    `../SKILL.md` ## Handover
+#   rung             action      fires when
+#   occ-checkpoint   checkpoint  parent occupancy >= rung (THE COMPACTION POINT above),
+#                                once per compaction segment -> bring the ledger current
+#                                and restamp `### Resume state`; `../SKILL.md`
+#                                ## Compaction and resume
 #
-# ONE RUNG, deliberately. There is nothing above `occ-30pct` because a supervising parent
-# has no action left to take on its own occupancy: it cannot hand itself over, and there is
-# no generation cap for it to run out of (`../SKILL.md` ## Handover, "Supervising past the
-# threshold"). The parent rung is a SINGLE line, not per-agent, and it runs only when
-# <subagents-dir> was passed explicitly (DISCOVERY RULE above). `occ-30pct` repeats on
-# every sample until `SAGE_OCC_ACK` silences it: it is the handover alarm that must survive
-# a compaction, and the ack is how it ends once the parent has acted on it.
+# ONE RUNG, deliberately. There is nothing above it: the checkpoint is the whole of what a
+# parent can do about its own occupancy, and doing it twice buys nothing. The parent rung
+# is a SINGLE line, not per-agent, and it runs only when <subagents-dir> was passed
+# explicitly (DISCOVERY RULE above).
+#
+# FIRE ONCE PER SEGMENT, and STATELESSLY — no acknowledgement variable, nothing written
+# anywhere. A segment is the run of records AFTER the newest `compact_boundary` in FILE
+# order (or after the start of file, when there is none). Over that segment's assistant
+# records, deduplicated by `message.id` keeping each id's LAST record and held in
+# first-appearance order, the rung fires only when the LAST record is at or past the rung
+# AND no earlier record in the segment was. So the sample that first crosses fires; every
+# sample after it is silent, because an earlier record in the same segment has now crossed
+# too; and the next compaction starts a fresh segment, which can cross and fire again.
+# The transcript itself is the state, which is why this survives a compaction with no
+# variable to set and nothing to reset when the parent is restarted or resumed.
 #
 # OUTPUT LINE SHAPE, fixed field order:
 #
@@ -155,9 +239,15 @@
 # every figure as key=value:
 #
 #   sage-watch status a37cd95f4 [Explore] "Gate blast radius" done=yes spend=205k \
-#              raw=496k occupancy=173k idle=2379s repeat=1 records=44
+#              raw=496k occupancy=173k idle=2379s repeat=1 records=44 compact=1 \
+#              model=claude-opus-5
 #
 # `raw` is the undeduplicated sum, printed only here, only so the dedupe stays auditable.
+# `compact=` above zero on a UNIT line says that unit compacted mid-work, so its report was
+# written from a summary of its own transcript rather than from the transcript — the parent
+# treats that as a deviation to record (`../references/execute.md`). `model=` is the
+# `message.model` of that unit's newest deduplicated assistant record, `unknown` when it
+# has none.
 #
 # A stale second positional argument prints one extra `note` line, `--status` only, before
 # every other line:
@@ -171,20 +261,42 @@
 # use. Ladder rungs print this line only when <subagents-dir> was passed explicitly
 # (never under discovery); `--status` prints it whether the dir was explicit or discovered:
 #
-#   sage-watch occ-30pct handover <session-id> [parent] "session transcript" \
-#              occupancy=302k window=1006380 pct=30%
+#   sage-watch occ-checkpoint checkpoint <session-id> [parent] "session transcript" \
+#              occupancy=302k window=1006380 compact-at=177779 source=measured \
+#              rung=147779 pct=30%
 #
-#   sage-watch status <session-id> [parent] "session transcript" \
-#              occupancy=160k window=1006380 pct=16%
+#   sage-watch status <session-id> [parent] "session transcript" model=claude-opus-5 \
+#              occupancy=160k window=1006380 compact-at=177779 source=measured \
+#              rung=147779 pct=16% compact=15 turns=188 occ-sum=17262417 \
+#              crossed-at=42 saving-post-rung=9330288
+#
+# `compact-at`, `rung`, `occ-sum` and `saving-post-rung` print RAW, never `tok()`-shortened,
+# for the same reason `window=` does: the parent copies them straight into the ledger and a
+# journal `run` line, and a rounded figure is precision it cannot get back.
+#
+# The `--status`-only fields after `pct=`:
+#   compact            how many `compact_boundary` records the parent transcript holds.
+#   turns              the deduplicated assistant record count over the WHOLE transcript.
+#   occ-sum            the sum of occupancy over those records (THE ARITHMETIC above).
+#   crossed-at         the 1-based index, in that same deduplicated first-appearance
+#                      order, of the first record at or past `rung` — or `none`. It is a
+#                      WHOLE-transcript figure, so it does not reset at a compaction the
+#                      way the rung's own fire test does.
+#   saving-post-rung   what a fresh window after the checkpoint could have saved: with T
+#                      = `SAGE_CHECKPOINT_TURN` when set to a positive integer, else
+#                      `crossed-at` (0 for `none`), the sum over deduplicated records
+#                      indexed above T of `max(occupancy - 60000, 0)`. The 60000 is the
+#                      floor a resumed parent would have carried anyway — skill, ledger
+#                      and re-read state — so what is left is the avoidable part. Price it
+#                      at the cache-read rate for `model=`, not the input rate.
 #
 # `<session-id>` is the session uuid — the basename of the session directory one level
 # above `subagents/`, or, under discovery in `--status` mode, whichever session id
-# discovery resolved. `--status` prints this line first, ack or not, explicit dir or
-# discovered — EXCEPT the five fail-open cases that print no parent line at all: the
-# parent transcript is missing, unreadable, or unparseable, it carries no assistant
-# records, or its occupancy reads 0. The ladder prints the line only under an explicit
-# dir, and only when `occ-30pct` actually fires — which is only when `SAGE_OCC_ACK` is
-# unset.
+# discovery resolved. `--status` prints this line first, explicit dir or discovered —
+# EXCEPT the five fail-open cases that print no parent line at all: the parent transcript
+# is missing, unreadable, or unparseable, it carries no assistant records, or its
+# occupancy reads 0. The ladder prints the line only under an explicit dir, and only on
+# the one sample per segment where `occ-checkpoint` fires.
 # `done` takes three values on `--status`: `yes` (clause a or b), `stale` (clause c — the
 # transcript is older than IDLE_CEIL, so the unit is presumed gone), and `no`.
 #
@@ -207,22 +319,33 @@
 #     next tool round, and a unit with no tool round in six hours has none coming, so the
 #     probe has no actionable claim left to make. Machine sleep lands here too, and going
 #     quiet after it is the fail-open answer.
-#   - The parent occupancy rung trusts `SAGE_WINDOW` completely: it has no way to learn
-#     the real window on its own. A window SMALLER than the real one fires EARLY and LOUD —
-#     measured: 900k against a real ~1,006,380 fired a false `occ-30pct` at 32% actual
-#     occupancy. A window LARGER than the real one
-#     fires LATE or never — measured: 10m against the same occupancy read `pct=4%`. Neither
-#     direction goes silent on its own; a value that parses to 0 is treated as unparseable
-#     and falls back to the 1006380 default (below), so it cannot zero out the percentage.
-#     Only discovery mode (above) silences the rung outright. Pass the resolved window
-#     explicitly rather than trusting the built-in default.
-#   - `occ-30pct` repeats every sample once it fires, by design (THE LADDER above) — that
-#     persistence is not a bug to suppress with anything but `SAGE_OCC_ACK`.
+#   - THE SENSOR CANNOT SEE THE WINDOW. It never could and nothing here changed that. It
+#     trusts `SAGE_WINDOW` for `pct=` and for the rung's margin, and a wrong value moves
+#     both: SMALLER than the real window fires EARLY and LOUD — measured: 900k against a
+#     real ~1,006,380 read 32% actual occupancy as 30% — and LARGER fires LATE or never —
+#     measured: 10m against the same occupancy read `pct=4%`. Neither direction goes silent
+#     on its own; a value that parses to 0 is treated as unparseable and falls back to the
+#     1006380 default (below), so it cannot zero out the percentage. A window under the
+#     30000 `assumed` reserve yields a negative compact-at, and so a rung that fires on the
+#     first sample — loud, not silent, which is the intended direction. Only discovery mode
+#     (above) silences the rung outright. Pass the resolved window explicitly rather than
+#     trusting the built-in default.
+#   - What it CAN see is the compaction trigger, and only once one has fired: `measured`
+#     needs a `compact_boundary` already in the transcript. Before the first compaction it
+#     trusts `SAGE_COMPACT_AT`, and with neither it ASSUMES, on a reserve measured at one
+#     window size (THE COMPACTION POINT above). An `assumed` rung on a 1M window is the
+#     weakest figure this script prints.
+#   - `occ-checkpoint` fires ONCE per compaction segment and then goes quiet even though
+#     occupancy keeps climbing. A checkpoint that the parent misses, ignores, or dispatches
+#     past is not re-raised until the next compaction resets the segment.
 #
 # FAIL OPEN. An absent signal means no alarm, never a recall.
 
-IDLE_CEIL=21600       # 6h. Past this a not-yet-finished unit is presumed gone, not stalled
-OCC_HANDOVER_PCT=30   # rung occ-30pct: parent occupancy as a percent of WINDOW
+IDLE_CEIL=21600         # 6h. Past this a not-yet-finished unit is presumed gone, not stalled
+COMPACT_RESERVE=30000   # `assumed` compact-at = WINDOW - this. Measured on 200k only
+CHECKPOINT_MARGIN_PCT=5 # rung = compact-at - max(this% of WINDOW, CHECKPOINT_MARGIN_FLOOR)
+CHECKPOINT_MARGIN_FLOOR=30000
+RESUME_FLOOR=60000      # what a resumed parent carries anyway; saving-post-rung nets it off
 
 # WINDOW: an integer, or an integer with a k/K (x1000) or m/M (x1000000) suffix. An
 # unparseable or unset SAGE_WINDOW falls back to the measured figure in
@@ -243,6 +366,15 @@ WINDOW=$(parse_amount "${SAGE_WINDOW:-}" 1006380)
 # of ever firing, which is a silent failure worse than falling back — so 0 is unparseable too.
 [ "$WINDOW" -ge 1 ] || WINDOW=1006380
 
+# 0 means "the user stated no compaction point", so the evidence order falls through to
+# `stated`-then-`assumed` exactly as an unset variable does.
+STATED_COMPACT_AT=$(parse_amount "${SAGE_COMPACT_AT:-}" 0)
+
+# --status only, and a BARE integer: it is a turn index, not a token amount, so the k/m
+# suffixes parse_amount accepts would be a category error here.
+CHECKPOINT_TURN="${SAGE_CHECKPOINT_TURN:-}"
+case "$CHECKPOINT_TURN" in ''|*[!0-9]*) CHECKPOINT_TURN=0 ;; esac
+
 JQ=$(command -v jq 2>/dev/null)
 [ -n "$JQ" ] || JQ=/usr/bin/jq   # fallback for a stripped PATH; jq ships at /usr/bin on macOS
 
@@ -256,8 +388,9 @@ usage() {
     '' \
     'A second positional argument is accepted and ignored (stale estimates-file path from' \
     'before the per-unit rungs were cut). --status prints one note line saying so.' \
-    'SAGE_WINDOW (env): the live context window, default 1006380. SAGE_OCC_ACK (env):' \
-    'non-empty suppresses the parent occ-30pct rung. Both documented above.' \
+    'SAGE_WINDOW (env): the live context window, default 1006380. SAGE_COMPACT_AT (env):' \
+    'the compaction point the user stated. SAGE_CHECKPOINT_TURN (env, --status, a bare' \
+    'integer): the turn the checkpoint fired at. All three documented above.' \
     'Exit 0 always; exit 2 only when the arguments themselves are unusable.'
 }
 
@@ -302,7 +435,7 @@ discover_dir() {
 }
 
 # EXPLICIT_DIR gates the parent occupancy rung below (DISCOVERY RULE): discovery can
-# resolve a different session's directory, and a handover trigger must never fire on it.
+# resolve a different session's directory, and a checkpoint trigger must never fire on it.
 if [ -n "$DIR" ]; then EXPLICIT_DIR=1; else EXPLICIT_DIR=0; fi
 [ -n "$DIR" ] || DIR=$(discover_dir)
 
@@ -384,6 +517,7 @@ emit() {  # rung action id type desc figures...
 # The per-transcript probe. Reads raw lines so a half-written final line is dropped
 # by `fromjson?` instead of failing the parse. Emits one TSV row:
 #   done spend raw_spend occupancy last_ts repeat_count assistant_records tool input
+#   model compact max_pretokens turns occ_sum
 #
 # `last_ts` comes from the last record that CARRIES a `timestamp` at all, not just an
 # assistant one: a tool result lands between assistant turns and is the freshest liveness
@@ -404,7 +538,7 @@ emit() {  # rung action id type desc figures...
 # `assistant_records` is the evidence count, and what it gates is narrower than it looks.
 # It gates the PARENT line and the parent rung, which both test `records >= 1`: a session
 # transcript carrying no assistant record produces no `[parent]` status line and fires no
-# handover rung. It does NOT gate the per-agent rows -- an evidence-free transcript still
+# checkpoint rung. It does NOT gate the per-agent rows -- an evidence-free transcript still
 # prints a full row, `records=0` with spend, raw, occupancy and repeat all zero (measured
 # on a user-only transcript), because a caller probing the layout needs to see that the
 # file was found and read. So `records=0` is the tell, never `idle`: idle is computed from
@@ -414,8 +548,23 @@ emit() {  # rung action id type desc figures...
 # future, or one before the epoch, which fails the same non-negative guard.
 # Fields 8 and 9 (tool, input) are read by nothing here. PROBE is SHARED by the parent
 # occupancy sensor and `--status`, so it moves only against a fixture AND a whole-corpus
-# regression -- the `last_ts` repair above is the only change it has taken. That repair
-# cannot reach the sensor either way: the sensor reads field 4, never field 5.
+# regression, and it moves by APPENDING fields, never by reordering them: every caller
+# reads positionally, and both callers absorb the tail they do not use.
+# Fields 10 to 14 are the compaction set: `model` (the newest deduplicated assistant
+# record's `message.model`, `unknown` with no assistant record), `compact` (how many
+# `compact_boundary` records the file holds), `max_pretokens` (the largest
+# `compactMetadata.preTokens` across them, 0 with none -- `numbers` drops a null or string
+# one so `max` never returns a non-integer), `turns` (the deduplicated count, against
+# field 7's raw one) and `occ_sum` (occupancy summed over the deduplicated records).
+# NO FIELD MAY EVER BE EMPTY, which is why fields 8 and 9 emit `-` rather than `""` on a
+# transcript with no tool call. TAB is IFS whitespace, so `IFS=$'\t' read` collapses a run
+# of tabs into ONE delimiter: an empty field 8 and 9 silently shifted every appended field
+# two places left, and the parent line printed max_pretokens as `model=` and an occupancy
+# sum as `compact-at=` (measured on a fixture). Nothing reads those two fields, so the
+# placeholder costs nothing and the invariant is what keeps positional reads honest.
+# `model` is descriptive only: the id does NOT carry the window. `claude-opus-5` has run
+# in a 200k and in a 1M session on this machine, so there is no model-to-window table here
+# and no derivation of one is sound. SAGE_WINDOW stays the only source for the window.
 
 PROBE='
 def num($x): if ($x|type) == "number" then $x else 0 end;
@@ -425,6 +574,7 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
 
 [inputs | fromjson? | select(type == "object")] as $all
 | [$all[] | select((.type? == "assistant") and (.message?.id? != null))] as $asst
+| [$all[] | select((.type? == "system") and (.subtype? == "compact_boundary"))] as $bnd
 | ($asst | group_by(.message.id) | map(.[-1])) as $ded
 | [$ded[] | (.message.content? // []) | if type == "array" then .[] else empty end
    | select(.type? == "tool_use")
@@ -450,8 +600,13 @@ def flat: (. // "") | tostring | gsub("[\\t\\r\\n]"; " ");
      else ($stamps[-1] | sub("\\.[0-9]+Z$"; "Z") | (fromdateiso8601? // -1)) end),
     ($top.c // 0),
     ($asst | length),
-    (if $top == null then "" else ($top.n | flat) end),
-    (if $top == null then "" else ($top.i | flat | .[0:70]) end)
+    (if $top == null then "-" else ($top.n | flat) end),
+    (if $top == null then "-" else ($top.i | flat | .[0:70]) end),
+    (if ($asst | length) == 0 then "unknown" else ($asst[-1].message.model // "unknown" | flat) end),
+    ($bnd | length),
+    ([$bnd[] | .compactMetadata?.preTokens? | numbers] | max // 0),
+    ($ded | length),
+    ([$ded[] | .message.usage? // {} | occ_of] | add // 0)
   ] | @tsv
 '
 
@@ -465,13 +620,68 @@ pct() {
   printf '%d' $(( $1 * 100 / $2 ))
 }
 
+compact_at_of() {  # compact_at_of <max_pretokens> — echoes "<integer> <source-word>"
+  # THE COMPACTION POINT above owns this order; first hit wins.
+  if [ "$1" -gt 0 ]; then printf '%s measured' "$1"
+  elif [ "$STATED_COMPACT_AT" -gt 0 ]; then printf '%s stated' "$STATED_COMPACT_AT"
+  else printf '%s assumed' $((WINDOW - COMPACT_RESERVE)); fi
+}
+
+checkpoint_rung_of() {  # checkpoint_rung_of <compact-at> — echoes an integer
+  local margin=$((WINDOW * CHECKPOINT_MARGIN_PCT / 100))
+  [ "$margin" -ge "$CHECKPOINT_MARGIN_FLOOR" ] || margin=$CHECKPOINT_MARGIN_FLOOR
+  printf '%d' $(($1 - margin))
+}
+
 # ---------------------------------------------------------------------------
-# Parent occupancy sensor (issue 2 / SKILL.md ## Handover). Reuses PROBE above; it needs
-# no second jq program, since occupancy is field 4 of the same TSV shape.
+# The parent-only second pass. PROBE cannot answer these three: they need the records in
+# FILE order and split at the newest compaction boundary, while PROBE's own dedup is
+# `group_by`, which sorts by message.id. Emits one TSV row:
+#   crossed_at saving_post_rung fires
+#
+# `dedup_ordered` keeps each id's LAST record and holds first-appearance order, which is
+# the turn numbering `crossed-at` and `SAGE_CHECKPOINT_TURN` both index into; `group_by`
+# would number the same turns by id and hand the parent an index it cannot act on.
+# `fires` is the once-per-segment test (THE LADDER above): the segment's last record is at
+# or past the rung and no earlier one in the segment was. Reading only the segment is what
+# makes it stateless — a compaction truncates the evidence, so the next climb is a first
+# crossing again, with nothing to acknowledge and nothing to reset.
+CHECKPOINT='
+def num($x): if ($x|type) == "number" then $x else 0 end;
+def occ_of: num(.input_tokens) + num(.cache_creation_input_tokens) + num(.cache_read_input_tokens);
+def assistants: [.[] | select((.type? == "assistant") and (.message?.id? != null))];
+def dedup_ordered:
+  reduce .[] as $r ({order: [], byid: {}};
+      .order = (if .byid[$r.message.id] == null then .order + [$r.message.id] else .order end)
+    | .byid[$r.message.id] = $r)
+  | . as $s | [$s.order[] | $s.byid[.]];
+def occupancies: assistants | dedup_ordered | map(.message.usage? // {} | occ_of);
+
+[inputs | fromjson? | select(type == "object")] as $all
+| ([$all | to_entries[]
+    | select((.value.type? == "system") and (.value.subtype? == "compact_boundary"))
+    | .key][-1] // -1) as $cut
+| ($all | occupancies) as $occs
+| ($all[($cut + 1):] | occupancies) as $seg
+| ([$occs | to_entries[] | select(.value >= $rung) | .key + 1][0] // 0) as $crossed
+| (if $cpt > 0 then $cpt else $crossed end) as $origin
+| [ $crossed,
+    ([$occs | to_entries[] | select(.key + 1 > $origin)
+      | .value - $floor | if . > 0 then . else 0 end] | add // 0),
+    (if ($seg | length) == 0 then 0
+     elif ($seg[-1] < $rung) then 0
+     elif ([$seg[:-1][] | select(. >= $rung)] | length) > 0 then 0
+     else 1 end)
+  ] | @tsv
+'
+
+# ---------------------------------------------------------------------------
+# Parent occupancy sensor. Reuses PROBE above, then CHECKPOINT for the three figures
+# PROBE's id-sorted dedup cannot produce.
 #
 # `--status` reports the parent under discovery too — it is diagnostic, not a trigger, so
 # resolving to the wrong session's occupancy costs nothing. The ladder rung below runs
-# only under an EXPLICIT <subagents-dir> (DISCOVERY RULE above): a handover
+# only under an EXPLICIT <subagents-dir> (DISCOVERY RULE above): a checkpoint
 # trigger must never fire on a different session's occupancy.
 if [ "$STATUS" -eq 1 ] || [ "$EXPLICIT_DIR" -eq 1 ]; then
   session_dir=$(dirname "$DIR")
@@ -481,26 +691,47 @@ if [ "$STATUS" -eq 1 ] || [ "$EXPLICIT_DIR" -eq 1 ]; then
   if [ -f "$parent_transcript" ] && [ -r "$parent_transcript" ]; then
     prow=$("$JQ" -R -n -r "$PROBE" < "$parent_transcript" 2>/dev/null) || prow=""
     if [ -n "$prow" ]; then
-      IFS=$'\t' read -r p_done p_spend p_raw p_occ p_ts p_rep p_recs p_tool p_in <<EOF
+      IFS=$'\t' read -r p_done p_spend p_raw p_occ p_ts p_rep p_recs p_tool p_in \
+                        p_model p_compact p_pretok p_turns p_occsum <<EOF
 $prow
 EOF
       # Fail open: a non-numeric figure, no assistant records, or zero occupancy is not
       # an alarm — a missing or unreadable parent transcript already skipped this block.
       case "$p_occ$p_recs" in *[!0-9]*|'') p_occ=""; p_recs=0 ;; esac
+      # The appended fields fail open on their own, and to zero rather than to no line:
+      # they are diagnostic, and withholding the whole parent line over one of them would
+      # cost the caller the occupancy figure the rung is actually about.
+      case "$p_compact$p_pretok$p_turns$p_occsum" in
+        *[!0-9]*|'') p_compact=0; p_pretok=0; p_turns=0; p_occsum=0 ;;
+      esac
+      [ -n "$p_model" ] || p_model=unknown
       if [ -n "$p_occ" ] && [ "$p_recs" -ge 1 ] && [ "$p_occ" -gt 0 ]; then
         p_pct=$(pct "$p_occ" "$WINDOW")
-        # `window=` is always the RAW figure, never `tok()`-shortened: the caller passed
-        # SAGE_WINDOW and must read back exactly what it passed.
+        evidence=$(compact_at_of "$p_pretok")
+        compact_at="${evidence%% *}"
+        at_source="${evidence#* }"
+        rung=$(checkpoint_rung_of "$compact_at")
+
+        crow=$("$JQ" -R -n -r --argjson rung "$rung" --argjson cpt "$CHECKPOINT_TURN" \
+                 --argjson floor "$RESUME_FLOOR" "$CHECKPOINT" \
+                 < "$parent_transcript" 2>/dev/null) || crow=""
+        IFS=$'\t' read -r crossed saving fires <<EOF
+$crow
+EOF
+        case "$crossed$saving$fires" in *[!0-9]*|'') crossed=0; saving=0; fires=0 ;; esac
+        if [ "$crossed" -gt 0 ]; then crossed_s="$crossed"; else crossed_s=none; fi
+
+        # `window=`, `compact-at=`, `rung=`, `occ-sum=` and `saving-post-rung=` are always
+        # RAW figures, never `tok()`-shortened: the caller passed SAGE_WINDOW and must read
+        # back exactly what it passed, and the other four go into the ledger and the
+        # journal `run` line, where a rounded figure is precision it cannot get back.
         if [ "$STATUS" -eq 1 ]; then
-          printf 'sage-watch status %s [parent] "session transcript" occupancy=%s window=%s pct=%s%%\n' \
-            "$session_id" "$(tok "$p_occ")" "$WINDOW" "$p_pct"
-        elif [ "$EXPLICIT_DIR" -eq 1 ]; then
-          # One rung (THE LADDER above): a supervising parent has no action left to take
-          # on its own occupancy, so the ack silences this alarm outright once acted on.
-          if [ "$p_pct" -ge "$OCC_HANDOVER_PCT" ] && [ -z "${SAGE_OCC_ACK:-}" ]; then
-            emit occ-30pct handover "$session_id" parent "session transcript" \
-              "occupancy=$(tok "$p_occ") window=$WINDOW pct=${p_pct}%"
-          fi
+          printf 'sage-watch status %s [parent] "session transcript" model=%s occupancy=%s window=%s compact-at=%s source=%s rung=%s pct=%s%% compact=%s turns=%s occ-sum=%s crossed-at=%s saving-post-rung=%s\n' \
+            "$session_id" "$p_model" "$(tok "$p_occ")" "$WINDOW" "$compact_at" "$at_source" \
+            "$rung" "$p_pct" "$p_compact" "$p_turns" "$p_occsum" "$crossed_s" "$saving"
+        elif [ "$EXPLICIT_DIR" -eq 1 ] && [ "$fires" -eq 1 ]; then
+          emit occ-checkpoint checkpoint "$session_id" parent "session transcript" \
+            "occupancy=$(tok "$p_occ") window=$WINDOW compact-at=$compact_at source=$at_source rung=$rung pct=${p_pct}%"
         fi
       fi
     fi
@@ -536,15 +767,21 @@ EOF
     # Fail open either way -- an empty $row is no row and no alarm.
     [ -n "$row" ] || continue
 
-    # Fields 8 and 9 (tool name, tool input) are absorbed and unused: PROBE is shared with
-    # the parent sensor above and moves only under its own fixture and whole-corpus
-    # regression (see the probe block), and nothing left in this script reads them.
-    IFS=$'\t' read -r done spend raw_spend occ last_ts rep_n recs _ _ <<EOF
+    # Fields 8, 9, 12 and 13 (tool name, tool input, max_pretokens, turns) are absorbed and
+    # unused here: PROBE is shared with the parent sensor above and moves only under its own
+    # fixture and whole-corpus regression (see the probe block). A unit has no rung and no
+    # window of its own, so only its `compact` count and its `model` reach a line.
+    IFS=$'\t' read -r done spend raw_spend occ last_ts rep_n recs _ _ \
+                      model n_compact _ _ _ <<EOF
 $row
 EOF
 
     # Fail open once more: anything non-numeric where a figure belongs is no signal.
     case "$done$spend$raw_spend$occ$last_ts$rep_n$recs" in *[!0-9-]*|'') continue ;; esac
+    # The two appended fields fail open to their own defaults instead, for the same reason
+    # as on the parent line: they never withhold the row the older figures can still carry.
+    case "$n_compact" in ''|*[!0-9]*) n_compact=0 ;; esac
+    [ -n "$model" ] || model=unknown
 
     if [ "$last_ts" -ge 0 ] && [ "$NOW" -ge 0 ]; then idle=$((NOW - last_ts)); else idle=-1; fi
 
@@ -558,9 +795,9 @@ EOF
     if [ "$done" -eq 1 ]; then done_s=yes
     elif [ "$stale" -eq 1 ]; then done_s=stale
     else done_s=no; fi
-    printf 'sage-watch status %s [%s] "%s" done=%s spend=%s raw=%s occupancy=%s idle=%s repeat=%s records=%s\n' \
+    printf 'sage-watch status %s [%s] "%s" done=%s spend=%s raw=%s occupancy=%s idle=%s repeat=%s records=%s compact=%s model=%s\n' \
       "$id" "${atype:-?}" "$desc" "$done_s" "$(tok "$spend")" "$(tok "$raw_spend")" \
-      "$(tok "$occ")" "$idle_s" "$rep_n" "$recs"
+      "$(tok "$occ")" "$idle_s" "$rep_n" "$recs" "$n_compact" "$model"
   done
 
   # The one silent exit --status still had. Once $DIR resolves, an empty glob and an

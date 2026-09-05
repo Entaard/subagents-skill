@@ -30,7 +30,7 @@ The plan is complete when every unit has a named model, a reader/writer class, a
 
 Write every dispatch against the task brief contract (`## Task brief` below). Briefing rules:
 
-- The agent starts with **zero context**. Name files, boundaries, the output shape, and the **decisions already made**: two units deciding one question differently is how coupled work fails. Name line ranges only where the location is certain. **Name the ground truth outright: exact files, line numbers, URLs, measured baselines, and the harness to measure with** — such a brief has run ~2–2.5× cheaper and failed less (calibration: established).
+- The agent starts with **zero context**. Name files, boundaries, the output shape, and the **decisions already made**: two units deciding one question differently is how coupled work fails. Name line ranges only where the location is certain. **Name the ground truth outright: exact files, line numbers, URLs, measured baselines, and the harness to measure with** — such a brief has run ~2–2.5× cheaper and failed less (calibration: established) — and **forbid re-deriving it**: one that named the payload but let the unit build its own decoder forfeited the discount (calibration: provisional).
 - **One dispatch class is exempt from naming the decisions: a blind acceptance-suite author** (`topologies.md` #10). It receives the decisions' *observable consequences*, never the decisions, and its criteria are phrased at the requirement's observable surface for the same reason.
 - **Grep the claim before you brief it — and before you assert it.** A brief asserts that a file, symbol, number, or state exists only after one command has proven it, and cites only what its named artifacts contain: a pointer into a transcript or report the agent cannot read is a briefing error. The rule reaches your own **completion claims** (calibration: recurring): where the deliverable cites artifacts, one `ls` loop over every path it names runs before the claim — either they resolve on the machine where the document is filed, or the document says where they resolve instead.
 - **A reader's structural claim is a lead, not ground truth.** Fetch the primary source locally and grep it yourself (calibration: established).
@@ -63,7 +63,7 @@ Apex is an escalation and dedicated-owner tier, never a default seat. **Tier is 
 ```text
 Role: <implementer | explorer | reviewer(lens) | verifier | judge>
 Objective: <one sentence>
-Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank. Name the exact ground truth: files, line numbers, URLs, the measured baseline, the harness to measure with (Step 3 above carries the measured ratio)>
+Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank. Name the exact ground truth: files, line numbers, URLs, the measured baseline, the harness to measure with — and say it is not to be re-derived (Step 3 above carries the measured ratio)>
 Scope and relevant files: <explicit>
 Allowed writes: <none | exact paths | worktree path>
 Allowed tools: <"read + search only, no network, no shell" | "repo tools + Bash for the test command only" | "inherit". Reviewers and explorers: deny network and shell unless the objective names a use for them. Read-only writes plus open network access is not read-only>

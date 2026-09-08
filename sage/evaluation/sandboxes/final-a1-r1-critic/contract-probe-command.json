@@ -1,0 +1,10 @@
+{
+  "label": "contract-probe-command",
+  "args": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r1-critic/evidence_audit.py"
+  ],
+  "exit_code": 1,
+  "stdout": "{\"scorecards\": 7, \"evidence_bindings\": 313, \"historical_hash_mismatches\": 0, \"main_control\": true, \"promotion_contract\": \"FAIL\", \"evidence\": \"standalone-promotion-contract.json\"}\n",
+  "stderr": ""
+}

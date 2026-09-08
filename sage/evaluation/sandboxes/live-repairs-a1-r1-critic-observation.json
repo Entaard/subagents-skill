@@ -1,0 +1,33 @@
+{
+  "native_handle": "/root/live_repairs_critic",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "observed_at": {
+    "current_time": "2026-09-08 13:39:38 UTC"
+  },
+  "brief": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic-brief.txt",
+  "root_writer_state": "read_only_until_release_and_native_terminal",
+  "completion": {
+    "observed_at": {
+      "current_time": "2026-09-08 13:52:32 UTC"
+    },
+    "native_status": "completed",
+    "explicit_release": true,
+    "pending_effects": "none reported",
+    "review": "sage/docs/reviews/live-repairs-a1-r1.json",
+    "verdict": "fail",
+    "open_errors": [
+      "LIVE-03"
+    ],
+    "verified_fixed": [
+      "LIVE-01",
+      "LIVE-02",
+      "LIVE-04",
+      "DOC-01"
+    ],
+    "status_append": "score_status.py successfully appended actual review and preserved prior rounds",
+    "effective_model": null,
+    "effective_effort": null
+  }
+}

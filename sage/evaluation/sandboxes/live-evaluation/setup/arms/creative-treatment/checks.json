@@ -1,0 +1,38 @@
+{
+  "dimensions": [
+    "task_correctness",
+    "task_completeness",
+    "evidence_quality",
+    "orchestration_behavior",
+    "routing_efficiency",
+    "safety_reversibility",
+    "report_quality",
+    "artifact_experience"
+  ],
+  "not_applicable": {
+    "recovery_behavior": "This case does not exercise recovery_behavior",
+    "knowledge_behavior": "This case does not exercise knowledge_behavior"
+  },
+  "checks": [
+    {
+      "id": "game-flow",
+      "acceptance": "Direct keyboard input starts, repeats 2-4-1 successfully, restarts, makes a wrong guess, restarts and succeeds again; phase/progress/mistake feedback is visible and demonstration ignores guesses."
+    },
+    {
+      "id": "visual-two-viewports",
+      "acceptance": "Actor/reviewer actually inspect captured 1280x800 and 390x844 images; assess layout, readable instructions, visible focus and no overflow. Capture alone is insufficient."
+    },
+    {
+      "id": "scoped-performance",
+      "acceptance": "Retain actual local load and keyboard-to-frame measurements with platform, viewport, sample count and method; distinguish them from general performance claims."
+    },
+    {
+      "id": "artifact",
+      "acceptance": "Single self-contained index.html meets accessibility/reduced-motion/keyboard requirements with no remote assets or hosting; actual independent review and focused repairs are evidenced."
+    },
+    {
+      "id": "live-procedure",
+      "acceptance": "Installed Sage, routing, one writer, review and preserved unknowns have live evidence."
+    }
+  ]
+}

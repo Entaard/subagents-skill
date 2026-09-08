@@ -1,0 +1,7079 @@
+{
+  "audit": {
+    "all_visitors": 810,
+    "missing_rows": [
+      {
+        "completed": null,
+        "crowd_block": "busy",
+        "row_id": "M09",
+        "sign": "new",
+        "visitors": 20,
+        "week": 2
+      }
+    ],
+    "note_ids": [
+      "N1",
+      "N2",
+      "N3",
+      "N4",
+      "N5"
+    ],
+    "observed_completed": 531,
+    "row_count": 9
+  },
+  "method": {
+    "difference": "100 * (new fraction - old fraction); signed percentage points, not relative percent",
+    "observed_rows": "Exclude the entire M09 row from numerator and denominator; no imputation. Old includes all 410 visitors; new includes 380 of 400.",
+    "sensitivity": "Evaluate every integer M09 completion count 0..20 at the known full-cohort denominators.",
+    "wilson": "95% descriptive binomial Wilson intervals, z=1.96, for observed-row overall sign fractions. Full-cohort new-sign intervals are conditional on each hypothetical M09 count. Neither accounts for confounding or session clustering and neither identifies a causal effect."
+  },
+  "missing_count_sensitivity": {
+    "bounds": {
+      "crowd_busy": {
+        "difference_new_minus_old_pp_max": 12.626728110599078,
+        "difference_new_minus_old_pp_min": 6.175115207373272,
+        "new_denominator": 310,
+        "new_fraction_max": 0.5548387096774193,
+        "new_fraction_min": 0.49032258064516127,
+        "old_denominator": 70,
+        "old_fraction": 0.42857142857142855
+      },
+      "crowd_quiet": {
+        "difference_new_minus_old_pp_max": 5.5555555555555465,
+        "difference_new_minus_old_pp_min": 5.5555555555555465,
+        "new_denominator": 90,
+        "new_fraction_max": 0.8555555555555555,
+        "new_fraction_min": 0.8555555555555555,
+        "old_denominator": 340,
+        "old_fraction": 0.8
+      },
+      "overall": {
+        "difference_new_minus_old_pp_max": -11.408536585365848,
+        "difference_new_minus_old_pp_min": -16.40853658536585,
+        "new_denominator": 400,
+        "new_fraction_max": 0.6225,
+        "new_fraction_min": 0.5725,
+        "old_denominator": 410,
+        "old_fraction": 0.7365853658536585
+      },
+      "week_1": {
+        "difference_new_minus_old_pp_max": -16.91729323308271,
+        "difference_new_minus_old_pp_min": -16.91729323308271,
+        "new_denominator": 190,
+        "new_fraction_max": 0.5736842105263158,
+        "new_fraction_min": 0.5736842105263158,
+        "old_denominator": 210,
+        "old_fraction": 0.7428571428571429
+      },
+      "week_1_busy": {
+        "difference_new_minus_old_pp_max": 9.999999999999998,
+        "difference_new_minus_old_pp_min": 9.999999999999998,
+        "new_denominator": 150,
+        "new_fraction_max": 0.5,
+        "new_fraction_min": 0.5,
+        "old_denominator": 30,
+        "old_fraction": 0.4
+      },
+      "week_1_quiet": {
+        "difference_new_minus_old_pp_max": 4.999999999999993,
+        "difference_new_minus_old_pp_min": 4.999999999999993,
+        "new_denominator": 40,
+        "new_fraction_max": 0.85,
+        "new_fraction_min": 0.85,
+        "old_denominator": 180,
+        "old_fraction": 0.8
+      },
+      "week_2": {
+        "difference_new_minus_old_pp_max": -6.333333333333336,
+        "difference_new_minus_old_pp_min": -15.857142857142858,
+        "new_denominator": 210,
+        "new_fraction_max": 0.6666666666666666,
+        "new_fraction_min": 0.5714285714285714,
+        "old_denominator": 200,
+        "old_fraction": 0.73
+      },
+      "week_2_busy": {
+        "difference_new_minus_old_pp_max": 15.624999999999995,
+        "difference_new_minus_old_pp_min": 3.125,
+        "new_denominator": 160,
+        "new_fraction_max": 0.60625,
+        "new_fraction_min": 0.48125,
+        "old_denominator": 40,
+        "old_fraction": 0.45
+      },
+      "week_2_quiet": {
+        "difference_new_minus_old_pp_max": 5.999999999999995,
+        "difference_new_minus_old_pp_min": 5.999999999999995,
+        "new_denominator": 50,
+        "new_fraction_max": 0.86,
+        "new_fraction_min": 0.86,
+        "old_denominator": 160,
+        "old_fraction": 0.8
+      }
+    },
+    "feasible_counts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "overall_new_wilson_envelope": {
+      "interpretation": "Envelope across 21 hypothetical intervals; not itself a 95% interval or causal confidence bound.",
+      "lower": 0.5235544015629189,
+      "upper": 0.6686291938850946
+    },
+    "row_id": "M09",
+    "scenarios": [
+      {
+        "M09_completed": 0,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 6.175115207373272,
+            "new": {
+              "all_visitors": 310,
+              "completed": 152,
+              "denominator": 310,
+              "fraction": 0.49032258064516127,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -16.40853658536585,
+            "new": {
+              "all_visitors": 400,
+              "completed": 229,
+              "denominator": 400,
+              "fraction": 0.5725,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5235544015629189,
+                "upper": 0.6200662655501273,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -15.857142857142858,
+            "new": {
+              "all_visitors": 210,
+              "completed": 120,
+              "denominator": 210,
+              "fraction": 0.5714285714285714,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 3.125,
+            "new": {
+              "all_visitors": 160,
+              "completed": 77,
+              "denominator": 160,
+              "fraction": 0.48125,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 1,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 6.497695852534563,
+            "new": {
+              "all_visitors": 310,
+              "completed": 153,
+              "denominator": 310,
+              "fraction": 0.4935483870967742,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -16.15853658536586,
+            "new": {
+              "all_visitors": 400,
+              "completed": 230,
+              "denominator": 400,
+              "fraction": 0.575,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5260666333045342,
+                "upper": 0.6225064706055136,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -15.380952380952383,
+            "new": {
+              "all_visitors": 210,
+              "completed": 121,
+              "denominator": 210,
+              "fraction": 0.5761904761904761,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 3.749999999999998,
+            "new": {
+              "all_visitors": 160,
+              "completed": 78,
+              "denominator": 160,
+              "fraction": 0.4875,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 2,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 6.820276497695854,
+            "new": {
+              "all_visitors": 310,
+              "completed": 154,
+              "denominator": 310,
+              "fraction": 0.4967741935483871,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -15.908536585365852,
+            "new": {
+              "all_visitors": 400,
+              "completed": 231,
+              "denominator": 400,
+              "fraction": 0.5775,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5285801141391775,
+                "upper": 0.624945426567872,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -14.904761904761898,
+            "new": {
+              "all_visitors": 210,
+              "completed": 122,
+              "denominator": 210,
+              "fraction": 0.580952380952381,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 4.375000000000001,
+            "new": {
+              "all_visitors": 160,
+              "completed": 79,
+              "denominator": 160,
+              "fraction": 0.49375,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 3,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 7.142857142857145,
+            "new": {
+              "all_visitors": 310,
+              "completed": 155,
+              "denominator": 310,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -15.658536585365857,
+            "new": {
+              "all_visitors": 400,
+              "completed": 232,
+              "denominator": 400,
+              "fraction": 0.58,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5310948469671546,
+                "upper": 0.6273831305368964,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -14.428571428571423,
+            "new": {
+              "all_visitors": 210,
+              "completed": 123,
+              "denominator": 210,
+              "fraction": 0.5857142857142857,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 4.999999999999999,
+            "new": {
+              "all_visitors": 160,
+              "completed": 80,
+              "denominator": 160,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 4,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 7.465437788018431,
+            "new": {
+              "all_visitors": 310,
+              "completed": 156,
+              "denominator": 310,
+              "fraction": 0.5032258064516129,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -15.408536585365852,
+            "new": {
+              "all_visitors": 400,
+              "completed": 233,
+              "denominator": 400,
+              "fraction": 0.5825,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5336108347956647,
+                "upper": 0.629819579505388,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -13.952380952380949,
+            "new": {
+              "all_visitors": 210,
+              "completed": 124,
+              "denominator": 210,
+              "fraction": 0.5904761904761905,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 5.6249999999999964,
+            "new": {
+              "all_visitors": 160,
+              "completed": 81,
+              "denominator": 160,
+              "fraction": 0.50625,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 5,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 7.788018433179728,
+            "new": {
+              "all_visitors": 310,
+              "completed": 157,
+              "denominator": 310,
+              "fraction": 0.5064516129032258,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -15.158536585365855,
+            "new": {
+              "all_visitors": 400,
+              "completed": 234,
+              "denominator": 400,
+              "fraction": 0.585,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5361280807400124,
+                "upper": 0.6322547703580419,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -13.476190476190474,
+            "new": {
+              "all_visitors": 210,
+              "completed": 125,
+              "denominator": 210,
+              "fraction": 0.5952380952380952,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 6.249999999999995,
+            "new": {
+              "all_visitors": 160,
+              "completed": 82,
+              "denominator": 160,
+              "fraction": 0.5125,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 6,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 8.110599078341012,
+            "new": {
+              "all_visitors": 310,
+              "completed": 158,
+              "denominator": 310,
+              "fraction": 0.5096774193548387,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -14.90853658536585,
+            "new": {
+              "all_visitors": 400,
+              "completed": 235,
+              "denominator": 400,
+              "fraction": 0.5875,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5386465880248711,
+                "upper": 0.634688699870185,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -13.0,
+            "new": {
+              "all_visitors": 210,
+              "completed": 126,
+              "denominator": 210,
+              "fraction": 0.6,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 6.8750000000000036,
+            "new": {
+              "all_visitors": 160,
+              "completed": 83,
+              "denominator": 160,
+              "fraction": 0.51875,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 7,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 8.43317972350231,
+            "new": {
+              "all_visitors": 310,
+              "completed": 159,
+              "denominator": 310,
+              "fraction": 0.5129032258064516,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -14.658536585365855,
+            "new": {
+              "all_visitors": 400,
+              "completed": 236,
+              "denominator": 400,
+              "fraction": 0.59,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5411663599855963,
+                "upper": 0.6371213647064611,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -12.523809523809526,
+            "new": {
+              "all_visitors": 210,
+              "completed": 127,
+              "denominator": 210,
+              "fraction": 0.6047619047619047,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 7.500000000000001,
+            "new": {
+              "all_visitors": 160,
+              "completed": 84,
+              "denominator": 160,
+              "fraction": 0.525,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 8,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 8.755760368663596,
+            "new": {
+              "all_visitors": 310,
+              "completed": 160,
+              "denominator": 310,
+              "fraction": 0.5161290322580645,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -14.40853658536585,
+            "new": {
+              "all_visitors": 400,
+              "completed": 237,
+              "denominator": 400,
+              "fraction": 0.5925,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5436874000695945,
+                "upper": 0.6395527614194646,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -12.04761904761904,
+            "new": {
+              "all_visitors": 210,
+              "completed": 128,
+              "denominator": 210,
+              "fraction": 0.6095238095238096,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 8.124999999999998,
+            "new": {
+              "all_visitors": 160,
+              "completed": 85,
+              "denominator": 160,
+              "fraction": 0.53125,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 9,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 9.078341013824891,
+            "new": {
+              "all_visitors": 310,
+              "completed": 161,
+              "denominator": 310,
+              "fraction": 0.5193548387096775,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -14.158536585365855,
+            "new": {
+              "all_visitors": 400,
+              "completed": 238,
+              "denominator": 400,
+              "fraction": 0.595,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5462097118377427,
+                "upper": 0.6419828864483179,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -11.571428571428566,
+            "new": {
+              "all_visitors": 210,
+              "completed": 129,
+              "denominator": 210,
+              "fraction": 0.6142857142857143,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 8.749999999999996,
+            "new": {
+              "all_visitors": 160,
+              "completed": 86,
+              "denominator": 160,
+              "fraction": 0.5375,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 10,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 9.400921658986178,
+            "new": {
+              "all_visitors": 310,
+              "completed": 162,
+              "denominator": 310,
+              "fraction": 0.5225806451612903,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -13.90853658536585,
+            "new": {
+              "all_visitors": 400,
+              "completed": 239,
+              "denominator": 400,
+              "fraction": 0.5975,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5487332989658665,
+                "upper": 0.6444117361171958,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -11.095238095238091,
+            "new": {
+              "all_visitors": 210,
+              "completed": 130,
+              "denominator": 210,
+              "fraction": 0.6190476190476191,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 9.374999999999995,
+            "new": {
+              "all_visitors": 160,
+              "completed": 87,
+              "denominator": 160,
+              "fraction": 0.54375,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 11,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 9.723502304147463,
+            "new": {
+              "all_visitors": 310,
+              "completed": 163,
+              "denominator": 310,
+              "fraction": 0.5258064516129032,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -13.658536585365855,
+            "new": {
+              "all_visitors": 400,
+              "completed": 240,
+              "denominator": 400,
+              "fraction": 0.6,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5512581652462732,
+                "upper": 0.6468393066337906,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -10.619047619047617,
+            "new": {
+              "all_visitors": 210,
+              "completed": 131,
+              "denominator": 210,
+              "fraction": 0.6238095238095238,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 10.000000000000004,
+            "new": {
+              "all_visitors": 160,
+              "completed": 88,
+              "denominator": 160,
+              "fraction": 0.55,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 12,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 10.04608294930876,
+            "new": {
+              "all_visitors": 310,
+              "completed": 164,
+              "denominator": 310,
+              "fraction": 0.5290322580645161,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -13.408536585365848,
+            "new": {
+              "all_visitors": 400,
+              "completed": 241,
+              "denominator": 400,
+              "fraction": 0.6025,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5537843145893452,
+                "upper": 0.6492655940877204,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -10.142857142857142,
+            "new": {
+              "all_visitors": 210,
+              "completed": 132,
+              "denominator": 210,
+              "fraction": 0.6285714285714286,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 10.625000000000002,
+            "new": {
+              "all_visitors": 160,
+              "completed": 89,
+              "denominator": 160,
+              "fraction": 0.55625,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 13,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 10.368663594470046,
+            "new": {
+              "all_visitors": 310,
+              "completed": 165,
+              "denominator": 310,
+              "fraction": 0.532258064516129,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -13.158536585365855,
+            "new": {
+              "all_visitors": 400,
+              "completed": 242,
+              "denominator": 400,
+              "fraction": 0.605,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5563117510251911,
+                "upper": 0.6516905944488758,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -9.666666666666668,
+            "new": {
+              "all_visitors": 210,
+              "completed": 133,
+              "denominator": 210,
+              "fraction": 0.6333333333333333,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 11.249999999999998,
+            "new": {
+              "all_visitors": 160,
+              "completed": 90,
+              "denominator": 160,
+              "fraction": 0.5625,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 14,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 10.691244239631342,
+            "new": {
+              "all_visitors": 310,
+              "completed": 166,
+              "denominator": 310,
+              "fraction": 0.535483870967742,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -12.908536585365848,
+            "new": {
+              "all_visitors": 400,
+              "completed": 243,
+              "denominator": 400,
+              "fraction": 0.6075,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5588404787053632,
+                "upper": 0.6541143035657054,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -9.190476190476193,
+            "new": {
+              "all_visitors": 210,
+              "completed": 134,
+              "denominator": 210,
+              "fraction": 0.638095238095238,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 11.874999999999996,
+            "new": {
+              "all_visitors": 160,
+              "completed": 91,
+              "denominator": 160,
+              "fraction": 0.56875,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 15,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 11.013824884792628,
+            "new": {
+              "all_visitors": 310,
+              "completed": 167,
+              "denominator": 310,
+              "fraction": 0.5387096774193548,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -12.658536585365853,
+            "new": {
+              "all_visitors": 400,
+              "completed": 244,
+              "denominator": 400,
+              "fraction": 0.61,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5613705019046327,
+                "upper": 0.6565367171634375,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -8.714285714285708,
+            "new": {
+              "all_visitors": 210,
+              "completed": 135,
+              "denominator": 210,
+              "fraction": 0.6428571428571429,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 12.499999999999995,
+            "new": {
+              "all_visitors": 160,
+              "completed": 92,
+              "denominator": 160,
+              "fraction": 0.575,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 16,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 11.336405529953925,
+            "new": {
+              "all_visitors": 310,
+              "completed": 168,
+              "denominator": 310,
+              "fraction": 0.5419354838709678,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -12.408536585365848,
+            "new": {
+              "all_visitors": 400,
+              "completed": 245,
+              "denominator": 400,
+              "fraction": 0.6125,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5639018250228361,
+                "upper": 0.6589578308422358,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -8.238095238095234,
+            "new": {
+              "all_visitors": 210,
+              "completed": 136,
+              "denominator": 210,
+              "fraction": 0.6476190476190476,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 13.125000000000004,
+            "new": {
+              "all_visitors": 160,
+              "completed": 93,
+              "denominator": 160,
+              "fraction": 0.58125,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 17,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 11.65898617511521,
+            "new": {
+              "all_visitors": 310,
+              "completed": 169,
+              "denominator": 310,
+              "fraction": 0.5451612903225806,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -12.158536585365853,
+            "new": {
+              "all_visitors": 400,
+              "completed": 246,
+              "denominator": 400,
+              "fraction": 0.615,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5664344525867856,
+                "upper": 0.6613776400752879,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -7.761904761904759,
+            "new": {
+              "all_visitors": 210,
+              "completed": 137,
+              "denominator": 210,
+              "fraction": 0.6523809523809524,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 13.750000000000002,
+            "new": {
+              "all_visitors": 160,
+              "completed": 94,
+              "denominator": 160,
+              "fraction": 0.5875,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 18,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 11.981566820276496,
+            "new": {
+              "all_visitors": 310,
+              "completed": 170,
+              "denominator": 310,
+              "fraction": 0.5483870967741935,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -11.908536585365848,
+            "new": {
+              "all_visitors": 400,
+              "completed": 247,
+              "denominator": 400,
+              "fraction": 0.6175,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5689683892522508,
+                "upper": 0.6637961402068244,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -7.285714285714285,
+            "new": {
+              "all_visitors": 210,
+              "completed": 138,
+              "denominator": 210,
+              "fraction": 0.6571428571428571,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 14.374999999999998,
+            "new": {
+              "all_visitors": 160,
+              "completed": 95,
+              "denominator": 160,
+              "fraction": 0.59375,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 19,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 12.304147465437792,
+            "new": {
+              "all_visitors": 310,
+              "completed": 171,
+              "denominator": 310,
+              "fraction": 0.5516129032258065,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -11.658536585365853,
+            "new": {
+              "all_visitors": 400,
+              "completed": 248,
+              "denominator": 400,
+              "fraction": 0.62,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5715036398060113,
+                "upper": 0.6662133264500655,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -6.80952380952381,
+            "new": {
+              "all_visitors": 210,
+              "completed": 139,
+              "denominator": 210,
+              "fraction": 0.6619047619047619,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 14.999999999999996,
+            "new": {
+              "all_visitors": 160,
+              "completed": 96,
+              "denominator": 160,
+              "fraction": 0.6,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "M09_completed": 20,
+        "comparisons": {
+          "crowd_busy": {
+            "difference_new_minus_old_pp": 12.626728110599078,
+            "new": {
+              "all_visitors": 310,
+              "completed": 172,
+              "denominator": 310,
+              "fraction": 0.5548387096774193,
+              "included_row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M04",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 70,
+              "completed": 30,
+              "denominator": 70,
+              "fraction": 0.42857142857142855,
+              "included_row_ids": [
+                "M03",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03",
+                "M07"
+              ]
+            }
+          },
+          "crowd_quiet": {
+            "difference_new_minus_old_pp": 5.5555555555555465,
+            "new": {
+              "all_visitors": 90,
+              "completed": 77,
+              "denominator": 90,
+              "fraction": 0.8555555555555555,
+              "included_row_ids": [
+                "M02",
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 340,
+              "completed": 272,
+              "denominator": 340,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01",
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M05"
+              ]
+            }
+          },
+          "overall": {
+            "difference_new_minus_old_pp": -11.408536585365848,
+            "new": {
+              "all_visitors": 400,
+              "completed": 249,
+              "denominator": 400,
+              "fraction": 0.6225,
+              "included_row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "wilson_95": {
+                "lower": 0.5740402091679837,
+                "upper": 0.6686291938850946,
+                "z": 1.96
+              }
+            },
+            "old": {
+              "all_visitors": 410,
+              "completed": 302,
+              "denominator": 410,
+              "fraction": 0.7365853658536585,
+              "included_row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_1": {
+            "difference_new_minus_old_pp": -16.91729323308271,
+            "new": {
+              "all_visitors": 190,
+              "completed": 109,
+              "denominator": 190,
+              "fraction": 0.5736842105263158,
+              "included_row_ids": [
+                "M02",
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 210,
+              "completed": 156,
+              "denominator": 210,
+              "fraction": 0.7428571428571429,
+              "included_row_ids": [
+                "M01",
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03"
+              ]
+            }
+          },
+          "week_1_busy": {
+            "difference_new_minus_old_pp": 9.999999999999998,
+            "new": {
+              "all_visitors": 150,
+              "completed": 75,
+              "denominator": 150,
+              "fraction": 0.5,
+              "included_row_ids": [
+                "M04"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M04"
+              ]
+            },
+            "old": {
+              "all_visitors": 30,
+              "completed": 12,
+              "denominator": 30,
+              "fraction": 0.4,
+              "included_row_ids": [
+                "M03"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M03"
+              ]
+            }
+          },
+          "week_1_quiet": {
+            "difference_new_minus_old_pp": 4.999999999999993,
+            "new": {
+              "all_visitors": 40,
+              "completed": 34,
+              "denominator": 40,
+              "fraction": 0.85,
+              "included_row_ids": [
+                "M02"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02"
+              ]
+            },
+            "old": {
+              "all_visitors": 180,
+              "completed": 144,
+              "denominator": 180,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M01"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01"
+              ]
+            }
+          },
+          "week_2": {
+            "difference_new_minus_old_pp": -6.333333333333336,
+            "new": {
+              "all_visitors": 210,
+              "completed": 140,
+              "denominator": 210,
+              "fraction": 0.6666666666666666,
+              "included_row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M06",
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 200,
+              "completed": 146,
+              "denominator": 200,
+              "fraction": 0.73,
+              "included_row_ids": [
+                "M05",
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05",
+                "M07"
+              ]
+            }
+          },
+          "week_2_busy": {
+            "difference_new_minus_old_pp": 15.624999999999995,
+            "new": {
+              "all_visitors": 160,
+              "completed": 97,
+              "denominator": 160,
+              "fraction": 0.60625,
+              "included_row_ids": [
+                "M08",
+                "M09"
+              ],
+              "missing_row_ids": [
+                "M09"
+              ],
+              "row_ids": [
+                "M08",
+                "M09"
+              ]
+            },
+            "old": {
+              "all_visitors": 40,
+              "completed": 18,
+              "denominator": 40,
+              "fraction": 0.45,
+              "included_row_ids": [
+                "M07"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M07"
+              ]
+            }
+          },
+          "week_2_quiet": {
+            "difference_new_minus_old_pp": 5.999999999999995,
+            "new": {
+              "all_visitors": 50,
+              "completed": 43,
+              "denominator": 50,
+              "fraction": 0.86,
+              "included_row_ids": [
+                "M06"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M06"
+              ]
+            },
+            "old": {
+              "all_visitors": 160,
+              "completed": 128,
+              "denominator": 160,
+              "fraction": 0.8,
+              "included_row_ids": [
+                "M05"
+              ],
+              "missing_row_ids": [],
+              "row_ids": [
+                "M05"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "observed_rows": {
+    "crowd_busy": {
+      "difference_new_minus_old_pp": 9.556650246305425,
+      "new": {
+        "all_visitors": 310,
+        "completed": 152,
+        "denominator": 290,
+        "fraction": 0.5241379310344828,
+        "included_row_ids": [
+          "M04",
+          "M08"
+        ],
+        "missing_row_ids": [
+          "M09"
+        ],
+        "row_ids": [
+          "M04",
+          "M08",
+          "M09"
+        ]
+      },
+      "old": {
+        "all_visitors": 70,
+        "completed": 30,
+        "denominator": 70,
+        "fraction": 0.42857142857142855,
+        "included_row_ids": [
+          "M03",
+          "M07"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M03",
+          "M07"
+        ]
+      }
+    },
+    "crowd_quiet": {
+      "difference_new_minus_old_pp": 5.5555555555555465,
+      "new": {
+        "all_visitors": 90,
+        "completed": 77,
+        "denominator": 90,
+        "fraction": 0.8555555555555555,
+        "included_row_ids": [
+          "M02",
+          "M06"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M02",
+          "M06"
+        ]
+      },
+      "old": {
+        "all_visitors": 340,
+        "completed": 272,
+        "denominator": 340,
+        "fraction": 0.8,
+        "included_row_ids": [
+          "M01",
+          "M05"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M01",
+          "M05"
+        ]
+      }
+    },
+    "overall": {
+      "difference_new_minus_old_pp": -13.395378690629013,
+      "new": {
+        "all_visitors": 400,
+        "completed": 229,
+        "denominator": 380,
+        "fraction": 0.6026315789473684,
+        "included_row_ids": [
+          "M02",
+          "M04",
+          "M06",
+          "M08"
+        ],
+        "missing_row_ids": [
+          "M09"
+        ],
+        "row_ids": [
+          "M02",
+          "M04",
+          "M06",
+          "M08",
+          "M09"
+        ],
+        "wilson_95": {
+          "lower": 0.5526380043524287,
+          "upper": 0.6505708192873226,
+          "z": 1.96
+        }
+      },
+      "old": {
+        "all_visitors": 410,
+        "completed": 302,
+        "denominator": 410,
+        "fraction": 0.7365853658536585,
+        "included_row_ids": [
+          "M01",
+          "M03",
+          "M05",
+          "M07"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M01",
+          "M03",
+          "M05",
+          "M07"
+        ],
+        "wilson_95": {
+          "lower": 0.6918928875462823,
+          "upper": 0.7768855049594493,
+          "z": 1.96
+        }
+      }
+    },
+    "week_1": {
+      "difference_new_minus_old_pp": -16.91729323308271,
+      "new": {
+        "all_visitors": 190,
+        "completed": 109,
+        "denominator": 190,
+        "fraction": 0.5736842105263158,
+        "included_row_ids": [
+          "M02",
+          "M04"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M02",
+          "M04"
+        ]
+      },
+      "old": {
+        "all_visitors": 210,
+        "completed": 156,
+        "denominator": 210,
+        "fraction": 0.7428571428571429,
+        "included_row_ids": [
+          "M01",
+          "M03"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M01",
+          "M03"
+        ]
+      }
+    },
+    "week_1_busy": {
+      "difference_new_minus_old_pp": 9.999999999999998,
+      "new": {
+        "all_visitors": 150,
+        "completed": 75,
+        "denominator": 150,
+        "fraction": 0.5,
+        "included_row_ids": [
+          "M04"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M04"
+        ]
+      },
+      "old": {
+        "all_visitors": 30,
+        "completed": 12,
+        "denominator": 30,
+        "fraction": 0.4,
+        "included_row_ids": [
+          "M03"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M03"
+        ]
+      }
+    },
+    "week_1_quiet": {
+      "difference_new_minus_old_pp": 4.999999999999993,
+      "new": {
+        "all_visitors": 40,
+        "completed": 34,
+        "denominator": 40,
+        "fraction": 0.85,
+        "included_row_ids": [
+          "M02"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M02"
+        ]
+      },
+      "old": {
+        "all_visitors": 180,
+        "completed": 144,
+        "denominator": 180,
+        "fraction": 0.8,
+        "included_row_ids": [
+          "M01"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M01"
+        ]
+      }
+    },
+    "week_2": {
+      "difference_new_minus_old_pp": -9.842105263157897,
+      "new": {
+        "all_visitors": 210,
+        "completed": 120,
+        "denominator": 190,
+        "fraction": 0.631578947368421,
+        "included_row_ids": [
+          "M06",
+          "M08"
+        ],
+        "missing_row_ids": [
+          "M09"
+        ],
+        "row_ids": [
+          "M06",
+          "M08",
+          "M09"
+        ]
+      },
+      "old": {
+        "all_visitors": 200,
+        "completed": 146,
+        "denominator": 200,
+        "fraction": 0.73,
+        "included_row_ids": [
+          "M05",
+          "M07"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M05",
+          "M07"
+        ]
+      }
+    },
+    "week_2_busy": {
+      "difference_new_minus_old_pp": 10.000000000000004,
+      "new": {
+        "all_visitors": 160,
+        "completed": 77,
+        "denominator": 140,
+        "fraction": 0.55,
+        "included_row_ids": [
+          "M08"
+        ],
+        "missing_row_ids": [
+          "M09"
+        ],
+        "row_ids": [
+          "M08",
+          "M09"
+        ]
+      },
+      "old": {
+        "all_visitors": 40,
+        "completed": 18,
+        "denominator": 40,
+        "fraction": 0.45,
+        "included_row_ids": [
+          "M07"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M07"
+        ]
+      }
+    },
+    "week_2_quiet": {
+      "difference_new_minus_old_pp": 5.999999999999995,
+      "new": {
+        "all_visitors": 50,
+        "completed": 43,
+        "denominator": 50,
+        "fraction": 0.86,
+        "included_row_ids": [
+          "M06"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M06"
+        ]
+      },
+      "old": {
+        "all_visitors": 160,
+        "completed": 128,
+        "denominator": 160,
+        "fraction": 0.8,
+        "included_row_ids": [
+          "M05"
+        ],
+        "missing_row_ids": [],
+        "row_ids": [
+          "M05"
+        ]
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_sha256": {
+    "notes.txt": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+    "sessions.csv": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee"
+  }
+}

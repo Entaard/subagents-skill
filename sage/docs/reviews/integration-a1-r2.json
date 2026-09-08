@@ -1,0 +1,162 @@
+{
+  "module": "integration",
+  "approach_id": "integration-a1",
+  "round": 2,
+  "review_id": "integration-a1-r2",
+  "reviewed_at": "2026-09-07T19:48:06Z",
+  "gate_type": "integration",
+  "verdict": "pass",
+  "summary": "Both round-1 errors are independently verified fixed. The normal original-source full suite passes 79 tests; sentinel isolation and early/late parent-type preflight preserve bytes. All 646 prior evidence files and 186 archive hashes remain unchanged. This is the assembled deterministic integration gate only.",
+  "reviewer": {
+    "actor": "/root/integration_critic",
+    "requested_model": "gpt-6-astra",
+    "effective_model": "unknown",
+    "independence": "Separate critic after builder release; sole review writer, no product repairs, no subagents, no archive/evidence overwrites."
+  },
+  "scores": {
+    "requirements_and_spec_fit": 8.7,
+    "architecture_and_coherence": 8.7,
+    "correctness_and_evidence": 8.7,
+    "simplicity_and_context_efficiency": 8.7,
+    "orchestration_and_model_routing": 8.7,
+    "safety_reversibility_and_recovery": 8.6,
+    "verification_strength": 8.8,
+    "reporting_and_maintainability": 8.6
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "All applicable deterministic assembly and migration criteria are credible with both prior errors closed. The normal full suite exercises the installed lifecycle, state, knowledge, links, and meaningful negative boundaries.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/summary.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e1-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+        "sage/evaluation/requirements-trace.json"
+      ]
+    },
+    "architecture_and_coherence": {
+      "reason": "The small receipt-bound lifecycle now shares parent-type checking with receipt preflight. Two entrypoints, explicit state roots, event authority, immutable knowledge generations, and source-only lifecycle packaging remain coherent.",
+      "evidence": [
+        "sage/scripts/sage-lifecycle.py",
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite/report.json"
+      ]
+    },
+    "correctness_and_evidence": {
+      "reason": "79 tests pass with zero failures/errors/skips on original source. Independent two-caller sentinel replay and early/late type conflicts pass; restored-parent uninstalls succeed. Candidate and prior evidence hashes are verified.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/summary.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e1-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/retention-and-hashes.json"
+      ]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "The repair adds one parent-directory predicate and sandbox allocation rather than a transaction framework. The compact installed instruction and two-helper surface is preserved; repeated limitation prose is immaterial polish.",
+      "evidence": [
+        "sage/scripts/sage-lifecycle.py:99",
+        "sage/evaluation/tests/test_product_install.py:199",
+        "sage/skills/sage/SKILL.md",
+        "sage/skills/sage-promote/SKILL.md"
+      ]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Installed instruction preservation and deterministic lifecycle fixtures continue to support adaptive team size, live schema authority, user overrides, and requested/effective identity separation. This is not a live routing-efficiency measurement.",
+      "evidence": [
+        "sage/skills/sage/references/delegation.md",
+        "sage/skills/sage/references/recovery.md",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite/report.json"
+      ]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Predictable non-directory parents now reject while loading the complete receipt, before deletion. Both iteration orders preserve all target/receipt/saved bytes; normal uninstall remains usable after restoration. Prior evidence and archive bytes remain intact. Unexpected I/O/races are explicitly outside the preflight guarantee.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/retention-and-hashes.json",
+        "sage/README.md:33"
+      ]
+    },
+    "verification_strength": {
+      "reason": "The repaired full runner executes normally with 79 passing tests. Independent probes verify two caller evidence roots and early/late parent conflicts, including positive recovery controls; all 646 earlier evidence files survive. Live gates remain separate.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite/report.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e1-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/retention-and-hashes.json"
+      ]
+    },
+    "reporting_and_maintainability": {
+      "reason": "The deterministic preexisting conflict now returns a truthful no-effect rejection; successful uninstall reports normal removals. Current docs qualify unexpected I/O limits and correct the baseline archive accounting. Round-1 findings and scores remain preserved.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/commands.json",
+        "sage/README.md:33",
+        "sage/docs/IMPLEMENTATION.md",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/status-before.json"
+      ]
+    }
+  },
+  "open_error_ids": [],
+  "finding_dispositions": [
+    {
+      "id": "INTEGRATION-A1-R1-E1",
+      "status": "verified_fixed",
+      "reason": "The positive overlap test allocates through support.sandbox. Identical copied test/source bytes run successfully under two fresh caller roots while preserving a sentinel at the former fixed path; the normal original-source full suite also leaves all 646 frozen earlier evidence files unchanged.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e1-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/retention-and-hashes.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite/report.json"
+      ]
+    },
+    {
+      "id": "INTEGRATION-A1-R1-E2",
+      "status": "verified_fixed",
+      "reason": "Receipt preflight checks each existing parent is a directory. Both early references and late agents replacements reject before any target, receipt, saved-tree, or unrelated byte changes. Restoring each parent permits a normal 14-file uninstall and preserves the unrelated file.",
+      "evidence": [
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+        "sage/evaluation/sandboxes/integration-a1-r2-critic/commands.json",
+        "sage/scripts/sage-lifecycle.py:99"
+      ]
+    }
+  ],
+  "findings": [],
+  "suggestions": [],
+  "verified_observations": [
+    "Original-source full offline suite: 79 tests, zero failures/errors/skips; no network or live trials.",
+    "Independent E1 replay: two distinct caller sandboxes, exact copied test bytes, old-path sentinel unchanged.",
+    "Independent E2 replay: early and late replaced directory parents both reject with no mutation; two restored positive controls uninstall 14 receipt-owned files each and preserve unrelated data.",
+    "All 646 prior integration-wave-r1 and round-1 critic evidence hashes remain unchanged; all 186 archive inventory hashes match.",
+    "All 13 frozen candidate hashes match before and after checks. Former installed lifecycle/state/report/resume/promotion/rollback/link controls pass in the full suite.",
+    "Baseline accounting is accurately qualified: 186 selected archived paths, seven rewritten nonarchived entrypoints, one removed tracked bytecode recoverable in Git, and an archived lifecycle path with a separate active rewrite."
+  ],
+  "input_hashes": {
+    "sage/install.sh": "56ebb56d909559a6d7a2976b9c0d9e99d777b0eda665359c84d335ba98521aeb",
+    "sage/uninstall.sh": "e7fdcf9855c9dd3ca52794f63e3423245da60f1fec5334fcb9fd53fdc7374f83",
+    "sage/scripts/sage-lifecycle.py": "7f13656506857854e3b288f9e722da71648028864e5f87a04981de90ade3c911",
+    "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+    "sage/scripts/sage_knowledge.py": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+    "sage/evaluation/tests/test_product_install.py": "0adca1528eccbc043ebbaef0c919a5d718a8f6802837e088c82c8f09852d4829",
+    "sage/evaluation/run_verification.py": "d54038c801b63a342ad99b2c539446ad605b407d8f9b9c8505787d1622b277a5",
+    "sage/evaluation/requirements-trace.json": "f564a90436d15c5a2f7cb9aed140262bb9158939d11a2a1fee77b9a08fe916a0",
+    "sage/README.md": "f763b9da198346e5c59f17e321343cd94c965d53c8fc8e08bdcc8f71cef3291b",
+    "sage/ARCHITECTURE.md": "a254750bd7c169f089ffa4d0765b34335d635efcda541ded66e1c5a81475716f",
+    "sage/docs/DECISIONS.md": "95b6946a241194d798342799919195f100f565b1fb174a9cf835a6568d54c9ed",
+    "sage/docs/IMPLEMENTATION.md": "af451edac7c055e9a01de5844ac5a45211d5a29c04e054f5ff527b6a8cf709df",
+    "sage/archive/legacy/SHA256SUMS": "28b26f134b6bcab2933d60334b9da25ac5414f9fb355a962cfa2b942a88cdbf8"
+  },
+  "evidence": [
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/probe.py",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/summary.json",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/commands.json",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/e1-replay.json",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/e2-replay.json",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/retention-and-hashes.json",
+    "sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite/report.json"
+  ],
+  "limitations": [
+    "All eight scores apply only to deterministic assembled integration. Final/live task quality, automatic discovery, actual behavioral independence, effective routing, usage, money, savings, and paired comparisons remain unrun and unscored.",
+    "This preflight handles predictable existing parent/type conflicts. Unexpected I/O failures or concurrent filesystem changes can still interrupt multi-file operations; no crash-atomic transaction or partial-effect recovery protocol is claimed.",
+    "Knowledge rollback still requires integrity-valid retained history; corrupt-history recovery remains outside this integration gate.",
+    "Bundled quick_validate remains unavailable because PyYAML is absent. No dependency was installed and no bundled-validator pass is claimed.",
+    "Prior reviewer evidence and failure history are retained exactly. This repair replay reads prior artifacts for hashes and never reruns old probe scripts or writes old hard-coded destinations."
+  ],
+  "next_action": "Set up independent live/held-out evaluation for the final module against the assembled installed skill; final/live scores remain null until that evidence and independent review exist."
+}

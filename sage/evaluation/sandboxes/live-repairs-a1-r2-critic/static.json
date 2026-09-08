@@ -1,0 +1,27 @@
+{
+  "diff_whitespace": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "sage"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "no_historical_test_dependencies": {
+    "command": [
+      "rg",
+      "-n",
+      "sandboxes/live",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "retained_failures": 42,
+  "retained_validator_sha256": "e2a4f32201a911418abf1f6594e6fa0a181c72da690016bb9efb6722849fffbf"
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/portable-matrix/current/sage/evaluation/tests",
+    "-p",
+    "test_native_shape.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) ... ok\ntest_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) ... ok\ntest_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 10.050s\n\nOK\n",
+  "label": "current",
+  "validator_sha256": "933b027f8251c7942a4c694d4782f428cb3af998f9cde04d237c97cc93d8bd16",
+  "no_historical_sandboxes": true,
+  "expected_exit": 0
+}

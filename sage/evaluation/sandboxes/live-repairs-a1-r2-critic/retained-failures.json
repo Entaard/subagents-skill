@@ -1,0 +1,674 @@
+[
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 161, in validate_scored_result\n    if routing.get(\"root_model_requested\") != frozen[\"root_model\"] or routing.get(\"eligible_worker_policy\") != frozen[\"arms\"][arm_name][\"eligible_worker_policy\"]:\n       ^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'get'\n",
+    "label": "routing-null",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-null.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 161, in validate_scored_result\n    if routing.get(\"root_model_requested\") != frozen[\"root_model\"] or routing.get(\"eligible_worker_policy\") != frozen[\"arms\"][arm_name][\"eligible_worker_policy\"]:\n       ^^^^^^^^^^^\nAttributeError: 'bool' object has no attribute 'get'\n",
+    "label": "routing-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-bool.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 161, in validate_scored_result\n    if routing.get(\"root_model_requested\") != frozen[\"root_model\"] or routing.get(\"eligible_worker_policy\") != frozen[\"arms\"][arm_name][\"eligible_worker_policy\"]:\n       ^^^^^^^^^^^\nAttributeError: 'int' object has no attribute 'get'\n",
+    "label": "routing-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-number.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 161, in validate_scored_result\n    if routing.get(\"root_model_requested\") != frozen[\"root_model\"] or routing.get(\"eligible_worker_policy\") != frozen[\"arms\"][arm_name][\"eligible_worker_policy\"]:\n       ^^^^^^^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+    "label": "routing-string",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-string.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 161, in validate_scored_result\n    if routing.get(\"root_model_requested\") != frozen[\"root_model\"] or routing.get(\"eligible_worker_policy\") != frozen[\"arms\"][arm_name][\"eligible_worker_policy\"]:\n       ^^^^^^^^^^^\nAttributeError: 'list' object has no attribute 'get'\n",
+    "label": "routing-opposite",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-opposite.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in validate_scored_result\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in <genexpr>\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                                ^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'get'\n",
+    "label": "worker-null",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-null.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in validate_scored_result\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in <genexpr>\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                                ^^^^^^^^\nAttributeError: 'bool' object has no attribute 'get'\n",
+    "label": "worker-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-bool.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in validate_scored_result\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in <genexpr>\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                                ^^^^^^^^\nAttributeError: 'int' object has no attribute 'get'\n",
+    "label": "worker-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-number.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in validate_scored_result\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in <genexpr>\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                                ^^^^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+    "label": "worker-string",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-string.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in validate_scored_result\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 166, in <genexpr>\n    if not isinstance(workers, list) or any(not item.get(\"role\") or not item.get(\"requested_model\") or (item.get(\"effective_model\") is not None and not isinstance(item.get(\"effective_model\"), str)) for item in workers):\n                                                ^^^^^^^^\nAttributeError: 'list' object has no attribute 'get'\n",
+    "label": "worker-opposite",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-opposite.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in validate_scored_result\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in <listcomp>\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                        ^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'get'\n",
+    "label": "check-null",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-null.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in validate_scored_result\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in <listcomp>\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                        ^^^^^^^^\nAttributeError: 'bool' object has no attribute 'get'\n",
+    "label": "check-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-bool.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in validate_scored_result\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in <listcomp>\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                        ^^^^^^^^\nAttributeError: 'int' object has no attribute 'get'\n",
+    "label": "check-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-number.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in validate_scored_result\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in <listcomp>\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                        ^^^^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+    "label": "check-string",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-string.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in validate_scored_result\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 171, in <listcomp>\n    if not isinstance(checks, list) or [item.get(\"id\") for item in checks] != fixed[\"check_ids\"]:\n                                        ^^^^^^^^\nAttributeError: 'list' object has no attribute 'get'\n",
+    "label": "check-opposite",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-opposite.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 185, in validate_scored_result\n    if scorer.get(\"independent\") is not True or not scorer.get(\"id\") or not scorer.get(\"evidence_refs\") or not set(scorer[\"evidence_refs\"]) <= evidence_ids:\n       ^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'get'\n",
+    "label": "scorer-null",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-null.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 185, in validate_scored_result\n    if scorer.get(\"independent\") is not True or not scorer.get(\"id\") or not scorer.get(\"evidence_refs\") or not set(scorer[\"evidence_refs\"]) <= evidence_ids:\n       ^^^^^^^^^^\nAttributeError: 'bool' object has no attribute 'get'\n",
+    "label": "scorer-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-bool.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 185, in validate_scored_result\n    if scorer.get(\"independent\") is not True or not scorer.get(\"id\") or not scorer.get(\"evidence_refs\") or not set(scorer[\"evidence_refs\"]) <= evidence_ids:\n       ^^^^^^^^^^\nAttributeError: 'int' object has no attribute 'get'\n",
+    "label": "scorer-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-number.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 185, in validate_scored_result\n    if scorer.get(\"independent\") is not True or not scorer.get(\"id\") or not scorer.get(\"evidence_refs\") or not set(scorer[\"evidence_refs\"]) <= evidence_ids:\n       ^^^^^^^^^^\nAttributeError: 'str' object has no attribute 'get'\n",
+    "label": "scorer-string",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-string.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 232, in <module>\n    if __name__ == \"__main__\": raise SystemExit(main())\n                                                ^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 226, in main\n    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 211, in validate_native_result\n    return {**validate_scored_result(data, frozen, True), \"result_schema\": data[\"schema_version\"]}\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py\", line 185, in validate_scored_result\n    if scorer.get(\"independent\") is not True or not scorer.get(\"id\") or not scorer.get(\"evidence_refs\") or not set(scorer[\"evidence_refs\"]) <= evidence_ids:\n       ^^^^^^^^^^\nAttributeError: 'list' object has no attribute 'get'\n",
+    "label": "scorer-opposite",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-opposite.json",
+    "original_exit": 1
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "check-refs-mapping",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-mapping.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "score-refs-mapping",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-mapping.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-refs-mapping",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-mapping.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "operational-refs-mapping",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-mapping.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "usage-refs-mapping",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-mapping.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-id-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-bool.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-id-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-number.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-id-list",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-list.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-id-object",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-object.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-role-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-bool.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-role-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-number.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-role-list",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-list.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-role-object",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-object.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-requested-model-bool",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-bool.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-requested-model-number",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-number.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-requested-model-list",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-list.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "worker-requested-model-object",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-object.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/check-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "check-string-reference",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/check-string-reference.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/score-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "score-string-reference",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/score-string-reference.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "scorer-string-reference",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-string-reference.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/operational-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "operational-string-reference",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/operational-string-reference.json",
+    "original_exit": 0
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/usage-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "usage-string-reference",
+    "input": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/usage-string-reference.json",
+    "original_exit": 0
+  }
+]

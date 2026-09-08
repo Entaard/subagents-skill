@@ -1,0 +1,2 @@
+PASS: 114381 exhaustive wire/split cases match independent whole-stream grammar, max_payload=2
+PASS: README usage example executes successfully

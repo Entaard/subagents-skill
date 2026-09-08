@@ -1,0 +1,137 @@
+{
+  "arm": "data-treatment",
+  "packet": "setup/arms/data-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 20:54:12 UTC"
+  },
+  "packet_sha256": "3a1fc2dd93d8837bfe903c989bbb7a1840e35c492abe7e8976a84ea20b414db4",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:57:12 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:59:26 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:00:51 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_treatment",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_data_treatment/numerical_review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:04:29 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_treatment",
+            "lifecycle": "running"
+          },
+          {
+            "agent_name": "/root/live_data_treatment/numerical_review",
+            "lifecycle": "completed",
+            "explicit_release": true,
+            "findings_reported": 0,
+            "m09_scenarios_reported": 21,
+            "groups_reported": 9,
+            "requested_model_reported": "gpt-5.6-sol",
+            "requested_effort_reported": "xhigh",
+            "complete_final_text_in_observer": false
+          }
+        ]
+      },
+      "provenance": "Normalized direct native tool status and reviewer final; long final omitted, effective identity unknown; claims not evaluation scores."
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_data_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 20:54:50 UTC"
+  },
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:00:51 UTC"
+      },
+      "sender": "/root/live_data_treatment",
+      "content": "Data-treatment candidate frozen: work/analysis.py, summary.json, decision-memo.md. Installed Sage state checkpoint and source/candidate hashes persisted. Coordinator writer lease released; one fresh read-only reviewer /root/live_data_treatment/numerical_review requested gpt-5.6-sol xhigh per installed routing. Root makes no writes until explicit reviewer release plus observed terminal lifecycle. No broader corpus accessed.",
+      "provenance": "Actor message; claims not independently scored."
+    }
+  ],
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 21:07:51 UTC"
+  },
+  "final_status": "completed",
+  "explicit_release": true,
+  "actor_final_summary": {
+    "delivered": [
+      "work/decision-memo.md",
+      "work/analysis.py",
+      "work/summary.json"
+    ],
+    "comparison_groups": 9,
+    "missing_value_scenarios": 21,
+    "review_findings": 0,
+    "product_repairs": 0,
+    "state_category_correction": true,
+    "run_dir": "state/run",
+    "reviewer_full_command_transcript_available": false,
+    "effective_model": null,
+    "effective_effort": null,
+    "tokens": null,
+    "money": null,
+    "provenance": "Coordinator final claims, not evaluation scores."
+  },
+  "terminal_validation": {
+    "chunk_id": "236035",
+    "wall_time_seconds": 0.000002708,
+    "exit_code": 0,
+    "original_token_count": 19,
+    "output": "{\"last_seq\": 28, \"ok\": true, \"run_id\": \"data-treatment\", \"terminal\": true}\n"
+  }
+}

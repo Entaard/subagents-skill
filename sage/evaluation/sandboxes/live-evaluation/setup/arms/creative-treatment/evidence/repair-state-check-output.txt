@@ -1,0 +1,20 @@
+Actor-retained observations, not raw native transcript.
+
+sage_state.py append --events evidence/continuation-repair-events.jsonl
+exit 0: {"appended": 12, "last_seq": 24, "ok": true}
+
+sage_state.py snapshot --write
+exit 0; continuation snapshot written; findings remain open; repair result passed/reconciled; recheck and integrate planned.
+
+sage_state.py validate
+exit 0: {"last_seq": 24, "ok": true, "run_id": "echo-steps-continuation", "terminal": false}
+
+sage_state.py report --write
+exit 0; state/runs/echo-steps-continuation/report.md generated.
+
+verify-repair.mjs
+exit 0; repair-check-results.json generated from primary observations and hashes.
+
+list_agents(path_prefix=/root/live_creative_treatment)
+{"agents":[{"agent_name":"/root/live_creative_treatment","agent_status":"running"}]}
+No child handle; three owned harness commands have completed with exit 0. The next terminal actor boundary must be observed by the outer coordinator after this final response.

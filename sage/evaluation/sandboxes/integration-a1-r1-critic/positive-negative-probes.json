@@ -1,0 +1,9 @@
+{
+  "default_source_nested_target": true,
+  "installed_14_files": true,
+  "modified_unowned_runtime_and_directories_preserved": true,
+  "empty_receipt_parent_symlink_rejected": true,
+  "malformed_receipts_rejected_without_mutation": 7,
+  "incomplete_manifest_overlap_rejections": true,
+  "retired_owned_removal_and_inherited_hashes": true
+}

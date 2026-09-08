@@ -1,0 +1,1940 @@
+{
+  "ok": true,
+  "frozen_and_initial_entries_checked": 380,
+  "entries": [
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+      "sha256": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-smokes.json",
+      "sha256": "c1cbecad6d03c329bdebc905c19bef309d6a978f634b6b3107579f596ff57abb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial-arm-hashes.json",
+      "sha256": "93861a5e1f7156bd9c1c20468996f9ea938c8a9b54e82a2b3e5499f400ac4a31",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/prepare_setup.py",
+      "sha256": "d657388c4e65cbc892f43b6ed285099676fa51fe29c036179bbfa86b5c71ace4",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/freeze_setup.py",
+      "sha256": "927a65a60e6fca877457cc3875ad8a0dc8ab5cbc8a4cd1d4e893a91ecac405fb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/checks-spec.json",
+      "sha256": "c589782f7429a27fd9863bb60b19937d2bd4f36d592fb83af2c673ff0a8ecd24",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/actor-packet-template.txt",
+      "sha256": "9121f4dbc069ddc7af9b71b8a746b39c39554016edd9075562becc8fd37d219e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-harness.mjs",
+      "sha256": "b2e4ac9618f5fb8ec1236b2c8cc7ec849b91cd2c0981f37b69d8b3ec30b11b4d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/clarify_before_actors.py",
+      "sha256": "b834ded433ddbb5ae3038efd31de31699224be69fd3424c50bf71e803749954a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/selection.json",
+      "sha256": "1f109139278f624556b4efba1c0d9c09c9347f2eed6dd451bda3f2b409807e0e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/environment.json",
+      "sha256": "6af106a438ad916de51778e035a66e5cca27c19e0bf522d8f39b2948c23ab298",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/prompt.txt",
+      "sha256": "eac75bfc4c33fa6f37c119fafb58bae888566c873cb8628cb080dec0cc211187",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/vectors.json",
+      "sha256": "717d86a57fe4cdd0af16ed2a2dd6fc3e0eb342fefdace082f2f3f0681847bebb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/install-identity.json",
+      "sha256": "3eeba9152e8504d07cf7adb8ca6b6bf205ea63eed92cb7d3b57891bc51c21ec7",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/launch-packet.txt",
+      "sha256": "4eae9d0391ad03ce1383baece52500282692f04c9df51e87d78bf1ff68f400b5",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/launch-packet.txt",
+      "sha256": "6af805da3d482d07c36712e94532441b4239c70658a5d6ec50ca3201aed55d28",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/checks.json",
+      "sha256": "03bfb96ecd29001f153e0958600c2fdda2a669595203f7b50b71f95571d1dd72",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/prompt.txt",
+      "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/notes.txt",
+      "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/sessions.csv",
+      "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/launch-packet.txt",
+      "sha256": "3a1fc2dd93d8837bfe903c989bbb7a1840e35c492abe7e8976a84ea20b414db4",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/launch-packet.txt",
+      "sha256": "782c5e1ec12fd74fb604e01354d0efd928a0b6df77adf301820395d13620512b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/checks.json",
+      "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/creative/prompt.txt",
+      "sha256": "1485c224e9f12fb3681d770836f708db02cfc5250754a29154206430d5dbc25c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/creative/checks.json",
+      "sha256": "e0a91ad33cef88685344f90ad87f13d6eae8d34ab20956c64f4de8e048e99084",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/checks.json",
+      "sha256": "e0a91ad33cef88685344f90ad87f13d6eae8d34ab20956c64f4de8e048e99084",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/inputs/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/inputs/flow.json",
+      "sha256": "84e7bd9186cf2df54d25f72f92196a20f693a81420c8276dffe71734439063ca",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/inputs/game.json",
+      "sha256": "45c2060f9098010e3a443c8d3c14c371bfa427183a869bd5819155758b650454",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/sage/receipt.json",
+      "sha256": "7530cfa1140afa433941f644720beba4b734f693e0eb3d53bdc10ee91bcc0e49",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/launch-packet.txt",
+      "sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/creative-treatment/prompt.txt",
+      "sha256": "1485c224e9f12fb3681d770836f708db02cfc5250754a29154206430d5dbc25c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/launch-packet.txt",
+      "sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/recovery/prompt.txt",
+      "sha256": "80e6e209631ece42bf83b560821a74e52deef5024ea6119d770e386cfb62d521",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/recovery/checks.json",
+      "sha256": "4aaf0b8158f1c24de4a075a5e610594832249cd6fabbf51d870b33b220c1d42a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/checks.json",
+      "sha256": "4aaf0b8158f1c24de4a075a5e610594832249cd6fabbf51d870b33b220c1d42a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/inputs/baseline.json",
+      "sha256": "042248522ec784d538787efbcc656d0445579d7dd4a741f566a9723b55bd9904",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/inputs/fixture-notes.txt",
+      "sha256": "66b01cd5c6b91db95020eb342d80c0698f39c0d587caca6a64e8b61c3ceb4719",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/inputs/observer.json",
+      "sha256": "ddb594ac4e9b596f23e009c1a8491ca918e9f14d80dffa255b0babf78574df8d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/sage/receipt.json",
+      "sha256": "2185d6751b4b89bf2a921a9871d580537c6f6eafcb78313fba92ed45f51fe158",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/launch-packet.txt",
+      "sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/prompt.txt",
+      "sha256": "80e6e209631ece42bf83b560821a74e52deef5024ea6119d770e386cfb62d521",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/state/runs/catalog-export/events.jsonl",
+      "sha256": "453b62cdea9132afe07bf22c6ad39baea3d03cc63f06d3ac46522e8191dbd1d6",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/state/runs/catalog-export/snapshot.json",
+      "sha256": "3f5b079bcfd8862cb48f0ad1435663c5b4a1e98cb70f2476d988f6334952a8c2",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/work/export.csv",
+      "sha256": "c309390f0eb4283f38c369a17b36cdb86e29172d3bf25f0fe7123a7822427bfd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/recovery-treatment/work/export.draft.csv",
+      "sha256": "8da84d528ed97d2d43b8470da26b8b3a1294a866bba03d28daf2982e964bbbbd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/launch-packet.txt",
+      "sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/promotion/prompt.txt",
+      "sha256": "a5bd1a5ada8fad4d4f0bdaf8a166de7390d894fdf223c77ef913697b135a84a1",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/promotion/checks.json",
+      "sha256": "08ae7944f391d3072ca11c390756372a71e5f9fb32d2720b4469cd2fa6033812",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/checks.json",
+      "sha256": "08ae7944f391d3072ca11c390756372a71e5f9fb32d2720b4469cd2fa6033812",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/controlled-seed-proposal.json",
+      "sha256": "6707f1090d59e064896fcbe593e27aeb5d022f7196ee7a84f9d44cd6bd2385a3",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/cues.json",
+      "sha256": "3734ff44664301de73a2d9a87707bbcb3d2789519301a7aa97cd26a9ebbdab8b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/fixture-provenance.json",
+      "sha256": "1d328e662cce6aad8b257fdd3e6e1b92d1b3b86a35c4d522b16b4ea601beefa9",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/new-observations.json",
+      "sha256": "4e7b1ef478b480cafb7c1ed4c0320ab7538e5beaf98de145ffc6f1eb5ab9b70a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/observe.py",
+      "sha256": "95cc1d69d00f270422ef61fcefb6cccdaeb212ad4b182de28ffbe67450742b0b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/old-observations.json",
+      "sha256": "5dbbf4615b431385d733936491f09698734f7bddb689a4827a990fb30e9ea82a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/inputs/samples.json",
+      "sha256": "307e66719f1c4f17e01c72dec28878a3fd7a030b9b5efc6a6d5f2d4791a28acd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/sage/receipt.json",
+      "sha256": "29fd8c448309b9930b968820ea390fb5a3d70b81751c04c9243453f388b12804",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/launch-packet.txt",
+      "sha256": "0f0407cc058049e763d6ca4bd7f899aa6b84e1824a22bb8f513f2c274f855851",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/prompt.txt",
+      "sha256": "a5bd1a5ada8fad4d4f0bdaf8a166de7390d894fdf223c77ef913697b135a84a1",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/knowledge/current.json",
+      "sha256": "5865416e744707ae21c84917d7138511eb136674d1546c47d94a9c2686dcf78d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/knowledge/generations/controlled-prior/index.json",
+      "sha256": "002ae23273650b86744af9262dbf6100cd2b0eb7a08dc1caae85b8e29129a388",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/knowledge/generations/controlled-prior/manifest.json",
+      "sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/knowledge/generations/controlled-prior/records/museum-csv-field-count.json",
+      "sha256": "69980f4f353b123935dab1e78c074bf4508dadeda351e8228a4ab21d2c8cf643",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/runs/csv-new/events.jsonl",
+      "sha256": "70511264eee2e393953fc2fccd5749c7d600dc003816d0ba156d63b69921aa80",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/runs/csv-new/snapshot.json",
+      "sha256": "0b3be1f86c5892405b31f823458799011d3a5ccbb726b2c96e8771f9252ce6d9",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/runs/csv-old/events.jsonl",
+      "sha256": "f1794020c3650775d3d87b1ce6dcd288be75181fb74f44a2aeedcfacaa68943d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial/promotion-treatment/state/runs/csv-old/snapshot.json",
+      "sha256": "0ae792a6a2a54f8a4616ed167aac2d1daeda4ccbbb129d09306b8f7df446081e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/launch-packet.txt",
+      "sha256": "0f0407cc058049e763d6ca4bd7f899aa6b84e1824a22bb8f513f2c274f855851",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/probe/attempt-3/observations.json",
+      "sha256": "8739b12f1c5b7caa68745f935dea9538b5c0d8224aab4e9e057138a6febda0d3",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/checks.json",
+      "sha256": "03bfb96ecd29001f153e0958600c2fdda2a669595203f7b50b71f95571d1dd72",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/inputs/vectors.json",
+      "sha256": "717d86a57fe4cdd0af16ed2a2dd6fc3e0eb342fefdace082f2f3f0681847bebb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/receipt.json",
+      "sha256": "3f72270511d70f865faea809613dfdef92051b166c310b52010caa7a191c0c23",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/launch-packet.txt",
+      "sha256": "4eae9d0391ad03ce1383baece52500282692f04c9df51e87d78bf1ff68f400b5",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/prompt.txt",
+      "sha256": "eac75bfc4c33fa6f37c119fafb58bae888566c873cb8628cb080dec0cc211187",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/checks.json",
+      "sha256": "03bfb96ecd29001f153e0958600c2fdda2a669595203f7b50b71f95571d1dd72",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/inputs/vectors.json",
+      "sha256": "717d86a57fe4cdd0af16ed2a2dd6fc3e0eb342fefdace082f2f3f0681847bebb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/receipt.json",
+      "sha256": "43f4c4fc16c1c06031ca485c2dafb8c57e01f1817152cdbdbf19325ac49db54d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/launch-packet.txt",
+      "sha256": "6af805da3d482d07c36712e94532441b4239c70658a5d6ec50ca3201aed55d28",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/prompt.txt",
+      "sha256": "eac75bfc4c33fa6f37c119fafb58bae888566c873cb8628cb080dec0cc211187",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/checks.json",
+      "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/inputs/notes.txt",
+      "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/inputs/sessions.csv",
+      "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/receipt.json",
+      "sha256": "be3d42ef5ad424a4e0e254ff047643c7e9d67f3cbee6fb73d92f8cd57f490829",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/launch-packet.txt",
+      "sha256": "782c5e1ec12fd74fb604e01354d0efd928a0b6df77adf301820395d13620512b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/prompt.txt",
+      "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/checks.json",
+      "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs/notes.txt",
+      "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs/sessions.csv",
+      "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/receipt.json",
+      "sha256": "955e3b1d160470814f72abace49d6108d408318866a120b84f9ebab201b60045",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/launch-packet.txt",
+      "sha256": "3a1fc2dd93d8837bfe903c989bbb7a1840e35c492abe7e8976a84ea20b414db4",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/prompt.txt",
+      "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/checks.json",
+      "sha256": "e0a91ad33cef88685344f90ad87f13d6eae8d34ab20956c64f4de8e048e99084",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/flow.json",
+      "sha256": "84e7bd9186cf2df54d25f72f92196a20f693a81420c8276dffe71734439063ca",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/game.json",
+      "sha256": "45c2060f9098010e3a443c8d3c14c371bfa427183a869bd5819155758b650454",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/receipt.json",
+      "sha256": "7530cfa1140afa433941f644720beba4b734f693e0eb3d53bdc10ee91bcc0e49",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/launch-packet.txt",
+      "sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/prompt.txt",
+      "sha256": "1485c224e9f12fb3681d770836f708db02cfc5250754a29154206430d5dbc25c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/checks.json",
+      "sha256": "4aaf0b8158f1c24de4a075a5e610594832249cd6fabbf51d870b33b220c1d42a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/inputs/baseline.json",
+      "sha256": "042248522ec784d538787efbcc656d0445579d7dd4a741f566a9723b55bd9904",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/inputs/fixture-notes.txt",
+      "sha256": "66b01cd5c6b91db95020eb342d80c0698f39c0d587caca6a64e8b61c3ceb4719",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/inputs/observer.json",
+      "sha256": "ddb594ac4e9b596f23e009c1a8491ca918e9f14d80dffa255b0babf78574df8d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/receipt.json",
+      "sha256": "2185d6751b4b89bf2a921a9871d580537c6f6eafcb78313fba92ed45f51fe158",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/launch-packet.txt",
+      "sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/prompt.txt",
+      "sha256": "80e6e209631ece42bf83b560821a74e52deef5024ea6119d770e386cfb62d521",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export/events.jsonl",
+      "sha256": "70aa2ca7d7c33eae12c73072849d434185c9a23966f87b8ba25bb1874f2834a3",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export/snapshot.json",
+      "sha256": "fbb057a0930ad9c572f9cb86c3bc078a86a9cf095b0dea9c632e4a0aeb32c5ae",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/work/export.csv",
+      "sha256": "c309390f0eb4283f38c369a17b36cdb86e29172d3bf25f0fe7123a7822427bfd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/work/export.draft.csv",
+      "sha256": "8da84d528ed97d2d43b8470da26b8b3a1294a866bba03d28daf2982e964bbbbd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/checks.json",
+      "sha256": "08ae7944f391d3072ca11c390756372a71e5f9fb32d2720b4469cd2fa6033812",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/controlled-seed-proposal.json",
+      "sha256": "6707f1090d59e064896fcbe593e27aeb5d022f7196ee7a84f9d44cd6bd2385a3",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json",
+      "sha256": "3734ff44664301de73a2d9a87707bbcb3d2789519301a7aa97cd26a9ebbdab8b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/fixture-provenance.json",
+      "sha256": "1d328e662cce6aad8b257fdd3e6e1b92d1b3b86a35c4d522b16b4ea601beefa9",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/new-observations.json",
+      "sha256": "4e7b1ef478b480cafb7c1ed4c0320ab7538e5beaf98de145ffc6f1eb5ab9b70a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/observe.py",
+      "sha256": "95cc1d69d00f270422ef61fcefb6cccdaeb212ad4b182de28ffbe67450742b0b",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/old-observations.json",
+      "sha256": "5dbbf4615b431385d733936491f09698734f7bddb689a4827a990fb30e9ea82a",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/samples.json",
+      "sha256": "307e66719f1c4f17e01c72dec28878a3fd7a030b9b5efc6a6d5f2d4791a28acd",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/install-result.json",
+      "sha256": "5fd00f34f1cb6d2a85c08397e72364379af7596863240df6581a29f84b92346e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/receipt.json",
+      "sha256": "29fd8c448309b9930b968820ea390fb5a3d70b81751c04c9243453f388b12804",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/launch-packet.txt",
+      "sha256": "0f0407cc058049e763d6ca4bd7f899aa6b84e1824a22bb8f513f2c274f855851",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/prompt.txt",
+      "sha256": "a5bd1a5ada8fad4d4f0bdaf8a166de7390d894fdf223c77ef913697b135a84a1",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge/current.json",
+      "sha256": "5865416e744707ae21c84917d7138511eb136674d1546c47d94a9c2686dcf78d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge/generations/controlled-prior/index.json",
+      "sha256": "002ae23273650b86744af9262dbf6100cd2b0eb7a08dc1caae85b8e29129a388",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge/generations/controlled-prior/manifest.json",
+      "sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge/generations/controlled-prior/records/museum-csv-field-count.json",
+      "sha256": "69980f4f353b123935dab1e78c074bf4508dadeda351e8228a4ab21d2c8cf643",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new/events.jsonl",
+      "sha256": "70511264eee2e393953fc2fccd5749c7d600dc003816d0ba156d63b69921aa80",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new/snapshot.json",
+      "sha256": "0b3be1f86c5892405b31f823458799011d3a5ccbb726b2c96e8771f9252ce6d9",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old/events.jsonl",
+      "sha256": "f1794020c3650775d3d87b1ce6dcd288be75181fb74f44a2aeedcfacaa68943d",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old/snapshot.json",
+      "sha256": "0ae792a6a2a54f8a4616ed167aac2d1daeda4ccbbb129d09306b8f7df446081e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+      "sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/delegation.md",
+      "sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/recovery.md",
+      "sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/run.md",
+      "sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/state.md",
+      "sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage/references/verification.md",
+      "sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "unchanged_since_scorer_audit": true
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/skills/sage-promote/references/promotion.md",
+      "sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "unchanged_since_scorer_audit": true
+    }
+  ],
+  "result_evidence_bindings_checked": 320,
+  "all_result_evidence_hashes_match": true,
+  "report_links_checked": 34,
+  "missing_report_links": [],
+  "owned_browser_process_check": {
+    "command": "ps -axo pid,ppid,command | rg '/Applications/Google [C]hrome.*scoring-a1-r1' || test \"$?\" -eq 1",
+    "result": {
+      "chunk_id": "81a8f7",
+      "wall_time_seconds": 3.333e-06,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "scorer_conclusion": "No scorer-owned Chrome process matched. Search pattern excludes its own command.",
+    "prior_attempts": [
+      {
+        "operation": "finalize.py process scan in restricted sandbox",
+        "result": "PermissionError: [Errno 1] Operation not permitted: 'ps'",
+        "effect": "No final-audit or bundle manifest produced."
+      },
+      {
+        "operation": "First escalated filtered process check",
+        "result": "Only its own zsh and rg search commands matched; refined executable pattern before concluding."
+      }
+    ]
+  },
+  "writes": "Scorer tree plus new sage/docs/LIVE-RESULTS.md only",
+  "pending_process_or_effect": false,
+  "scorer_method_notes": [
+    "A first record-inspection pass did not resolve arm-relative locators; corrected using explicit arm root, all those hashes match. No missing-file issue was issued.",
+    "Added direct summary-bound/envelope assertions to the data verifier; both data checks rerun, frozen candidates unchanged.",
+    "Frozen pair validator rejection observed on both compilation invocations; same null native exit and same actual exit-2 message retained."
+  ],
+  "release": "RELEASE of entire scorer writer lease; no pending process/effect."
+}

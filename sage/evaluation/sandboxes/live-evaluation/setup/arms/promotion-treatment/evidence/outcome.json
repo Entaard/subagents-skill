@@ -1,0 +1,32 @@
+{
+  "status": "completed",
+  "action": "correct",
+  "stable_id": "museum-csv-field-count",
+  "revision": 2,
+  "prior_revision": 1,
+  "evidence_class": "scoped_fact",
+  "status_during_activation": "supported",
+  "active_generation_after_rollback": "controlled-prior",
+  "active_revision_after_rollback": 1,
+  "retained_new_generation": "promotion-live-v2",
+  "manifest_sha256": "264f60a52810a91d650136b58629c547bbd998d8c5899e11f232c051bb5fa6e1",
+  "rollback_pointer_sha256": "5865416e744707ae21c84917d7138511eb136674d1546c47d94a9c2686dcf78d",
+  "candidate_count": 1,
+  "focused_repairs": 1,
+  "source_runs": [
+    "csv-old",
+    "csv-new"
+  ],
+  "quarantines": [],
+  "actors": {
+    "coordinator": "/root/live_promotion_treatment",
+    "author": "/root/live_promotion_author",
+    "refuter": "/root/live_promotion_refuter",
+    "reviewer": "/root/live_promotion_reviewer"
+  },
+  "effective_identity": null,
+  "tokens": null,
+  "money": null,
+  "remaining_human_items": [],
+  "limitation": "Broader discovery does not extend support beyond Python 3.11.6 supplied samples; rollback intentionally restores original disproven guidance as active."
+}

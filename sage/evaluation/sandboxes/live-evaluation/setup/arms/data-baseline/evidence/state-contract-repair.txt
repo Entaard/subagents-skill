@@ -1,0 +1,6 @@
+Actor-observed state persistence check, not raw transcript:
+Initial closure append was rejected with exit 2: {"code":"invalid_event","message":"invalid note category","ok":false}.
+The append was atomic; persisted event history remained at sequence 9.
+The following terminal validation accordingly returned {"code":"incomplete_run","message":"terminal validation requires run.closed","ok":false}.
+Diagnosis: authored event used category finding-disposition, but installed helper accepts only assumption or decision (sage_state.py:232).
+Focused metadata repair: change the pending decision note category to decision and re-append the same closure batch. No analysis artifact changes or second build wave.

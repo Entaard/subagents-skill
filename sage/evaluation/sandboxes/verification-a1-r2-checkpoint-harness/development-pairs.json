@@ -1,0 +1,157 @@
+{
+  "schema_version": "sage-pairs-v2",
+  "selection": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development-selection.json",
+    "sha256": "9df02f9fd94b6ad29ab5886965123d1d61bea2c91209c16fa923020da22f8430"
+  },
+  "shared": {
+    "rubric": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    "protocol": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    "environment": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/environment.json",
+      "sha256": "9e0ed91884050397cf4dbd60943979a7ddad5bde352df7308b2c2c425a279019"
+    }
+  },
+  "root_model": "gpt-6-astra",
+  "root_procedure": "installed_sage",
+  "arms": {
+    "treatment": {
+      "eligible_worker_policy": "sage_routing"
+    },
+    "baseline": {
+      "eligible_worker_policy": "astra_for_every_eligible_worker"
+    },
+    "routing_is_only_intended_difference": true
+  },
+  "pairs": [
+    {
+      "case_id": "DEV-CODE-01",
+      "kind": "code",
+      "case_binding_sha256": "2eaec2b9b3608cf8efa9d2e93d0842e6ae4e75c8a272b3a6026b25b98b9d17f9",
+      "prompt": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/code/prompt.txt",
+        "sha256": "d1aa57774072b2d5331c8f77c5eaee7c86fcb7338a5a535f465b5de1b73b7304"
+      },
+      "inputs": [
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/code/scheduler.py",
+          "sha256": "f95682043ee87dfc1efa06ee8ec6290696e4ffc2cf8a29ee0ee2727d6121acf4"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/code/test_scheduler.py",
+          "sha256": "91faf057d2b1aad8b72820fa0901f696a775a8b7f2f37011d7c4e955807c5684"
+        }
+      ],
+      "checks_artifact": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/code/checks.json",
+        "sha256": "76d0a0314529de6e5ecb66dc6f8c8e40e96915ea3e3dbfeea9a4a90c387f1017"
+      },
+      "check_ids": [
+        "unit",
+        "scope"
+      ],
+      "dimensions": [
+        "task_correctness",
+        "task_completeness",
+        "evidence_quality",
+        "orchestration_behavior",
+        "routing_efficiency",
+        "safety_reversibility",
+        "report_quality"
+      ],
+      "order": [
+        "treatment",
+        "baseline"
+      ]
+    },
+    {
+      "case_id": "DEV-EVIDENCE-01",
+      "kind": "evidence_data",
+      "case_binding_sha256": "091a28f12692ae5c2b7ff7f5e22f2cfbee5f325dbd5f2bd0a461eb91aea77e7a",
+      "prompt": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/evidence/prompt.txt",
+        "sha256": "7927ef65803eb6dffbf9fe4048ced455931206f53d06d26110c986b955517a9e"
+      },
+      "inputs": [
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/evidence/observations.json",
+          "sha256": "322d36806d10438efa81eddae368b186515f85cc9b2cef8ae754db5d91f48286"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/evidence/claims.json",
+          "sha256": "a7dcab32c2fa050c0a8bf4887465a0cc67a1f06b9659eb04bcaed72fd9c2122b"
+        }
+      ],
+      "checks_artifact": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/evidence/checks.json",
+        "sha256": "9e02c9e0bc56ab2af77991e2431ff8892725019c5339657b737abdab0ce0d494"
+      },
+      "check_ids": [
+        "citations",
+        "unknowns"
+      ],
+      "dimensions": [
+        "task_correctness",
+        "task_completeness",
+        "evidence_quality",
+        "orchestration_behavior",
+        "routing_efficiency",
+        "safety_reversibility",
+        "report_quality"
+      ],
+      "order": [
+        "baseline",
+        "treatment"
+      ]
+    },
+    {
+      "case_id": "DEV-CREATIVE-01",
+      "kind": "creative_interaction_smoke",
+      "case_binding_sha256": "9cca4589b4b32e11b8aa48093d8756a14154e3c252abd0f8f03c7294dc210478",
+      "prompt": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/creative/prompt.txt",
+        "sha256": "f2cb1c35844282e16a18f42420821d10540f988b6420f0f33ea334f8693ddc5b"
+      },
+      "inputs": [
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/creative/status.json",
+          "sha256": "ee5fd048be8fd1ed359833b4eb807a88101b412331b24d7f8b7c516afe4c4c16"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/creative/flow.txt",
+          "sha256": "0b5d18c7a80edcf5edc9cc25a6c394cb82228cfa51ee65b025a0e9e10f1543c2"
+        }
+      ],
+      "checks_artifact": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/cases/development/creative/checks.json",
+        "sha256": "9cc3100447c9913341c27c7128b7ff88907130d09395453a5f413bf0c4b48b9c"
+      },
+      "check_ids": [
+        "keyboard",
+        "visual",
+        "timing"
+      ],
+      "dimensions": [
+        "task_correctness",
+        "task_completeness",
+        "evidence_quality",
+        "orchestration_behavior",
+        "routing_efficiency",
+        "safety_reversibility",
+        "report_quality",
+        "artifact_experience"
+      ],
+      "order": [
+        "treatment",
+        "baseline"
+      ]
+    }
+  ],
+  "manifest_sha256": "32ccbf0ebcdb94450ff62a3577abf1ed877679cb1426242a213c139ebe4621da"
+}

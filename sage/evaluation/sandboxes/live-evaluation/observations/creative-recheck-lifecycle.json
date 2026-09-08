@@ -1,0 +1,18 @@
+{
+  "native_handle": "/root/live_creative_review",
+  "operation": "followup_task",
+  "recorded_after_dispatch": {
+    "current_time": "2026-09-07 21:35:40 UTC"
+  },
+  "packet": "setup/arms/creative-treatment/evidence/recheck-brief.txt",
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 21:40:02 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "finding_dispositions": {
+    "platform_metadata": "resolved with provenance limitation",
+    "terminal_pads": "resolved",
+    "new_material_regressions": 0
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "classification": "informed_diagnostic_only",
+  "reuse": "Inspected builder replay mechanics; independent boundary checks recorded separately.",
+  "creative": {
+    "classification": "informed_diagnostic",
+    "source_run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+    "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-original-copy",
+    "source_events_sha256": "f047e7dfa82745d6ee6f4be9a3f431e0e6377426f256286665f28e4af516b945",
+    "wave": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-reconciliation-wave.jsonl",
+    "append": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+        "append",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-original-copy",
+        "--events",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-reconciliation-wave.jsonl"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"appended\": 3, \"last_seq\": 25, \"ok\": true}\n",
+      "stderr": ""
+    },
+    "terminal_validation": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-original-copy",
+        "--terminal"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 25, \"ok\": true, \"run_id\": \"echo-steps\", \"terminal\": true}\n",
+      "stderr": ""
+    },
+    "report": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+        "report",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-original-copy",
+        "--write"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/creative-original-copy/report.md\", \"run_id\": \"echo-steps\"}\n",
+      "stderr": ""
+    },
+    "assertions": {
+      "append_exit_zero": true,
+      "terminal_exit_zero": true,
+      "report_exit_zero": true,
+      "original_history_is_prefix": true,
+      "original_event_count": true,
+      "stopped_not_passed": true,
+      "no_invented_agent_request": true
+    }
+  },
+  "reports": {
+    "classification": "informed_diagnostic",
+    "reports": [
+      {
+        "arm": "data-treatment",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-treatment",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-treatment",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-treatment/report.md\", \"run_id\": \"data-treatment\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "5e9f303bf9c762c09fb0866538bd67af02bc88e705e631339ce8bf1d8fcaa896",
+        "unknown_handles": [
+          "/root/live_data_treatment/numerical_review"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "promotion-treatment",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/promotion-treatment",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/promotion-treatment",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/promotion-treatment/report.md\", \"run_id\": \"promotion-live\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "4748a6acc8dae05a667586ec5b7dc6723ac15cd922025f51c175e58de54f839f",
+        "unknown_handles": [
+          "/root/live_promotion_author",
+          "/root/live_promotion_refuter",
+          "/root/live_promotion_reviewer"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "recovery-treatment",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/recovery-treatment",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/recovery-treatment",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/recovery-treatment/report.md\", \"run_id\": \"catalog-export\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "82fcaf360a34c49dca9cfd95670909009b730d889a7540f779ecdb6a3976a315",
+        "unknown_handles": [
+          "/controlled/catalog-export-writer"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "creative-treatment",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/creative-treatment",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/creative-treatment",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/creative-treatment/report.md\", \"run_id\": \"echo-steps-continuation\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "4aca3cdd91245fc8168a9767efac2ea0d160dce7c4546af423e2b156127197db",
+        "unknown_handles": [
+          "/root/live_creative_review"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "code-baseline",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-baseline",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-baseline",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-baseline/report.md\", \"run_id\": \"decoder-baseline\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "ffb4e7e50d286749b92a575447edb6638807a4490ea88affa2a86f24305ec79e",
+        "unknown_handles": [
+          "/root/live_code_baseline/review"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "code-treatment",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-treatment",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-treatment",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/code-treatment/report.md\", \"run_id\": \"code-treatment\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "e3b43f65bf84b9fb6236b287f84f6349f8a0f313e729e348ba320cd7e933a8f5",
+        "unknown_handles": [
+          "/root/live_code_treatment/review"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      },
+      {
+        "arm": "data-baseline",
+        "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+        "copy": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-baseline",
+        "command": {
+          "command": [
+            "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+            "report",
+            "--run-dir",
+            "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-baseline",
+            "--write"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/report-copies/data-baseline/report.md\", \"run_id\": \"data-baseline\"}\n",
+          "stderr": ""
+        },
+        "report_sha256": "542d42ce46c4ddbd4ba09a6252d6e55d98f7805c22af931f93111c62161e8176",
+        "unknown_handles": [
+          "/root/live_data_baseline/reviewer"
+        ],
+        "assertions": {
+          "report_exit_zero": true,
+          "events_unchanged": true,
+          "unknown_not_denied": true,
+          "untested_not_denied": true,
+          "empty_is_qualified": true,
+          "stored_unknown_handles_rendered": true
+        }
+      }
+    ]
+  },
+  "native": {
+    "classification": "informed_diagnostic",
+    "source": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+    "adapted": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/paired-results-v3-adapted-informed-diagnostic.json",
+    "legacy_validation": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks completed transcript evidence\"}\n"
+    },
+    "successor_validation": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate-native",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/paired-results-v3-adapted-informed-diagnostic.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+      "stderr": ""
+    },
+    "captured_command_count": 6,
+    "assertions": {
+      "original_v2_still_rejected": true,
+      "adapted_v3_diagnostic_validates": true,
+      "native_exits_remain_null": true,
+      "actual_subprocess_exits_are_separate": true,
+      "journals_are_not_transcripts": true
+    }
+  }
+}

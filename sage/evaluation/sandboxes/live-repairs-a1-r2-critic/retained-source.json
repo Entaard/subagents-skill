@@ -1,0 +1,32 @@
+[
+  {
+    "original": "sage/ARCHITECTURE.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/ARCHITECTURE.md",
+    "sha256": "d187660d2704d0a93944366621dcc6fc75d309174c9496747e9d6cd45bdc4c47"
+  },
+  {
+    "original": "sage/docs/DECISIONS.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/docs/DECISIONS.md",
+    "sha256": "250a957e230af6a176a951c06418113426f3c5fd328b3e2d1f3c7a815a1b953d"
+  },
+  {
+    "original": "sage/docs/IMPLEMENTATION.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/docs/IMPLEMENTATION.md",
+    "sha256": "602a1514e3848e14ca42c25a2ec5ed6e3e1f432acb8a2939c7876ddea8e95c93"
+  },
+  {
+    "original": "sage/evaluation/native-result-protocol-v3.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/native-result-protocol-v3.md",
+    "sha256": "418cd4ecb6501330769456c8347227bbdef6cd1d4ec75f0c5705752716c62b19"
+  },
+  {
+    "original": "sage/evaluation/pairing.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/pairing.py",
+    "sha256": "e2a4f32201a911418abf1f6594e6fa0a181c72da690016bb9efb6722849fffbf"
+  },
+  {
+    "original": "sage/evaluation/tests/test_live_repairs.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r2-critic/candidate-source/sage/evaluation/tests/test_live_repairs.py",
+    "sha256": "d5889467807d18746d6eb3fc8d8d2984bb166e3b58b5b40c4ff0b2926e82f35c"
+  }
+]

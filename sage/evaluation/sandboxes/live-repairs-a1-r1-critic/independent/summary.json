@@ -1,0 +1,11 @@
+{
+  "commands": 103,
+  "unexpected": [
+    "native-run-id-bool",
+    "native-start-bool",
+    "native-finish-object",
+    "native-execution-null"
+  ],
+  "non_atomic": [],
+  "classification": "Independent synthetic boundary tests plus malformed informed historical v3 adaptations; no new live trial."
+}

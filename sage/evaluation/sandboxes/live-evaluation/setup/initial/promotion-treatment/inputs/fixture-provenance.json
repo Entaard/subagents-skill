@@ -1,0 +1,32 @@
+{
+  "kind": "controlled seed; not authentic prior live promotion",
+  "synthetic_roles": [
+    "/controlled/seed-proposer",
+    "/controlled/seed-refuter",
+    "/controlled/seed-reviewer"
+  ],
+  "source_runs": [
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new"
+  ],
+  "reproduce": "python3 inputs/observe.py",
+  "observations": "Actual reproducible stdlib behavior; logged completion and previous role attestations are synthetic.",
+  "seed_stage": {
+    "action": "create",
+    "generation_id": "controlled-prior",
+    "manifest_sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+    "ok": true,
+    "prior_generation_id": "none",
+    "record": {
+      "id": "museum-csv-field-count",
+      "revision": 1,
+      "status": "supported"
+    }
+  },
+  "seed_active": {
+    "generation_id": "controlled-prior",
+    "manifest_sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+    "ok": true,
+    "previous_generation_id": "none"
+  }
+}

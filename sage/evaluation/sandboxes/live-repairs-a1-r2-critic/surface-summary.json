@@ -1,0 +1,371 @@
+{
+  "targets": [
+    {
+      "label": "result",
+      "path": [],
+      "expected": "object"
+    },
+    {
+      "label": "pairs",
+      "path": [
+        "pairs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "pair",
+      "path": [
+        "pairs",
+        0
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "arm",
+      "path": [
+        "pairs",
+        0,
+        "treatment"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "execution",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "completion",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "completion"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "completion-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "completion",
+        "evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "exit-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "completion",
+        "exit_evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "commands",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "commands"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "command",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "commands",
+        0
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "command-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "commands",
+        0,
+        "evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "evidence",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "evidence"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "evidence-item",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "evidence",
+        0
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "routing",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "workers",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "workers"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "worker",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "workers",
+        0
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "checks",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "checks"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "check",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "checks",
+        0
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "check-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "checks",
+        0,
+        "evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "scores",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scores"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "score",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scores",
+        "task_correctness"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "score-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scores",
+        "task_correctness",
+        "evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "scorer",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scorer"
+      ],
+      "expected": "object"
+    },
+    {
+      "label": "scorer-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scorer",
+        "evidence_refs"
+      ],
+      "expected": "array"
+    },
+    {
+      "label": "operational-refs",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "operational_evidence_refs"
+      ],
+      "expected": "array"
+    }
+  ],
+  "commands": 136,
+  "failures": [
+    {
+      "label": "routing-null",
+      "exit_code": 1
+    },
+    {
+      "label": "routing-bool",
+      "exit_code": 1
+    },
+    {
+      "label": "routing-number",
+      "exit_code": 1
+    },
+    {
+      "label": "routing-string",
+      "exit_code": 1
+    },
+    {
+      "label": "routing-opposite",
+      "exit_code": 1
+    },
+    {
+      "label": "worker-null",
+      "exit_code": 1
+    },
+    {
+      "label": "worker-bool",
+      "exit_code": 1
+    },
+    {
+      "label": "worker-number",
+      "exit_code": 1
+    },
+    {
+      "label": "worker-string",
+      "exit_code": 1
+    },
+    {
+      "label": "worker-opposite",
+      "exit_code": 1
+    },
+    {
+      "label": "check-null",
+      "exit_code": 1
+    },
+    {
+      "label": "check-bool",
+      "exit_code": 1
+    },
+    {
+      "label": "check-number",
+      "exit_code": 1
+    },
+    {
+      "label": "check-string",
+      "exit_code": 1
+    },
+    {
+      "label": "check-opposite",
+      "exit_code": 1
+    },
+    {
+      "label": "scorer-null",
+      "exit_code": 1
+    },
+    {
+      "label": "scorer-bool",
+      "exit_code": 1
+    },
+    {
+      "label": "scorer-number",
+      "exit_code": 1
+    },
+    {
+      "label": "scorer-string",
+      "exit_code": 1
+    },
+    {
+      "label": "scorer-opposite",
+      "exit_code": 1
+    },
+    {
+      "label": "check-refs-mapping",
+      "exit_code": 0
+    },
+    {
+      "label": "score-refs-mapping",
+      "exit_code": 0
+    },
+    {
+      "label": "scorer-refs-mapping",
+      "exit_code": 0
+    },
+    {
+      "label": "operational-refs-mapping",
+      "exit_code": 0
+    },
+    {
+      "label": "usage-refs-mapping",
+      "exit_code": 0
+    }
+  ],
+  "scope": "V3 scored-result container and element types; original frozen manifest unchanged. Usage branch is synthetic structural evidence only, not observed usage."
+}

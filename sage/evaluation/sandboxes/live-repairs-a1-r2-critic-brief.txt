@@ -1,0 +1,18 @@
+Resume as the same independent Astra/high critic for live-repairs-a1 ROUND 2. Read your original scope brief at sage/evaluation/sandboxes/live-repairs-a1-r1-critic-brief.txt and this update. Do not delegate or repair source; root read-only while your new lease is active.
+
+Only prior open finding is LIVE-03. Your round-1 review and all its exact failed validator/input/output/source snapshot bytes remain immutable. LIVE-01, LIVE-02, LIVE-04 and DOC-01 were independently verified fixed; preserve/check them without restarting broad task evaluation.
+
+Candidate: sage/evaluation/sandboxes/live-repairs-a1-r2-builder/candidate-manifest.json, raw SHA256 5744b40b326d72a750e1b3afbb295883eceaf405393c36fbf7600514321ffb29. Root checked all 6 changed source, 10 preserved source and 5 frozen guard hashes. Builder release/native completed in live-repairs-a1-r2-builder-observation.json. STATUS pending module live_repairs, approach live-repairs-a1, round 2, gate_type integration.
+
+New exclusive writer scope ONLY:
+sage/evaluation/sandboxes/live-repairs-a1-r2-critic/
+sage/docs/reviews/live-repairs-a1-r2.json
+All old directories, STATUS, source, frozen source protocol/rubric, original LIVE-RESULTS and original scoring artifacts read-only. Use apply_patch and confined PYTHONDONTWRITEBYTECODE/TMPDIR/SAGE_EVALUATION_SANDBOX. No browser, network, packages, home or sage-claude actions. Keep resumable checkpoint and release clearly.
+
+Assess actual source/contract before builder claims. Reproduce your exact four retained malformed inputs against current CLI and retained old CLI without modifying those inputs; current must return structured JSON exit 2 without traceback/false pass. Positive null-native-exit v3 and separate actual subprocess fields must still pass; original v2 actual result must still reject as before. Check surrounding object-shape and primitive/provenance/reference negatives in proportion to this same boundary. V3 docs deliberately specify nonblank string run_id/started_at/finished_at and do not add a calendar/chronology parser; assess exact documented promise, not invented authenticity/temporal-proof claims.
+
+Builder reports 13 focused methods and 92 full offline tests pass. It retained red-current (initial wrong empty-object draft), corrected red-exact (all 4 real failures), red-surrounding, and focused-final test-fixture KeyError separately; corrected focused-final2 uses fresh files. Verify classification and real evidence, not just names. Run independent complete gate with fresh output root and enough independent probes; preserve prior fixes, source/frozen/evidence hashes. A second new seven-arm live execution is unnecessary and unauthorized in this repair scope. All historical adaptations remain informed diagnostics, not rescores or pristine trial passes.
+
+Review JSON contract: module live_repairs, approach_id live-repairs-a1, round 2, review_id live-repairs-a1-r2, gate_type integration, actual UTC reviewed_at, all 8 rubric status scores and score_evidence with resolvable paths, verdict iff every score >=8.5 and zero open errors. Exactly one prior finding_dispositions entry for LIVE-03. Rank any remaining/new errors with evidence and falsifiable fix check. Validate review schema and transition read-only or on your own STATUS copy, never write actual STATUS. This is not the fresh later whole-skill gate.
+
+Return exact review/evidence paths, actual scores, issues and checks, limitations, and explicit RELEASE with no pending process/effect. Root will append your review after native completion/release.

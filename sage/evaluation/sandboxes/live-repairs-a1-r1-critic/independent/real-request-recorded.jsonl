@@ -1,0 +1,1 @@
+{"v": 1, "event_id": "e-5", "run_id": "tiny-1", "seq": 5, "at": "2026-09-08T13:45:00Z", "actor": "root", "type": "agent.requested", "payload": {"task_id": "work", "handle": "/root/uncreated", "requested_model": "gpt-5.6-sol", "requested_effort": "high", "fork_turns": "none"}}

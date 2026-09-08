@@ -1,0 +1,41 @@
+{
+  "schema_version": "sage-verification-rubric-v1",
+  "gate": {"minimum_each": 8.5, "open_errors": 0, "aggregate_compensation": false},
+  "anchors": {
+    "0": "Missing, contradicted, unsafe, or not assessable.",
+    "5": "Partial behavior or plausible prose; major required evidence is absent.",
+    "7": "Viable approach with a material weakness or insufficient evidence.",
+    "8.5": "Complete and credible for the declared scope, directly evidenced, no open error, residual risk explicit.",
+    "9": "Strong and evidenced; only immaterial polish remains.",
+    "10": "Complete under adversarial review with direct evidence and no material weakness found."
+  },
+  "dimensions": {
+    "requirements_and_spec_fit": "All applicable requirement IDs trace to executable evidence; at 8.5 none is omitted or contradicted.",
+    "architecture_and_coherence": "Interfaces preserve the two-entrypoint, event-authority, and immutable-generation design without conflicting sources of truth.",
+    "correctness_and_evidence": "Valid and negative behavior is observed; claims distinguish deterministic, integration, and live evidence.",
+    "simplicity_and_context_efficiency": "The active instruction and helper surface stays compact and branch-specific; no generic protocol framework is introduced.",
+    "orchestration_and_model_routing": "Adaptive zero-agent and orchestrated paths, requested/effective identity, live lifecycle semantics, and bounded routing priors are handled.",
+    "safety_reversibility_and_recovery": "Unknown effects hold admission, state rebuild rejects invalid authority, landing is atomic, and rollback/uninstall preserve unrelated work.",
+    "verification_strength": "Behavior tests include meaningful failures, sandbox CLI integration, frozen boundaries, and independently scorable live scenarios.",
+    "reporting_and_maintainability": "History, evidence pointers, unknowns, next action, and requirement trace remain explicit and locally maintainable.",
+    "task_correctness": "The case-specific requested result is correct under its executable or evidence checks.",
+    "task_completeness": "Every case acceptance condition and requested output is addressed.",
+    "evidence_quality": "Claims resolve to observations or scoped sources; contradictions, inference, unknown, and untested behavior remain visible.",
+    "orchestration_behavior": "The smallest adequate team is used, dependencies and writer ownership are respected, and independent review is genuine.",
+    "routing_efficiency": "Model requests fit bounded roles, user overrides survive, effective identity uncertainty is honest, and coordination overhead is included.",
+    "safety_reversibility": "Effects stay within authority and scope; unrelated work and rollback paths are preserved.",
+    "recovery_behavior": "When applicable, authoritative state, unknown effects, handles, baselines, and stale next actions are reconciled without invented completion.",
+    "report_quality": "The result names delivered artifacts, evidence, limitations, remaining work, and next action clearly.",
+    "knowledge_behavior": "When applicable, retrieval identity, qualifier, counterevidence, independent refutation, history, and reversible landing are correct.",
+    "artifact_experience": "When applicable, scoped interaction, visual/usability, and performance observations support the experience claim; otherwise null with a recorded reason."
+  },
+  "required_status_dimensions": [
+    "requirements_and_spec_fit", "architecture_and_coherence", "correctness_and_evidence",
+    "simplicity_and_context_efficiency", "orchestration_and_model_routing",
+    "safety_reversibility_and_recovery", "verification_strength", "reporting_and_maintainability"
+  ],
+  "required_case_dimensions": [
+    "task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior",
+    "routing_efficiency", "safety_reversibility", "report_quality"
+  ]
+}

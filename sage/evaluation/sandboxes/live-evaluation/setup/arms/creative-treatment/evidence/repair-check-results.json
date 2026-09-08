@@ -1,0 +1,234 @@
+{
+  "observedAt": "2026-09-07T21:32:48.952Z",
+  "status": "coordinator checks passed; independent recheck pending",
+  "checks": [
+    "All original candidate bytes, raw sources and prior browser observations/screenshots match retained hashes.",
+    "Supplied success-mistake-recovery keyboard flow passes at both declared viewports on repaired real candidate.",
+    "Actual diagnostic DOM observations show all four pads disabled after success and mistake, enabled again on input.",
+    "Terminal Tab events do not focus pads.",
+    "Native Enter on Pad 1 transfers focus to Restart after both mistake and success.",
+    "Explicit observed platform/browser installation/runtime metadata and sample counts retained.",
+    "Both repaired real-candidate screenshots actually viewed; visible focus/outcome styling retained, no horizontal overflow."
+  ],
+  "terminalObservations": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "step": 4,
+      "phase": "Complete",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "step": 8,
+      "phase": "Try again",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "step": 14,
+      "phase": "Complete",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "step": 4,
+      "phase": "Complete",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "step": 8,
+      "phase": "Try again",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "step": 14,
+      "phase": "Complete",
+      "pads": [
+        {
+          "id": "pad-1",
+          "disabled": true
+        },
+        {
+          "id": "pad-2",
+          "disabled": true
+        },
+        {
+          "id": "pad-3",
+          "disabled": true
+        },
+        {
+          "id": "pad-4",
+          "disabled": true
+        }
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "navigationN": 1,
+      "keyboardN": 11,
+      "loadWallMs": 53.663791999999944,
+      "inputToTwoFramesMs": {
+        "min": 21.854707999999846,
+        "max": 38.4419170000001
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "navigationN": 1,
+      "keyboardN": 11,
+      "loadWallMs": 7.298125000001164,
+      "inputToTwoFramesMs": {
+        "min": 24.849207999999635,
+        "max": 33.13554199999999
+      }
+    }
+  ],
+  "performanceScope": {
+    "browser": "Approved isolated owned-headless process, fresh profile for each run, only arm-local HTML, page network URLs blocked",
+    "deviceScaleFactor": 1,
+    "mobile": false,
+    "cpuThrottle": false,
+    "networkThrottle": false,
+    "loadTiming": "One local file navigation after browser process startup, waiting for document.readyState complete",
+    "inputTiming": "Wall clock from CDP keyDown/keyUp through two animation frames; includes CDP overhead"
+  },
+  "diagnosticLimit": "Disabled/focus probes use a hash-linked derived HTML with appended read-only DOM observers and visible output; they are distinct from the uninstrumented main candidate and their timings/layout are not product performance/layout measurements.",
+  "hashes": {
+    "work/index.html": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+    "evidence/original-index.html": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "evidence/platform-metadata.json": "7d80198062ac60c990e75b779c0463ac4b0ab434f52dcc1b54c1a4311127da77",
+    "evidence/outer-independent-review.md": "1aae6bbd38d3a3fc289759fe4ca4da7f28ad5a57065f7da368bbfe255f077bec",
+    "evidence/disabled-probe.html": "0885b1b41255c03bea925c87a650b0b4dd0dd2866506d22c557c40955775429c",
+    "evidence/make-disabled-probe.mjs": "f79578be5311cdc59802475fd494adedc42b7ea52b2c9644cbe88f59e67fdcbe",
+    "evidence/repair-flow.json": "d886be32066b122fa16c32d8aa7937bba469a28f2582dd53276e03a6a6b73451",
+    "evidence/repair-focus-flow.json": "2baadfa33a3f161d86107cce43c1a5b248281e6f6bf99f3754c7159c3a757512",
+    "evidence/browser-repair-main/observations.json": "65187f4c532fc99fc589fa499a887b4a0bdecac2795a4096357fc4e39f4fb7e4",
+    "evidence/browser-repair-main/viewport-1280x800.png": "34ef52f543ca4d136207a360a09a9b9e3d23c867991ca5fbc801e58b1a3dd468",
+    "evidence/browser-repair-main/viewport-390x844.png": "55a3d63ad7274c1e8fa86c6906d2f6832568158c6984fddc4904484d8abdeb96",
+    "evidence/browser-repair-disabled/observations.json": "7ef762e68bd5b0e7f7fe2c76d256090b7ec634353e2e93cb9b87cdf2eda575c6",
+    "evidence/browser-repair-disabled/viewport-1280x800.png": "1a52491581ee9335c5d00d993559b136664e3beb82961a4caa6e32bec92b1329",
+    "evidence/browser-repair-disabled/viewport-390x844.png": "689810fd7e7cdcb005d3081626dd42ddc083da9d4bc8425e3eed85bd3ed0c599",
+    "evidence/browser-repair-focus/observations.json": "acb7715519b35d719a54857560476bfae328fc51c34b26dddd726bc946e91696",
+    "evidence/browser-repair-focus/viewport-1280x800.png": "8d7370e5a6a4e950b084c543d23428c52bb7b1a3de25fe9ad79585284e1030ee",
+    "evidence/browser-repair-focus/viewport-390x844.png": "043dd4e09a90a84aad9049be33a1d698c58bb9ae7b0df645c663f57f6a77d3d3"
+  },
+  "unknowns": [
+    "Independent recheck has not occurred.",
+    "Original process browser version was not captured; platform observation applies to installation before repair runs.",
+    "Reduced-motion runtime emulation, screen-reader speech and physical touch/mouse untested.",
+    "Effective model/effort, tokens and money remain null."
+  ]
+}

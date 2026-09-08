@@ -1,0 +1,38 @@
+{
+  "dimensions": [
+    "task_correctness",
+    "task_completeness",
+    "evidence_quality",
+    "orchestration_behavior",
+    "routing_efficiency",
+    "safety_reversibility",
+    "report_quality"
+  ],
+  "not_applicable": {
+    "artifact_experience": "This case does not exercise artifact_experience",
+    "recovery_behavior": "This case does not exercise recovery_behavior",
+    "knowledge_behavior": "This case does not exercise knowledge_behavior"
+  },
+  "checks": [
+    {
+      "id": "arithmetic",
+      "acceptance": "Recompute denominator-aware fractions and percentage-point differences overall, by block and week, plus Wilson intervals; explicit absent completion count is not silently imputed."
+    },
+    {
+      "id": "sensitivity",
+      "acceptance": "A reproducible numerical bound accounts for every feasible completion count of M09 and identifies its effect on the reported comparison."
+    },
+    {
+      "id": "interpretation",
+      "acceptance": "Memo distinguishes observation, inference and causal identification; cites actual rows/notes, analyzes collection limitations and gives a bounded follow-up with decision-changing evidence."
+    },
+    {
+      "id": "deliverables",
+      "acceptance": "analysis.py reproducibly creates summary.json using stdlib; decision memo is concise and all raw source hashes are preserved."
+    },
+    {
+      "id": "live-procedure",
+      "acceptance": "Installed Sage, bounded criteria, routing requests, independent review, writer ownership and finding dispositions have actual evidence; unknown usage/identity remains unknown."
+    }
+  ]
+}

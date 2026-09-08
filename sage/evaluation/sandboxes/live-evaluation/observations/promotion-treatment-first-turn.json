@@ -1,0 +1,63 @@
+{
+  "arm": "promotion-treatment",
+  "packet": "setup/arms/promotion-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 22:14:36 UTC"
+  },
+  "packet_sha256": "0f0407cc058049e763d6ca4bd7f899aa6b84e1824a22bb8f513f2c274f855851",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:18:16 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_promotion_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 22:15:27 UTC"
+  },
+  "outer_environment_update": {
+    "recorded_at": {
+      "current_time": "2026-09-07 22:15:27 UTC"
+    },
+    "kind": "Capacity workaround only, no task/output hints",
+    "content": "Nested native spawn has hit thread limit with two running; no close tool; outer fresh spawn after coordinator terminal succeeds. On failure preserve exact role brief/routing/failure and release for sequential outer dispatch; may reuse this handoff after one confirmed failure for later distinct real roles. No impersonation; scoped native queries.",
+    "protocol_deviation": "Additional current harness fact supplied after exact frozen packet; disclose in evaluation."
+  },
+  "first_turn_terminal_observed_at": {
+    "current_time": "2026-09-07 22:18:59 UTC"
+  },
+  "first_turn_status": "completed turn; all three native roles pending after nested capacity failure",
+  "explicit_release": true,
+  "actor_first_final": {
+    "native_dispatch_failure": "agent thread limit reached",
+    "author_created": false,
+    "proposal_pending": true,
+    "landing_pending": true,
+    "rollback_pending": true,
+    "source_runs_reported_terminal_valid": true,
+    "store_and_sources_reported_unchanged": true,
+    "run_dir": "state/runs/promotion-live",
+    "provenance": "Coordinator final claims; independent scores unrun."
+  },
+  "role_observations": []
+}

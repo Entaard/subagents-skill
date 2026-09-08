@@ -1,0 +1,83 @@
+{
+  "arm": "creative-treatment",
+  "packet": "setup/arms/creative-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 21:07:52 UTC"
+  },
+  "packet_sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:10:50 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:13:26 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_creative_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 21:08:30 UTC"
+  },
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:15:55 UTC"
+      },
+      "sender": "/root/live_creative_treatment",
+      "content": "Creative treatment candidate is built; full supplied keyboard flow and two focused flows observed at both viewports. Both screenshots actually inspected, no horizontal overflow. Restricted launch failed and retained; explicitly approved isolated escalation succeeded. Preparing fresh Sol/xhigh independent review; no product/state files outside this arm touched.",
+      "provenance": "Actor message; claims not independently scored."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:17:08 UTC"
+      },
+      "sender": "/root/live_creative_treatment",
+      "content": "Independent review dispatch failed: native spawn_agent returned 'agent thread limit reached'. No reviewer handle was created. Candidate and all browser evidence are frozen; build writer released. Please free one concurrency slot so this arm can perform its required fresh Sol/xhigh review. I can continue read-only integration preparation meanwhile.",
+      "provenance": "Actor message; tool failure not independently reproduced."
+    }
+  ],
+  "first_turn_terminal_observed_at": {
+    "current_time": "2026-09-07 21:20:58 UTC"
+  },
+  "first_turn_status": "completed; required independent review unavailable",
+  "explicit_release": true,
+  "actor_final_summary": {
+    "candidate_sha256": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "reviewer_created": false,
+    "native_dispatch_failure": "agent thread limit reached",
+    "state_terminal": false,
+    "run_dir": "state/runs/echo-steps",
+    "provenance": "Coordinator final claims, independent score unrun."
+  }
+}

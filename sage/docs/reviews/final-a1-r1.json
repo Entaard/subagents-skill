@@ -1,0 +1,139 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "module": "final",
+  "approach_id": "final-a1",
+  "round": 1,
+  "review_id": "final-a1-r1",
+  "gate_type": "final",
+  "reviewed_at": "2026-09-08T14:56:02Z",
+  "verdict": "fail",
+  "summary": "The assembled package has strong deterministic and bounded historical task evidence, but standalone sage-promote does not expose the promised own-run planning, durable coordination and context-loss recovery procedure. One causal instruction-integration error remains. The fresh 95-test offline suite, exact installed package and all 11 local links pass; all 313 original seven-scorecard evidence bindings still match. Original live failures remain unchanged and are not rescored.",
+  "approach_change": {
+    "cause": "assembled product has not received whole-skill gate",
+    "material_change": "assess both installed skills end-to-end using frozen live evidence plus current separately verified repairs"
+  },
+  "candidate": {
+    "manifest": "sage/evaluation/sandboxes/final-a1-r1-candidate/candidate-manifest.json",
+    "sha256": "c0767e686daa9ed9edc885b6335e441e143af9a526f8a9df9fbee49c4324f692",
+    "source_files": 42,
+    "all_hashes_verified": true,
+    "retained_source": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage",
+    "installed_package": "sage/evaluation/sandboxes/final-a1-r1-critic/installed",
+    "retention_evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-retention.json"
+  },
+  "reviewer": {
+    "actor": "/root/whole_skill_critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown",
+    "product_builder": false,
+    "delegated": false,
+    "source_modified": false,
+    "actual_status_modified": false,
+    "independence": "A separate whole-skill critic actor reviewed the frozen candidate after root release, with no product authorship or repair. The root's unadjudicated coverage question was supplied and read; this is explicitly an informed whole-product review, not a blinded live trial. A retained-actor fallback was not used by this critic.",
+    "method": "Read architecture, actual requirement IDs, rubric, contracts, current instructions and implementation/live history. Independently install exact copied source, run the normal offline suite, inspect both entrypoints and their entire reachable Markdown graph, trace every requirement, verify original independent scorecard evidence hashes, and assess current repairs using preserved module evidence plus fresh regression checks. No original seven-arm replay, browser/network/packages or home installation."
+  },
+  "scores": {
+    "requirements_and_spec_fit": 7.5,
+    "architecture_and_coherence": 8,
+    "correctness_and_evidence": 8.5,
+    "simplicity_and_context_efficiency": 8.5,
+    "orchestration_and_model_routing": 8,
+    "safety_reversibility_and_recovery": 7,
+    "verification_strength": 8.5,
+    "reporting_and_maintainability": 8
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "All 57 actual requirement IDs are explicitly assessed. Main Sage and the store/lifecycle seams are credible, but the separate promotion entrypoint omits its architecturally promised own plan/log and checkpoint/resume procedure. This is an incomplete requirement, not optional polish; FINAL-A1-R1-E1 prevents acceptance.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json", "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json", "sage/ARCHITECTURE.md", "sage/docs/REQUIREMENTS.md"]
+    },
+    "architecture_and_coherence": {
+      "reason": "Installed two-entrypoint separation, explicit roots, append-only event authority, generation lineage and reversible pointer changes compose correctly in deterministic checks. Promotion's operational spine stops at closed-source validation and store operations, leaving the architecture's own-run lifecycle disconnected from the available shared state/recovery seams.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json", "sage/evaluation/sandboxes/final-a1-r1-critic/instruction-reachability.json", "sage/docs/CONTRACTS.md", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    "correctness_and_evidence": {
+      "reason": "The unmodified normal suite passes 95 tests on a retained candidate copy, and exact installed bytes match. Original seven-arm outcomes have 313 currently matching evidence bindings, with report/creative failures preserved. Prior repairs passed independent bounded checks and remain green. These support existing implemented behavior; no current unsafe activation or real compaction failure is invented from the instruction gap.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/summary.json", "sage/evaluation/sandboxes/final-a1-r1-critic/historical-score-evidence.json", "sage/docs/reviews/live-repairs-a1-r3.json", "sage/docs/LIVE-RESULTS.md"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Main and promotion spines remain short with conditional references, two dependency-free domain helpers and a source-only receipt installer. Inline/no_change and bounded retrieval avoid ritual work. Existing shared state/run/recovery/delegation references offer a compact repair seam; the missing essential instructions are scored as an error, not credited as desirable brevity.",
+      "evidence": ["sage/skills/sage/SKILL.md", "sage/skills/sage-promote/SKILL.md", "sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json", "sage/skills/sage/references/delegation.md", "sage/skills/sage/references/knowledge.md"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Main gives a coherent zero-agent/value/capability-first policy, honest uncalibrated Luna/Sol/Astra priors, total overhead and native semantics. Original task and promotion role evidence supports bounded independent review. Standalone promotion lacks the reachable own-assignment recording/fork/lifecycle/retry/total-overhead instructions needed to run and resume that policy reliably without co-invoking main Sage.",
+      "evidence": ["sage/skills/sage/references/delegation.md", "sage/skills/sage/references/state.md", "sage/skills/sage-promote/SKILL.md", "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json", "sage/evaluation/sandboxes/final-a1-r1-critic/historical-score-evidence.json"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "State corruption/unknown-effect barriers, receipt ownership, generation checks and rollback are well tested. Main exposes their safe operation. Promotion documents store corruption stopping and one writer, but omits its own authoritative coordinator checkpoint/resume and actor/effect/pointer baseline reconciliation. For a separately invoked mutating workflow, that missing recovery boundary is material.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage/evaluation/sandboxes/offline/stderr.txt", "sage/skills/sage/references/recovery.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json"]
+    },
+    "verification_strength": {
+      "reason": "The normal 95-test suite includes meaningful positive/negative state, knowledge, lifecycle and native-result cases. Fresh installation/link/byte checks and a requirement-complete manual review expose the previously missed promotion instruction seam. Historical independent task arithmetic, interaction and promotion/recovery checks retain binding and honest scope; known repairs are not relabeled as untouched holdouts.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/summary.json", "sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json", "sage/evaluation/sandboxes/final-a1-r1-critic/historical-score-evidence.json", "sage/docs/reviews/verification-a1-r3.json", "sage/docs/reviews/live-repairs-a1-r3.json"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Current source reports expose typed unknowns and native uncertainty; original failed scores, repair history and residual limits remain clear. Installed main event fields/examples are usable. Standalone promotion's final-report checklist does not define durable own progress/next-action authority across context loss, so the assembled operator contract remains incomplete.",
+      "evidence": ["sage/skills/sage/references/state.md", "sage/skills/sage/references/verification.md", "sage/skills/sage-promote/SKILL.md", "sage/docs/LIVE-RESULTS.md", "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json"]
+    }
+  },
+  "open_error_count": 1,
+  "open_error_ids": ["FINAL-A1-R1-E1"],
+  "finding_dispositions": [],
+  "errors": [
+    {
+      "id": "FINAL-A1-R1-E1",
+      "rank": 1,
+      "severity": "major",
+      "status": "open",
+      "title": "Standalone promotion omits its own durable coordination and recovery contract",
+      "requirements": ["R-012", "R-013", "R-015", "R-016", "R-021", "R-023", "R-024", "R-025", "R-026", "R-030", "R-031", "R-033", "R-034", "R-035", "R-036", "R-037", "R-038"],
+      "primary_requirements": ["R-030", "R-031", "R-035", "R-036"],
+      "locations": ["sage/skills/sage-promote/SKILL.md:10", "sage/skills/sage-promote/SKILL.md:13", "sage/skills/sage-promote/references/promotion.md:7", "sage/skills/sage-promote/references/promotion.md:29", "sage/skills/sage-promote/references/promotion.md:49"],
+      "violated_contract": "ARCHITECTURE.md explicitly says promotion has its own plan, log and bounded team, then gives the root boundary-checkpoint and authoritative context-loss recovery protocol. The two entrypoints share primitives without an implicit lifecycle; promotion cannot depend on main Sage being co-invoked.",
+      "cause": "The promotion rewrite exposes knowledge proposal/store semantics but does not connect the standalone coordinator to the existing shared operational state, delegation and recovery seam.",
+      "observation": "Starting at installed skills/sage-promote/SKILL.md reaches exactly that spine and its promotion.md/knowledge.md references. Reading all three shows terminal validation only for selected source runs, bounded corpus/attempts, distinct role IDs, stage/activate/rollback and final reporting. None specifies creation/authority of the promotion coordinator's separate run; plan/task/assignment logging, boundary checkpoint, validated snapshot resume, native handle/effect reconciliation, changed pointer/proposal/authority baselines or stale-next-action revision are absent. Requested/effective assignment recording, fork semantics and complete coordination-overhead reasoning likewise remain in unreachable main references. The installed main graph supplies all of the existing primitives, so missing package capability is not the cause.",
+      "counterevidence_considered": "Promotion's generation manifest preserves landed record/provenance/role data, expected-current detects stale conforming pointer changes, and one-writer text limits concurrent landing. These are valuable store controls, but do not preserve an unfinished coordinator plan, unknown actor effect, cancelled authority, pending review or prelanding next action. The original promotion smoke invoked sage-promote and demonstrated deliberate checkpoints under its evaluator brief and outer capacity coordination; successful behavior on that case does not fill the missing standalone instructions or demonstrate actual coordinator context-loss recovery. No observed data loss or unsafe native activation is alleged.",
+      "reproduction": {
+        "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/final-a1-r1-critic/evidence_audit.py",
+        "expected_exit": 1,
+        "kind": "documentation-contract failure, not live agent execution",
+        "input": "sage/evaluation/sandboxes/final-a1-r1-critic/installed/skills/sage-promote/SKILL.md",
+        "exact_source": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage",
+        "output": "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json",
+        "positive_control": "The same installed graph traversal reaches main Sage's complete existing state/run/recovery/delegation references. Term inventory is supporting evidence; the error is independently based on the complete text and architecture, not a keyword-only oracle."
+      },
+      "remedy": "Explicitly connect standalone promotion to a compact own-run operating procedure through the existing installed state/run/delegation/recovery seams, with promotion-specific source-versus-coordinator separation and proposal/current-pointer baselines. Preserve tiny no_change behavior and role independence. A new runtime/helper or duplicated framework is not required by this finding.",
+      "verification": "Fresh-install both skills and begin only sage-promote. The reachable instructions must suffice to record its own bounded graph, requested/effective assignments, privacy/evidence, boundary checkpoint and next action independently of closed source runs. Exercise installed public state seams for pre-dispatch and pre/post-stage or activation recovery: valid log rebuilds only its stale projection, invalid authority pauses, unknown native/effect state holds writes, changed pointer/proposal/user authority revises the action before admission, reviewed landing remains reversible, and source bytes stay closed/unchanged. Preserve a tiny no_change/zero-team control. Use synthetic native observations only when explicitly labeled, and retain the current exact failing package/input/output for sensitivity checks.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json", "sage/evaluation/sandboxes/final-a1-r1-critic/instruction-reachability.json", "sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json", "sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json"]
+    }
+  ],
+  "suggestions": [],
+  "requirement_trace": "sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json",
+  "executed_checks": [
+    {"name": "frozen-candidate", "result": "42 hashes match exact manifest c0767e686daa9ed9edc885b6335e441e143af9a526f8a9df9fbee49c4324f692", "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-retention.json"},
+    {"name": "fresh offline suite on exact candidate copy", "exit_code": 0, "tests": 95, "failures": 0, "errors": 0, "skipped": 0, "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage/evaluation/sandboxes/offline/report.json"},
+    {"name": "fresh installed assembly", "exit_code": 0, "files_including_receipt": 15, "local_links": 11, "unresolved_links": 0, "source_byte_mismatches": 0, "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json"},
+    {"name": "original independent scorecard hash audit", "scorecards": 7, "evidence_bindings": 313, "mismatches": 0, "rescored": false, "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/historical-score-evidence.json"},
+    {"name": "standalone promotion contract", "exit_code": 1, "result": "one current instruction-integration failure; main shared-contract positive control succeeds", "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json"},
+    {"name": "requirements trace completeness", "actual_requirement_ids": 57, "assessed": 57, "missing": [], "extra": [], "evidence": "sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json"}
+  ],
+  "historical_evidence_disposition": {
+    "original_live": "Seven original scored arms: two code/data pairs and three unpaired creative/recovery/promotion smokes. Only recovery passed its strict arm gate; all six report scores of 7 and creative orchestration 7 remain historical failures.",
+    "repairs": "LIVE-01/LIVE-02/LIVE-04/DOC-01 independently verified in prior repair review; LIVE-03 passed round 3 with 95 tests, 256 retained cases, 19 new controls and sensitive old/current matrices. Current full-suite checks preserve those repairs; this does not rescore the original live evaluation.",
+    "comparison": "Both arms used installed Sage and an Astra root. Eligible review routing differed. Same successful invocation counts and equal paired scores; observed treatment outer intervals were 280 s and 98 s shorter. These are two cases with failed reporting gates, not proof of general quality equivalence or savings."
+  },
+  "limitations": [
+    "This final review fails for one current standalone-promotion instruction seam. It does not claim an observed unsafe runtime effect, actual context compaction failure or semantic data loss from the omission.",
+    "Existing module pass scores are evidence for their declared scopes, not inherited final scores. Final dimensions above are this critic's own whole-product judgments.",
+    "Original live evidence includes native thread-capacity workarounds, authored journals rather than raw transcripts, a disclosed creative unrelated-lifecycle exposure and synthetic promotion source/seed history. Those limits remain; informed repairs and this review are not pristine post-fix holdouts.",
+    "Actual effective model/effort, normalized tokens and money remain unobserved. Routing priors are not calibrated price/quality rankings. No general task-quality or cost-savings promise follows from two paired cases.",
+    "Creative interaction evidence is limited to the declared two viewports, keyboard flows and measured platform/method. Screen-reader speech, physical touch, runtime reduced-motion and additional environments remain untested.",
+    "Home automatic discovery was not exercised. Fresh sandbox installation and explicit helper/package loading prove only the assembled paths and operations tested.",
+    "State/store validation cannot prove user authority, persuasive semantic evidence, behavioral independence or a physical writer lease. Knowledge rollback requires integrity-valid retained history; unexpected lifecycle I/O/concurrent filesystem changes are not crash-atomic multi-file transactions.",
+    "No external dependency was installed and no bundled PyYAML-dependent validator pass is claimed. Existing dependency-free metadata/link/syntax and CLI verification are the actual checks.",
+    "Original Sage supplemental replay provenance was previously qualified after a scratch overwrite; original critic failure bytes and scores remain retained. This review does not reconstruct missing historical bytes."
+  ],
+  "next_action": "Preserve this failed final-a1 round 1 and its exact installed candidate. Assign a separate bounded builder to connect standalone promotion's own durable coordination/recovery to existing installed seams, verify the stated positive/negative cases, then request independent final-a1 round 2. Do not alter original live scores, v2 frozen evidence or sage-claude."
+}

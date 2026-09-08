@@ -1,0 +1,109 @@
+{
+  "schema_version": "sage-live-execution-v1",
+  "phase": "executed_awaiting_independent_scoring",
+  "frozen_setup": "setup/setup-freeze.json",
+  "frozen_setup_manifest_sha256": "6c65b62f17ac1eb2546b87f966057a0b861a1aee15281ba7b7bf717074679ece",
+  "order": [
+    "code-treatment",
+    "code-baseline",
+    "data-baseline",
+    "data-treatment",
+    "creative-treatment",
+    "recovery-treatment",
+    "promotion-treatment"
+  ],
+  "completed_arms": [
+    {
+      "arm": "code-treatment",
+      "actor": "/root/live_code_treatment",
+      "observation": "observations/code-treatment.json",
+      "terminal_validation": true,
+      "evaluation_scores": null
+    },
+    {
+      "arm": "code-baseline",
+      "actor": "/root/live_code_baseline",
+      "observation": "observations/code-baseline.json",
+      "terminal_validation": true,
+      "evaluation_scores": null
+    },
+    {
+      "arm": "data-baseline",
+      "actor": "/root/live_data_baseline",
+      "observation": "observations/data-baseline.json",
+      "terminal_validation": true,
+      "evaluation_scores": null
+    },
+    {
+      "arm": "data-treatment",
+      "actor": "/root/live_data_treatment",
+      "observation": "observations/data-treatment.json",
+      "terminal_validation": true,
+      "evaluation_scores": null
+    },
+    {
+      "arm": "creative-treatment",
+      "actor": "/root/live_creative_treatment",
+      "additional_reviewer": "/root/live_creative_review",
+      "observation": "observations/creative-treatment.json",
+      "terminal_validation": true,
+      "original_run_terminal": false,
+      "workflow_deviations": [
+        "Nested native dispatch hit thread limit; outer fresh reviewer after actor terminal succeeded.",
+        "One focused repair with independent recheck; original candidate/evidence retained.",
+        "Original admitted-but-uncreated reviewer run kept incomplete; linked continuation completed."
+      ],
+      "evaluation_scores": null
+    },
+    {
+      "arm": "recovery-treatment",
+      "actor": "/root/live_recovery_treatment",
+      "additional_reviewer": "/root/live_recovery_review",
+      "observation": "observations/recovery-treatment.json",
+      "source_integrity_validation": true,
+      "source_terminal": false,
+      "terminal_validation": null,
+      "terminal_validation_not_applicable_reason": "Recovery assessment completed; controlled canceled export source intentionally stays open with unknown effects, as frozen scenario allows.",
+      "workflow_deviations": [
+        "Supplied disclosed current capacity environment note; nested native dispatch still failed, outer fresh reviewer after coordinator terminal succeeded.",
+        "One focused identity-evidence correction and independent recheck; original candidate/review preserved."
+      ],
+      "evaluation_scores": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "actor": "/root/live_promotion_treatment",
+      "additional_role_actors": [
+        "/root/live_promotion_author",
+        "/root/live_promotion_refuter",
+        "/root/live_promotion_reviewer"
+      ],
+      "observation": "observations/promotion-treatment.json",
+      "terminal_validation": true,
+      "store_validation": true,
+      "source_terminal_validation": true,
+      "workflow_deviations": [
+        "Disclosed current capacity workaround; one nested author spawn failed; outer sequential fresh roles after coordinator terminal.",
+        "Initial final reviewer failed actual-cue qualifier; one author repair then renewed independent refutation/review passed.",
+        "Three real distinct roles retained; coordinator performed stage/activation/retrieval/rollback; original pointer restored and both generations retained."
+      ],
+      "evaluation_scores": null
+    }
+  ],
+  "dispatch_intent": {
+    "requested_task_name": "live_scorer",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "fork_turns": "none",
+    "native_handle": null,
+    "packet": "scorer-brief.txt",
+    "status": "recorded before independent scoring dispatch; all live actors terminal/released"
+  },
+  "next_action": "Independent scoring completed with explicit release and native terminal observation. See scoring-a1-r1/scoring-manifest.json, docs/LIVE-RESULTS.md and observations/live-scorer.json. Recovery passes; six original arms fail, four verified issues require a separate post-live repair wave. Do not rerun or rewrite original trials.",
+  "limitations": [
+    "Actor journals are authored journals, not raw native transcripts.",
+    "Outer lifecycle observations are normalized direct tool facts; timestamps include observation/recording latency.",
+    "All arm scores, effective model identity, token usage and money remain unknown until independently observed; no general quality or savings claim."
+  ],
+  "incomplete_arms": []
+}

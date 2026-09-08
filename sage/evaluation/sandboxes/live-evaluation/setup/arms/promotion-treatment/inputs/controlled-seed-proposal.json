@@ -1,0 +1,67 @@
+{
+  "action": "create",
+  "proposer": "/controlled/seed-proposer",
+  "reviewer": "/controlled/seed-reviewer",
+  "source_runs": [
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old"
+  ],
+  "record": {
+    "v": 1,
+    "id": "museum-csv-field-count",
+    "revision": 1,
+    "prior_revision": null,
+    "status": "supported",
+    "evidence_class": "scoped_fact",
+    "gate_rationale": "Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.",
+    "gate_evidence": {
+      "repeatable_check": "python3 inputs/observe.py (old rows)",
+      "environment": "Python 3.11.6 controlled museum sample"
+    },
+    "rule": "For a museum CSV row, count commas and add one to obtain its field count.",
+    "recognizer": {
+      "domain": [
+        "museum imports"
+      ],
+      "artifact": [
+        "csv"
+      ],
+      "operation": [
+        "count fields"
+      ]
+    },
+    "qualifier": {
+      "all": {
+        "artifact": [
+          "csv"
+        ]
+      },
+      "none": {}
+    },
+    "falsifier": "A museum CSV row has a csv.reader field count different from comma count plus one.",
+    "evidence_summary": "Original unquoted rows have equal plain-split and csv.reader field counts.",
+    "provenance": [
+      {
+        "run_id": "csv-old",
+        "locator": "ev-1"
+      }
+    ],
+    "alternative_explanations": [],
+    "counterevidence": [],
+    "refutation": {
+      "actor": "/controlled/seed-refuter",
+      "outcome": "passed",
+      "findings": [],
+      "evidence": [
+        "csv-old:ev-1"
+      ]
+    },
+    "review": {
+      "actor": "/controlled/seed-reviewer",
+      "outcome": "passed",
+      "dispositions": [],
+      "gate_decision": "supported"
+    },
+    "created_at": "2026-09-08T00:01:00Z",
+    "reviewed_at": "2026-09-08T00:02:00Z"
+  }
+}

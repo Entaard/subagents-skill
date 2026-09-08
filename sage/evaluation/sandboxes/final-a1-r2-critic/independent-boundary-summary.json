@@ -1,0 +1,69 @@
+{
+  "kind": "informed independent installed-CLI scenario",
+  "native_live_trial": false,
+  "synthetic_role_ids": true,
+  "synthetic_authority": true,
+  "commands": [
+    {
+      "label": "seed-stage",
+      "exit_code": 0
+    },
+    {
+      "label": "seed-activate",
+      "exit_code": 0
+    },
+    {
+      "label": "reviewed-stage",
+      "exit_code": 0
+    },
+    {
+      "label": "init",
+      "exit_code": 0
+    },
+    {
+      "label": "initial-append",
+      "exit_code": 0
+    },
+    {
+      "label": "pre-effect-snapshot",
+      "exit_code": 0
+    },
+    {
+      "label": "activation-effect",
+      "exit_code": 0
+    },
+    {
+      "label": "uncertain-resume",
+      "exit_code": 0
+    },
+    {
+      "label": "blocked-second-writer",
+      "exit_code": 2
+    },
+    {
+      "label": "observe-store",
+      "exit_code": 0
+    },
+    {
+      "label": "reconciled-stop",
+      "exit_code": 0
+    },
+    {
+      "label": "terminal-validation",
+      "exit_code": 0
+    },
+    {
+      "label": "report",
+      "exit_code": 0
+    }
+  ],
+  "lost_acknowledgement_blocks_admission": true,
+  "second_writer_error": "writer_busy",
+  "store_observed_before_result": true,
+  "activation_not_replayed": true,
+  "source_log_unchanged": true,
+  "authority_change_recorded": true,
+  "cancelled_follow_on_unadmitted": true,
+  "honest_terminal": "stopped",
+  "final_pointer": "g-next"
+}

@@ -1,0 +1,44 @@
+{
+  "native_handle": "/root/live_repairs_builder",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "fork_turns": "none",
+  "observed_at": {
+    "current_time": "2026-09-08 12:46:08 UTC"
+  },
+  "brief": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder-brief.txt",
+  "root_writer_state": "read_only_until_release_and_native_terminal",
+  "completion": {
+    "observed_at": {
+      "current_time": "2026-09-08 13:36:21 UTC"
+    },
+    "native_status": "completed",
+    "explicit_release": true,
+    "pending_effects": "none reported",
+    "candidate": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/candidate-manifest.json",
+    "candidate_sha256": "46f9c89edf0d39d0bab0c4853e326c0d1e43b41dfb0096415a16f65ba43f157d",
+    "claims": {
+      "at": {
+        "current_time": "2026-09-08 13:23:26 UTC"
+      },
+      "source": "builder PROGRESS.md observed read-only; not independent critic verification",
+      "focused_tests": 10,
+      "offline_tests": 89,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "informed_diagnostic_claims": {
+        "creative_original_prefix_events": 22,
+        "creative_copy_terminal": "stopped",
+        "report_copies": 7,
+        "v2_exit": 2,
+        "v3_exit": 0,
+        "subprocess_exits_separately_captured": 6,
+        "protected_files_unchanged": 2239
+      },
+      "phase": "final static checks, implementation log, candidate hashes, release pending",
+      "lease": "active"
+    },
+    "root_hash_check": "16 candidate source + 5 guards checked with shasum; see current tool output"
+  }
+}

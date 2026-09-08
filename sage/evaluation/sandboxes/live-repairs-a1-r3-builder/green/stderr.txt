@@ -1,0 +1,8 @@
+test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) ... ok
+test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) ... ok
+test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.731s
+
+OK

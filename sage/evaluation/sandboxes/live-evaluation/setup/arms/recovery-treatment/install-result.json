@@ -1,0 +1,22 @@
+{
+  "installed": [
+    "sage/bin/sage_knowledge.py",
+    "sage/bin/sage_state.py",
+    "skills/sage-promote/SKILL.md",
+    "skills/sage-promote/agents/openai.yaml",
+    "skills/sage-promote/references/knowledge.md",
+    "skills/sage-promote/references/promotion.md",
+    "skills/sage/SKILL.md",
+    "skills/sage/agents/openai.yaml",
+    "skills/sage/references/delegation.md",
+    "skills/sage/references/knowledge.md",
+    "skills/sage/references/recovery.md",
+    "skills/sage/references/run.md",
+    "skills/sage/references/state.md",
+    "skills/sage/references/verification.md"
+  ],
+  "ok": true,
+  "operation": "install",
+  "receipt": "sage/receipt.json",
+  "removed_retired": []
+}

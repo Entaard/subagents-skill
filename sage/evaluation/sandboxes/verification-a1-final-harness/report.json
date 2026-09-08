@@ -1,0 +1,22 @@
+{
+  "schema_version": "sage-verification-run-v1",
+  "mode": "harness",
+  "started_and_finished_at": "2026-09-07T14:51:16.727292+00:00",
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+    "-p",
+    "test_harness.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "passed": true,
+  "live_trials_run": false,
+  "network_used": false,
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt"
+}

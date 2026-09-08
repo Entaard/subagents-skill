@@ -1,0 +1,119 @@
+{
+  "issues": [
+    {
+      "id": "LIVE-01",
+      "severity": "major",
+      "category": "product_defect",
+      "status": "open",
+      "arms": [
+        "creative-treatment"
+      ],
+      "requirements": [
+        "R-025",
+        "R-036",
+        "R-037",
+        "R-038"
+      ],
+      "summary": "A known failed pre-creation dispatch cannot reconcile its already-admitted delegated task without a fabricated agent request.",
+      "evidence": [
+        "reporting-checks.json",
+        "record-inspection.json"
+      ],
+      "reproduction": "verify_reporting.py copies the exact original creative run and attempts failed/none task.result for its admitted review. Installed helper exits 2: delegated result needs its recorded agent request. Existing revision_limit=1 independently prohibits a second revision; merely increasing that limit cannot settle the original admitted no-handle assignment.",
+      "fix_check": "Represent known pre-creation failure with append-only evidence and no invented handle, permitting an honest stopped/failed disposition and a separately bounded revised strategy. Retain blocking behavior when creation/effects are unknown; prove the observed creative history can reconcile without rewriting old events.",
+      "scope_note": "Original no-handle run stays open; actual final game/review finished through a disclosed separate continuation. Native capacity refusal is an environment deviation; inability to durably represent its known no-creation outcome is a product gap."
+    },
+    {
+      "id": "LIVE-02",
+      "severity": "major",
+      "category": "product_reporting_defect",
+      "status": "open",
+      "arms": [
+        "code-treatment",
+        "code-baseline",
+        "data-baseline",
+        "data-treatment",
+        "creative-treatment",
+        "promotion-treatment"
+      ],
+      "requirements": [
+        "R-023",
+        "R-027",
+        "R-032"
+      ],
+      "summary": "Generated reports state Unknowns: None while their own snapshots and delivered narratives retain important unknowns; creative also states Untested evidence: None despite named untested experience checks.",
+      "evidence": [
+        "reporting-checks.json",
+        "record-inspection.json"
+      ],
+      "reproduction": "verify_reporting.py regenerates seven reports on copies, byte-identically. Six render Unknowns: None. Agents in those same snapshots retain effective_model/effective_effort unknown; data memos explicitly retain missing M09 and unidentified causality, creative final report retains untested screen reader/reduced motion/touch, and promotion retains unobserved transfer.",
+      "fix_check": "Make empty typed sections say no entries recorded rather than no unknowns; render directly stored unknown identity/effects and ensure material task unknown/untested facts receive typed evidence during recording. Regenerate these copied examples and show no unqualified denial contradicting their explicit unknowns.",
+      "scope_note": "Supplemental final reports correctly disclose the unknowns, so this does not invalidate numerical/game results or allege invented effective identities. It prevents a full reporting pass for the six delivered report sets. Recovery correctly contains an unknown-kind evidence entry and clearly states the open source barrier."
+    },
+    {
+      "id": "LIVE-03",
+      "severity": "major",
+      "category": "evaluation_schema_mismatch",
+      "status": "open",
+      "arms": [],
+      "requirements": [
+        "R-005",
+        "R-059",
+        "R-060",
+        "R-061"
+      ],
+      "summary": "Frozen pair validator requires integer native execution.exit_code even though native completion exposes none.",
+      "evidence": [
+        "paired-validation.json",
+        "paired-results.json"
+      ],
+      "reproduction": "Run pairing.py validate on the scored hash-bound native results. It exits 2 at completed transcript evidence because execution.exit_code is null; native lifecycle is completed and subprocess verifier exits are separately recorded.",
+      "fix_check": "In a future versioned protocol, explicitly distinguish native lifecycle completion/nullable native exit status from subprocess command exits. Accept honest native records and reject invented/absent completion evidence. Preserve this frozen v2 failure and classify any repaired validation as informed diagnostic work.",
+      "scope_note": "Do not relabel an unrelated verifier exit code as the native arm exit, or relabel journals as raw transcripts. Existing transcript enum is precisely qualified as authored journal plus normalized outer observation."
+    },
+    {
+      "id": "LIVE-04",
+      "severity": "minor",
+      "category": "product_documentation_defect",
+      "status": "open",
+      "arms": [],
+      "requirements": [
+        "R-004",
+        "R-031"
+      ],
+      "summary": "Installed state contract omits allowed note.recorded.category values; all four paired coordinators independently hit rejected categories.",
+      "evidence": [
+        "record-inspection.json"
+      ],
+      "reproduction": "Installed references/state.md lists category but never its enum; installed helper line 232 permits assumption and decision. Paired journals and retained closure rejection files show reconciliation, closure or finding-disposition style categories rejected with exit 2, then corrected by inspecting helper source. Creative and promotion also retain this failure.",
+      "fix_check": "Document assumption|decision in the installed state contract and validate an example without helper-source inspection. Preserve the observed rejected appends and do not count bookkeeping corrections as candidate repairs.",
+      "scope_note": "Recovered atomically; no source corruption or open task defect from these corrected appends. Routing scores include this overhead but do not imply monetary cost."
+    }
+  ],
+  "root_candidate_assessment": {
+    "note_enum": "Confirmed by omitted installed enum plus four paired atomic rejections; product documentation issue, not candidate arithmetic failure.",
+    "dispatch_failure": "Confirmed on exact copied creative run; native capacity is environment-specific, durable failure representation gap is product-level.",
+    "native_exit": "Confirmed by actual frozen validator rejection with honest null, not fixed or worked around.",
+    "architecture_message": "Root later reported architecture drift; explicitly outside this bounded scoring assessment and not scored here."
+  },
+  "nonblocking_residuals": [
+    {
+      "id": "RES-01",
+      "summary": "Promotion discovery accepts absent/different environment cues after repair; semantic applicability remains explicitly Python/sample-bound in retrieved record. R-042 still requires the caller to honor text. No supported transfer claim observed."
+    },
+    {
+      "id": "RES-02",
+      "summary": "Creative original event points to subsequently repaired working path. Exact original bytes are retained under evidence/original-index.html and final report links their hash; navigation drift is not loss of evidence."
+    },
+    {
+      "id": "RES-03",
+      "summary": "Screen reader, runtime reduced motion, touch, exact demonstration transition timestamp and other platforms remain untested; source/keyboard evidence meets only the declared bounded smoke scope."
+    }
+  ],
+  "environment_deviations": [
+    "Native thread-limit failure in each smoke, recovered through sequential outer role dispatch and followups; later smoke packets also received disclosed current-capacity environment note.",
+    "Creative unfiltered lifecycle response exposed unrelated completed-arm text; actor disclosed exposure, no use proved or disproved. Paired arms finished before this incident.",
+    "Owned headless browser requires sandbox escalation; restricted attempts retained."
+  ],
+  "whole_skill_gate": "Not assessed or passed by this scorer."
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "Supplemental platform observation for the focused repair runs; not a retroactive browser-process version measurement",
+  "observedAt": "2026-09-07T21:29:35Z",
+  "os": {"product": "macOS", "version": "27.0", "build": "26A5425a", "kernel": "Darwin 27.0.0", "architecture": "arm64"},
+  "browser": {"product": "Google Chrome", "installedVersion": "152.0.7977.82", "binary": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "versionSource": "Installed app Info.plist CFBundleShortVersionString", "runtimeProtocolVersion": null},
+  "runtime": {"product": "Node.js", "version": "v26.7.0"},
+  "method": {"browser": "Approved isolated owned-headless process, fresh profile for each run, only arm-local HTML, page network URLs blocked", "deviceScaleFactor": 1, "mobile": false, "cpuThrottle": false, "networkThrottle": false, "loadTiming": "One local file navigation after browser process startup, waiting for document.readyState complete", "inputTiming": "Wall clock from CDP keyDown/keyUp through two animation frames; includes CDP overhead"},
+  "suppliedFlowSamples": [{"viewport": {"width":1280,"height":800}, "navigationN":1, "keyboardN":11}, {"viewport":{"width":390,"height":844},"navigationN":1,"keyboardN":11}],
+  "commands": ["sw_vers", "uname -srm", "/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' '/Applications/Google Chrome.app/Contents/Info.plist'", "node --version"],
+  "limits": ["Original browser process version was not captured contemporaneously; this version observation applies to the installation immediately before repair-run launches.", "Local unthrottled samples do not establish population, cross-device, or cost claims."]
+}

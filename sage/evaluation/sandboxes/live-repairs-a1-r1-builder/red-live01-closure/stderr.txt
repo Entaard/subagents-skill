@@ -1,0 +1,16 @@
+test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path) ... FAIL
+
+======================================================================
+FAIL: test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 112, in test_no_creation_fact_requires_direct_observation_and_is_single_final_path
+    self.assert_rejected(root, "missing-result-evidence", missing_result_evidence, "invalid_reference")
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 55, in assert_rejected
+    self.assertEqual(result.returncode, 2, result.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.166s
+
+FAILED (failures=1)

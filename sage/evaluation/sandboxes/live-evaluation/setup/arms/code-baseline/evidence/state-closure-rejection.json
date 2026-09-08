@@ -1,0 +1,1 @@
+{"code":"invalid_event","message":"invalid note category","ok":false,"observed_helper_exit":2,"observed_wrapper_exit":1,"disposition":"Changed note category from closure to decision, as required by installed helper validation; authoritative history unchanged by rejected append."}

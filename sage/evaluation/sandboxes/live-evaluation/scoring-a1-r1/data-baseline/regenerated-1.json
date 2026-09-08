@@ -1,0 +1,5833 @@
+{
+  "missing_count": {
+    "completed": null,
+    "handling": "Exclude its visitors from observed-outcome fractions; enumerate every feasible integer completion count for full-data bounds.",
+    "note_ids": [
+      "N3"
+    ],
+    "row_id": "M09",
+    "visitors": 20
+  },
+  "observed": {
+    "by_crowd_block": {
+      "busy": {
+        "new": {
+          "fraction_known_outcomes": 0.5241379310344828,
+          "known_completed": 152,
+          "known_outcome_visitors": 290,
+          "missing_outcome_visitors": 20,
+          "missing_row_ids": [
+            "M09"
+          ],
+          "row_ids": [
+            "M04",
+            "M08",
+            "M09"
+          ],
+          "total_visitors": 310
+        },
+        "new_minus_old_pp_known_outcomes": 9.556650246305425,
+        "old": {
+          "fraction_known_outcomes": 0.42857142857142855,
+          "known_completed": 30,
+          "known_outcome_visitors": 70,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M03",
+            "M07"
+          ],
+          "total_visitors": 70
+        }
+      },
+      "quiet": {
+        "new": {
+          "fraction_known_outcomes": 0.8555555555555555,
+          "known_completed": 77,
+          "known_outcome_visitors": 90,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M02",
+            "M06"
+          ],
+          "total_visitors": 90
+        },
+        "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+        "old": {
+          "fraction_known_outcomes": 0.8,
+          "known_completed": 272,
+          "known_outcome_visitors": 340,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M01",
+            "M05"
+          ],
+          "total_visitors": 340
+        }
+      }
+    },
+    "by_week": {
+      "1": {
+        "new": {
+          "fraction_known_outcomes": 0.5736842105263158,
+          "known_completed": 109,
+          "known_outcome_visitors": 190,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M02",
+            "M04"
+          ],
+          "total_visitors": 190
+        },
+        "new_minus_old_pp_known_outcomes": -16.91729323308271,
+        "old": {
+          "fraction_known_outcomes": 0.7428571428571429,
+          "known_completed": 156,
+          "known_outcome_visitors": 210,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M01",
+            "M03"
+          ],
+          "total_visitors": 210
+        }
+      },
+      "2": {
+        "new": {
+          "fraction_known_outcomes": 0.631578947368421,
+          "known_completed": 120,
+          "known_outcome_visitors": 190,
+          "missing_outcome_visitors": 20,
+          "missing_row_ids": [
+            "M09"
+          ],
+          "row_ids": [
+            "M06",
+            "M08",
+            "M09"
+          ],
+          "total_visitors": 210
+        },
+        "new_minus_old_pp_known_outcomes": -9.842105263157897,
+        "old": {
+          "fraction_known_outcomes": 0.73,
+          "known_completed": 146,
+          "known_outcome_visitors": 200,
+          "missing_outcome_visitors": 0,
+          "missing_row_ids": [],
+          "row_ids": [
+            "M05",
+            "M07"
+          ],
+          "total_visitors": 200
+        }
+      }
+    },
+    "by_week_and_crowd_block": {
+      "1": {
+        "busy": {
+          "new": {
+            "fraction_known_outcomes": 0.5,
+            "known_completed": 75,
+            "known_outcome_visitors": 150,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M04"
+            ],
+            "total_visitors": 150
+          },
+          "new_minus_old_pp_known_outcomes": 9.999999999999998,
+          "old": {
+            "fraction_known_outcomes": 0.4,
+            "known_completed": 12,
+            "known_outcome_visitors": 30,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M03"
+            ],
+            "total_visitors": 30
+          }
+        },
+        "quiet": {
+          "new": {
+            "fraction_known_outcomes": 0.85,
+            "known_completed": 34,
+            "known_outcome_visitors": 40,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M02"
+            ],
+            "total_visitors": 40
+          },
+          "new_minus_old_pp_known_outcomes": 4.999999999999993,
+          "old": {
+            "fraction_known_outcomes": 0.8,
+            "known_completed": 144,
+            "known_outcome_visitors": 180,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M01"
+            ],
+            "total_visitors": 180
+          }
+        }
+      },
+      "2": {
+        "busy": {
+          "new": {
+            "fraction_known_outcomes": 0.55,
+            "known_completed": 77,
+            "known_outcome_visitors": 140,
+            "missing_outcome_visitors": 20,
+            "missing_row_ids": [
+              "M09"
+            ],
+            "row_ids": [
+              "M08",
+              "M09"
+            ],
+            "total_visitors": 160
+          },
+          "new_minus_old_pp_known_outcomes": 10.000000000000004,
+          "old": {
+            "fraction_known_outcomes": 0.45,
+            "known_completed": 18,
+            "known_outcome_visitors": 40,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M07"
+            ],
+            "total_visitors": 40
+          }
+        },
+        "quiet": {
+          "new": {
+            "fraction_known_outcomes": 0.86,
+            "known_completed": 43,
+            "known_outcome_visitors": 50,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M06"
+            ],
+            "total_visitors": 50
+          },
+          "new_minus_old_pp_known_outcomes": 5.999999999999995,
+          "old": {
+            "fraction_known_outcomes": 0.8,
+            "known_completed": 128,
+            "known_outcome_visitors": 160,
+            "missing_outcome_visitors": 0,
+            "missing_row_ids": [],
+            "row_ids": [
+              "M05"
+            ],
+            "total_visitors": 160
+          }
+        }
+      }
+    },
+    "overall": {
+      "new": {
+        "fraction_known_outcomes": 0.6026315789473684,
+        "known_completed": 229,
+        "known_outcome_visitors": 380,
+        "missing_outcome_visitors": 20,
+        "missing_row_ids": [
+          "M09"
+        ],
+        "row_ids": [
+          "M02",
+          "M04",
+          "M06",
+          "M08",
+          "M09"
+        ],
+        "total_visitors": 400
+      },
+      "new_minus_old_pp_known_outcomes": -13.395378690629013,
+      "old": {
+        "fraction_known_outcomes": 0.7365853658536585,
+        "known_completed": 302,
+        "known_outcome_visitors": 410,
+        "missing_outcome_visitors": 0,
+        "missing_row_ids": [],
+        "row_ids": [
+          "M01",
+          "M03",
+          "M05",
+          "M07"
+        ],
+        "total_visitors": 410
+      }
+    }
+  },
+  "overall_wilson_95": {
+    "basis": "Only visitors in rows with observed completion counts; descriptive binomial intervals, not causal or clustering-adjusted uncertainty.",
+    "signs": {
+      "new": {
+        "completed": 229,
+        "fraction_interval": [
+          0.5526380043524287,
+          0.6505708192873226
+        ],
+        "visitors": 380
+      },
+      "old": {
+        "completed": 302,
+        "fraction_interval": [
+          0.6918928875462823,
+          0.7768855049594493
+        ],
+        "visitors": 410
+      }
+    },
+    "z": 1.96
+  },
+  "schema_version": 1,
+  "sensitivity": {
+    "assumption": "Only M09 completion is missing; 0 through 20 are all feasible by N3. Scenarios are possibilities, not estimated counts.",
+    "busy_new_minus_old_pp": {
+      "max": 12.626728110599078,
+      "min": 6.175115207373272
+    },
+    "new_overall_fraction": {
+      "max": 0.6225,
+      "min": 0.5725
+    },
+    "overall_new_minus_old_pp": {
+      "max": -11.408536585365848,
+      "min": -16.40853658536585
+    },
+    "scenario_count": 21,
+    "scenarios": [
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.49032258064516127,
+                "known_completed": 152,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 6.175115207373272,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.5714285714285714,
+                "known_completed": 120,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -15.857142857142858,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.48125,
+                  "known_completed": 77,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 3.125,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5725,
+              "known_completed": 229,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -16.40853658536585,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 0,
+        "new_overall_wilson": [
+          0.5235544015629189,
+          0.6200662655501273
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.4935483870967742,
+                "known_completed": 153,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 6.497695852534563,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.5761904761904761,
+                "known_completed": 121,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -15.380952380952383,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.4875,
+                  "known_completed": 78,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 3.749999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.575,
+              "known_completed": 230,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -16.15853658536586,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 1,
+        "new_overall_wilson": [
+          0.5260666333045342,
+          0.6225064706055136
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.4967741935483871,
+                "known_completed": 154,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 6.820276497695854,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.580952380952381,
+                "known_completed": 122,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -14.904761904761898,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.49375,
+                  "known_completed": 79,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 4.375000000000001,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5775,
+              "known_completed": 231,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -15.908536585365852,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 2,
+        "new_overall_wilson": [
+          0.5285801141391775,
+          0.624945426567872
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5,
+                "known_completed": 155,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 7.142857142857145,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.5857142857142857,
+                "known_completed": 123,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -14.428571428571423,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 80,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999999,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.58,
+              "known_completed": 232,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -15.658536585365857,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 3,
+        "new_overall_wilson": [
+          0.5310948469671546,
+          0.6273831305368964
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5032258064516129,
+                "known_completed": 156,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 7.465437788018431,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.5904761904761905,
+                "known_completed": 124,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -13.952380952380949,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.50625,
+                  "known_completed": 81,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 5.6249999999999964,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5825,
+              "known_completed": 233,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -15.408536585365852,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 4,
+        "new_overall_wilson": [
+          0.5336108347956647,
+          0.629819579505388
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5064516129032258,
+                "known_completed": 157,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 7.788018433179728,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.5952380952380952,
+                "known_completed": 125,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -13.476190476190474,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5125,
+                  "known_completed": 82,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 6.249999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.585,
+              "known_completed": 234,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -15.158536585365855,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 5,
+        "new_overall_wilson": [
+          0.5361280807400124,
+          0.6322547703580419
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5096774193548387,
+                "known_completed": 158,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 8.110599078341012,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6,
+                "known_completed": 126,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -13.0,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.51875,
+                  "known_completed": 83,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 6.8750000000000036,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5875,
+              "known_completed": 235,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -14.90853658536585,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 6,
+        "new_overall_wilson": [
+          0.5386465880248711,
+          0.634688699870185
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5129032258064516,
+                "known_completed": 159,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 8.43317972350231,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6047619047619047,
+                "known_completed": 127,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -12.523809523809526,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.525,
+                  "known_completed": 84,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 7.500000000000001,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.59,
+              "known_completed": 236,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -14.658536585365855,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 7,
+        "new_overall_wilson": [
+          0.5411663599855963,
+          0.6371213647064611
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5161290322580645,
+                "known_completed": 160,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 8.755760368663596,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6095238095238096,
+                "known_completed": 128,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -12.04761904761904,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.53125,
+                  "known_completed": 85,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 8.124999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5925,
+              "known_completed": 237,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -14.40853658536585,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 8,
+        "new_overall_wilson": [
+          0.5436874000695945,
+          0.6395527614194646
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5193548387096775,
+                "known_completed": 161,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 9.078341013824891,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6142857142857143,
+                "known_completed": 129,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -11.571428571428566,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5375,
+                  "known_completed": 86,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 8.749999999999996,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.595,
+              "known_completed": 238,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -14.158536585365855,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 9,
+        "new_overall_wilson": [
+          0.5462097118377427,
+          0.6419828864483179
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5225806451612903,
+                "known_completed": 162,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 9.400921658986178,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6190476190476191,
+                "known_completed": 130,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -11.095238095238091,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.54375,
+                  "known_completed": 87,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 9.374999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.5975,
+              "known_completed": 239,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -13.90853658536585,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 10,
+        "new_overall_wilson": [
+          0.5487332989658665,
+          0.6444117361171958
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5258064516129032,
+                "known_completed": 163,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 9.723502304147463,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6238095238095238,
+                "known_completed": 131,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -10.619047619047617,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.55,
+                  "known_completed": 88,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 10.000000000000004,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6,
+              "known_completed": 240,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -13.658536585365855,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 11,
+        "new_overall_wilson": [
+          0.5512581652462732,
+          0.6468393066337906
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5290322580645161,
+                "known_completed": 164,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 10.04608294930876,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6285714285714286,
+                "known_completed": 132,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -10.142857142857142,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.55625,
+                  "known_completed": 89,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 10.625000000000002,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6025,
+              "known_completed": 241,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -13.408536585365848,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 12,
+        "new_overall_wilson": [
+          0.5537843145893452,
+          0.6492655940877204
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.532258064516129,
+                "known_completed": 165,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 10.368663594470046,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6333333333333333,
+                "known_completed": 133,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -9.666666666666668,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5625,
+                  "known_completed": 90,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 11.249999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.605,
+              "known_completed": 242,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -13.158536585365855,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 13,
+        "new_overall_wilson": [
+          0.5563117510251911,
+          0.6516905944488758
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.535483870967742,
+                "known_completed": 166,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 10.691244239631342,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.638095238095238,
+                "known_completed": 134,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -9.190476190476193,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.56875,
+                  "known_completed": 91,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 11.874999999999996,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6075,
+              "known_completed": 243,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -12.908536585365848,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 14,
+        "new_overall_wilson": [
+          0.5588404787053632,
+          0.6541143035657054
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5387096774193548,
+                "known_completed": 167,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 11.013824884792628,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6428571428571429,
+                "known_completed": 135,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -8.714285714285708,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.575,
+                  "known_completed": 92,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 12.499999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.61,
+              "known_completed": 244,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -12.658536585365853,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 15,
+        "new_overall_wilson": [
+          0.5613705019046327,
+          0.6565367171634375
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5419354838709678,
+                "known_completed": 168,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 11.336405529953925,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6476190476190476,
+                "known_completed": 136,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -8.238095238095234,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.58125,
+                  "known_completed": 93,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 13.125000000000004,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6125,
+              "known_completed": 245,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -12.408536585365848,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 16,
+        "new_overall_wilson": [
+          0.5639018250228361,
+          0.6589578308422358
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5451612903225806,
+                "known_completed": 169,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 11.65898617511521,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6523809523809524,
+                "known_completed": 137,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -7.761904761904759,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5875,
+                  "known_completed": 94,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 13.750000000000002,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.615,
+              "known_completed": 246,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -12.158536585365853,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 17,
+        "new_overall_wilson": [
+          0.5664344525867856,
+          0.6613776400752879
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5483870967741935,
+                "known_completed": 170,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 11.981566820276496,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6571428571428571,
+                "known_completed": 138,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -7.285714285714285,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.59375,
+                  "known_completed": 95,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 14.374999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6175,
+              "known_completed": 247,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -11.908536585365848,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 18,
+        "new_overall_wilson": [
+          0.5689683892522508,
+          0.6637961402068244
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5516129032258065,
+                "known_completed": 171,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 12.304147465437792,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6619047619047619,
+                "known_completed": 139,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -6.80952380952381,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.6,
+                  "known_completed": 96,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 14.999999999999996,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.62,
+              "known_completed": 248,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -11.658536585365853,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 19,
+        "new_overall_wilson": [
+          0.5715036398060113,
+          0.6662133264500655
+        ]
+      },
+      {
+        "comparisons": {
+          "by_crowd_block": {
+            "busy": {
+              "new": {
+                "fraction_known_outcomes": 0.5548387096774193,
+                "known_completed": 172,
+                "known_outcome_visitors": 310,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M04",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 310
+              },
+              "new_minus_old_pp_known_outcomes": 12.626728110599078,
+              "old": {
+                "fraction_known_outcomes": 0.42857142857142855,
+                "known_completed": 30,
+                "known_outcome_visitors": 70,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M03",
+                  "M07"
+                ],
+                "total_visitors": 70
+              }
+            },
+            "quiet": {
+              "new": {
+                "fraction_known_outcomes": 0.8555555555555555,
+                "known_completed": 77,
+                "known_outcome_visitors": 90,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M06"
+                ],
+                "total_visitors": 90
+              },
+              "new_minus_old_pp_known_outcomes": 5.5555555555555465,
+              "old": {
+                "fraction_known_outcomes": 0.8,
+                "known_completed": 272,
+                "known_outcome_visitors": 340,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M05"
+                ],
+                "total_visitors": 340
+              }
+            }
+          },
+          "by_week": {
+            "1": {
+              "new": {
+                "fraction_known_outcomes": 0.5736842105263158,
+                "known_completed": 109,
+                "known_outcome_visitors": 190,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M02",
+                  "M04"
+                ],
+                "total_visitors": 190
+              },
+              "new_minus_old_pp_known_outcomes": -16.91729323308271,
+              "old": {
+                "fraction_known_outcomes": 0.7428571428571429,
+                "known_completed": 156,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M01",
+                  "M03"
+                ],
+                "total_visitors": 210
+              }
+            },
+            "2": {
+              "new": {
+                "fraction_known_outcomes": 0.6666666666666666,
+                "known_completed": 140,
+                "known_outcome_visitors": 210,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M06",
+                  "M08",
+                  "M09"
+                ],
+                "total_visitors": 210
+              },
+              "new_minus_old_pp_known_outcomes": -6.333333333333336,
+              "old": {
+                "fraction_known_outcomes": 0.73,
+                "known_completed": 146,
+                "known_outcome_visitors": 200,
+                "missing_outcome_visitors": 0,
+                "missing_row_ids": [],
+                "row_ids": [
+                  "M05",
+                  "M07"
+                ],
+                "total_visitors": 200
+              }
+            }
+          },
+          "by_week_and_crowd_block": {
+            "1": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.5,
+                  "known_completed": 75,
+                  "known_outcome_visitors": 150,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M04"
+                  ],
+                  "total_visitors": 150
+                },
+                "new_minus_old_pp_known_outcomes": 9.999999999999998,
+                "old": {
+                  "fraction_known_outcomes": 0.4,
+                  "known_completed": 12,
+                  "known_outcome_visitors": 30,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M03"
+                  ],
+                  "total_visitors": 30
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.85,
+                  "known_completed": 34,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M02"
+                  ],
+                  "total_visitors": 40
+                },
+                "new_minus_old_pp_known_outcomes": 4.999999999999993,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 144,
+                  "known_outcome_visitors": 180,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M01"
+                  ],
+                  "total_visitors": 180
+                }
+              }
+            },
+            "2": {
+              "busy": {
+                "new": {
+                  "fraction_known_outcomes": 0.60625,
+                  "known_completed": 97,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M08",
+                    "M09"
+                  ],
+                  "total_visitors": 160
+                },
+                "new_minus_old_pp_known_outcomes": 15.624999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.45,
+                  "known_completed": 18,
+                  "known_outcome_visitors": 40,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M07"
+                  ],
+                  "total_visitors": 40
+                }
+              },
+              "quiet": {
+                "new": {
+                  "fraction_known_outcomes": 0.86,
+                  "known_completed": 43,
+                  "known_outcome_visitors": 50,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M06"
+                  ],
+                  "total_visitors": 50
+                },
+                "new_minus_old_pp_known_outcomes": 5.999999999999995,
+                "old": {
+                  "fraction_known_outcomes": 0.8,
+                  "known_completed": 128,
+                  "known_outcome_visitors": 160,
+                  "missing_outcome_visitors": 0,
+                  "missing_row_ids": [],
+                  "row_ids": [
+                    "M05"
+                  ],
+                  "total_visitors": 160
+                }
+              }
+            }
+          },
+          "overall": {
+            "new": {
+              "fraction_known_outcomes": 0.6225,
+              "known_completed": 249,
+              "known_outcome_visitors": 400,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M02",
+                "M04",
+                "M06",
+                "M08",
+                "M09"
+              ],
+              "total_visitors": 400
+            },
+            "new_minus_old_pp_known_outcomes": -11.408536585365848,
+            "old": {
+              "fraction_known_outcomes": 0.7365853658536585,
+              "known_completed": 302,
+              "known_outcome_visitors": 410,
+              "missing_outcome_visitors": 0,
+              "missing_row_ids": [],
+              "row_ids": [
+                "M01",
+                "M03",
+                "M05",
+                "M07"
+              ],
+              "total_visitors": 410
+            }
+          }
+        },
+        "m09_completed": 20,
+        "new_overall_wilson": [
+          0.5740402091679837,
+          0.6686291938850946
+        ]
+      }
+    ],
+    "week_2_busy_new_minus_old_pp": {
+      "max": 15.624999999999995,
+      "min": 3.125
+    },
+    "week_2_new_minus_old_pp": {
+      "max": -6.333333333333336,
+      "min": -15.857142857142858
+    }
+  },
+  "source_sha256": {
+    "notes.txt": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+    "sessions.csv": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee"
+  },
+  "units": {
+    "differences": "absolute percentage points, new minus old",
+    "fractions": "0 to 1"
+  }
+}

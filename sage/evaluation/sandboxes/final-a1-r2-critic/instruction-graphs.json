@@ -1,0 +1,228 @@
+{
+  "old": {
+    "sage": {
+      "reachable": [
+        "skills/sage/SKILL.md",
+        "skills/sage/references/delegation.md",
+        "skills/sage/references/knowledge.md",
+        "skills/sage/references/recovery.md",
+        "skills/sage/references/run.md",
+        "skills/sage/references/state.md",
+        "skills/sage/references/verification.md"
+      ],
+      "links": [
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/recovery.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/run.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/delegation.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/knowledge.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/verification.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/state.md",
+          "target": "run.md",
+          "exists": true,
+          "inside": true
+        }
+      ]
+    },
+    "sage-promote": {
+      "reachable": [
+        "skills/sage-promote/SKILL.md",
+        "skills/sage-promote/references/knowledge.md",
+        "skills/sage-promote/references/promotion.md"
+      ],
+      "links": [
+        {
+          "source": "skills/sage-promote/SKILL.md",
+          "target": "references/promotion.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/SKILL.md",
+          "target": "references/knowledge.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "knowledge.md",
+          "exists": true,
+          "inside": true
+        }
+      ]
+    }
+  },
+  "current": {
+    "sage": {
+      "reachable": [
+        "skills/sage/SKILL.md",
+        "skills/sage/references/delegation.md",
+        "skills/sage/references/knowledge.md",
+        "skills/sage/references/recovery.md",
+        "skills/sage/references/run.md",
+        "skills/sage/references/state.md",
+        "skills/sage/references/verification.md"
+      ],
+      "links": [
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/recovery.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/run.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/delegation.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/knowledge.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/SKILL.md",
+          "target": "references/verification.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/state.md",
+          "target": "run.md",
+          "exists": true,
+          "inside": true
+        }
+      ]
+    },
+    "sage-promote": {
+      "reachable": [
+        "skills/sage-promote/SKILL.md",
+        "skills/sage-promote/references/knowledge.md",
+        "skills/sage-promote/references/promotion.md",
+        "skills/sage/references/delegation.md",
+        "skills/sage/references/recovery.md",
+        "skills/sage/references/run.md",
+        "skills/sage/references/state.md"
+      ],
+      "links": [
+        {
+          "source": "skills/sage-promote/SKILL.md",
+          "target": "references/promotion.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/SKILL.md",
+          "target": "references/knowledge.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "../../sage/references/run.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "../../sage/references/state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "../../sage/references/delegation.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "../../sage/references/recovery.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage-promote/references/promotion.md",
+          "target": "knowledge.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/state.md",
+          "target": "run.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        },
+        {
+          "source": "skills/sage/references/run.md",
+          "target": "state.md",
+          "exists": true,
+          "inside": true
+        }
+      ]
+    }
+  }
+}

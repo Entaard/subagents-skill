@@ -1,0 +1,94 @@
+{
+  "files": {
+    "sage/bin/sage_knowledge.py": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "source_sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e"
+    },
+    "sage/bin/sage_state.py": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+      "source_sha256": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e"
+    },
+    "skills/sage-promote/SKILL.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "source_sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef"
+    },
+    "skills/sage-promote/agents/openai.yaml": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "source_sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f"
+    },
+    "skills/sage-promote/references/knowledge.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "source_sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c"
+    },
+    "skills/sage-promote/references/promotion.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf",
+      "source_sha256": "48972f070cad61d90feac80f08b63b5832cde80b5c0e25a432723ada2b125ddf"
+    },
+    "skills/sage/SKILL.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "source_sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f"
+    },
+    "skills/sage/agents/openai.yaml": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "source_sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e"
+    },
+    "skills/sage/references/delegation.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+      "source_sha256": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f"
+    },
+    "skills/sage/references/knowledge.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "source_sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27"
+    },
+    "skills/sage/references/recovery.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+      "source_sha256": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e"
+    },
+    "skills/sage/references/run.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+      "source_sha256": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51"
+    },
+    "skills/sage/references/state.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+      "source_sha256": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21"
+    },
+    "skills/sage/references/verification.md": {
+      "inherited_installed_sha256": null,
+      "installed_sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+      "source_sha256": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed"
+    }
+  },
+  "installed_files": [
+    "sage/bin/sage_knowledge.py",
+    "sage/bin/sage_state.py",
+    "skills/sage-promote/SKILL.md",
+    "skills/sage-promote/agents/openai.yaml",
+    "skills/sage-promote/references/knowledge.md",
+    "skills/sage-promote/references/promotion.md",
+    "skills/sage/SKILL.md",
+    "skills/sage/agents/openai.yaml",
+    "skills/sage/references/delegation.md",
+    "skills/sage/references/knowledge.md",
+    "skills/sage/references/recovery.md",
+    "skills/sage/references/run.md",
+    "skills/sage/references/state.md",
+    "skills/sage/references/verification.md"
+  ],
+  "operation": "install",
+  "schema_version": "sage-install-receipt-v1",
+  "source_root": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage",
+  "target_root": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed"
+}

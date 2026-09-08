@@ -1,0 +1,181 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "architecture-a1-r2",
+  "module": "architecture",
+  "approach_id": "architecture-a1",
+  "round": 2,
+  "reviewed_at": "2026-09-07T14:26:37Z",
+  "reviewer": {
+    "agent": "/root/architecture_critic",
+    "role": "independent architecture critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "gate_type": "design",
+  "verdict": "pass",
+  "open_error_count": 0,
+  "scope": "Re-review of the frozen architecture, requirements, decisions, and status; verify all three round-1 repairs and their coherence. No feature implementation or empirical behavior is claimed.",
+  "inputs": [
+    {
+      "path": "sage/ARCHITECTURE.md",
+      "sha256": "c4e01783d014d5bd73ba0ef01add8581c90d314a7016d61501e5b209a04d7e82"
+    },
+    {
+      "path": "sage/docs/REQUIREMENTS.md",
+      "sha256": "e0514487e0bb6292d575d232f30f4fb3469a29719f7a79bc1702a79298def77b"
+    },
+    {
+      "path": "sage/docs/DECISIONS.md",
+      "sha256": "475216db7af27dffbe4e029d5901138fb7f6dfaef8134e49fd373dce57a4f546"
+    },
+    {
+      "path": "sage/docs/STATUS.json",
+      "sha256": "4febf0c61932fc4d175ee864e9324406625e9081ca00a0f9d004ea88aabdd3d0"
+    }
+  ],
+  "scores": {
+    "requirements_and_spec_fit": 8.8,
+    "architecture_and_coherence": 8.8,
+    "correctness_and_evidence": 8.6,
+    "simplicity_and_context_efficiency": 8.7,
+    "orchestration_and_model_routing": 8.8,
+    "safety_reversibility_and_recovery": 8.8,
+    "verification_strength": 8.7,
+    "reporting_and_maintainability": 8.6
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The three previously incomplete contracts are now explicit in the architecture and mirrored by R-037/R-038/R-040/R-041/R-049. Codex scope, two skills, independence, and migration boundaries remain intact.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:108",
+        "sage/ARCHITECTURE.md:186",
+        "sage/ARCHITECTURE.md:190",
+        "sage/docs/REQUIREMENTS.md:45",
+        "sage/docs/REQUIREMENTS.md:59"
+      ]
+    },
+    "architecture_and_coherence": {
+      "reason": "Cause-responsive execution, generation-aware retrieval, and class-specific promotion now connect through the existing plan/log/record contracts without adding a scheduler or new subsystem.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:110",
+        "sage/ARCHITECTURE.md:186",
+        "sage/ARCHITECTURE.md:196",
+        "sage/docs/DECISIONS.md#d-007--adaptive-orchestration-including-zero-agents",
+        "sage/docs/DECISIONS.md#d-009--situation-driven-promoted-knowledge"
+      ]
+    },
+    "correctness_and_evidence": {
+      "reason": "Scoped facts, transferable heuristics, and causal guidance require distinct evidence predicates; confounded success stays provisional and independent review cannot substitute for evidence. Applying these predicates reliably remains an empirical question for later gates.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:190",
+        "sage/ARCHITECTURE.md:196",
+        "sage/docs/REQUIREMENTS.md:59"
+      ]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Repairs add short decision contracts to existing components. Bounded cue/generation refresh deduplicates loaded revisions; instruction-first helpers and the inline path remain. The added text is justified by real previously ambiguous branches.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:11",
+        "sage/ARCHITECTURE.md:108",
+        "sage/ARCHITECTURE.md:186"
+      ]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Requested routing priors and native lifecycle semantics remain correct against the supplied live schema. A failed criterion now requires causal diagnosis and bounded responsive changes while preserving user model constraints.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:110",
+        "sage/ARCHITECTURE.md:118",
+        "sage/ARCHITECTURE.md:133",
+        "sage/docs/REQUIREMENTS.md:45"
+      ]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Single-writer and unknown-effect barriers are retained. Recovery now explicitly rebuilds projections only from valid logs; promotion accepts reconciled terminal failures and stops while excluding unknown-effect inputs; exact knowledge generations/revisions are recoverable.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:145",
+        "sage/ARCHITECTURE.md:186",
+        "sage/ARCHITECTURE.md:208",
+        "sage/ARCHITECTURE.md:237"
+      ]
+    },
+    "verification_strength": {
+      "reason": "Verification-first, held-out evaluation, anchored per-dimension review, and same-case baseline comparison remain credible design contracts. New support/retry/refresh rules now yield falsifiable negative cases for the next builder.",
+      "evidence": [
+        "sage/ARCHITECTURE.md#build-and-quality-gates",
+        "sage/ARCHITECTURE.md#contracts-for-the-next-builders",
+        "sage/docs/REQUIREMENTS.md:45",
+        "sage/docs/REQUIREMENTS.md:50",
+        "sage/docs/REQUIREMENTS.md:59"
+      ]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Requirements and decisions agree with the repaired design; round-1 failures and the builder's unscored repair claims were preserved. Static design approval remains explicitly separate from implementation and measured task quality.",
+      "evidence": [
+        "sage/docs/STATUS.json",
+        "sage/docs/DECISIONS.md#d-010--promotion-is-refutable-and-reversible",
+        "sage/ARCHITECTURE.md:3"
+      ]
+    }
+  },
+  "dispositions": [
+    {
+      "id": "ARCH-A1-R1-E1",
+      "status": "verified_fixed",
+      "evidence": [
+        "sage/ARCHITECTURE.md:190",
+        "sage/ARCHITECTURE.md:196",
+        "sage/docs/REQUIREMENTS.md:59"
+      ],
+      "verification": "Static contract check: a repeatably verified local invariant qualifies only within its scope; a joint model-and-prompt change remains provisional; transferable and causal guidance require evidence beyond reviewer assent. Class and rationale are persisted."
+    },
+    {
+      "id": "ARCH-A1-R1-E2",
+      "status": "verified_fixed",
+      "evidence": [
+        "sage/ARCHITECTURE.md:108",
+        "sage/ARCHITECTURE.md:110",
+        "sage/ARCHITECTURE.md:112",
+        "sage/docs/REQUIREMENTS.md:45"
+      ],
+      "verification": "Static trace check: repeated partial worker results require unmet-criterion evidence and a causal hypothesis; unchanged indistinguishable failure cannot receive the same dispatch. Finite allowances force a materially changed plan, preserving user model choices and allowing continued distinct safe strategies."
+    },
+    {
+      "id": "ARCH-A1-R1-E3",
+      "status": "verified_fixed",
+      "evidence": [
+        "sage/ARCHITECTURE.md:186",
+        "sage/docs/REQUIREMENTS.md:50"
+      ],
+      "verification": "Static trace check: initial no-match followed by a known failure cue triggers retrieval before retry. Unchanged cues/generation avoid reload; changed generations trigger status/qualifier revalidation; selected generation and revisions survive recovery."
+    },
+    {
+      "id": "ARCH-A1-R1-S1",
+      "status": "addressed",
+      "evidence": [
+        "sage/ARCHITECTURE.md:237",
+        "sage/docs/REQUIREMENTS.md:44"
+      ],
+      "verification": "Valid authoritative logs can rebuild stale/missing projections; invalid logs pause admission."
+    },
+    {
+      "id": "ARCH-A1-R1-S2",
+      "status": "addressed",
+      "evidence": [
+        "sage/ARCHITECTURE.md:208",
+        "sage/docs/REQUIREMENTS.md:54"
+      ],
+      "verification": "Successful, failed, and stopped terminal runs are eligible when integrity-valid and effects are reconciled; active/unknown-effect runs are excluded."
+    }
+  ],
+  "errors": [],
+  "suggestions": [],
+  "limitations": [
+    "Design approval only. No deterministic suite, installed workflow, held-out task, quality/cost comparison, or knowledge transfer has been executed by this review.",
+    "Qualitative evidence judgment and cause diagnosis must still prove useful and consistent in forward tests.",
+    "Requested critic placement is recorded; effective model/effort and spend are not independently observed.",
+    "External source claims were not independently revalidated; the supplied live collaboration schema is the authority for the reviewed tool semantics."
+  ],
+  "next_action": "Begin the verification builder: implement the verification contracts and offline test entrypoint, freeze scoring anchors and held-out boundaries before treatment outcomes, and return a frozen verification candidate for a separate critic. Do not rewrite active Sage/promotion behavior until verification passes."
+}

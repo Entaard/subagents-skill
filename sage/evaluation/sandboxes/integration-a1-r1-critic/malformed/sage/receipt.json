@@ -1,0 +1,11 @@
+{
+  "schema_version": "sage-install-receipt-v1",
+  "operation": "install",
+  "source_root": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage",
+  "target_root": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed",
+  "installed_files": [
+    "skills/sage/x",
+    "skills/sage/x"
+  ],
+  "files": {}
+}

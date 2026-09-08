@@ -1,0 +1,315 @@
+{
+  "reports": [
+    {
+      "arm": "data-treatment",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-treatment",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-treatment/report.md\", \"run_id\": \"data-treatment\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_data_treatment/numerical_review": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_data_treatment/numerical_review",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-5.6-sol",
+          "task_id": "review"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-treatment/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/promotion-treatment",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/promotion-treatment/report.md\", \"run_id\": \"promotion-live\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_promotion_author": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_promotion_author",
+          "lifecycle": "completed",
+          "requested_effort": "high",
+          "requested_model": "gpt-5.6-sol",
+          "task_id": "repair"
+        },
+        "/root/live_promotion_refuter": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_promotion_refuter",
+          "lifecycle": "completed",
+          "requested_effort": "high",
+          "requested_model": "gpt-6-astra",
+          "task_id": "refute-repair"
+        },
+        "/root/live_promotion_reviewer": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_promotion_reviewer",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-5.6-sol",
+          "task_id": "review-repair"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/promotion-treatment/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/recovery-treatment",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/recovery-treatment/report.md\", \"run_id\": \"catalog-export\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": false,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/controlled/catalog-export-writer": {
+          "effect_status": "unknown",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/controlled/catalog-export-writer",
+          "lifecycle": "idle",
+          "requested_effort": "high",
+          "requested_model": "gpt-6-astra",
+          "task_id": "observe"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/recovery-treatment/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "creative-treatment",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/creative-treatment",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/creative-treatment/report.md\", \"run_id\": \"echo-steps-continuation\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_creative_review": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_creative_review",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-5.6-sol",
+          "task_id": "recheck"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/creative-treatment/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "code-baseline",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-baseline",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-baseline/report.md\", \"run_id\": \"decoder-baseline\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_code_baseline/review": {
+          "effect_status": "none",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_code_baseline/review",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-6-astra",
+          "task_id": "review"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-baseline/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "code-treatment",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-treatment",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-treatment/report.md\", \"run_id\": \"code-treatment\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_code_treatment/review": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_code_treatment/review",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-5.6-sol",
+          "task_id": "review"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/code-treatment/report.md",
+      "matches_delivered_report": true
+    },
+    {
+      "arm": "data-baseline",
+      "command": {
+        "command": [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/installed/sage/bin/sage_state.py",
+          "report",
+          "--run-dir",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-baseline",
+          "--write"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-baseline/report.md\", \"run_id\": \"data-baseline\"}\n",
+        "stderr": ""
+      },
+      "unknown_heading_says_none": true,
+      "untested_heading_says_none": true,
+      "agents": {
+        "/root/live_data_baseline/reviewer": {
+          "effect_status": "reconciled",
+          "effective_effort": "unknown",
+          "effective_model": "unknown",
+          "fork_turns": "none",
+          "handle": "/root/live_data_baseline/reviewer",
+          "lifecycle": "completed",
+          "requested_effort": "xhigh",
+          "requested_model": "gpt-6-astra",
+          "task_id": "review"
+        }
+      },
+      "report_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/report-copies/data-baseline/report.md",
+      "matches_delivered_report": true
+    }
+  ],
+  "precreation_failure": {
+    "command": {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/installed/sage/bin/sage_state.py",
+        "append",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/failed-dispatch-copy",
+        "--event",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/dispatch-failure-result.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"code\": \"invalid_transition\", \"message\": \"delegated result needs its recorded agent request\", \"ok\": false}\n"
+    },
+    "exact_original_copy_unchanged": true,
+    "task": {
+      "completion": "Evidence-linked findings and explicit release with terminal lifecycle",
+      "dependencies": [
+        "build"
+      ],
+      "effect": "read",
+      "fork_turns": "none",
+      "id": "review",
+      "inputs": [
+        "prompt.txt",
+        "checks.json",
+        "work/index.html",
+        "evidence/browser-attempt-1/observations.json"
+      ],
+      "objective": "Independently review frozen artifact and primary evidence against original acceptance",
+      "owner": "/root/live_creative_treatment/review",
+      "requested_effort": "xhigh",
+      "requested_model": "gpt-5.6-sol",
+      "returns": [
+        "independent findings"
+      ],
+      "revision": 1,
+      "risk": "read-only",
+      "scope": [
+        "work/index.html",
+        "evidence",
+        "inputs"
+      ],
+      "verification": "review findings checked by coordinator"
+    },
+    "original_plan_limits": [
+      1
+    ],
+    "scope": "Observed creative admitted read-review has no native handle after failed spawn. No synthetic agent request was created; a truthful failed/no-effect result is rejected."
+  },
+  "historical_locator": {
+    "event": "creative original e-6",
+    "expected": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "preserved_copy_sha256": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "assessment": "Working-path locator now points to repaired candidate. Old bytes remain preserved and explicitly linked by final report; historical locator drift is a nonblocking evidence navigation limitation, not lost evidence or immutable-input violation."
+  },
+  "scorer_method_correction": "Initial record-inspection treated arm-relative locators as unresolved; corrected resolution using explicit arm root. All such hashes match. No false missing-file finding is issued."
+}

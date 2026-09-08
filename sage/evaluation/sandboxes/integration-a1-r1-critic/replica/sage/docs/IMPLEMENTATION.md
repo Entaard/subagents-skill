@@ -1,0 +1,209 @@
+# Sage implementation log
+
+This is an append-only build narrative. Statements in earlier sections that a helper, installer, promotion module, or broad gate is “future,” “missing,” or “unrun” describe that historical wave only; the current integration state is recorded in the final section and `STATUS.json`. Historical critic outcomes and evidence are not rewritten into current claims.
+
+## sage-a1 round 1 — main Sage
+
+Scope: main `sage` skill, its run-state helper, and focused regressions. The knowledge helper, `sage-promote` rewrite, installer/generator cutover, legacy quarantine, and live forward evaluation remain later dependency-ordered modules.
+
+### Candidate
+
+- `scripts/sage_state.py` implements the frozen dependency-free CLI: init, atomic validated single/batch append, validation, hash-bound projection, advisory resume, and derived report.
+- `skills/sage/SKILL.md` is an explicit-only instruction spine. Its focused run, delegation, verification, recovery, and state references cover observable excellence criteria, adaptive zero-agent orchestration, current live collaboration semantics, capability-first routing priors, one-writer handling, independent review, cause-based replanning, honest closure, and installed helper resolution.
+- `tests/test_state.py` records regressions found while reconciling recovery and immutable-history behavior.
+- D-019 documents the one minimal post-freeze interface clarification: an unknown task result can be reconciled once by a later evidence-bearing result for the same task revision. Both events remain immutable.
+
+The helper is intentionally several hundred lines rather than a framework: strict JSON parsing, the full event vocabulary, reference/transition validation, projection, and six CLI commands account for its size. It has no third-party dependencies and exposes no scheduler, semantic grader, authority engine, or physical lease claim.
+
+### Observations and repairs
+
+The first frozen state run passed 7 of 9 tests. It rejected a pre-admission task refinement that legitimately retained its revision, and it allowed a later plan to expand a previously reached revision bound. Both were repaired from frozen fixture evidence; the next run passed 9 of 9.
+
+A read-only recovery audit then found and reproduced these additional issues before submission:
+
+- snapshot repair compared only the event digest and could trust tampered projected fields;
+- resume admission did not include an unresolved root-owned effectful task;
+- completed historical readers could be over-conservatively treated as an active barrier;
+- admission could name a stale plan;
+- attempt allowance was present but unenforced;
+- an old delegated handle could be reused across task revisions;
+- plan projection reset carried task outcomes;
+- closure could omit current-plan tasks never admitted;
+- an unknown result had no append-only reconciliation path.
+
+The implementation now compares a snapshot to the whole freshly derived projection, binds handles to task revision, requires current-plan admission, enforces the current committed attempt limit, carries only same-revision task state, checks every current-plan task at closure, distinguishes released historical readers during resume admission, and implements D-019. Five focused regressions pass.
+
+### Evidence
+
+Scoped command shape follows `evaluation/README.md`, with `PYTHONDONTWRITEBYTECODE`, `SAGE_EVALUATION_SANDBOX`, and `TMPDIR` all confined beneath `sage/evaluation/sandboxes/state-wave`.
+
+- Frozen state contract: 9 tests passed, 0 failed, 0 errors.
+- Focused recovery/transition regressions: 5 tests passed, 0 failed, 0 errors.
+- The package-local tiny example executed all five phases successfully: init, seven-event atomic batch append, snapshot, terminal validation, and report.
+- Dependency-free checks passed frontmatter shape, explicit-only metadata, nine local Markdown links, Python syntax, and STATUS JSON. The bundled `quick_validate.py` could not start because PyYAML is absent; this wave did not install it.
+- No knowledge, installer, broad red-mode, installed-package, paired comparison, or live behavioral pass is claimed in this module.
+
+### Deterministic limits
+
+The state helper validates recorded syntax, references, lifecycle facts, immutable history, and completion preconditions. It cannot prove that evidence is persuasive, a criterion expresses the user’s true intent, a worker is independent, a model actually matches the requested identity when the tool omits it, an actor holds authority, or a filesystem writer lease exists. Root judgment and actual tool/artifact observations remain required.
+
+Source execution uses `sage/scripts/sage_state.py`; the future installer must place it at `<target-root>/sage/bin/sage_state.py` and install only `<target-root>/skills/{sage,sage-promote}` plus the two helper paths declared in the frozen contract. This round does not call the legacy generator or installer and does not claim the installed layout works yet.
+
+## sage-a1 round 2 — deterministic repair
+
+The independent round-1 critic failed all dimensions except simplicity/context efficiency and retained six error groups in `docs/reviews/sage-a1-r1.json`. Its exact inputs and outputs remain unchanged under `evaluation/sandboxes/sage-a1-r1-critic/`. This repair used those failures as evidence; it does not overwrite their scores or claim they were independently closed.
+
+### Reproduced round-1 failures
+
+The critic observed: resume admitted a delegated writer without a terminal handle and a root writer with unknown effects; contradictory failed/unknown results had no reconciliation route; two handles could attach to one assignment; late old-revision results marked a current revision passed; malformed common/enum values escaped structured rejection; graph expansion failed while a later `initial` retry passed; amendment correction links bypassed validation; and reports omitted terminal status, untested evidence, failed checks, and accepted residuals.
+
+### Repairs
+
+- Validation, dependency admission, terminal closure, and resume now share the same `released` rule. A small `execution_facts` replay binds results, requests, observations, and current tasks by `(task_id, revision)`; projection uses those revision-specific facts rather than task labels alone.
+- Each task revision has one assignment. A native handle is preserved exactly and can be reused after a fully released terminal assignment; the new request rebinds later observations, so an old completion cannot release the new work. D-021 separates opaque native handles such as `/root/scout` from Sage artifact IDs.
+- Known outcomes with unknown effects are rejected at ingestion. An accepted `unknown/unknown` result can be reconciled once by an evidence-bearing known result. Result and terminal-observation order is immaterial.
+- Resume checks only admitted effectful work. Merely planned root work and released historical readers do not invent a barrier; an admitted unreleased root/delegated effect does.
+- Common version/sequence/timestamp and payload enum values are type-checked before use. Calendar-invalid UTC timestamps, unhashable enums, malformed live-agent rows, duplicate live handles, duplicate keys, and nonfinite numbers receive structured exit-2 errors. Existing derived bytes remain unchanged on rejection.
+- Pure graph expansion is an operational change; only revision 1 may use `reason: initial`. Correction links are checked before type-specific transitions, including amendment links.
+- D-020 allows truthful failed/stopped closure with safely never-admitted tasks still planned, while completed closure requires every current task's own result. Completed criterion evidence must be associated in the observation and a passed check must cite evidence. Differently named check supersession remains root judgment.
+- Reports now show terminal outcome/scope, passed and unfinished tasks, observations, inferences, unknown and untested evidence, failed and untested checks, open findings, accepted limitations, human items, and a terminal next action.
+- Focused tests resolve their output root from `SAGE_EVALUATION_SANDBOX`. Installed recovery guidance now includes the observed `list_agents` normalization (`agent_name`, running/completed status shape, null effective identity) without adding a host adapter.
+
+### Round-2 evidence before independent review
+
+- Frozen product-state slice: 9 tests passed, 0 failures, 0 errors.
+- Normal focused regressions: 14 tests passed, 0 failures, 0 errors. These cover both writer fact orders, unknown reconciliation, root planned/released controls, assignment reuse, canonical `/root/...` handles, stale revisions, late old results and reconciliation, wrong input types, graph/retry transitions, correction links, stopped/completed scope, completion associations, and report contents.
+- The unmodified round-1 critic probe source was executed with a synthetic `__file__` pointing to fresh `evaluation/sandboxes/state-wave-r2-critic/`, so it wrote no round-1 critic artifact. Its retained `results.json` shows the prior controls repaired: unreleased writer admission false; planned/released root admission true; two-assignment rejection; current revision planned after late old result; four malformed common cases exit 2; dangling correction rejected; graph addition accepted; later initial rejected; evidence associations rejected; negative report facts present; tiny example init/append successful.
+- The critic's `failed/unknown` fixture now fails at the contradictory first result, as explicitly permitted by its expected outcome. A separate normal regression proves the supported `unknown/unknown` → evidence-bearing `failed/reconciled` append path.
+
+No promotion helper, promotion skill, installer, broad product red gate, installed execution, paired comparison, or live task-quality pass is claimed. Fixture lifecycle checks still do not prove physical lease enforcement, actual authority, semantic evidence quality, or effective model identity when the tool omits it.
+
+## sage-a1 round 3 — temporal release and UTF-8 boundary
+
+The independent round-2 critic retained two error groups and its scores in `docs/reviews/sage-a1-r2.json`. Its exact failing inputs, stdout, stderr, snapshots, and append attempts remain unchanged under `evaluation/sandboxes/sage-a1-r2-critic/`. The supplemental `evaluation/sandboxes/sage-a1-r2-replay/` directory was later overwritten by a scratch replay and is not original round-2 evidence; `evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json` records that limitation and current hashes. No lost bytes are reconstructed. Round 2 independently verified E2, E4, E5, and E6 fixed and left E1/E3 open.
+
+### Initial failures
+
+The new focused assertions were first run against the round-2 helper. Sixteen tests ran with eight assertion failures: resume incorrectly allowed admission after each of `active`, `idle`, `interrupted`, and `missing` superseded an early terminal observation before the result; invalid UTF-8 criteria, event, and live-agent files exited 1 with tracebacks; and invalid UTF-8 in a derived snapshot prevented recovery. These observations agree with the retained round-2 critic evidence; they are not relabeled as a pass.
+
+### Repairs
+
+- D-022 defines the missing temporal boundary. Replay keeps the newest provisional assignment observation until a known reconciled result and terminal reconciled observation coexist. It then records immutable task-effect and native-assignment release facts separately, which preserves historical completed readers and permits safe same-handle reuse without borrowing an older assignment's completion.
+- The shared `mark_release` and `record_observation` primitives drive incremental validation and the revision-specific execution replay. Dependency admission, one-writer admission, closure, handle reuse, and resume consume those replay facts rather than independently interpreting task labels or the first terminal lifecycle.
+- `read_json` now reads bytes, converts file I/O failures to `io_error`, and converts only UTF-8 decoding failures to structured `invalid_json`. Existing JSON parser errors remain structured. `bound_snapshot` treats that contract error as a disposable projection failure and rebuilds from a valid authoritative log; `read_events` continues to reject a non-UTF-8 log before any snapshot write.
+- Installed `state.md` and `recovery.md`, the source contract, architecture checkpoint, and D-022 all state the same conditional release and UTF-8 behavior. The 25-line instruction spine did not grow.
+
+The helper is 657 source lines after this targeted repair. Its size comes from the frozen full event vocabulary, strict transition/reference checks, atomic projection/append commands, and reports; the temporal repair adds two small replay primitives, not a scheduler or protocol framework.
+
+### Round-3 evidence before independent review
+
+- Frozen product-state slice: 9 tests passed, 0 failures, 0 errors under `evaluation/sandboxes/state-wave-r3/`.
+- Normal focused regressions: 16 tests passed, 0 failures, 0 errors. The two additions cover all four terminal-then-unknown lifecycle orders, blocked resume and append, fresh terminal recovery, the already-correct result/observation orders and same-handle reuse, invalid UTF-8 for criteria/event/live-agent/log, derived snapshot repair, and byte preservation.
+- The unmodified round-2 critic probe source was executed with a synthetic `__file__` rooted at fresh `evaluation/sandboxes/state-wave-r3-critic/`. Its retained `results.json`, `contracts.txt`, and `regressions.txt` show 9 frozen and 16 normal tests green. Twenty-two explicit post-run assertions checked all temporal, handle-reuse, and UTF-8 outcomes: each unsafe resume is false, each second-writer append returns `writer_busy`, the fresh terminal control validates, malformed JSON inputs return `invalid_json`/exit 2, and snapshot repair exits 0.
+- The package-local executable example ran init, batch append, snapshot, terminal validation, and report with exit codes `[0,0,0,0,0]`; stdout/stderr and the report are retained under `evaluation/sandboxes/state-wave-r3/cli-example/`.
+- Python syntax, STATUS JSON, eight active skill Markdown files, and all local links pass. `git diff --check -- sage` is clean. The bundled skill validator still cannot start because its external `yaml` module is absent; this source wave did not install a dependency or claim that validator passed.
+
+No independent round-3 score or error closure is claimed. The deterministic fixtures do not prove semantic evidence quality, authority, physical lease enforcement, effective model identity, installed layout, live task outcomes, promotion behavior, or model/cost savings. Promotion, knowledge helper, and installer work remain deliberately outside this wave.
+
+## promotion-a1 round 1 — immutable promotion and selective retrieval
+
+This candidate adds only the frozen promotion module: the dependency-free `scripts/sage_knowledge.py` CLI, the explicit-only `sage-promote` skill and its package-local operating references, focused public-CLI regressions, and the narrow Main Sage retrieval reference. It does not change `sage_state.py`, install files, invoke a legacy generator, or claim an installed or live result.
+
+### Observed failures before repair
+
+The untouched frozen knowledge slice initially ran 10 tests with 10 errors because the contracted helper was absent; stdout and stderr are retained under `evaluation/sandboxes/promotion-wave-r1-red/`. Each added boundary was then observed failing through the public CLI before its repair: empty retrieval could not round-trip into `knowledge.selected`; retrieval-policy changes did not change the cue fingerprint; a stale staged snapshot could activate over a newer pointer; reused `(stable ID, revision)` bytes could conflict; a rollback made every later correction a dead end; an extra empty generation path escaped validation; argparse emitted non-JSON errors; a rehashed failed-refutation generation could activate; and global lineage conflicts or dangling parents could escape store validation. The corresponding `*-red/` and `*-green/` evidence directories are preserved under `evaluation/sandboxes/`.
+
+### Helper behavior
+
+- `validate`, `retrieve`, `stage`, `activate`, and `rollback` use strict UTF-8/JSON, explicit paths, structured errors, and the frozen state helper's native-handle and terminal-run primitives. The missing-pointer state is the reserved generation string `none`, so empty retrieval can be persisted unchanged into run state and cannot collide with a real generation.
+- Retrieval normalizes and bounds cues, binds `include_non_supported` into the fingerprint, checks recognizer and qualifier data, returns actionable exact revisions, and excludes non-supported knowledge unless explicitly requested. Feedback and selection frequency are discovery inputs only; Main Sage never mines raw closed runs or promotes itself.
+- Staging validates every completed, failed, or safely stopped source and each recorded reference. Active, malformed, non-UTF-8, unknown-effect, or missing-evidence inputs fail before generation publication. Passed role fields remain structural facts: the coordinator must observe three genuinely separate live behaviors.
+- Supported scoped facts, transferable heuristics, and causal guidance have different recorded predicates. Repetition, approval, and confounded model-plus-prompt outcomes do not substitute for those predicates. Material unresolved counterevidence remains contested; correction, refutation, and intentional retirement preserve the stable ID and retained history; disuse is not a retirement basis.
+- Each staged generation is a complete immutable directory whose manifest binds its parent, exact sorted paths and hashes, and role/action metadata. Normal activation requires both the target's staged parent and the live expected pointer to match. Rollback changes only the pointer. Across every retained generation, revision bytes are unique and the revision chain is contiguous: after rolling revision 2 back to a safe revision-1 snapshot, a repair can stage revision 3 from that snapshot without reactivating revision 2 or reusing its identity.
+
+These expected-pointer checks assume one cooperative promotion writer. They detect a changed pointer and stale staged base; they do not implement a physical filesystem lease or transactional defense against a hostile writer.
+
+### Executable skill and example
+
+The 19-line `sage-promote` spine is explicit-only and routes details to two installed references. It qualifies bounded terminal sources; permits a small no-change path without a ceremonial team; separates the candidate author, adversarial refuter, reviewer, and landing coordinator; explains the role-routing priors; applies evidence-class gates; and gives complete stage, validation, activation, rollback, and reporting instructions. The package includes a complete proposal and every nested schema needed after installation.
+
+The documented proposal was exercised in `evaluation/sandboxes/promotion-wave-r1-doc-example/`: nine public commands validated an empty store, staged and activated generation `g-1`, retrieved one actionable match, staged and activated `g-2`, rolled back to `g-1`, and validated two retained generations. All nine exited 0; `results.json` contains argv, stdout, stderr, match assertions, the active rollback pointer, and retained-`g-2` assertion.
+
+### Round-1 evidence before independent review
+
+- Frozen product-knowledge slice: 10 tests passed, 0 failures, 0 errors under `evaluation/sandboxes/promotion-wave-r1-final/contracts/`.
+- Focused public-CLI regressions: 10 tests passed, 0 failures, 0 errors under `evaluation/sandboxes/promotion-wave-r1-final/regressions/`. The suite covers empty selection and first activation, policy-sensitive fingerprints, stale-base activation, safe post-rollback revision 3 plus revision-collision rejection, exact path integrity, structured argument errors, failed/stopped sources, every revision action and retrieval status, non-disuse retirement, rehashed failed refutation, and global lineage/parent validation.
+- Unchanged shared-state controls: the frozen state slice passed 9 tests and the focused state regressions passed 16 tests under `evaluation/sandboxes/promotion-wave-r1-final/state-contracts/` and `state-regressions/`.
+- Dependency-free checks passed two Python source compilations, five JSON examples, eight local Markdown links, frontmatter, explicit-only metadata, and `git diff --check -- sage`; outputs are retained under `evaluation/sandboxes/promotion-wave-r1-final/static/`.
+- The bundled skill `quick_validate.py` could not start because the environment has no `yaml` module. Its traceback is retained under `evaluation/sandboxes/promotion-wave-r1-final/validator/`; this wave installed no dependency and does not relabel that check as passed.
+
+No independent promotion score, critic error closure, semantic evidence proof, actual actor independence, physical writer lease, installed-package behavior, model placement, token/cost saving, paired comparison, or live task-quality result is claimed.
+
+## promotion-a1 round 2 — reference, transition, time, and pointer repair
+
+The independent round-1 critic failed promotion with four retained error groups and scores in `docs/reviews/promotion-a1-r1.json`. Its scripts and evidence directories were not rerun or modified. Four new public-CLI methods first ran with four failures under `evaluation/sandboxes/promotion-wave-r2-red/`, reproducing each reported cause before repair.
+
+### Narrow repairs
+
+- Reference closure now checks supported `comparison` as well as `corroboration` and causal evidence. Bare event/evidence IDs and `events.jsonl#ID` are documented local forms; a URI resolves only when its exact locator was hash-bound in the selected source. An arbitrary URI fragment can no longer alias a local event.
+- A retained record can enter `retired` only through the `retire` action and its intentional basis/reason. A revision-1 `create` may still import historical retired knowledge, preserving the frozen import behavior. The revision-link diagnostic now correctly names the greatest retained prior revision.
+- Creation and review UTC strings are validated as before but compared as parsed instants. A later fractional review and equal instants with different fractional precision pass; an earlier fractional review fails without publication.
+- `current.json` symlinks are rejected before the missing-path empty-store branch, so a dangling symlink is not mistaken for `none`. A truly absent pointer remains a valid empty store.
+
+Round-1 suggestion S1 is documented without weakening immutable-history checks. Normal rollback handles an integrity-valid bad landing and retains both generations. If any retained bytes or the pointer are corrupt, every normal mutation fails unchanged; the operator preserves the evidence and needs a separately designed recovery. Promotion does not delete the damaged history or fabricate a repair.
+
+### Round-2 evidence before independent review
+
+- Targeted red: 4 tests ran with 4 failures at the four critic boundaries. Targeted green: the same 4 methods passed. Positive controls cover valid local comparison and corroboration, an exact hash-bound external locator, a proper retirement, a historical retired create, later/equal/earlier fractional chronology, and a true empty store.
+- Frozen product knowledge: 10 tests passed, 0 failures, 0 errors under `evaluation/sandboxes/promotion-wave-r2-final/contracts/`.
+- Focused public-CLI regressions: 14 tests passed, 0 failures, 0 errors under `evaluation/sandboxes/promotion-wave-r2-final/regressions/`.
+- Unchanged shared state: 9 frozen tests and 16 focused regressions passed under `evaluation/sandboxes/promotion-wave-r2-final/state-contracts/` and `state-regressions/`.
+- The documented promotion flow ran 9 commands in a fresh store under `evaluation/sandboxes/promotion-wave-r2-doc-example/`; all exited 0, returned the actionable revision-1 match, rolled back to `g-1`, and retained `g-2`.
+- The offline harness passed 11 tests. Dependency-free checks passed Python syntax, five JSON examples, eight local links, frontmatter, explicit-only metadata, and diff whitespace. The bundled skill validator again could not start because PyYAML is absent; its fresh traceback is retained and is not called a pass.
+
+No round-1 error is self-declared verified fixed. No independent round-2 score, installed integration, live role independence, semantic evidence judgment, corrupt-history recovery, model placement, usage, cost, or task-quality result is claimed.
+
+## promotion-a1 round 3 — exact accepted-precision chronology
+
+The independent round-2 critic verified E1, E2, and E4 fixed and retained only E3: Python's datetime conversion discarded accepted fractional digits beyond microseconds. Its review and evidence remain unchanged in `docs/reviews/promotion-a1-r2.json` and `evaluation/sandboxes/promotion-a1-r2-critic/`.
+
+One new public-CLI regression first passed later `.5000001` → `.5000002` and numerically equal `.500000100` / `.5000001` controls, then failed because earlier `.5000002` → `.5000001` staged successfully. The red result is retained under `evaluation/sandboxes/promotion-wave-r3-red/`.
+
+The repair removes only the lossy conversion from knowledge-record chronology. After the shared validator accepts each UTC timestamp, the helper compares its fixed-width whole-second portion and its arbitrary-length fractional digits with trailing zeros normalized. This preserves the accepted format, treats decimal-equivalent instants equally, and uses no float or bounded-precision conversion. The same three controls pass under `evaluation/sandboxes/promotion-wave-r3-green/`.
+
+Final scoped evidence before independent review:
+
+- Frozen knowledge: 10 tests passed; focused public-CLI knowledge regressions: 15 passed.
+- Unchanged state: 9 frozen and 16 focused tests passed.
+- The documented promotion flow again completed 9 of 9 commands with an actionable match, rollback to `g-1`, and retained `g-2`.
+- The offline harness passed 11 tests. Python syntax, five JSON examples, eight local links, frontmatter, explicit-only metadata, and diff whitespace passed.
+- The bundled validator again could not import absent PyYAML. Its fresh traceback is retained; no dependency was installed and no validator pass is claimed.
+
+No prior finding is self-declared closed and no round-3 score, installed behavior, live independence, semantic evidence quality, model placement, usage, cost, or task-quality result is claimed.
+
+## integration-a1 round 1 — installed package and legacy cutover
+
+This candidate implements only the frozen integration boundary. The source-only `scripts/sage-lifecycle.py` backs `install.sh` and `uninstall.sh`; it does not become part of the installed package. Install accepts an explicit `--target-root` and optional `--source-root` defaulting to the `sage/` source directory. Uninstall accepts only the explicit target.
+
+### Lifecycle behavior
+
+- Source preflight requires both complete active skill packages and the two helper scripts. Source files, target roots/components, and the receipt must be regular, non-symlinked objects at canonical allowlisted paths.
+- Before mutation, install validates the whole source set, target/receipt safety, every owned hash, every exact destination conflict, and retired owned paths. A target beneath `sage/evaluation/sandboxes` is intentionally valid; overlap is rejected only when it would contain the source root or collide with shipped `skills/` or `scripts/` paths.
+- The receipt binds its exact target and records sorted ownership plus source, installed, and inherited installed SHA-256 values. Fresh unowned destinations and locally edited/replaced owned files cause a conflict without overwriting either.
+- Update copies the new allowlist and removes a retired owned file only when its prior hash still matches. Uninstall removes only unchanged receipt-owned files, retains modified/replaced paths, reports both sets, removes the receipt, and leaves all directories and runtime state unowned.
+- Installed helper modes were exercised through their public CLIs: state `init`, `snapshot`, `report`, and `resume`; knowledge `stage`, `activate`, `retrieve`, a revision-2 stage/activate, and rollback to the retained revision-1 generation. Installed Markdown links resolve entirely within the copied packages.
+
+### Legacy migration audit
+
+The selected legacy baseline is commit `c816a6250d0df74e6cbfa9b2a672a2fc15110deb`. A path-scoped `git archive` extraction preserved 186 original files beneath `archive/legacy/`; a second extraction compared equal before active removal, and `archive/legacy/SHA256SUMS` verifies all 186 bytes. The selection includes the old policies, runtime, artifacts, libraries, knowledge seed, phase documents/evaluation, scripts/tests, copied active references, and the baseline originals of the previously deleted `promotion-contract.md`, `source-manifest.json`, and `workflow.md`.
+
+Only those known legacy paths were removed from active locations. Mixed rebuilt directories remained in place. The archived generator and old lifecycle are inert: active wrappers invoke only `scripts/sage-lifecycle.py`, the active skill trees contain no source manifest or copied legacy policy, and the installer rejects such a manifest if reintroduced.
+
+### Integration evidence before independent review
+
+- The original five installer contract tests and eleven added public regressions pass together: 16 tests, zero failures or errors under `evaluation/sandboxes/integration-wave-r1-green7/`. Earlier red and repair checkpoints remain separate and are not relabeled.
+- The complete historically named `red` gate passed 77 tests with zero failures, errors, or skips under `evaluation/sandboxes/integration-wave-r1-final4/`: 46 evaluation/product tests plus the unchanged 16 state and 15 knowledge regressions. The runner records `live_trials_run: false` and `network_used: false`.
+- Harness-only mode separately passed 11 tests under `evaluation/sandboxes/integration-wave-r1-harness/` before the final installed rollback/link additions; those same harness tests are included in the final 77-test gate.
+- Dependency-free syntax, JSON, active local-link, explicit-only metadata, archive-hash, and active-legacy-absence checks are recorded under `evaluation/sandboxes/integration-wave-r1-static/`. The bundled `quick_validate.py` cannot import absent PyYAML; no dependency was installed and no validator pass is claimed.
+
+This is deterministic and sandbox integration evidence only. It does not prove live task quality, semantic evidence judgment, actual role independence, effective model/effort, token usage, prices, cost savings, filesystem atomicity under every crash/race, or recovery from corrupt retained knowledge history. No live or paired trials ran, and no integration score is assigned by the builder.

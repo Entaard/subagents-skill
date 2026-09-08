@@ -1,0 +1,5 @@
+N1. Entire dataset is fictional. Each row is a disjoint group; a visitor appears once. Completed means reaching the final exhibit station during that visit.
+N2. Staff selected the sign; there was no random assignment. The new sign was used more often on busy sessions. Quiet/busy labels were logged before opening each session.
+N3. M09's visitor counter worked. Its completion counter export was lost; no alternative count exists. All other fields were transcribed and checked against the fictional session tally.
+N4. Two weeks are available. Staffing and route length were held constant according to the shift notebook, but visitor mix, crowding and staff sign choice were not controlled. There are no visitor-level records.
+N5. The decision is whether to schedule a small, reversible new-sign pilot for another exhibit weekend; no budget, staffing, safety or public announcement is authorized by this exercise.

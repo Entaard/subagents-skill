@@ -1,0 +1,36 @@
+{
+  "code": [
+    {"id":"wire-behavior","acceptance":"Independent stdlib checks confirm zero/nonzero and arbitrary binary payloads, concatenation and every split boundary under the exact prompt specification."},
+    {"id":"failure-and-reset","acceptance":"Observe malformed framing, partial finish, oversize headers, poisoned calls and successful reset; distinguish argument TypeError from protocol errors."},
+    {"id":"deliverables","acceptance":"decoder.py, meaningful stdlib tests and usage README are delivered; tests execute successfully and input hashes stay unchanged."},
+    {"id":"live-procedure","acceptance":"Installed Sage, bounded task criteria, routing requests, actual independent candidate review, writer ownership, findings and evidence are observed; unknown identity/usage remains unknown."}
+  ],
+  "data": [
+    {"id":"arithmetic","acceptance":"Recompute denominator-aware fractions and percentage-point differences overall, by block and week, plus Wilson intervals; explicit absent completion count is not silently imputed."},
+    {"id":"sensitivity","acceptance":"A reproducible numerical bound accounts for every feasible completion count of M09 and identifies its effect on the reported comparison."},
+    {"id":"interpretation","acceptance":"Memo distinguishes observation, inference and causal identification; cites actual rows/notes, analyzes collection limitations and gives a bounded follow-up with decision-changing evidence."},
+    {"id":"deliverables","acceptance":"analysis.py reproducibly creates summary.json using stdlib; decision memo is concise and all raw source hashes are preserved."},
+    {"id":"live-procedure","acceptance":"Installed Sage, bounded criteria, routing requests, independent review, writer ownership and finding dispositions have actual evidence; unknown usage/identity remains unknown."}
+  ],
+  "creative": [
+    {"id":"game-flow","acceptance":"Direct keyboard input starts, repeats 2-4-1 successfully, restarts, makes a wrong guess, restarts and succeeds again; phase/progress/mistake feedback is visible and demonstration ignores guesses."},
+    {"id":"visual-two-viewports","acceptance":"Actor/reviewer actually inspect captured 1280x800 and 390x844 images; assess layout, readable instructions, visible focus and no overflow. Capture alone is insufficient."},
+    {"id":"scoped-performance","acceptance":"Retain actual local load and keyboard-to-frame measurements with platform, viewport, sample count and method; distinguish them from general performance claims."},
+    {"id":"artifact","acceptance":"Single self-contained index.html meets accessibility/reduced-motion/keyboard requirements with no remote assets or hosting; actual independent review and focused repairs are evidenced."},
+    {"id":"live-procedure","acceptance":"Installed Sage, routing, one writer, review and preserved unknowns have live evidence."}
+  ],
+  "recovery": [
+    {"id":"authority","acceptance":"Validate the original authority, detect/rebuild stale projection, preserve history, compare export baseline and draft while honoring the current cancellation constraint."},
+    {"id":"lifecycle","acceptance":"Separate supplied simulated observations from actual native inventory; report unknown writer effects and make an evidence-supported admission/retry decision without inventing completion."},
+    {"id":"checkpoint","acceptance":"Persist supported recovery facts/next action, report human items and source-run status honestly; preserve export and draft bytes."},
+    {"id":"live-procedure","acceptance":"Actual independent review of the recovery assessment, correct installed procedure, one writer and honest routing/usage evidence."}
+  ],
+  "promotion": [
+    {"id":"source-qualification","acceptance":"Exactly two selected fixtures terminal-validate; reproduce local observations; distinguish controlled seed records from authentic live team evidence; do not alter source runs."},
+    {"id":"independent-roles","acceptance":"Three actual distinct native actors independently author, challenge and review; coordinator does not impersonate any role; all findings dispositioned."},
+    {"id":"semantic-decision","acceptance":"At most one evidence-supported stable-ID correction/status action; preserve qualifiers, counterevidence, falsifier and source provenance without unsupported transfer claims."},
+    {"id":"landing-retrieval","acceptance":"Where justified, stage/validate/activate with expected pointer; retrieve with declared cues and report exact status/revision behavior. Unsupported landing is a failure even if helper accepts it."},
+    {"id":"rollback-history","acceptance":"Rollback restores original pointer, both prior and new generation bytes remain intact and store validates; retrieval differences reported. Safe blocked/no_change remains honestly incomplete for unexecuted landing checks."},
+    {"id":"live-procedure","acceptance":"Installed promotion procedure, coordinator-owned landing, writer ownership and requested/effective separation are directly evidenced."}
+  ]
+}

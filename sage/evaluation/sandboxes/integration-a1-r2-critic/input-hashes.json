@@ -1,0 +1,15 @@
+{
+  "sage/install.sh": "56ebb56d909559a6d7a2976b9c0d9e99d777b0eda665359c84d335ba98521aeb",
+  "sage/uninstall.sh": "e7fdcf9855c9dd3ca52794f63e3423245da60f1fec5334fcb9fd53fdc7374f83",
+  "sage/scripts/sage-lifecycle.py": "7f13656506857854e3b288f9e722da71648028864e5f87a04981de90ade3c911",
+  "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+  "sage/scripts/sage_knowledge.py": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+  "sage/evaluation/tests/test_product_install.py": "0adca1528eccbc043ebbaef0c919a5d718a8f6802837e088c82c8f09852d4829",
+  "sage/evaluation/run_verification.py": "d54038c801b63a342ad99b2c539446ad605b407d8f9b9c8505787d1622b277a5",
+  "sage/evaluation/requirements-trace.json": "f564a90436d15c5a2f7cb9aed140262bb9158939d11a2a1fee77b9a08fe916a0",
+  "sage/README.md": "f763b9da198346e5c59f17e321343cd94c965d53c8fc8e08bdcc8f71cef3291b",
+  "sage/ARCHITECTURE.md": "a254750bd7c169f089ffa4d0765b34335d635efcda541ded66e1c5a81475716f",
+  "sage/docs/DECISIONS.md": "95b6946a241194d798342799919195f100f565b1fb174a9cf835a6568d54c9ed",
+  "sage/docs/IMPLEMENTATION.md": "af451edac7c055e9a01de5844ac5a45211d5a29c04e054f5ff527b6a8cf709df",
+  "sage/archive/legacy/SHA256SUMS": "28b26f134b6bcab2933d60334b9da25ac5414f9fb355a962cfa2b942a88cdbf8"
+}

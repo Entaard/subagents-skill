@@ -1,0 +1,15 @@
+Installed sage_state.py append --events evidence/checkpoint-events.jsonl
+exit 0: {"appended": 9, "last_seq": 22, "ok": true}
+
+Installed sage_state.py snapshot --write
+exit 0: hash-bound snapshot written, terminal null, no agent handles recorded.
+
+Installed sage_state.py validate
+exit 0: {"last_seq": 22, "ok": true, "run_id": "echo-steps", "terminal": false}
+
+Installed sage_state.py report --write
+exit 0: {"ok": true, "report": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps/report.md", "run_id": "echo-steps"}
+
+Native list_agents filtered to /root/live_creative_treatment:
+{"agents":[{"agent_name":"/root/live_creative_treatment","agent_status":"running"}]}
+No reviewer child handle exists. Coordinator terminal lifecycle will be externally observed after final response.

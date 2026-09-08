@@ -1,0 +1,216 @@
+{
+  "kind": "direct owned-headless harness observations",
+  "scope": "one local file navigation and keyboard sequence per viewport, no throttle; wall includes CDP and frame waits; not population performance or monetary cost",
+  "observations": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "loadWallMs": 43.612707999999884,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 28.65337499999987,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nStart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nReady\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nFind your focus.\n\nPress Start to see the three-step pattern.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 32.41100000000006,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "3",
+          "inputToTwoFramesMs": 32.30400000000009,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 30.626541999999972,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 30.74062499999991,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 31.7469159999996,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 31.07837500000005,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 32.507791,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 29.448207999999795,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nYour turn. Echo the pattern.\n\nUse keys 1–4 or the pads. Start with the first signal.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-1"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 32.079625000000306,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nYour turn. Echo the pattern.\n\nUse keys 1–4 or the pads. Start with the first signal.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-2"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 28.112041999999747,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-2"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 32.13179199999922,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-3"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 33.39087500000005,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-4"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 29.827541999999994,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-4"
+        }
+      ],
+      "screenshot": "viewport-1280x800.png",
+      "metrics": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "nav": [
+          {
+            "duration": 6.200000002980232,
+            "domContentLoadedEventEnd": 5.700000002980232,
+            "loadEventEnd": 6.200000002980232
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loadWallMs": 7.229957999999897,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 30.097917000000052,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nStart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nReady\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nFind your focus.\n\nPress Start to see the three-step pattern.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 32.64233299999978,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "3",
+          "inputToTwoFramesMs": 32.739042000000154,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 32.119542000000365,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 32.566749999999956,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 32.10850000000028,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 30.85583399999996,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 32.43904199999997,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 27.352499999999054,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nYour turn. Echo the pattern.\n\nUse keys 1–4 or the pads. Start with the first signal.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-1"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 32.5575000000008,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nYour turn. Echo the pattern.\n\nUse keys 1–4 or the pads. Start with the first signal.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-2"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 31.75683299999946,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-2"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 31.822291000000405,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-3"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 31.613792000000103,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-4"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 32.112708999999086,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo",
+          "focus": "pad-4"
+        }
+      ],
+      "screenshot": "viewport-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "nav": [
+          {
+            "duration": 4.200000002980232,
+            "domContentLoadedEventEnd": 3.9000000059604645,
+            "loadEventEnd": 4.200000002980232
+          }
+        ]
+      }
+    }
+  ]
+}

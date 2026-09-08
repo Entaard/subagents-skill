@@ -1,0 +1,76 @@
+{
+  "checks": {
+    "all_landing_cli_exits_zero": true,
+    "original_pointer_bytes_restored": true,
+    "source_run_bytes_unchanged": true,
+    "original_store_bytes_restored": true,
+    "both_retained_generations_byte_identical": true,
+    "exact_two_retained_generations": true,
+    "before_after_retrieval_exactly_equal": true,
+    "unchanged_cues_fingerprint": true,
+    "actual_cues_bytes_unchanged": true,
+    "during_revision_two_supported": true,
+    "after_revision_one_supported": true,
+    "new_generation_bound_to_original_parent": true,
+    "record_assembly_preserved": true,
+    "retrieved_scope_and_counterevidence_intact": true,
+    "frozen_artifacts_unchanged": true,
+    "csv-old_terminal_validation": true,
+    "csv-new_terminal_validation": true,
+    "final_observations_match_hash_bound_inputs": true,
+    "old_falsifier_fired": true,
+    "parser_counts_three_for_every_supplied_row": true
+  },
+  "pointer": {
+    "generation_id": "controlled-prior",
+    "manifest_sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+    "v": 1
+  },
+  "pointer_sha256": "5865416e744707ae21c84917d7138511eb136674d1546c47d94a9c2686dcf78d",
+  "generation_hashes": {
+    "state/knowledge/generations/controlled-prior/index.json": "002ae23273650b86744af9262dbf6100cd2b0eb7a08dc1caae85b8e29129a388",
+    "state/knowledge/generations/controlled-prior/manifest.json": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+    "state/knowledge/generations/controlled-prior/records/museum-csv-field-count.json": "69980f4f353b123935dab1e78c074bf4508dadeda351e8228a4ab21d2c8cf643",
+    "state/knowledge/generations/promotion-live-v2/index.json": "aa8b3798941e18d7f9511bda63b95005276eea259abe24fbcf7d09a3019ead38",
+    "state/knowledge/generations/promotion-live-v2/manifest.json": "264f60a52810a91d650136b58629c547bbd998d8c5899e11f232c051bb5fa6e1",
+    "state/knowledge/generations/promotion-live-v2/records/museum-csv-field-count.json": "2bb339dec080e4988a01ac4506f460244517169e52b94002b29e06c48d71df0b"
+  },
+  "final_proposal_sha256": "13d91f49429ad82bbbe0a888e24c1e02b372b1975f07457a2b4ed07c8a1d49e9",
+  "rechecks": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old",
+        "--terminal"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-old\", \"terminal\": true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new",
+        "--terminal"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-new\", \"terminal\": true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/observe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"old\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A1,Map room,4\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A2,North hall,9\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ],\n  \"new\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A3,\\\"Maps, early years\\\",6\",\n      \"plain_split_fields\": 4,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A4,\\\"He said \\\"\\\"hello\\\"\\\"\\\",2\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  ]
+}

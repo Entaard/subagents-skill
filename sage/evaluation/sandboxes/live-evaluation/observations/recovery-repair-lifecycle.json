@@ -1,0 +1,14 @@
+{
+  "native_handle": "/root/live_recovery_treatment",
+  "operation": "followup_task",
+  "recorded_after_dispatch": {
+    "current_time": "2026-09-07 22:01:11 UTC"
+  },
+  "scope": "One focused identity-evidence correction then freeze/release for independent recheck",
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:04:34 UTC"
+  },
+  "explicit_release": true,
+  "candidate_sha256": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+  "status": "completed turn; finding pending independent recheck"
+}

@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-07T17:05:20Z",
+  "finding": "The round-2 supplemental replay directory was reused during a later builder execution.",
+  "affected_directory": "sage/evaluation/sandboxes/sage-a1-r2-replay",
+  "proof": {
+    "round_2_review_recorded_regressions": 14,
+    "current_supplemental_results_regressions": 16,
+    "current_results_sha256": "41b01da7712e7adb6999817e829892127fa878ccfea0f3b2f5bff50cbaa28d1c",
+    "current_results_modified_epoch": 1788800153.9300349,
+    "cause": "sage-a1-r2-critic/probes.py hard-codes the nested sage-a1-r2-replay destination; changing only __file__ isolates its main outputs but not the nested replay."
+  },
+  "original_failure_evidence_still_present": {
+    "path": "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+    "current_sha256": "08195d06e2b4696772776ed566257deb495470a9569ee2fd8aceee26c765bcaa",
+    "current_modified_epoch": 1788799441.0307624,
+    "regressions": 14,
+    "utf8_append_exit": 1,
+    "note": "The original round-2 critic directory still contains the reported failed temporal and UTF-8 outcomes. No pre-replay hash was recorded for the supplemental directory, so exact original supplemental bytes are not recoverable or authenticated here."
+  },
+  "round_3_handling": "The independent runner redirects both its synthetic __file__ and the nested replay output constant. All fresh output is under sage-a1-r3-critic or sage-a1-r3-replay. Probe inputs and checks are unchanged; no prior bytes are reconstructed or relabeled as original.",
+  "assessment": "This limits the provenance of the old supplemental replay, not the current product behavior. The normal regression runner honors SAGE_EVALUATION_SANDBOX and needs no repair for this cause. Historical review scores and original failure records remain preserved; this qualification accompanies the round-3 review and status history."
+}

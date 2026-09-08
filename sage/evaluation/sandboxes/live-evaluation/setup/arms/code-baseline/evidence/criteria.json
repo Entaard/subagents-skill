@@ -1,0 +1,6 @@
+[
+  {"id":"wire-behavior","text":"Independent checks confirm arbitrary binary payloads, zero/nonzero lengths, concatenation and every split boundary."},
+  {"id":"failure-and-reset","text":"Malformed, truncated and oversized frames poison until reset; argument TypeError preserves state."},
+  {"id":"deliverables","text":"Dependency-free decoder.py, meaningful stdlib tests and usage README pass checks; input hashes remain unchanged."},
+  {"id":"live-procedure","text":"Installed Sage state, bounded plan, independent review, ownership, findings and evidence are recorded with unknown identity and usage kept null."}
+]

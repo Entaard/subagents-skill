@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/run_verification.py",
+    "--mode",
+    "red",
+    "--evidence-dir",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/offline"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"schema_version\": \"sage-verification-run-v1\",\n  \"mode\": \"red\",\n  \"started_and_finished_at\": \"2026-09-08T14:40:50.158988+00:00\",\n  \"command\": [\n    \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n    \"-m\",\n    \"unittest\",\n    \"discover\",\n    \"-s\",\n    \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests\",\n    \"-p\",\n    \"test_*.py\",\n    \"-v\"\n  ],\n  \"commands\": [\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ],\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ]\n  ],\n  \"exit_code\": 0,\n  \"passed\": true,\n  \"tests\": 95,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"skipped\": 0,\n  \"live_trials_run\": false,\n  \"network_used\": false,\n  \"stdout\": \"stdout.txt\",\n  \"stderr\": \"stderr.txt\",\n  \"evidence_dir\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/offline\"\n}\n",
+  "stderr": ""
+}

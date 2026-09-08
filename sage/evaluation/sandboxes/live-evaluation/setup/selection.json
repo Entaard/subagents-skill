@@ -1,0 +1,37 @@
+{
+  "schema_version": "sage-case-selection-v1",
+  "rubric": "../../../rubric.json",
+  "protocol": "../../../live-protocol.md",
+  "environment": "environment.json",
+  "root_model": "gpt-6-astra",
+  "root_procedure": "installed_sage",
+  "cases": [
+    {
+      "case_id": "LIVE-CODE-01",
+      "kind": "code",
+      "prompt": "cases/code/prompt.txt",
+      "inputs": [
+        "cases/code/vectors.json",
+        "install-identity.json",
+        "actor-packet-template.txt",
+        "arms/code-treatment/launch-packet.txt",
+        "arms/code-baseline/launch-packet.txt"
+      ],
+      "checks": "cases/code/checks.json"
+    },
+    {
+      "case_id": "LIVE-DATA-01",
+      "kind": "evidence_data",
+      "prompt": "cases/data/prompt.txt",
+      "inputs": [
+        "cases/data/notes.txt",
+        "cases/data/sessions.csv",
+        "install-identity.json",
+        "actor-packet-template.txt",
+        "arms/data-treatment/launch-packet.txt",
+        "arms/data-baseline/launch-packet.txt"
+      ],
+      "checks": "cases/data/checks.json"
+    }
+  ]
+}

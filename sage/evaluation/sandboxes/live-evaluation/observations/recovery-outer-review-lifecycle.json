@@ -1,0 +1,25 @@
+{
+  "before_spawn": {
+    "current_time": "2026-09-07 21:50:43 UTC"
+  },
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "fork_turns": "none",
+  "reason": "Nested spawn capacity failed; original coordinator now completed/released.",
+  "spawn_result": {
+    "task_name": "/root/live_recovery_review"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 21:51:13 UTC"
+  },
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:00:33 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "reported_findings": {
+    "minor": 1,
+    "major": 0
+  },
+  "final_message_file": "setup/arms/recovery-treatment/evidence/independent-review.md"
+}

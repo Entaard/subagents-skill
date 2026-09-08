@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "parent": "references",
+      "exit_code": 2,
+      "target_bytes_unchanged": true,
+      "saved_bytes_unchanged": true,
+      "receipt_unchanged": true,
+      "removed_files": []
+    },
+    {
+      "parent": "agents",
+      "exit_code": 2,
+      "target_bytes_unchanged": true,
+      "saved_bytes_unchanged": true,
+      "receipt_unchanged": true,
+      "removed_files": []
+    }
+  ],
+  "restored_positive_uninstalls": 2
+}

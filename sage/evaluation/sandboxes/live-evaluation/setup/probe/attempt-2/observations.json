@@ -1,0 +1,72 @@
+{
+  "kind": "direct owned-headless harness observations",
+  "scope": "one local file navigation and keyboard sequence per viewport, no throttle; wall includes CDP and frame waits; not population performance or monetary cost",
+  "observations": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "loadWallMs": 26.470542000000023,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 46.22720800000002,
+          "visible": "Probewaiting",
+          "focus": "probe"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 33.872749999999996,
+          "visible": "Probewaiting",
+          "focus": "probe"
+        }
+      ],
+      "screenshot": "viewport-1280x800.png",
+      "metrics": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "nav": [
+          {
+            "duration": 12,
+            "domContentLoadedEventEnd": 10.5,
+            "loadEventEnd": 12
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loadWallMs": 8.322374999999965,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 25.78970800000002,
+          "visible": "Probewaiting",
+          "focus": "probe"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 33.003999999999905,
+          "visible": "Probewaiting",
+          "focus": "probe"
+        }
+      ],
+      "screenshot": "viewport-390x844.png",
+      "metrics": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "nav": [
+          {
+            "duration": 5.300000011920929,
+            "domContentLoadedEventEnd": 5.100000008940697,
+            "loadEventEnd": 5.300000011920929
+          }
+        ]
+      }
+    }
+  ]
+}

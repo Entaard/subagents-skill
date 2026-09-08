@@ -1,0 +1,422 @@
+{
+  "commands": [
+    {
+      "cmd": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+        "validate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 2, \"ok\": true}\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+        "retrieve",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+        "--cues",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json",
+        "--limit",
+        "10"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"controlled-prior\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"Original unquoted rows have equal plain-split and csv.reader field counts.\", \"falsifier\": \"A museum CSV row has a csv.reader field count different from comma count plus one.\", \"gate_rationale\": \"Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 1, \"rule\": \"For a museum CSV row, count commas and add one to obtain its field count.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/observe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"old\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A1,Map room,4\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A2,North hall,9\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ],\n  \"new\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A3,\\\"Maps, early years\\\",6\",\n      \"plain_split_fields\": 4,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A4,\\\"He said \\\"\\\"hello\\\"\\\"\\\",2\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new/events.jsonl",
+      "original": "70511264eee2e393953fc2fccd5749c7d600dc003816d0ba156d63b69921aa80",
+      "now": "70511264eee2e393953fc2fccd5749c7d600dc003816d0ba156d63b69921aa80"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new/snapshot.json",
+      "original": "0b3be1f86c5892405b31f823458799011d3a5ccbb726b2c96e8771f9252ce6d9",
+      "now": "0b3be1f86c5892405b31f823458799011d3a5ccbb726b2c96e8771f9252ce6d9"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old/events.jsonl",
+      "original": "f1794020c3650775d3d87b1ce6dcd288be75181fb74f44a2aeedcfacaa68943d",
+      "now": "f1794020c3650775d3d87b1ce6dcd288be75181fb74f44a2aeedcfacaa68943d"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old/snapshot.json",
+      "original": "0ae792a6a2a54f8a4616ed167aac2d1daeda4ccbbb129d09306b8f7df446081e",
+      "now": "0ae792a6a2a54f8a4616ed167aac2d1daeda4ccbbb129d09306b8f7df446081e"
+    }
+  ],
+  "source_observations_reproduced": {
+    "old": [
+      {
+        "line": "code,label,count",
+        "plain_split_fields": 3,
+        "csv_reader_fields": 3
+      },
+      {
+        "line": "A1,Map room,4",
+        "plain_split_fields": 3,
+        "csv_reader_fields": 3
+      },
+      {
+        "line": "A2,North hall,9",
+        "plain_split_fields": 3,
+        "csv_reader_fields": 3
+      }
+    ],
+    "new": [
+      {
+        "line": "code,label,count",
+        "plain_split_fields": 3,
+        "csv_reader_fields": 3
+      },
+      {
+        "line": "A3,\"Maps, early years\",6",
+        "plain_split_fields": 4,
+        "csv_reader_fields": 3
+      },
+      {
+        "line": "A4,\"He said \"\"hello\"\"\",2",
+        "plain_split_fields": 3,
+        "csv_reader_fields": 3
+      }
+    ]
+  },
+  "single_author_repair_exact": true,
+  "actors": {
+    "action": "correct",
+    "id": "museum-csv-field-count",
+    "proposer": "/root/live_promotion_author",
+    "refuter": "/root/live_promotion_refuter",
+    "reviewer": "/root/live_promotion_reviewer",
+    "source_run_ids": [
+      "csv-new",
+      "csv-old"
+    ]
+  },
+  "original_pointer_bytes_restored": true,
+  "generations": [
+    {
+      "generation": "controlled-prior",
+      "manifest_sha256": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+      "file_hashes": [
+        {
+          "path": "index.json",
+          "sha256": "002ae23273650b86744af9262dbf6100cd2b0eb7a08dc1caae85b8e29129a388"
+        },
+        {
+          "path": "records/museum-csv-field-count.json",
+          "sha256": "69980f4f353b123935dab1e78c074bf4508dadeda351e8228a4ab21d2c8cf643"
+        }
+      ]
+    },
+    {
+      "generation": "promotion-live-v2",
+      "manifest_sha256": "264f60a52810a91d650136b58629c547bbd998d8c5899e11f232c051bb5fa6e1",
+      "file_hashes": [
+        {
+          "path": "index.json",
+          "sha256": "aa8b3798941e18d7f9511bda63b95005276eea259abe24fbcf7d09a3019ead38"
+        },
+        {
+          "path": "records/museum-csv-field-count.json",
+          "sha256": "2bb339dec080e4988a01ac4506f460244517169e52b94002b29e06c48d71df0b"
+        }
+      ]
+    }
+  ],
+  "retained_landing_commands": [
+    {
+      "name": "pre-stage-validate",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+      "exit_code": 0,
+      "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 1, \"ok\": true}\n"
+    },
+    {
+      "name": "before-retrieve",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py retrieve --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --cues /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json --limit 10",
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"controlled-prior\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"Original unquoted rows have equal plain-split and csv.reader field counts.\", \"falsifier\": \"A museum CSV row has a csv.reader field count different from comma count plus one.\", \"gate_rationale\": \"Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 1, \"rule\": \"For a museum CSV row, count commas and add one to obtain its field count.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n"
+    },
+    {
+      "name": "stage",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py stage --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --proposal /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-final.json --generation-id promotion-live-v2 --expected-current controlled-prior",
+      "exit_code": 0,
+      "stdout": "{\"action\": \"correct\", \"generation_id\": \"promotion-live-v2\", \"manifest_sha256\": \"264f60a52810a91d650136b58629c547bbd998d8c5899e11f232c051bb5fa6e1\", \"ok\": true, \"prior_generation_id\": \"controlled-prior\", \"record\": {\"id\": \"museum-csv-field-count\", \"revision\": 2, \"status\": \"supported\"}}\n"
+    },
+    {
+      "name": "post-stage-validate",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+      "exit_code": 0,
+      "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 2, \"ok\": true}\n"
+    },
+    {
+      "name": "activate",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py activate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --generation-id promotion-live-v2 --expected-current controlled-prior",
+      "exit_code": 0,
+      "stdout": "{\"generation_id\": \"promotion-live-v2\", \"manifest_sha256\": \"264f60a52810a91d650136b58629c547bbd998d8c5899e11f232c051bb5fa6e1\", \"ok\": true, \"previous_generation_id\": \"controlled-prior\"}\n"
+    },
+    {
+      "name": "post-activate-validate",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+      "exit_code": 0,
+      "stdout": "{\"current\": \"promotion-live-v2\", \"generation_count\": 2, \"ok\": true}\n"
+    },
+    {
+      "name": "during-retrieve",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py retrieve --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --cues /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json --limit 10",
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"promotion-live-v2\", \"matches\": [{\"counterevidence\": [\"csv-old:ev-1\"], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"The old header and two unquoted data rows each produce 3 fields by both literal splitting and csv.reader. In the new sample, A3 contains a quoted comma: literal splitting produces 4 pieces while csv.reader produces the expected 3 fields. The A4 escaped-quote row and the repeated header also produce 3 parser fields. This directly falsifies revision 1's comma-count rule while supporting parser-derived counts only in the declared fixture.\", \"falsifier\": \"Within the declared fixture environment, a supplied syntactically valid museum row has an expected three-field schema but Python csv.reader returns a field count other than three.\", \"gate_rationale\": \"The repeatable local probe establishes parser-derived field counts for every supplied old and new row in the declared Python 3.11.6 controlled fixture. It does not establish behavior for other parsers, malformed CSV, dialects, or museum inputs outside these samples.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [\"museum imports\"], \"environment\": [], \"failure\": [], \"operation\": [\"count fields\"], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 2, \"rule\": \"For field-count checks on these museum CSV inputs, count the fields returned by Python csv.reader. Do not infer the field count from the number of literal commas when a quoted field may contain a comma.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n"
+    },
+    {
+      "name": "rollback",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py rollback --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --generation-id controlled-prior --expected-current promotion-live-v2",
+      "exit_code": 0,
+      "stdout": "{\"generation_id\": \"controlled-prior\", \"manifest_sha256\": \"2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04\", \"ok\": true, \"previous_generation_id\": \"promotion-live-v2\"}\n"
+    },
+    {
+      "name": "post-rollback-validate",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+      "exit_code": 0,
+      "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 2, \"ok\": true}\n"
+    },
+    {
+      "name": "after-retrieve",
+      "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py retrieve --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --cues /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json --limit 10",
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"controlled-prior\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"Original unquoted rows have equal plain-split and csv.reader field counts.\", \"falsifier\": \"A museum CSV row has a csv.reader field count different from comma count plus one.\", \"gate_rationale\": \"Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 1, \"rule\": \"For a museum CSV row, count commas and add one to obtain its field count.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n"
+    }
+  ],
+  "current_review": {
+    "actor": "/root/live_promotion_reviewer",
+    "outcome": "passed",
+    "dispositions": [
+      {
+        "finding_id": "rf-scope",
+        "disposition": "accepted",
+        "rationale": "Clearing qualifier.all.environment makes the record discoverable when an environment cue is absent or names a different environment, but discoverability is not evidence of transfer. The unchanged rule limits the instruction to Python csv.reader and these inputs; gate_rationale, gate_evidence, evidence_summary, and falsifier preserve the Python 3.11.6 supplied-sample boundary. Retrieval for a different environment must therefore be read as a bounded candidate result, not support for that environment. This is an explicit nonblocking scope limitation, not a material semantic defect.",
+        "evidence": [
+          "csv-old:ev-1",
+          "csv-new:ev-1"
+        ]
+      },
+      {
+        "finding_id": "rf-strength",
+        "disposition": "resolved",
+        "rationale": "The repeated Python 3.11.6 probe confirms three csv.reader fields for every supplied row and four literal split pieces for A3, firing revision 1's falsifier. The repaired candidate preserves the old observation as counterevidence and does not claim generic escaping correctness, malformed-input validation, dialect coverage, or cross-context transfer.",
+        "evidence": [
+          "csv-new:ev-1",
+          "csv-old:ev-1"
+        ]
+      },
+      {
+        "finding_id": "rf-retrieval-repair",
+        "disposition": "resolved",
+        "rationale": "The sole candidate change is qualifier.all.environment from [python 3 stdlib csv] to []. Direct application of the installed retrieval predicate now matches the unchanged actual task cues. The repaired qualifier still rejects missing domain, missing operation, and a different artifact. Actual revision-2 CLI retrieval remains a coordinator-owned post-activation completion check rather than evidence needed to assess the frozen repair bytes.",
+        "evidence": [
+          "csv-old:ev-1",
+          "csv-new:ev-1"
+        ]
+      }
+    ],
+    "gate_decision": "supported",
+    "reviewed_at": "2026-09-07T23:02:07Z",
+    "metadata": {
+      "candidate_path": "work/proposal-repaired.json",
+      "candidate_sha256": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+      "refutation_path": "work/refutation-repaired.json",
+      "refutation_sha256": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+      "evidence_class": "scoped_fact",
+      "prior_finding_disposition": {
+        "finding_id": "rv-retrieval-actual-cues",
+        "disposition": "resolved",
+        "rationale": "The frozen repaired predicate was observed in memory to match unchanged inputs/cues.json after removal of the mandatory environment qualifier. The original candidate was observed not to match those cues. Live retrieval of revision 2 is still unexecuted because staging and activation belong to the coordinator.",
+        "observed_evidence": [
+          "inputs/cues.json sha256=3734ff44664301de73a2d9a87707bbcb3d2789519301a7aa97cd26a9ebbdab8b",
+          "work/proposal-author.json#/record/qualifier/all/environment=[python 3 stdlib csv]",
+          "work/proposal-repaired.json#/record/qualifier/all/environment=[]",
+          "installed/skills/sage-promote/references/knowledge.md#Retrieval",
+          "in-memory repaired predicate: actual_absent_environment would_match=true"
+        ],
+        "remaining_completion_check": "After coordinator-owned staging and activation, retrieve with unchanged inputs/cues.json and require museum-csv-field-count revision 2, status supported, with the Python 3.11.6 supplied-sample boundary intact."
+      },
+      "observations": [
+        "The repaired and original proposals differ only at /record/qualifier/all/environment.",
+        "Python 3.11.6 reproduction: every supplied row has csv_reader_fields=3; A3 has plain_split_fields=4.",
+        "csv-old and csv-new each terminal-validate with ok=true, terminal=true, last_seq=8.",
+        "The current store validates at controlled-prior with one generation.",
+        "Before landing, unchanged actual cues retrieve museum-csv-field-count revision 1 with status supported and cue fingerprint 7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29.",
+        "The repaired predicate matches unchanged cues with absent environment and also remains discoverable with a different environment cue.",
+        "The repaired predicate rejects missing domain, missing operation, and a different artifact."
+      ],
+      "semantic_assessment": {
+        "status": "supported",
+        "scope": "Python 3.11.6 stdlib csv behavior for the supplied controlled fictional museum samples only",
+        "lineage": "correct preserves museum-csv-field-count, advances revision 1 to revision 2, and retains the fired prior falsifier, provenance, alternative explanations, and csv-old counterevidence",
+        "unsupported_transfer": "No support is claimed for other parsers, Python versions, malformed CSV, dialects, or museum inputs outside the supplied samples. Retrieval under absent or different environment cues does not change that boundary."
+      },
+      "additional_findings": [],
+      "source_authenticity": "The two source runs, fixture records, and controlled seed actor labels are synthetic scaffolding. Only the hash-bound local Python observations were treated as reproducible facts.",
+      "identity": {
+        "native_actor_id": "/root/live_promotion_reviewer",
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "requested_fork_turns": "native followup",
+        "effective_identity": null,
+        "effective_model": null,
+        "effective_effort": null,
+        "tokens": null,
+        "money": null
+      },
+      "coordinator_owned_unexecuted": [
+        "complete proposal assembly",
+        "stage",
+        "post-stage store validation",
+        "activate",
+        "live revision-2 retrieval with unchanged task cues",
+        "rollback",
+        "pointer-restoration validation",
+        "retained-history validation"
+      ],
+      "unknowns": [
+        "No live revision-2 CLI retrieval result exists yet.",
+        "No staged or activated generation ID, manifest hash, rollback result, or post-rollback retrieval result was observed in this review.",
+        "Effective runtime identity, model, effort, tokens, and money are unobserved."
+      ],
+      "writer_lease": "RELEASE"
+    }
+  },
+  "initial_review": {
+    "actor": "/root/live_promotion_reviewer",
+    "outcome": "failed",
+    "dispositions": [
+      {
+        "finding_id": "rf-scope",
+        "disposition": "resolved",
+        "rationale": "The scoped-fact evidence is limited to the supplied Python 3.11.6 fixture, and the frozen candidate keeps that boundary explicit in its gate rationale, rule, evidence summary, and alternative explanations. The two selected observations support no transfer claim beyond those supplied rows.",
+        "evidence": [
+          "csv-old:ev-1",
+          "csv-new:ev-1"
+        ]
+      },
+      {
+        "finding_id": "rf-strength",
+        "disposition": "resolved",
+        "rationale": "The new A3 observation fires revision 1's recorded falsifier because literal comma counting yields four while csv.reader yields three. The candidate claims only parser-derived field counts for the supplied inputs and does not claim general escaping, dialect, malformed-input, or validation correctness.",
+        "evidence": [
+          "csv-new:ev-1",
+          "csv-old:ev-1"
+        ]
+      }
+    ],
+    "gate_decision": "focused_repair_required",
+    "reviewed_at": "2026-09-07T22:38:28Z",
+    "metadata": {
+      "semantic_gate": {
+        "evidence_class": "scoped_fact",
+        "decision": "supported_within_declared_fixture",
+        "landing_blocked_by": "rv-retrieval-actual-cues"
+      },
+      "additional_findings": [
+        {
+          "id": "rv-retrieval-actual-cues",
+          "severity": "blocker",
+          "criterion": "landing-retrieval: retrieval using the exact cues for the actual task",
+          "summary": "The exact task cues intersect the candidate recognizer on domain, artifact, and operation, but they omit the environment cue required by qualifier.all. Under the documented retrieval predicate, the proposed supported revision 2 would therefore be filtered out even though active revision 1 currently retrieves for the same task cues.",
+          "exact_evidence": [
+            "inputs/cues.json",
+            "work/proposal-author.json#/record/recognizer",
+            "work/proposal-author.json#/record/qualifier/all/environment",
+            "installed/skills/sage-promote/references/knowledge.md#Retrieval",
+            "observed current retrieve: generation_id=controlled-prior, cue_fingerprint=7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29, matched museum-csv-field-count revision=1 status=supported",
+            "in-memory candidate predicate check: actual-task environment qualifier=false and would_match=false; full candidate recognizer cues would_match=true"
+          ],
+          "minimal_falsifiable_repair": "In the single allowed author repair, remove the mandatory environment value from qualifier.all while retaining the Python 3.11.6 environment and supplied-sample limitation in gate_evidence, gate_rationale, rule, and evidence_summary. Do not change inputs/cues.json.",
+          "falsifiable_fix_check": "After independent review of the frozen repair and coordinator-owned staging, run sage_knowledge.py retrieve with the unchanged inputs/cues.json; it must return museum-csv-field-count revision 2 with status supported and must expose the supplied-sample/Python boundary. A no_match result or loss of that boundary fails the repair."
+        }
+      ],
+      "command_outcomes": [
+        {
+          "check": "frozen proposal SHA-256",
+          "outcome": "passed",
+          "observed": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9"
+        },
+        {
+          "check": "frozen refutation SHA-256",
+          "outcome": "passed",
+          "observed": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee"
+        },
+        {
+          "check": "selected source terminal validation",
+          "outcome": "passed",
+          "observed": "csv-old and csv-new each ok=true, terminal=true, last_seq=8"
+        },
+        {
+          "check": "repeatable local observation",
+          "outcome": "passed",
+          "observed": "Python 3.11.6; all supplied rows yield csv_reader_fields=3; A3 yields plain_split_fields=4"
+        },
+        {
+          "check": "prior knowledge store validation",
+          "outcome": "passed",
+          "observed": "current=controlled-prior, generation_count=1"
+        },
+        {
+          "check": "current retrieval with unchanged task cues",
+          "outcome": "passed",
+          "observed": "controlled-prior returns museum-csv-field-count revision=1 status=supported"
+        },
+        {
+          "check": "candidate retrieval predicate with unchanged task cues",
+          "outcome": "failed",
+          "observed": "qualifier.all.environment has no intersection; would_match=false"
+        }
+      ],
+      "lineage_assessment": "The proposed correct action preserves stable ID museum-csv-field-count, advances retained revision 1 to revision 2, and records the fired prior falsifier and csv-old counterevidence.",
+      "source_authenticity": "The source runs, fixture records, and controlled seed actor labels are synthetic scaffolding. Only the hash-bound local Python observations were treated as current reproducible facts.",
+      "identity": {
+        "native_actor_id": "/root/live_promotion_reviewer",
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "requested_fork_turns": "none",
+        "effective_identity": null,
+        "effective_model": null,
+        "effective_effort": null,
+        "tokens": null,
+        "money": null
+      },
+      "limitations": [
+        "The candidate was not staged, activated, or rolled back in this reviewer pass.",
+        "Revision 2 could not be exercised through the store CLI without a coordinator-owned store mutation; its task-cue behavior was checked directly against the documented recognizer and qualifier predicate.",
+        "No contexts beyond the two selected controlled fixtures were observed."
+      ],
+      "coordinator_owned_unexecuted": [
+        "focused author repair and refreeze",
+        "independent review of any repaired candidate",
+        "stage",
+        "store validation after stage",
+        "activate",
+        "live retrieval of revision 2 with unchanged task cues",
+        "rollback",
+        "pointer-restoration and retained-history checks"
+      ],
+      "writer_lease": "RELEASE"
+    }
+  },
+  "qualifier_limitation": "Environment no longer filters discovery; rule and gate rationale explicitly retain supplied-sample Python 3.11.6 scope. This is a disclosed discovery limitation, not evidence of transfer.",
+  "ok": true
+}

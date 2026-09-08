@@ -1,0 +1,152 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "promotion-a1-r1",
+  "module": "promotion",
+  "approach_id": "promotion-a1",
+  "round": 1,
+  "reviewed_at": "2026-09-07T18:13:40Z",
+  "gate_type": "deterministic",
+  "verdict": "fail",
+  "open_error_count": 4,
+  "open_error_ids": ["PROMOTION-A1-R1-E1", "PROMOTION-A1-R1-E2", "PROMOTION-A1-R1-E3", "PROMOTION-A1-R1-E4"],
+  "reviewer": {
+    "agent": "/root/promotion_critic",
+    "role": "independent demanding promotion source-module critic; no product repairs",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 7.4,
+    "architecture_and_coherence": 8.0,
+    "correctness_and_evidence": 7.1,
+    "simplicity_and_context_efficiency": 8.6,
+    "orchestration_and_model_routing": 8.7,
+    "safety_reversibility_and_recovery": 7.8,
+    "verification_strength": 8.1,
+    "reporting_and_maintainability": 8.2
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The closed-source, immutable-lineage, staged-parent, bounded retrieval and class-specific gate design is substantially implemented. Four independently reproduced boundary errors remain: unbound references, a retirement transition bypass, wrong timestamp ordering and malformed pointer acceptance. These violate the claimed deterministic source boundary even though the frozen controls pass.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/assertions.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-assertions.json", "sage/docs/CONTRACTS.md"]
+    },
+    "architecture_and_coherence": {
+      "reason": "The implementation preserves the two entrypoints and shares only narrow state/JSON primitives. Safe revision 3 after rollback, immutable ID/revision history and staged-parent activation have observed controls. Reference interpretation and action-versus-status enforcement nevertheless disagree across entry paths, so the declared boundary is not yet coherent at acceptance level.",
+      "evidence": ["sage/scripts/sage_knowledge.py:268", "sage/scripts/sage_knowledge.py:520", "sage/evaluation/sandboxes/promotion-a1-r1-critic/regressions.txt", "sage/ARCHITECTURE.md"]
+    },
+    "correctness_and_evidence": {
+      "reason": "Fresh frozen knowledge 10 and regressions 10 pass, as do unchanged state 9 and 16. Independent CLI observations additionally show a nonexistent comparison reference activating as supported, external URI fragments bypassing recorded-locator binding, retirement staging without its intentional basis, reversed fractional timestamp decisions, and a dangling pointer accepted as empty. The honest structural-versus-semantic disclaimer does not excuse these structural failures.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/contracts.txt", "sage/evaluation/sandboxes/promotion-a1-r1-critic/regressions.txt"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "The concise promotion spine routes to two focused references; Main Sage receives one bounded retrieval reference. The 636-line dependency-free helper implements concrete file and record checks without introducing a scheduler or generic protocol framework. Some repeated role and gate text is tolerable for this scope; no material context-efficiency error was found.",
+      "evidence": ["sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/skills/sage-promote/references/knowledge.md", "sage/scripts/sage_knowledge.py"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Guidance explicitly requires three distinct live actors for actual promotion, excludes the coordinator from their roles, withholds a desired refutation verdict, and distinguishes native identity strings from behavioral independence. It allows zero-team no-change, labels routing priors uncalibrated, and preserves user model choices. This score assesses source guidance and structural negative controls only; actual actor independence and routing effectiveness remain untested.",
+      "evidence": ["sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/promotion-a1-r1-critic/contracts.txt", "sage/evaluation/sandboxes/promotion-a1-r1-critic/regressions.txt"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Stale activation, failed refutation, unknown-effect sources, lineage collisions, extra generation paths and corrupt rollback targets are rejected by fresh controls. However, dangling current.json is treated as an absent pointer and correction can evade retirement metadata. Integrity-invalid retained history blocks all pointer changes by design; the observed inability to roll back corrupted current bytes is qualified as a limitation and optional documentation improvement, not a fifth error.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/contracts.txt", "sage/evaluation/sandboxes/promotion-a1-r1-critic/regressions.txt", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/scripts/sage_knowledge.py:405"]
+    },
+    "verification_strength": {
+      "reason": "The frozen public tests and focused regressions exercise meaningful controls; fresh source-slice runs preserve their assertions. The documented proposal and five command steps execute successfully. Independent probes discriminate comparison from corroboration and chronological order in both directions, exposing missing regression coverage. Candidate verification is not yet acceptance-complete; installed and live gates remain untouched.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/review_checks.py", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental_checks.py", "sage/evaluation/sandboxes/promotion-a1-r1-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Instructions name actionable retrieved fields, precise revision identity, status, counterevidence and evidence-class limits. They clearly avoid claims of physical leases, measured savings and installed success. However, their reference-closure and symlink-rejection descriptions currently overstate accepted CLI behavior; timestamp ordering also corrupts the intended audit chronology. All four issues need repair before those descriptions are accurate.",
+      "evidence": ["sage/skills/sage-promote/references/knowledge.md", "sage/skills/sage/references/knowledge.md", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/input-hashes.json"]
+    }
+  },
+  "finding_dispositions": [],
+  "errors": [
+    {
+      "id": "PROMOTION-A1-R1-E1",
+      "rank": 1,
+      "severity": "major",
+      "title": "Reference closure can be bypassed through comparison evidence and external URI fragments",
+      "requirements": ["R-041", "R-044", "R-049"],
+      "location": "sage/scripts/sage_knowledge.py:268",
+      "observed": "A supported transferable record with comparison:[\"source-1:missing-evidence\"] stages and activates with exit 0; the equivalent corroboration control rejects with invalid_reference. Separately, provenance locator https://unrecorded.invalid/report#source-1-e-6 and qualified refutation evidence using that URI both stage successfully although no such external locator or hash was recorded in the source.",
+      "cause": "validate_record_references checks corroboration and causal evidence but omits comparison. reference_exists strips every locator prefix before #, allowing arbitrary unrecorded external locators to alias a valid local event ID.",
+      "expected": "Validate each reference-bearing comparison entry and preserve the distinction between a documented local event/evidence reference and an exact hash-bound external locator. Reject unresolved proposals before store mutation. This asks for structural closure, not semantic evidence grading.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/unresolved-comparison/store/current.json", "sage/scripts/sage_knowledge.py:295"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E2",
+      "rank": 2,
+      "severity": "major",
+      "title": "A correction can retire existing knowledge without an intentional retirement basis or reason",
+      "requirements": ["R-041", "R-047", "R-048"],
+      "location": "sage/scripts/sage_knowledge.py:520",
+      "observed": "After creating and activating supported k-1 revision 1, action correct with revision 2/status retired and valid counterevidence stages with exit 0 while review contains neither retirement_basis nor retirement_reason. The dedicated retire path requires both. The accepted stored generation permanently records this operation as correct while excluding the item from retrieval.",
+      "cause": "Retirement metadata is required only when the action string equals retire; correct has no corresponding status constraint. This lets the same existing-record transition reach a weaker validation path.",
+      "expected": "Make the existing-record action/status boundary consistent: reject an inappropriate correct-to-retired transition or require the same intentional retirement evidence. Preserve the frozen create/import control for a new historical retired record rather than imposing a new universal restriction on imports.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/correct-to-retired/store/generations/g-2/records/k-1.json", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E3",
+      "rank": 3,
+      "severity": "minor",
+      "title": "Lexical timestamp comparison reverses valid chronology at fractional seconds",
+      "requirements": ["R-041"],
+      "location": "sage/scripts/sage_knowledge.py:236",
+      "observed": "created_at 2026-09-07T00:00:00Z and reviewed_at 2026-09-07T00:00:00.500Z is rejected as reviewed_at precedes created_at. Reversing those two values is accepted and staged. Both values are valid UTC timestamps accepted by the shared validator.",
+      "cause": "Canonical record validation compares the original RFC 3339 strings instead of their instants; '.' sorts before 'Z'.",
+      "expected": "Compare parsed instants, retaining input bytes as appropriate. Add both chronological directions and equal instants with different supported fractional precision as meaningful controls.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental/earlier-fractional-review/store/generations/g-1/records/k-1.json"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E4",
+      "rank": 4,
+      "severity": "minor",
+      "title": "A dangling active-pointer symlink is accepted as a valid empty store",
+      "requirements": ["R-040", "R-048"],
+      "location": "sage/scripts/sage_knowledge.py:405",
+      "observed": "With store/current.json a symlink to a nonexistent file, validate exits 0 and reports current:none, generation_count:0. The active-pointer path is present and malformed; this is not the intentionally absent-pointer empty-store case.",
+      "cause": "Path.exists follows the symlink and returns false before current_pointer reaches its explicit symlink rejection.",
+      "expected": "Distinguish absent paths from dangling symlinks before returning the empty sentinel. Reject the malformed pointer consistently without changing it; retain the successful truly-empty-store retrieval/state roundtrip.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental_checks.py", "sage/skills/sage-promote/references/knowledge.md"]
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "PROMOTION-A1-R1-S1",
+      "title": "Clarify rollback when retained history has corrupt bytes",
+      "reason": "The exploratory probe corrupts active g-2 and asks to roll back to valid g-1; the CLI rejects with generation_hash_mismatch and preserves the pointer. Validating all retained history before mutation is explicit in the architecture and promotion reference, so this is a design limitation rather than an implementation error. A short note could distinguish integrity-valid bad landings, which normal rollback handles, from corrupt audit history, which requires preserved evidence and separately designed recovery. Do not weaken validation or erase corrupt generations just to satisfy the exploratory assertion.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r1-critic/results.json", "sage/skills/sage-promote/references/promotion.md", "sage/scripts/sage_knowledge.py:583"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-S2",
+      "title": "Use retained-prior wording in the transition error",
+      "reason": "check_transition says active prior revision even though its caller supplies the greatest retained revision. The tested post-rollback revision 3 behavior is correct; aligning this diagnostic with D-024 would reduce operator confusion.",
+      "evidence": ["sage/scripts/sage_knowledge.py:526", "sage/docs/DECISIONS.md"]
+    }
+  ],
+  "executed_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/promotion-a1-r1-critic/review_checks.py",
+      "exit_code": 0,
+      "interpretation": "Evidence-collection runner exit 0 is not a pass verdict. It runs 45 unchanged tests (knowledge frozen 10, knowledge regressions 10, state frozen 9, state regressions 16), all passing. Its 36 assertions include 4 false observations: unresolved comparison rejection, prevention of its activation, retirement metadata enforcement, and exploratory corrupt-current rollback. The last is suggestion S1; the first three support E1/E2. It executes the documented proposal's validate-empty/stage/validate-staged/activate/retrieve commands and verifies the actionable rule. Submitted source hashes match.",
+      "evidence": "sage/evaluation/sandboxes/promotion-a1-r1-critic/assertions.json"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental_checks.py",
+      "exit_code": 0,
+      "interpretation": "Evidence-collection runner: 8 public CLI probes, 22 assertions, 5 false assertions supporting E1/E3/E4. Invalid UTF-8, non-finite overflow and duplicate JSON keys reject correctly. Dependency-free Python syntax, local-link, frontmatter and explicit-only metadata checks pass. No older script or output destination is replayed.",
+      "evidence": "sage/evaluation/sandboxes/promotion-a1-r1-critic/supplemental-assertions.json"
+    }
+  ],
+  "input_hashes_evidence": "sage/evaluation/sandboxes/promotion-a1-r1-critic/input-hashes.json",
+  "limitations": [
+    "Only the deterministic promotion source module and narrow Main Sage retrieval plumbing are reviewed. No installed-package, installer cutover, live forward task or cost-quality result is claimed; integration remains pending and unscored.",
+    "Source fixtures and distinct actor strings do not prove behavioral independence, persuasive knowledge evidence, authority, physical workspace isolation or semantic causality. Three actual roles are clearly required by guidance; their live execution remains a later gate.",
+    "The eight required status dimensions are scored for this source-module gate. Live case dimensions, including artifact experience and measured routing efficiency, are not exercised or assigned fabricated numeric scores.",
+    "The bundled quick validator was already observed unable to start because PyYAML is missing. This review uses dependency-free static checks and does not claim a quick_validate pass or install dependencies.",
+    "Primary runner's corrupt-current rollback assertion is an exploratory unmet preference explicitly dispositioned as suggestion S1, not an undisclosed open error. All four actual errors block passage regardless of severity or score."
+  ],
+  "next_action": "Repair PROMOTION-A1-R1-E1 first, then E2-E4, adding narrow public-CLI controls without weakening the frozen tests. Submit promotion-a1 round 2 for independent review; preserve this failed review and every original artifact. Integration remains pending and unscored."
+}

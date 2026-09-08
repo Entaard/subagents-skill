@@ -1,0 +1,106 @@
+{
+  "module": "live_repairs",
+  "approach_id": "live-repairs-a1",
+  "round": 3,
+  "review_id": "live-repairs-a1-r3",
+  "gate_type": "integration",
+  "reviewed_at": "2026-09-08T14:41:59Z",
+  "verdict": "pass",
+  "summary": "LIVE-03 is verified fixed for the bounded native-v3 result interface. All 42 retained round-2 failures and the original four malformed execution cases now reject correctly. The complete inventory and valid controls pass, the normal gate passes 95 tests, and independent old/new sensitivity checks reproduce 51 failing subcases only against the old validator. Previous source repairs and original live results remain preserved. This is an integration repair pass, not a whole-skill or new live-evaluation pass.",
+  "candidate": {
+    "manifest": "sage/evaluation/sandboxes/live-repairs-a1-r3-builder/candidate-manifest.json",
+    "sha256": "28efb2b997dbe487ae7aefc9479ec9559dfb091198f8cfbd7dbc95cc1242b883",
+    "retained_source_index": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/retained-source.json",
+    "validator_sha256": "933b027f8251c7942a4c694d4782f428cb3af998f9cde04d237c97cc93d8bd16"
+  },
+  "critic": {
+    "actor": "/root/live_repairs_critic",
+    "builder_or_original_scorer": false,
+    "delegated_review": false,
+    "source_modified": false,
+    "status_modified": false,
+    "independence": "Root acted as the round-3 sole builder after rejected Sol dispatch attempts. The retained critic remained a separate actor and did not author product changes. The routing fallback is disclosed, not presented as observed Sol implementation or cost improvement.",
+    "method": "Read the current source, protocol, exact briefs, prior review and actual red/green evidence. Re-execute the retained independent inventory via the current public CLI without running old writer scripts. Add bounded final-arm, omission and nullable controls; run the full offline gate and the maintained matrix against old/current validator copies without historical sandboxes. Writing-for-agents guidance informs instruction clarity and evidence/completion boundaries; no instruction file was edited."
+  },
+  "scores": {
+    "requirements_and_spec_fit": 9.0,
+    "architecture_and_coherence": 9.0,
+    "correctness_and_evidence": 9.0,
+    "simplicity_and_context_efficiency": 8.5,
+    "orchestration_and_model_routing": 8.5,
+    "safety_reversibility_and_recovery": 9.0,
+    "verification_strength": 9.0,
+    "reporting_and_maintainability": 8.5
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The complete declared v3 type boundary now rejects nonobject records, malformed collections/elements, non-string identities/roles/models and non-array references. All 42 exact round-2 cases and original four are covered. Valid null-native-exit, actual subprocess, one-character reference and nullable observation controls survive. The existing R-059 mismatch is resolved within the declared structural scope.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/inventory-replay.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-boundaries.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/native-result-protocol-v3.md", "sage/docs/REQUIREMENTS.md"]
+    },
+    "architecture_and_coherence": {
+      "reason": "A v3-only preflight checks consumed types before shared code dereferences objects or constructs sets. AST comparison proves existing shared/v2 functions unchanged; the sole changed existing function is the native entrypoint invoking the new preflight. The explicit versioning, evidence-authenticity responsibility and timestamp-policy boundary remain coherent.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/pairing.py", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/ARCHITECTURE.md"]
+    },
+    "correctness_and_evidence": {
+      "reason": "The independent complete gate passes 95 tests; all 256 retained inventory/control observations and 19 additional boundary checks meet their expected outcomes. The exact 42 known failures now reject with one structured JSON error and exit 2. Fresh old/current copies independently show 51 failing subcases only on old code, confirming regression sensitivity rather than a weakened oracle.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/offline/report.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/inventory-summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-boundaries.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-summary.json"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "The active skill spines and installed references stay unchanged. Four small local type primitives express one bounded v3 preflight without dependencies, calendar parsing or generic schema machinery. The extra schema checks must remain aligned with shared semantic checks, a bounded maintenance tradeoff that preserves frozen v2 behavior.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/pairing.py", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/preservation.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/static.json"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Recorded role/requested-model and scorer identity primitives now reject the previously accepted wrong types. Requested and effective models remain distinct, and effective models may be absent or null. The no-creation lifecycle repair and instructions remain preserved. The root-builder fallback is disclosed and critic independence maintained; no new empirical placement or routing-quality claim is made.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/inventory-replay.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-boundaries.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-builder/RELEASE.md", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/preservation.json"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "State/recovery/reporting repairs and installed operator paths match previously verified hashes and their regressions pass in the complete gate. All 2,178 protected source, old review/evidence and archive entries remain unchanged; exact old validators and failed fixtures are preserved. No source, actual STATUS, user installation or external effect was changed by this critic.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/preservation.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/offline/stderr.txt", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/retained-source.json"]
+    },
+    "verification_strength": {
+      "reason": "The three new matrix methods cover the complete consumed container/element inventory, nonblank identifier types, nullable effective models and every reference branch. They work from fresh copies with no historical sandbox bundle and independently reproduce the old 51-failure result before passing on current code. Additional final-baseline and omitted-field probes establish that validation is not restricted to the first arm or merely the original four cases.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/tests/test_native_shape.py", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-old.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-current.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-boundaries.json"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "V3 documentation now states the consumed object/array, primitive, reference and nullable boundaries. Builder red/green evidence and prior failed scores remain explicit; independent replay confirms their classification. Original v2 failure, six historical report scores of 7 and creative orchestration score 7 remain unchanged. Source validation and informed diagnostics are distinguished from authentic native observation and whole-skill assessment.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/native-result-protocol-v3.md", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/docs/IMPLEMENTATION.md", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-summary.json", "sage/docs/LIVE-RESULTS.md"]
+    }
+  },
+  "open_error_ids": [],
+  "finding_dispositions": [
+    {
+      "id": "LIVE-03",
+      "status": "verified_fixed",
+      "reason": "All 42 retained round-2 malformed inputs now return structured JSON exit 2, as do the original four. The full retained inventory has zero unexpected outcomes; valid single-character reference arrays, unknown effective identities/usage and evidenced nullable native completion remain accepted. The new preflight validates all consumed records/collections and declared identifier/reference primitives before shared access/coercion. Nineteen independent surrounding controls and the 95-test gate pass. Maintained matrix tests reproduce 51 old-validator failing subcases on a fresh copy and pass on current code. Original frozen v2 actual rejection remains replayable and shared/v2 function ASTs are unchanged. This closes the repaired source issue without altering historical trial results.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r3-critic/inventory-replay.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/inventory-summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-boundaries.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/offline/report.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/sensitivity-summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/preservation.json"]
+    }
+  ],
+  "previously_verified_fixed_preserved": ["LIVE-01", "LIVE-02", "LIVE-04", "DOC-01"],
+  "open_errors": [],
+  "suggestions": [],
+  "verification": {
+    "candidate_identity": "Raw manifest hash matches; seven source entries, ten preserved repair sources and five frozen guards match; current source bytes retained in candidate-source/.",
+    "complete_offline": "95 tests passed, zero failures/errors/skips; no network or live trials.",
+    "retained_independent_inventory": "256 expected outcomes, zero unexpected outcomes, including all 42 exact round-2 failures and original four malformed cases, valid nullable controls, array references and original v2 actual exit 2.",
+    "additional_controls": "19 expected outcomes, zero unexpected outcomes: last-baseline arm negatives, required omissions, nullable and absent effective observations, empty worker/command collections, explicit no-calendar-parser control, synthetic native integer-exit reference and rejection of subprocess evidence as native-exit proof.",
+    "regression_sensitivity": "In separate minimal copies without historical sandboxes, current three matrix tests produce exit 1 and 51 failing subcases with old round-2 validator, then exit 0 with all three methods passing on current validator. Actual builder red/green classification independently confirmed.",
+    "v2_preservation": "AST comparison shows all existing shared/v2 functions unchanged; only validate_native_result adds the call to new validate_native_shape. Original v2 result retains its historical rejection.",
+    "preservation": "2,178 protected source/history/archive entries unchanged, including actual STATUS and previous reviews. Browser profile/cache/session contents were excluded and not inspected.",
+    "static": "Diff whitespace check passes; maintained new tests use synthetic local fixtures and work without historical live sandbox dependencies."
+  },
+  "limitations": [
+    "This pass is limited to the frozen live repair integration candidate; the separate fresh whole-skill assessment and promotion-recovery coverage question remain outstanding.",
+    "No new live arm, browser/UI test, network/package action, home installation, source change or actual STATUS mutation occurred in this review.",
+    "Historical adaptations and fixture replays are informed diagnostics, not fresh holdouts or retroactive v2/live passes.",
+    "Native integer-exit, reference-alias and non-null usage controls are synthetic structural examples; they do not establish actual native exit observation or measured usage.",
+    "Timestamp syntax/order, execution authenticity, evidence persuasiveness, native effect truth and actor independence remain evaluator judgments. Structural/hash validity is not proof of those facts.",
+    "Original live results remain unchanged: recovery passes, six reports score 7, creative orchestration scores 7 and the frozen v2 paired result rejects honest null native exits."
+  ],
+  "release": {
+    "state": "RELEASE",
+    "writer_lease": "released",
+    "pending_process": false,
+    "pending_effect": false,
+    "next_owner": "root to validate and persist this integration review, then arrange the separate whole-skill assessment"
+  }
+}

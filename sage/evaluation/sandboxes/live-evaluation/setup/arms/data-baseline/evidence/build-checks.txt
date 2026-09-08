@@ -1,0 +1,7 @@
+2026-09-07T20:43:47Z — coordinator observed checks (not raw transcript)
+python3 work/analysis.py --output tmp/reproduced.json: exit 0, rows=9, missing_rows=[M09], sensitivity_scenarios=21
+cmp work/summary.json tmp/reproduced.json: exit 0, byte identical
+shasum -a 256 -c evidence/source-hashes.sha256: exit 0, both raw sources OK
+shasum -a 256 work/analysis.py work/summary.json work/decision-memo.md: exit 0, retained in candidate-hashes.sha256
+wc -w work/decision-memo.md: 937
+PYTHONDONTWRITEBYTECODE=1 and TMPDIR=this arm's tmp used for Python invocations.

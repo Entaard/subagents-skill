@@ -1,0 +1,1 @@
+{"task":["implementation"],"domain":["byte-stream-decoding"],"artifact":["python-module","stdlib-tests","readme"],"environment":["python3","dependency-free","isolated-workspace"],"risk":["state-poisoning","unbounded-header"],"operation":["build","independent-review"],"failure":[]}

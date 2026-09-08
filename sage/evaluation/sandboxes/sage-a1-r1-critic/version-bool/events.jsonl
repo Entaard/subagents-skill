@@ -1,0 +1,1 @@
+{"v": true, "event_id": "e-1", "run_id": "run-1", "seq": 1, "at": "2026-09-07T00:00:01Z", "actor": "root", "type": "run.opened", "payload": {"objective": "verify one bounded outcome", "criteria": [{"id": "c-1", "text": "criterion c-1"}], "constraints": [], "next_action": "plan"}}

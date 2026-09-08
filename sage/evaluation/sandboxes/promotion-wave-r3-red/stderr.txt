@@ -1,0 +1,15 @@
+test_record_chronology_preserves_all_accepted_fraction_digits (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_preserves_all_accepted_fraction_digits) ... 
+  test_record_chronology_preserves_all_accepted_fraction_digits (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_preserves_all_accepted_fraction_digits) (name='earlier-high-precision') ... FAIL
+
+======================================================================
+FAIL: test_record_chronology_preserves_all_accepted_fraction_digits (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_preserves_all_accepted_fraction_digits) (name='earlier-high-precision')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 517, in test_record_chronology_preserves_all_accepted_fraction_digits
+    self.assertEqual(result.returncode, expected, result.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.164s
+
+FAILED (failures=1)

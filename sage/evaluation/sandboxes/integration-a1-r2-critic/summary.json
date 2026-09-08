@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "full_suite": {
+    "schema_version": "sage-verification-run-v1",
+    "mode": "red",
+    "started_and_finished_at": "2026-09-07T19:48:04.487602+00:00",
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "commands": [
+      [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ]
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "tests": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "live_trials_run": false,
+    "network_used": false,
+    "stdout": "stdout.txt",
+    "stderr": "stderr.txt",
+    "evidence_dir": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite"
+  },
+  "e1_two_fresh_caller_sandboxes": true,
+  "e2_early_late_parent_preservation": true,
+  "positive_restored_uninstalls": 2,
+  "prior_evidence_files_unchanged": 646,
+  "archive_hashes_verified": 186,
+  "candidate_hashes_verified": 13,
+  "live_trials_run": false
+}

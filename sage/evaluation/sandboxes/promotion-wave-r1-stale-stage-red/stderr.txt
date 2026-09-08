@@ -1,0 +1,14 @@
+test_activation_rejects_generation_staged_from_a_different_base (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_generation_staged_from_a_different_base) ... FAIL
+
+======================================================================
+FAIL: test_activation_rejects_generation_staged_from_a_different_base (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_generation_staged_from_a_different_base)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 188, in test_activation_rejects_generation_staged_from_a_different_base
+    self.assertEqual(stale.returncode, 2, stale.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.205s
+
+FAILED (failures=1)

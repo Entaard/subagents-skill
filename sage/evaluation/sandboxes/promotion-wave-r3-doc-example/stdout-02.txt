@@ -1,0 +1,1 @@
+{"action": "create", "generation_id": "g-1", "manifest_sha256": "9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515", "ok": true, "prior_generation_id": "none", "record": {"id": "validate-log-before-snapshot", "revision": 1, "status": "supported"}}

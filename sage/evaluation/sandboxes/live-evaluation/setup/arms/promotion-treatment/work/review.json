@@ -1,0 +1,117 @@
+{
+  "actor": "/root/live_promotion_reviewer",
+  "outcome": "failed",
+  "dispositions": [
+    {
+      "finding_id": "rf-scope",
+      "disposition": "resolved",
+      "rationale": "The scoped-fact evidence is limited to the supplied Python 3.11.6 fixture, and the frozen candidate keeps that boundary explicit in its gate rationale, rule, evidence summary, and alternative explanations. The two selected observations support no transfer claim beyond those supplied rows.",
+      "evidence": [
+        "csv-old:ev-1",
+        "csv-new:ev-1"
+      ]
+    },
+    {
+      "finding_id": "rf-strength",
+      "disposition": "resolved",
+      "rationale": "The new A3 observation fires revision 1's recorded falsifier because literal comma counting yields four while csv.reader yields three. The candidate claims only parser-derived field counts for the supplied inputs and does not claim general escaping, dialect, malformed-input, or validation correctness.",
+      "evidence": [
+        "csv-new:ev-1",
+        "csv-old:ev-1"
+      ]
+    }
+  ],
+  "gate_decision": "focused_repair_required",
+  "reviewed_at": "2026-09-07T22:38:28Z",
+  "metadata": {
+    "semantic_gate": {
+      "evidence_class": "scoped_fact",
+      "decision": "supported_within_declared_fixture",
+      "landing_blocked_by": "rv-retrieval-actual-cues"
+    },
+    "additional_findings": [
+      {
+        "id": "rv-retrieval-actual-cues",
+        "severity": "blocker",
+        "criterion": "landing-retrieval: retrieval using the exact cues for the actual task",
+        "summary": "The exact task cues intersect the candidate recognizer on domain, artifact, and operation, but they omit the environment cue required by qualifier.all. Under the documented retrieval predicate, the proposed supported revision 2 would therefore be filtered out even though active revision 1 currently retrieves for the same task cues.",
+        "exact_evidence": [
+          "inputs/cues.json",
+          "work/proposal-author.json#/record/recognizer",
+          "work/proposal-author.json#/record/qualifier/all/environment",
+          "installed/skills/sage-promote/references/knowledge.md#Retrieval",
+          "observed current retrieve: generation_id=controlled-prior, cue_fingerprint=7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29, matched museum-csv-field-count revision=1 status=supported",
+          "in-memory candidate predicate check: actual-task environment qualifier=false and would_match=false; full candidate recognizer cues would_match=true"
+        ],
+        "minimal_falsifiable_repair": "In the single allowed author repair, remove the mandatory environment value from qualifier.all while retaining the Python 3.11.6 environment and supplied-sample limitation in gate_evidence, gate_rationale, rule, and evidence_summary. Do not change inputs/cues.json.",
+        "falsifiable_fix_check": "After independent review of the frozen repair and coordinator-owned staging, run sage_knowledge.py retrieve with the unchanged inputs/cues.json; it must return museum-csv-field-count revision 2 with status supported and must expose the supplied-sample/Python boundary. A no_match result or loss of that boundary fails the repair."
+      }
+    ],
+    "command_outcomes": [
+      {
+        "check": "frozen proposal SHA-256",
+        "outcome": "passed",
+        "observed": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9"
+      },
+      {
+        "check": "frozen refutation SHA-256",
+        "outcome": "passed",
+        "observed": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee"
+      },
+      {
+        "check": "selected source terminal validation",
+        "outcome": "passed",
+        "observed": "csv-old and csv-new each ok=true, terminal=true, last_seq=8"
+      },
+      {
+        "check": "repeatable local observation",
+        "outcome": "passed",
+        "observed": "Python 3.11.6; all supplied rows yield csv_reader_fields=3; A3 yields plain_split_fields=4"
+      },
+      {
+        "check": "prior knowledge store validation",
+        "outcome": "passed",
+        "observed": "current=controlled-prior, generation_count=1"
+      },
+      {
+        "check": "current retrieval with unchanged task cues",
+        "outcome": "passed",
+        "observed": "controlled-prior returns museum-csv-field-count revision=1 status=supported"
+      },
+      {
+        "check": "candidate retrieval predicate with unchanged task cues",
+        "outcome": "failed",
+        "observed": "qualifier.all.environment has no intersection; would_match=false"
+      }
+    ],
+    "lineage_assessment": "The proposed correct action preserves stable ID museum-csv-field-count, advances retained revision 1 to revision 2, and records the fired prior falsifier and csv-old counterevidence.",
+    "source_authenticity": "The source runs, fixture records, and controlled seed actor labels are synthetic scaffolding. Only the hash-bound local Python observations were treated as current reproducible facts.",
+    "identity": {
+      "native_actor_id": "/root/live_promotion_reviewer",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh",
+      "requested_fork_turns": "none",
+      "effective_identity": null,
+      "effective_model": null,
+      "effective_effort": null,
+      "tokens": null,
+      "money": null
+    },
+    "limitations": [
+      "The candidate was not staged, activated, or rolled back in this reviewer pass.",
+      "Revision 2 could not be exercised through the store CLI without a coordinator-owned store mutation; its task-cue behavior was checked directly against the documented recognizer and qualifier predicate.",
+      "No contexts beyond the two selected controlled fixtures were observed."
+    ],
+    "coordinator_owned_unexecuted": [
+      "focused author repair and refreeze",
+      "independent review of any repaired candidate",
+      "stage",
+      "store validation after stage",
+      "activate",
+      "live retrieval of revision 2 with unchanged task cues",
+      "rollback",
+      "pointer-restoration and retained-history checks"
+    ],
+    "writer_lease": "RELEASE"
+  }
+}

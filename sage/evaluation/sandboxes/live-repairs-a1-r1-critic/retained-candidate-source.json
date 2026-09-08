@@ -1,0 +1,82 @@
+[
+  {
+    "original": "sage/ARCHITECTURE.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/ARCHITECTURE.md",
+    "sha256": "4fd3d28229db75999de2521e24c3615267d2808a2a8bc63da70b8111b67d40e2"
+  },
+  {
+    "original": "sage/docs/CONTRACTS.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/docs/CONTRACTS.md",
+    "sha256": "380cef7698f95f46832954c76891c49597a0a24cbb31ef3a77345913b0061e52"
+  },
+  {
+    "original": "sage/docs/REQUIREMENTS.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/docs/REQUIREMENTS.md",
+    "sha256": "2a838ce2c5d6045e53909bce38a3f714d4caedab8c62de7a95ae6020bbdb3148"
+  },
+  {
+    "original": "sage/docs/DECISIONS.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/docs/DECISIONS.md",
+    "sha256": "523d1da3b74b1fdd048d0607ac2bea464bb430dc2d3fc0882e71800fb5488144"
+  },
+  {
+    "original": "sage/docs/IMPLEMENTATION.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/docs/IMPLEMENTATION.md",
+    "sha256": "fbaeb0dc84c4717c80aced2557866e5462ea723c71b01bb706986895ab88e996"
+  },
+  {
+    "original": "sage/evaluation/README.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/README.md",
+    "sha256": "9da232ceb68e74979c86ec6f8fa38be6e44de70a3b94557a97374c38c513e3af"
+  },
+  {
+    "original": "sage/evaluation/native-result-protocol-v3.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/native-result-protocol-v3.md",
+    "sha256": "75a4316da2b761b949ee3c058fb75c91464c47d7b07484ac2fc75424e382d5b0"
+  },
+  {
+    "original": "sage/evaluation/pairing.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/pairing.py",
+    "sha256": "92c89bf88998d7bfd8062f3ba7c7cda65b9110f2b52e5eccd6be44224a4ef57a"
+  },
+  {
+    "original": "sage/evaluation/tests/test_live_repairs.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/tests/test_live_repairs.py",
+    "sha256": "08a547b2359aa77c1e72b53459b6f33cb6961c534cca7b29b759ed1e573c03eb"
+  },
+  {
+    "original": "sage/scripts/sage_state.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/scripts/sage_state.py",
+    "sha256": "2fda97567bed5c3b1eb8bdaa1465398ecbbe619da6aab47d83e45f28c1e7a205"
+  },
+  {
+    "original": "sage/skills/sage/references/delegation.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage/references/delegation.md",
+    "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27"
+  },
+  {
+    "original": "sage/skills/sage/references/recovery.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage/references/recovery.md",
+    "sha256": "b3290b8ae3e0e946daa8c608ec3888fd1f2e209e80d2759dfe8cb604c3e75763"
+  },
+  {
+    "original": "sage/skills/sage/references/run.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage/references/run.md",
+    "sha256": "d038fb288d8600c79412b95eddca68576f2635a1463ea87fe682887b24a41f84"
+  },
+  {
+    "original": "sage/skills/sage/references/state.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage/references/state.md",
+    "sha256": "1ea5bee2746c8fddcc8c1ed61fc3be416ee726331fe09473bb64e3305cc96b41"
+  },
+  {
+    "original": "sage/skills/sage/references/verification.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage/references/verification.md",
+    "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d"
+  },
+  {
+    "original": "sage/skills/sage-promote/references/promotion.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/skills/sage-promote/references/promotion.md",
+    "sha256": "10e9adc3c38eeb642a4ab55c4a19e71b322e6616e7284840b43c2af4d36008c4"
+  }
+]

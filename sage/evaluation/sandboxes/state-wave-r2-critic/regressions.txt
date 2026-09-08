@@ -1,0 +1,19 @@
+test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier (regressions.StateRegressionTests.test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier) ... ok
+test_completion_associations_and_reports_preserve_negative_facts (regressions.StateRegressionTests.test_completion_associations_and_reports_preserve_negative_facts) ... ok
+test_late_old_results_never_change_current_revision_projection (regressions.StateRegressionTests.test_late_old_results_never_change_current_revision_projection) ... ok
+test_malformed_types_are_structured_contract_errors (regressions.StateRegressionTests.test_malformed_types_are_structured_contract_errors) ... ok
+test_native_canonical_handle_round_trips_without_aliasing (regressions.StateRegressionTests.test_native_canonical_handle_round_trips_without_aliasing) ... ok
+test_one_assignment_per_task_revision (regressions.StateRegressionTests.test_one_assignment_per_task_revision) ... ok
+test_plan_expansion_later_initial_and_correction_links (regressions.StateRegressionTests.test_plan_expansion_later_initial_and_correction_links) ... ok
+test_planned_root_is_safe_released_root_is_safe_and_known_unknown_is_rejected (regressions.StateRegressionTests.test_planned_root_is_safe_released_root_is_safe_and_known_unknown_is_rejected) ... ok
+test_released_native_handle_can_be_reassigned_without_reusing_old_completion (regressions.StateRegressionTests.test_released_native_handle_can_be_reassigned_without_reusing_old_completion) ... ok
+test_snapshot_tamper_with_valid_digest_is_repaired (regressions.StateRegressionTests.test_snapshot_tamper_with_valid_digest_is_repaired) ... ok
+test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected (regressions.StateRegressionTests.test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected) ... ok
+test_unknown_result_can_reconcile_once_and_terminal_scope_is_outcome_specific (regressions.StateRegressionTests.test_unknown_result_can_reconcile_once_and_terminal_scope_is_outcome_specific) ... ok
+test_unresolved_root_writer_blocks_resume_without_agents (regressions.StateRegressionTests.test_unresolved_root_writer_blocks_resume_without_agents) ... ok
+test_writer_release_resume_and_both_fact_orders_share_one_rule (regressions.StateRegressionTests.test_writer_release_resume_and_both_fact_orders_share_one_rule) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.783s
+
+OK

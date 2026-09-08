@@ -1,0 +1,204 @@
+{
+  "arm": "code-baseline",
+  "packet": "sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 20:19:20 UTC"
+  },
+  "spawn_result": {
+    "task_name": "/root/live_code_baseline"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 20:20:02 UTC"
+  },
+  "packet_sha256": "6af805da3d482d07c36712e94532441b4239c70658a5d6ec50ca3201aed55d28",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:21:44 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:23:15 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:24:40 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:25:09 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_baseline/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:26:34 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_baseline/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:28:02 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_baseline/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:29:32 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_baseline/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:31:26 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_baseline",
+            "lifecycle": "running"
+          },
+          {
+            "agent_name": "/root/live_code_baseline/review",
+            "lifecycle": "completed",
+            "explicit_release": true,
+            "findings_reported": 0,
+            "requested_model_reported": "gpt-6-astra",
+            "requested_effort_reported": "xhigh",
+            "complete_final_text_in_observer": false
+          }
+        ]
+      },
+      "provenance": "Normalized direct native tool status and reviewer final; long final omitted, effective identity unknown."
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:25:09 UTC"
+      },
+      "sender": "/root/live_code_baseline",
+      "content": "Code-baseline bounded implementation finished: decoder.py, 13 passing stdlib test groups and README. Installed Sage state initialized/checkpointed; input hash preserved. Fresh Astra/xhigh read-only reviewer /root/live_code_baseline/review is active against frozen candidate. Requested/effective identity remain separately recorded; no external effects.",
+      "provenance": "Actor message; claims not independently scored."
+    }
+  ],
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 20:38:10 UTC"
+  },
+  "final_status": "completed",
+  "explicit_release": true,
+  "terminal_validation": {
+    "chunk_id": "0d4db6",
+    "wall_time_seconds": 0.000004125,
+    "exit_code": 0,
+    "original_token_count": 20,
+    "output": "{\"last_seq\": 30, \"ok\": true, \"run_id\": \"decoder-baseline\", \"terminal\": true}\n"
+  },
+  "actor_final_summary": {
+    "delivered": [
+      "work/decoder.py",
+      "work/test_decoder.py",
+      "work/README.md"
+    ],
+    "test_groups": 13,
+    "raw_vector_cases": 22,
+    "exhaustive_split_cases": 114381,
+    "review_findings": 0,
+    "product_repairs": 0,
+    "rejected_state_event_corrected": true,
+    "run_dir": "state/decoder-run",
+    "effective_model": null,
+    "effective_effort": null,
+    "tokens": null,
+    "money": null,
+    "python_tested": "3.11.6",
+    "provenance": "Coordinator final claims, not evaluation scores."
+  }
+}

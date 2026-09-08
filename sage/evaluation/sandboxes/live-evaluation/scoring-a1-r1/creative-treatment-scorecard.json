@@ -1,0 +1,636 @@
+{
+  "schema_version": "sage-independent-live-scorecard-v1",
+  "arm": "creative-treatment",
+  "scorer": {
+    "id": "/root/live_scorer",
+    "independent": true,
+    "not_output_author": true,
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": null,
+    "effective_effort": null
+  },
+  "scores": {
+    "task_correctness": {
+      "value": 9,
+      "rationale": "Scorer independently played Start/Enter, ignored watch-phase guess, 2-4-1 success, R, wrong 3, R, repeated success at both viewports. Source timing is 1650 ms; precise transition timestamp remains unmeasured.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    "task_completeness": {
+      "value": 8.5,
+      "rationale": "All requested task deliverables and substantive checks are present; scope limitations are disclosed. This score does not compensate for separate reporting/orchestration failures.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    "evidence_quality": {
+      "value": 8.5,
+      "rationale": "Independent checks corroborate artifacts and preserved sources. Authored journals and normalized outer observations are qualified; effective identity, usage and money remain null. Generated-report defect is scored under report_quality.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    "orchestration_behavior": {
+      "value": 7,
+      "rationale": "Independent review and focused repair succeeded through outer dispatch and a continuation; the original admitted no-handle review remains unreconcilable under installed contract (LIVE-01). This is a durable orchestration weakness, not claimed active physical work.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection",
+        "reporting"
+      ]
+    },
+    "routing_efficiency": {
+      "value": 8.5,
+      "rationale": "Requested review routing follows the frozen policy (Sol/xhigh treatment, Astra/xhigh baseline); coordinator work stays cohesive. All invocations, bookkeeping corrections and observation time are counted; no pricing/effective-placement claim.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    "safety_reversibility": {
+      "value": 9,
+      "rationale": "Frozen inputs/installed files preserved, changes confined to arm scope, reviewers do not repair candidates, unknown effects not converted to completion; observed reversibility checks match case requirements.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    "report_quality": {
+      "value": 7,
+      "rationale": "Tailored reports disclose results/limits, but the delivered generated report says Unknowns: None despite recorded unknowns (LIVE-02); this material contradiction prevents the reporting threshold.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection",
+        "reporting"
+      ]
+    },
+    "artifact_experience": {
+      "value": 8.5,
+      "rationale": "Self-contained accessible native buttons, live region, focus treatment and reduced-motion CSS are source-verified; actual keyboard interaction/review/repair present. Runtime reduced-motion, speech and touch remain untested.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "game-flow",
+      "value": 9,
+      "outcome": "passed",
+      "rationale": "Scorer independently played Start/Enter, ignored watch-phase guess, 2-4-1 success, R, wrong 3, R, repeated success at both viewports. Source timing is 1650 ms; precise transition timestamp remains unmeasured.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    {
+      "id": "visual-two-viewports",
+      "value": 9,
+      "outcome": "passed",
+      "rationale": "Scorer actually viewed original final and newly captured real-game PNGs at 1280x800 and 390x844: readable instructions, clear focus/status, no horizontal clipping; metrics equal viewport width.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    {
+      "id": "scoped-performance",
+      "value": 8.5,
+      "outcome": "passed",
+      "rationale": "New local navigation and twelve keyboard-to-two-frame samples per viewport retained with platform/version/method; process-protocol identity and exact transition latency unobserved.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    {
+      "id": "artifact",
+      "value": 8.5,
+      "outcome": "passed",
+      "rationale": "Self-contained accessible native buttons, live region, focus treatment and reduced-motion CSS are source-verified; actual keyboard interaction/review/repair present. Runtime reduced-motion, speech and touch remain untested.",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection"
+      ]
+    },
+    {
+      "id": "live-procedure",
+      "value": 7,
+      "outcome": "failed",
+      "rationale": "Real outer independent review/recheck and one repair completed; failed nested creation cannot reconcile original run (LIVE-01), and generated report loses unknown/untested distinctions (LIVE-02).",
+      "evidence_refs": [
+        "checks",
+        "integrity",
+        "journal",
+        "outer",
+        "record-inspection",
+        "reporting"
+      ]
+    }
+  ],
+  "open_errors": [
+    "LIVE-01",
+    "LIVE-02"
+  ],
+  "gate": {
+    "minimum_each": 8.5,
+    "zero_open_errors": true,
+    "aggregate_compensation": false,
+    "passed": false
+  },
+  "evidence": [
+    {
+      "id": "file-0",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/prompt.txt",
+      "sha256": "1485c224e9f12fb3681d770836f708db02cfc5250754a29154206430d5dbc25c"
+    },
+    {
+      "id": "file-1",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/checks.json",
+      "sha256": "e0a91ad33cef88685344f90ad87f13d6eae8d34ab20956c64f4de8e048e99084"
+    },
+    {
+      "id": "journal",
+      "kind": "transcript",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/actor-journal.md",
+      "sha256": "90e3c580b837bb3511f7dba9a014f6656578303f5cc241322a72058a1ee978a4",
+      "provenance": "Actor-authored journal, NOT raw native transcript. Enum used only as required legacy container; actual lifecycle has separate outer evidence."
+    },
+    {
+      "id": "outer",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/observations/creative-treatment.json",
+      "sha256": "fdff6fc62209eba1f549310cb0b39df6cbddd0122d968bfd0e2c3ca198e88f5b",
+      "provenance": "Normalized direct outer native request/lifecycle observations, NOT raw child transcript."
+    },
+    {
+      "id": "checks",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/creative-treatment-checks.json",
+      "sha256": "7e3416a34cd9ada46b13d0b477f1cde479fd3e1671d4a1ab2e8b4ca2e5bbb7ae"
+    },
+    {
+      "id": "integrity",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/integrity.json",
+      "sha256": "2dff09293d97065c7a6bbc7331925dc369ffb48cc6f2a37a9ea9191c49fd409f"
+    },
+    {
+      "id": "record-inspection",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/record-inspection.json",
+      "sha256": "111412dd599d037658840b762654df9fee5b7b6846b8e2fa8296c9a108c349eb"
+    },
+    {
+      "id": "reporting",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/reporting-checks.json",
+      "sha256": "f79a0f655a652f32b9ce635f52c80d6f61e40b66ca37149f8fd1fb9a499bdf37"
+    },
+    {
+      "id": "file-8",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/work/index.html",
+      "sha256": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0"
+    },
+    {
+      "id": "file-9",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606"
+    },
+    {
+      "id": "file-10",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/flow.json",
+      "sha256": "84e7bd9186cf2df54d25f72f92196a20f693a81420c8276dffe71734439063ca"
+    },
+    {
+      "id": "file-11",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/inputs/game.json",
+      "sha256": "45c2060f9098010e3a443c8d3c14c371bfa427183a869bd5819155758b650454"
+    },
+    {
+      "id": "file-12",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/DELIVERY.md",
+      "sha256": "981fb4772db4ec3db7dcdcd348612179cac9def7e62ebb2ac1941da7ac6dbf4b"
+    },
+    {
+      "id": "file-13",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/FINAL-REPORT.md",
+      "sha256": "90ea39575d63fea02b1b7e666252f033339796186c7a46695db8885884b4e487"
+    },
+    {
+      "id": "file-14",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/REPAIR-DELIVERY.md",
+      "sha256": "8c733bdd4c35cd8263e56b1971f1b9895632fd969812b6163185ba1c99f5de41"
+    },
+    {
+      "id": "file-15",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/build-events.jsonl",
+      "sha256": "c1eb37958c9c70969676c59d2e3b5fc5c53adb174602a344747ac755b41a90e6"
+    },
+    {
+      "id": "file-16",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/check-results.json",
+      "sha256": "b0462efac535c1561805bf160059bd8d04cb321665944841d15f845a468822ae"
+    },
+    {
+      "id": "file-17",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/checkpoint-events.jsonl",
+      "sha256": "992588d881f20fe2d171391f3740ff14eb64bdff29980f60e20000da3bd7e53b"
+    },
+    {
+      "id": "file-18",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/continuation-final-events.jsonl",
+      "sha256": "a0d73f51f1166e47761f1eeb8dfe38d2caaef1009ff4ad84b6e06d02883fb462"
+    },
+    {
+      "id": "file-19",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/continuation-initial-events.jsonl",
+      "sha256": "5cf625f455a6d5adb9e854a150f8080f49c552b8a6e679a84c9e6d7ec2e0c9c0"
+    },
+    {
+      "id": "file-20",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/continuation-repair-events.jsonl",
+      "sha256": "5f78f5e01d7366106b39822d23654f6ed888a4db0b01f59305eefc73779ea126"
+    },
+    {
+      "id": "file-21",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/criteria.json",
+      "sha256": "6e946d1adce4a5fb165399d9279229b79050af2c3675e5f52b3256f1d0d2cde9"
+    },
+    {
+      "id": "file-22",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/cues.json",
+      "sha256": "c4f1dcd245c57354c3a87361825f409f2f98fd95d1e4c1a5671ef509186fdc06"
+    },
+    {
+      "id": "file-23",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/demonstration-flow.json",
+      "sha256": "916028725b18668dea46cc7535641ec211d6679404e71a1ef4a049fe959a5070"
+    },
+    {
+      "id": "file-24",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/dispatch-and-state-limitations.json",
+      "sha256": "abbd24a45d69eeeb0d50fa2b25e87b09c0b274033ac5908cea284b850d5780e5"
+    },
+    {
+      "id": "file-25",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/dispatch-block-events.jsonl",
+      "sha256": "80a16a22b05e8f55bad459540e62fd479c9f4ee7c6ab4a917b088dc2877bd834"
+    },
+    {
+      "id": "file-26",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/final-integration-observation.json",
+      "sha256": "1d5be3e20c146ed30577f5e1cefa4d5351f958073dbfdca8a75ab2379d0932da"
+    },
+    {
+      "id": "file-27",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/final-state-check-output.txt",
+      "sha256": "154dd5408700826412a009dc19d7fcc4287b13c86af5cb7eac7fe04a343bf31d"
+    },
+    {
+      "id": "file-28",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/focused-flow.json",
+      "sha256": "dac2be4ea6504c43193f530081b9a978164b469c398966c61a24d77f953c8205"
+    },
+    {
+      "id": "file-29",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/initial-events.jsonl",
+      "sha256": "10f74ab3bb005f0baae0bf5f2f324e9b873fb3fee6b358c189d1a68c9af8c7b1"
+    },
+    {
+      "id": "file-30",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/intended-review-brief.txt",
+      "sha256": "c41bd7d8b4c8bb6823e7e5805df391d7f31a2863acd76f265ebe9c597b79cf78"
+    },
+    {
+      "id": "file-31",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/make-disabled-probe.mjs",
+      "sha256": "f79578be5311cdc59802475fd494adedc42b7ea52b2c9644cbe88f59e67fdcbe"
+    },
+    {
+      "id": "file-32",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/outer-independent-recheck.md",
+      "sha256": "89e13fc7072246a47c5377ec1b50ff168cabc174c7323af0ccf06c8538e25ea3"
+    },
+    {
+      "id": "file-33",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/outer-independent-review.md",
+      "sha256": "1aae6bbd38d3a3fc289759fe4ca4da7f28ad5a57065f7da368bbfe255f077bec"
+    },
+    {
+      "id": "file-34",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/platform-metadata.json",
+      "sha256": "7d80198062ac60c990e75b779c0463ac4b0ab434f52dcc1b54c1a4311127da77"
+    },
+    {
+      "id": "file-35",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/recheck-brief.txt",
+      "sha256": "2516dab7329f7c597afcfdb8d63b839d92b903c670cafd7e14b533581e613286"
+    },
+    {
+      "id": "file-36",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/repair-check-results.json",
+      "sha256": "d264eda1415a335e1a5e4d587e1f4bcd38800872ef59fb51bbf56702739f090c"
+    },
+    {
+      "id": "file-37",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/repair-flow.json",
+      "sha256": "d886be32066b122fa16c32d8aa7937bba469a28f2582dd53276e03a6a6b73451"
+    },
+    {
+      "id": "file-38",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/repair-focus-flow.json",
+      "sha256": "2baadfa33a3f161d86107cce43c1a5b248281e6f6bf99f3754c7159c3a757512"
+    },
+    {
+      "id": "file-39",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/repair-state-check-output.txt",
+      "sha256": "1c3ea5cdec9479044fe405c1aeef7eb0f131bd9e922d2c7c21ef5897dec024fc"
+    },
+    {
+      "id": "file-40",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/state-check-output.txt",
+      "sha256": "347dad8d3731c02c9e904b08471b2ae1955de4306712b75f457eb5b941b96de4"
+    },
+    {
+      "id": "file-41",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/verify-repair.mjs",
+      "sha256": "b706ec6b1c5095031f89c58d77497f671b654e393ce7bb170459c0498060224b"
+    },
+    {
+      "id": "file-42",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/verify.mjs",
+      "sha256": "ba6e7843e2fc134798e37a92483869192b6ad669e06b9e9ec63d8db601a0411e"
+    },
+    {
+      "id": "file-43",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps/events.jsonl",
+      "sha256": "f047e7dfa82745d6ee6f4be9a3f431e0e6377426f256286665f28e4af516b945"
+    },
+    {
+      "id": "file-44",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation/events.jsonl",
+      "sha256": "bf22b07dfd88f9ae07c31472879ec6debde3b2fe0e053bb0cd9343ed5b9762d7"
+    },
+    {
+      "id": "file-45",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps/snapshot.json",
+      "sha256": "757d46192b24eefd16d680b0139458999a8d598ff28a29943e7d2bcf6fcd9e26"
+    },
+    {
+      "id": "file-46",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation/snapshot.json",
+      "sha256": "fafdbd2ff37bc0aeb72f5d0615a0691e99b463e76f0e7041441dd36f36783ba1"
+    },
+    {
+      "id": "file-47",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps/report.md",
+      "sha256": "13acbae8c57b3cdae5782afbf79c6e158573a9c4646636027823b4e2c54280a1"
+    },
+    {
+      "id": "file-48",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation/report.md",
+      "sha256": "b49fa334675c9a9d48e736045199af650c828298c1899404262727e0ff496ec2"
+    },
+    {
+      "id": "file-49",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/browser-attempt-2/observations.json",
+      "sha256": "3bd7e08c4e23f36d0ecabb4817fef80228c8655a284558316e7d97bceea9de02"
+    },
+    {
+      "id": "file-50",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/browser-attempt-2/viewport-1280x800.png",
+      "sha256": "34ef52f543ca4d136207a360a09a9b9e3d23c867991ca5fbc801e58b1a3dd468"
+    },
+    {
+      "id": "file-51",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/browser-attempt-2/viewport-390x844.png",
+      "sha256": "55a3d63ad7274c1e8fa86c6906d2f6832568158c6984fddc4904484d8abdeb96"
+    },
+    {
+      "id": "file-52",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-main/viewport-1280x800.png",
+      "sha256": "34ef52f543ca4d136207a360a09a9b9e3d23c867991ca5fbc801e58b1a3dd468"
+    },
+    {
+      "id": "file-53",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-main/viewport-390x844.png",
+      "sha256": "55a3d63ad7274c1e8fa86c6906d2f6832568158c6984fddc4904484d8abdeb96"
+    },
+    {
+      "id": "file-54",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-disabled/observations.json",
+      "sha256": "7ef762e68bd5b0e7f7fe2c76d256090b7ec634353e2e93cb9b87cdf2eda575c6"
+    },
+    {
+      "id": "file-55",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-focus/observations.json",
+      "sha256": "acb7715519b35d719a54857560476bfae328fc51c34b26dddd726bc946e91696"
+    },
+    {
+      "id": "file-56",
+      "kind": "artifact",
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-demonstration-1/observations.json",
+      "sha256": "974542cb77b6786462418b28b3c4d09f5afae730d04e32106078e2ba310b1f82"
+    }
+  ],
+  "operational": {
+    "arm": "creative-treatment",
+    "actor_calls": 5,
+    "distinct_actors": 2,
+    "successful_initial_spawns": 2,
+    "followup_calls": 3,
+    "failed_dispatch_attempts": 1,
+    "total_dispatch_and_followup_attempts": 6,
+    "started_at": "2026-09-07 21:07:52 UTC",
+    "finished_at": "2026-09-07 21:44:28 UTC",
+    "wall_seconds": 2196.0,
+    "scope": "Outer pre-dispatch clock through final terminal observation; includes recording latency, coordination, reviewer time, repairs and gaps; not model compute or money. Native completion exit code unknown. Successful actor invocations include followups; failed dispatches separately counted. Evaluator/setup/scorer invocations excluded.",
+    "turns": [
+      {
+        "actor": "/root/live_creative_treatment",
+        "operation": "spawn_agent",
+        "start": {
+          "current_time": "2026-09-07 21:07:52 UTC"
+        },
+        "end": {
+          "current_time": "2026-09-07 21:20:58 UTC"
+        }
+      },
+      {
+        "before_spawn": {
+          "current_time": "2026-09-07 21:21:15 UTC"
+        },
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "fork_turns": "none",
+        "reason": "Original coordinator now completed and explicitly released.",
+        "spawn_result": {
+          "task_name": "/root/live_creative_review"
+        },
+        "after_spawn": {
+          "current_time": "2026-09-07 21:21:47 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:27:47 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "final_message_file": "observations/creative-independent-review.md",
+        "reported_findings": 2
+      },
+      {
+        "native_handle": "/root/live_creative_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:28:12 UTC"
+        },
+        "scope": "One focused repair, then checkpoint/release for independent existing reviewer recheck",
+        "root_effective_identity": null,
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:35:14 UTC"
+        },
+        "explicit_release": true,
+        "candidate_sha256": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+        "status": "completed turn; continuation task nonterminal pending independent recheck"
+      },
+      {
+        "native_handle": "/root/live_creative_review",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:35:40 UTC"
+        },
+        "packet": "setup/arms/creative-treatment/evidence/recheck-brief.txt",
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:40:02 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "finding_dispositions": {
+          "platform_metadata": "resolved with provenance limitation",
+          "terminal_pads": "resolved",
+          "new_material_regressions": 0
+        }
+      },
+      {
+        "native_handle": "/root/live_creative_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:40:18 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:44:28 UTC"
+        },
+        "explicit_release": true
+      }
+    ],
+    "workers": [
+      {
+        "role": "independent review",
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "effective_model": null,
+        "effective_effort": null
+      }
+    ],
+    "reported_tokens": null,
+    "reported_money": null
+  },
+  "frozen_setup_manifest_sha256": "6c65b62f17ac1eb2546b87f966057a0b861a1aee15281ba7b7bf717074679ece",
+  "non_applicable": {
+    "recovery_behavior": "This case does not exercise recovery_behavior",
+    "knowledge_behavior": "This case does not exercise knowledge_behavior"
+  }
+}

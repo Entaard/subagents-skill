@@ -1,0 +1,33 @@
+{
+  "scope": "Root observations and scoring preparation, not independent scores or verified product finding dispositions.",
+  "notes": {
+    "scope": "Independent scoring after seven sequential arms, no actor score substitution",
+    "frozen_setup_manifest": "6c65b62f17ac1eb2546b87f966057a0b861a1aee15281ba7b7bf717074679ece",
+    "paired": "Code and data only; routing is only intended difference; installed procedure in both; no absent-skill causal inference.",
+    "criteria": "Apply every frozen check and applicable dimension; no null scores, no compensation. Execute independent checks not just read journal. Pass threshold 8.5 and zero errors.",
+    "provenance": "Actor journals are authored journals not raw native transcripts. Pairing enum transcript must explicitly qualify source type; combine outer spawn/lifecycle observer evidence. Effective model/effort, token and money null unless exposed. Actor calls/root dispatch-to-terminal interval limited operational not monetary measures; bounds include observation latency.",
+    "immutability": "Do not overwrite arm artifacts/journals/frozen inputs or previous evidence. Own fresh scoring directory. Hash immutable prompt/checks/inputs/installed against initial list; allowed state changes intentional. Browser profiles excluded from general content inspection.",
+    "scenarios": "Creative must view actual game screenshots both viewports and run actual keyboard sequences/timings; neutral setup probe insufficient. Recovery and promotion source fixtures synthetic labeled, not authentic historical runs. Promotion actual three distinct role actors.",
+    "failures": "Preserve all failed/untested evidence; no resetting holdout after seeing outcome. Product repairs source separate wave critic then informed diagnostic rerun qualification.",
+    "root_readonly_candidate_issue": {
+      "summary": "All four paired-arm coordinators report rejected note.recorded.category, recovered by inspecting helper. Active state.md table lists category field but rg finds no allowed enum; helper line232 accepts assumption/decision. Potential documentation discoverability defect for independent evaluation, not self-scored.",
+      "evidence": [
+        "setup/arms/code-treatment/evidence/actor-journal.md:15",
+        "setup/arms/code-baseline/evidence/actor-journal.md:13",
+        "setup/arms/data-baseline/evidence/actor-journal.md:18",
+        "setup/arms/data-treatment/evidence/actor-journal.md:37",
+        "sage/skills/sage/references/state.md:24",
+        "sage/scripts/sage_state.py:232"
+      ],
+      "action": "Do not repair frozen installs midtrial. Preserve pristine failures. Assess source documentation remediation after live scoring in normal builder/critic cycle."
+    },
+    "additional_root_candidate_issue": {
+      "summary": "Creative arm reports real native dispatch failure after task.admitted leaves delegated task unreconcilable without real agent.requested handle; plan revision_limit1 prevents new revision, preserving incomplete source and linked continuation. Determine independently whether required known pre-creation failure closure/recovery contract is inadequate vs deliberate limit. No actor state fabrication authorized.",
+      "evidence": "Creative actor message; see final source/continuation journals and original installed state helper. Outer dispatch after coordinator terminal succeeded, fresh review actual then focused repair."
+    },
+    "native_exit_code_boundary": {
+      "summary": "pairing.py validate_result currently requires execution.exit_code integer, while native collaboration completion exposes no OS exit code. Do not invent native exit status. Determine if a separately executed verification process can be unambiguously scoped with its actual observed exit; otherwise report a schema/protocol evidence mismatch for repair, preserve genuine native completion evidence and unknowns.",
+      "evidence": "sage/evaluation/pairing.py: execution completed status/type(exit_code) check; outer observers carry native lifecycle plus independent helper subprocess exits separately."
+    }
+  }
+}

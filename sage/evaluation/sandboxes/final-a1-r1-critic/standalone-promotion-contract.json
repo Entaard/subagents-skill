@@ -1,0 +1,295 @@
+{
+  "kind": "installed-documentation-contract-probe",
+  "scenario": "Invoke only $sage-promote. Lose conversation context after author review and staging, before deciding whether activation already happened. Resume from the promotion coordinator's own persisted authority, reconcile actors/effects and pointer/proposal baselines, then admit only the safe next action. Source runs must remain closed and unchanged.",
+  "oracle": "R-030/R-031/R-035/R-036 plus ARCHITECTURE promotion-own-plan/log and context-loss protocol; semantic finding is based on complete manual reading, not term presence alone.",
+  "entrypoint_instruction_graph": {
+    "sage": {
+      "reachable": [
+        "skills/sage/SKILL.md",
+        "skills/sage/references/delegation.md",
+        "skills/sage/references/knowledge.md",
+        "skills/sage/references/recovery.md",
+        "skills/sage/references/run.md",
+        "skills/sage/references/state.md",
+        "skills/sage/references/verification.md"
+      ],
+      "terms": {
+        "checkpoint": [
+          {
+            "file": "skills/sage/references/run.md",
+            "line": 32,
+            "text": "Checkpoint after plan commitment, before and after a delegation wave, before a risky effect, after integration, after fixes, and on host compaction/context warnings. Boundary checkpoints replace imaginary token percentages."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 38,
+            "text": "| `checkpoint.written` | `next_action,baselines,unresolved_user_items` |"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 71,
+            "text": "{\"v\":1,\"event_id\":\"e-7\",\"run_id\":\"tiny-1\",\"seq\":7,\"at\":\"2026-09-07T00:00:07Z\",\"actor\":\"root\",\"type\":\"checkpoint.written\",\"payload\":{\"next_action\":\"close\",\"baselines\":[],\"unresolved_user_items\":[]}}"
+          }
+        ],
+        "snapshot": [
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 5,
+            "text": "Resolve the explicit run directory and state helper path. Validate `events.jsonl`; it is authority. A valid log may regenerate a missing or stale hash-bound snapshot. An invalid log preserves existing derived files and blocks admission. Never recover from `report.md`."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 9,
+            "text": "1. Read the validated snapshot, active skill spine, and only references named by the next action."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 21,
+            "text": "The helper\u2019s `resume` command repairs only a derived snapshot and returns advisory observations; proposals become facts only through `append`, followed by a new snapshot. Effective model/effort absent from live output remains `unknown`."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 23,
+            "text": "For a report, validate the log/snapshot binding, run `report --write`, and present delivered observations separately from inference, unknowns, untested checks, open findings, next action, and human items. The report does not change run state."
+          },
+          {
+            "file": "skills/sage/references/run.md",
+            "line": 20,
+            "text": "Prefer `init`, batched `append`, and boundary `snapshot` calls. Example tiny run:"
+          },
+          {
+            "file": "skills/sage/references/run.md",
+            "line": 25,
+            "text": "python3 SAGE_STATE snapshot --run-dir RUN --write"
+          },
+          {
+            "file": "skills/sage/references/run.md",
+            "line": 30,
+            "text": "`events.jsonl` is append-only authority. Prepare a complete JSONL wave and let `append` validate the whole proposed history before atomic replacement. `snapshot.json` is a hash-bound projection; `report.md` is derived. Persist large or confidential evidence by scoped locator/hash and classification, never by copying credentials or capability secrets."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 11,
+            "text": "python3 SAGE_STATE snapshot --run-dir RUN --write"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 53,
+            "text": "The helper's completion gate is deliberately structural. Every admitted task must finish with reconciled effects. `completed` also requires every current-plan task to pass, criterion-associated observation evidence, and a passed evidence-bearing check. `failed` or `stopped` may retain safely never-admitted tasks as visibly unfinished. Reports surface later failed checks; the helper does not infer which differently named check semantically supersedes another, judge evidence persuasiveness, prove authority, or enforce a physical lease. Invalid UTF-8 in criteria, event, live-agent, or authoritative-log input is a structured data error; invalid UTF-8 confined to `snapshot.json` is disposable and rebuilt from a valid log."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 75,
+            "text": "Then run `append --events wave.jsonl`, `snapshot --write`, `validate --terminal`, and `report --write`. `append` validates the entire proposed history before atomic replacement; a rejection leaves the log unchanged."
+          }
+        ],
+        "events.jsonl": [
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 5,
+            "text": "Resolve the explicit run directory and state helper path. Validate `events.jsonl`; it is authority. A valid log may regenerate a missing or stale hash-bound snapshot. An invalid log preserves existing derived files and blocks admission. Never recover from `report.md`."
+          },
+          {
+            "file": "skills/sage/references/run.md",
+            "line": 30,
+            "text": "`events.jsonl` is append-only authority. Prepare a complete JSONL wave and let `append` validate the whole proposed history before atomic replacement. `snapshot.json` is a hash-bound projection; `report.md` is derived. Persist large or confidential evidence by scoped locator/hash and classification, never by copying credentials or capability secrets."
+          }
+        ],
+        "plan.revised": [
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 26,
+            "text": "| `plan.revised` | `revision,reason,attempt_limit,revision_limit,no_progress,trigger_event_ids,tasks` |"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 66,
+            "text": "{\"v\":1,\"event_id\":\"e-2\",\"run_id\":\"tiny-1\",\"seq\":2,\"at\":\"2026-09-07T00:00:02Z\",\"actor\":\"root\",\"type\":\"plan.revised\",\"payload\":{\"revision\":1,\"reason\":\"initial\",\"attempt_limit\":1,\"revision_limit\":1,\"no_progress\":\"one bounded attempt\",\"trigger_event_ids\":[\"e-1\"],\"tasks\":[{\"id\":\"read-1\",\"revision\":1,\"objective\":\"inspect the bounded input\",\"completion\":\"one observation is recorded\",\"dependencies\":[],\"owner\":\"root\",\"effect\":\"read\",\"scope\":[\"input.txt\"],\"inputs\":[\"input.txt\"],\"returns\":[\"observation\"],\"risk\":\"low\",\"verification\":\"check-1\",\"requested_model\":\"gpt-5.6-sol\",\"requested_effort\":\"high\",\"fork_turns\":\"none\"}]}}"
+          }
+        ],
+        "list_agents": [
+          {
+            "file": "skills/sage/SKILL.md",
+            "line": 21,
+            "text": "Use the live collaboration-tool schema as authority. A full-history fork inherits the root\u2019s model/effort and cannot override them; a fresh or bounded fork may request overrides. A fresh fork omits conversation history, not system, tool, repository, or sandbox context. `send_message` steers an active turn; `followup_task` wakes an idle worker. Reconcile with `list_agents`. Idle, missing, or interrupted is not completion."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 11,
+            "text": "3. Call `list_agents` and reconcile every recorded handle. Map by returned ID or canonical name; append accepted `agent.observed` proposals before relying on them."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 15,
+            "text": "Normalize the current native `list_agents` response into the small `--agents` array; do not persist the host envelope. Map `agent_name` to `handle`, string `running` to `lifecycle: active`, and an object such as `{completed: ...}` to `lifecycle: completed`. Use JSON null for effective model/effort when the tool omits them. Lifecycle alone never proves an effect reconciled: omit `effect_status` (the helper treats it as unknown) or supply `reconciled` only from separate effect evidence."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 43,
+            "text": "Each delegated task revision normally has one `agent.requested`; its native handle equals the plan owner. If native creation is directly observed to fail before returning a handle, append one `agent.not_created` with nonempty observation-evidence references instead. It accepts only one subsequent `task.result` with `outcome: failed`, `effect_status: none`, and at least one of the same evidence IDs; it cannot follow or substitute for a real request, and absence from `list_agents` is not proof of non-creation. A bounded later revision may use a genuinely new strategy within the committed attempt/revision limits."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 49,
+            "text": "`resume --agents` consumes a normalized array, not the raw `list_agents` envelope. Each item has `handle,lifecycle` and may include `effect_status,effective_model,effective_effort`. Map native `agent_name` exactly to `handle`, `running` to `active`, and a completed status object to `completed`; omitted effective identity becomes null. Completion text is lifecycle evidence only, never effect-reconciliation evidence, so effect remains unknown until separately observed."
+          }
+        ],
+        "followup_task": [
+          {
+            "file": "skills/sage/SKILL.md",
+            "line": 21,
+            "text": "Use the live collaboration-tool schema as authority. A full-history fork inherits the root\u2019s model/effort and cannot override them; a fresh or bounded fork may request overrides. A fresh fork omits conversation history, not system, tool, repository, or sandbox context. `send_message` steers an active turn; `followup_task` wakes an idle worker. Reconcile with `list_agents`. Idle, missing, or interrupted is not completion."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 13,
+            "text": "5. Use `send_message` for an active turn and `followup_task` for an idle worker. Revise the plan if the recorded next action or dependency state is stale."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 45,
+            "text": "A delegated writer releases only when its reconciled result and that assignment's latest terminal reconciled observation coexist, in either order. Before that boundary, a newer lifecycle supersedes an earlier one: terminal then active/unknown before the result stays blocked until a fresh terminal reconciliation. After the boundary, release is historical and immutable. A released native handle may receive a new task revision through `followup_task` and a new request; later observations bind to that new assignment, so old completion cannot release it. A known uncreated assignment releases only through its failed/no-effect result. A root writer releases from its reconciled result. Planned-but-unadmitted tasks and released historical readers do not hold the writer barrier."
+          }
+        ],
+        "fork_turns": [
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 28,
+            "text": "| `agent.requested` | `task_id,handle,requested_model,requested_effort,fork_turns` |"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 41,
+            "text": "A task has `id,revision,objective,completion,dependencies,owner,effect,scope,inputs,returns,risk,verification,requested_model,requested_effort,fork_turns`. Effects are `read`, `write`, `external`, or `unknown`. Plan reasons are `initial`, `failure`, `user_amendment`, or `evidence_change`; a failure revision also supplies `unmet_criterion,failure_evidence_ids,cause,strategy_change`. Causes are `missing_input_or_authority`, `ambiguous_brief`, `decomposition`, `capability`, `environment_or_tool`, or `candidate_defect`."
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 66,
+            "text": "{\"v\":1,\"event_id\":\"e-2\",\"run_id\":\"tiny-1\",\"seq\":2,\"at\":\"2026-09-07T00:00:02Z\",\"actor\":\"root\",\"type\":\"plan.revised\",\"payload\":{\"revision\":1,\"reason\":\"initial\",\"attempt_limit\":1,\"revision_limit\":1,\"no_progress\":\"one bounded attempt\",\"trigger_event_ids\":[\"e-1\"],\"tasks\":[{\"id\":\"read-1\",\"revision\":1,\"objective\":\"inspect the bounded input\",\"completion\":\"one observation is recorded\",\"dependencies\":[],\"owner\":\"root\",\"effect\":\"read\",\"scope\":[\"input.txt\"],\"inputs\":[\"input.txt\"],\"returns\":[\"observation\"],\"risk\":\"low\",\"verification\":\"check-1\",\"requested_model\":\"gpt-5.6-sol\",\"requested_effort\":\"high\",\"fork_turns\":\"none\"}]}}"
+          }
+        ],
+        "effective": [
+          {
+            "file": "skills/sage/SKILL.md",
+            "line": 23,
+            "text": "The root model cannot be silently switched by this skill. It may request bounded Astra advice while retaining root decisions. Requested and effective model/effort are separate; absent effective observations remain `unknown`."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 15,
+            "text": "Normalize the current native `list_agents` response into the small `--agents` array; do not persist the host envelope. Map `agent_name` to `handle`, string `running` to `lifecycle: active`, and an object such as `{completed: ...}` to `lifecycle: completed`. Use JSON null for effective model/effort when the tool omits them. Lifecycle alone never proves an effect reconciled: omit `effect_status` (the helper treats it as unknown) or supply `reconciled` only from separate effect evidence."
+          },
+          {
+            "file": "skills/sage/references/recovery.md",
+            "line": 18,
+            "text": "[{\"handle\":\"/root/scout\",\"lifecycle\":\"active\",\"effective_model\":null,\"effective_effort\":null}]"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 30,
+            "text": "| `agent.observed` | `handle,lifecycle,effect_status,effective_model,effective_effort` |"
+          },
+          {
+            "file": "skills/sage/references/state.md",
+            "line": 49,
+            "text": "`resume --agents` consumes a normalized array, not the raw `list_agents` envelope. Each item has `handle,lifecycle` and may include `effect_status,effective_model,effective_effort`. Map native `agent_name` exactly to `handle`, `running` to `active`, and a completed status object to `completed`; omitted effective identity becomes null. Completion text is lifecycle evidence only, never effect-reconciliation evidence, so effect remains unknown until separately observed."
+          }
+        ],
+        "root-context": [
+          {
+            "file": "skills/sage/references/delegation.md",
+            "line": 7,
+            "text": "Delegate only a bounded, packageable unit whose expected gain from parallelism, context protection, independent evidence, or cohesive ownership exceeds briefing, root-context, review, integration, verification, and retry cost. Keep small or tightly coupled judgment inline. Batch independent scouts over the same corpus so they share a coherent question and return non-overlapping evidence. Admit only dependency-ready tasks."
+          }
+        ]
+      }
+    },
+    "sage-promote": {
+      "reachable": [
+        "skills/sage-promote/SKILL.md",
+        "skills/sage-promote/references/knowledge.md",
+        "skills/sage-promote/references/promotion.md"
+      ],
+      "terms": {
+        "checkpoint": [],
+        "snapshot": [
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 22,
+            "text": "{\"task\":[\"repository repair\"],\"domain\":[\"software\"],\"artifact\":[\"jsonl state\"],\"environment\":[\"python 3.11\"],\"risk\":[\"corrupt projection\"],\"operation\":[\"resume\"],\"failure\":[\"stale snapshot\"],\"include_non_supported\":false}"
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 41,
+            "text": "    \"id\": \"validate-log-before-snapshot\","
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 47,
+            "text": "    \"gate_evidence\": {\"repeatable_check\": \"python3 -m unittest test_state_snapshot\", \"environment\": \"Python 3.11 fixture sandbox\"},"
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 48,
+            "text": "    \"rule\": \"Validate the authoritative event log before regenerating its snapshot.\","
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 49,
+            "text": "    \"recognizer\": {\"task\": [], \"domain\": [], \"artifact\": [\"jsonl state\"], \"environment\": [], \"risk\": [\"corrupt projection\"], \"operation\": [\"resume\"], \"failure\": [\"stale snapshot\"]},"
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 54,
+            "text": "    \"falsifier\": \"A corrupt authoritative log safely regenerates a valid snapshot.\","
+          },
+          {
+            "file": "skills/sage-promote/references/promotion.md",
+            "line": 57,
+            "text": "`stage` validates every source/reference, copies the active snapshot, checks retained lineage, writes and fsyncs a complete sibling generation, rechecks the pointer, and renames it without activating it. `activate` validates all retained history, requires the target\u2019s staged parent to equal the live expected pointer, and atomically changes only `current.json`. These are cooperative checks; maintain one live promotion writer."
+          }
+        ],
+        "events.jsonl": [
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 56,
+            "text": "    \"provenance\": [{\"run_id\": \"run-1\", \"locator\": \"events.jsonl#e-6\"}],"
+          },
+          {
+            "file": "skills/sage-promote/references/knowledge.md",
+            "line": 83,
+            "text": "Every provenance item names a selected run and resolves to a bare event/evidence ID, a documented local `events.jsonl#ID`, or the exact hash-bound external locator recorded there. Qualified evidence uses `run-id:event-or-evidence-id` or `run-id:exact-external-locator`. A URI fragment never aliases a local ID. Refutation, finding, disposition, counterevidence, supported comparison/corroboration, and causal references must resolve. Missing source evidence fails before store mutation."
+          }
+        ],
+        "plan.revised": [],
+        "list_agents": [],
+        "followup_task": [],
+        "fork_turns": [],
+        "effective": [],
+        "root-context": []
+      }
+    }
+  },
+  "observations": {
+    "sage": {
+      "events.jsonl": true,
+      "plan.revised": true,
+      "checkpoint": true,
+      "list_agents": true,
+      "followup_task": true
+    },
+    "sage-promote": {
+      "events.jsonl": true,
+      "plan.revised": false,
+      "checkpoint": false,
+      "list_agents": false,
+      "followup_task": false
+    }
+  },
+  "positive_control_main_shared_contract_available": true,
+  "promotion_own_workflow_sufficient": false,
+  "expected": "A reachable own-run procedure specifies creation/authority, boundary checkpoint and safe resumed actor/effect/pointer reconciliation.",
+  "actual": "Only source-run terminal validation is specified. The three reachable promotion Markdown files give no own coordinator run initialization, event log, checkpoint/snapshot or resumed-native reconciliation procedure. Knowledge generation snapshots represent stored records, not pending coordinator task/authority state.",
+  "not_claimed": "No observed data loss, unsafe activation, failed native resume or live model behavior is inferred from this documentation omission.",
+  "fix_check": "Install the repair freshly, start only sage-promote, and demonstrate a separate bounded own-run checkpoint/resume through existing public state seams at pre-dispatch and pre/post-stage or activation boundaries. Corrupt own log must pause; stale projection may rebuild only from valid authority; unknown actor/effects hold writes; changed pointer/proposal or user authority revises the next action. Source logs stay unchanged. Retain an inline no_change control without a ritual team."
+}

@@ -1,0 +1,10 @@
+test_failed_round_is_preserved_when_later_round_is_appended (test_harness.HarnessTests.test_failed_round_is_preserved_when_later_round_is_appended) ... ok
+test_frozen_assets_and_trace_are_complete (test_harness.HarnessTests.test_frozen_assets_and_trace_are_complete) ... ok
+test_pairing_is_counterbalanced_and_unknown_cost_is_valid (test_harness.HarnessTests.test_pairing_is_counterbalanced_and_unknown_cost_is_valid) ... ok
+test_score_json_loader_rejects_duplicate_and_nonfinite_data (test_harness.HarnessTests.test_score_json_loader_rejects_duplicate_and_nonfinite_data) ... ok
+test_score_validator_rejects_omitted_null_nonfinite_and_false_pass (test_harness.HarnessTests.test_score_validator_rejects_omitted_null_nonfinite_and_false_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK

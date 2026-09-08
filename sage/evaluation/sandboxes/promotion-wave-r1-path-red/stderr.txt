@@ -1,0 +1,14 @@
+test_generation_validation_rejects_extra_empty_paths (sage.tests.test_knowledge.KnowledgeRegressionTests.test_generation_validation_rejects_extra_empty_paths) ... FAIL
+
+======================================================================
+FAIL: test_generation_validation_rejects_extra_empty_paths (sage.tests.test_knowledge.KnowledgeRegressionTests.test_generation_validation_rejects_extra_empty_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 237, in test_generation_validation_rejects_extra_empty_paths
+    self.assertEqual(result.returncode, 2, result.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.146s
+
+FAILED (failures=1)

@@ -1,0 +1,133 @@
+{
+  "ok": true,
+  "module_gates_passed": 7,
+  "critic_rounds": 18,
+  "failed_rounds_retained": 11,
+  "reviewed_source_unchanged_except_facts_only_docs": [
+    "sage/README.md",
+    "sage/docs/CONTRACTS.md",
+    "sage/docs/DECISIONS.md",
+    "sage/docs/LIVE-RESULTS.md",
+    "sage/docs/REQUIREMENTS.md",
+    "sage/evaluation/README.md",
+    "sage/evaluation/holdout-boundary.json",
+    "sage/evaluation/live-protocol.md",
+    "sage/evaluation/native-result-protocol-v3.md",
+    "sage/evaluation/pairing.py",
+    "sage/evaluation/requirements-trace.json",
+    "sage/evaluation/rubric.json",
+    "sage/evaluation/run_verification.py",
+    "sage/evaluation/score_status.py",
+    "sage/evaluation/tests/support.py",
+    "sage/evaluation/tests/test_harness.py",
+    "sage/evaluation/tests/test_live_repairs.py",
+    "sage/evaluation/tests/test_native_shape.py",
+    "sage/evaluation/tests/test_product_install.py",
+    "sage/evaluation/tests/test_product_knowledge.py",
+    "sage/evaluation/tests/test_product_state.py",
+    "sage/install.sh",
+    "sage/scripts/sage-lifecycle.py",
+    "sage/scripts/sage_knowledge.py",
+    "sage/scripts/sage_state.py",
+    "sage/skills/sage/SKILL.md",
+    "sage/skills/sage/agents/openai.yaml",
+    "sage/skills/sage/references/delegation.md",
+    "sage/skills/sage/references/knowledge.md",
+    "sage/skills/sage/references/recovery.md",
+    "sage/skills/sage/references/run.md",
+    "sage/skills/sage/references/state.md",
+    "sage/skills/sage/references/verification.md",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/agents/openai.yaml",
+    "sage/skills/sage-promote/references/knowledge.md",
+    "sage/skills/sage-promote/references/promotion.md",
+    "sage/tests/test_knowledge.py",
+    "sage/tests/test_state.py",
+    "sage/uninstall.sh"
+  ],
+  "facts_only_documentation": [
+    "sage/ARCHITECTURE.md",
+    "sage/docs/IMPLEMENTATION.md"
+  ],
+  "frozen_guards": [
+    {
+      "path": "sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    {
+      "path": "sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+      "sha256": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+      "sha256": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"
+    },
+    {
+      "path": "sage/docs/LIVE-RESULTS.md",
+      "sha256": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b"
+    }
+  ],
+  "handoff_links": [
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "../skills/sage/SKILL.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "../skills/sage-promote/SKILL.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "STATUS.json"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "reviews/final-a1-r2.json"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "../evaluation/sandboxes/final-a1-r2-builder/candidate-manifest.json"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "LIVE-RESULTS.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "../README.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "../ARCHITECTURE.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "IMPLEMENTATION.md"
+    },
+    {
+      "document": "sage/docs/FINAL-REPORT.md",
+      "target": "DECISIONS.md"
+    },
+    {
+      "document": "sage/ARCHITECTURE.md",
+      "target": "docs/FINAL-REPORT.md"
+    },
+    {
+      "document": "sage/docs/IMPLEMENTATION.md",
+      "target": "reviews/final-a1-r2.json"
+    },
+    {
+      "document": "sage/docs/IMPLEMENTATION.md",
+      "target": "FINAL-REPORT.md"
+    }
+  ],
+  "archive_files_verified": 186,
+  "sage_claude_worktree_clean": true,
+  "diff_check_passed": true,
+  "native_live_trial": false,
+  "cost_claim": null
+}

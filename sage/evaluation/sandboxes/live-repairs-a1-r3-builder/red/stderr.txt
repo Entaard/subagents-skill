@@ -1,0 +1,1065 @@
+test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) ... 
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=None) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=True) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=1) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value='x') ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=[]) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=None) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=True) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=1) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value='x') ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=[]) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=None) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=True) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=1) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value='x') ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=[]) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=None) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=True) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=1) ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value='x') ... FAIL
+  test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=[]) ... FAIL
+test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) ... 
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'checks', 0, 'evidence_refs'), value='x') ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'checks', 0, 'evidence_refs'), value={'x': True}) ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scores', 'task_correctness', 'evidence_refs'), value='x') ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scores', 'task_correctness', 'evidence_refs'), value={'x': True}) ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scorer', 'evidence_refs'), value='x') ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scorer', 'evidence_refs'), value={'x': True}) ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'operational_evidence_refs'), value='x') ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'operational_evidence_refs'), value={'x': True}) ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'usage_evidence_refs'), value='x') ... FAIL
+  test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'usage_evidence_refs'), value={'x': True}) ... FAIL
+test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) ... 
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=True) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=1) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=['x']) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value={'x': True}) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=True) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=1) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=['x']) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value={'x': True}) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=True) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=1) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=['x']) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value={'x': True}) ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'execution', 'evidence', 0, 'id'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'execution', 'commands', 0, 'id'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'root_model_effective'), value='') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'root_model_effective'), value='  ') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'effective_model'), value='') ... FAIL
+  test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'effective_model'), value='  ') ... FAIL
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 161, in validate_scored_result
+    if routing.get("root_model_requested") != frozen["root_model"] or routing.get("eligible_worker_policy") != frozen["arms"][arm_name]["eligible_worker_policy"]:
+       ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 161, in validate_scored_result
+    if routing.get("root_model_requested") != frozen["root_model"] or routing.get("eligible_worker_policy") != frozen["arms"][arm_name]["eligible_worker_policy"]:
+       ^^^^^^^^^^^
+AttributeError: 'bool' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 161, in validate_scored_result
+    if routing.get("root_model_requested") != frozen["root_model"] or routing.get("eligible_worker_policy") != frozen["arms"][arm_name]["eligible_worker_policy"]:
+       ^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 161, in validate_scored_result
+    if routing.get("root_model_requested") != frozen["root_model"] or routing.get("eligible_worker_policy") != frozen["arms"][arm_name]["eligible_worker_policy"]:
+       ^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing'), value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 161, in validate_scored_result
+    if routing.get("root_model_requested") != frozen["root_model"] or routing.get("eligible_worker_policy") != frozen["arms"][arm_name]["eligible_worker_policy"]:
+       ^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in validate_scored_result
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in <genexpr>
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                                ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in validate_scored_result
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in <genexpr>
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                                ^^^^^^^^
+AttributeError: 'bool' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in validate_scored_result
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in <genexpr>
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                                ^^^^^^^^
+AttributeError: 'int' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in validate_scored_result
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in <genexpr>
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                                ^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0), value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in validate_scored_result
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 166, in <genexpr>
+    if not isinstance(workers, list) or any(not item.get("role") or not item.get("requested_model") or (item.get("effective_model") is not None and not isinstance(item.get("effective_model"), str)) for item in workers):
+                                                ^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in validate_scored_result
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in <listcomp>
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                        ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in validate_scored_result
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in <listcomp>
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                        ^^^^^^^^
+AttributeError: 'bool' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in validate_scored_result
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in <listcomp>
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                        ^^^^^^^^
+AttributeError: 'int' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in validate_scored_result
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in <listcomp>
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                        ^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'checks', 0), value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in validate_scored_result
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 171, in <listcomp>
+    if not isinstance(checks, list) or [item.get("id") for item in checks] != fixed["check_ids"]:
+                                        ^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 185, in validate_scored_result
+    if scorer.get("independent") is not True or not scorer.get("id") or not scorer.get("evidence_refs") or not set(scorer["evidence_refs"]) <= evidence_ids:
+       ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 185, in validate_scored_result
+    if scorer.get("independent") is not True or not scorer.get("id") or not scorer.get("evidence_refs") or not set(scorer["evidence_refs"]) <= evidence_ids:
+       ^^^^^^^^^^
+AttributeError: 'bool' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 185, in validate_scored_result
+    if scorer.get("independent") is not True or not scorer.get("id") or not scorer.get("evidence_refs") or not set(scorer["evidence_refs"]) <= evidence_ids:
+       ^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 185, in validate_scored_result
+    if scorer.get("independent") is not True or not scorer.get("id") or not scorer.get("evidence_refs") or not set(scorer["evidence_refs"]) <= evidence_ids:
+       ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_all_consumed_container_and_element_shapes (test_native_shape.NativeShapeTests.test_all_consumed_container_and_element_shapes) (path=('pairs', 0, 'treatment', 'scorer'), value=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 68, in test_all_consumed_container_and_element_shapes
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 232, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 226, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 211, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 185, in validate_scored_result
+    if scorer.get("independent") is not True or not scorer.get("id") or not scorer.get("evidence_refs") or not set(scorer["evidence_refs"]) <= evidence_ids:
+       ^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'checks', 0, 'evidence_refs'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'checks', 0, 'evidence_refs'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scores', 'task_correctness', 'evidence_refs'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scores', 'task_correctness', 'evidence_refs'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scorer', 'evidence_refs'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'scorer', 'evidence_refs'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'operational_evidence_refs'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'operational_evidence_refs'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'usage_evidence_refs'), value='x')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_every_reference_branch_requires_string_array (test_native_shape.NativeShapeTests.test_every_reference_branch_requires_string_array) (path=('pairs', 0, 'treatment', 'usage_evidence_refs'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 109, in test_every_reference_branch_requires_string_array
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value=['x'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'scorer', 'id'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value=['x'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'role'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value=['x'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value={'x': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'requested_model'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'execution', 'evidence', 0, 'id'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'execution', 'commands', 0, 'id'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'root_model_effective'), value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'root_model_effective'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'effective_model'), value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+======================================================================
+FAIL: test_nonblank_identifiers_and_nullable_effective_models (test_native_shape.NativeShapeTests.test_nonblank_identifiers_and_nullable_effective_models) (path=('pairs', 0, 'treatment', 'routing', 'workers', 0, 'effective_model'), value='  ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 84, in test_nonblank_identifiers_and_nullable_effective_models
+    self.check(helper, manifest, root, self.change(control, path, value))
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_native_shape.py", line 32, in check
+    self.assertEqual(result.returncode, 0 if accepted else 2, result.stdout + result.stderr)
+AssertionError: 0 != 2 : {
+  "ok": true,
+  "pair_count": 3,
+  "validation_scope": "hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility",
+  "result_schema": "sage-live-native-scored-results-v3"
+}
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.204s
+
+FAILED (failures=51)

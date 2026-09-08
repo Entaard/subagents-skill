@@ -1,0 +1,25 @@
+{
+  "old_exit": 1,
+  "old_failing_subcases": 51,
+  "current_exit": 0,
+  "current_methods_passed": 3,
+  "existing_functions_changed": [
+    "validate_native_result"
+  ],
+  "added_function": "validate_native_shape",
+  "v2_shared_functions_ast_unchanged": true,
+  "no_historical_sandboxes": true,
+  "builder_red_green_classification_verified": true,
+  "diff_whitespace": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "sage"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

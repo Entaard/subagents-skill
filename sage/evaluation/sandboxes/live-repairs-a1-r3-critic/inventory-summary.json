@@ -1,0 +1,7 @@
+{
+  "commands": 256,
+  "unexpected": [],
+  "distinct_round2_failure_inputs": 42,
+  "all_exact_failures_rejected": true,
+  "classification": "Retained independent inventory replay; informed diagnostics, no live trial."
+}

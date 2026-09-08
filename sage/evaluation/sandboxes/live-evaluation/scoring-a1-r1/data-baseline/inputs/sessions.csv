@@ -1,0 +1,10 @@
+row_id,week,crowd_block,sign,visitors,completed
+M01,1,quiet,old,180,144
+M02,1,quiet,new,40,34
+M03,1,busy,old,30,12
+M04,1,busy,new,150,75
+M05,2,quiet,old,160,128
+M06,2,quiet,new,50,43
+M07,2,busy,old,40,18
+M08,2,busy,new,140,77
+M09,2,busy,new,20,

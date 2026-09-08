@@ -1,0 +1,11 @@
+{
+  "domain": [
+    "museum imports"
+  ],
+  "artifact": [
+    "csv"
+  ],
+  "operation": [
+    "count fields"
+  ]
+}

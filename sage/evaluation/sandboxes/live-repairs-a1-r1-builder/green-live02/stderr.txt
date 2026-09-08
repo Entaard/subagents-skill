@@ -1,0 +1,10 @@
+test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite (test_live_repairs.LiveRepairStateTests.test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite) ... ok
+test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds (test_live_repairs.LiveRepairStateTests.test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds) ... ok
+test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path) ... ok
+test_report_copies_qualify_empty_sections_and_render_stored_native_unknowns (test_live_repairs.LiveRepairStateTests.test_report_copies_qualify_empty_sections_and_render_stored_native_unknowns) ... ok
+test_report_renders_actual_typed_unknown_and_untested_entries (test_live_repairs.LiveRepairStateTests.test_report_renders_actual_typed_unknown_and_untested_entries) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.872s
+
+OK

@@ -1,0 +1,34 @@
+{
+  "dimensions": [
+    "task_correctness",
+    "task_completeness",
+    "evidence_quality",
+    "orchestration_behavior",
+    "routing_efficiency",
+    "safety_reversibility",
+    "report_quality"
+  ],
+  "not_applicable": {
+    "artifact_experience": "This case does not exercise artifact_experience",
+    "recovery_behavior": "This case does not exercise recovery_behavior",
+    "knowledge_behavior": "This case does not exercise knowledge_behavior"
+  },
+  "checks": [
+    {
+      "id": "wire-behavior",
+      "acceptance": "Independent stdlib checks confirm zero/nonzero and arbitrary binary payloads, concatenation and every split boundary under the exact prompt specification."
+    },
+    {
+      "id": "failure-and-reset",
+      "acceptance": "Observe malformed framing, partial finish, oversize headers, poisoned calls and successful reset; distinguish argument TypeError from protocol errors."
+    },
+    {
+      "id": "deliverables",
+      "acceptance": "decoder.py, meaningful stdlib tests and usage README are delivered; tests execute successfully and input hashes stay unchanged."
+    },
+    {
+      "id": "live-procedure",
+      "acceptance": "Installed Sage, bounded task criteria, routing requests, actual independent candidate review, writer ownership, findings and evidence are observed; unknown identity/usage remains unknown."
+    }
+  ]
+}

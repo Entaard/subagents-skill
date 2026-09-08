@@ -1,0 +1,4098 @@
+[
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-run-id-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.run_id must be a nonblank string\"}\n",
+    "label": "probes.json:current:native-run-id-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-start-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.started_at must be a nonblank string\"}\n",
+    "label": "probes.json:current:native-start-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-finish-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.finished_at must be a nonblank string\"}\n",
+    "label": "probes.json:current:native-finish-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-execution-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "probes.json:current:native-execution-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/paired-results-v3-adapted-informed-diagnostic.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "probes.json:valid-informed-native-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks completed transcript evidence\"}\n",
+    "label": "probes.json:original-v2-rejection",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/command-bool-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment invalid subprocess command evidence\"}\n",
+    "label": "probes.json:retained-negative:command-bool-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/command-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "probes.json:retained-negative:command-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/command-dangling-evidence.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment invalid subprocess command evidence\"}\n",
+    "label": "probes.json:retained-negative:command-dangling-evidence",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/command-no-evidence.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment invalid subprocess command evidence\"}\n",
+    "label": "probes.json:retained-negative:command-no-evidence",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/command-string-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment invalid subprocess command evidence\"}\n",
+    "label": "probes.json:retained-negative:command-string-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/commands-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "probes.json:retained-negative:commands-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-array-completion.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:retained-negative:native-array-completion",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-blank-provenance.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.provenance must be a nonblank string\"}\n",
+    "label": "probes.json:retained-negative:native-blank-provenance",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-bool-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment native exit needs direct bound evidence\"}\n",
+    "label": "probes.json:retained-negative:native-bool-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-bool-lifecycle.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks bound native lifecycle completion evidence\"}\n",
+    "label": "probes.json:retained-negative:native-bool-lifecycle",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-bool-provenance.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.provenance must be a nonblank string\"}\n",
+    "label": "probes.json:retained-negative:native-bool-provenance",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-evidence-kind-contradiction.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment has invalid native execution fields\"}\n",
+    "label": "probes.json:retained-negative:native-evidence-kind-contradiction",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-failed-lifecycle.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks bound native lifecycle completion evidence\"}\n",
+    "label": "probes.json:retained-negative:native-failed-lifecycle",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-float-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment native exit needs direct bound evidence\"}\n",
+    "label": "probes.json:retained-negative:native-float-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-hash-contradiction.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment evidence hash mismatch\"}\n",
+    "label": "probes.json:retained-negative:native-hash-contradiction",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-invented-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment native exit needs direct bound evidence\"}\n",
+    "label": "probes.json:retained-negative:native-invented-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-journal-proof.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks bound native lifecycle completion evidence\"}\n",
+    "label": "probes.json:retained-negative:native-journal-proof",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-missing-proof.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks bound native lifecycle completion evidence\"}\n",
+    "label": "probes.json:retained-negative:native-missing-proof",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-missing-provenance.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.provenance must be a nonblank string\"}\n",
+    "label": "probes.json:retained-negative:native-missing-provenance",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-null-completion.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:retained-negative:native-null-completion",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-null-with-exit-proof.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment unobserved native exit cannot cite exit evidence\"}\n",
+    "label": "probes.json:retained-negative:native-null-with-exit-proof",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-object-proof.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs entry must be a nonblank string\"}\n",
+    "label": "probes.json:retained-negative:native-object-proof",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-string-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment native exit needs direct bound evidence\"}\n",
+    "label": "probes.json:retained-negative:native-string-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-string-refs.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "probes.json:retained-negative:native-string-refs",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/run_id-blank.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.run_id must be a nonblank string\"}\n",
+    "label": "probes.json:run_id:blank",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/run_id-integer.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.run_id must be a nonblank string\"}\n",
+    "label": "probes.json:run_id:integer",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/run_id-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.run_id must be a nonblank string\"}\n",
+    "label": "probes.json:run_id:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/run_id-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.run_id must be a nonblank string\"}\n",
+    "label": "probes.json:run_id:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/started_at-blank.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.started_at must be a nonblank string\"}\n",
+    "label": "probes.json:started_at:blank",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/started_at-integer.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.started_at must be a nonblank string\"}\n",
+    "label": "probes.json:started_at:integer",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/started_at-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.started_at must be a nonblank string\"}\n",
+    "label": "probes.json:started_at:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/started_at-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.started_at must be a nonblank string\"}\n",
+    "label": "probes.json:started_at:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/finished_at-blank.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.finished_at must be a nonblank string\"}\n",
+    "label": "probes.json:finished_at:blank",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/finished_at-integer.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.finished_at must be a nonblank string\"}\n",
+    "label": "probes.json:finished_at:integer",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/finished_at-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.finished_at must be a nonblank string\"}\n",
+    "label": "probes.json:finished_at:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/finished_at-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution.finished_at must be a nonblank string\"}\n",
+    "label": "probes.json:finished_at:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/result-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "probes.json:result:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/result-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "probes.json:result:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/result-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "probes.json:result:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/result-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "probes.json:result:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/pair-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "probes.json:pair:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/pair-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "probes.json:pair:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/pair-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "probes.json:pair:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/pair-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "probes.json:pair:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/arm-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "probes.json:arm:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/arm-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "probes.json:arm:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/arm-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "probes.json:arm:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/arm-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "probes.json:arm:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/execution-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "probes.json:execution:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/execution-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "probes.json:execution:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/execution-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "probes.json:execution:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/execution-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "probes.json:execution:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/completion-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:completion:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/completion-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:completion:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/completion-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:completion:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/completion-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "probes.json:completion:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/command-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "probes.json:command:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/command-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "probes.json:command:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/command-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "probes.json:command:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/command-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "probes.json:command:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/evidence-entry-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "probes.json:evidence-entry:null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/evidence-entry-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "probes.json:evidence-entry:list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/evidence-entry-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "probes.json:evidence-entry:bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/evidence-entry-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "probes.json:evidence-entry:string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/completion-object-ref.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs entry must be a nonblank string\"}\n",
+    "label": "probes.json:completion-object-ref",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/native-exit-object-ref.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs entry must be a nonblank string\"}\n",
+    "label": "probes.json:native-exit-object-ref",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/subprocess-object-ref.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs entry must be a nonblank string\"}\n",
+    "label": "probes.json:subprocess-object-ref",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/routing-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "probes.json:routing-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/worker-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "probes.json:worker-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/check-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "probes.json:check-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/scorer-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "probes.json:scorer-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/inputs/noncalendar-text.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "probes.json:documented-no-timestamp-parser",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/result-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "surface-results.json:result-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/result-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "surface-results.json:result-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/result-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "surface-results.json:result-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/result-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "surface-results.json:result-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/result-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"native result must be an object\"}\n",
+    "label": "surface-results.json:result-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pairs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs must be an array\"}\n",
+    "label": "surface-results.json:pairs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pairs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs must be an array\"}\n",
+    "label": "surface-results.json:pairs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pairs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs must be an array\"}\n",
+    "label": "surface-results.json:pairs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pairs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs must be an array\"}\n",
+    "label": "surface-results.json:pairs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pairs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs must be an array\"}\n",
+    "label": "surface-results.json:pairs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pair-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "surface-results.json:pair-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pair-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "surface-results.json:pair-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pair-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "surface-results.json:pair-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pair-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "surface-results.json:pair-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/pair-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0] must be an object\"}\n",
+    "label": "surface-results.json:pair-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/arm-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "surface-results.json:arm-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/arm-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "surface-results.json:arm-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/arm-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "surface-results.json:arm-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/arm-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "surface-results.json:arm-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/arm-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment must be an object\"}\n",
+    "label": "surface-results.json:arm-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/execution-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "surface-results.json:execution-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/execution-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "surface-results.json:execution-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/execution-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "surface-results.json:execution-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/execution-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "surface-results.json:execution-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/execution-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.execution must be an object\"}\n",
+    "label": "surface-results.json:execution-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "surface-results.json:completion-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "surface-results.json:completion-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "surface-results.json:completion-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "surface-results.json:completion-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion must be an object\"}\n",
+    "label": "surface-results.json:completion-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/exit-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:exit-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/exit-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:exit-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/exit-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:exit-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/exit-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:exit-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/exit-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.exit_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:exit-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/commands-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "surface-results.json:commands-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/commands-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "surface-results.json:commands-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/commands-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "surface-results.json:commands-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/commands-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "surface-results.json:commands-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/commands-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.commands must be an array\"}\n",
+    "label": "surface-results.json:commands-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "surface-results.json:command-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "surface-results.json:command-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "surface-results.json:command-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "surface-results.json:command-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command must be an object\"}\n",
+    "label": "surface-results.json:command-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence must be an array\"}\n",
+    "label": "surface-results.json:evidence-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence must be an array\"}\n",
+    "label": "surface-results.json:evidence-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence must be an array\"}\n",
+    "label": "surface-results.json:evidence-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence must be an array\"}\n",
+    "label": "surface-results.json:evidence-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence must be an array\"}\n",
+    "label": "surface-results.json:evidence-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-item-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "surface-results.json:evidence-item-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-item-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "surface-results.json:evidence-item-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-item-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "surface-results.json:evidence-item-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-item-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "surface-results.json:evidence-item-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/evidence-item-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence entry must be an object\"}\n",
+    "label": "surface-results.json:evidence-item-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "surface-results.json:routing-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "surface-results.json:routing-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "surface-results.json:routing-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "surface-results.json:routing-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/routing-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing must be an object\"}\n",
+    "label": "surface-results.json:routing-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/workers-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.workers must be an array\"}\n",
+    "label": "surface-results.json:workers-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/workers-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.workers must be an array\"}\n",
+    "label": "surface-results.json:workers-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/workers-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.workers must be an array\"}\n",
+    "label": "surface-results.json:workers-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/workers-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.workers must be an array\"}\n",
+    "label": "surface-results.json:workers-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/workers-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.workers must be an array\"}\n",
+    "label": "surface-results.json:workers-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "surface-results.json:worker-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "surface-results.json:worker-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "surface-results.json:worker-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "surface-results.json:worker-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/worker-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker must be an object\"}\n",
+    "label": "surface-results.json:worker-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/checks-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.checks must be an array\"}\n",
+    "label": "surface-results.json:checks-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/checks-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.checks must be an array\"}\n",
+    "label": "surface-results.json:checks-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/checks-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.checks must be an array\"}\n",
+    "label": "surface-results.json:checks-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/checks-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.checks must be an array\"}\n",
+    "label": "surface-results.json:checks-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/checks-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.checks must be an array\"}\n",
+    "label": "surface-results.json:checks-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "surface-results.json:check-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "surface-results.json:check-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "surface-results.json:check-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "surface-results.json:check-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check must be an object\"}\n",
+    "label": "surface-results.json:check-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scores-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores must be an object\"}\n",
+    "label": "surface-results.json:scores-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scores-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores must be an object\"}\n",
+    "label": "surface-results.json:scores-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scores-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores must be an object\"}\n",
+    "label": "surface-results.json:scores-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scores-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores must be an object\"}\n",
+    "label": "surface-results.json:scores-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scores-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores must be an object\"}\n",
+    "label": "surface-results.json:scores-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness must be an object\"}\n",
+    "label": "surface-results.json:score-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness must be an object\"}\n",
+    "label": "surface-results.json:score-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness must be an object\"}\n",
+    "label": "surface-results.json:score-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness must be an object\"}\n",
+    "label": "surface-results.json:score-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness must be an object\"}\n",
+    "label": "surface-results.json:score-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "surface-results.json:scorer-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "surface-results.json:scorer-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "surface-results.json:scorer-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "surface-results.json:scorer-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer must be an object\"}\n",
+    "label": "surface-results.json:scorer-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-null.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-null",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-string.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-string",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-opposite.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-opposite",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/completion-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:completion-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/command-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:command-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/check-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:check-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/score-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:score-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/scorer-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:scorer-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/operational-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:operational-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-branch-structural-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "surface-results.json:usage-branch-structural-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.usage_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:usage-refs-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.usage_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:usage-refs-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-mapping.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.usage_evidence_refs must be an array\"}\n",
+    "label": "surface-results.json:usage-refs-mapping",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/surface-inputs/usage-refs-element-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.usage_evidence_refs entry must be a nonblank string\"}\n",
+    "label": "surface-results.json:usage-refs-element-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:scorer-id-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:scorer-id-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:scorer-id-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-id-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:scorer-id-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.role must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-role-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.role must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-role-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.role must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-role-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-role-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.role must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-role-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.requested_model must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-requested-model-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.requested_model must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-requested-model-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.requested_model must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-requested-model-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-requested-model-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.requested_model must be a nonblank string\"}\n",
+    "label": "primitive-results.json:worker-requested-model-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-effective-model-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.effective_model must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:worker-effective-model-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-effective-model-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.effective_model must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:worker-effective-model-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-effective-model-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.effective_model must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:worker-effective-model-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/worker-effective-model-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.worker.effective_model must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:worker-effective-model-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/root-effective-model-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing.root_model_effective must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:root-effective-model-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/root-effective-model-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing.root_model_effective must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:root-effective-model-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/root-effective-model-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing.root_model_effective must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:root-effective-model-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/root-effective-model-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.routing.root_model_effective must be a nonblank string or null\"}\n",
+    "label": "primitive-results.json:root-effective-model-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/evidence-id-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:evidence-id-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/evidence-id-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:evidence-id-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/evidence-id-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:evidence-id-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/evidence-id-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.evidence.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:evidence-id-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-id-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:command-id-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-id-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:command-id-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-id-list.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:command-id-list",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-id-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.id must be a nonblank string\"}\n",
+    "label": "primitive-results.json:command-id-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/completion-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:completion-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/completion-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.completion.evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:completion-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:command-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/command-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.command.evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:command-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/check-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:check-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/check-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.check.evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:check-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/score-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:score-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/score-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scores.task_correctness.evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:score-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:scorer-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/scorer-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.scorer.evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:scorer-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/operational-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:operational-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/operational-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.operational_evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:operational-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/usage-single-character-id-array-control.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "primitive-results.json:usage-single-character-id-array-control",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r2-critic/primitive-inputs/usage-string-reference.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[0].treatment.usage_evidence_refs must be an array\"}\n",
+    "label": "primitive-results.json:usage-string-reference",
+    "expected_exit": 2,
+    "matched": true
+  }
+]

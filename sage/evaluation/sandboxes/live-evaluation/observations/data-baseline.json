@@ -1,0 +1,162 @@
+{
+  "arm": "data-baseline",
+  "packet": "setup/arms/data-baseline/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 20:38:54 UTC"
+  },
+  "packet_sha256": "782c5e1ec12fd74fb604e01354d0efd928a0b6df77adf301820395d13620512b",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:41:17 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_baseline",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:42:40 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_baseline",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:45:07 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_data_baseline/reviewer",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:47:31 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_baseline",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_data_baseline/reviewer",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:50:53 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_data_baseline",
+            "lifecycle": "running"
+          },
+          {
+            "agent_name": "/root/live_data_baseline/reviewer",
+            "lifecycle": "completed",
+            "explicit_release": true,
+            "findings_reported": 0,
+            "assertions_reported": 3807,
+            "m09_scenarios_reported": 21,
+            "requested_model_reported": "gpt-6-astra",
+            "requested_effort_reported": "xhigh"
+          }
+        ]
+      },
+      "provenance": "Normalized direct native tool status and reviewer final; actor claims not evaluation scores."
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_data_baseline"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 20:39:32 UTC"
+  },
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:45:07 UTC"
+      },
+      "sender": "/root/live_data_baseline",
+      "content": "data-baseline build complete and frozen; byte-identical reproduction and unchanged raw source hashes observed. Native independent reviewer dispatched as /root/live_data_baseline/reviewer, requested gpt-6-astra/xhigh fresh fork. I released build writer lease and remain read-only until reviewer explicit release + completed lifecycle. Outcome arithmetic: overall new lower for all M09 possibilities; within both crowd blocks new higher, causal identification unsupported.",
+      "provenance": "Actor message; claims not independently scored."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:47:31 UTC"
+      },
+      "sender": "/root/live_data_baseline",
+      "content": "Independent reviewer remains active; this arm is read-only at coordinator level. Frozen script/summary/memo and raw-source hashes were rechecked during review and all match. Awaiting reviewer release and native completion before state/report integration. Effective identity, usage, and cost remain null.",
+      "provenance": "Actor message; claims not independently scored."
+    }
+  ],
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 20:54:11 UTC"
+  },
+  "final_status": "completed",
+  "explicit_release": true,
+  "actor_final_summary": {
+    "delivered": [
+      "work/decision-memo.md",
+      "work/analysis.py",
+      "work/summary.json"
+    ],
+    "independent_assertions": 3807,
+    "missing_value_scenarios": 21,
+    "byte_identical_reproductions": 2,
+    "review_findings": 0,
+    "product_repairs": 0,
+    "state_note_schema_correction": true,
+    "run_dir": "state/run",
+    "effective_model": null,
+    "effective_effort": null,
+    "tokens": null,
+    "money": null,
+    "provenance": "Coordinator final claims, not evaluation scores."
+  },
+  "terminal_validation": {
+    "chunk_id": "19f191",
+    "wall_time_seconds": 0.000002875,
+    "exit_code": 0,
+    "original_token_count": 19,
+    "output": "{\"last_seq\": 27, \"ok\": true, \"run_id\": \"data-baseline\", \"terminal\": true}\n"
+  }
+}

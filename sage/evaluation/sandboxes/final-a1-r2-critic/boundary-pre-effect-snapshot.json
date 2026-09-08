@@ -1,0 +1,13 @@
+{
+  "args": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/sandboxes/coordination/critic/installed/sage/bin/sage_state.py",
+    "snapshot",
+    "--run-dir",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary/coordinator",
+    "--write"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"agents\": {}, \"assumptions\": [], \"baselines\": [{\"source_sha256\": \"c37e2ba8f299da88e0bf74eebcbed8d7f7898461663672dfaffac3720c3dc421\"}, {\"proposal_sha256\": \"5d1b5441c65c214ea13a5e12bac90a32c819bbfefda666e3cd8dc8a2037ad0eb\"}, {\"pointer_sha256\": \"f04f2ca7652ad0e91b9646b72ab474db93c117c0927b4e044b04f391e870bea3\"}, {\"expected\": \"g-base\"}, {\"generation\": \"g-next\", \"manifest_sha256\": \"df8a447bca6e93d376bec348449ab52ab43477f4cbb28b6f50e360b17d04fbb7\"}, {\"authority\": \"synthetic fixture permits one activation\"}], \"checks\": {}, \"constraints\": [], \"criteria\": [{\"id\": \"c-1\", \"text\": \"the reviewed activation effect is reconciled\"}], \"current_plan_revision\": 1, \"decisions\": [], \"events_sha256\": \"66ff0263e23a42ac5473f1f814eb40f475d1a47d8e96191ee1c28845baa98d64\", \"evidence\": {}, \"findings\": {}, \"knowledge_feedback\": [], \"knowledge_selection\": null, \"last_seq\": 4, \"next_action\": \"activate reviewed g-next once\", \"objective\": \"reconcile one reviewed promotion effect\", \"ok\": true, \"run_id\": \"promotion-recovery\", \"tasks\": {\"activate\": {\"completion\": \"activate has an observed result\", \"dependencies\": [], \"effect\": \"write\", \"fork_turns\": \"none\", \"id\": \"activate\", \"inputs\": [\"recorded baselines\"], \"objective\": \"complete activate\", \"owner\": \"root\", \"requested_effort\": \"high\", \"requested_model\": \"gpt-5.6-sol\", \"returns\": [\"result\", \"evidence\"], \"revision\": 1, \"risk\": \"low\", \"scope\": [\"promotion/activate\"], \"state\": \"admitted\", \"verification\": \"check-activate\"}, \"follow-on\": {\"completion\": \"follow-on has an observed result\", \"dependencies\": [], \"effect\": \"write\", \"fork_turns\": \"none\", \"id\": \"follow-on\", \"inputs\": [\"recorded baselines\"], \"objective\": \"complete follow-on\", \"owner\": \"root\", \"requested_effort\": \"high\", \"requested_model\": \"gpt-5.6-sol\", \"returns\": [\"result\", \"evidence\"], \"revision\": 1, \"risk\": \"low\", \"scope\": [\"promotion/follow-on\"], \"state\": \"planned\", \"verification\": \"check-follow-on\"}}, \"terminal\": null, \"unresolved_user_items\": [], \"user_decisions\": [], \"v\": 1}\n",
+  "stderr": ""
+}

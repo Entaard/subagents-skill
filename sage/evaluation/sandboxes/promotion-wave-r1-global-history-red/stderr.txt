@@ -1,0 +1,14 @@
+test_store_validation_checks_global_lineage_and_parent_references (sage.tests.test_knowledge.KnowledgeRegressionTests.test_store_validation_checks_global_lineage_and_parent_references) ... FAIL
+
+======================================================================
+FAIL: test_store_validation_checks_global_lineage_and_parent_references (sage.tests.test_knowledge.KnowledgeRegressionTests.test_store_validation_checks_global_lineage_and_parent_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 372, in test_store_validation_checks_global_lineage_and_parent_references
+    self.assertEqual(collision.returncode, 2, collision.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.214s
+
+FAILED (failures=1)

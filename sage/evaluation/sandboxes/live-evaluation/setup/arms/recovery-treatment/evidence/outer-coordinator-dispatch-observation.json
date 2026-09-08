@@ -1,0 +1,22 @@
+{
+  "schema_version": "sage-outer-native-dispatch-observation-v1",
+  "provenance": "Outer coordinator's structured observation of its direct collaboration.spawn_agent request/result and clock-tool bounds; not a raw native transcript.",
+  "native_handle": "/root/live_recovery_treatment",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 21:44:29 UTC"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 21:45:33 UTC"
+  },
+  "spawn_result": {
+    "task_name": "/root/live_recovery_treatment"
+  },
+  "packet_sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+  "effective_model": null,
+  "effective_effort": null,
+  "reported_tokens": null,
+  "reported_money": null
+}

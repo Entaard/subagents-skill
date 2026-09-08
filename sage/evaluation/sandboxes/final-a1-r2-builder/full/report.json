@@ -1,0 +1,50 @@
+{
+  "schema_version": "sage-verification-run-v1",
+  "mode": "red",
+  "started_and_finished_at": "2026-09-08T15:18:38.942036+00:00",
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "commands": [
+    [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ]
+  ],
+  "exit_code": 0,
+  "passed": true,
+  "tests": 95,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "live_trials_run": false,
+  "network_used": false,
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt"
+}

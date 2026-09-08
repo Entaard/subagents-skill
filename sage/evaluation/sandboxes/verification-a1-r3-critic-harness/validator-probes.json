@@ -1,0 +1,9 @@
+{
+  "fail_then_fail_preserves_open_error": true,
+  "failed_history_preserved": true,
+  "source_fixture_dangling_trigger_ids": [],
+  "compliant_unknown_cost_pair": true,
+  "score_only_rejected": true,
+  "required_dimension_omission_rejected": true,
+  "creative_experience_omission_rejected": true
+}

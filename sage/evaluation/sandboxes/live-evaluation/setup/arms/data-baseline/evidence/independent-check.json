@@ -1,0 +1,4287 @@
+{
+  "busy_visitor_shares": {
+    "new": 0.775,
+    "old": 0.17073170731707318
+  },
+  "candidate_imports": [
+    "argparse",
+    "csv",
+    "hashlib",
+    "json",
+    "math",
+    "pathlib"
+  ],
+  "check_count": 3807,
+  "comparison_directions_preserved": {
+    "by_crowd_block/busy": true,
+    "by_crowd_block/quiet": true,
+    "by_week/1": true,
+    "by_week/2": true,
+    "by_week_and_crowd_block/1/busy": true,
+    "by_week_and_crowd_block/1/quiet": true,
+    "by_week_and_crowd_block/2/busy": true,
+    "by_week_and_crowd_block/2/quiet": true,
+    "overall": true
+  },
+  "effective_identity": null,
+  "failures": [],
+  "max_absolute_numeric_discrepancy": 8.881784197001252e-15,
+  "money": null,
+  "numeric_absolute_tolerance": 1e-12,
+  "observed": {
+    "by_crowd_block/busy": {
+      "new": {
+        "completed": 152,
+        "denominator": 290,
+        "fraction": 0.5241379310344828,
+        "fraction_exact": "76/145",
+        "missing_visitors": 20,
+        "total_visitors": 310
+      },
+      "new_minus_old_pp": 9.556650246305418,
+      "new_minus_old_pp_exact": "1940/203",
+      "old": {
+        "completed": 30,
+        "denominator": 70,
+        "fraction": 0.42857142857142855,
+        "fraction_exact": "3/7",
+        "missing_visitors": 0,
+        "total_visitors": 70
+      }
+    },
+    "by_crowd_block/quiet": {
+      "new": {
+        "completed": 77,
+        "denominator": 90,
+        "fraction": 0.8555555555555555,
+        "fraction_exact": "77/90",
+        "missing_visitors": 0,
+        "total_visitors": 90
+      },
+      "new_minus_old_pp": 5.555555555555555,
+      "new_minus_old_pp_exact": "50/9",
+      "old": {
+        "completed": 272,
+        "denominator": 340,
+        "fraction": 0.8,
+        "fraction_exact": "4/5",
+        "missing_visitors": 0,
+        "total_visitors": 340
+      }
+    },
+    "by_week/1": {
+      "new": {
+        "completed": 109,
+        "denominator": 190,
+        "fraction": 0.5736842105263158,
+        "fraction_exact": "109/190",
+        "missing_visitors": 0,
+        "total_visitors": 190
+      },
+      "new_minus_old_pp": -16.917293233082706,
+      "new_minus_old_pp_exact": "-2250/133",
+      "old": {
+        "completed": 156,
+        "denominator": 210,
+        "fraction": 0.7428571428571429,
+        "fraction_exact": "26/35",
+        "missing_visitors": 0,
+        "total_visitors": 210
+      }
+    },
+    "by_week/2": {
+      "new": {
+        "completed": 120,
+        "denominator": 190,
+        "fraction": 0.631578947368421,
+        "fraction_exact": "12/19",
+        "missing_visitors": 20,
+        "total_visitors": 210
+      },
+      "new_minus_old_pp": -9.842105263157896,
+      "new_minus_old_pp_exact": "-187/19",
+      "old": {
+        "completed": 146,
+        "denominator": 200,
+        "fraction": 0.73,
+        "fraction_exact": "73/100",
+        "missing_visitors": 0,
+        "total_visitors": 200
+      }
+    },
+    "by_week_and_crowd_block/1/busy": {
+      "new": {
+        "completed": 75,
+        "denominator": 150,
+        "fraction": 0.5,
+        "fraction_exact": "1/2",
+        "missing_visitors": 0,
+        "total_visitors": 150
+      },
+      "new_minus_old_pp": 10.0,
+      "new_minus_old_pp_exact": "10",
+      "old": {
+        "completed": 12,
+        "denominator": 30,
+        "fraction": 0.4,
+        "fraction_exact": "2/5",
+        "missing_visitors": 0,
+        "total_visitors": 30
+      }
+    },
+    "by_week_and_crowd_block/1/quiet": {
+      "new": {
+        "completed": 34,
+        "denominator": 40,
+        "fraction": 0.85,
+        "fraction_exact": "17/20",
+        "missing_visitors": 0,
+        "total_visitors": 40
+      },
+      "new_minus_old_pp": 5.0,
+      "new_minus_old_pp_exact": "5",
+      "old": {
+        "completed": 144,
+        "denominator": 180,
+        "fraction": 0.8,
+        "fraction_exact": "4/5",
+        "missing_visitors": 0,
+        "total_visitors": 180
+      }
+    },
+    "by_week_and_crowd_block/2/busy": {
+      "new": {
+        "completed": 77,
+        "denominator": 140,
+        "fraction": 0.55,
+        "fraction_exact": "11/20",
+        "missing_visitors": 20,
+        "total_visitors": 160
+      },
+      "new_minus_old_pp": 10.0,
+      "new_minus_old_pp_exact": "10",
+      "old": {
+        "completed": 18,
+        "denominator": 40,
+        "fraction": 0.45,
+        "fraction_exact": "9/20",
+        "missing_visitors": 0,
+        "total_visitors": 40
+      }
+    },
+    "by_week_and_crowd_block/2/quiet": {
+      "new": {
+        "completed": 43,
+        "denominator": 50,
+        "fraction": 0.86,
+        "fraction_exact": "43/50",
+        "missing_visitors": 0,
+        "total_visitors": 50
+      },
+      "new_minus_old_pp": 6.0,
+      "new_minus_old_pp_exact": "6",
+      "old": {
+        "completed": 128,
+        "denominator": 160,
+        "fraction": 0.8,
+        "fraction_exact": "4/5",
+        "missing_visitors": 0,
+        "total_visitors": 160
+      }
+    },
+    "overall": {
+      "new": {
+        "completed": 229,
+        "denominator": 380,
+        "fraction": 0.6026315789473684,
+        "fraction_exact": "229/380",
+        "missing_visitors": 20,
+        "total_visitors": 400
+      },
+      "new_minus_old_pp": -13.39537869062901,
+      "new_minus_old_pp_exact": "-10435/779",
+      "old": {
+        "completed": 302,
+        "denominator": 410,
+        "fraction": 0.7365853658536585,
+        "fraction_exact": "151/205",
+        "missing_visitors": 0,
+        "total_visitors": 410
+      }
+    }
+  },
+  "overall_pp_shift_from_known_outcomes": {
+    "max": 1.986842105263158,
+    "min": -3.013157894736842
+  },
+  "overall_wilson_95_decimal": {
+    "new": [
+      "0.552638004352428716078225053357238741261584444559273934432654",
+      "0.650570819287322681373223669240832963316554037564602164458138"
+    ],
+    "old": [
+      "0.691892887546282330170782160447081786095973111857607881405512",
+      "0.776885504959449331411813692652268303406870488205798020756088"
+    ]
+  },
+  "protected_sha256_after": {
+    "checks.json": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983",
+    "inputs/notes.txt": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+    "inputs/sessions.csv": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+    "prompt.txt": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb",
+    "work/analysis.py": "0b5943413a7ea1487fde69a50a29acb7eea7b8347207949421cd72c5381e6397",
+    "work/decision-memo.md": "41b05f3510b1ef82894f0932c27dba40ea10584ebb544b45350817e69fae2b63",
+    "work/summary.json": "549ab21e380092216b0b4fa5dbb056be8cd4a45bed5f22466ed4518114148969"
+  },
+  "protected_sha256_before": {
+    "checks.json": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983",
+    "inputs/notes.txt": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14",
+    "inputs/sessions.csv": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+    "prompt.txt": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb",
+    "work/analysis.py": "0b5943413a7ea1487fde69a50a29acb7eea7b8347207949421cd72c5381e6397",
+    "work/decision-memo.md": "41b05f3510b1ef82894f0932c27dba40ea10584ebb544b45350817e69fae2b63",
+    "work/summary.json": "549ab21e380092216b0b4fa5dbb056be8cd4a45bed5f22466ed4518114148969"
+  },
+  "reference_method": "Exact Fraction accumulation; independent 60-digit Decimal score-quadratic roots for Wilson z=1.96; candidate never imported.",
+  "reproduction_runs": [
+    {
+      "byte_identical_to_frozen": true,
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work/analysis.py",
+        "--output",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/tmp/independent-review-w_bozb77/summary-1.json"
+      ],
+      "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work",
+      "exit_code": 0,
+      "output_sha256": "549ab21e380092216b0b4fa5dbb056be8cd4a45bed5f22466ed4518114148969",
+      "stderr": "",
+      "stdout": "{\"missing_rows\": [\"M09\"], \"output\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/tmp/independent-review-w_bozb77/summary-1.json\", \"rows\": 9, \"sensitivity_scenarios\": 21}\n"
+    },
+    {
+      "byte_identical_to_frozen": true,
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work/analysis.py",
+        "--output",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/tmp/independent-review-w_bozb77/summary-2.json"
+      ],
+      "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work",
+      "exit_code": 0,
+      "output_sha256": "549ab21e380092216b0b4fa5dbb056be8cd4a45bed5f22466ed4518114148969",
+      "stderr": "",
+      "stdout": "{\"missing_rows\": [\"M09\"], \"output\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/tmp/independent-review-w_bozb77/summary-2.json\", \"rows\": 9, \"sensitivity_scenarios\": 21}\n"
+    }
+  ],
+  "requested_identity": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh"
+  },
+  "scenarios": [
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 152,
+            "denominator": 310,
+            "fraction": 0.49032258064516127,
+            "fraction_exact": "76/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 6.175115207373272,
+          "new_minus_old_pp_exact": "1340/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 120,
+            "denominator": 210,
+            "fraction": 0.5714285714285714,
+            "fraction_exact": "4/7",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -15.857142857142858,
+          "new_minus_old_pp_exact": "-111/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 77,
+            "denominator": 160,
+            "fraction": 0.48125,
+            "fraction_exact": "77/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 3.125,
+          "new_minus_old_pp_exact": "25/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 229,
+            "denominator": 400,
+            "fraction": 0.5725,
+            "fraction_exact": "229/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -16.408536585365855,
+          "new_minus_old_pp_exact": "-2691/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 0,
+      "new_overall_wilson": [
+        "0.523554401562918953742918050793716135487862287680985619469884",
+        "0.620066265550127349560159195334468776616289439134676759046842"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 153,
+            "denominator": 310,
+            "fraction": 0.4935483870967742,
+            "fraction_exact": "153/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 6.497695852534562,
+          "new_minus_old_pp_exact": "1410/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 121,
+            "denominator": 210,
+            "fraction": 0.5761904761904761,
+            "fraction_exact": "121/210",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -15.380952380952381,
+          "new_minus_old_pp_exact": "-323/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 78,
+            "denominator": 160,
+            "fraction": 0.4875,
+            "fraction_exact": "39/80",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 3.75,
+          "new_minus_old_pp_exact": "15/4",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 230,
+            "denominator": 400,
+            "fraction": 0.575,
+            "fraction_exact": "23/40",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -16.158536585365855,
+          "new_minus_old_pp_exact": "-1325/82",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 1,
+      "new_overall_wilson": [
+        "0.526066633304534263415329693154527297113794168481141364425483",
+        "0.622506470605513636553370906288422611959466238569543854729750"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 154,
+            "denominator": 310,
+            "fraction": 0.4967741935483871,
+            "fraction_exact": "77/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 6.820276497695852,
+          "new_minus_old_pp_exact": "1480/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 122,
+            "denominator": 210,
+            "fraction": 0.580952380952381,
+            "fraction_exact": "61/105",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -14.904761904761905,
+          "new_minus_old_pp_exact": "-313/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 79,
+            "denominator": 160,
+            "fraction": 0.49375,
+            "fraction_exact": "79/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 4.375,
+          "new_minus_old_pp_exact": "35/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 231,
+            "denominator": 400,
+            "fraction": 0.5775,
+            "fraction_exact": "231/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -15.908536585365853,
+          "new_minus_old_pp_exact": "-2609/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 2,
+      "new_overall_wilson": [
+        "0.528580114139177487219271647170297585077372628782257160642153",
+        "0.624945426567872009415052305587417320964996458503450899151588"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 155,
+            "denominator": 310,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 7.142857142857143,
+          "new_minus_old_pp_exact": "50/7",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 123,
+            "denominator": 210,
+            "fraction": 0.5857142857142857,
+            "fraction_exact": "41/70",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -14.428571428571429,
+          "new_minus_old_pp_exact": "-101/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 80,
+            "denominator": 160,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 232,
+            "denominator": 400,
+            "fraction": 0.58,
+            "fraction_exact": "29/50",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -15.658536585365853,
+          "new_minus_old_pp_exact": "-642/41",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 3,
+      "new_overall_wilson": [
+        "0.531094846967154626741610256317295201102127672890658004252818",
+        "0.627383130536896466558337049755184701909350094630072896179430"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 156,
+            "denominator": 310,
+            "fraction": 0.5032258064516129,
+            "fraction_exact": "78/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 7.465437788018433,
+          "new_minus_old_pp_exact": "1620/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 124,
+            "denominator": 210,
+            "fraction": 0.5904761904761905,
+            "fraction_exact": "62/105",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -13.952380952380953,
+          "new_minus_old_pp_exact": "-293/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 81,
+            "denominator": 160,
+            "fraction": 0.50625,
+            "fraction_exact": "81/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 5.625,
+          "new_minus_old_pp_exact": "45/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 233,
+            "denominator": 400,
+            "fraction": 0.5825,
+            "fraction_exact": "233/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -15.408536585365853,
+          "new_minus_old_pp_exact": "-2527/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 4,
+      "new_overall_wilson": [
+        "0.533610834795664722083650683530375904511450153581998654797063",
+        "0.629819579505387967881919975856868995469136294173755086273694"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 157,
+            "denominator": 310,
+            "fraction": 0.5064516129032258,
+            "fraction_exact": "157/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 7.788018433179723,
+          "new_minus_old_pp_exact": "1690/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 125,
+            "denominator": 210,
+            "fraction": 0.5952380952380952,
+            "fraction_exact": "25/42",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -13.476190476190476,
+          "new_minus_old_pp_exact": "-283/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 82,
+            "denominator": 160,
+            "fraction": 0.5125,
+            "fraction_exact": "41/80",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 6.25,
+          "new_minus_old_pp_exact": "25/4",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 234,
+            "denominator": 400,
+            "fraction": 0.585,
+            "fraction_exact": "117/200",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -15.158536585365853,
+          "new_minus_old_pp_exact": "-1243/82",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 5,
+      "new_overall_wilson": [
+        "0.536128080740012446972669979662935611533476428750689936434779",
+        "0.632254770358041839658524033039074285416218699240086645274485"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 158,
+            "denominator": 310,
+            "fraction": 0.5096774193548387,
+            "fraction_exact": "79/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 8.110599078341014,
+          "new_minus_old_pp_exact": "1760/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 126,
+            "denominator": 210,
+            "fraction": 0.6,
+            "fraction_exact": "3/5",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -13.0,
+          "new_minus_old_pp_exact": "-13",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 83,
+            "denominator": 160,
+            "fraction": 0.51875,
+            "fraction_exact": "83/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 6.875,
+          "new_minus_old_pp_exact": "55/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 235,
+            "denominator": 400,
+            "fraction": 0.5875,
+            "fraction_exact": "47/80",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -14.908536585365853,
+          "new_minus_old_pp_exact": "-2445/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 6,
+      "new_overall_wilson": [
+        "0.538646588024870967226167097862833732286950914865928655037885",
+        "0.634688699870184916070650268153941161631852893359870767309887"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 159,
+            "denominator": 310,
+            "fraction": 0.5129032258064516,
+            "fraction_exact": "159/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 8.433179723502304,
+          "new_minus_old_pp_exact": "1830/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 127,
+            "denominator": 210,
+            "fraction": 0.6047619047619047,
+            "fraction_exact": "127/210",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -12.523809523809524,
+          "new_minus_old_pp_exact": "-263/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 84,
+            "denominator": 160,
+            "fraction": 0.525,
+            "fraction_exact": "21/40",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 7.5,
+          "new_minus_old_pp_exact": "15/2",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 236,
+            "denominator": 400,
+            "fraction": 0.59,
+            "fraction_exact": "59/100",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -14.658536585365853,
+          "new_minus_old_pp_exact": "-601/41",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 7,
+      "new_overall_wilson": [
+        "0.541166359985596296039199109725797045898289883883337891368356",
+        "0.637121364706461183923241609605742844989622604577484371617924"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 160,
+            "denominator": 310,
+            "fraction": 0.5161290322580645,
+            "fraction_exact": "16/31",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 8.755760368663594,
+          "new_minus_old_pp_exact": "1900/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 128,
+            "denominator": 210,
+            "fraction": 0.6095238095238096,
+            "fraction_exact": "64/105",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -12.047619047619047,
+          "new_minus_old_pp_exact": "-253/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 85,
+            "denominator": 160,
+            "fraction": 0.53125,
+            "fraction_exact": "17/32",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 8.125,
+          "new_minus_old_pp_exact": "65/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 237,
+            "denominator": 400,
+            "fraction": 0.5925,
+            "fraction_exact": "237/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -14.408536585365853,
+          "new_minus_old_pp_exact": "-2363/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 8,
+      "new_overall_wilson": [
+        "0.543687400069594439244247320043941640721429467666924310864271",
+        "0.639552761419464637383816752602363247135591701028920792760517"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 161,
+            "denominator": 310,
+            "fraction": 0.5193548387096775,
+            "fraction_exact": "161/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 9.078341013824884,
+          "new_minus_old_pp_exact": "1970/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 129,
+            "denominator": 210,
+            "fraction": 0.6142857142857143,
+            "fraction_exact": "43/70",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -11.571428571428571,
+          "new_minus_old_pp_exact": "-81/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 86,
+            "denominator": 160,
+            "fraction": 0.5375,
+            "fraction_exact": "43/80",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 8.75,
+          "new_minus_old_pp_exact": "35/4",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 238,
+            "denominator": 400,
+            "fraction": 0.595,
+            "fraction_exact": "119/200",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -14.158536585365853,
+          "new_minus_old_pp_exact": "-1161/82",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 9,
+      "new_overall_wilson": [
+        "0.546209711837742685732993496685258990863851208856472591191380",
+        "0.641982886448317987560693929275810893962278640074395353071915"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 162,
+            "denominator": 310,
+            "fraction": 0.5225806451612903,
+            "fraction_exact": "81/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 9.400921658986174,
+          "new_minus_old_pp_exact": "2040/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 130,
+            "denominator": 210,
+            "fraction": 0.6190476190476191,
+            "fraction_exact": "13/21",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -11.095238095238095,
+          "new_minus_old_pp_exact": "-233/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 87,
+            "denominator": 160,
+            "fraction": 0.54375,
+            "fraction_exact": "87/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 9.375,
+          "new_minus_old_pp_exact": "75/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 239,
+            "denominator": 400,
+            "fraction": 0.5975,
+            "fraction_exact": "239/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -13.908536585365853,
+          "new_minus_old_pp_exact": "-2281/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 10,
+      "new_overall_wilson": [
+        "0.548733298965866462765675861073327780482209630264511225125917",
+        "0.644411736117195807193634918202507101313028898901379559775886"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 163,
+            "denominator": 310,
+            "fraction": 0.5258064516129032,
+            "fraction_exact": "163/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 9.723502304147466,
+          "new_minus_old_pp_exact": "2110/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 131,
+            "denominator": 210,
+            "fraction": 0.6238095238095238,
+            "fraction_exact": "131/210",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -10.619047619047619,
+          "new_minus_old_pp_exact": "-223/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 88,
+            "denominator": 160,
+            "fraction": 0.55,
+            "fraction_exact": "11/20",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 240,
+            "denominator": 400,
+            "fraction": 0.6,
+            "fraction_exact": "3/5",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -13.658536585365853,
+          "new_minus_old_pp_exact": "-560/41",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 11,
+      "new_overall_wilson": [
+        "0.551258165246273243069256028188407347357651059038703494782573",
+        "0.646839306633790623555678104402192531406696150362210130757738"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 164,
+            "denominator": 310,
+            "fraction": 0.5290322580645161,
+            "fraction_exact": "82/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 10.046082949308756,
+          "new_minus_old_pp_exact": "2180/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 132,
+            "denominator": 210,
+            "fraction": 0.6285714285714286,
+            "fraction_exact": "22/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -10.142857142857142,
+          "new_minus_old_pp_exact": "-71/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 89,
+            "denominator": 160,
+            "fraction": 0.55625,
+            "fraction_exact": "89/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 10.625,
+          "new_minus_old_pp_exact": "85/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 241,
+            "denominator": 400,
+            "fraction": 0.6025,
+            "fraction_exact": "241/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -13.408536585365853,
+          "new_minus_old_pp_exact": "-2199/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 12,
+      "new_overall_wilson": [
+        "0.553784314589345060591315216868014061285613555695029721681565",
+        "0.649265594087720402699242269037350814447842333940906744497253"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 165,
+            "denominator": 310,
+            "fraction": 0.532258064516129,
+            "fraction_exact": "33/62",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 10.368663594470046,
+          "new_minus_old_pp_exact": "2250/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 133,
+            "denominator": 210,
+            "fraction": 0.6333333333333333,
+            "fraction_exact": "19/30",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -9.666666666666666,
+          "new_minus_old_pp_exact": "-29/3",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 90,
+            "denominator": 160,
+            "fraction": 0.5625,
+            "fraction_exact": "9/16",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 11.25,
+          "new_minus_old_pp_exact": "45/4",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 242,
+            "denominator": 400,
+            "fraction": 0.605,
+            "fraction_exact": "121/200",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -13.158536585365853,
+          "new_minus_old_pp_exact": "-1079/82",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 13,
+      "new_overall_wilson": [
+        "0.556311751025191264691739702650303522407967925690263088800774",
+        "0.651690594448875795264441136569826350294596644180696218016553"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 166,
+            "denominator": 310,
+            "fraction": 0.535483870967742,
+            "fraction_exact": "83/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 10.691244239631336,
+          "new_minus_old_pp_exact": "2320/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 134,
+            "denominator": 210,
+            "fraction": 0.638095238095238,
+            "fraction_exact": "67/105",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -9.19047619047619,
+          "new_minus_old_pp_exact": "-193/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 91,
+            "denominator": 160,
+            "fraction": 0.56875,
+            "fraction_exact": "91/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 11.875,
+          "new_minus_old_pp_exact": "95/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 243,
+            "denominator": 400,
+            "fraction": 0.6075,
+            "fraction_exact": "243/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -12.908536585365853,
+          "new_minus_old_pp_exact": "-2117/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 14,
+      "new_overall_wilson": [
+        "0.558840478705363218587235356945917705571565680306293263139809",
+        "0.654114303565705438034568835588977164100107569799688884316025"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 167,
+            "denominator": 310,
+            "fraction": 0.5387096774193548,
+            "fraction_exact": "167/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 11.013824884792626,
+          "new_minus_old_pp_exact": "2390/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 135,
+            "denominator": 210,
+            "fraction": 0.6428571428571429,
+            "fraction_exact": "9/14",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -8.714285714285714,
+          "new_minus_old_pp_exact": "-61/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 92,
+            "denominator": 160,
+            "fraction": 0.575,
+            "fraction_exact": "23/40",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 12.5,
+          "new_minus_old_pp_exact": "25/2",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 244,
+            "denominator": 400,
+            "fraction": 0.61,
+            "fraction_exact": "61/100",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -12.658536585365853,
+          "new_minus_old_pp_exact": "-519/41",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 15,
+      "new_overall_wilson": [
+        "0.561370501904632727192588179750708091521984855882802650488757",
+        "0.656536717163437526094839366098951775118797074458202337605585"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 168,
+            "denominator": 310,
+            "fraction": 0.5419354838709678,
+            "fraction_exact": "84/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 11.336405529953916,
+          "new_minus_old_pp_exact": "2460/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 136,
+            "denominator": 210,
+            "fraction": 0.6476190476190476,
+            "fraction_exact": "68/105",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -8.238095238095237,
+          "new_minus_old_pp_exact": "-173/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 93,
+            "denominator": 160,
+            "fraction": 0.58125,
+            "fraction_exact": "93/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 13.125,
+          "new_minus_old_pp_exact": "105/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 245,
+            "denominator": 400,
+            "fraction": 0.6125,
+            "fraction_exact": "49/80",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -12.408536585365853,
+          "new_minus_old_pp_exact": "-2035/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 16,
+      "new_overall_wilson": [
+        "0.563901825022836062315761251597956560710866325548772826201875",
+        "0.658957830842235787637289647566468302899024285027255002530975"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 169,
+            "denominator": 310,
+            "fraction": 0.5451612903225806,
+            "fraction_exact": "169/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 11.658986175115208,
+          "new_minus_old_pp_exact": "2530/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 137,
+            "denominator": 210,
+            "fraction": 0.6523809523809524,
+            "fraction_exact": "137/210",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -7.761904761904762,
+          "new_minus_old_pp_exact": "-163/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 94,
+            "denominator": 160,
+            "fraction": 0.5875,
+            "fraction_exact": "47/80",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 13.75,
+          "new_minus_old_pp_exact": "55/4",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 246,
+            "denominator": 400,
+            "fraction": 0.615,
+            "fraction_exact": "123/200",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -12.158536585365853,
+          "new_minus_old_pp_exact": "-997/82",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 17,
+      "new_overall_wilson": [
+        "0.566434452586785539660841209710078219233241045739971900568893",
+        "0.661377640075287906957833042769111641345758245071078768802465"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 170,
+            "denominator": 310,
+            "fraction": 0.5483870967741935,
+            "fraction_exact": "17/31",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 11.981566820276498,
+          "new_minus_old_pp_exact": "2600/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 138,
+            "denominator": 210,
+            "fraction": 0.6571428571428571,
+            "fraction_exact": "23/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -7.285714285714286,
+          "new_minus_old_pp_exact": "-51/7",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 95,
+            "denominator": 160,
+            "fraction": 0.59375,
+            "fraction_exact": "19/32",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 14.375,
+          "new_minus_old_pp_exact": "115/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 247,
+            "denominator": 400,
+            "fraction": 0.6175,
+            "fraction_exact": "247/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -11.908536585365853,
+          "new_minus_old_pp_exact": "-1953/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 18,
+      "new_overall_wilson": [
+        "0.568968389252250692484790549325436021165694385785626039669757",
+        "0.663796140206824350799507056468518836382413585260447470340109"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 171,
+            "denominator": 310,
+            "fraction": 0.5516129032258065,
+            "fraction_exact": "171/310",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 12.304147465437788,
+          "new_minus_old_pp_exact": "2670/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 139,
+            "denominator": 210,
+            "fraction": 0.6619047619047619,
+            "fraction_exact": "139/210",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -6.809523809523809,
+          "new_minus_old_pp_exact": "-143/21",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 96,
+            "denominator": 160,
+            "fraction": 0.6,
+            "fraction_exact": "3/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 15.0,
+          "new_minus_old_pp_exact": "15",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 248,
+            "denominator": 400,
+            "fraction": 0.62,
+            "fraction_exact": "31/50",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -11.658536585365853,
+          "new_minus_old_pp_exact": "-478/41",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 19,
+      "new_overall_wilson": [
+        "0.571503639806011181264837301646496477383131955521398418753754",
+        "0.666213326450065458685083657462223377134084695759697931894619"
+      ]
+    },
+    {
+      "groups": {
+        "by_crowd_block/busy": {
+          "new": {
+            "completed": 172,
+            "denominator": 310,
+            "fraction": 0.5548387096774193,
+            "fraction_exact": "86/155",
+            "missing_visitors": 0,
+            "total_visitors": 310
+          },
+          "new_minus_old_pp": 12.626728110599078,
+          "new_minus_old_pp_exact": "2740/217",
+          "old": {
+            "completed": 30,
+            "denominator": 70,
+            "fraction": 0.42857142857142855,
+            "fraction_exact": "3/7",
+            "missing_visitors": 0,
+            "total_visitors": 70
+          }
+        },
+        "by_crowd_block/quiet": {
+          "new": {
+            "completed": 77,
+            "denominator": 90,
+            "fraction": 0.8555555555555555,
+            "fraction_exact": "77/90",
+            "missing_visitors": 0,
+            "total_visitors": 90
+          },
+          "new_minus_old_pp": 5.555555555555555,
+          "new_minus_old_pp_exact": "50/9",
+          "old": {
+            "completed": 272,
+            "denominator": 340,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 340
+          }
+        },
+        "by_week/1": {
+          "new": {
+            "completed": 109,
+            "denominator": 190,
+            "fraction": 0.5736842105263158,
+            "fraction_exact": "109/190",
+            "missing_visitors": 0,
+            "total_visitors": 190
+          },
+          "new_minus_old_pp": -16.917293233082706,
+          "new_minus_old_pp_exact": "-2250/133",
+          "old": {
+            "completed": 156,
+            "denominator": 210,
+            "fraction": 0.7428571428571429,
+            "fraction_exact": "26/35",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          }
+        },
+        "by_week/2": {
+          "new": {
+            "completed": 140,
+            "denominator": 210,
+            "fraction": 0.6666666666666666,
+            "fraction_exact": "2/3",
+            "missing_visitors": 0,
+            "total_visitors": 210
+          },
+          "new_minus_old_pp": -6.333333333333333,
+          "new_minus_old_pp_exact": "-19/3",
+          "old": {
+            "completed": 146,
+            "denominator": 200,
+            "fraction": 0.73,
+            "fraction_exact": "73/100",
+            "missing_visitors": 0,
+            "total_visitors": 200
+          }
+        },
+        "by_week_and_crowd_block/1/busy": {
+          "new": {
+            "completed": 75,
+            "denominator": 150,
+            "fraction": 0.5,
+            "fraction_exact": "1/2",
+            "missing_visitors": 0,
+            "total_visitors": 150
+          },
+          "new_minus_old_pp": 10.0,
+          "new_minus_old_pp_exact": "10",
+          "old": {
+            "completed": 12,
+            "denominator": 30,
+            "fraction": 0.4,
+            "fraction_exact": "2/5",
+            "missing_visitors": 0,
+            "total_visitors": 30
+          }
+        },
+        "by_week_and_crowd_block/1/quiet": {
+          "new": {
+            "completed": 34,
+            "denominator": 40,
+            "fraction": 0.85,
+            "fraction_exact": "17/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          },
+          "new_minus_old_pp": 5.0,
+          "new_minus_old_pp_exact": "5",
+          "old": {
+            "completed": 144,
+            "denominator": 180,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 180
+          }
+        },
+        "by_week_and_crowd_block/2/busy": {
+          "new": {
+            "completed": 97,
+            "denominator": 160,
+            "fraction": 0.60625,
+            "fraction_exact": "97/160",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          },
+          "new_minus_old_pp": 15.625,
+          "new_minus_old_pp_exact": "125/8",
+          "old": {
+            "completed": 18,
+            "denominator": 40,
+            "fraction": 0.45,
+            "fraction_exact": "9/20",
+            "missing_visitors": 0,
+            "total_visitors": 40
+          }
+        },
+        "by_week_and_crowd_block/2/quiet": {
+          "new": {
+            "completed": 43,
+            "denominator": 50,
+            "fraction": 0.86,
+            "fraction_exact": "43/50",
+            "missing_visitors": 0,
+            "total_visitors": 50
+          },
+          "new_minus_old_pp": 6.0,
+          "new_minus_old_pp_exact": "6",
+          "old": {
+            "completed": 128,
+            "denominator": 160,
+            "fraction": 0.8,
+            "fraction_exact": "4/5",
+            "missing_visitors": 0,
+            "total_visitors": 160
+          }
+        },
+        "overall": {
+          "new": {
+            "completed": 249,
+            "denominator": 400,
+            "fraction": 0.6225,
+            "fraction_exact": "249/400",
+            "missing_visitors": 0,
+            "total_visitors": 400
+          },
+          "new_minus_old_pp": -11.408536585365853,
+          "new_minus_old_pp_exact": "-1871/164",
+          "old": {
+            "completed": 302,
+            "denominator": 410,
+            "fraction": 0.7365853658536585,
+            "fraction_exact": "151/205",
+            "missing_visitors": 0,
+            "total_visitors": 410
+          }
+        }
+      },
+      "m09_completed": 20,
+      "new_overall_wilson": [
+        "0.574040209167983677600575160908783599828880223647943231685187",
+        "0.668629193885094559014969151514701251657445107868175959601694"
+      ]
+    }
+  ],
+  "scratch_directory": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/tmp/independent-review-w_bozb77",
+  "sensitivity_bounds": {
+    "busy_new_minus_old_pp": {
+      "max": 12.626728110599078,
+      "max_exact": "2740/217",
+      "min": 6.175115207373272,
+      "min_exact": "1340/217"
+    },
+    "new_overall_fraction": {
+      "max": 0.6225,
+      "max_exact": "249/400",
+      "min": 0.5725,
+      "min_exact": "229/400"
+    },
+    "overall_new_minus_old_pp": {
+      "max": -11.408536585365853,
+      "max_exact": "-1871/164",
+      "min": -16.408536585365855,
+      "min_exact": "-2691/164"
+    },
+    "week_2_busy_new_minus_old_pp": {
+      "max": 15.625,
+      "max_exact": "125/8",
+      "min": 3.125,
+      "min_exact": "25/8"
+    },
+    "week_2_new_minus_old_pp": {
+      "max": -6.333333333333333,
+      "max_exact": "-19/3",
+      "min": -15.857142857142858,
+      "min_exact": "-111/7"
+    }
+  },
+  "source_sha256_matches_summary": true,
+  "status": "pass",
+  "usage": null
+}

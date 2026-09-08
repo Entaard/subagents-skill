@@ -1,0 +1,294 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "verification-a1-r1",
+  "module": "verification",
+  "approach_id": "verification-a1",
+  "round": 1,
+  "reviewed_at": "2026-09-07T14:54:53Z",
+  "gate_type": "verification_design_and_harness",
+  "verdict": "fail",
+  "open_error_count": 5,
+  "open_error_ids": [
+    "VER-A1-R1-E1",
+    "VER-A1-R1-E2",
+    "VER-A1-R1-E3",
+    "VER-A1-R1-E4",
+    "VER-A1-R1-E5"
+  ],
+  "reviewer": {
+    "agent": "/root/architecture_critic",
+    "role": "independent verification critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 6.5,
+    "architecture_and_coherence": 6.5,
+    "correctness_and_evidence": 6,
+    "simplicity_and_context_efficiency": 8.6,
+    "orchestration_and_model_routing": 7,
+    "safety_reversibility_and_recovery": 6.5,
+    "verification_strength": 5.5,
+    "reporting_and_maintainability": 6
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "Public CLI separation fits the design, but required durable facts and several promised verification boundaries are absent.",
+      "errors": [
+        "VER-A1-R1-E2",
+        "VER-A1-R1-E4"
+      ],
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/requirements-trace.json"
+      ]
+    },
+    "architecture_and_coherence": {
+      "reason": "The two small helpers are appropriate; root-writer release and resume effects conflict, and the unseen-case procedure cannot use the fixed development-case pairing interface.",
+      "errors": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E3"
+      ],
+      "evidence": [
+        "sage/docs/CONTRACTS.md:46",
+        "sage/docs/CONTRACTS.md:54",
+        "sage/evaluation/pairing.py:17"
+      ]
+    },
+    "correctness_and_evidence": {
+      "reason": "Five harness tests truly pass and 18 missing-product failures are honestly expected. Independent probes show that the passing validators still accept unsupported results and illegal review history.",
+      "errors": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E5"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+      ]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Dependency-free CLIs and small public-interface tests remain compact; no generic scheduler or protocol framework is introduced. Repairs can stay within these interfaces.",
+      "errors": [],
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/run_verification.py",
+        "sage/evaluation/tests/support.py"
+      ]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Live role judgment is correctly separated from deterministic checks, but a zero-agent root writer is not representable and paired result records omit the promised routing observations.",
+      "errors": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E3"
+      ],
+      "evidence": [
+        "sage/docs/CONTRACTS.md:46",
+        "sage/evaluation/live-protocol.md",
+        "sage/evaluation/pairing.py:42"
+      ]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Sandbox containment and reversible state/generation intent are credible. Ambiguous persisted recovery effects and missing corrupt-generation/installed-cutover assertions leave central safeguards insufficiently specified or tested.",
+      "errors": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E4"
+      ],
+      "evidence": [
+        "sage/evaluation/run_verification.py",
+        "sage/docs/CONTRACTS.md:54",
+        "sage/evaluation/tests/test_product_knowledge.py",
+        "sage/evaluation/tests/test_product_install.py"
+      ]
+    },
+    "verification_strength": {
+      "reason": "Expected-red setup behavior is correct, but multiple negatives fail for unrelated structural defects; central promotion/status and actual installed workflow checks are missing. The passing harness does not establish the promised freeze or scoring integrity.",
+      "errors": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "evidence": [
+        "sage/evaluation/tests/test_product_state.py:37",
+        "sage/evaluation/tests/test_harness.py:31",
+        "sage/evaluation/sandboxes/verification-a1-critic-red/report.json"
+      ]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Current reports distinguish missing implementation from live behavior, but the reusable score writer can manufacture completion, omit evidence, and leave stale resume fields. Trace granularity conceals missing coverage.",
+      "errors": [
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "evidence": [
+        "sage/evaluation/score_status.py",
+        "sage/evaluation/requirements-trace.json"
+      ]
+    }
+  },
+  "errors": [
+    {
+      "id": "VER-A1-R1-E1",
+      "rank": 1,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-010",
+        "R-015",
+        "R-025",
+        "R-036"
+      ],
+      "path": "sage/docs/CONTRACTS.md:46",
+      "issue": "Writer release requires a later terminal agent.observed event for every writer, but root-owned writes have no native agent handle. The ordinary zero-agent edit cannot release its writer barrier without fabricating an agent. Recovery also both promises snapshot regeneration and prohibits snapshot mutation, while its proposed unknown-effect observation has no defined effect field in agent.observed.",
+      "remedy": "Define separate evidence-backed release rules for synchronous root work and delegated work; keep unresolved delegated effects blocked. Make resume either strictly advisory with an explicit rebuild command or explicitly permit derived-snapshot repair, and specify the persistable event that records unknown effects. Add root-write completion, delegated unknown-effect, and missing/stale-snapshot resume tests.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md:36",
+        "sage/docs/CONTRACTS.md:46",
+        "sage/docs/CONTRACTS.md:54",
+        "sage/evaluation/tests/support.py:62"
+      ],
+      "verification": "A root-owned write run closes without a fake agent; replay of accepted resume observations preserves the unknown-effect barrier; missing/stale snapshot behavior has one unambiguous write contract."
+    },
+    {
+      "id": "VER-A1-R1-E2",
+      "rank": 2,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-011",
+        "R-031",
+        "R-043"
+      ],
+      "path": "sage/docs/CONTRACTS.md:28",
+      "issue": "The frozen vocabulary has no representation for objective/constraint amendments, assumptions/decisions and their corrections, received user decisions, or useful/neutral/misleading/not-exercised retrieval feedback. Its snapshot omits these facts. Every plan revision after 1 requires a failure, so an ordinary user scope change or newly learned successful evidence cannot revise a plan without inventing failure evidence.",
+      "remedy": "Add the minimum typed facts/projection fields needed for those required branches, and distinguish failure-driven revisions from scope/evidence-driven revisions. Keep correction links immutable. Cover an amended objective with no prior failure and retrieval feedback surviving snapshot/resume; do not widen scope into a generic event framework.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md:33",
+        "sage/docs/CONTRACTS.md:42",
+        "sage/docs/CONTRACTS.md:48",
+        "sage/docs/CONTRACTS.md:52",
+        "sage/docs/REQUIREMENTS.md:39",
+        "sage/docs/REQUIREMENTS.md:53"
+      ],
+      "verification": "All R-031 and R-043 facts can be appended and recovered using only the frozen public contract; a user amendment requires no fictitious failure."
+    },
+    {
+      "id": "VER-A1-R1-E3",
+      "rank": 3,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-058",
+        "R-059",
+        "R-060",
+        "R-061"
+      ],
+      "path": "sage/evaluation/pairing.py:17",
+      "issue": "The live protocol selects unseen prompts, but prepare/validate hard-code development.json and cannot accept an evaluator's frozen case manifest. input_sha256 hashes descriptive case JSON, not prompt/raw inputs/checks/rubric/environment. Validation recomputes against mutable current descriptions and accepts score-only arms with no execution, source, or scorer evidence, then labels them 'these executed cases only'.",
+      "remedy": "Prepare an explicit persisted manifest from evaluator-selected cases with hashes of actual prompt/input/check/rubric/environment artifacts and arm protocol. Validate results against that supplied immutable manifest, preserving requested/effective routing and resolvable per-score/check/usage evidence. Reject missing or mismatched execution evidence and use honest schema-only language unless execution is evidenced. Add unseen-case, tamper, missing-evidence, and valid unknown-cost tests.",
+      "evidence": [
+        "sage/evaluation/live-protocol.md:5",
+        "sage/evaluation/pairing.py:17",
+        "sage/evaluation/pairing.py:24",
+        "sage/evaluation/pairing.py:35",
+        "sage/evaluation/pairing.py:64",
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+      ],
+      "verification": "An unseen evaluator case runs through prepare/validate without editing development cases; changed frozen artifacts or invented score-only arms are rejected, while evidenced executed arms with null money/tokens pass."
+    },
+    {
+      "id": "VER-A1-R1-E4",
+      "rank": 4,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-055",
+        "R-056",
+        "R-070",
+        "R-073"
+      ],
+      "path": "sage/evaluation/tests/test_product_state.py:35",
+      "issue": "Several promised boundaries lack discriminating tests. Duplicate/NaN log and pointer fixtures are already structurally incomplete, so ordinary schema rejection passes without strict parsing. The retry negative simultaneously uses missing evidence and an unchanged task, so it cannot detect failure to enforce material change. No product tests exercise support gates for heuristic/causal classes, contested/refuted/retired retrieval, corrupted valid-generation rollback, or installed report/resume/promotion execution; the install allowlist test inspects only receipt paths. File-level trace labels imply broader coverage than the assertions provide.",
+      "remedy": "Mutate one property of an otherwise accepted fixture for each negative, including separate retry-cause/change/bound cases. Add focused class/status, generation-integrity/rollback, and actual installed-helper cutover cases; check actual installed files/hashes and legacy exclusion. Trace specific test methods to requirements and explicitly assign judgment-only obligations to later live cases. Product tests should remain red until implementation.",
+      "evidence": [
+        "sage/evaluation/tests/test_product_state.py:37",
+        "sage/evaluation/tests/test_product_state.py:102",
+        "sage/evaluation/tests/test_product_knowledge.py",
+        "sage/evaluation/tests/test_product_install.py:23",
+        "sage/evaluation/requirements-trace.json",
+        "sage/evaluation/tests/test_harness.py:31"
+      ],
+      "verification": "Each invalid fixture has an accepted control differing only in the claimed invariant; omission of strict parsing, material-change checks, class/status checks, integrity checks, or real cutover must make a named test fail. Missing future product remains expected-red, not a review error."
+    },
+    {
+      "id": "VER-A1-R1-E5",
+      "rank": 5,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-050",
+        "R-053",
+        "R-054",
+        "R-059",
+        "R-061"
+      ],
+      "path": "sage/evaluation/score_status.py:32",
+      "issue": "Score validation requires numbers but no evidence or gate type. Appending a review ignores dependency gates, round sequencing/uniqueness, the four-round approach bound, and prior-error dispositions. A probe accepted final=passed while dependencies were pending and five distinct reviews all numbered round 1 in one approach. The writer also leaves pending_review/next_action stale, making the durable recovery view disagree with the appended result.",
+      "remedy": "Validate evidence-bearing review metadata and gate type; enforce the current module/approach, next unique round, dependencies, four-round bound and explicit new-approach rationale, plus dispositions for previous errors. Update pending/current/next-action fields coherently while preserving historical records. Add rejection tests for the observed false accepts and a valid fail-repair-pass sequence.",
+      "evidence": [
+        "sage/evaluation/score_status.py:32",
+        "sage/evaluation/score_status.py:58",
+        "sage/evaluation/score_status.py:73",
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+      ],
+      "verification": "The probe's unsupported final pass, repeated round numbers, fifth same-approach review, and evidence-free scores fail validation; a correctly evidenced next-round review preserves prior failures and produces a coherent resume state."
+    }
+  ],
+  "suggestions": [],
+  "executed_checks": [
+    {
+      "command": "python3 sage/evaluation/run_verification.py --mode harness --evidence-dir sage/evaluation/sandboxes/verification-a1-critic-harness",
+      "exit_code": 0,
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "sage/evaluation/sandboxes/verification-a1-critic-harness/report.json"
+    },
+    {
+      "command": "python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/verification-a1-critic-red",
+      "exit_code": 1,
+      "tests": 23,
+      "passed": 5,
+      "failed": 18,
+      "skipped": 0,
+      "interpretation": "All 18 failures are missing-product setUp assertions; expected at this gate. Product test bodies were not executed.",
+      "evidence": "sage/evaluation/sandboxes/verification-a1-critic-red/report.json"
+    },
+    {
+      "check": "In-memory calls to validate_review/append_review/prepare/validate_result; no source files mutated",
+      "result": "Unsupported final pass, repeated round numbers, fifth same-approach review, and unevidenced paired scores accepted.",
+      "evidence": "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+    }
+  ],
+  "input_hashes": {
+    "sage/docs/CONTRACTS.md": "b78b97f5718f6becf209e3bc94c2030e7138db1474426dddd1aa62238a87a9b8",
+    "sage/evaluation/run_verification.py": "e705c012bad97bdac801ac8ce4ef850d2983ccb4038b7eea54a0b5ab5c5ed84d",
+    "sage/evaluation/score_status.py": "907ceb31d7552846e2c7edd273ffe19118ac07f80db222cec22032357b0cdc0e",
+    "sage/evaluation/pairing.py": "70b5475e3f8776f60aed3a3ee13e4fd80220f128d0d23e7cb272a0f0f95b9ccd",
+    "sage/evaluation/rubric.json": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16",
+    "sage/evaluation/tests/test_harness.py": "29cb1bcb1913cb61336f8059217dd78e3e6d97d6bffafdd427237689290f4ecd",
+    "sage/evaluation/tests/test_product_state.py": "61dad88766a96097cb79d5816beb279e2097f0ef736d7d664441ffbf266e4fec",
+    "sage/evaluation/tests/test_product_knowledge.py": "465a9282c8ff75452b65778af7aa51324b15a91e03536009bcbe1d09362aa3fb",
+    "sage/evaluation/tests/test_product_install.py": "625ad8a4759770b63eb88730c229e23761bc6db3a7e024c3629404167307d6db",
+    "sage/docs/STATUS.json": "da9920172b13aac40a64be1d034b71cc80dcd84291f143bf5d5a937f1f0f3cd0"
+  },
+  "limitations": [
+    "No future product implementation is expected at this gate, and its absence is not an open error.",
+    "No live or paired trial was run; no task-quality, model-efficiency, or knowledge-transfer claim is made.",
+    "Passing existing harness tests is observed; adequacy of the still-red product tests is assessed by source/contract review.",
+    "Review excludes hostile-machine race guarantees and other machinery outside the declared small design."
+  ],
+  "next_action": "Repair the five ranked verification contracts/harness issues under verification-a1, preserve this failed round and its evidence, then freeze round 2 for a separate critic. Keep active Sage/promotion implementation unbuilt until the verification gate passes."
+}

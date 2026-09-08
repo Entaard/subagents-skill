@@ -1,0 +1,46 @@
+{
+  "before_spawn": {
+    "current_time": "2026-09-07 23:17:13 UTC"
+  },
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "packet": "scorer-brief.txt",
+  "spawn_result": {
+    "task_name": "/root/live_scorer"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 23:17:40 UTC"
+  },
+  "interruption": {
+    "observed_at": {
+      "current_time": "2026-09-08 12:22:18 UTC"
+    },
+    "native_status": "errored",
+    "error": "You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 14th, 2026 8:52 PM.",
+    "scoring_artifacts_observed": 0,
+    "explicit_release": false
+  },
+  "resume": {
+    "reason": "User explicitly requested resume after interruption",
+    "operation": "followup_task",
+    "native_handle": "/root/live_scorer",
+    "after_dispatch": {
+      "current_time": "2026-09-08 12:22:18 UTC"
+    },
+    "observed_running_at": {
+      "current_time": "2026-09-08 12:23:01 UTC"
+    }
+  },
+  "completion": {
+    "observed_at": {
+      "current_time": "2026-09-08 12:43:27 UTC"
+    },
+    "native_status": "completed",
+    "explicit_release": true,
+    "pending_effects": "none reported",
+    "scoring_manifest_sha256": "69f7adf3ed1b446dc39b4c3853b4855040cd018facebae00b5eac6a57a1c8a57",
+    "report": "sage/docs/LIVE-RESULTS.md",
+    "scope": "Independent seven-arm scoring, not final whole-skill gate"
+  }
+}

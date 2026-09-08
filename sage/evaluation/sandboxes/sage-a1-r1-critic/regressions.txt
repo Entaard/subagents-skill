@@ -1,0 +1,10 @@
+test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier (regressions.StateRegressionTests.test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier) ... ok
+test_snapshot_tamper_with_valid_digest_is_repaired (regressions.StateRegressionTests.test_snapshot_tamper_with_valid_digest_is_repaired) ... ok
+test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected (regressions.StateRegressionTests.test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected) ... ok
+test_unknown_result_can_reconcile_once_but_unadmitted_scope_cannot_close (regressions.StateRegressionTests.test_unknown_result_can_reconcile_once_but_unadmitted_scope_cannot_close) ... ok
+test_unresolved_root_writer_blocks_resume_without_agents (regressions.StateRegressionTests.test_unresolved_root_writer_blocks_resume_without_agents) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.365s
+
+OK

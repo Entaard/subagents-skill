@@ -1,0 +1,24 @@
+{
+  "task": [
+    "repository repair"
+  ],
+  "domain": [
+    "software"
+  ],
+  "artifact": [
+    "jsonl state"
+  ],
+  "environment": [
+    "python 3.11"
+  ],
+  "risk": [
+    "corrupt projection"
+  ],
+  "operation": [
+    "resume"
+  ],
+  "failure": [
+    "stale snapshot"
+  ],
+  "include_non_supported": false
+}

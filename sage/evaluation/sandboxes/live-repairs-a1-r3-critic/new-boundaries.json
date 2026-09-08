@@ -1,0 +1,306 @@
+[
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-worker-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.worker must be an object\"}\n",
+    "label": "late-worker-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-check-ref-element.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.check.evidence_refs entry must be a nonblank string\"}\n",
+    "label": "late-check-ref-element",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-scorer-blank.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.scorer.id must be a nonblank string\"}\n",
+    "label": "late-scorer-blank",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-command-exit-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-DATA-01 baseline invalid subprocess command evidence\"}\n",
+    "label": "late-command-exit-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-evidence-path-number.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.evidence.path must be a nonblank string\"}\n",
+    "label": "late-evidence-path-number",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-evidence-kind-object.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.evidence.kind must be a nonblank string\"}\n",
+    "label": "late-evidence-kind-object",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-check-outcome-array.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.check.outcome must be a nonblank string\"}\n",
+    "label": "late-check-outcome-array",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/late-native-exit-bool.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-DATA-01 baseline native exit needs direct bound evidence\"}\n",
+    "label": "late-native-exit-bool",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/missing-scorer-id.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.scorer.id must be a nonblank string\"}\n",
+    "label": "missing-scorer-id",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/missing-check-refs.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.check.evidence_refs must be an array\"}\n",
+    "label": "missing-check-refs",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/missing-command-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-DATA-01 baseline invalid subprocess command evidence\"}\n",
+    "label": "missing-command-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/missing-completion-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-DATA-01 baseline lacks explicit native completion\"}\n",
+    "label": "missing-completion-exit",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/missing-native-provenance.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"pairs[1].baseline.evidence.provenance must be a nonblank string\"}\n",
+    "label": "missing-native-provenance",
+    "expected_exit": 2,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/null-unknowns.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "null-unknowns",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/absent-effective-models.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "absent-effective-models",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/empty-workers-and-commands.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "empty-workers-and-commands",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/noncalendar-text.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "noncalendar-text",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/synthetic-native-integer-with-native-ref.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"pair_count\": 2,\n  \"validation_scope\": \"hash-bound native lifecycle, command, schema, and evidence references; execution authenticity remains an independent-evaluator responsibility\",\n  \"result_schema\": \"sage-live-native-scored-results-v3\"\n}\n",
+    "stderr": "",
+    "label": "synthetic-native-integer-with-native-ref",
+    "expected_exit": 0,
+    "matched": true
+  },
+  {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate-native",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r3-critic/new-inputs/subprocess-evidence-cannot-prove-native-exit.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-DATA-01 baseline native exit needs direct bound evidence\"}\n",
+    "label": "subprocess-evidence-cannot-prove-native-exit",
+    "expected_exit": 2,
+    "matched": true
+  }
+]

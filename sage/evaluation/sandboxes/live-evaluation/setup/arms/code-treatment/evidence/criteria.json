@@ -1,0 +1,6 @@
+[
+  {"id":"wire-behavior","text":"Exact protocol decodes empty and arbitrary binary payloads, concatenation and every split boundary."},
+  {"id":"failure-and-reset","text":"Malformed, truncated and oversize input poisons; reset recovers; TypeError preserves state."},
+  {"id":"deliverables","text":"Dependency-free decoder.py, meaningful stdlib tests and usage README pass checks; raw input hashes unchanged."},
+  {"id":"live-procedure","text":"Installed Sage state, bounded routing, independent frozen review, writer release and honest unknowns are recorded."}
+]

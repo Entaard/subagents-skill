@@ -1,0 +1,58 @@
+{
+  "schema_version": "sage-live-environment-v1",
+  "frozen_date": "2026-09-08",
+  "platform": "macOS local evaluation sandbox",
+  "python": "3.11.6",
+  "node": "26.7.0",
+  "chrome": "152.0.7977.82",
+  "native_collaboration": {
+    "root_model_requested": "gpt-6-astra",
+    "root_effort_requested": "high",
+    "effective_model": null,
+    "effective_effort": null,
+    "actors": "fresh fork-none native calls, sequential delegation, one writer",
+    "raw_native_transcript_access": false,
+    "journal": "actor-authored, not raw transcript",
+    "outer_capture": "independently observed tool lifecycle and returned artifacts where available"
+  },
+  "source_identity": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/install-identity.json",
+    "sha256": "3eeba9152e8504d07cf7adb8ca6b6bf205ea63eed92cb7d3b57891bc51c21ec7"
+  },
+  "browser": {
+    "surface": "isolated local owned headless; connected Browser unavailable",
+    "neutral_probe_only": true,
+    "restricted_attempt": "failed",
+    "isolated_attempt_2": "launch/screenshot succeeded; Enter failed",
+    "isolated_attempt_3": "Tab focus and Enter activation observed at both viewports",
+    "harness": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-harness.mjs",
+      "sha256": "b2e4ac9618f5fb8ec1236b2c8cc7ec849b91cd2c0981f37b69d8b3ec30b11b4d"
+    },
+    "usage": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606"
+    },
+    "probe": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/probe/attempt-3/observations.json",
+      "sha256": "8739b12f1c5b7caa68745f935dea9538b5c0d8224aab4e9e057138a6febda0d3"
+    },
+    "permissions": "sandbox escalation may be required; no personal profiles or remote assets"
+  },
+  "metrics": {
+    "tokens": null,
+    "money": null,
+    "wall": "limited local operational observation, not cost",
+    "calls": "observed native actor invocations including coordinator and workers; tool calls reported separately if available"
+  },
+  "order": [
+    "code-treatment",
+    "code-baseline",
+    "data-baseline",
+    "data-treatment",
+    "creative-treatment",
+    "recovery-treatment",
+    "promotion-treatment"
+  ],
+  "scope": "Two routing pairs plus three single-arm smokes; no population quality or savings inference"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    "source hashes match initial baseline",
+    "two fresh processes from different working directories produce byte-identical JSON",
+    "saved JSON equals regenerated JSON",
+    "M09 remains null in source audit",
+    "all 21 M09 integer scenarios preserve reported directions"
+  ],
+  "command": "PYTHONDONTWRITEBYTECODE=1 TMPDIR=<arm>/tmp python3 evidence/check_candidate.py",
+  "source_sha256": {
+    "sessions.csv": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee",
+    "notes.txt": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14"
+  },
+  "artifact_sha256": {
+    "analysis.py": "b52dced6d4084ff1e541c4b5be67e261641b84178f359a3cfacd0d9baecf4b38",
+    "summary.json": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e",
+    "decision-memo.md": "b64361abe06ef9724c12ce9608b59e6665b50e6b569db59b412cb5fd3b55dc54"
+  },
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null
+}

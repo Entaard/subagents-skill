@@ -1,0 +1,11 @@
+{
+  "actor": "/root/live_repairs_critic",
+  "round": 3,
+  "native_status": "completed",
+  "release_observed": true,
+  "review": "sage/docs/reviews/live-repairs-a1-r3.json",
+  "verdict": "pass",
+  "scores": [9, 9, 9, 8.5, 8.5, 9, 9, 8.5],
+  "open_error_ids": [],
+  "observation_kind": "root-normalized direct tool observation, not raw transcript"
+}

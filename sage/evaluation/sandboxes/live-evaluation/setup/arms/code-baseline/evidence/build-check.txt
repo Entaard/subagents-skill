@@ -1,0 +1,22 @@
+Observed command: PYTHONDONTWRITEBYTECODE=1 TMPDIR=<ARM_ROOT>/tmp python3 -m unittest -v
+Working directory: <ARM_ROOT>/work
+Observed process exit: 0
+Captured stdout/stderr from tool result:
+test_constructor_validation (test_decoder.DecoderTests.test_constructor_validation) ... ok
+test_emits_only_after_comma (test_decoder.DecoderTests.test_emits_only_after_comma) ... ok
+test_every_partition_of_short_stream (test_decoder.DecoderTests.test_every_partition_of_short_stream) ... ok
+test_every_proper_frame_prefix_is_truncated (test_decoder.DecoderTests.test_every_proper_frame_prefix_is_truncated) ... ok
+test_every_single_split_binary_and_concatenation (test_decoder.DecoderTests.test_every_single_split_binary_and_concatenation) ... ok
+test_finish_boundary_does_not_close (test_decoder.DecoderTests.test_finish_boundary_does_not_close) ... ok
+test_limit_zero_and_exact_limit (test_decoder.DecoderTests.test_limit_zero_and_exact_limit) ... ok
+test_malformed_at_every_split (test_decoder.DecoderTests.test_malformed_at_every_split) ... ok
+test_oversize_immediately_without_colon (test_decoder.DecoderTests.test_oversize_immediately_without_colon) ... ok
+test_reset_discards_partial_data_and_preserves_limit (test_decoder.DecoderTests.test_reset_discards_partial_data_and_preserves_limit) ... ok
+test_seeded_arbitrary_chunks (test_decoder.DecoderTests.test_seeded_arbitrary_chunks) ... ok
+test_type_error_does_not_unpoison (test_decoder.DecoderTests.test_type_error_does_not_unpoison) ... ok
+test_type_errors_preserve_every_phase (test_decoder.DecoderTests.test_type_errors_preserve_every_phase) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.006s
+
+OK

@@ -1,0 +1,229 @@
+test_committed_development_selection_freezes_real_artifacts_and_counterbalances (test_harness.HarnessTests.test_committed_development_selection_freezes_real_artifacts_and_counterbalances) ... ok
+test_fail_repair_pass_preserves_round_and_error_history (test_harness.HarnessTests.test_fail_repair_pass_preserves_round_and_error_history) ... ok
+test_frozen_assets_and_trace_are_complete (test_harness.HarnessTests.test_frozen_assets_and_trace_are_complete) ... ok
+test_score_json_loader_rejects_duplicate_and_nonfinite_data (test_harness.HarnessTests.test_score_json_loader_rejects_duplicate_and_nonfinite_data) ... ok
+test_score_validator_rejects_omitted_null_nonfinite_false_pass_and_missing_evidence (test_harness.HarnessTests.test_score_validator_rejects_omitted_null_nonfinite_false_pass_and_missing_evidence) ... ok
+test_status_gate_rejects_pending_dependencies_repeated_round_fifth_round_and_undispositioned_errors (test_harness.HarnessTests.test_status_gate_rejects_pending_dependencies_repeated_round_fifth_round_and_undispositioned_errors) ... ok
+test_strict_product_fixture_oracle_has_an_accepted_control_and_single_parser_mutations (test_harness.HarnessTests.test_strict_product_fixture_oracle_has_an_accepted_control_and_single_parser_mutations) ... ok
+test_unseen_manifest_evidence_binding_tamper_rejection_and_unknown_cost (test_harness.HarnessTests.test_unseen_manifest_evidence_binding_tamper_rejection_and_unknown_cost) ... ok
+test_incomplete_source_fails_before_target_mutation (test_product_install.InstallContractTests.test_incomplete_source_fails_before_target_mutation) ... FAIL
+test_install_uses_only_the_new_allowlist (test_product_install.InstallContractTests.test_install_uses_only_the_new_allowlist) ... FAIL
+test_installed_helpers_execute_report_resume_and_promotion_paths (test_product_install.InstallContractTests.test_installed_helpers_execute_report_resume_and_promotion_paths) ... FAIL
+test_uninstall_removes_only_unchanged_owned_files (test_product_install.InstallContractTests.test_uninstall_removes_only_unchanged_owned_files) ... FAIL
+test_update_rejects_unowned_conflicts_and_preserves_new_files (test_product_install.InstallContractTests.test_update_rejects_unowned_conflicts_and_preserves_new_files) ... FAIL
+test_active_and_unknown_effect_sources_are_rejected_without_store_mutation (test_product_knowledge.KnowledgeContractTests.test_active_and_unknown_effect_sources_are_rejected_without_store_mutation) ... FAIL
+test_contested_refuted_retired_retrieval_policy (test_product_knowledge.KnowledgeContractTests.test_contested_refuted_retired_retrieval_policy) ... FAIL
+test_correction_preserves_stable_id_history_and_rollback (test_product_knowledge.KnowledgeContractTests.test_correction_preserves_stable_id_history_and_rollback) ... FAIL
+test_corrupted_prior_generation_cannot_be_rollback_target (test_product_knowledge.KnowledgeContractTests.test_corrupted_prior_generation_cannot_be_rollback_target) ... FAIL
+test_failed_unsupported_or_nonindependent_refutation_is_rejected (test_product_knowledge.KnowledgeContractTests.test_failed_unsupported_or_nonindependent_refutation_is_rejected) ... FAIL
+test_malformed_duplicate_and_nonfinite_store_data_is_rejected (test_product_knowledge.KnowledgeContractTests.test_malformed_duplicate_and_nonfinite_store_data_is_rejected) ... FAIL
+test_missing_source_evidence_reference_is_rejected (test_product_knowledge.KnowledgeContractTests.test_missing_source_evidence_reference_is_rejected) ... FAIL
+test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues (test_product_knowledge.KnowledgeContractTests.test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues) ... FAIL
+test_stale_generation_and_partial_generation_cannot_change_pointer (test_product_knowledge.KnowledgeContractTests.test_stale_generation_and_partial_generation_cannot_change_pointer) ... FAIL
+test_transferable_and_causal_support_gates_have_isolated_controls (test_product_knowledge.KnowledgeContractTests.test_transferable_and_causal_support_gates_have_isolated_controls) ... FAIL
+test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection (test_product_state.StateContractTests.test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection) ... FAIL
+test_dependencies_one_writer_and_unknown_effect_hold_admission (test_product_state.StateContractTests.test_dependencies_one_writer_and_unknown_effect_hold_admission) ... FAIL
+test_init_append_snapshot_report_and_stale_rebuild (test_product_state.StateContractTests.test_init_append_snapshot_report_and_stale_rebuild) ... FAIL
+test_knowledge_selection_preserves_status_cues_and_revision_identity (test_product_state.StateContractTests.test_knowledge_selection_preserves_status_cues_and_revision_identity) ... FAIL
+test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot (test_product_state.StateContractTests.test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot) ... FAIL
+test_requested_effective_unknown_and_resume_is_advisory (test_product_state.StateContractTests.test_requested_effective_unknown_and_resume_is_advisory) ... FAIL
+test_retry_requires_resolved_failure_evidence_cause_and_material_change (test_product_state.StateContractTests.test_retry_requires_resolved_failure_evidence_cause_and_material_change) ... FAIL
+test_synchronous_root_write_releases_without_fabricated_agent (test_product_state.StateContractTests.test_synchronous_root_write_releases_without_fabricated_agent) ... FAIL
+test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings (test_product_state.StateContractTests.test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings) ... FAIL
+
+======================================================================
+FAIL: test_incomplete_source_fails_before_target_mutation (test_product_install.InstallContractTests.test_incomplete_source_fails_before_target_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_install.py", line 21, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_install_uses_only_the_new_allowlist (test_product_install.InstallContractTests.test_install_uses_only_the_new_allowlist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_install.py", line 21, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_installed_helpers_execute_report_resume_and_promotion_paths (test_product_install.InstallContractTests.test_installed_helpers_execute_report_resume_and_promotion_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_install.py", line 21, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_uninstall_removes_only_unchanged_owned_files (test_product_install.InstallContractTests.test_uninstall_removes_only_unchanged_owned_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_install.py", line 21, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_update_rejects_unowned_conflicts_and_preserves_new_files (test_product_install.InstallContractTests.test_update_rejects_unowned_conflicts_and_preserves_new_files)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_install.py", line 21, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_active_and_unknown_effect_sources_are_rejected_without_store_mutation (test_product_knowledge.KnowledgeContractTests.test_active_and_unknown_effect_sources_are_rejected_without_store_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_contested_refuted_retired_retrieval_policy (test_product_knowledge.KnowledgeContractTests.test_contested_refuted_retired_retrieval_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_correction_preserves_stable_id_history_and_rollback (test_product_knowledge.KnowledgeContractTests.test_correction_preserves_stable_id_history_and_rollback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_corrupted_prior_generation_cannot_be_rollback_target (test_product_knowledge.KnowledgeContractTests.test_corrupted_prior_generation_cannot_be_rollback_target)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_failed_unsupported_or_nonindependent_refutation_is_rejected (test_product_knowledge.KnowledgeContractTests.test_failed_unsupported_or_nonindependent_refutation_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_malformed_duplicate_and_nonfinite_store_data_is_rejected (test_product_knowledge.KnowledgeContractTests.test_malformed_duplicate_and_nonfinite_store_data_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_missing_source_evidence_reference_is_rejected (test_product_knowledge.KnowledgeContractTests.test_missing_source_evidence_reference_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues (test_product_knowledge.KnowledgeContractTests.test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_stale_generation_and_partial_generation_cannot_change_pointer (test_product_knowledge.KnowledgeContractTests.test_stale_generation_and_partial_generation_cannot_change_pointer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_transferable_and_causal_support_gates_have_isolated_controls (test_product_knowledge.KnowledgeContractTests.test_transferable_and_causal_support_gates_have_isolated_controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_knowledge.py", line 13, in setUp
+    self.assertTrue(KNOWLEDGE_CLI.is_file(), "future product missing: sage/scripts/sage_knowledge.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_knowledge.py
+
+======================================================================
+FAIL: test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection (test_product_state.StateContractTests.test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_dependencies_one_writer_and_unknown_effect_hold_admission (test_product_state.StateContractTests.test_dependencies_one_writer_and_unknown_effect_hold_admission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_init_append_snapshot_report_and_stale_rebuild (test_product_state.StateContractTests.test_init_append_snapshot_report_and_stale_rebuild)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_knowledge_selection_preserves_status_cues_and_revision_identity (test_product_state.StateContractTests.test_knowledge_selection_preserves_status_cues_and_revision_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot (test_product_state.StateContractTests.test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_requested_effective_unknown_and_resume_is_advisory (test_product_state.StateContractTests.test_requested_effective_unknown_and_resume_is_advisory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_retry_requires_resolved_failure_evidence_cause_and_material_change (test_product_state.StateContractTests.test_retry_requires_resolved_failure_evidence_cause_and_material_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_synchronous_root_write_releases_without_fabricated_agent (test_product_state.StateContractTests.test_synchronous_root_write_releases_without_fabricated_agent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+======================================================================
+FAIL: test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings (test_product_state.StateContractTests.test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_product_state.py", line 13, in setUp
+    self.assertTrue(STATE_CLI.is_file(), "future product missing: sage/scripts/sage_state.py")
+AssertionError: False is not true : future product missing: sage/scripts/sage_state.py
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.009s
+
+FAILED (failures=24)

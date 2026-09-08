@@ -1,0 +1,162 @@
+{
+  "approach": "live-repairs-a1",
+  "round": 3,
+  "builder": "/root",
+  "routing_fallback": "Agent-thread limit prevented prior/fresh Sol builder; retained Astra critic is separate.",
+  "source": [
+    {
+      "path": "sage/ARCHITECTURE.md",
+      "sha256": "4f9cc6310ebd4ca436225fd101e59ec1d0720ea9ca6b57af0685e85bbb715b8a"
+    },
+    {
+      "path": "sage/docs/DECISIONS.md",
+      "sha256": "0c8fc5d2e40010fe7a81d1d92f05806ffed87696632390612b44992f4735428e"
+    },
+    {
+      "path": "sage/docs/IMPLEMENTATION.md",
+      "sha256": "6293328cf7383fb3cc3f368ef000461c620bea168217c5dde3860c8b87612a23"
+    },
+    {
+      "path": "sage/evaluation/native-result-protocol-v3.md",
+      "sha256": "1a880745154172cc796f1c7588866a5b80adfc0e3760c305e7785e3dad6142eb"
+    },
+    {
+      "path": "sage/evaluation/pairing.py",
+      "sha256": "933b027f8251c7942a4c694d4782f428cb3af998f9cde04d237c97cc93d8bd16"
+    },
+    {
+      "path": "sage/evaluation/tests/test_live_repairs.py",
+      "sha256": "d5889467807d18746d6eb3fc8d8d2984bb166e3b58b5b40c4ff0b2926e82f35c"
+    },
+    {
+      "path": "sage/evaluation/tests/test_native_shape.py",
+      "sha256": "026015d2687a8b404ca2588088244a6b4f9c387d8b5387537f89421cba8372c4"
+    }
+  ],
+  "preserved_round_1_repair_source": [
+    {
+      "path": "sage/docs/CONTRACTS.md",
+      "sha256": "380cef7698f95f46832954c76891c49597a0a24cbb31ef3a77345913b0061e52"
+    },
+    {
+      "path": "sage/docs/REQUIREMENTS.md",
+      "sha256": "2a838ce2c5d6045e53909bce38a3f714d4caedab8c62de7a95ae6020bbdb3148"
+    },
+    {
+      "path": "sage/evaluation/README.md",
+      "sha256": "9da232ceb68e74979c86ec6f8fa38be6e44de70a3b94557a97374c38c513e3af"
+    },
+    {
+      "path": "sage/scripts/sage_state.py",
+      "sha256": "2fda97567bed5c3b1eb8bdaa1465398ecbbe619da6aab47d83e45f28c1e7a205"
+    },
+    {
+      "path": "sage/skills/sage/references/delegation.md",
+      "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27"
+    },
+    {
+      "path": "sage/skills/sage/references/recovery.md",
+      "sha256": "b3290b8ae3e0e946daa8c608ec3888fd1f2e209e80d2759dfe8cb604c3e75763"
+    },
+    {
+      "path": "sage/skills/sage/references/run.md",
+      "sha256": "d038fb288d8600c79412b95eddca68576f2635a1463ea87fe682887b24a41f84"
+    },
+    {
+      "path": "sage/skills/sage/references/state.md",
+      "sha256": "1ea5bee2746c8fddcc8c1ed61fc3be416ee726331fe09473bb64e3305cc96b41"
+    },
+    {
+      "path": "sage/skills/sage/references/verification.md",
+      "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d"
+    },
+    {
+      "path": "sage/skills/sage-promote/references/promotion.md",
+      "sha256": "10e9adc3c38eeb642a4ab55c4a19e71b322e6616e7284840b43c2af4d36008c4"
+    }
+  ],
+  "frozen_guards": [
+    {
+      "path": "sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    {
+      "path": "sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+      "sha256": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+      "sha256": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"
+    },
+    {
+      "path": "sage/docs/LIVE-RESULTS.md",
+      "sha256": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b"
+    }
+  ],
+  "verification": {
+    "red": "red/stderr.txt",
+    "green": "green/stderr.txt",
+    "full": {
+      "schema_version": "sage-verification-run-v1",
+      "mode": "red",
+      "started_and_finished_at": "2026-09-08T14:33:58.710184+00:00",
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "commands": [
+        [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        [
+          "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ]
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests": 95,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "live_trials_run": false,
+      "network_used": false,
+      "stdout": "stdout.txt",
+      "stderr": "stderr.txt"
+    },
+    "retained_failures_rejected": 42
+  },
+  "critic_findings_self_closed": false,
+  "historical_scores_changed": false,
+  "limitations": [
+    "Structural/informed checks, not new live trials or evidence authentication.",
+    "Timestamp syntax/order is outside this validator.",
+    "No new home installation or effective-model/usage telemetry."
+  ]
+}

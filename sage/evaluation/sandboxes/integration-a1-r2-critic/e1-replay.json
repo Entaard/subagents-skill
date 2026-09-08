@@ -1,0 +1,17 @@
+{
+  "source_test_sha256": "0adca1528eccbc043ebbaef0c919a5d718a8f6802837e088c82c8f09852d4829",
+  "copied_test_sha256": "0adca1528eccbc043ebbaef0c919a5d718a8f6802837e088c82c8f09852d4829",
+  "sentinel_sha256": "2fb899c019bf0de23b0ee4d5eed42a8dc739226d8cd620b22f10797b17932544",
+  "runs": [
+    {
+      "caller": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/sentinel-source/sage/evaluation/sandboxes/caller-1",
+      "passed": true,
+      "sentinel_unchanged": true
+    },
+    {
+      "caller": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/sentinel-source/sage/evaluation/sandboxes/caller-2",
+      "passed": true,
+      "sentinel_unchanged": true
+    }
+  ]
+}

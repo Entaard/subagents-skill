@@ -1,0 +1,10 @@
+{
+  "actor": "/root/whole_skill_critic",
+  "native_status": "completed",
+  "release_observed": true,
+  "review": "sage/docs/reviews/final-a1-r2.json",
+  "verdict": "pass",
+  "scores": [8.5, 9, 8.5, 8.5, 8.5, 8.5, 9, 8.5],
+  "open_error_ids": [],
+  "observation_kind": "root-normalized direct tool observations, not raw transcript"
+}

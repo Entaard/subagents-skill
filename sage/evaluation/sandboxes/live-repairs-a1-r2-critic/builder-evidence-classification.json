@@ -1,0 +1,27 @@
+[
+  {
+    "path": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/red-current/stderr.txt",
+    "sha256": "9595cf48cb725a25d7f7435235033aad31135f59f5f7752204979ee9b6fde41f",
+    "classification": "first draft; wrong empty-object fixture did not reproduce the fourth truthy-object failure"
+  },
+  {
+    "path": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/red-exact/stderr.txt",
+    "sha256": "14d063a1e60899c749777ce2af6d8fdeb0a448d4719e9195ec254e3580e09270",
+    "classification": "correct exact four product-boundary failures"
+  },
+  {
+    "path": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/red-surrounding/stderr.txt",
+    "sha256": "aabd65388e3d4fa9ed01d4d57111d2f470a0def13c223695cc8d37d317922e6a",
+    "classification": "result/pair object-shape product failures; arm-null already rejected"
+  },
+  {
+    "path": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/focused-final/stderr.txt",
+    "sha256": "ea3f2e666df2ec8289017bf89fff864181b6d1f7156b7e5274ff47afa5ee2b7a",
+    "classification": "test-fixture error at wrong evidence index, not product validator failure"
+  },
+  {
+    "path": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/focused-final2/stderr.txt",
+    "sha256": "aafc622b58f6cd9d9febc809eef547227cf6ba39d15673f25111c433d2fb7c09",
+    "classification": "corrected fresh test run; final OK verified"
+  }
+]

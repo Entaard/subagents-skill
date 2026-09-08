@@ -1,0 +1,42 @@
+test_all_gate_references_and_exact_external_locators_are_closed (sage.tests.test_knowledge.KnowledgeRegressionTests.test_all_gate_references_and_exact_external_locators_are_closed) ... FAIL
+test_correct_cannot_bypass_intentional_retirement_metadata (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correct_cannot_bypass_intentional_retirement_metadata) ... FAIL
+test_record_chronology_uses_parsed_utc_instants (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_uses_parsed_utc_instants) ... FAIL
+test_dangling_pointer_is_not_an_empty_store (sage.tests.test_knowledge.KnowledgeRegressionTests.test_dangling_pointer_is_not_an_empty_store) ... FAIL
+
+======================================================================
+FAIL: test_all_gate_references_and_exact_external_locators_are_closed (sage.tests.test_knowledge.KnowledgeRegressionTests.test_all_gate_references_and_exact_external_locators_are_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 405, in test_all_gate_references_and_exact_external_locators_are_closed
+    self.assertEqual(rejected.returncode, 2, rejected.stderr)
+AssertionError: 0 != 2 : 
+
+======================================================================
+FAIL: test_correct_cannot_bypass_intentional_retirement_metadata (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correct_cannot_bypass_intentional_retirement_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 471, in test_correct_cannot_bypass_intentional_retirement_metadata
+    self.assertEqual(rejected.returncode, 2, rejected.stderr)
+AssertionError: 0 != 2 : 
+
+======================================================================
+FAIL: test_record_chronology_uses_parsed_utc_instants (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_uses_parsed_utc_instants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 500, in test_record_chronology_uses_parsed_utc_instants
+    self.assertEqual(result.returncode, expected, result.stderr)
+AssertionError: 2 != 0 : {"code": "invalid_record", "message": "reviewed_at precedes created_at", "ok": false}
+
+
+======================================================================
+FAIL: test_dangling_pointer_is_not_an_empty_store (sage.tests.test_knowledge.KnowledgeRegressionTests.test_dangling_pointer_is_not_an_empty_store)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 513, in test_dangling_pointer_is_not_an_empty_store
+    self.assertEqual(rejected.returncode, 2, rejected.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.356s
+
+FAILED (failures=4)

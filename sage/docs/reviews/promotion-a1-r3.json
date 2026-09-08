@@ -1,0 +1,103 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "promotion-a1-r3",
+  "module": "promotion",
+  "approach_id": "promotion-a1",
+  "round": 3,
+  "reviewed_at": "2026-09-07T18:45:30Z",
+  "gate_type": "deterministic",
+  "verdict": "pass",
+  "open_error_count": 0,
+  "open_error_ids": [],
+  "reviewer": {
+    "agent": "/root/promotion_critic",
+    "role": "independent promotion source-module critic; bounded exact-repair verification; no product repairs",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 8.7,
+    "architecture_and_coherence": 8.7,
+    "correctness_and_evidence": 8.7,
+    "simplicity_and_context_efficiency": 8.6,
+    "orchestration_and_model_routing": 8.7,
+    "safety_reversibility_and_recovery": 8.7,
+    "verification_strength": 8.8,
+    "reporting_and_maintainability": 8.6
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The sole remaining error is now independently repaired over accepted fractional precision, and the three previously fixed public error groups remain green. The source module meets its declared closed-input, reference, status, lineage, retrieval and reversible-landing contracts. Installed and live requirements remain explicitly outside this pass.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/contracts.txt", "sage/evaluation/sandboxes/promotion-a1-r3-critic/regressions.txt", "sage/docs/CONTRACTS.md"]
+    },
+    "architecture_and_coherence": {
+      "reason": "Validation retains the shared accepted UTC format and compares validated fixed-width whole seconds plus exact decimal fraction digits. The repair introduces no precision restriction or floating-point conversion. Existing source/reference closure, staged-parent binding, greatest-retained revision semantics and explicit corruption boundary remain consistent across the helper and guidance.",
+      "evidence": ["sage/scripts/sage_knowledge.py:131", "sage/scripts/sage_knowledge.py:241", "sage/ARCHITECTURE.md", "sage/skills/sage-promote/references/knowledge.md"]
+    },
+    "correctness_and_evidence": {
+      "reason": "Fresh 50-test source slices pass. All 70 explicit assertions pass across 42 commands. An independent exact Fraction oracle checks 18 same-second chronology pairs, including the original 100-nanosecond failure and 28-digit fractions; four additional second/day boundary controls pass. Earlier cases reject before generation creation. Exact original E1/E2/E4 probes and the nine-command documented workflow also pass.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/summary.json"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "A three-line domain-specific key removes the lossy conversion without broad refactoring or new dependencies. The short promotion spine and two conditional references preserve the distinction between deterministic mechanics and evidence judgment. Precision wording adds only the relevant accepted-domain rule.",
+      "evidence": ["sage/scripts/sage_knowledge.py:131", "sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/knowledge.md", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Source guidance continues to require three distinct live actors for actual proposals, a coordinator who owns landing, no target approval verdict for the refuter, preserved user model choices and explicitly uncalibrated priors. The no-change path avoids a ceremonial team. Fresh role-separation negative tests validate recorded identities only; actual independence and placement are not inferred from fixture strings.",
+      "evidence": ["sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/promotion-a1-r3-critic/contracts.txt"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Previously repaired pointer and retirement boundaries remain independently enforced with pointer preservation. Frozen and focused tests retain protection against active/unknown-effect sources, failed refutation, stale stage activation, lineage collision and corrupt target rollback. The documented normal rollback succeeds while retaining both generations; corrupt-history recovery is explicitly outside the normal mutation path.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/regressions.txt", "sage/evaluation/sandboxes/promotion-a1-r3-critic/contracts.txt", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    "verification_strength": {
+      "reason": "The focused exact-precision matrix uses independent rational arithmetic as its expected-value oracle and checks both valid and invalid behavior, differing fraction lengths, trailing-zero equivalence, whole-second ordering and no publication on rejection. Existing tests run without overrides; fresh public negatives cover earlier errors. This evidence is direct and sufficient for the bounded repair gate without implying installed or live evaluation.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r3-critic/review_checks.py", "sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json", "sage/tests/test_knowledge.py"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Current chronology wording accurately describes exact accepted digits and trailing-zero equivalence. Locator syntax, retirement/import distinctions, retained-prior diagnostics and integrity-valid-only rollback remain precise. Both failed reviews and all prior critic evidence are preserved. A fresh runner binds explicitly to the round-3 repair submission, avoiding the historical replay selector ambiguity.",
+      "evidence": ["sage/skills/sage-promote/references/knowledge.md", "sage/docs/IMPLEMENTATION.md", "sage/evaluation/sandboxes/promotion-a1-r3-critic/input-hashes.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/prior-evidence-hashes.json"]
+    }
+  },
+  "finding_dispositions": [
+    {
+      "id": "PROMOTION-A1-R1-E3",
+      "status": "verified_fixed",
+      "reason": "The exact round-2 created .5000002Z / reviewed .5000001Z input now rejects with invalid_record and creates no generation. Valid later and equal-instant controls pass. Eighteen same-second pairs agree with an independent exact rational oracle, including variable lengths, trailing-zero equivalence, zero/no fraction and 28-digit differences; second/day boundaries also preserve chronology. The accepted format is unchanged and no precision is discarded.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json", "sage/evaluation/sandboxes/promotion-a1-r3-critic/probes/precision-00/proposal.json", "sage/scripts/sage_knowledge.py:131"]
+    }
+  ],
+  "prior_fixed_error_regressions": [
+    {"id":"PROMOTION-A1-R1-E1","result":"still_fixed","evidence":["sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json","sage/evaluation/sandboxes/promotion-a1-r3-critic/regressions.txt"],"observed":"Missing comparison and both external-fragment alias forms reject; valid comparison/corroboration and exact hash-bound external controls remain covered by passing focused regressions."},
+    {"id":"PROMOTION-A1-R1-E2","result":"still_fixed","evidence":["sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json","sage/evaluation/sandboxes/promotion-a1-r3-critic/regressions.txt"],"observed":"Correct-to-retired rejects and preserves the pointer; proper retirement and revision-1 historical retired import remain green."},
+    {"id":"PROMOTION-A1-R1-E4","result":"still_fixed","evidence":["sage/evaluation/sandboxes/promotion-a1-r3-critic/results.json","sage/evaluation/sandboxes/promotion-a1-r3-critic/assertions.json"],"observed":"Dangling pointer validation rejects with invalid_store and retains the original symlink; truly empty-store and retrieval/state sentinel controls pass."}
+  ],
+  "errors": [],
+  "suggestions": [],
+  "executed_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/promotion-a1-r3-critic/review_checks.py",
+      "exit_code": 0,
+      "tests": 50,
+      "test_failures": 0,
+      "test_errors": 0,
+      "explicit_assertions": 70,
+      "assertion_failures": 0,
+      "commands": 42,
+      "interpretation": "Fresh frozen knowledge 10, focused knowledge 15, frozen state 9 and focused state 16 run unchanged. Independent public probes add exact chronology and prior-error controls. The complete documented proposal executes nine commands through normal rollback/final validation. Syntax and active local-link checks pass. The runner uses only fresh round-3 destinations, binds all 13 hashes to builder_repair_submitted round 3, and verifies both prior critic evidence trees unchanged.",
+      "evidence": "sage/evaluation/sandboxes/promotion-a1-r3-critic/summary.json"
+    }
+  ],
+  "input_hashes_evidence": "sage/evaluation/sandboxes/promotion-a1-r3-critic/input-hashes.json",
+  "limitations": [
+    "This passes the deterministic promotion source module only. Installed integration, allowlisted installer cutover and live forward behavior remain pending and unscored.",
+    "Fixtures and distinct recorded actor IDs do not prove actual independence, semantic knowledge truth, causal adequacy, user authority or a physical workspace lease. The guidance requires live evidence for those claims.",
+    "No effective model/effort, normalized cost, usage, savings or empirical routing-quality result is claimed. Live case dimensions remain unrun rather than receiving inferred scores.",
+    "Normal mutation and rollback require integrity-valid retained history. Corrupt-byte recovery remains a separately designed procedure that must preserve evidence; this pass does not add one.",
+    "No bundled quick_validate pass or dependency installation is claimed; PyYAML remains unavailable. The builder's offline harness result was not rerun or counted among this review's 50 observed tests.",
+    "The exact-precision controls are scoped deterministic evidence, not an assertion that every possible future input or filesystem failure has been exhaustively tested."
+  ],
+  "next_action": "Begin the integration builder against the passed architecture, verification, Main Sage and promotion modules. Preserve all three promotion rounds, prior evidence and corruption-recovery limits. Keep installed integration and live quality/cost gates unscored until independently observed."
+}

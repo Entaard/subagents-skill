@@ -1,0 +1,233 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "architecture-a1-r1",
+  "module": "architecture",
+  "approach_id": "architecture-a1",
+  "round": 1,
+  "reviewed_at": "2026-09-07T14:18:23Z",
+  "reviewer": {
+    "agent": "/root/architecture_critic",
+    "role": "independent architecture critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "gate_type": "design",
+  "verdict": "fail",
+  "open_error_count": 3,
+  "scope": "Frozen architecture, requirements, decisions, and status contract. Downstream implementation is deliberately unbuilt and is not scored as absent functionality.",
+  "inputs": [
+    {
+      "path": "sage/ARCHITECTURE.md",
+      "sha256": "85cda84751c8f50886299efe5c44158e46fdfe70f1a420f586234268941f5804"
+    },
+    {
+      "path": "sage/docs/REQUIREMENTS.md",
+      "sha256": "319ef3918ea54a6d28c6b3a23941261372b74fa8053c1ad8bc3999f487fcec24"
+    },
+    {
+      "path": "sage/docs/DECISIONS.md",
+      "sha256": "20120c18abaf9df4d1d34c65558b53ce864f8b66e37e4c006d8e21475508add0"
+    },
+    {
+      "path": "sage/docs/STATUS.json",
+      "sha256": "4a87639d7824084f8c50066ed6e5cfc7eb87220ba3118d56cd4fdb6251b67373"
+    }
+  ],
+  "scores": {
+    "requirements_and_spec_fit": 7.5,
+    "architecture_and_coherence": 7.5,
+    "correctness_and_evidence": 7,
+    "simplicity_and_context_efficiency": 8.8,
+    "orchestration_and_model_routing": 8,
+    "safety_reversibility_and_recovery": 8.5,
+    "verification_strength": 8.7,
+    "reporting_and_maintainability": 8.6
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "Codex scope, two entrypoints, migration, independent review, and explicit state meet the central design requirements. Runtime failure control and useful knowledge resurfacing remain incomplete.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:5",
+        "sage/ARCHITECTURE.md:108",
+        "sage/ARCHITECTURE.md:174",
+        "sage/ARCHITECTURE.md:243"
+      ],
+      "errors": [
+        "ARCH-A1-R1-E2",
+        "ARCH-A1-R1-E3"
+      ]
+    },
+    "architecture_and_coherence": {
+      "reason": "The instruction spine, deterministic helpers, and separate promotion are coherent. The supported-state gate and changing-situation retrieval contract are too ambiguous for independent downstream builders to implement consistently.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:11",
+        "sage/ARCHITECTURE.md:182",
+        "sage/ARCHITECTURE.md:199"
+      ],
+      "errors": [
+        "ARCH-A1-R1-E1",
+        "ARCH-A1-R1-E3"
+      ]
+    },
+    "correctness_and_evidence": {
+      "reason": "Independent refutation, provenance, falsifiers, and counterevidence are strong safeguards, but supported status currently depends on an unspecified evidence class and review predicate.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:182",
+        "sage/ARCHITECTURE.md:199",
+        "sage/ARCHITECTURE.md:200"
+      ],
+      "errors": [
+        "ARCH-A1-R1-E1"
+      ]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Judgment stays in prose; helpers have narrow deterministic responsibilities; branch-specific references, bounded retrieval, and zero delegation protect context. The design does not reproduce the legacy protocol.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:11",
+        "sage/ARCHITECTURE.md:13",
+        "sage/ARCHITECTURE.md:89",
+        "sage/ARCHITECTURE.md:178"
+      ],
+      "errors": []
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Priors match the requested roles, full-history restrictions match the supplied live schema, lifecycle reconciliation is explicit, and cost accounting includes coordination. Failure-to-escalation behavior is still unspecified for ordinary task execution.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:114",
+        "sage/ARCHITECTURE.md:123",
+        "sage/ARCHITECTURE.md:131",
+        "sage/ARCHITECTURE.md:243"
+      ],
+      "errors": [
+        "ARCH-A1-R1-E2"
+      ]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "The single writer, no blind retry of unknown effects, immutable log, hash-bound projection, boundary checkpoints, and retained knowledge generations form a credible minimal design. Snapshot repair and source terminal-state distinctions can be clarified during detailed contracts.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:141",
+        "sage/ARCHITECTURE.md:145",
+        "sage/ARCHITECTURE.md:201",
+        "sage/ARCHITECTURE.md:209"
+      ],
+      "errors": []
+    },
+    "verification_strength": {
+      "reason": "Verification precedes behavior implementation, separates design and empirical gates, uses negative and held-out tests, freezes evaluation boundaries, and compares a predeclared baseline while preserving unknown spend. Actual tests and benchmark breadth are correctly deferred.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:245",
+        "sage/ARCHITECTURE.md:254",
+        "sage/ARCHITECTURE.md:281"
+      ],
+      "errors": []
+    },
+    "reporting_and_maintainability": {
+      "reason": "Acceptance requirements, decision rationale, immutable review rounds, evidence labels, and an allowlisted reversible cutover are clear. No absent implementation or empirical success is misrepresented.",
+      "evidence": [
+        "sage/ARCHITECTURE.md:157",
+        "sage/ARCHITECTURE.md:241",
+        "sage/ARCHITECTURE.md:256",
+        "sage/docs/STATUS.json"
+      ],
+      "errors": []
+    }
+  },
+  "errors": [
+    {
+      "id": "ARCH-A1-R1-E1",
+      "rank": 1,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-041",
+        "R-045",
+        "R-046",
+        "R-049"
+      ],
+      "path": "sage/ARCHITECTURE.md",
+      "lines": [
+        182,
+        185,
+        199,
+        200
+      ],
+      "issue": "The supported-state contract refers to an evidence class and gate, but defines neither the classes nor the decision predicate. 'Stronger and more varied' evidence does not tell a coordinator or refuter when a general recommendation has earned supported status. Independent review alone can approve a plausible one-run causal story, making that story normal retrieval policy.",
+      "concrete_case": "A run succeeds after both a model escalation and a rewritten prompt. A candidate says to escalate that task category; the refuter finds no direct counterexample. The design gives no rule requiring evidence that separates the model effect from the prompt change before granting supported status.",
+      "remedy": "Specify a small qualitative evidence gate before implementation: distinguish a directly checkable scoped fact/invariant from transferable heuristic or causal guidance; state what direct verification or cross-context/counterfactual evidence each needs; keep uncertain transfer or unresolved alternative explanations provisional or contested. Persist evidence class and gate rationale in the record. Numerical run-count thresholds are unnecessary.",
+      "verification": "A reviewer can classify a deterministic local invariant, a confounded successful run, and varied corroborated guidance without inventing a policy. The verification builder can derive negative supported-status cases from that contract."
+    },
+    {
+      "id": "ARCH-A1-R1-E2",
+      "rank": 2,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-021",
+        "R-037",
+        "R-038"
+      ],
+      "path": "sage/ARCHITECTURE.md",
+      "lines": [
+        108,
+        123,
+        141,
+        243
+      ],
+      "issue": "Ordinary Sage runtime has no explicit bounded retry/no-progress and escalation contract. The only finite approach limit belongs to the rebuild's builder/critic process. 'Revise a plan when the failure cause or evidence changes' does not require identifying a cause before every retry or deciding what changes when a worker repeatedly misses its criterion.",
+      "concrete_case": "A guided Sol builder repeatedly returns a partial result. All side effects are known, so the native admission rule permits another follow-up. The architecture does not require a finite attempt allowance, a diagnosis of missing evidence versus inadequate decomposition/capability, or a recorded escalation/replan decision.",
+      "remedy": "Add a concise ordinary-run failure loop: record the failed criterion and causal hypothesis, allow only bounded cause-responsive attempts, distinguish missing inputs from inadequate task decomposition or model capability, and require a materially changed plan/routing/evidence strategy on no progress. Respect user routing overrides and request user input only when authority or an essential input is actually missing. Do not copy the rebuild's four-round ceremony into every small task.",
+      "verification": "A planned runtime trace with repeated identical failure must produce diagnosis and a changed approach rather than another unchanged dispatch; a persistent-user request must continue through in-scope replanning."
+    },
+    {
+      "id": "ARCH-A1-R1-E3",
+      "rank": 3,
+      "severity": "moderate",
+      "status": "open",
+      "requirements": [
+        "R-040",
+        "R-042",
+        "R-043"
+      ],
+      "path": "sage/ARCHITECTURE.md",
+      "lines": [
+        174,
+        176,
+        180
+      ],
+      "issue": "Situation-specific retrieval is scheduled only after qualification and before final planning. Newly discovered environment details, failed checks, changed user constraints, or a revised plan have no retrieval refresh trigger. Recording a missed recognizer for a later promotion does not surface already-promoted relevant knowledge during the current task.",
+      "concrete_case": "The initial plan has no knowledge match. A test later reveals a known tool failure signature with an existing supported workaround. That signature was unavailable at initial selection, and the stated sequence never revisits the active index before the next attempt.",
+      "remedy": "Define a bounded refresh trigger when new observable cues or a material plan/constraint change can affect the next decision. Query the active index, deduplicate already-loaded records, re-check qualifiers of applied records, and persist the selected generation/record revisions or equivalent exact identity for recovery. Keep raw closed-run mining exclusive to promotion.",
+      "verification": "A case starting with no match and later discovering a known failure cue loads the applicable existing record before retry; unchanged cues do not repeatedly reload the same knowledge."
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "ARCH-A1-R1-S1",
+      "priority": "optional",
+      "path": "sage/ARCHITECTURE.md:223",
+      "suggestion": "When detailing recovery, state that a missing or stale snapshot can be rebuilt from a valid authoritative log, while an invalid log pauses admission and preserves evidence. This follows the declared source-of-truth model but is not yet stated as a branch."
+    },
+    {
+      "id": "ARCH-A1-R1-S2",
+      "priority": "optional",
+      "path": "sage/ARCHITECTURE.md:194",
+      "suggestion": "Clarify whether closed inputs include unsuccessful or stopped terminal runs. Their failure evidence can be valuable; terminal eligibility should depend on reconciled effects and integrity rather than success alone."
+    }
+  ],
+  "strengths": [
+    "Two explicit skills separate task delivery from knowledge consolidation.",
+    "Native tool semantics match the live schema supplied to this critic; unknown effective placement and spend are preserved.",
+    "One active shared-workspace writer and independent frozen-candidate review are feasible without a scheduler.",
+    "Immutable generations and a single active pointer provide a small reversible knowledge store.",
+    "Verification-first ordering and bounded baseline claims avoid confusing plausible architecture with measured quality."
+  ],
+  "limitations": [
+    "Static design review only: deterministic tests, installed behavior, live task quality, routing savings, and knowledge transfer were not run or scored.",
+    "Model and effort are the requested critic assignment; the tool context does not provide an independently observed effective placement.",
+    "External papers and documentation were treated as the design's bounded rationale, not independently revalidated empirical evidence; live collaboration signatures were available directly in context.",
+    "Review deliberately excludes hostile-machine concurrency guarantees and transaction machinery outside the declared scope."
+  ],
+  "next_action": "Repair the three open architecture contracts, preserve this round, then request a separate critic review of the frozen architecture-a1 round 2 candidate before building verification."
+}

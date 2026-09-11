@@ -1,6 +1,6 @@
 # Run and state
 
-Read this for every new persisted run. Use the source helper at `sage/scripts/sage_state.py` when operating in this repository. After installation, use `<target-root>/sage/bin/sage_state.py`. Resolve the path explicitly; never infer a state root from the task repository. Use the installation's configured state root; absent an override, resolve the standard `~/.codex/sage` directory to an absolute path and state it before access. The installer copies `<target-root>/skills/{sage,sage-promote}` and `<target-root>/sage/bin/{sage_state.py,sage_knowledge.py}`; source-tree success is not installed integration.
+Read this for every new run. First follow [runtime paths](runtime.md) to resolve the helper and shared root and initialize a discoverable run. Source-tree success is not installed integration.
 
 ## Shape the outcome
 
@@ -24,11 +24,11 @@ When a committed plan-revision allowance is exhausted, diagnose the failed appro
 Prefer `init`, batched `append`, and boundary `snapshot` calls. Example tiny run:
 
 ```text
-python3 SAGE_STATE init --run-dir RUN --run-id ID --objective TEXT --criteria criteria.json
-python3 SAGE_STATE append --run-dir RUN --events wave.jsonl
-python3 SAGE_STATE snapshot --run-dir RUN --write
-python3 SAGE_STATE validate --run-dir RUN --terminal
-python3 SAGE_STATE report --run-dir RUN --write
+python3 SAGE_STATE init --state-root ROOT --run-id ID --objective TEXT --criteria criteria.json
+python3 SAGE_STATE append --state-root ROOT --run-id ID --events wave.jsonl
+python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write
+python3 SAGE_STATE validate --state-root ROOT --run-id ID --terminal
+python3 SAGE_STATE report --state-root ROOT --run-id ID --write
 ```
 
 `events.jsonl` is append-only authority. Prepare a complete JSONL wave and let `append` validate the whole proposed history before atomic replacement. `snapshot.json` is a hash-bound projection; `report.md` is derived. Persist large or confidential evidence by scoped locator/hash and classification, never by copying credentials or capability secrets.

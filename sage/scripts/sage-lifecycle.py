@@ -23,6 +23,7 @@ REQUIRED = (
     "skills/sage/SKILL.md",
     "skills/sage/agents/openai.yaml",
     "skills/sage/references/run.md",
+    "skills/sage/references/runtime.md",
     "skills/sage/references/delegation.md",
     "skills/sage/references/verification.md",
     "skills/sage/references/recovery.md",

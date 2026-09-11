@@ -5,15 +5,18 @@ Read when creating event payloads, recovering state, or diagnosing a CLI rejecti
 ## Commands
 
 ```text
-python3 SAGE_STATE init --run-dir RUN --run-id ID --objective TEXT --criteria CRITERIA_JSON
-python3 SAGE_STATE append --run-dir RUN (--event EVENT_JSON | --events EVENTS_JSONL)
-python3 SAGE_STATE validate --run-dir RUN [--terminal]
-python3 SAGE_STATE snapshot --run-dir RUN --write
-python3 SAGE_STATE resume --run-dir RUN --agents AGENTS_JSON
-python3 SAGE_STATE report --run-dir RUN --write
+python3 SAGE_STATE paths [--state-root ROOT]
+python3 SAGE_STATE list-runs --state-root ROOT [--limit 20 --offset 0]
+python3 SAGE_STATE register --state-root ROOT --run-dir LEGACY_RUN
+python3 SAGE_STATE init --state-root ROOT --run-id ID --objective TEXT --criteria CRITERIA_JSON
+python3 SAGE_STATE append --state-root ROOT --run-id ID (--event EVENT_JSON | --events EVENTS_JSONL)
+python3 SAGE_STATE validate --state-root ROOT --run-id ID [--terminal]
+python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write
+python3 SAGE_STATE resume --state-root ROOT --run-id ID --agents AGENTS_JSON
+python3 SAGE_STATE report --state-root ROOT --run-id ID --write
 ```
 
-Both paths are explicit: resolve `SAGE_STATE` as described in [run](run.md) and choose `RUN` beneath an explicit state root. Success emits one JSON object and exits 0. Contract/data rejection emits `{ok:false,code,message}` to stderr and exits 2; unexpected I/O exits 3. JSON is UTF-8, finite, and duplicate-key free. Sage-owned IDs match `^[a-z0-9][a-z0-9._-]{0,63}$`. Agent handles instead preserve the exact bounded, control-free native ID or canonical name returned by the tool; `/root/scout` is valid and must not be aliased.
+Resolve `SAGE_STATE` and pin `ROOT` using [runtime paths](runtime.md), the shared authority for defaults, discovery and legacy registration. Omitting `--state-root` uses that resolver. Explicit legacy/fixture operations may substitute `--run-dir RUN` for the root/ID target; `init` still requires an ID. Success emits one JSON object and exits 0. Contract/data rejection, including argument errors, emits `{ok:false,code,message}` to stderr and exits 2; unexpected I/O exits 3. JSON is UTF-8, finite, and duplicate-key free. Sage-owned IDs match `^[a-z0-9][a-z0-9._-]{0,63}$`. Agent handles instead preserve the exact bounded, control-free native ID or canonical name returned by the tool; `/root/scout` is valid and must not be aliased.
 
 Each JSONL event has exactly `v,event_id,run_id,seq,at,actor,type,payload`. Version is 1; sequence is contiguous from 1; time is RFC 3339 UTC. Required payload fields:
 
@@ -52,7 +55,9 @@ Each delegated task revision normally has one `agent.requested`; its native hand
 
 A delegated writer releases only when its reconciled result and that assignment's latest terminal reconciled observation coexist, in either order. Before that boundary, a newer lifecycle supersedes an earlier one: terminal then active/unknown before the result stays blocked until a fresh terminal reconciliation. After the boundary, release is historical and immutable. A released native handle may receive a new task revision through `followup_task` and a new request; later observations bind to that new assignment, so old completion cannot release it. A known uncreated assignment releases only through its failed/no-effect result. A root writer releases from its reconciled result. Planned-but-unadmitted tasks and released historical readers do not hold the writer barrier.
 
-Lifecycle is `active,idle,completed,failed,interrupted,missing`; effect status is `none,reconciled,unknown`. Evidence kinds are `observation,inference,unknown,untested`. Check outcomes are `passed,failed,not_tested`. Findings use `blocker,major,minor` and dispositions `fixed,accepted,rejected`.
+Lifecycle is `active,idle,completed,failed,interrupted,missing`; effect status is `none,reconciled,unknown`. Assignment snapshots share the validator's frozen release observation. Later observations without a new assignment stay in historical events but cannot rewrite that released assignment's projection; `resume` proposes observations only for assignments not yet released. A new request resets the handle's projection for the new assignment. Evidence kinds are `observation,inference,unknown,untested`. Check outcomes are `passed,failed,not_tested`. Findings use `blocker,major,minor` and dispositions `fixed,accepted,rejected`.
+
+Knowledge selection validates cue keys and string-array values, match statuses (`supported`, or `provisional|contested` with `include_non_supported:true`), unique match IDs and retrieval consistency. `matched` requires nonempty matches and recognizer cues from a real generation; `no_match` and `unchanged` require empty matches. Generation `none` has no matches. `unchanged` also requires an earlier selection with the same generation, fingerprint and cues. These structural checks do not authenticate the helper output or establish that guidance was applied.
 
 `resume --agents` consumes a normalized array, not the raw `list_agents` envelope. Each item has `handle,lifecycle` and may include `effect_status,effective_model,effective_effort`. Map native `agent_name` exactly to `handle`, `running` to `active`, and a completed status object to `completed`; omitted effective identity becomes null. Completion text is lifecycle evidence only, never effect-reconciliation evidence, so effect remains unknown until separately observed.
 
@@ -62,7 +67,7 @@ The helper's completion gate is deliberately structural. Every admitted task mus
 
 ## Executable tiny run
 
-Set `SAGE_STATE` and `RUN`, create `criteria.json` containing:
+Resolve `SAGE_STATE` and `ROOT`; use run ID `tiny-1` in the commands and events below. Create `criteria.json` containing:
 
 ```json
 [{"id":"c-1","text":"The bounded read is observed and checked."}]
@@ -80,7 +85,7 @@ Run `init`, then create `wave.jsonl` with these complete lines:
 {"v":1,"event_id":"e-8","run_id":"tiny-1","seq":8,"at":"2026-09-07T00:00:08Z","actor":"root","type":"run.closed","payload":{"status":"completed","criterion_evidence":{"c-1":["ev-1"]},"scope_reconciled":true,"remaining_human_items":[]}}
 ```
 
-Then run `append --events wave.jsonl`, `snapshot --write`, `validate --terminal`, and `report --write`. `append` validates the entire proposed history before atomic replacement; a rejection leaves the log unchanged.
+Then run `append --events wave.jsonl`, `snapshot --write`, `validate --terminal`, and `report --write`, each with `--state-root ROOT --run-id tiny-1`. `append` validates the entire proposed history before atomic replacement; a rejection leaves the log unchanged.
 
 For a note after `init`, create `note-example.json` with the next event ID/sequence and one published category:
 
@@ -88,4 +93,4 @@ For a note after `init`, create `note-example.json` with the next event ID/seque
 {"v":1,"event_id":"e-2","run_id":"tiny-1","seq":2,"at":"2026-09-07T00:00:02Z","actor":"root","type":"note.recorded","payload":{"category":"decision","text":"Use the bounded read plan.","evidence_ids":[],"corrects_event_id":null}}
 ```
 
-Then run `python3 SAGE_STATE append --run-dir RUN --event note-example.json`. Use `assumption` for a premise currently taken as true and `decision` for a chosen course; reconciliation, closure, and finding dispositions have their own event types.
+Then run `python3 SAGE_STATE append --state-root ROOT --run-id tiny-1 --event note-example.json`. Use this alternative immediately after `init`, before the complete wave above. Use `assumption` for a premise currently taken as true and `decision` for a chosen course; reconciliation, closure, and finding dispositions have their own event types.

@@ -1,0 +1,113 @@
+{
+  "ok": true,
+  "installed_files": [
+    {
+      "path": "sage/bin/sage_knowledge.py",
+      "sha256": "3bf593187e0e8cc690337ee50c8e5957122f55c3d5e6f546cb1709b276cec5f3"
+    },
+    {
+      "path": "sage/bin/sage_state.py",
+      "sha256": "641121a5cec6d94d00338d76b5b117363f92cc61cbec400ac868352a6ef1930a"
+    },
+    {
+      "path": "skills/sage-promote/SKILL.md",
+      "sha256": "9019e5a50842f2d84b66e9b22cf92fd2e06c16a1991faeca8be3ef41367e84d2"
+    },
+    {
+      "path": "skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f"
+    },
+    {
+      "path": "skills/sage-promote/references/knowledge.md",
+      "sha256": "8bed28db034c754dab3980773d1bdc1fd0073b477204b16a8640dab4b361806a"
+    },
+    {
+      "path": "skills/sage-promote/references/promotion.md",
+      "sha256": "c3a971a1478b2251392fb84bc4fa724c9ca45e7c0e1c7ba5308a73ffeb335682"
+    },
+    {
+      "path": "skills/sage/SKILL.md",
+      "sha256": "fe9c9958d8331ea446b56f630ca007d910c500d15d981859005505edf2a53586"
+    },
+    {
+      "path": "skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e"
+    },
+    {
+      "path": "skills/sage/references/delegation.md",
+      "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27"
+    },
+    {
+      "path": "skills/sage/references/knowledge.md",
+      "sha256": "6efa4d7b83f708b3230131fe8012524e212c7ac94bd89adfad57bf1466a8c6d0"
+    },
+    {
+      "path": "skills/sage/references/recovery.md",
+      "sha256": "b24f7fb803a836afde12ce440cada44c2470ad3b36ac91317968a70c673127e7"
+    },
+    {
+      "path": "skills/sage/references/run.md",
+      "sha256": "49eb9e720a187f3e235e1ae28a24d338ef84cea6358d116daafcbf82f1360380"
+    },
+    {
+      "path": "skills/sage/references/runtime.md",
+      "sha256": "92001c45fb5c369ec14ac62245ce0ca54fe52a23b21ad4e217358aad81fadd64"
+    },
+    {
+      "path": "skills/sage/references/state.md",
+      "sha256": "1172f3e922e1ac1018b93c8de6f016459f53001d34c92843d6a4eb5c876f9123"
+    },
+    {
+      "path": "skills/sage/references/verification.md",
+      "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d"
+    }
+  ],
+  "local_reference_links_checked": 24,
+  "history": {
+    "major-issues-review": "826655b2cb33e94696d6fda8cdb52a0d89aab701d3316a00a29f67954b2c164b",
+    "major-issues-fix": "f5892f0709bca82d0f6ce62285940ea882bc395e9e37d20716f906b6ad214684"
+  },
+  "inventory": {
+    "next_offset": null,
+    "ok": true,
+    "references_dir": "/Users/tuananhnguyen/.codex/sage/run-references",
+    "root_exists": true,
+    "root_source": "argument",
+    "runs": [
+      {
+        "eligible": false,
+        "entry_path": "/Users/tuananhnguyen/.codex/sage/runs/2026-09-11-state-root-fix",
+        "events_sha256": "961eba4fe47815cb5b45f8883db23b701927e4955aa1b105bcffdbe54411d619",
+        "last_seq": 43,
+        "origin": "canonical",
+        "run_dir": "/Users/tuananhnguyen/.codex/sage/runs/2026-09-11-state-root-fix",
+        "run_id": "2026-09-11-state-root-fix",
+        "status": "active"
+      },
+      {
+        "eligible": true,
+        "entry_path": "/Users/tuananhnguyen/.codex/sage/run-references/major-issues-fix.json",
+        "events_sha256": "f5892f0709bca82d0f6ce62285940ea882bc395e9e37d20716f906b6ad214684",
+        "last_seq": 41,
+        "origin": "registered",
+        "run_dir": "/Users/tuananhnguyen/Projects/notes/subagents-skill/.sage-state/major-issues-fix/run",
+        "run_id": "major-issues-fix",
+        "status": "completed"
+      },
+      {
+        "eligible": true,
+        "entry_path": "/Users/tuananhnguyen/.codex/sage/run-references/major-issues-review.json",
+        "events_sha256": "826655b2cb33e94696d6fda8cdb52a0d89aab701d3316a00a29f67954b2c164b",
+        "last_seq": 39,
+        "origin": "registered",
+        "run_dir": "/Users/tuananhnguyen/Projects/notes/subagents-skill/reviews/2026-09-11-sage-major-issues/run",
+        "run_id": "major-issues-review",
+        "status": "completed"
+      }
+    ],
+    "runs_dir": "/Users/tuananhnguyen/.codex/sage/runs",
+    "state_root": "/Users/tuananhnguyen/.codex/sage",
+    "store_dir": "/Users/tuananhnguyen/.codex/sage/knowledge",
+    "total_entries": 3
+  }
+}

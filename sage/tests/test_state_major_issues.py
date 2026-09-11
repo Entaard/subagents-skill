@@ -360,7 +360,7 @@ class StateMajorIssueTests(unittest.TestCase):
             "retrieval_status": "matched",
         }
         second = {
-            "generation_id": "g-2", "cue_fingerprint": "two", "cues": {"operation": ["retry"]},
+            "generation_id": "g-2", "cue_fingerprint": "two", "cues": {"operation": ["retry"], "include_non_supported": True},
             "matches": [
                 {"id": "k-1", "revision": 1, "status": "supported", "reason": "first"},
                 {"id": "k-2", "revision": 3, "status": "contested", "reason": "second"},

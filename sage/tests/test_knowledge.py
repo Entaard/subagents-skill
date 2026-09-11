@@ -255,7 +255,7 @@ class KnowledgeRegressionTests(unittest.TestCase):
             cues.write_text('{"operation":[]}\n', encoding="utf-8")
             for arguments in (
                 ("retrieve", "--store-dir", str(root / "store"), "--cues", str(cues), "--limit", "many"),
-                ("validate",),
+                ("validate", "--unknown-option"),
             ):
                 result = invoke(KNOWLEDGE, *arguments)
                 self.assertEqual(result.returncode, 2)

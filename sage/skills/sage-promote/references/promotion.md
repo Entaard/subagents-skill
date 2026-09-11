@@ -4,7 +4,7 @@ Read for every `$sage-promote` run. The root is the promotion coordinator: it se
 
 ## Own coordination and recovery
 
-Every invocation owns a separate coordinator run. Before planning, read the sibling [run procedure](../../sage/references/run.md) and [state contract](../../sage/references/state.md), resolve `SAGE_STATE` beside `SAGE_KNOWLEDGE`, and choose an explicit run directory distinct from every selected source. Its own `events.jsonl` is append-only authority for promotion work. Source runs remain closed and read-only; validate them without appending, resuming, or repairing them. Knowledge generations are store artifacts, not the coordinator's task state.
+Every invocation owns a separate coordinator run. Before planning, read the sibling [runtime paths](../../sage/references/runtime.md), [run procedure](../../sage/references/run.md) and [state contract](../../sage/references/state.md). Initialize the coordinator by unique ID in the pinned shared root, distinct from every selected source. Its own `events.jsonl` is append-only authority for promotion work. Source runs remain closed and read-only; validate them without appending, resuming, or repairing them. Knowledge generations are store artifacts, not the coordinator's task state.
 
 Commit a bounded task graph that records source selection and candidate/attempt limits, user authority, proposal and expected-pointer/generation baselines, actual role handles, and dependencies through landing. Before dispatch or material rerouting, read [delegation](../../sage/references/delegation.md). Record each assignment's requested and effective model/effort separately, its context fork, scope/effect, evidence handling, and actual result. Judge placement using total delegation overhead: briefing, root context, review, integration, verification, and retry cost. A bounded `no_change` may instead use one root-owned inspection task, no candidate team, and no generation write.
 
@@ -16,7 +16,9 @@ Close the coordinator `completed` only after every criterion has observation evi
 
 ## Resolve and qualify
 
-Choose an explicit state root. Use the installation’s configured Codex state root; absent an override, resolve the standard `~/.codex/sage` path to an absolute path and state it before access. Set the knowledge store to `<state-root>/knowledge` and selected sources to explicit `<state-root>/runs/<run-id>` paths. Never infer either from the current repository. Resolve `SAGE_KNOWLEDGE` to the source helper in this checkout or its installed `sage/bin` sibling.
+Use `list-runs --state-root ROOT --limit N --offset OFFSET` from the shared runtime procedure. It discovers canonical and explicitly registered legacy history and returns exact source paths. Bound pages and candidates before reading evidence; exclude the active coordinator. Pass eligible `run_dir` values unchanged as proposal `source_runs` and copy each selected `run_id` and `events_sha256` into its required `source_hashes` map. Source paths can be outside `ROOT/runs` for registered legacy history. Use the same `ROOT` for every knowledge command. Root-mode staging verifies these selected hashes and central ID/path bindings before mutation and again before publication; a valid-but-changed log or quarantined registration cannot bypass discovery by supplying its raw path.
+
+Report a missing/empty root, active-only history, and quarantined sources distinctly. If the user expected old runs, recover supplied paths through registration or request their location; do not equate undiscovered history with evidence that yielded no reusable rule. A bounded empty-source inspection can close the coordinator with outcome `no_sources`, naming the root, pages and exclusions, without creating a generation. `no_change` means eligible evidence was actually reviewed and yielded no reusable candidate.
 
 Run the state helper’s terminal validation for each selected source, then let `stage` revalidate it. Eligible status is `completed`, `failed`, or `stopped`; every admitted effect must be reconciled. Active, malformed, non-UTF-8, integrity-invalid, or unknown-effect runs are quarantined and reported without repair. Failed and safely stopped work can contain valuable negative evidence.
 
@@ -61,9 +63,9 @@ Independent refutation and review are necessary for all classes and sufficient f
 Read [knowledge CLI and schema](knowledge.md), prepare the complete proposal, and record the observed active generation (`none` for an empty store). Then:
 
 ```text
-python3 SAGE_KNOWLEDGE stage --store-dir STORE --proposal proposal.json --generation-id NEW --expected-current EXPECTED
-python3 SAGE_KNOWLEDGE validate --store-dir STORE
-python3 SAGE_KNOWLEDGE activate --store-dir STORE --generation-id NEW --expected-current EXPECTED
+python3 SAGE_KNOWLEDGE stage --state-root ROOT --proposal proposal.json --generation-id NEW --expected-current EXPECTED
+python3 SAGE_KNOWLEDGE validate --state-root ROOT
+python3 SAGE_KNOWLEDGE activate --state-root ROOT --generation-id NEW --expected-current EXPECTED
 ```
 
 `stage` validates every source/reference, copies the active snapshot, checks retained lineage, writes and fsyncs a complete candidate beneath `.staging`, rechecks the pointer, and renames it into `generations` without activating it. Both parent directories are fsynced. `activate` validates all retained history, requires the target’s staged parent to equal the live expected pointer, and atomically changes only `current.json`. These are cooperative checks; maintain one live promotion writer.
@@ -73,7 +75,7 @@ After an abrupt staging exit, validate the store and inspect the intended genera
 Rollback is explicit and does not delete either generation:
 
 ```text
-python3 SAGE_KNOWLEDGE rollback --store-dir STORE --generation-id PRIOR --expected-current CURRENT
+python3 SAGE_KNOWLEDGE rollback --state-root ROOT --generation-id PRIOR --expected-current CURRENT
 ```
 
 This rollback handles an integrity-valid bad landing. Because every normal mutation validates all retained history, corrupt generation bytes or a malformed pointer block rollback unchanged. Preserve that evidence and stop for a separately designed recovery; do not delete history or weaken validation inside promotion.

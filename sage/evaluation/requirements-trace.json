@@ -2,6 +2,7 @@
   "schema_version": "sage-verification-trace-v2",
   "contract": "sage/docs/CONTRACTS.md",
   "executable": [
+    {"requirement":"R-074","evidence":["test_state_root.StateRootTests.test_two_projects_share_history_and_promotion_store","test_state_root.StateRootTests.test_legacy_registration_is_nondestructive_bound_and_idempotent","test_state_root.StateRootTests.test_installed_discover_stage_retrieve_resume_and_uninstall","test_state_root.StateRootTests.test_missing_or_malformed_legacy_references_are_visible"]},
     {"requirement":"R-010","evidence":["test_product_state.StateContractTests.test_synchronous_root_write_releases_without_fabricated_agent"]},
     {"requirement":"R-012","evidence":["test_product_state.StateContractTests.test_dependencies_one_writer_and_unknown_effect_hold_admission"]},
     {"requirement":"R-013","evidence":["test_product_state.StateContractTests.test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection","test_product_knowledge.KnowledgeContractTests.test_correction_preserves_stable_id_history_and_rollback"]},

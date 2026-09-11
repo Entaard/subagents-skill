@@ -86,7 +86,7 @@ The final file set may be smaller when two references remain easy to use as one.
 
 ### Installed state layout
 
-The implementation resolves one explicit `state_root`; the standard default is the absolute expansion of `~/.codex/sage`, unless the installation supplies a configured override. The caller states and passes that resolved path rather than inferring state from the installed skill package or task repository. Tests override it with `sage/evaluation/sandboxes/<case>/state`.
+Both helpers share the executable root resolver exposed by `sage_state.py paths`: explicit `--state-root`, `SAGE_STATE_ROOT`, `$CODEX_HOME/sage`, then the absolute expansion of `~/.codex/sage`. The caller states and pins that root rather than inferring state from the installed package or task repository. There is no installer-owned runtime-root configuration. Tests supply an isolated absolute root or explicit legacy/fixture paths. See the [runtime procedure](skills/sage/references/runtime.md).
 
 ```text
 <state_root>/
@@ -94,6 +94,7 @@ The implementation resolves one explicit `state_root`; the standard default is t
 |   |-- events.jsonl               # authoritative append-only facts
 |   |-- snapshot.json              # validated projection for fast resume
 |   `-- report.md                  # derived, never resume authority
+|-- run-references/<run-id>.json   # explicit legacy path + terminal-log hash
 `-- knowledge/
     |-- current.json               # active generation pointer
     |-- .staging/stage-<token>/     # unpublished scratch, separate from history
@@ -105,7 +106,7 @@ The implementation resolves one explicit `state_root`; the standard default is t
 
 The installed package root is separate from `state_root`. It contains only `skills/sage/**`, `skills/sage-promote/**`, `sage/bin/sage_state.py`, `sage/bin/sage_knowledge.py`, and `sage/receipt.json`. The receipt hashes copied source bytes, installed bytes, and inherited ownership for safe updates. Runtime state is neither receipt-owned nor removed by uninstall. The documented Codex user-skill root is `$HOME/.agents/skills`, making `$HOME/.agents` the recommended lifecycle target; arbitrary targets exist for sandbox verification or explicit loading and do not by themselves prove automatic Codex discovery.
 
-The default is an operating convention, not installer-owned configuration. Callers still pass the resolved path to every helper command. No helper infers permission to edit the task repository merely because a run exists.
+`init --run-id` allocates a canonical run. `list-runs` inventories direct canonical runs and registered legacy references, with bounded log reads, continuation offsets, status and quarantine reasons. `register --run-dir` enrolls only valid terminal history, without moving evidence or rewriting source logs. Every state command accepts root plus ID; every knowledge command shares root resolution. Explicit `--run-dir` and `--store-dir` remain low-level compatibility paths; isolated initialization visibly warns that discovery is bypassed. Runtime state survives package update and uninstall. No helper infers permission to edit the task repository merely because a run exists.
 
 ## Main Sage components
 
@@ -113,7 +114,7 @@ The default is an operating convention, not installer-owned configuration. Calle
 
 The root first chooses the smallest adequate mode:
 
-- **Inline:** tiny, tightly coupled, or cheaper to do than brief and verify. It may have zero delegated tasks and needs only a concise task record when persistence is useful.
+- **Inline:** tiny, tightly coupled, or cheaper to do than brief and verify. It has a discoverable run with a concise task record and may have zero delegated tasks. A user's explicit no-persistence instruction is honored and the missing durable history is disclosed.
 - **Orchestrated:** substantive work with independently checkable units, useful parallel reads, a meaningful independent review, or context-heavy exploration.
 - **Safety pause:** authority, essential inputs, or a safe effect boundary is missing.
 
@@ -202,7 +203,7 @@ A run completes only when its acceptance criteria have evidence, required checks
 
 ## Situation-specific knowledge retrieval
 
-Main Sage can read only the active promoted index, never search raw closed runs. Selection first occurs after task qualification and before final planning:
+For ordinary task-time learning, Main Sage reads only the active promoted index. Explicit history-inspection or Sage-maintenance tasks authorize their bounded artifact access without granting promotion authority. Selection first occurs after task qualification and before final planning:
 
 1. Derive observable cues from the current situation: task/domain, artifact type, environment/tool, risk trigger, requested operation, and known failure signature.
 2. Match cues against index recognizers and qualifiers. Record the candidate IDs and reasons.

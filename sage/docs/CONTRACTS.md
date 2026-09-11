@@ -6,7 +6,30 @@ Status: implemented source contract plus the live-repairs-a1 round-1 candidate d
 
 Both Python helpers are dependency-free and are invoked with the repository interpreter. They accept UTF-8 JSON, reject duplicate object keys and non-finite numbers, resolve all supplied paths, and never infer a state root from the current task repository.
 
-Success exits `0` and prints one JSON object to stdout. Contract/data rejection exits `2` and prints one JSON error object to stderr with `ok: false`, `code`, and `message`. Unexpected I/O failure exits `3`. No command writes outside an explicitly supplied directory. Sage-owned run, event, task, criterion, evidence, check, finding, request, generation, and knowledge IDs match `^[a-z0-9][a-z0-9._-]{0,63}$`. Native agent handles are different: persist the nonempty, control-free string returned by the collaboration tool exactly, up to 512 characters, so canonical names such as `/root/scout` can reconcile with `list_agents` without invented aliases.
+Success exits `0` and prints one JSON object to stdout. Contract/data rejection exits `2` and prints one JSON error object to stderr with `ok: false`, `code`, and `message`. Unexpected I/O failure exits `3`. Runtime writes target the shared resolved root or explicitly supplied legacy/fixture directory. Sage-owned run, event, task, criterion, evidence, check, finding, request, generation, and knowledge IDs match `^[a-z0-9][a-z0-9._-]{0,63}$`. Native agent handles are different: persist the nonempty, control-free string returned by the collaboration tool exactly, up to 512 characters, so canonical names such as `/root/scout` can reconcile with `list_agents` without invented aliases.
+
+## Shared runtime-root extension (2026-09-11)
+
+The original explicit-directory interfaces below remain supported. Normal operation uses the additive root/ID interface, specified in [runtime paths and discovery](../skills/sage/references/runtime.md):
+
+```text
+python3 sage/scripts/sage_state.py paths [--state-root ROOT]
+python3 sage/scripts/sage_state.py list-runs [--state-root ROOT] [--limit 20 --offset 0]
+python3 sage/scripts/sage_state.py register [--state-root ROOT] --run-dir LEGACY_RUN
+python3 sage/scripts/sage_state.py init [--state-root ROOT] --run-id ID --objective TEXT --criteria CRITERIA_JSON
+```
+
+All other state commands accept `--run-id ID [--state-root ROOT]` instead of `--run-dir`. Every knowledge command accepts `[--state-root ROOT]` instead of `--store-dir`. Both helpers use the same precedence: explicit root, `SAGE_STATE_ROOT`, `$CODEX_HOME/sage`, then `~/.codex/sage`. Configured paths are absolute after tilde expansion; empty or relative settings reject. There is no installation receipt field for runtime configuration. `paths` and an empty inventory do not create runtime directories. An absent root is valid first-use state, distinct from an invalid root or a missing historical source.
+
+`init` by ID allocates `ROOT/runs/ID`, rejects occupied canonical or registered IDs (including empty directories), and returns the exact `run_dir` with `discoverable: true`. External legacy/fixture `init --run-dir` returns `discoverable: false` and an explicit warning; explicitly targeting the selected root's exact `runs/ID` location instead uses canonical checks and metadata. Normal skills must use root/ID. Root-based state results include resolved `state_root` and `run_dir`; root-based knowledge results include `store_dir`. The `runs`, `run-references` and `knowledge` namespaces reject symlinks before resolution can hide their type. Explicit-store knowledge responses retain their original shape. CLI argument errors are structured JSON in both helpers.
+
+`register` writes only `ROOT/run-references/ID.json` with exactly `v:1,run_id,run_dir,events_sha256`. It validates terminal source state and reconciled effects first, retains the original source path/bytes, rejects ID collisions and changed bindings, and is idempotent for identical registration. It is a reference, not an archival backup or physical lease.
+
+`list-runs` sorts direct canonical and reference entries by ID/origin and validates only the requested page (`limit` 1..128, nonnegative `offset`). Output includes root metadata, `total_entries`, `next_offset` or null, and `runs`. Each entry has ID, origin, entry locator, status and eligibility; valid entries include actual run path and log hash. Invalid, missing, mismatched, duplicated or changed sources are individually quarantined without mutation. Active runs remain visible but ineligible for promotion. Invalid namespace directories fail the command; they are not an empty inventory. This is point-in-time discovery; selected sources are revalidated before promotion. Main Sage uses inventory only to locate report/resume, not as task-time knowledge.
+
+Root-mode staging additionally requires proposal `source_hashes`, a map of every selected ID to its discovery log hash. It verifies each ID resolves through that root to the supplied source path, including any registered terminal-log binding, and checks selected bytes both before mutation and immediately before publication. Explicit-store staging retains the original proposal shape; if a hash map is supplied, it is enforced there too. Changed canonical or registered sources and unregistered external paths cannot silently enter a root-mode generation.
+
+Assignment projection and resume share the execution validator's frozen release observation; later unbound observations do not rewrite a released assignment. Knowledge selections reject malformed cue keys/value types, invalid or policy-ineligible match statuses, duplicate IDs, generation `none` with matches, `matched` without matches/cues, and `no_match|unchanged` with matches. `unchanged` must reference the same prior generation/fingerprint/cues. These remain structural checks, not authentication or semantic proof.
 
 ## Run state helper
 

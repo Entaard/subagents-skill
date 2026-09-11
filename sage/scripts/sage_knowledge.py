@@ -23,18 +23,20 @@ from typing import Any
 
 from sage_state import (
     ContractError,
+    CUE_KEYS,
     ID,
     atomic_write,
     encode,
     native_handle,
     read_events,
     read_json,
+    runtime_paths,
+    resolve_run,
     utc_timestamp,
     validate as validate_run,
 )
 
 
-CUE_KEYS = ("task", "domain", "artifact", "environment", "risk", "operation", "failure")
 EMPTY_GENERATION = "none"
 RECORD_FIELDS = {
     "v", "id", "revision", "prior_revision", "status", "evidence_class",
@@ -260,10 +262,11 @@ def source_catalog(paths: Any) -> tuple[dict[str, dict[str, Any]], list[str]]:
     fail(len(resolved_paths) != len(set(resolved_paths)), "invalid_proposal", "duplicate source run path")
     catalog: dict[str, dict[str, Any]] = {}
     for path in resolved_paths:
-        rows, _ = read_events(path / "events.jsonl"); state = validate_run(rows, terminal=True); run_id = state["run_id"]
+        rows, raw = read_events(path / "events.jsonl"); state = validate_run(rows, terminal=True); run_id = state["run_id"]
         fail(run_id in catalog, "invalid_proposal", f"duplicate source run ID: {run_id}")
         catalog[run_id] = {
             "path": str(path),
+            "events_sha256": hashlib.sha256(raw).hexdigest(),
             "events": {row["event_id"] for row in rows},
             "evidence": {row["payload"]["evidence_id"] for row in rows if row["type"] == "evidence.recorded"},
             "external": {row["payload"]["locator"] for row in rows if row["type"] == "evidence.recorded" and row["payload"]["sha256"] is not None},
@@ -589,7 +592,9 @@ def command_revalidate(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def validate_proposal(value: Any) -> dict[str, Any]:
-    proposal = exact_object(value, {"action", "proposer", "reviewer", "source_runs", "record"}, "proposal", "invalid_proposal")
+    fields = {"action", "proposer", "reviewer", "source_runs", "record"}
+    if isinstance(value, dict) and "source_hashes" in value: fields.add("source_hashes")
+    proposal = exact_object(value, fields, "proposal", "invalid_proposal")
     fail(not isinstance(proposal["action"], str) or proposal["action"] not in ACTIONS, "invalid_proposal", "invalid proposal action")
     for role in ("proposer", "reviewer"): native_handle(proposal[role], f"{role} actor")
     record = canonical_record(proposal["record"])
@@ -600,6 +605,17 @@ def validate_proposal(value: Any) -> dict[str, Any]:
     fail(record["review"]["outcome"] != "passed", "invalid_proposal", "the proposed action did not pass review")
     result = copy.deepcopy(proposal); result["record"] = record
     return result
+
+
+def validate_source_bindings(proposal: dict[str, Any], catalog: dict[str, Any], root: str | None) -> None:
+    hashes = proposal.get("source_hashes")
+    if root is not None or "source_hashes" in proposal:
+        fail(not isinstance(hashes, dict) or set(hashes) != set(catalog), "invalid_proposal", "source_hashes must bind every selected run ID from discovery")
+        for run_id, source in catalog.items():
+            fail(hashes[run_id] != source["events_sha256"], "invalid_reference", f"selected source log changed: {run_id}")
+            if root is not None:
+                resolved = resolve_run(Path(root), run_id)
+                fail(str(resolved) != source["path"], "invalid_reference", f"source path does not match central discovery: {run_id}")
 
 
 def check_transition(action: str, record: dict[str, Any], prior: dict[str, Any] | None) -> None:
@@ -646,6 +662,8 @@ def command_stage(args: argparse.Namespace) -> dict[str, Any]:
     store = Path(args.store_dir).resolve(); token, current = require_expected(store, expected)
     proposal = validate_proposal(read_json(Path(args.proposal).resolve()))
     catalog, source_ids = source_catalog(proposal["source_runs"]); validate_record_references(proposal["record"], catalog, source_ids)
+    runtime_root = getattr(args, "runtime_root", None)
+    validate_source_bindings(proposal, catalog, runtime_root)
     records = copy.deepcopy(current["records"] if current else {})
     authors = {item["id"]: copy.deepcopy(item) for item in (current["manifest"]["authors"] if current else [])}
     record = proposal["record"]; record_id = record["id"]
@@ -664,6 +682,9 @@ def command_stage(args: argparse.Namespace) -> dict[str, Any]:
     temporary = Path(tempfile.mkdtemp(prefix='stage-', dir=staging))
     try:
         built = write_generation(temporary, new_id, expected, records, authors)
+        if runtime_root is not None or "source_hashes" in proposal:
+            final_catalog, _ = source_catalog(proposal["source_runs"])
+            validate_source_bindings(proposal, final_catalog, runtime_root)
         require_expected(store, expected, token); fail(target.exists(), "generation_exists", f"generation appeared during stage: {new_id}")
         os.rename(temporary, target); fsync_directory(generations); fsync_directory(staging)
     finally:
@@ -702,18 +723,34 @@ class CliParser(argparse.ArgumentParser):
 
 def parser() -> argparse.ArgumentParser:
     root = CliParser(); commands = root.add_subparsers(dest="command", required=True)
-    validate = commands.add_parser("validate"); validate.add_argument("--store-dir", required=True); validate.set_defaults(func=command_validate)
-    retrieve = commands.add_parser("retrieve"); retrieve.add_argument("--store-dir", required=True); retrieve.add_argument("--cues", required=True); retrieve.add_argument("--limit", required=True); retrieve.set_defaults(func=command_retrieve)
-    revalidate = commands.add_parser('revalidate'); revalidate.add_argument('--store-dir', required=True); revalidate.add_argument('--cues', required=True); revalidate.add_argument('--previous', required=True); revalidate.set_defaults(func=command_revalidate)
-    stage = commands.add_parser("stage"); stage.add_argument("--store-dir", required=True); stage.add_argument("--proposal", required=True); stage.add_argument("--generation-id", required=True); stage.add_argument("--expected-current", required=True); stage.set_defaults(func=command_stage)
-    activate = commands.add_parser("activate"); activate.add_argument("--store-dir", required=True); activate.add_argument("--generation-id", required=True); activate.add_argument("--expected-current", required=True); activate.set_defaults(func=command_activate)
-    rollback = commands.add_parser("rollback"); rollback.add_argument("--store-dir", required=True); rollback.add_argument("--generation-id", required=True); rollback.add_argument("--expected-current", required=True); rollback.set_defaults(func=command_rollback)
+    validate = commands.add_parser("validate"); validate.set_defaults(func=command_validate)
+    retrieve = commands.add_parser("retrieve"); retrieve.add_argument("--cues", required=True); retrieve.add_argument("--limit", required=True); retrieve.set_defaults(func=command_retrieve)
+    revalidate = commands.add_parser('revalidate'); revalidate.add_argument('--cues', required=True); revalidate.add_argument('--previous', required=True); revalidate.set_defaults(func=command_revalidate)
+    stage = commands.add_parser("stage"); stage.add_argument("--proposal", required=True); stage.add_argument("--generation-id", required=True); stage.add_argument("--expected-current", required=True); stage.set_defaults(func=command_stage)
+    activate = commands.add_parser("activate"); activate.add_argument("--generation-id", required=True); activate.add_argument("--expected-current", required=True); activate.set_defaults(func=command_activate)
+    rollback = commands.add_parser("rollback"); rollback.add_argument("--generation-id", required=True); rollback.add_argument("--expected-current", required=True); rollback.set_defaults(func=command_rollback)
+    for command in (validate, retrieve, revalidate, stage, activate, rollback):
+        target = command.add_mutually_exclusive_group()
+        target.add_argument("--store-dir", help="explicit isolated or legacy store")
+        target.add_argument("--state-root", help="shared runtime root; defaults match sage_state.py paths")
     return root
 
 
 def main() -> int:
     try:
-        arguments = parser().parse_args(); result = arguments.func(arguments)
+        arguments = parser().parse_args()
+        shared_root = arguments.store_dir is None
+        if shared_root:
+            layout = runtime_paths(arguments.state_root)
+            arguments.runtime_root = layout["state_root"]
+            arguments.store_dir = layout["store_dir"]
+        else:
+            store = Path(arguments.store_dir).expanduser()
+            fail(store.is_symlink(), "invalid_store", f"knowledge store must not be a symlink: {store}")
+            arguments.runtime_root = None
+            arguments.store_dir = str(store.resolve())
+        result = arguments.func(arguments)
+        if shared_root: result["store_dir"] = arguments.store_dir
         sys.stdout.write(json.dumps(result, allow_nan=False, sort_keys=True) + "\n"); return 0
     except ContractError as exc:
         exit_code = 3 if exc.code == "io_error" else 2

@@ -1,21 +1,23 @@
 # Knowledge CLI and proposal schema
 
-Read when retrieving, drafting, staging, activating, validating, or rolling back knowledge. Paths are always explicit. CLI success emits one JSON object and exits 0; contract/data rejection emits `{ok:false,code,message}` to stderr and exits 2; unexpected I/O exits 3. JSON is strict UTF-8 with duplicate keys and non-finite numbers rejected.
+Read when retrieving, drafting, staging, activating, validating, or rolling back knowledge. Resolve and pin `ROOT` using the shared [runtime procedure](../../sage/references/runtime.md). CLI success emits one JSON object and exits 0; contract/data rejection emits `{ok:false,code,message}` to stderr and exits 2; unexpected I/O exits 3. JSON is strict UTF-8 with duplicate keys and non-finite numbers rejected.
 
 ## Commands and store
 
 ```text
-python3 SAGE_KNOWLEDGE validate --store-dir STORE
-python3 SAGE_KNOWLEDGE retrieve --store-dir STORE --cues CUES_JSON --limit N
-python3 SAGE_KNOWLEDGE revalidate --store-dir STORE --previous PREVIOUS_JSON --cues CUES_JSON
-python3 SAGE_KNOWLEDGE stage --store-dir STORE --proposal PROPOSAL_JSON --generation-id ID --expected-current ID_OR_NONE
-python3 SAGE_KNOWLEDGE activate --store-dir STORE --generation-id ID --expected-current ID_OR_NONE
-python3 SAGE_KNOWLEDGE rollback --store-dir STORE --generation-id PRIOR_ID --expected-current CURRENT_ID
+python3 SAGE_KNOWLEDGE validate --state-root ROOT
+python3 SAGE_KNOWLEDGE retrieve --state-root ROOT --cues CUES_JSON --limit N
+python3 SAGE_KNOWLEDGE revalidate --state-root ROOT --previous PREVIOUS_JSON --cues CUES_JSON
+python3 SAGE_KNOWLEDGE stage --state-root ROOT --proposal PROPOSAL_JSON --generation-id ID --expected-current ID_OR_NONE
+python3 SAGE_KNOWLEDGE activate --state-root ROOT --generation-id ID --expected-current ID_OR_NONE
+python3 SAGE_KNOWLEDGE rollback --state-root ROOT --generation-id PRIOR_ID --expected-current CURRENT_ID
 ```
 
 `STORE/current.json` points to one immutable `STORE/generations/<id>` directory. The real generation ID `none` is reserved: a truly absent pointer is the valid empty state, while a dangling pointer symlink is invalid. Every manifest binds its staged parent, exact sorted file paths/hashes, and proposer/refuter/reviewer identities. Validation rejects extra paths (including empty directories), symlinks, partial generations, bad hashes, dangling/cyclic parents, duplicate stable IDs, and conflicting retained `(id,revision)` bytes.
 
 Unpublished work lives separately in `STORE/.staging/stage-<8-character-token>/`. Partial regular JSON files and the helper's atomic-write scratch files may remain there after abrupt termination. Validation checks recognized path shapes and rejects symlinks, special files, and unknown paths, while committed generations still receive full content and lineage validation. Staging names identify scratch format, not proof of ownership or permission to delete it. Both parents share a filesystem and are fsynced after publication by rename. Existing stores without `.staging` remain valid.
+
+`STORE` is `ROOT/knowledge`. Omitting the root uses the shared resolver. An explicit `--store-dir STORE` is retained for legacy or isolated stores and is mutually exclusive with `--state-root`; its existing response shape is preserved. Root-based commands also return the resolved `store_dir`.
 
 ## Retrieval
 
@@ -33,7 +35,7 @@ The result is `{generation_id,cue_fingerprint,retrieval_status,matches}`. Empty 
 
 ## Complete proposal
 
-Replace the absolute run path and evidence IDs with references from validated selected runs. Actor values are the opaque native IDs returned by live collaboration; they are not Sage artifact IDs.
+Replace the absolute run path, log hash and evidence IDs with references from validated selected runs. Root-mode staging requires `source_hashes` to map every selected run ID to its exact `events_sha256` from discovery; the zeros below are a placeholder to replace. It also resolves each ID through the central namespace and registered hash binding. All bindings are checked before mutation and again before publishing a generation. Explicit legacy `--store-dir` staging may omit the map for backward compatibility; when supplied, the hashes are enforced there too. Actor values are the opaque native IDs returned by live collaboration; they are not Sage artifact IDs.
 
 ```json
 {
@@ -41,6 +43,7 @@ Replace the absolute run path and evidence IDs with references from validated se
   "proposer": "/root/candidate-author",
   "reviewer": "/root/reviewer",
   "source_runs": ["/absolute/codex-state/sage/runs/run-1"],
+  "source_hashes": {"run-1": "0000000000000000000000000000000000000000000000000000000000000000"},
   "record": {
     "v": 1,
     "id": "validate-log-before-snapshot",

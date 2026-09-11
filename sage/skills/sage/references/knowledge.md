@@ -1,13 +1,13 @@
 # Promoted knowledge retrieval
 
-Read before the first knowledge query, when a material cue changes, or when recording retrieval feedback. Main Sage reads only an active immutable generation through the helper. It never searches closed-run logs, writes a generation, promotes an observation, or edits itself.
+Read before the first knowledge query, when a material cue changes, or when recording retrieval feedback. For task-time learning Main Sage reads only an active immutable generation through the helper. Closed-run inspection and Sage maintenance are permitted when explicitly requested as the task itself; promotion requires its separate invocation.
 
-Resolve all paths explicitly. Use `sage/scripts/sage_knowledge.py` in this checkout or the installed sibling `<target-root>/sage/bin/sage_knowledge.py`. Set `STORE` to `<explicit-state-root>/knowledge`; use the configured state root or the absolute expansion of the standard `~/.codex/sage`, never the task repository.
+Use the helper and pinned `ROOT` from [runtime paths](runtime.md). Its store is `ROOT/knowledge`. Missing helpers and invalid stores are reported failures; record retrieval as unobserved and repair the installation when in scope. An empty successful query is distinct from a query that did not run.
 
 After qualification and before final planning, write a cue JSON object whose arrays capture only observed `task`, `domain`, `artifact`, `environment`, `risk`, `operation`, and `failure` values. Normal retrieval omits `include_non_supported` or sets it false. Set it true only when provisional/contested guidance is worth examining with status and counterevidence attached.
 
 ```text
-python3 SAGE_KNOWLEDGE retrieve --store-dir STORE --cues cues.json --limit 3
+python3 SAGE_KNOWLEDGE retrieve --state-root ROOT --cues cues.json --limit 3
 ```
 
 The result contains `generation_id`, `cue_fingerprint`, `retrieval_status`, and bounded `matches`. A fresh empty store returns `generation_id: "none"`, `no_match`, and `[]`; `none` is reserved and is recorded unchanged in state. Each match contains exact ID/revision/status/reason and the rule, qualifier, falsifier, support rationale, evidence summary, and counterevidence.
@@ -19,7 +19,7 @@ Append one `knowledge.selected` event using exactly the returned generation, fin
 When any of those inputs changes, revalidate every previously selected revision, independently of the bounded recommendation list. The snapshot's `knowledge_selected_revisions` is the cumulative inventory; retain only each entry's `id`, `revision`, and `generation_id` in `previous.json`, and split inventories longer than 128 entries into batches. All batches must observe the same active manifest; restart the check if it changes mid-batch.
 
 ```text
-python3 SAGE_KNOWLEDGE revalidate --store-dir STORE --previous previous.json --cues cues.json
+python3 SAGE_KNOWLEDGE revalidate --state-root ROOT --previous previous.json --cues cues.json
 ```
 
 This uncached diagnostic returns the active generation/manifest and one result per supplied entry: `unchanged_applicable`, `revised`, `out_of_scope`, `refuted`, `retired`, `contested`, `provisional`, or `not_present_in_active_generation`, with the current revision/status, qualifier, eligibility and reason. A rollback may legitimately select an older revision. Diagnostic eligibility means only that the current retrieval policy and cues permit examination; it does not authorize application. Use ordinary retrieval or a separately reviewed current record before applying changed guidance. Refuted and retired records remain excluded from normal retrieval.

@@ -6,7 +6,7 @@ These requirements are the acceptance source for the rebuild. “Must” is test
 
 - **R-001 — Codex scope.** The active product must target the Codex collaboration surface only and must make no cross-host portability or managed-scheduler claim.
 - **R-002 — Active entrypoints.** The active packages must remain `sage/skills/sage` and `sage/skills/sage-promote`, with consistent UI metadata and discriminating invocation descriptions.
-- **R-003 — Separation.** Main Sage must not inspect closed-run logs for lessons, promote knowledge, or edit its own instructions. Promotion must accept only closed runs and must not resume their tasks.
+- **R-003 — Separation.** Ordinary Main Sage task-time learning uses promoted knowledge, not closed-run logs or self-edited instructions. Explicit user requests to inspect history or maintain Sage authorize that bounded work; promotion remains a separate explicit invocation. Promotion must accept only closed runs and must not resume their tasks.
 - **R-004 — Small architecture.** Operational judgment must live in concise skill/reference text. Dependency-free Python helpers are permitted only where deterministic behavior materially improves correctness. The rebuild must not reproduce a protocol bureaucracy approaching the legacy implementation’s size.
 - **R-005 — Honest claims.** The product must not promise universal correctness, savings, isolation, exact model placement, token accounting, or evaluations that were not observed.
 
@@ -35,7 +35,7 @@ These requirements are the acceptance source for the rebuild. “Must” is test
 
 ## Evidence, logging, reporting, and recovery
 
-- **R-030 — Source of truth.** Each persisted run must have an append-only, versioned event log and a validated snapshot. Markdown reports must be derived and must not be resume authority.
+- **R-030 — Source of truth.** Every work invocation, including inline work and promotion coordination, must open a discoverable run with an append-only, versioned event log and validated boundary snapshots. A user instruction forbidding persistence is honored with explicit disclosure of the absent history. Markdown reports must be derived and must not be resume authority.
 - **R-031 — Minimum state.** Persisted state must cover objective/constraints, plan/task revisions, assignments and handles, claims/evidence, checks, findings/dispositions, assumptions/decisions, baselines, user items, next action, and terminal status.
 - **R-032 — Evidence labels.** Reports must distinguish observation, inference, unknown, and untested behavior. An empty typed section must describe the absence of recorded entries rather than assert no unknown exists, and directly stored unknown native identity/effect fields must render. Load-bearing real-world claims must carry current primary evidence where available and surface material counterevidence.
 - **R-033 — Privacy.** Logs must be compact and classified. Large/raw/confidential content must use a protected locator plus integrity hash when retained; credentials and privileged capabilities must never enter state or fixtures.
@@ -79,6 +79,7 @@ These requirements are the acceptance source for the rebuild. “Must” is test
 - **R-071 — Legacy quarantine.** Useful legacy material may be retained or moved intact under `sage/archive/legacy`, but it must be clearly inert and must not be served as a fallback.
 - **R-072 — Reversible migration.** Migration must preserve unrelated work and avoid destructive deletion. Installation must fail clearly if the rebuilt package is incomplete.
 - **R-073 — Cutover proof.** Sandbox integration must prove that install/update selects the rebuilt package, reports/resumes run through the new contract, promotion uses the new store, and uninstall removes only owned installed artifacts.
+- **R-074 — Shared history.** Both helpers must resolve one cwd-independent runtime root, expose its exact paths, and support normal runs and every knowledge operation through it. New work must allocate canonical runs by ID. Bounded discovery must distinguish eligible, active, absent and quarantined history. Explicit legacy registration must preserve source bytes and locators, bind log hashes, and reject ID collisions. Tests must exercise two task directories and installed discovery through staging, retrieval, recovery and uninstall; missing discovery must not be reported as reviewed evidence yielding no change.
 
 ## Review score anchors
 

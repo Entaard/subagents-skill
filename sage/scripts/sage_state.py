@@ -37,6 +37,7 @@ TASK_FIELDS = {
 OPERATIONAL_TASK_FIELDS = TASK_FIELDS - {"id", "revision"}
 TERMINAL_LIFECYCLES = {"completed", "failed"}
 CAUSES = {"missing_input_or_authority", "ambiguous_brief", "decomposition", "capability", "environment_or_tool", "candidate_defect"}
+CUE_KEYS = ("task", "domain", "artifact", "environment", "risk", "operation", "failure")
 
 
 class ContractError(Exception):
@@ -294,9 +295,25 @@ def validate_payload(row: dict[str, Any]) -> None:
         identifier(p["generation_id"], "generation_id"); text(p["cue_fingerprint"], "cue_fingerprint")
         fail(not isinstance(p["cues"], dict) or not isinstance(p["matches"], list), "invalid_event", "invalid knowledge selection")
         choice(p["retrieval_status"], {"matched", "no_match", "unchanged"}, "retrieval_status")
+        fail(set(p["cues"]) - set(CUE_KEYS) - {"include_non_supported"}, "invalid_event", "unknown knowledge cue key")
+        for key, values in p["cues"].items():
+            if key == "include_non_supported":
+                fail(type(values) is not bool, "invalid_event", "include_non_supported must be boolean")
+            else:
+                strings(values, f"cues.{key}")
+                fail(any(not value.strip() for value in values), "invalid_event", "knowledge cues must be nonblank")
+        fail(len(p["matches"]) > 100, "invalid_event", "knowledge selection exceeds retrieval limit")
+        fail((p["retrieval_status"] == "matched") != bool(p["matches"]), "invalid_event", "retrieval status and matches disagree")
+        fail(p["generation_id"] == "none" and bool(p["matches"]), "invalid_event", "empty generation cannot contain matches")
+        fail(bool(p["matches"]) and not any(p["cues"].get(key, []) for key in CUE_KEYS), "invalid_event", "matches require an observed recognizer cue")
+        ids = set()
         for match in p["matches"]:
             fail(not isinstance(match, dict), "invalid_event", "knowledge match must be object"); need(match, {"id", "revision", "status", "reason"}, "knowledge match")
             identifier(match["id"], "knowledge id"); positive(match["revision"], "knowledge revision"); text(match["reason"], "match reason")
+            choice(match["status"], {"supported", "provisional", "contested"}, "knowledge match status")
+            fail(match["status"] != "supported" and not p["cues"].get("include_non_supported", False), "invalid_event", "non-supported match requires explicit retrieval policy")
+            fail(match["id"] in ids, "duplicate_id", "duplicate knowledge match ID")
+            ids.add(match["id"])
     elif kind == "knowledge.feedback":
         identifier(p["id"], "knowledge id"); positive(p["revision"], "knowledge revision"); strings(p["evidence_ids"], "evidence_ids"); strings(p["missed_recognizers"], "missed_recognizers")
         choice(p["outcome"], {"useful", "neutral", "misleading", "not_exercised"}, "feedback outcome")
@@ -324,6 +341,7 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
     amendments: set[str] = set(); decisions: set[str] = set(); decision_events: set[str] = set(); authority_events: set[str] = set()
     hard_caps: dict[str, int | None] = {"total_attempt_limit": None, "plan_revision_limit": None}
     approach_total_attempt_limit: int | None = None; approach_revision_limit: int | None = None
+    prior_selection = None
     for index, row in enumerate(rows, 1):
         fail(not isinstance(row, dict), "invalid_event", f"event {index} must be an object")
         fail(set(row) != COMMON, "invalid_event", f"event {index} common fields must be exactly {sorted(COMMON)}")
@@ -545,6 +563,10 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
         elif kind == "note.recorded":
             fail(any(x not in evidence for x in p.get("evidence_ids", [])), "invalid_reference", "note references missing evidence")
             if p["category"] == "decision": authority_events.add(row["event_id"])
+        elif kind == "knowledge.selected":
+            if p["retrieval_status"] == "unchanged":
+                fail(prior_selection is None or any(p[field] != prior_selection[field] for field in ("generation_id", "cue_fingerprint", "cues")), "invalid_reference", "unchanged retrieval requires the same prior generation, fingerprint and cues")
+            prior_selection = p
         elif kind == "knowledge.feedback": fail(any(x not in evidence for x in p["evidence_ids"]), "invalid_reference", "feedback references missing evidence")
         elif kind == "run.closed":
             fail(any(x not in criteria for x in p["criterion_evidence"]), "invalid_reference", "closure references an unknown criterion")
@@ -640,7 +662,7 @@ def execution_facts(rows: list[dict[str, Any]]) -> dict[str, Any]:
             mark_release(key, tasks, results, requests, not_created, observations, released_tasks, released_assignments)
     return {"tasks": tasks, "current": current, "admitted": admitted, "results": results,
             "requests": requests, "not_created": not_created, "observations": observations, "released": released_tasks,
-            "released_assignments": released_assignments}
+            "released_assignments": released_assignments, "current_assignment": current_assignment}
 
 
 def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -729,6 +751,12 @@ def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
         elif kind == "checkpoint.written": state.update({"baselines": p["baselines"], "next_action": p["next_action"], "unresolved_user_items": p["unresolved_user_items"]})
         elif kind == "run.closed": state["terminal"] = p
     facts = execution_facts(rows)
+    for handle, key in facts["current_assignment"].items():
+        observation = facts["observations"].get(key)
+        if observation:
+            state["agents"][handle].update({**observation,
+                "effective_model": observation["effective_model"] or "unknown",
+                "effective_effort": observation["effective_effort"] or "unknown"})
     for task_id, task in facts["current"].items():
         key = (task_id, task["revision"]); current = state["tasks"][task_id]
         current.pop("result", None)
@@ -769,13 +797,141 @@ def bound_snapshot(run_dir: Path) -> tuple[dict[str, Any], list[dict[str, Any]],
     return state, rows, raw
 
 
+def runtime_paths(explicit: str | None = None) -> dict[str, Any]:
+    """One cwd-independent root contract, shared by both installed helpers."""
+    if explicit is not None:
+        raw, source = explicit, "argument"
+    elif "SAGE_STATE_ROOT" in os.environ:
+        raw, source = os.environ["SAGE_STATE_ROOT"], "SAGE_STATE_ROOT"
+    elif "CODEX_HOME" in os.environ:
+        home = absolute_runtime_path(os.environ["CODEX_HOME"])
+        raw, source = str(home / "sage"), "CODEX_HOME"
+    else:
+        raw, source = str(Path.home() / ".codex/sage"), "default"
+    root = absolute_runtime_path(raw)
+    fail(root.exists() and not root.is_dir(), "invalid_path", f"state root must be a directory: {root}")
+    return {"state_root": str(root), "root_source": source, "root_exists": root.exists(),
+            "runs_dir": str(root / "runs"), "references_dir": str(root / "run-references"),
+            "store_dir": str(runtime_namespace(root, "knowledge"))}
+
+
+def absolute_runtime_path(raw: str) -> Path:
+    fail(not isinstance(raw, str) or not raw.strip() or "\x00" in raw, "invalid_path", "runtime path must be nonempty text")
+    try:
+        path = Path(raw).expanduser()
+        fail(not path.is_absolute(), "invalid_path", f"runtime path must be absolute, independent of the task directory: {raw}")
+        return path.resolve()
+    except (RuntimeError, ValueError) as exc:
+        raise ContractError("invalid_path", f"cannot resolve runtime path: {raw}") from exc
+
+
+def runtime_namespace(root: Path, name: str) -> Path:
+    path = root / name
+    fail(path.is_symlink() or (path.exists() and not path.is_dir()), "invalid_path", f"runtime namespace must be a real directory: {path}")
+    return path
+
+
+def registered_run(reference: Path) -> tuple[Path, dict[str, Any], bytes]:
+    fail(reference.is_symlink() or not reference.is_file(), "invalid_reference", f"invalid run reference: {reference}")
+    value = read_json(reference)
+    fail(not isinstance(value, dict) or set(value) != {"v", "run_id", "run_dir", "events_sha256"}, "invalid_reference", "invalid run reference fields")
+    fail(type(value["v"]) is not int or value["v"] != 1, "invalid_reference", "invalid run reference version")
+    identifier(value["run_id"], "registered run_id")
+    fail(reference.name != value["run_id"] + ".json", "invalid_reference", "reference name does not match run ID")
+    path = absolute_runtime_path(value["run_dir"])
+    fail(str(path) != value["run_dir"], "invalid_reference", "registered path changed or is not canonical")
+    rows, raw = read_events(path / "events.jsonl")
+    fail(hashlib.sha256(raw).hexdigest() != value["events_sha256"], "invalid_reference", f"registered log changed: {path}")
+    state = validate(rows, terminal=True)
+    fail(state["run_id"] != value["run_id"], "invalid_reference", "registered run ID mismatch")
+    return path, state, raw
+
+
+def resolve_run(root: Path, run_id: str, *, new: bool = False) -> Path:
+    identifier(run_id, "run_id")
+    run = runtime_namespace(root, "runs") / run_id
+    reference = runtime_namespace(root, "run-references") / (run_id + ".json")
+    fail(run.is_symlink(), "invalid_path", f"canonical run must not be a symlink: {run}")
+    fail(new and run.exists(), "state_exists", f"canonical run ID is occupied: {run_id}")
+    if reference.exists() or reference.is_symlink():
+        fail(new or run.exists(), "state_exists", f"run ID is already registered or duplicated: {run_id}")
+        return registered_run(reference)[0]
+    if not new:
+        fail(not run.exists(), "invalid_reference", f"run ID is not present in the selected root: {run_id}")
+        rows, _ = read_events(run / "events.jsonl")
+        state = validate(rows)
+        fail(state["run_id"] != run_id, "invalid_reference", "directory name does not match run ID")
+    return run
+
+
+def command_register(args: argparse.Namespace) -> dict[str, Any]:
+    """Enroll a closed legacy run without moving evidence or rewriting history."""
+    layout = runtime_paths(args.state_root)
+    root = Path(layout["state_root"])
+    source = Path(args.run_dir).expanduser().resolve()
+    rows, raw = read_events(source / "events.jsonl")
+    state = validate(rows, terminal=True)
+    run_id = state["run_id"]
+    canonical = runtime_namespace(root, "runs") / run_id
+    refs = runtime_namespace(root, "run-references")
+    reference = refs / (run_id + ".json")
+    fail(canonical.exists() or canonical.is_symlink(), "state_exists", f"run ID already occupies the canonical namespace: {run_id}")
+    value = {"v": 1, "run_id": run_id, "run_dir": str(source), "events_sha256": hashlib.sha256(raw).hexdigest()}
+    if reference.exists() or reference.is_symlink():
+        registered_run(reference)
+        fail(read_json(reference) != value, "state_exists", f"run ID already registered: {run_id}")
+    else:
+        atomic_write(reference, encode(value))
+    return {"ok": True, **value, "state_root": str(root), "reference": str(reference)}
+
+
+def command_list_runs(args: argparse.Namespace) -> dict[str, Any]:
+    layout = runtime_paths(args.state_root)
+    fail(not 1 <= args.limit <= 128 or args.offset < 0, "invalid_arguments", "limit must be 1..128 and offset nonnegative")
+    root = Path(layout["state_root"])
+    runs = runtime_namespace(root, "runs")
+    refs = runtime_namespace(root, "run-references")
+    entries = ([(p.name, "canonical", p) for p in runs.iterdir()] if runs.exists() else [])
+    entries += ([(p.stem, "registered", p) for p in refs.iterdir()] if refs.exists() else [])
+    entries.sort(key=lambda x: (x[0], x[1], str(x[2])))
+    counts: dict[str, int] = {}
+    for run_id, _, _ in entries: counts[run_id] = counts.get(run_id, 0) + 1
+    results = []
+    for run_id, origin, path in entries[args.offset:args.offset + args.limit]:
+        item: dict[str, Any] = {"run_id": run_id, "origin": origin, "entry_path": str(path), "eligible": False}
+        try:
+            identifier(run_id, "run_id")
+            fail(counts[run_id] != 1, "duplicate_id", f"multiple entries for run ID: {run_id}")
+            if origin == "registered":
+                run, state, raw = registered_run(path)
+            else:
+                fail(path.is_symlink() or not path.is_dir(), "invalid_path", f"invalid run directory: {path}")
+                run = path
+                rows, raw = read_events(path / "events.jsonl")
+                state = validate(rows)
+                fail(state["run_id"] != run_id, "invalid_reference", "directory name does not match run ID")
+            status = state["terminal"]["status"] if state["terminal"] else "active"
+            item.update(run_dir=str(run), status=status, eligible=status in {"completed", "failed", "stopped"},
+                        events_sha256=hashlib.sha256(raw).hexdigest(), last_seq=state["last_seq"])
+        except (ContractError, OSError) as exc:
+            item.update(status="quarantined", code=exc.code if isinstance(exc, ContractError) else "io_error", reason=str(exc))
+        results.append(item)
+    next_offset = args.offset + len(results)
+    return {"ok": True, **layout, "runs": results, "total_entries": len(entries),
+            "next_offset": next_offset if next_offset < len(entries) else None}
+
+
 def command_init(args: argparse.Namespace) -> dict[str, Any]:
     run_dir = Path(args.run_dir).resolve(); identifier(args.run_id, "run_id"); text(args.objective, "objective")
     fail(run_dir.exists() and any(run_dir.iterdir()), "state_exists", "run directory already contains state")
     criteria = read_json(Path(args.criteria).resolve()); fail(not isinstance(criteria, list), "invalid_event", "criteria file must contain an array")
-    run_dir.mkdir(parents=True, exist_ok=True); now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     row = {"v": 1, "event_id": "e-1", "run_id": args.run_id, "seq": 1, "at": now, "actor": "root", "type": "run.opened", "payload": {"objective": args.objective, "criteria": criteria, "constraints": [], "next_action": "plan"}}
-    validate([row]); atomic_write(run_dir / "events.jsonl", encode(row)); return {"ok": True, "run_id": args.run_id, "event_id": "e-1"}
+    validate([row]); atomic_write(run_dir / "events.jsonl", encode(row))
+    result = {"ok": True, "run_id": args.run_id, "event_id": "e-1", "run_dir": str(run_dir), "discoverable": args.canonical}
+    if not args.canonical:
+        result["warning"] = "Explicit --run-dir bypasses central discovery; register this run after closure, or use --run-id with the shared state root."
+    return result
 
 
 def command_append(args: argparse.Namespace) -> dict[str, Any]:
@@ -810,7 +966,9 @@ def command_resume(args: argparse.Namespace) -> dict[str, Any]:
             fail(field in agent and agent[field] is not None and not isinstance(agent[field], str), "invalid_event", f"{field} must be text or null")
     live_by_handle = {x.get("handle"): x for x in live if isinstance(x, dict) and isinstance(x.get("handle"), str)}
     proposals = []; seq = rows[-1]["seq"]
+    facts = execution_facts(rows)
     for handle, recorded in state["agents"].items():
+        if facts["current_assignment"].get(handle) in facts["released_assignments"]: continue
         observed = live_by_handle.get(handle, {"handle": handle, "lifecycle": "missing"}); lifecycle = observed.get("lifecycle", "missing")
         choice(lifecycle, {"active", "idle", "completed", "failed", "interrupted", "missing"}, f"live lifecycle for {handle}")
         seq += 1; now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -819,7 +977,6 @@ def command_resume(args: argparse.Namespace) -> dict[str, Any]:
         effect = supplied_effect
         if lifecycle in {"idle", "interrupted", "missing"}: effect = "unknown"
         proposals.append({"v": 1, "event_id": f"resume-{seq}", "run_id": state["run_id"], "seq": seq, "at": now, "actor": "root", "type": "agent.observed", "payload": {"handle": handle, "lifecycle": lifecycle, "effect_status": effect, "effective_model": observed.get("effective_model"), "effective_effort": observed.get("effective_effort")}})
-    facts = execution_facts(rows)
     unsafe = any(facts["tasks"][key]["effect"] in {"write", "external", "unknown"} and key not in facts["released"]
                  for key in facts["admitted"])
     return {"ok": True, "run_id": state["run_id"], "proposed_events": proposals, "admission_allowed": not unsafe and state["terminal"] is None, "recommended_next_action": "revise_plan" if unsafe else state["next_action"]}
@@ -861,20 +1018,53 @@ def command_report(args: argparse.Namespace) -> dict[str, Any]:
     atomic_write(run_dir / "report.md", report.encode()); return {"ok": True, "run_id": state["run_id"], "report": str(run_dir / "report.md")}
 
 
+class CliParser(argparse.ArgumentParser):
+    def error(self, message: str) -> None:
+        raise ContractError("invalid_arguments", message)
+
+
 def parser() -> argparse.ArgumentParser:
-    root = argparse.ArgumentParser(); commands = root.add_subparsers(dest="command", required=True)
-    init = commands.add_parser("init"); init.add_argument("--run-dir", required=True); init.add_argument("--run-id", required=True); init.add_argument("--objective", required=True); init.add_argument("--criteria", required=True); init.set_defaults(func=command_init)
-    append = commands.add_parser("append"); append.add_argument("--run-dir", required=True); choice = append.add_mutually_exclusive_group(required=True); choice.add_argument("--event"); choice.add_argument("--events"); append.set_defaults(func=command_append)
-    valid = commands.add_parser("validate"); valid.add_argument("--run-dir", required=True); valid.add_argument("--terminal", action="store_true"); valid.set_defaults(func=command_validate)
-    snap = commands.add_parser("snapshot"); snap.add_argument("--run-dir", required=True); snap.add_argument("--write", action="store_true", required=True); snap.set_defaults(func=lambda a: {"ok": True, **write_snapshot(Path(a.run_dir).resolve())})
-    resume = commands.add_parser("resume"); resume.add_argument("--run-dir", required=True); resume.add_argument("--agents", required=True); resume.set_defaults(func=command_resume)
-    report = commands.add_parser("report"); report.add_argument("--run-dir", required=True); report.add_argument("--write", action="store_true", required=True); report.set_defaults(func=command_report)
+    root = CliParser(); commands = root.add_subparsers(dest="command", required=True)
+    paths = commands.add_parser("paths"); paths.set_defaults(func=lambda a: {"ok": True, **runtime_paths(a.state_root)})
+    listing = commands.add_parser("list-runs"); listing.add_argument("--limit", type=int, default=20); listing.add_argument("--offset", type=int, default=0); listing.set_defaults(func=command_list_runs)
+    register = commands.add_parser("register"); register.add_argument("--run-dir", required=True); register.set_defaults(func=command_register)
+    init = commands.add_parser("init"); init.add_argument("--run-dir"); init.add_argument("--run-id", required=True); init.add_argument("--objective", required=True); init.add_argument("--criteria", required=True); init.set_defaults(func=command_init)
+    append = commands.add_parser("append"); choice = append.add_mutually_exclusive_group(required=True); choice.add_argument("--event"); choice.add_argument("--events"); append.set_defaults(func=command_append)
+    valid = commands.add_parser("validate"); valid.add_argument("--terminal", action="store_true"); valid.set_defaults(func=command_validate)
+    snap = commands.add_parser("snapshot"); snap.add_argument("--write", action="store_true", required=True); snap.set_defaults(func=lambda a: {"ok": True, **write_snapshot(Path(a.run_dir).resolve())})
+    resume = commands.add_parser("resume"); resume.add_argument("--agents", required=True); resume.set_defaults(func=command_resume)
+    report = commands.add_parser("report"); report.add_argument("--write", action="store_true", required=True); report.set_defaults(func=command_report)
+    for command in (paths, listing, register, init, append, valid, snap, resume, report):
+        command.add_argument("--state-root", help="absolute runtime root; otherwise SAGE_STATE_ROOT, CODEX_HOME/sage, or ~/.codex/sage")
+    for command in (append, valid, snap, resume, report):
+        target = command.add_mutually_exclusive_group(required=True)
+        target.add_argument("--run-dir"); target.add_argument("--run-id")
     return root
 
 
 def main() -> int:
     try:
-        value = parser().parse_args(); result = value.func(value); sys.stdout.write(json.dumps(result, allow_nan=False, sort_keys=True) + "\n"); return 0
+        value = parser().parse_args()
+        if value.command not in {"paths", "list-runs", "register"}:
+            value.canonical = value.run_dir is None
+            if value.canonical:
+                layout = runtime_paths(value.state_root)
+                value.run_dir = str(resolve_run(Path(layout["state_root"]), value.run_id, new=value.command == "init"))
+            else:
+                fail(value.state_root is not None, "invalid_arguments", "--run-dir and --state-root are alternative targets")
+                supplied_run = Path(value.run_dir).expanduser()
+                value.run_dir = str(supplied_run.resolve())
+                if value.command == "init":
+                    # Preserve explicit fixture access even if unrelated root configuration is invalid.
+                    try: layout = runtime_paths()
+                    except ContractError: layout = None
+                    if layout and supplied_run.parent.resolve() / supplied_run.name == Path(layout["runs_dir"]) / value.run_id:
+                        value.run_dir = str(resolve_run(Path(layout["state_root"]), value.run_id, new=True))
+                        value.canonical = True
+        result = value.func(value)
+        if getattr(value, "canonical", False):
+            result.update(state_root=layout["state_root"], run_dir=value.run_dir)
+        sys.stdout.write(json.dumps(result, allow_nan=False, sort_keys=True) + "\n"); return 0
     except ContractError as exc:
         code = 3 if exc.code == "io_error" else 2; sys.stderr.write(json.dumps({"ok": False, "code": exc.code, "message": exc.message}, sort_keys=True) + "\n"); return code
     except OSError as exc:

@@ -1,6 +1,6 @@
 # Claude Code mechanics
 
-Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Model facts verified against the vendor's model docs 2026-09-03 on local install v2.1.259; the limits section carries its own date. Every dated figure behind a rule here lives in `harness-measurements.md`.
+Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Model facts verified against the vendor's model docs 2026-09-10 on local install v2.1.267; the limits section carries its own date. Every dated figure behind a rule here lives in `harness-measurements.md`.
 
 **Docs-drift trigger:** `claude --version` reports a build newer than that line → re-verify this file's tables against the changelog before trusting them.
 

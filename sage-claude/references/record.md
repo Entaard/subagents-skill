@@ -43,7 +43,7 @@ The **Result** — the deliverable in prose, standing alone — is printed on ev
      diff     <revision range or changed-file manifest>
    ```
 
-   Recording is not the same as reaching. The ledger path already rides the run line, but the diff pointer lives in `### Run record` where only `/sage report` renders it — so a clean run ends with an artifact the user has no way to open. **`ls` every path before you print it** — the citation rule in `dispatch.md` Step 3 reaches the run's own output, and a printed path that does not resolve is worse than one never printed.
+   Recording is not the same as reaching. The ledger path already rides the run line, but the diff pointer lives in `### Run record` where only `/sage report` renders it — so a clean run ends with an artifact the user has no way to open. **`ls` every path before you print it** — the citation rule in `dispatch.md` Step 3 reaches the run's own output, and a printed path that does not resolve is worse than one never printed. **A published artifact's URL is a path too**: a publish has returned a URL for an artifact that then vanished from the account, and a republish to the same file path fails after that, so confirm the link with the Artifact tool's `list` action or a read-back before the block names it, and recover a vanished one by publishing from a new path.
 4. Any **surfaced event** from the list below.
 
 ## Surfaced events

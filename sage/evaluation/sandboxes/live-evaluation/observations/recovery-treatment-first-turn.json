@@ -1,0 +1,59 @@
+{
+  "arm": "recovery-treatment",
+  "packet": "setup/arms/recovery-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 21:44:29 UTC"
+  },
+  "packet_sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:47:53 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_recovery_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_recovery_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 21:45:33 UTC"
+  },
+  "outer_environment_update": {
+    "recorded_at": {
+      "current_time": "2026-09-07 21:45:33 UTC"
+    },
+    "kind": "Capacity failure workaround only, not task/output hints",
+    "content": "Nested native spawn recently hit agent thread limit reached; no close capability exposed. Outer fresh spawn after actor terminal succeeded. On same failure preserve exact role brief and failure, checkpoint/release for outer dispatch and resume. Avoid broad listings exposing unrelated completed text.",
+    "protocol_deviation": "Additional current harness fact supplied after exact frozen packet; disclose in evaluation."
+  },
+  "first_turn_terminal_observed_at": {
+    "current_time": "2026-09-07 21:50:43 UTC"
+  },
+  "first_turn_status": "completed turn; required independent review pending",
+  "explicit_release": true,
+  "actor_first_final": {
+    "native_dispatch_failure": "agent thread limit reached",
+    "reviewer_created": false,
+    "source_run_terminal": false,
+    "source_run_dir": "state/runs/catalog-export",
+    "candidate_sha256": "f5e7409048402fe24c6f8235c9de7b4ea970acd052280408c501e54144069a90",
+    "provenance": "Actor message/final claims; independently unscored."
+  }
+}

@@ -1,0 +1,15 @@
+test_activation_rejects_generation_staged_from_a_different_base (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_generation_staged_from_a_different_base) ... ok
+test_activation_rejects_rehashed_generation_with_failed_refutation (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_rehashed_generation_with_failed_refutation) ... ok
+test_cli_argument_rejection_is_structured_json (sage.tests.test_knowledge.KnowledgeRegressionTests.test_cli_argument_rejection_is_structured_json) ... ok
+test_correction_after_rollback_cannot_reuse_revision_for_different_bytes (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correction_after_rollback_cannot_reuse_revision_for_different_bytes) ... ok
+test_disuse_is_not_an_accepted_retirement_basis (sage.tests.test_knowledge.KnowledgeRegressionTests.test_disuse_is_not_an_accepted_retirement_basis) ... ok
+test_empty_retrieval_round_trips_through_run_state_and_reserves_none (sage.tests.test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none) ... ok
+test_every_revision_action_preserves_prior_generation_and_retrieval_policy (sage.tests.test_knowledge.KnowledgeRegressionTests.test_every_revision_action_preserves_prior_generation_and_retrieval_policy) ... ok
+test_failed_and_stopped_terminal_sources_are_eligible (sage.tests.test_knowledge.KnowledgeRegressionTests.test_failed_and_stopped_terminal_sources_are_eligible) ... ok
+test_generation_validation_rejects_extra_empty_paths (sage.tests.test_knowledge.KnowledgeRegressionTests.test_generation_validation_rejects_extra_empty_paths) ... ok
+test_store_validation_checks_global_lineage_and_parent_references (sage.tests.test_knowledge.KnowledgeRegressionTests.test_store_validation_checks_global_lineage_and_parent_references) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.765s
+
+OK

@@ -1,0 +1,156 @@
+{
+  "commands": 42,
+  "targets": [
+    {
+      "label": "scorer-id",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "scorer",
+        "id"
+      ]
+    },
+    {
+      "label": "worker-role",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "workers",
+        0,
+        "role"
+      ]
+    },
+    {
+      "label": "worker-requested-model",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "workers",
+        0,
+        "requested_model"
+      ]
+    },
+    {
+      "label": "worker-effective-model",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "workers",
+        0,
+        "effective_model"
+      ]
+    },
+    {
+      "label": "root-effective-model",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "routing",
+        "root_model_effective"
+      ]
+    },
+    {
+      "label": "evidence-id",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "evidence",
+        0,
+        "id"
+      ]
+    },
+    {
+      "label": "command-id",
+      "path": [
+        "pairs",
+        0,
+        "treatment",
+        "execution",
+        "commands",
+        0,
+        "id"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "label": "scorer-id-bool",
+      "exit_code": 0
+    },
+    {
+      "label": "scorer-id-number",
+      "exit_code": 0
+    },
+    {
+      "label": "scorer-id-list",
+      "exit_code": 0
+    },
+    {
+      "label": "scorer-id-object",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-role-bool",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-role-number",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-role-list",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-role-object",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-requested-model-bool",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-requested-model-number",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-requested-model-list",
+      "exit_code": 0
+    },
+    {
+      "label": "worker-requested-model-object",
+      "exit_code": 0
+    },
+    {
+      "label": "check-string-reference",
+      "exit_code": 0
+    },
+    {
+      "label": "score-string-reference",
+      "exit_code": 0
+    },
+    {
+      "label": "scorer-string-reference",
+      "exit_code": 0
+    },
+    {
+      "label": "operational-string-reference",
+      "exit_code": 0
+    },
+    {
+      "label": "usage-string-reference",
+      "exit_code": 0
+    }
+  ],
+  "scope": "Non-string identifiers, worker role/model primitives and non-array evidence reference strings. Alias and usage controls are structural synthetic diagnostics, not new native evidence or usage claims."
+}

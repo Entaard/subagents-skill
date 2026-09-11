@@ -1,0 +1,15 @@
+test_correction_after_rollback_cannot_reuse_revision_for_different_bytes (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correction_after_rollback_cannot_reuse_revision_for_different_bytes) ... FAIL
+
+======================================================================
+FAIL: test_correction_after_rollback_cannot_reuse_revision_for_different_bytes (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correction_after_rollback_cannot_reuse_revision_for_different_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 234, in test_correction_after_rollback_cannot_reuse_revision_for_different_bytes
+    self.assertEqual(repaired.returncode, 0, repaired.stderr)
+AssertionError: 2 != 0 : {"code": "invalid_transition", "message": "new revision must link to the active prior revision", "ok": false}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.354s
+
+FAILED (failures=1)

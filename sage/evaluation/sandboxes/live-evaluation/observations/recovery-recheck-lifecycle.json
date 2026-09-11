@@ -1,0 +1,15 @@
+{
+  "native_handle": "/root/live_recovery_review",
+  "operation": "followup_task",
+  "recorded_after_dispatch": {
+    "current_time": "2026-09-07 22:05:01 UTC"
+  },
+  "packet": "setup/arms/recovery-treatment/evidence/recheck-brief.md",
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:09:53 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "finding_disposition": "Original minor falsifiable repair check passed; no new findings reported.",
+  "review_file": "setup/arms/recovery-treatment/evidence/independent-recheck.md"
+}

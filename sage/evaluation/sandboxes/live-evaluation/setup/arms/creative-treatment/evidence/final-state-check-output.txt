@@ -1,0 +1,22 @@
+Actor-retained final observations, not raw native transcript.
+
+Installed sage_state.py append --events evidence/continuation-final-events.jsonl
+exit 0: {"appended": 19, "last_seq": 43, "ok": true}
+
+Installed sage_state.py snapshot --write
+exit 0: terminal status completed, both findings fixed, all four continuation tasks passed.
+
+Installed sage_state.py validate --terminal
+exit 0: {"last_seq": 43, "ok": true, "run_id": "echo-steps-continuation", "terminal": true}
+
+Installed sage_state.py report --write
+exit 0: state/runs/echo-steps-continuation/report.md generated and read.
+The generated report is structural. Its empty typed Unknowns/Untested sections do not establish that every modality was exercised. Task-specific provenance and untested modalities are explicitly retained in evidence/FINAL-REPORT.md and the exact independent recheck.
+
+SHA-256:
+3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0  work/index.html
+90ea39575d63fea02b1b7e666252f033339796186c7a46695db8885884b4e487  evidence/FINAL-REPORT.md
+bf22b07dfd88f9ae07c31472879ec6debde3b2fe0e053bb0cd9343ed5b9762d7  state/runs/echo-steps-continuation/events.jsonl
+b49fa334675c9a9d48e736045199af650c828298c1899404262727e0ff496ec2  state/runs/echo-steps-continuation/report.md
+
+Filtered native list_agents(/root/live_creative_treatment): this coordinator running; no children. Outer reviewer completed/released observation is attributed to the outer coordinator's resume packet. No outstanding tool processes.

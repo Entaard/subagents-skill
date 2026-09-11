@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "state_commands": 6,
+  "knowledge_commands": 8,
+  "matched_record": "validate-log-before-snapshot",
+  "active_generation": "g-1",
+  "g2_retained": true,
+  "source_doc_consulted_by_installed_process": false
+}

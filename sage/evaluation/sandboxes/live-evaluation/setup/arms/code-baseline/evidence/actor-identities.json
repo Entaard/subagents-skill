@@ -1,0 +1,4 @@
+[
+  {"handle":"/root/live_code_baseline","role":"coordinator and implementer","requested_model":"gpt-6-astra","requested_effort":"high","effective_model":null,"effective_effort":null,"tokens":null,"money":null},
+  {"handle":"/root/live_code_baseline/review","role":"independent read-only reviewer","requested_model":"gpt-6-astra","requested_effort":"xhigh","fork_turns":"none","effective_model":null,"effective_effort":null,"tokens":null,"money":null,"observed_lifecycle":"completed","explicit_release":true,"writes_performed":false}
+]

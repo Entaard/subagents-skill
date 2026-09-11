@@ -1,0 +1,124 @@
+{
+  "module": "integration",
+  "approach_id": "integration-a1",
+  "round": 1,
+  "review_id": "integration-a1-r1",
+  "reviewed_at": "2026-09-07T19:28:10Z",
+  "gate_type": "integration",
+  "verdict": "fail",
+  "summary": "The assembled installed package and exact legacy quarantine work in the bounded deterministic tests. Two integration errors remain: an offline test deletes prior evidence outside its caller-selected sandbox, and uninstall can partially remove files before discovering a preexisting non-directory parent without reporting the completed removals.",
+  "reviewer": {
+    "actor": "/root/integration_critic",
+    "independence": "Separate critic with sole review writer ownership after the builder released. No product repairs, archive edits, or subagents. Review writes stay under sage.",
+    "requested_model": "gpt-6-astra",
+    "effective_model": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 7.7,
+    "architecture_and_coherence": 8.6,
+    "correctness_and_evidence": 7.8,
+    "simplicity_and_context_efficiency": 8.7,
+    "orchestration_and_model_routing": 8.7,
+    "safety_reversibility_and_recovery": 7.4,
+    "verification_strength": 7.6,
+    "reporting_and_maintainability": 7.8
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The 14-file installed product, documented CLI flows, receipt ownership, and selected 186-file quarantine are directly evidenced; E1 violates evidence preservation and temporary-test isolation, and E2 leaves the declared uninstall/reporting boundary incomplete.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/full-suite.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/runner-isolation.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/archive-conclusion.json"]
+    },
+    "architecture_and_coherence": {
+      "reason": "The installed package retains two explicit entrypoints, independent state paths, event authority, immutable knowledge generations, and a source-only lifecycle helper. The errors are bounded implementation and verification defects rather than a competing architecture.",
+      "evidence": ["sage/ARCHITECTURE.md", "sage/docs/CONTRACTS.md", "sage/evaluation/sandboxes/integration-a1-r1-critic/installed-links.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/result.json"]
+    },
+    "correctness_and_evidence": {
+      "reason": "The exact-byte relocated full suite passes 77 tests with zero failures/errors/skips and the installed documentation passes 14 commands. Independent negative probes expose two observable defects beyond those passing tests; the critic does not convert green assertions into a complete integration claim.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/full-suite.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replica-byte-equivalence.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/result.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "The 25-line main and 19-line promotion spines route to package-local branch references; only two deterministic helpers install. Lifecycle remains a small source-only copy/receipt operation. Neither finding requires a runtime framework or physical transaction protocol.",
+      "evidence": ["sage/skills/sage/SKILL.md", "sage/skills/sage-promote/SKILL.md", "sage/scripts/sage-lifecycle.py", "sage/evaluation/sandboxes/integration-a1-r1-critic/installed-links.json"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "The installed prose preserves adaptive zero-agent/delegated modes, live schema authority, user overrides, requested/effective uncertainty, one-writer ownership, and bounded uncalibrated routing priors. This scores only preservation and deterministic assembly; actual live routing efficiency remains unscored.",
+      "evidence": ["sage/skills/sage/references/delegation.md", "sage/skills/sage/references/recovery.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/integration-a1-r1-critic/full-suite.json"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Receipt path/type rejection, symlink controls, modified/unowned file retention, empty-directory/runtime preservation, and installed knowledge rollback have positive evidence. E1 destructively removes earlier test evidence, and E2 misses a predictable parent-type check before removals, so the gate cannot pass.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/positive-negative-probes.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/result.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/runner-isolation.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json"]
+    },
+    "verification_strength": {
+      "reason": "The comprehensive offline suite is useful and passes when relocated unchanged, but its hard-coded destructive test escapes the selected evidence root and has no assertion protecting earlier evidence. Independent probes reproduce that omission and a missing lifecycle parent-type case. No live or automatic-discovery result is inferred.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/full-suite.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/runner-isolation.json", "sage/evaluation/tests/test_product_install.py:194", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Historical scores and current limitations are explicit, and unowned filenames are reported without private contents. E1 undermines preserved evaluation history and E2 emits only lifecycle_rejected after six completed removals. Both need narrow correction before the reporting gate passes.",
+      "evidence": ["sage/docs/IMPLEMENTATION.md", "sage/evaluation/sandboxes/integration-a1-r1-critic/status-before.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/commands.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/runner-isolation.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json"]
+    }
+  },
+  "open_error_ids": ["INTEGRATION-A1-R1-E1", "INTEGRATION-A1-R1-E2"],
+  "finding_dispositions": [],
+  "findings": [
+    {
+      "id": "INTEGRATION-A1-R1-E1",
+      "severity": "major",
+      "priority": "P1",
+      "title": "Offline overlap test deletes earlier evidence outside the requested sandbox",
+      "requirements": ["R-053", "R-057", "R-072"],
+      "location": "sage/evaluation/tests/test_product_install.py:194",
+      "cause": "The test ignores SAGE_EVALUATION_SANDBOX, selects a fixed integration-wave-r1-overlap-positive/target directory, and recursively removes it before installation. A fresh --evidence-dir therefore does not isolate the full suite.",
+      "observed": "An exact-byte relocated source suite passed all 77 tests while deleting a critic-created earlier-evidence sentinel beneath the fixed prior target and outside the supplied fresh-critic-suite evidence directory. The sentinel hash is retained. The real previous evidence directory was never executed against or changed by this critic.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/runner-isolation.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replica-byte-equivalence.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/full-suite.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/probe.py"],
+      "fix_check": "Allocate the overlap target beneath the caller's fresh sandbox while preserving the positive target-inside-source condition. Run with two distinct evidence directories and a sentinel at the former hard-coded path; all tests must pass and the sentinel plus earlier evidence hashes must remain unchanged. No recursive cleanup of prior evidence is acceptable."
+    },
+    {
+      "id": "INTEGRATION-A1-R1-E2",
+      "severity": "major",
+      "priority": "P2",
+      "title": "Uninstall discovers a replaced directory parent only after unreported removals",
+      "requirements": ["R-005", "R-072", "R-073"],
+      "location": "sage/scripts/sage-lifecycle.py:282",
+      "cause": "Receipt preflight checks parent symlinks but does not verify that existing parent components are directories. The uninstall loop classifies and deletes one file at a time, so a later NotADirectoryError occurs after earlier owned files have already been removed.",
+      "observed": "After a valid install, moving skills/sage/agents aside and placing a regular user file at that path causes uninstall to remove six skills/sage/references files, then exit 2. stdout is empty; stderr contains only lifecycle_rejected and the failing descendant path. The modified parent and old receipt survive, but no removed/retained result explains the partial installation. Replacing the earlier-sorted references parent instead rejects before removal, confirming the outcome depends on iteration order.",
+      "evidence": ["sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-parent.json", "sage/evaluation/sandboxes/integration-a1-r1-critic/final-checks.py", "sage/scripts/sage-lifecycle.py:165", "sage/scripts/sage-lifecycle.py:169"],
+      "fix_check": "Preflight predictable existing parent/type conflicts before any removal, or conservatively retain and explicitly report replaced parent subtrees under a documented contract. A late-order non-directory parent must not produce unreported partial deletion. Test both early and late order, preserve unrelated files and the replacement, and accurately state any remaining unexpected-I/O limits. A crash-atomic multi-file transaction framework is not required."
+    }
+  ],
+  "suggestions": [],
+  "verified_observations": [
+    "77/77 full offline tests pass with no failures/errors/skips in an exact-byte relocated source copy; relocation is recorded and was necessary to avoid modifying prior evidence through E1.",
+    "Default source-root installation into a fresh target beneath the real source sandbox succeeds with exactly 14 owned files plus the receipt; all installed Markdown links resolve.",
+    "Installed state init/append/snapshot/terminal validation/report/resume and knowledge validate/stage/activate/retrieve/correct/rollback pass 14 documented commands from a separate working directory using installed sibling helpers.",
+    "Modified owned and unowned package files, private content, runtime files, and preexisting empty directories survive appropriate update/uninstall paths; reporting includes unowned names without private contents.",
+    "Seven malformed receipt index variants reject with structured exit 2 and no mutation. Empty-receipt parent symlinks reject without following or deleting the escaped receipt.",
+    "Missing required reference, reintroduced source-manifest, and shipped-source overlap reject before target creation. An unchanged retired owned extension is removed on update and inherited receipt hashes are retained.",
+    "All 186 SHA256SUMS entries match exact baseline Git bytes. Additional archive README and SHA256SUMS are explanatory metadata. Lifecycle is both archived and rewritten active; the eight baseline paths outside the inventory are seven rewritten entrypoints plus removed tracked bytecode, still recoverable in Git.",
+    "Candidate source/input hashes remain unchanged throughout review. Prior critic rounds and failed evidence were not rewritten; sage-claude was not edited."
+  ],
+  "input_hashes": {
+    "sage/install.sh": "56ebb56d909559a6d7a2976b9c0d9e99d777b0eda665359c84d335ba98521aeb",
+    "sage/uninstall.sh": "e7fdcf9855c9dd3ca52794f63e3423245da60f1fec5334fcb9fd53fdc7374f83",
+    "sage/scripts/sage-lifecycle.py": "76549421d45aecd8e6555be3fffb71be798e836f3a51fb6a7e591925fc763840",
+    "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+    "sage/scripts/sage_knowledge.py": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+    "sage/evaluation/tests/test_product_install.py": "eadb022a84a29fedd9c1d5fb89404289c802ee8918e5441d65018b933c121fb3",
+    "sage/evaluation/run_verification.py": "d54038c801b63a342ad99b2c539446ad605b407d8f9b9c8505787d1622b277a5",
+    "sage/evaluation/requirements-trace.json": "5957c6d36c8dbc27cf21200a1ef505737497121bc3f231ff0776809e0815ff8a",
+    "sage/README.md": "87df8379674add99c8415b349fd9da322461505e0963409b6568e84d21d0c3e2",
+    "sage/ARCHITECTURE.md": "53a4839f33228083f95a048f758b64880080e8429917bd36bbf64f06a0aa19fa",
+    "sage/docs/DECISIONS.md": "95b6946a241194d798342799919195f100f565b1fb174a9cf835a6568d54c9ed",
+    "sage/docs/IMPLEMENTATION.md": "e4c7da843d229880799130d7361d61123222973c874fbe8409fe5183e8e621f8",
+    "sage/archive/legacy/SHA256SUMS": "28b26f134b6bcab2933d60334b9da25ac5414f9fb355a962cfa2b942a88cdbf8"
+  },
+  "full_input_hash_inventory": "sage/evaluation/sandboxes/integration-a1-r1-critic/input-hashes.json",
+  "limitations": [
+    "This review scores all eight status dimensions only for deterministic assembled integration. Final/live quality, automatic Codex discovery, actual behavioral independence, effective routing, token use, money, and savings remain unrun and unscored.",
+    "The suite ran in a byte-identical source copy under the critic sandbox to contain the known destructive hard-coded target. Source-copy path relocation is an explicit environment difference; the real active installer also received separate public probes.",
+    "A critic-only Python -I startup experiment failed because that mode excludes sibling imports; it is outside the documented launch contract and is not a product defect. The -E follow-up ignored the no-bytecode environment and produced a confined cache, correctly retained/reported on uninstall. Subsequent documented examples used normal Python with explicit -B.",
+    "Two critic archive assertions were overly broad: the archive has explanatory metadata outside its 186-entry inventory, and the archived lifecycle path also has a rewritten active replacement. The raw audit and corrected conclusion are both retained; all 186 baseline byte comparisons passed.",
+    "The bundled quick_validate dependency remains unavailable because PyYAML is absent; no dependency installation or bundled-validator pass is claimed. Dependency-free source syntax, installed links, and explicit-only metadata were inspected.",
+    "No physical transaction, hostile-writer defense, broad crash recovery, or corrupt retained-knowledge-history recovery is claimed. E2 concerns a deterministic preexisting type conflict and missing partial-effect reporting, not those excluded guarantees."
+  ],
+  "next_action": "Repair only the two frozen integration errors for integration-a1 round 2, retain this failed round and evidence, then independently recheck before opening the final/live gate."
+}

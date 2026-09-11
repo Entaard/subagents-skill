@@ -1,0 +1,14 @@
+{
+  "arm": "code-treatment",
+  "candidate_sha256": "bfde6d5c0ed95398a1dea59a72f08aa211bf27034f4d647c1a1f670fbce31c10",
+  "delivered_tests": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_all_partitions_of_short_stream (test_decoder.DecoderTests.test_all_partitions_of_short_stream) ... ok\ntest_constructor_validation (test_decoder.DecoderTests.test_constructor_validation) ... ok\ntest_deterministic_random_chunking (test_decoder.DecoderTests.test_deterministic_random_chunking) ... ok\ntest_each_incomplete_prefix_and_poisoning (test_decoder.DecoderTests.test_each_incomplete_prefix_and_poisoning) ... ok\ntest_every_single_split_and_bytewise_binary (test_decoder.DecoderTests.test_every_single_split_and_bytewise_binary) ... ok\ntest_finish_stays_open_and_reset_discards_partial (test_decoder.DecoderTests.test_finish_stays_open_and_reset_discards_partial) ... ok\ntest_limit_enforced_before_colon (test_decoder.DecoderTests.test_limit_enforced_before_colon) ... ok\ntest_malformed_and_reset (test_decoder.DecoderTests.test_malformed_and_reset) ... ok\ntest_raw_vectors (test_decoder.DecoderTests.test_raw_vectors) ... ok\ntest_type_errors_preserve_each_partial_state (test_decoder.DecoderTests.test_type_errors_preserve_each_partial_state) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.011s\n\nOK\n"
+  },
+  "oracle_stream_chunk_cases": 396016,
+  "negative_assertions": 46,
+  "mismatches": [],
+  "scope": "Python interpreter of this scorer, independent whole-wire parser, exhaustive short streams every split, binary random payloads every split, poison/reset/type/immediate limit checks",
+  "ok": true
+}

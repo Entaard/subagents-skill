@@ -1,0 +1,9 @@
+{
+  "review_validation_exit": 0,
+  "probe_expected_exit": 1,
+  "status_copy_final_gate": "failed",
+  "prior_history_preserved": true,
+  "protected_file_count": 331,
+  "changed": [],
+  "actual_status_unchanged": true
+}

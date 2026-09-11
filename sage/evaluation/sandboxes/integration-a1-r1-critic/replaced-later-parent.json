@@ -1,0 +1,15 @@
+{
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"[Errno 20] Not a directory: '/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent/skills/sage/agents/openai.yaml'\", \"ok\": false}\n",
+  "removed_before_rejection": [
+    "skills/sage/references/delegation.md",
+    "skills/sage/references/knowledge.md",
+    "skills/sage/references/recovery.md",
+    "skills/sage/references/run.md",
+    "skills/sage/references/state.md",
+    "skills/sage/references/verification.md"
+  ],
+  "replacement_preserved": true,
+  "receipt_preserved": true
+}

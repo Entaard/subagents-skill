@@ -1,0 +1,99 @@
+{
+  "actor": "/root/live_promotion_reviewer",
+  "outcome": "passed",
+  "dispositions": [
+    {
+      "finding_id": "rf-scope",
+      "disposition": "accepted",
+      "rationale": "Clearing qualifier.all.environment makes the record discoverable when an environment cue is absent or names a different environment, but discoverability is not evidence of transfer. The unchanged rule limits the instruction to Python csv.reader and these inputs; gate_rationale, gate_evidence, evidence_summary, and falsifier preserve the Python 3.11.6 supplied-sample boundary. Retrieval for a different environment must therefore be read as a bounded candidate result, not support for that environment. This is an explicit nonblocking scope limitation, not a material semantic defect.",
+      "evidence": [
+        "csv-old:ev-1",
+        "csv-new:ev-1"
+      ]
+    },
+    {
+      "finding_id": "rf-strength",
+      "disposition": "resolved",
+      "rationale": "The repeated Python 3.11.6 probe confirms three csv.reader fields for every supplied row and four literal split pieces for A3, firing revision 1's falsifier. The repaired candidate preserves the old observation as counterevidence and does not claim generic escaping correctness, malformed-input validation, dialect coverage, or cross-context transfer.",
+      "evidence": [
+        "csv-new:ev-1",
+        "csv-old:ev-1"
+      ]
+    },
+    {
+      "finding_id": "rf-retrieval-repair",
+      "disposition": "resolved",
+      "rationale": "The sole candidate change is qualifier.all.environment from [python 3 stdlib csv] to []. Direct application of the installed retrieval predicate now matches the unchanged actual task cues. The repaired qualifier still rejects missing domain, missing operation, and a different artifact. Actual revision-2 CLI retrieval remains a coordinator-owned post-activation completion check rather than evidence needed to assess the frozen repair bytes.",
+      "evidence": [
+        "csv-old:ev-1",
+        "csv-new:ev-1"
+      ]
+    }
+  ],
+  "gate_decision": "supported",
+  "reviewed_at": "2026-09-07T23:02:07Z",
+  "metadata": {
+    "candidate_path": "work/proposal-repaired.json",
+    "candidate_sha256": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+    "refutation_path": "work/refutation-repaired.json",
+    "refutation_sha256": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+    "evidence_class": "scoped_fact",
+    "prior_finding_disposition": {
+      "finding_id": "rv-retrieval-actual-cues",
+      "disposition": "resolved",
+      "rationale": "The frozen repaired predicate was observed in memory to match unchanged inputs/cues.json after removal of the mandatory environment qualifier. The original candidate was observed not to match those cues. Live retrieval of revision 2 is still unexecuted because staging and activation belong to the coordinator.",
+      "observed_evidence": [
+        "inputs/cues.json sha256=3734ff44664301de73a2d9a87707bbcb3d2789519301a7aa97cd26a9ebbdab8b",
+        "work/proposal-author.json#/record/qualifier/all/environment=[python 3 stdlib csv]",
+        "work/proposal-repaired.json#/record/qualifier/all/environment=[]",
+        "installed/skills/sage-promote/references/knowledge.md#Retrieval",
+        "in-memory repaired predicate: actual_absent_environment would_match=true"
+      ],
+      "remaining_completion_check": "After coordinator-owned staging and activation, retrieve with unchanged inputs/cues.json and require museum-csv-field-count revision 2, status supported, with the Python 3.11.6 supplied-sample boundary intact."
+    },
+    "observations": [
+      "The repaired and original proposals differ only at /record/qualifier/all/environment.",
+      "Python 3.11.6 reproduction: every supplied row has csv_reader_fields=3; A3 has plain_split_fields=4.",
+      "csv-old and csv-new each terminal-validate with ok=true, terminal=true, last_seq=8.",
+      "The current store validates at controlled-prior with one generation.",
+      "Before landing, unchanged actual cues retrieve museum-csv-field-count revision 1 with status supported and cue fingerprint 7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29.",
+      "The repaired predicate matches unchanged cues with absent environment and also remains discoverable with a different environment cue.",
+      "The repaired predicate rejects missing domain, missing operation, and a different artifact."
+    ],
+    "semantic_assessment": {
+      "status": "supported",
+      "scope": "Python 3.11.6 stdlib csv behavior for the supplied controlled fictional museum samples only",
+      "lineage": "correct preserves museum-csv-field-count, advances revision 1 to revision 2, and retains the fired prior falsifier, provenance, alternative explanations, and csv-old counterevidence",
+      "unsupported_transfer": "No support is claimed for other parsers, Python versions, malformed CSV, dialects, or museum inputs outside the supplied samples. Retrieval under absent or different environment cues does not change that boundary."
+    },
+    "additional_findings": [],
+    "source_authenticity": "The two source runs, fixture records, and controlled seed actor labels are synthetic scaffolding. Only the hash-bound local Python observations were treated as reproducible facts.",
+    "identity": {
+      "native_actor_id": "/root/live_promotion_reviewer",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh",
+      "requested_fork_turns": "native followup",
+      "effective_identity": null,
+      "effective_model": null,
+      "effective_effort": null,
+      "tokens": null,
+      "money": null
+    },
+    "coordinator_owned_unexecuted": [
+      "complete proposal assembly",
+      "stage",
+      "post-stage store validation",
+      "activate",
+      "live revision-2 retrieval with unchanged task cues",
+      "rollback",
+      "pointer-restoration validation",
+      "retained-history validation"
+    ],
+    "unknowns": [
+      "No live revision-2 CLI retrieval result exists yet.",
+      "No staged or activated generation ID, manifest hash, rollback result, or post-rollback retrieval result was observed in this review.",
+      "Effective runtime identity, model, effort, tokens, and money are unobserved."
+    ],
+    "writer_lease": "RELEASE"
+  }
+}

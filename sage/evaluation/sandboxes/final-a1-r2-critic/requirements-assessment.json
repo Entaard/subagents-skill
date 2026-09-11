@@ -1,0 +1,670 @@
+{
+  "scope": "Final-a1 round 2 assembled both-skills assessment. Unchanged areas reuse round-1 independent semantic review and original scoped evidence, with fresh 95-test/package/hash verification. Changed instruction coverage is independently rejudged below. No new live trial or universal empirical guarantee.",
+  "basis": {
+    "main": "sage/skills/sage/SKILL.md",
+    "run": "sage/skills/sage/references/run.md",
+    "delegate": "sage/skills/sage/references/delegation.md",
+    "verify": "sage/skills/sage/references/verification.md",
+    "recover": "sage/skills/sage/references/recovery.md",
+    "state": "sage/skills/sage/references/state.md",
+    "retrieve": "sage/skills/sage/references/knowledge.md",
+    "promote": "sage/skills/sage-promote/SKILL.md",
+    "promotion": "sage/skills/sage-promote/references/promotion.md",
+    "knowledge": "sage/skills/sage-promote/references/knowledge.md",
+    "contract": "sage/docs/CONTRACTS.md",
+    "architecture": "sage/ARCHITECTURE.md",
+    "offline": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage/evaluation/sandboxes/offline/report.json",
+    "offline-detail": "sage/evaluation/sandboxes/final-a1-r1-critic/candidate-source/sage/evaluation/sandboxes/offline/stderr.txt",
+    "install": "sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json",
+    "gap": "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json",
+    "live": "sage/docs/LIVE-RESULTS.md",
+    "scores": "sage/evaluation/sandboxes/final-a1-r1-critic/historical-score-evidence.json",
+    "repair": "sage/docs/reviews/live-repairs-a1-r3.json",
+    "promotion-review": "sage/docs/reviews/promotion-a1-r3.json",
+    "integration-review": "sage/docs/reviews/integration-a1-r2.json",
+    "verification-review": "sage/docs/reviews/verification-a1-r3.json",
+    "architecture-review": "sage/docs/reviews/architecture-a1-r2.json",
+    "history": "sage/evaluation/sandboxes/final-a1-r1-critic/status-before.json",
+    "rubric": "sage/evaluation/rubric.json",
+    "trace": "sage/evaluation/requirements-trace.json",
+    "current-audit": "sage/evaluation/sandboxes/final-a1-r2-critic/summary.json",
+    "current-graphs": "sage/evaluation/sandboxes/final-a1-r2-critic/instruction-graphs.json",
+    "current-install": "sage/evaluation/sandboxes/final-a1-r2-critic/installed-audit.json",
+    "current-boundary": "sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json",
+    "current-historical": "sage/evaluation/sandboxes/final-a1-r2-critic/historical-binding-check.json",
+    "current-history": "sage/evaluation/sandboxes/final-a1-r2-critic/status-before.json"
+  },
+  "rows": [
+    [
+      "R-001",
+      "supported",
+      "Active packages are Codex-specific, use native collaboration and deny a managed scheduler or portability guarantee.",
+      [
+        "main",
+        "promote",
+        "architecture",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-002",
+      "supported",
+      "Two explicit-only entrypoints with distinct names/default prompts and consistent allow_implicit_invocation:false; fresh installation contains both.",
+      [
+        "main",
+        "promote",
+        "install",
+        "current-audit",
+        "current-install"
+      ]
+    ],
+    [
+      "R-003",
+      "supported",
+      "Main reads active knowledge only; promotion accepts closed sources and does not resume them or edit policy. Missing own promotion lifecycle is separately recorded.",
+      [
+        "retrieve",
+        "promote",
+        "promotion",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-004",
+      "supported",
+      "25-line main and 19-line promotion spines, branch-specific references, two dependency-free domain helpers and source-only installer; missing essential promotion guidance is not rewarded as simplicity.",
+      [
+        "install",
+        "main",
+        "promote",
+        "contract",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-005",
+      "supported_with_limits",
+      "Current docs distinguish actual failed history from informed passing repair tests; no universal quality/savings, physical lease or effective-model proof claimed.",
+      [
+        "live",
+        "repair",
+        "architecture",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-010",
+      "supported",
+      "Main inline zero-agent path and promotion no_change path explicit; synchronous-root tests pass. Original treatment arms keep cohesive root work with bounded review.",
+      [
+        "main",
+        "promote",
+        "offline-detail",
+        "live",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-011",
+      "supported",
+      "Main root and promotion coordinator own scope/risk/adoption/landing; author/refuter/reviewer cannot substitute votes for semantic decisions.",
+      [
+        "main",
+        "promotion",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-012",
+      "verified_fixed_final_e1",
+      "Promotion now reads run/state before planning and commits its own bounded task graph, authority/baselines, actual role handles and dependencies through landing.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-013",
+      "verified_fixed_final_e1",
+      "Its separate events.jsonl is explicitly append-only own authority; shared state governs immutable task/plan/result corrections while source logs and generations remain separate.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-014",
+      "supported_with_limits",
+      "Main value test includes parallelism/context/independence/ownership and root work; promotion skips scout/no_change teams. Original live routing is case evidence, not a universal optimality result.",
+      [
+        "delegate",
+        "promotion",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-015",
+      "verified_fixed_final_e1",
+      "Required shared delegation/recovery links supply temporal writer release; own unknown actor/effects retain the writer barrier before any further mutation.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-016",
+      "verified_fixed_final_e1",
+      "Own graph records dependencies through landing and shared state/delegation govern dependency-ready admission, including after stale-state revision.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-017",
+      "supported",
+      "Substantive main candidates receive independent review, targeted fixes and integration; tiny work has a direct path. Promotion original reviewer dissent, author repair and renewed reviews are evidenced.",
+      [
+        "verify",
+        "promotion",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-018",
+      "supported_with_limits",
+      "Main requires actual interaction/visual/usability/performance evidence. Original creative scorer played real flows at two viewports and checked PNGs/timings; assistive technology, touch and reduced-motion runtime remain untested.",
+      [
+        "verify",
+        "live",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-020",
+      "supported",
+      "Luna/Sol/Astra role priors are explicitly uncalibrated in both spines/references; prior does not establish price or guaranteed ranking.",
+      [
+        "delegate",
+        "promote",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-021",
+      "verified_fixed_final_e1",
+      "Promotion explicitly evaluates total delegation overhead including briefing, root context, review, integration, verification and retry cost.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-022",
+      "supported_with_limits",
+      "Both spines preserve user model/effort choices; main reports unavailability. No exhaustive model-unavailability live branch is claimed.",
+      [
+        "main",
+        "delegate",
+        "promote",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-023",
+      "verified_fixed_final_e1",
+      "Every own assignment records requested and effective model/effort separately, linked to the existing state contract's null/unknown observations.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-024",
+      "verified_fixed_final_e1",
+      "Before dispatch or rerouting promotion reads installed delegation, whose fresh/bounded versus inherited-fork rules match the supplied callable schema; context fork is recorded per assignment.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-025",
+      "verified_fixed_final_e1",
+      "Shared recovery requires actual handle inventory, active steering versus idle followup, latest effect/lifecycle reconciliation and no completion inferred from idle/missing/interruption.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-026",
+      "verified_fixed_final_e1",
+      "Promotion requires the existing live-tool operating seam, actual role handles/results and evidence of independence; cached role priors do not override supplied callable schema or returned observations.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-027",
+      "supported_with_limits",
+      "No fixed token meter or hardcoded price table; reports forbid unobserved cost claims and original records leave money/tokens null.",
+      [
+        "delegate",
+        "promote",
+        "live",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-030",
+      "verified_fixed_final_e1",
+      "Each invocation selects a separate own coordinator run and explicitly establishes events.jsonl as authority. Shared state handles derived snapshot/report binding.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-031",
+      "verified_fixed_final_e1",
+      "The own run records bounded plan, actual assignments/results, authority, source/proposal/pointer/generation baselines, checkpoints, unresolved items and next action, using the existing complete state vocabulary.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-032",
+      "supported_with_limits",
+      "Current reports render unknown native fields and honest empty sections; main mandates typed unknown/untested facts. Original six report failures remain scored 7; independently verified repairs and fresh tests are not rescoring.",
+      [
+        "verify",
+        "repair",
+        "offline-detail",
+        "live",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-033",
+      "verified_fixed_final_e1",
+      "Mandatory run/state references supply compact classified protected-locator/hash evidence and exclusion of credentials, rather than copying private raw material into promotion history.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-034",
+      "verified_fixed_final_e1",
+      "Promotion's own completion requires criterion observations, checks, finding disposition, reconciled effects/scope; shared state additionally rejects accepted major/blocker findings. Honest open/failed/stopped and human items remain explicit.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-035",
+      "verified_fixed_final_e1",
+      "Promotion checkpoints plan commitment, delegation waves, proposal/refutation/review and before/after stage/activation. Shared run guidance includes host context warnings.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-036",
+      "verified_fixed_final_e1",
+      "Own log validates before projection repair; corrupt authority pauses. Resume reconciles handles/effects and source/proposal/pointer/generation/authority baselines; unknown mutations are observed before any retry, stale next action revised and continuing authority checked.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-037",
+      "verified_fixed_final_e1",
+      "Mandatory run/delegation/state procedures provide finite task and revision allowances plus recorded failure cause/material strategy changes; promotion additionally bounds corpus/candidates and attempts.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-038",
+      "verified_fixed_final_e1",
+      "Shared cause-responsive replanning is reachable, and promotion requires stale-action revision with existing-authority confirmation. It asks for new authority only when scope/action requires it; no_change stays zero-team.",
+      [
+        "promotion",
+        "current-graphs",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-040",
+      "supported",
+      "Main cue/generation/policy refresh, bounded selection, no_match, unchanged no-op, dedup and feedback explicit; empty-store/policy/lineage/selection tests pass. Original promotion validates actual-cue retrieval after reviewer-blocked repair.",
+      [
+        "retrieve",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-041",
+      "supported_with_limits",
+      "Record schema preserves class/status/gate/provenance/qualifier/falsifier/counterevidence/review fields; structural tests and original scoped semantic correction support bounded behavior only.",
+      [
+        "knowledge",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-042",
+      "supported",
+      "Current task/user evidence outranks promoted rules; qualifiers are rechecked, and refuted/retired records excluded. Original promotion correction responds to direct contrary CSV evidence.",
+      [
+        "retrieve",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-043",
+      "supported",
+      "Exact loaded revision feedback useful/neutral/misleading/not_exercised and missed recognizers persists without main promotion; projector/retrieval tests pass.",
+      [
+        "retrieve",
+        "state",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-044",
+      "supported",
+      "Source terminal/effect/integrity validation rejects active, malformed and unknown-effect inputs unchanged; failed/stopped controls pass. Original two synthetic source runs explicitly remain immutable.",
+      [
+        "promotion",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-045",
+      "supported_with_limits",
+      "Candidate extraction/refutation actively seeks contradictions, counterexamples, alternatives and scope failures. Original CSV counterexample, refuter findings and reviewer dissent provide actual bounded evidence.",
+      [
+        "promotion",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-046",
+      "supported_with_limits",
+      "All potentially landing actions require independent author/refuter/reviewer roles, passed challenge and dispositioned findings; material changes return to author. Structural negatives and actual original roles are evidenced, without claiming strings prove independence.",
+      [
+        "promotion",
+        "knowledge",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-047",
+      "supported",
+      "Stable ID/revision lineage, corrective evidence and retained generations enforced; refuted/retired retrieval exclusion and postrollback revision continuation pass tests.",
+      [
+        "knowledge",
+        "offline-detail",
+        "promotion-review",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-048",
+      "supported_with_limits",
+      "Stage validates immutable full generation; expected-parent/pointer checks precede atomic pointer landing; rollback retains history. Installed tests and original rev1/rev2/rev1 smoke support it; corrupt retained history intentionally blocks normal mutation.",
+      [
+        "knowledge",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-049",
+      "supported_with_limits",
+      "Three class-specific evidence predicates explicit and separately tested. Independent review insufficient by itself; model-plus-prompt confounding stays provisional; unresolved contradiction contested. Live semantic evidence covers one scoped fact, not transferable/causal general performance.",
+      [
+        "promotion",
+        "knowledge",
+        "offline-detail",
+        "scores",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-050",
+      "supported",
+      "Saved history/dependency gates order architecture, verification, Sage, promotion, integration, live repairs and final. Fresh harness rejects pending-dependency transitions.",
+      [
+        "history",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-051",
+      "supported_with_limits",
+      "The separate Sol/xhigh builder released a frozen candidate; the same independent whole_skill_critic actor rechecks it, without product authorship. Retained critic reuse is explicit and this is informed review, not a fresh blinded trial.",
+      [
+        "current-history",
+        "current-audit",
+        "history"
+      ]
+    ],
+    [
+      "R-052",
+      "gate_enforced",
+      "Eight genuine round-2 scores are independently assigned with evidence; every score is at least 8.5 and FINAL-A1-R1-E1 is verified fixed, leaving zero open errors. No aggregation hides a failed dimension.",
+      [
+        "rubric",
+        "current-audit",
+        "current-boundary"
+      ]
+    ],
+    [
+      "R-053",
+      "supported_with_limits",
+      "Real failed rounds and original live failures retained; final initially null/unscored. This review validates transition on its own copy only. Old supplemental Sage replay loss is disclosed in history, not fabricated back into original evidence.",
+      [
+        "history",
+        "live",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-054",
+      "supported",
+      "History contains at most three rounds in reviewed approaches, architecture/integration two, final round one. Fresh harness rejects repeated/fifth rounds and requires causal materially changed approach.",
+      [
+        "history",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-055",
+      "supported",
+      "Verification gate passed while 24 product setup checks were expected-red because helpers were still unbuilt; frozen rubric/cases/holdout/baseline precede main and promotion rewrites.",
+      [
+        "verification-review",
+        "history",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-056",
+      "supported_with_limits",
+      "Fresh normal 95 tests pass; identical focused six-check copies reproduce only the old instruction-graph failure and pass current. One independent 13-command installed lost-acknowledgement/control scenario also passes; model judgment remains outside synthetic tests.",
+      [
+        "current-audit",
+        "current-boundary",
+        "offline-detail"
+      ]
+    ],
+    [
+      "R-057",
+      "supported",
+      "Fresh copied-source runner, installed package, temporary roots and captures confined to this critic sandbox. No home install/browser/network/packages. Prior integration isolation repair remains passing.",
+      [
+        "offline",
+        "install",
+        "integration-review",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-058",
+      "supported_with_limits",
+      "Original independent realistic seven-arm protocol and score/evidence records retained; 313 scorecard hash bindings currently match. Disclosed creative unrelated lifecycle exposure and smoke capacity workarounds limit pristine claims. This review and informed repairs are not new holdouts.",
+      [
+        "live",
+        "scores",
+        "current-audit",
+        "current-historical"
+      ]
+    ],
+    [
+      "R-059",
+      "supported_with_limits",
+      "Frozen rubric has anchors and applicability; original scores remain bound and failed v2 native-exit validation persists. V3 structural repair separately passes current negative/positive tests; no native OS exit is fabricated.",
+      [
+        "rubric",
+        "scores",
+        "repair",
+        "offline-detail",
+        "current-audit",
+        "current-historical"
+      ]
+    ],
+    [
+      "R-060",
+      "supported_with_limits",
+      "Two paired code/data cases hold inputs/procedure/Astra root fixed and vary eligible review routing; three smokes unpaired. Equal paired scores are equal failed reporting gates; same invocation counts and shorter observed outer intervals establish no general savings. Dollars/tokens/effective identity unknown.",
+      [
+        "live",
+        "scores",
+        "current-audit",
+        "current-historical"
+      ]
+    ],
+    [
+      "R-061",
+      "supported",
+      "Original live evidence, module deterministic/integration gates, known-case repairs and current whole-skill assessment remain distinct with actual failures preserved.",
+      [
+        "live",
+        "repair",
+        "history",
+        "offline",
+        "current-audit",
+        "current-historical"
+      ]
+    ],
+    [
+      "R-070",
+      "supported",
+      "Fresh package owns exactly two skills, required references/metadata, two helpers and receipt; source-only installer excludes legacy manifests and tests reject incomplete/conflicting/symlink paths.",
+      [
+        "install",
+        "offline-detail",
+        "current-audit",
+        "current-install"
+      ]
+    ],
+    [
+      "R-071",
+      "supported",
+      "Archived legacy is outside installed allowlist and not a fallback. Prior independent integration verified 186 archive hashes; current lifecycle code unchanged and allowlist tests pass.",
+      [
+        "integration-review",
+        "install",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-072",
+      "supported_with_limits",
+      "Fresh lifecycle negative tests preserve modified/unowned bytes and fail missing source before target mutation; prior migration audit retained baseline history. Unexpected concurrent filesystem/I/O failures are not a transaction guarantee.",
+      [
+        "integration-review",
+        "offline-detail",
+        "current-audit"
+      ]
+    ],
+    [
+      "R-073",
+      "supported",
+      "Installed state init/report/resume and promotion stage/activate/retrieve/rollback exercise shared helpers in normal tests; update/uninstall exact ownership and legacy exclusion pass. Fresh independent package bytes and links match.",
+      [
+        "install",
+        "offline-detail",
+        "integration-review",
+        "current-audit",
+        "current-install"
+      ]
+    ]
+  ],
+  "prior_trace": "sage/evaluation/sandboxes/final-a1-r1-critic/requirements-assessment.json"
+}

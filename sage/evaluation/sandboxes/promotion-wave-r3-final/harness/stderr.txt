@@ -1,0 +1,16 @@
+test_committed_development_selection_freezes_real_artifacts_and_counterbalances (test_harness.HarnessTests.test_committed_development_selection_freezes_real_artifacts_and_counterbalances) ... ok
+test_disposition_consistency_duplicates_and_round_four_replan (test_harness.HarnessTests.test_disposition_consistency_duplicates_and_round_four_replan) ... ok
+test_fail_fail_pass_preserves_unresolved_then_closed_error_history (test_harness.HarnessTests.test_fail_fail_pass_preserves_unresolved_then_closed_error_history) ... ok
+test_frozen_assets_and_trace_are_complete (test_harness.HarnessTests.test_frozen_assets_and_trace_are_complete) ... ok
+test_namespaced_positive_source_fixture_has_reference_closure (test_harness.HarnessTests.test_namespaced_positive_source_fixture_has_reference_closure) ... ok
+test_real_rubric_dimension_omission_and_unknown_dimension_cannot_freeze (test_harness.HarnessTests.test_real_rubric_dimension_omission_and_unknown_dimension_cannot_freeze) ... ok
+test_score_json_loader_rejects_duplicate_and_nonfinite_data (test_harness.HarnessTests.test_score_json_loader_rejects_duplicate_and_nonfinite_data) ... ok
+test_score_validator_rejects_omitted_null_nonfinite_false_pass_and_missing_evidence (test_harness.HarnessTests.test_score_validator_rejects_omitted_null_nonfinite_false_pass_and_missing_evidence) ... ok
+test_status_gate_rejects_pending_dependencies_repeated_round_fifth_round_and_undispositioned_errors (test_harness.HarnessTests.test_status_gate_rejects_pending_dependencies_repeated_round_fifth_round_and_undispositioned_errors) ... ok
+test_strict_product_fixture_oracle_has_an_accepted_control_and_single_parser_mutations (test_harness.HarnessTests.test_strict_product_fixture_oracle_has_an_accepted_control_and_single_parser_mutations) ... ok
+test_unseen_manifest_evidence_binding_tamper_rejection_and_unknown_cost (test_harness.HarnessTests.test_unseen_manifest_evidence_binding_tamper_rejection_and_unknown_cost) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.014s
+
+OK

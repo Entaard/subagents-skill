@@ -1,0 +1,25 @@
+{
+  "source": "Re-run of the round-2 critic probe plus round-3 regression tests",
+  "truthful_fail_then_fail": "accepted",
+  "valid_source_fixture_dangling_trigger_ids": [],
+  "required_case_dimensions_omitted": [],
+  "paired_dimensions_with_real_rubric": [
+    "task_correctness",
+    "task_completeness",
+    "evidence_quality",
+    "orchestration_behavior",
+    "routing_efficiency",
+    "safety_reversibility",
+    "report_quality"
+  ],
+  "old_evidence_free_review": "rejected",
+  "old_score_only_pair": "rejected",
+  "product_test_definitions_not_executed_until_helpers_exist": [
+    "fail-fail-pass preserves unresolved then closed finding history",
+    "duplicate and inconsistent dispositions reject",
+    "fourth failure requires a materially changed approach at round 1",
+    "missing and unknown real-rubric case dimensions reject",
+    "revision-limit negative differs from its accepted control only by the bound",
+    "rollback hash negative mutates a valid record while retaining its stale manifest hash"
+  ]
+}

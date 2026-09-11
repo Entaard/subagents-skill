@@ -1,0 +1,270 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "verification-a1-r2",
+  "module": "verification",
+  "approach_id": "verification-a1",
+  "round": 2,
+  "reviewed_at": "2026-09-07T15:26:20Z",
+  "gate_type": "verification_design_and_harness",
+  "verdict": "fail",
+  "open_error_count": 3,
+  "open_error_ids": [
+    "VER-A1-R1-E5",
+    "VER-A1-R1-E4",
+    "VER-A1-R1-E3"
+  ],
+  "reviewer": {
+    "agent": "/root/architecture_critic",
+    "role": "independent verification critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 7.5,
+    "architecture_and_coherence": 8.7,
+    "correctness_and_evidence": 7,
+    "simplicity_and_context_efficiency": 8.6,
+    "orchestration_and_model_routing": 8.6,
+    "safety_reversibility_and_recovery": 8,
+    "verification_strength": 7,
+    "reporting_and_maintainability": 7
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "Root work, durable facts, and actual paired input artifacts are repaired. Required comparison dimensions and valid positive fixtures still fail the declared verification contract.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "errors": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4"
+      ]
+    },
+    "architecture_and_coherence": {
+      "reason": "Root and delegated release rules now differ explicitly; resume separates derived repair from advisory facts; amendments and typed notes fit the small event model. Pairing accepts evaluator selections and honestly limits schema validation.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/pairing.py",
+        "sage/evaluation/live-protocol.md"
+      ],
+      "errors": []
+    },
+    "correctness_and_evidence": {
+      "reason": "Eight harness tests pass, and previous evidence-free review/pair false accepts now reject. Independent probes expose an invalid positive source fixture, omitted comparison dimensions, and rejection of a legitimate failed review.",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "errors": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Repairs remain within the two CLIs and focused fixture/harness modules, without introducing a scheduler or generic state framework.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/tests/support.py"
+      ],
+      "errors": []
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Zero-agent root writes and persistent unknown delegated effects are representable; comparison explicitly holds root model and Sage procedure constant while varying worker routing. Outcome dimensional enforcement is separately scored under verification.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/live-protocol.md",
+        "sage/evaluation/pairing.py"
+      ],
+      "errors": []
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Derived-snapshot repair and unknown effects are coherent, with new installed-path and rollback tests. The invalid source fixtures and confounded hash-integrity negative still weaken proof of safe knowledge landing/recovery.",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/tests/test_product_knowledge.py",
+        "sage/evaluation/tests/test_product_install.py"
+      ],
+      "errors": [
+        "VER-A1-R1-E4"
+      ]
+    },
+    "verification_strength": {
+      "reason": "Coverage is materially improved and strict-parser controls now discriminate. The source fixtures violate reference closure; two negative tests still permit rejection for another reason, and required comparison dimensions can be omitted.",
+      "evidence": [
+        "sage/evaluation/tests/test_product_state.py",
+        "sage/evaluation/tests/test_product_knowledge.py",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "errors": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4"
+      ]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Evidence-bearing scores, dependencies, unique rounds, and pending-state updates are implemented. The remaining status transition refuses honest failed repairs, directly undermining durable review history.",
+      "evidence": [
+        "sage/evaluation/score_status.py",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "errors": [
+        "VER-A1-R1-E5"
+      ]
+    }
+  },
+  "finding_dispositions": [
+    {
+      "id": "VER-A1-R1-E1",
+      "status": "verified_fixed",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/tests/test_product_state.py"
+      ],
+      "reason": "Synchronous root release, delegated release, explicit unknown-effect observations, and derived-snapshot repair now have consistent contracts and focused test bodies."
+    },
+    {
+      "id": "VER-A1-R1-E2",
+      "status": "verified_fixed",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/tests/test_product_state.py"
+      ],
+      "reason": "Objective/constraint amendments, corrected notes, user decisions, retrieval feedback, and non-failure revision reasons are represented in immutable state and projection."
+    },
+    {
+      "id": "VER-A1-R1-E3",
+      "status": "open",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "reason": "Input/manifest/evidence repairs verified; required case dimension enforcement remains incomplete."
+    },
+    {
+      "id": "VER-A1-R1-E4",
+      "status": "open",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+        "sage/evaluation/tests/test_product_state.py",
+        "sage/evaluation/tests/test_product_knowledge.py"
+      ],
+      "reason": "Many requested controls are added, but namespaced positive fixtures now contain dangling references and two negatives remain confounded."
+    },
+    {
+      "id": "VER-A1-R1-E5",
+      "status": "open",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "reason": "Prior false accepts are repaired, but the new disposition gate forbids a legitimate fail-to-fail transition."
+    }
+  ],
+  "errors": [
+    {
+      "id": "VER-A1-R1-E5",
+      "rank": 1,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-053",
+        "R-054"
+      ],
+      "path": "sage/evaluation/score_status.py:101",
+      "issue": "The repaired status writer cannot record a truthful fail-to-fail round: every prior error must be marked verified_fixed or rejected_with_evidence. A remaining error with an explicit still-open disposition is rejected, so failed repairs cannot retain their real identity and outcome through this interface.",
+      "remedy": "Permit an evidenced open/unresolved disposition only when that ID remains in open_error_ids; require fixed/rejected IDs to be absent and reject duplicate dispositions. Add fail-to-fail-to-pass coverage. At the fourth failed round, next_action should require a new materially changed approach instead of suggesting forbidden round 5.",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+        "sage/evaluation/tests/test_harness.py:test_fail_repair_pass_preserves_round_and_error_history"
+      ],
+      "verification": "A second failed review retaining E-1 appends honestly; a later verified fix closes E-1; inconsistent closure/open status and duplicate dispositions reject; the fourth failure points to replanning."
+    },
+    {
+      "id": "VER-A1-R1-E4",
+      "rank": 2,
+      "severity": "major",
+      "status": "open",
+      "requirements": [
+        "R-013",
+        "R-055",
+        "R-056",
+        "R-073"
+      ],
+      "path": "sage/evaluation/tests/support.py:97",
+      "issue": "complete_read_run('source-1') renames event IDs but leaves plan.trigger_event_ids=['e-1'], which no longer resolves. All supposedly valid promotion sources and the installed-promotion smoke are therefore invalid under the repaired contract, hidden by missing-product setUp failures. Two added negatives also still conflate invariants: the revision-limit case repeats unchanged operational content, and corrupted rollback replaces a record with structurally invalid {}.",
+      "remedy": "Rewrite internal event references when namespacing fixtures and add an offline reference-closure check for these positive fixtures. Make the over-limit candidate operationally distinct so only the bound rejects it. For hash-integrity rollback, alter a valid record field while retaining the stale manifest hash, with a valid matching-hash control or an asserted integrity-specific error.",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+        "sage/evaluation/tests/support.py:90",
+        "sage/evaluation/tests/test_product_state.py:122",
+        "sage/evaluation/tests/test_product_knowledge.py:149"
+      ],
+      "verification": "Source-1 fixtures have no dangling event refs; a contract-compliant implementation can accept all intended positives. Removing only revision-bound or hash-integrity validation must fail the corresponding named negative test."
+    },
+    {
+      "id": "VER-A1-R1-E3",
+      "rank": 3,
+      "severity": "moderate",
+      "status": "open",
+      "requirements": [
+        "R-059",
+        "R-060"
+      ],
+      "path": "sage/evaluation/pairing.py:56",
+      "issue": "Real manifests and evidence bindings are now implemented, but prepare only checks that case dimensions are nonempty and unique. It never validates them against the frozen rubric. An unseen code case bound to the actual rubric can omit completeness, evidence quality, orchestration, routing efficiency, safety, and report quality; prepare and validate_result both accept it. This bypasses the predeclared comparison dimensions.",
+      "remedy": "Load the frozen rubric during preparation and enforce all required_case_dimensions plus known, applicable family dimensions; reject unknown dimensions and omissions. Keep genuine non-applicability explicit in the case contract. Replace the reduced-dimension positive harness fixture with a compliant one and add omission/unknown-dimension negatives.",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+        "sage/evaluation/rubric.json:required_case_dimensions",
+        "sage/evaluation/tests/test_harness.py:_unseen_selection"
+      ],
+      "verification": "An otherwise valid real-rubric case missing routing_efficiency or task_completeness cannot freeze; compliant unseen cases with all required dimensions and unknown money/tokens still validate."
+    }
+  ],
+  "suggestions": [],
+  "executed_checks": [
+    {
+      "command": "python3 sage/evaluation/run_verification.py --mode harness --evidence-dir sage/evaluation/sandboxes/verification-a1-r2-critic-harness",
+      "exit_code": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/report.json"
+    },
+    {
+      "command": "python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/verification-a1-r2-critic-red",
+      "exit_code": 1,
+      "tests": 32,
+      "passed": 8,
+      "failed": 24,
+      "skipped": 0,
+      "evidence": "sage/evaluation/sandboxes/verification-a1-r2-critic-red/report.json",
+      "interpretation": "All failures remain expected missing-product setUp assertions; no product test body or live trial ran."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/verification-a1-r2-critic-harness/critic_probes.py",
+      "exit_code": 0,
+      "evidence": "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+      "interpretation": "Previously evidence-free inputs reject; three targeted remaining issues reproduced using current public validators/fixture helpers."
+    }
+  ],
+  "input_hashes": {
+    "sage/docs/CONTRACTS.md": "052863c3c72e570364f1803d4242e37a3ae963cb7474a0a45468f9378c5ee38b",
+    "sage/evaluation/score_status.py": "85d80441bfda99ca773e95d17b8cab007a98d467f1fb9c1a3cecbb2230d2a72f",
+    "sage/evaluation/pairing.py": "7993a22fe5766037388b968722f5eeab66942cd469513283546ccb441126441f",
+    "sage/evaluation/tests/support.py": "95671887137c4453259fe16cc01ef2c7a0e7a3f16212977e1cb7da291c2def48",
+    "sage/evaluation/tests/test_harness.py": "1a38edac0e8dc7287ca2643c31806e79cae50d5d63ef202f2c2ccd8e8990321c",
+    "sage/evaluation/tests/test_product_state.py": "faa4cbd2325dfaededcbb89afbaaa73573995e0843e4dd873fe439ef4a55bc53",
+    "sage/evaluation/tests/test_product_knowledge.py": "1daea09c782d63f06134f23c8352197514d942ddddcbd50d0a6c56aabcaaf674",
+    "sage/evaluation/tests/test_product_install.py": "d5dce481b4fa70f6685509200e773f331215b7dd42a840fabe490564d1a8f635",
+    "sage/docs/STATUS.json": "ce5ac3d464b1afdd2b2520036031b01bb875e6523368c7681a4fa4bc69bce803"
+  },
+  "limitations": [
+    "Static contract/test review plus executed harness/probes only; missing future implementation is expected and not an error.",
+    "No live paired trial, quality/cost result, installed product behavior, or semantic knowledge transfer was observed.",
+    "Review metadata is appended with apply_patch because the reviewed score writer cannot yet represent this truthful failed repair round."
+  ],
+  "next_action": "Repair the three remaining verification issues for verification-a1 round 3: honest unresolved-finding transitions, reference-closed/discriminating fixtures, and required paired score dimensions. Preserve both failed rounds; keep active Sage/promotion implementation unbuilt until verification passes."
+}

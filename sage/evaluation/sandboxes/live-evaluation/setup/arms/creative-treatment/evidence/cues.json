@@ -1,0 +1,1 @@
+{"task":["build","review"],"domain":["memory-game"],"artifact":["self-contained-html"],"environment":["local-owned-headless","two-viewports"],"risk":["low","accessibility"],"operation":["keyboard-interaction","screenshot-inspection"],"failure":[]}

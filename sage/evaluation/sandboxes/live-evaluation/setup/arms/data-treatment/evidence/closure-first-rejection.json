@@ -1,0 +1,1 @@
+{"command":"python3 evidence/record_run.py finish","exit_code":2,"stderr":{"code":"invalid_event","message":"invalid note category","ok":false},"disposition":"Changed unsupported note category reconciliation to allowed decision after inspecting installed helper line 232; authoritative event log unchanged at sequence 12."}

@@ -1,0 +1,8 @@
+{
+  "code_bytes_unchanged": true,
+  "requested_evidence_dir": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/sandboxes/fresh-critic-suite",
+  "earlier_evidence_path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/sandboxes/integration-wave-r1-overlap-positive/target/prior-evidence.txt",
+  "earlier_evidence_sha256": "bc73f34b75bd70ae4d90d422f2a472de9ee818806c95c5950879df5c757b6651",
+  "earlier_evidence_survived": false,
+  "suite_passed": true
+}

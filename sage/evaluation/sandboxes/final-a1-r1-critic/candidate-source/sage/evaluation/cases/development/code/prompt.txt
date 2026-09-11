@@ -1,0 +1,1 @@
+Repair scheduler.py so ready() admits a task only after every predecessor passed. Preserve its signature and make the supplied tests pass. Keep unrelated files unchanged.

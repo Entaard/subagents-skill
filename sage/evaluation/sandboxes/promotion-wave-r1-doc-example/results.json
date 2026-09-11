@@ -1,0 +1,128 @@
+{
+  "checks": [
+    {
+      "argv": [
+        "validate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"current\": \"none\", \"generation_count\": 0, \"ok\": true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "stage",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--proposal",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/proposal.json",
+        "--generation-id",
+        "g-1",
+        "--expected-current",
+        "none"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"action\": \"create\", \"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"prior_generation_id\": \"none\", \"record\": {\"id\": \"validate-log-before-snapshot\", \"revision\": 1, \"status\": \"supported\"}}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "validate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"current\": \"none\", \"generation_count\": 1, \"ok\": true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "activate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--generation-id",
+        "g-1",
+        "--expected-current",
+        "none"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"previous_generation_id\": \"none\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "retrieve",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--cues",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/cues.json",
+        "--limit",
+        "3"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"796f4a13deb7bfe3d5b01f6a5a1a4db3396db15d673d725b482807d6d69e8948\", \"generation_id\": \"g-1\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"The repeatable fixture rejects the corrupt log and preserves the prior projection.\", \"falsifier\": \"A corrupt authoritative log safely regenerates a valid snapshot.\", \"gate_rationale\": \"A repeatable check establishes this ordering in the declared fixture environment.\", \"id\": \"validate-log-before-snapshot\", \"qualifier\": {\"all\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [\"resume\"], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [\"remote managed authority\"], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: artifact=jsonl state; risk=corrupt projection; operation=resume; failure=stale snapshot; qualifier satisfied\", \"revision\": 1, \"rule\": \"Validate the authoritative event log before regenerating its snapshot.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "stage",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--proposal",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/proposal-second.json",
+        "--generation-id",
+        "g-2",
+        "--expected-current",
+        "g-1"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"action\": \"create\", \"generation_id\": \"g-2\", \"manifest_sha256\": \"55f39adc9eefeaed8ab00030ae67c183cde78792cdd1ff93173b725f1207efe5\", \"ok\": true, \"prior_generation_id\": \"g-1\", \"record\": {\"id\": \"second-bounded-rule\", \"revision\": 1, \"status\": \"supported\"}}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "activate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--generation-id",
+        "g-2",
+        "--expected-current",
+        "g-1"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"generation_id\": \"g-2\", \"manifest_sha256\": \"55f39adc9eefeaed8ab00030ae67c183cde78792cdd1ff93173b725f1207efe5\", \"ok\": true, \"previous_generation_id\": \"g-1\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rollback",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge",
+        "--generation-id",
+        "g-1",
+        "--expected-current",
+        "g-2"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"previous_generation_id\": \"g-2\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "validate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/promotion-wave-r1-doc-example/state/knowledge"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"current\": \"g-1\", \"generation_count\": 2, \"ok\": true}\n",
+      "stderr": ""
+    }
+  ],
+  "assertions": {
+    "json_blocks": 2,
+    "actionable_match": true,
+    "rollback_current": "g-1",
+    "g2_retained": true
+  }
+}

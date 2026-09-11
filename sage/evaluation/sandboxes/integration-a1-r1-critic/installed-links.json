@@ -1,0 +1,52 @@
+[
+  {
+    "document": "skills/sage-promote/SKILL.md",
+    "link": "references/promotion.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage-promote/SKILL.md",
+    "link": "references/knowledge.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage-promote/references/promotion.md",
+    "link": "knowledge.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/SKILL.md",
+    "link": "references/recovery.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/SKILL.md",
+    "link": "references/run.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/SKILL.md",
+    "link": "references/delegation.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/SKILL.md",
+    "link": "references/knowledge.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/SKILL.md",
+    "link": "references/verification.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/references/state.md",
+    "link": "run.md",
+    "exists": true
+  },
+  {
+    "document": "skills/sage/references/run.md",
+    "link": "state.md",
+    "exists": true
+  }
+]

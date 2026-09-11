@@ -1,0 +1,8 @@
+{
+  "summary": "Architecture promises promotion has its own plan/log/bounded team and task asks context-loss resistance. Installed promotion entrypoint/references show source terminal validation, role recording and store workflow, but rg checkpoint|resume|snapshot|plan|log finds no explicit promotion coordinator run/checkpoint/resume workflow. Assess whether current instructions sufficiently establish durable promotion recovery without relying on co-invoked main Sage or author familiarity. Not independently adjudicated.",
+  "evidence": [
+    "sage/ARCHITECTURE.md: sage-promote workflow preamble",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/references/promotion.md"
+  ]
+}

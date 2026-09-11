@@ -1,0 +1,1466 @@
+{
+  "schema_version": "sage-live-native-scored-results-v3",
+  "frozen_manifest_sha256": "aa93a4b33bfa4a346179c5a2371fbe8fcec148249dcbd5ffcc56725b758a0dfd",
+  "pairs": [
+    {
+      "case_id": "LIVE-CODE-01",
+      "order": [
+        "treatment",
+        "baseline"
+      ],
+      "case_binding_sha256": "abc26f2e966bde28fec5065c53cca3bcc0753b2e3ffb0a8f33fe17f5bbf61264",
+      "treatment": {
+        "execution": {
+          "mode": "native_collaboration",
+          "run_id": "/root/live_code_treatment",
+          "started_at": "2026-09-07 20:04:17 UTC",
+          "finished_at": "2026-09-07 20:18:27 UTC",
+          "completion": {
+            "lifecycle": "completed",
+            "native_exit_code": null,
+            "evidence_refs": [
+              "outer"
+            ],
+            "exit_evidence_refs": []
+          },
+          "commands": [
+            {
+              "id": "captured-check-1",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            }
+          ],
+          "evidence": {}
+        },
+        "routing": {
+          "root_model_requested": "gpt-6-astra",
+          "root_model_effective": null,
+          "root_effort_requested": "high",
+          "root_effort_effective": null,
+          "eligible_worker_policy": "sage_routing",
+          "workers": [
+            {
+              "role": "independent review",
+              "requested_model": "gpt-5.6-sol",
+              "requested_effort": "xhigh",
+              "effective_model": null,
+              "effective_effort": null
+            }
+          ]
+        },
+        "checks": [
+          {
+            "id": "wire-behavior",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "396,016 independent whole-wire-oracle stream/chunk cases, including all short grammar candidates and every split of arbitrary binary payloads, have zero mismatches.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "failure-and-reset",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "46 targeted negative assertions per arm cover constructor/type state, malformed/truncated streams, poisoning, reset and immediate oversize digits; delivered tests also pass.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "deliverables",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Decoder, meaningful stdlib tests and README are delivered; copied suite passes (10 treatment / 13 baseline) and frozen inputs match.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "live-procedure",
+            "value": 7,
+            "outcome": "failed",
+            "rationale": "Independent review, bounded routing and ownership are observed, but generated reports contradict retained unknowns (LIVE-02).",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        ],
+        "scores": {
+          "task_correctness": {
+            "value": 9,
+            "rationale": "396,016 independent whole-wire-oracle stream/chunk cases, including all short grammar candidates and every split of arbitrary binary payloads, have zero mismatches.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "task_completeness": {
+            "value": 9,
+            "rationale": "All requested task deliverables and substantive checks are present; scope limitations are disclosed. This score does not compensate for separate reporting/orchestration failures.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "evidence_quality": {
+            "value": 8.5,
+            "rationale": "Independent checks corroborate artifacts and preserved sources. Authored journals and normalized outer observations are qualified; effective identity, usage and money remain null. Generated-report defect is scored under report_quality.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "orchestration_behavior": {
+            "value": 8.5,
+            "rationale": "Bounded coordinator work plus genuine independent review; original-task briefs exclude supplemental builder rationale, dependency order and release observations support single-writer transitions. Physical exclusivity is not proven by helper validation alone.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          },
+          "routing_efficiency": {
+            "value": 8.5,
+            "rationale": "Requested review routing follows the frozen policy (Sol/xhigh treatment, Astra/xhigh baseline); coordinator work stays cohesive. All invocations, bookkeeping corrections and observation time are counted; no pricing/effective-placement claim.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "safety_reversibility": {
+            "value": 9,
+            "rationale": "Frozen inputs/installed files preserved, changes confined to arm scope, reviewers do not repair candidates, unknown effects not converted to completion; observed reversibility checks match case requirements.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "report_quality": {
+            "value": 7,
+            "rationale": "Tailored reports disclose results/limits, but the delivered generated report says Unknowns: None despite recorded unknowns (LIVE-02); this material contradiction prevents the reporting threshold.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        },
+        "scorer": {
+          "id": "/root/live_scorer",
+          "independent": true,
+          "evidence_refs": [
+            "scorecard"
+          ]
+        },
+        "actor_calls": 2,
+        "wall_seconds": 850.0,
+        "operational_evidence_refs": [
+          "outer",
+          "journal",
+          "scorecard"
+        ],
+        "reported_tokens": null,
+        "reported_money": null,
+        "open_errors": [
+          "LIVE-02"
+        ],
+        "gate_passed": false
+      },
+      "baseline": {
+        "execution": {
+          "mode": "native_collaboration",
+          "run_id": "/root/live_code_baseline",
+          "started_at": "2026-09-07 20:19:20 UTC",
+          "finished_at": "2026-09-07 20:38:10 UTC",
+          "completion": {
+            "lifecycle": "completed",
+            "native_exit_code": null,
+            "evidence_refs": [
+              "outer"
+            ],
+            "exit_evidence_refs": []
+          },
+          "commands": [
+            {
+              "id": "captured-check-1",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "file-0",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/prompt.txt",
+              "sha256": "eac75bfc4c33fa6f37c119fafb58bae888566c873cb8628cb080dec0cc211187"
+            },
+            {
+              "id": "file-1",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/checks.json",
+              "sha256": "03bfb96ecd29001f153e0958600c2fdda2a669595203f7b50b71f95571d1dd72"
+            },
+            {
+              "id": "journal",
+              "kind": "journal",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/actor-journal.md",
+              "sha256": "de1121a506271ca0c4ce2a396a2b3ccb652b16145695e23749bfdb463f64bcc5",
+              "provenance": "Actor-authored journal, NOT raw native transcript. Enum used only as required legacy container; actual lifecycle has separate outer evidence."
+            },
+            {
+              "id": "outer",
+              "kind": "native_observation",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/observations/code-baseline.json",
+              "sha256": "f3332bf09c6551fb0aa5db77c1af2a60f69a5d9420fbd427e496d8b03fa30d6a",
+              "provenance": "Normalized direct outer native request/lifecycle observations, NOT raw child transcript."
+            },
+            {
+              "id": "checks",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/code-baseline-checks.json",
+              "sha256": "dcee5e7b0651704fa2580a4ad4851ed5b984598d62cc4aae3684cde8e9c73092"
+            },
+            {
+              "id": "integrity",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/integrity.json",
+              "sha256": "2dff09293d97065c7a6bbc7331925dc369ffb48cc6f2a37a9ea9191c49fd409f"
+            },
+            {
+              "id": "record-inspection",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/record-inspection.json",
+              "sha256": "111412dd599d037658840b762654df9fee5b7b6846b8e2fa8296c9a108c349eb"
+            },
+            {
+              "id": "reporting",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/reporting-checks.json",
+              "sha256": "f79a0f655a652f32b9ce635f52c80d6f61e40b66ca37149f8fd1fb9a499bdf37"
+            },
+            {
+              "id": "file-8",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work/README.md",
+              "sha256": "af4630de54eb81bdd16ff694fa3a5b32187eb142c68dd18a3c1157f9771c0bd7"
+            },
+            {
+              "id": "file-9",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work/decoder.py",
+              "sha256": "5343bbf470035b6a63dbff8356c65ab03296d32b14a14c1b1202629a5cca42dc"
+            },
+            {
+              "id": "file-10",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work/test_decoder.py",
+              "sha256": "c09dae1aa2511c104bd38b1b05f9ab5bf5246df50df68c22290afa0bcfea04d1"
+            },
+            {
+              "id": "file-11",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/inputs/vectors.json",
+              "sha256": "717d86a57fe4cdd0af16ed2a2dd6fc3e0eb342fefdace082f2f3f0681847bebb"
+            },
+            {
+              "id": "file-12",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/actor-identities.json",
+              "sha256": "8c7bcb3ea1f63656359bcf32aaf7c25baef439a7a7fc2f6218d4b0971144f11c"
+            },
+            {
+              "id": "file-13",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/build-check.txt",
+              "sha256": "cb0a22258fcd2e25fb6e5f3ece05dcc008e027ab976cf9aa76db02c6ef71684d"
+            },
+            {
+              "id": "file-14",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/build-wave.jsonl",
+              "sha256": "8a3326ab0527675a6ca7b15b2fa2fca481a8275461e86d2759163b4669a44561"
+            },
+            {
+              "id": "file-15",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/check_delivery.py",
+              "sha256": "878a6763e3ae1966e4aa151babe402622c1ec61198ff1daf19a737e08c80efed"
+            },
+            {
+              "id": "file-16",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/closure-wave.jsonl",
+              "sha256": "fd4f7b91aecee25a7f0b93dff85263f1b8fb501b37f2717b423fc688694ff0c3"
+            },
+            {
+              "id": "file-17",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/coordinator-review-check.txt",
+              "sha256": "c27d62597c5739ca1749b9b87052e39038a46de2f9407d61a2476d439dfbdb83"
+            },
+            {
+              "id": "file-18",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/criteria.json",
+              "sha256": "78f449e9b969e54348f36d09760768bcf7670d2d5d1ea8ab21f0844b87af85c1"
+            },
+            {
+              "id": "file-19",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/cues.json",
+              "sha256": "d32df870346da7502660cde9286768adbc8a748a418b7864645e38c692f0fab1"
+            },
+            {
+              "id": "file-20",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/final-check.txt",
+              "sha256": "b4472439313e6abd312ff964fff2a330ea14425313d7d9cec0e95cb2cc35e0e9"
+            },
+            {
+              "id": "file-21",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/frozen-sha256.txt",
+              "sha256": "8f9b32cad69882d64ef31244e13d3a3cc76cf3efd7f548b5d3735fd15e66b6c8"
+            },
+            {
+              "id": "file-22",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/handoff.md",
+              "sha256": "bae5b62ed5844fca63aaf12e8d02f1f73d653f47efd8c9771d4f4af9cd50d5f0"
+            },
+            {
+              "id": "file-23",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/independent-review.md",
+              "sha256": "b1b86c28fc86ee48b33cb0a8355fcbd355e24d5844fe2f5a971c49b60f6ed793"
+            },
+            {
+              "id": "file-24",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/independent_check.py",
+              "sha256": "9178ebbd5b95f4568f407c05c65ff0f1a3ff54c14abe374abc681cd9d9934a85"
+            },
+            {
+              "id": "file-25",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/plan-wave.jsonl",
+              "sha256": "deb3a961ea3e56c306ba16eac37a9acd56fae511de147f834ca3fa150a6f5615"
+            },
+            {
+              "id": "file-26",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/record_state.py",
+              "sha256": "4bfbe14bec6ff2f3b4d9434b866fbc354873e65312f1feadf704b0b7d9740ee9"
+            },
+            {
+              "id": "file-27",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/review-dispatch-wave.jsonl",
+              "sha256": "45d806032895e8a5561c196a7cc386485264d2bc57e500d07d65cd5296379a6f"
+            },
+            {
+              "id": "file-28",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/review-result-wave.jsonl",
+              "sha256": "3dbbbb060ab6238f8c6fa76f920958d00d6c4b11f09fdb9839e1112f958270d0"
+            },
+            {
+              "id": "file-29",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/state-closure-rejection.json",
+              "sha256": "040808c3edd6fe30ef482ee2338e3fdef8e5f098f471edb11913b0f46d9516ff"
+            },
+            {
+              "id": "file-30",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/state-report-result.json",
+              "sha256": "77691bd39265369bf143cbfd70ac81f3c4f737b2ec0189e5486b492ea000832e"
+            },
+            {
+              "id": "file-31",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/state-validation.json",
+              "sha256": "c6f92a794e7082fffa2cdf66d91d279a22f94273b890adc103ea168539a7b5da"
+            },
+            {
+              "id": "file-32",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run/events.jsonl",
+              "sha256": "68a104c412b83a202ae26eaf3ac5b45db4f2e4c3aa0a70620051f74a9d3b19ca"
+            },
+            {
+              "id": "file-33",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run/snapshot.json",
+              "sha256": "7f8059a218f951cc227ec5907073e6f0c842826f70c68a31395e7bb3371f63f3"
+            },
+            {
+              "id": "file-34",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run/report.md",
+              "sha256": "8a0a840301c7bb5a06d1b3af4f6feeab73ba708935f9c1c9305563089a6245b3"
+            },
+            {
+              "id": "scorecard",
+              "kind": "scorecard",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/code-baseline-scorecard.json",
+              "sha256": "e94280088151171e4330a258ef2746157c9ba256c4e4c20c5ebe04bff0f7a252"
+            }
+          ]
+        },
+        "routing": {
+          "root_model_requested": "gpt-6-astra",
+          "root_model_effective": null,
+          "root_effort_requested": "high",
+          "root_effort_effective": null,
+          "eligible_worker_policy": "astra_for_every_eligible_worker",
+          "workers": [
+            {
+              "role": "independent review",
+              "requested_model": "gpt-6-astra",
+              "requested_effort": "xhigh",
+              "effective_model": null,
+              "effective_effort": null
+            }
+          ]
+        },
+        "checks": [
+          {
+            "id": "wire-behavior",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "396,016 independent whole-wire-oracle stream/chunk cases, including all short grammar candidates and every split of arbitrary binary payloads, have zero mismatches.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "failure-and-reset",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "46 targeted negative assertions per arm cover constructor/type state, malformed/truncated streams, poisoning, reset and immediate oversize digits; delivered tests also pass.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "deliverables",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Decoder, meaningful stdlib tests and README are delivered; copied suite passes (10 treatment / 13 baseline) and frozen inputs match.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "live-procedure",
+            "value": 7,
+            "outcome": "failed",
+            "rationale": "Independent review, bounded routing and ownership are observed, but generated reports contradict retained unknowns (LIVE-02).",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        ],
+        "scores": {
+          "task_correctness": {
+            "value": 9,
+            "rationale": "396,016 independent whole-wire-oracle stream/chunk cases, including all short grammar candidates and every split of arbitrary binary payloads, have zero mismatches.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "task_completeness": {
+            "value": 9,
+            "rationale": "All requested task deliverables and substantive checks are present; scope limitations are disclosed. This score does not compensate for separate reporting/orchestration failures.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "evidence_quality": {
+            "value": 8.5,
+            "rationale": "Independent checks corroborate artifacts and preserved sources. Authored journals and normalized outer observations are qualified; effective identity, usage and money remain null. Generated-report defect is scored under report_quality.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "orchestration_behavior": {
+            "value": 8.5,
+            "rationale": "Bounded coordinator work plus genuine independent review; original-task briefs exclude supplemental builder rationale, dependency order and release observations support single-writer transitions. Physical exclusivity is not proven by helper validation alone.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          },
+          "routing_efficiency": {
+            "value": 8.5,
+            "rationale": "Requested review routing follows the frozen policy (Sol/xhigh treatment, Astra/xhigh baseline); coordinator work stays cohesive. All invocations, bookkeeping corrections and observation time are counted; no pricing/effective-placement claim.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "safety_reversibility": {
+            "value": 9,
+            "rationale": "Frozen inputs/installed files preserved, changes confined to arm scope, reviewers do not repair candidates, unknown effects not converted to completion; observed reversibility checks match case requirements.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "report_quality": {
+            "value": 7,
+            "rationale": "Tailored reports disclose results/limits, but the delivered generated report says Unknowns: None despite recorded unknowns (LIVE-02); this material contradiction prevents the reporting threshold.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        },
+        "scorer": {
+          "id": "/root/live_scorer",
+          "independent": true,
+          "evidence_refs": [
+            "scorecard"
+          ]
+        },
+        "actor_calls": 2,
+        "wall_seconds": 1130.0,
+        "operational_evidence_refs": [
+          "outer",
+          "journal",
+          "scorecard"
+        ],
+        "reported_tokens": null,
+        "reported_money": null,
+        "open_errors": [
+          "LIVE-02"
+        ],
+        "gate_passed": false
+      }
+    },
+    {
+      "case_id": "LIVE-DATA-01",
+      "order": [
+        "baseline",
+        "treatment"
+      ],
+      "case_binding_sha256": "af6afa62735c5bff5051fcf79510cf411347ba1fbf956457c8245be6a8c762e8",
+      "treatment": {
+        "execution": {
+          "mode": "native_collaboration",
+          "run_id": "/root/live_data_treatment",
+          "started_at": "2026-09-07 20:54:12 UTC",
+          "finished_at": "2026-09-07 21:07:51 UTC",
+          "completion": {
+            "lifecycle": "completed",
+            "native_exit_code": null,
+            "evidence_refs": [
+              "outer"
+            ],
+            "exit_evidence_refs": []
+          },
+          "commands": [
+            {
+              "id": "captured-check-1",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            },
+            {
+              "id": "captured-check-2",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "file-0",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/prompt.txt",
+              "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb"
+            },
+            {
+              "id": "file-1",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/checks.json",
+              "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983"
+            },
+            {
+              "id": "journal",
+              "kind": "journal",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/actor-journal.md",
+              "sha256": "312faa5b79d62f01b8c0f510097ffb1117c427a723399ebef16d5f6688b4af10",
+              "provenance": "Actor-authored journal, NOT raw native transcript. Enum used only as required legacy container; actual lifecycle has separate outer evidence."
+            },
+            {
+              "id": "outer",
+              "kind": "native_observation",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/observations/data-treatment.json",
+              "sha256": "14e1b74e54aa4c0d3a305b472f73c2b3f42f92d3725f3d06ccd3f24aacb1aaf8",
+              "provenance": "Normalized direct outer native request/lifecycle observations, NOT raw child transcript."
+            },
+            {
+              "id": "checks",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-treatment-checks.json",
+              "sha256": "23bd75dfb2acd6b08f3f13417281616070584bbdaae7b2ead5d0b6b757ad3f2f"
+            },
+            {
+              "id": "integrity",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/integrity.json",
+              "sha256": "2dff09293d97065c7a6bbc7331925dc369ffb48cc6f2a37a9ea9191c49fd409f"
+            },
+            {
+              "id": "record-inspection",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/record-inspection.json",
+              "sha256": "111412dd599d037658840b762654df9fee5b7b6846b8e2fa8296c9a108c349eb"
+            },
+            {
+              "id": "reporting",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/reporting-checks.json",
+              "sha256": "f79a0f655a652f32b9ce635f52c80d6f61e40b66ca37149f8fd1fb9a499bdf37"
+            },
+            {
+              "id": "file-8",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/analysis.py",
+              "sha256": "b52dced6d4084ff1e541c4b5be67e261641b84178f359a3cfacd0d9baecf4b38"
+            },
+            {
+              "id": "file-9",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/decision-memo.md",
+              "sha256": "b64361abe06ef9724c12ce9608b59e6665b50e6b569db59b412cb5fd3b55dc54"
+            },
+            {
+              "id": "file-10",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/summary.json",
+              "sha256": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e"
+            },
+            {
+              "id": "file-11",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs/notes.txt",
+              "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14"
+            },
+            {
+              "id": "file-12",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs/sessions.csv",
+              "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee"
+            },
+            {
+              "id": "file-13",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/candidate-checks.json",
+              "sha256": "d4a241f23fecb4c4cf8a543b4296959673108f1e917ab44fceef7bb470913157"
+            },
+            {
+              "id": "file-14",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/check_candidate.py",
+              "sha256": "514967a959746a29f24e4339a77df3f7d75bf65fd72fcaf924dadd967f0fb734"
+            },
+            {
+              "id": "file-15",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/closure-events.jsonl",
+              "sha256": "76b446bbbbbb6c6bb3d4a62d88702fa7b5f85d6fa8128c69d5f3e32ecb7c2f5f"
+            },
+            {
+              "id": "file-16",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/closure-first-rejection.json",
+              "sha256": "803ccd5ad7d6857f05b7cd27ba1678aebe0ebab0a452a514eaa40ea93df62457"
+            },
+            {
+              "id": "file-17",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/closure-state-output.txt",
+              "sha256": "79af529916be6698836348111e2dda848f9688d9bb709d6975b5584ce220500f"
+            },
+            {
+              "id": "file-18",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/criteria.json",
+              "sha256": "e89661d6d9c3f1330633248c211853863a7c553f3c0df646cab1ca1557d5ab20"
+            },
+            {
+              "id": "file-19",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/cues.json",
+              "sha256": "02113466b19f45d4ef04726fa48a89353e239affccca97ab0f1fa1c6246b67bb"
+            },
+            {
+              "id": "file-20",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/frozen-events.jsonl",
+              "sha256": "a1068d93d478959836c5d92aa532f1c4fb1d0c5df78dc6fe7ebf577f0655ec87"
+            },
+            {
+              "id": "file-21",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/frozen-state-output.txt",
+              "sha256": "ff8664046bd8d133274016a7ff0dc55f4215fef969e6992ebceb7cb55a6e8c2e"
+            },
+            {
+              "id": "file-22",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/independent-review.md",
+              "sha256": "93a4567bb0a456b470d7d6f45e0af971cdf7ff7584c8d8b0c4a21861a59e16ad"
+            },
+            {
+              "id": "file-23",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/plan-events.jsonl",
+              "sha256": "d95e1223ae8c16b46524b7d4bdcd2df5a750384db461c22a43fe61fa667067d0"
+            },
+            {
+              "id": "file-24",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/plan-state-output.txt",
+              "sha256": "341290c11e8e0d0578cbc60afc29a0975ed01827f823e6235671df53b99fae75"
+            },
+            {
+              "id": "file-25",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/record_run.py",
+              "sha256": "72224ecc946bfa3b08e5b512f178e2df9939a5bb0bec452134be53020dd99076"
+            },
+            {
+              "id": "file-26",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/terminal-check-output.txt",
+              "sha256": "f46aa42d97f5baefd5ce90d0bbe6201f1068ac8b601f75036fb0bfccf18667b9"
+            },
+            {
+              "id": "file-27",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run/events.jsonl",
+              "sha256": "f8640f2dd4aa55fb350135b1ef1fe21b2d45ce8a85a9cfda8ce33543b7a9a124"
+            },
+            {
+              "id": "file-28",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run/snapshot.json",
+              "sha256": "efd0008a0bd4270324e37f15bb084c6e244e8c2b9a875a677c766a05b59f6561"
+            },
+            {
+              "id": "file-29",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run/report.md",
+              "sha256": "f9f55b16a06b967270a7b3463be08598024ea3b1109299d01360f7ce079c4961"
+            },
+            {
+              "id": "scorecard",
+              "kind": "scorecard",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-treatment-scorecard.json",
+              "sha256": "0e3c4246667384a69903787f08107e20c6896586e977bc5e7b01e5559c078246"
+            }
+          ]
+        },
+        "routing": {
+          "root_model_requested": "gpt-6-astra",
+          "root_model_effective": null,
+          "root_effort_requested": "high",
+          "root_effort_effective": null,
+          "eligible_worker_policy": "sage_routing",
+          "workers": [
+            {
+              "role": "independent review",
+              "requested_model": "gpt-5.6-sol",
+              "requested_effort": "xhigh",
+              "effective_model": null,
+              "effective_effort": null
+            }
+          ]
+        },
+        "checks": [
+          {
+            "id": "arithmetic",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Independent exact-Fraction counts and algebraically separate Wilson formula match 1,386 numeric group/scenario assertions and 23 intervals in each arm.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "sensitivity",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "All k=0..20 scenarios are present; full new completion is 229/400..249/400 and comparison remains negative overall but positive within each crowd block.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "interpretation",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Both memos cite M01\u2013M09/N1\u2013N5, distinguish observation from causality, explain crowd composition/selection/missingness and propose bounded randomized follow-up with decision-changing thresholds.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "deliverables",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Each script regenerated original JSON byte-identically twice from copied raw sources, using stdlib; raw hashes preserved.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "live-procedure",
+            "value": 7,
+            "outcome": "failed",
+            "rationale": "Actual independent reviewers and sensible requested routing are supported; generated reports falsely present empty unknown sections as None (LIVE-02).",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        ],
+        "scores": {
+          "task_correctness": {
+            "value": 9,
+            "rationale": "Independent exact-Fraction counts and algebraically separate Wilson formula match 1,386 numeric group/scenario assertions and 23 intervals in each arm.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "task_completeness": {
+            "value": 9,
+            "rationale": "All requested task deliverables and substantive checks are present; scope limitations are disclosed. This score does not compensate for separate reporting/orchestration failures.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "evidence_quality": {
+            "value": 8.5,
+            "rationale": "Independent checks corroborate artifacts and preserved sources. Authored journals and normalized outer observations are qualified; effective identity, usage and money remain null. Generated-report defect is scored under report_quality.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "orchestration_behavior": {
+            "value": 8.5,
+            "rationale": "Bounded coordinator work plus genuine independent review; original-task briefs exclude supplemental builder rationale, dependency order and release observations support single-writer transitions. Physical exclusivity is not proven by helper validation alone.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          },
+          "routing_efficiency": {
+            "value": 8.5,
+            "rationale": "Requested review routing follows the frozen policy (Sol/xhigh treatment, Astra/xhigh baseline); coordinator work stays cohesive. All invocations, bookkeeping corrections and observation time are counted; no pricing/effective-placement claim.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "safety_reversibility": {
+            "value": 9,
+            "rationale": "Frozen inputs/installed files preserved, changes confined to arm scope, reviewers do not repair candidates, unknown effects not converted to completion; observed reversibility checks match case requirements.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "report_quality": {
+            "value": 7,
+            "rationale": "Tailored reports disclose results/limits, but the delivered generated report says Unknowns: None despite recorded unknowns (LIVE-02); this material contradiction prevents the reporting threshold.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        },
+        "scorer": {
+          "id": "/root/live_scorer",
+          "independent": true,
+          "evidence_refs": [
+            "scorecard"
+          ]
+        },
+        "actor_calls": 2,
+        "wall_seconds": 819.0,
+        "operational_evidence_refs": [
+          "outer",
+          "journal",
+          "scorecard"
+        ],
+        "reported_tokens": null,
+        "reported_money": null,
+        "open_errors": [
+          "LIVE-02"
+        ],
+        "gate_passed": false
+      },
+      "baseline": {
+        "execution": {
+          "mode": "native_collaboration",
+          "run_id": "/root/live_data_baseline",
+          "started_at": "2026-09-07 20:38:54 UTC",
+          "finished_at": "2026-09-07 20:54:11 UTC",
+          "completion": {
+            "lifecycle": "completed",
+            "native_exit_code": null,
+            "evidence_refs": [
+              "outer"
+            ],
+            "exit_evidence_refs": []
+          },
+          "commands": [
+            {
+              "id": "captured-check-1",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            },
+            {
+              "id": "captured-check-2",
+              "exit_code": 0,
+              "evidence_refs": [
+                "checks"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "id": "file-0",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/prompt.txt",
+              "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb"
+            },
+            {
+              "id": "file-1",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/checks.json",
+              "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983"
+            },
+            {
+              "id": "journal",
+              "kind": "journal",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/actor-journal.md",
+              "sha256": "39d91fc3956f11005cb0fde84c7f216814358f59b5fa3c5ac1ca4ecfc39a6dc6",
+              "provenance": "Actor-authored journal, NOT raw native transcript. Enum used only as required legacy container; actual lifecycle has separate outer evidence."
+            },
+            {
+              "id": "outer",
+              "kind": "native_observation",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/observations/data-baseline.json",
+              "sha256": "a0c24e6262489fa98e3a43c0f116bbdcf0fd4d71dc13d04a3235156a673ca0e5",
+              "provenance": "Normalized direct outer native request/lifecycle observations, NOT raw child transcript."
+            },
+            {
+              "id": "checks",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-baseline-checks.json",
+              "sha256": "43397e888e7c1c6fadb2aa42739af268494059b09e3df1f06764b0d32ff92368"
+            },
+            {
+              "id": "integrity",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/integrity.json",
+              "sha256": "2dff09293d97065c7a6bbc7331925dc369ffb48cc6f2a37a9ea9191c49fd409f"
+            },
+            {
+              "id": "record-inspection",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/record-inspection.json",
+              "sha256": "111412dd599d037658840b762654df9fee5b7b6846b8e2fa8296c9a108c349eb"
+            },
+            {
+              "id": "reporting",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/reporting-checks.json",
+              "sha256": "f79a0f655a652f32b9ce635f52c80d6f61e40b66ca37149f8fd1fb9a499bdf37"
+            },
+            {
+              "id": "file-8",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work/analysis.py",
+              "sha256": "0b5943413a7ea1487fde69a50a29acb7eea7b8347207949421cd72c5381e6397"
+            },
+            {
+              "id": "file-9",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work/decision-memo.md",
+              "sha256": "41b05f3510b1ef82894f0932c27dba40ea10584ebb544b45350817e69fae2b63"
+            },
+            {
+              "id": "file-10",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/work/summary.json",
+              "sha256": "549ab21e380092216b0b4fa5dbb056be8cd4a45bed5f22466ed4518114148969"
+            },
+            {
+              "id": "file-11",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/inputs/notes.txt",
+              "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14"
+            },
+            {
+              "id": "file-12",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/inputs/sessions.csv",
+              "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee"
+            },
+            {
+              "id": "file-13",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/build-boundary.jsonl",
+              "sha256": "b1a7ba0f9f83054efc75a0dc34194a97e5e7d61b9732765d764176d19c36d2c7"
+            },
+            {
+              "id": "file-14",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/build-checks.txt",
+              "sha256": "e01781546c677e6a606fcc859dae228e2d9ababa173ca64ecedf8743433d2d64"
+            },
+            {
+              "id": "file-15",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/closure.jsonl",
+              "sha256": "efbf58e567769634b74e22f7484288df29151faf0dd8b0078d13de4493c6d88a"
+            },
+            {
+              "id": "file-16",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/criteria.json",
+              "sha256": "44f8186bd5fb6b134e6fccd24f2bc5a3ef797dd1068a20161568244f3f7d7c47"
+            },
+            {
+              "id": "file-17",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/cues.json",
+              "sha256": "723e4523d25429ff2c22d82dde93c1675182e91ce9530bec8dd5bf3f3003e6b3"
+            },
+            {
+              "id": "file-18",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/final-integration-check.json",
+              "sha256": "21b448fd69a7dff939cead6876e1f65420b4dade673e223c633485b9e93c5bb0"
+            },
+            {
+              "id": "file-19",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/handoff.md",
+              "sha256": "4c79f3b7dbdf7d2f75d7a78cf933817bb0db8d0aa1313f083bc90cb11c74a0b6"
+            },
+            {
+              "id": "file-20",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/independent-check.json",
+              "sha256": "0b01cf6ce21d45ee4cb231a7f2d02eeddec28ea8cce75fac10d6a93e0a85a4a4"
+            },
+            {
+              "id": "file-21",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/independent_check.py",
+              "sha256": "f2d51435e565c43baece9a534aab8c6508183b6d1a8d9106687b4c7c0a946fa0"
+            },
+            {
+              "id": "file-22",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/plan.jsonl",
+              "sha256": "3e735535373e2c6152cc7c0cb0e9b049aa48ec7f8bc0ba01b0231135780ee68f"
+            },
+            {
+              "id": "file-23",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/review.md",
+              "sha256": "6400f7a09791800c5fa7522a46134043cb9036be4da8f80f03ab53b1978e0f6f"
+            },
+            {
+              "id": "file-24",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/state-append-output.json",
+              "sha256": "a0dc7ca0b6b6b0656b1317d5a23d07291dc8cc7f48a43ad071634feec1630e34"
+            },
+            {
+              "id": "file-25",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/state-contract-repair.txt",
+              "sha256": "cbf8ec507fcaba780320d227690bf7704a8812cdce9ae853020140bf8960421d"
+            },
+            {
+              "id": "file-26",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/state-report-output.json",
+              "sha256": "9bfc8f2d45942378f72ff58b0bf2a63b0b130c61697060cc69bd644ac67139cd"
+            },
+            {
+              "id": "file-27",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/state-snapshot-output.json",
+              "sha256": "9bb66140e5eb504434a4800c33beba23c5481fd38772dbd7a379a7c1e9826b74"
+            },
+            {
+              "id": "file-28",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/evidence/state-validation.json",
+              "sha256": "3feb91d51e5e502310d97a264f6e405eaa3afecc4bba5087c16f02b892d67534"
+            },
+            {
+              "id": "file-29",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run/events.jsonl",
+              "sha256": "654bd16af8fd49f61b1272a1b9d117831ea40ad6df8234882c688104eb61a064"
+            },
+            {
+              "id": "file-30",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run/snapshot.json",
+              "sha256": "f9995821ef3633ad2c578de87c2cb0a640624761cd652b6fd0f21fd5b31191ca"
+            },
+            {
+              "id": "file-31",
+              "kind": "artifact",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run/report.md",
+              "sha256": "01fd47a49a8e4ff93cc1d7ae2cc021ba6142669230a9fd03807a76ed205e2cb5"
+            },
+            {
+              "id": "scorecard",
+              "kind": "scorecard",
+              "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-baseline-scorecard.json",
+              "sha256": "9f6e82d6605842d01ecbb5e20a0fcff9530271209cb393885077a101119a9241"
+            }
+          ]
+        },
+        "routing": {
+          "root_model_requested": "gpt-6-astra",
+          "root_model_effective": null,
+          "root_effort_requested": "high",
+          "root_effort_effective": null,
+          "eligible_worker_policy": "astra_for_every_eligible_worker",
+          "workers": [
+            {
+              "role": "independent review",
+              "requested_model": "gpt-6-astra",
+              "requested_effort": "xhigh",
+              "effective_model": null,
+              "effective_effort": null
+            }
+          ]
+        },
+        "checks": [
+          {
+            "id": "arithmetic",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Independent exact-Fraction counts and algebraically separate Wilson formula match 1,386 numeric group/scenario assertions and 23 intervals in each arm.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "sensitivity",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "All k=0..20 scenarios are present; full new completion is 229/400..249/400 and comparison remains negative overall but positive within each crowd block.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "interpretation",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Both memos cite M01\u2013M09/N1\u2013N5, distinguish observation from causality, explain crowd composition/selection/missingness and propose bounded randomized follow-up with decision-changing thresholds.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "deliverables",
+            "value": 9,
+            "outcome": "passed",
+            "rationale": "Each script regenerated original JSON byte-identically twice from copied raw sources, using stdlib; raw hashes preserved.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          {
+            "id": "live-procedure",
+            "value": 7,
+            "outcome": "failed",
+            "rationale": "Actual independent reviewers and sensible requested routing are supported; generated reports falsely present empty unknown sections as None (LIVE-02).",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        ],
+        "scores": {
+          "task_correctness": {
+            "value": 9,
+            "rationale": "Independent exact-Fraction counts and algebraically separate Wilson formula match 1,386 numeric group/scenario assertions and 23 intervals in each arm.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "task_completeness": {
+            "value": 9,
+            "rationale": "All requested task deliverables and substantive checks are present; scope limitations are disclosed. This score does not compensate for separate reporting/orchestration failures.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "evidence_quality": {
+            "value": 8.5,
+            "rationale": "Independent checks corroborate artifacts and preserved sources. Authored journals and normalized outer observations are qualified; effective identity, usage and money remain null. Generated-report defect is scored under report_quality.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "orchestration_behavior": {
+            "value": 8.5,
+            "rationale": "Bounded coordinator work plus genuine independent review; original-task briefs exclude supplemental builder rationale, dependency order and release observations support single-writer transitions. Physical exclusivity is not proven by helper validation alone.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          },
+          "routing_efficiency": {
+            "value": 8.5,
+            "rationale": "Requested review routing follows the frozen policy (Sol/xhigh treatment, Astra/xhigh baseline); coordinator work stays cohesive. All invocations, bookkeeping corrections and observation time are counted; no pricing/effective-placement claim.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "safety_reversibility": {
+            "value": 9,
+            "rationale": "Frozen inputs/installed files preserved, changes confined to arm scope, reviewers do not repair candidates, unknown effects not converted to completion; observed reversibility checks match case requirements.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection"
+            ]
+          },
+          "report_quality": {
+            "value": 7,
+            "rationale": "Tailored reports disclose results/limits, but the delivered generated report says Unknowns: None despite recorded unknowns (LIVE-02); this material contradiction prevents the reporting threshold.",
+            "evidence_refs": [
+              "checks",
+              "integrity",
+              "journal",
+              "outer",
+              "record-inspection",
+              "reporting"
+            ]
+          }
+        },
+        "scorer": {
+          "id": "/root/live_scorer",
+          "independent": true,
+          "evidence_refs": [
+            "scorecard"
+          ]
+        },
+        "actor_calls": 2,
+        "wall_seconds": 917.0,
+        "operational_evidence_refs": [
+          "outer",
+          "journal",
+          "scorecard"
+        ],
+        "reported_tokens": null,
+        "reported_money": null,
+        "open_errors": [
+          "LIVE-02"
+        ],
+        "gate_passed": false
+      }
+    }
+  ],
+  "provenance": "Not raw transcripts; authored journals plus independently normalized outer observations and new scorer checks. Native exit_code remains null.",
+  "diagnostic_classification": "informed_diagnostic_from_historical_result",
+  "source_result_sha256": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"
+}

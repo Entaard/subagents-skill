@@ -1,0 +1,573 @@
+{
+  "contracts": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "regressions": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "resume-writer-result-no-terminal:resume": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "resume",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-writer-result-no-terminal",
+      "--agents",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-writer-result-no-terminal/agents-input.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"admission_allowed\": false, \"ok\": true, \"proposed_events\": [{\"actor\": \"root\", \"at\": \"2026-09-07T16:55:52Z\", \"event_id\": \"resume-7\", \"payload\": {\"effect_status\": \"unknown\", \"effective_effort\": null, \"effective_model\": null, \"handle\": \"agent-a\", \"lifecycle\": \"missing\"}, \"run_id\": \"run-1\", \"seq\": 7, \"type\": \"agent.observed\", \"v\": 1}], \"recommended_next_action\": \"revise_plan\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "admission_allowed": false,
+      "ok": true,
+      "proposed_events": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T16:55:52Z",
+          "event_id": "resume-7",
+          "payload": {
+            "effect_status": "unknown",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "agent-a",
+            "lifecycle": "missing"
+          },
+          "run_id": "run-1",
+          "seq": 7,
+          "type": "agent.observed",
+          "v": 1
+        }
+      ],
+      "recommended_next_action": "revise_plan",
+      "run_id": "run-1"
+    }
+  },
+  "resume-writer-result-no-terminal:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-writer-result-no-terminal"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 6, \"ok\": true, \"run_id\": \"run-1\", \"terminal\": false}\n",
+    "stderr": "",
+    "output": {
+      "last_seq": 6,
+      "ok": true,
+      "run_id": "run-1",
+      "terminal": false
+    }
+  },
+  "resume-root-failed-unknown:resume": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "resume",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-root-failed-unknown",
+      "--agents",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-root-failed-unknown/agents-input.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"unknown_effect\", \"message\": \"known outcome cannot have unknown effect status\", \"ok\": false}\n",
+    "output": {
+      "code": "unknown_effect",
+      "message": "known outcome cannot have unknown effect status",
+      "ok": false
+    }
+  },
+  "resume-root-failed-unknown:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-root-failed-unknown"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"unknown_effect\", \"message\": \"known outcome cannot have unknown effect status\", \"ok\": false}\n",
+    "output": {
+      "code": "unknown_effect",
+      "message": "known outcome cannot have unknown effect status",
+      "ok": false
+    }
+  },
+  "root-failed-unknown-reconciliation:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/root-failed-unknown-reconciliation"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"unknown_effect\", \"message\": \"known outcome cannot have unknown effect status\", \"ok\": false}\n",
+    "output": {
+      "code": "unknown_effect",
+      "message": "known outcome cannot have unknown effect status",
+      "ok": false
+    }
+  },
+  "resume-root-released:resume": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "resume",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-root-released",
+      "--agents",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-root-released/agents-input.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"admission_allowed\": true, \"ok\": true, \"proposed_events\": [], \"recommended_next_action\": \"plan\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "admission_allowed": true,
+      "ok": true,
+      "proposed_events": [],
+      "recommended_next_action": "plan",
+      "run_id": "run-1"
+    }
+  },
+  "resume-planned-root:resume": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "resume",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-planned-root",
+      "--agents",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/resume-planned-root/agents-input.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"admission_allowed\": true, \"ok\": true, \"proposed_events\": [], \"recommended_next_action\": \"plan\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "admission_allowed": true,
+      "ok": true,
+      "proposed_events": [],
+      "recommended_next_action": "plan",
+      "run_id": "run-1"
+    }
+  },
+  "two-handles-one-active:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/two-handles-one-active"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_transition\", \"message\": \"task revision already has an assigned agent\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_transition",
+      "message": "task revision already has an assigned agent",
+      "ok": false
+    }
+  },
+  "single-released-handle-control:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/single-released-handle-control"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"run-1\", \"terminal\": false}\n",
+    "stderr": "",
+    "output": {
+      "last_seq": 8,
+      "ok": true,
+      "run_id": "run-1",
+      "terminal": false
+    }
+  },
+  "late-old-result:snapshot": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "snapshot",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/late-old-result",
+      "--write"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"agents\": {}, \"assumptions\": [], \"baselines\": [], \"checks\": {}, \"constraints\": [], \"criteria\": [{\"id\": \"c-1\", \"text\": \"criterion c-1\"}], \"current_plan_revision\": 2, \"decisions\": [], \"events_sha256\": \"31264083e3ad586f32fd287b9c7ca03081b756cb1379ad12748b94c6ecfe0bcd\", \"evidence\": {\"ev-1\": {\"criterion_ids\": [\"c-1\"], \"event_id\": \"e-4\", \"evidence_id\": \"ev-1\", \"kind\": \"observation\", \"locator\": \"artifact/observed\", \"sha256\": null}}, \"findings\": {}, \"knowledge_feedback\": [], \"knowledge_selection\": null, \"last_seq\": 6, \"next_action\": \"plan\", \"objective\": \"verify one bounded outcome\", \"ok\": true, \"run_id\": \"run-1\", \"tasks\": {\"t-1\": {\"completion\": \"observable check passes\", \"dependencies\": [], \"effect\": \"read\", \"fork_turns\": \"none\", \"id\": \"t-1\", \"inputs\": [\"new requested scope\"], \"objective\": \"complete t-1\", \"owner\": \"root\", \"requested_effort\": \"high\", \"requested_model\": \"gpt-5.6-sol\", \"returns\": [\"result\", \"evidence\"], \"revision\": 2, \"risk\": \"low\", \"scope\": [\"artifact/t-1\"], \"state\": \"planned\", \"verification\": \"check-1\"}}, \"terminal\": null, \"unresolved_user_items\": [], \"user_decisions\": [], \"v\": 1}\n",
+    "stderr": "",
+    "output": {
+      "agents": {},
+      "assumptions": [],
+      "baselines": [],
+      "checks": {},
+      "constraints": [],
+      "criteria": [
+        {
+          "id": "c-1",
+          "text": "criterion c-1"
+        }
+      ],
+      "current_plan_revision": 2,
+      "decisions": [],
+      "events_sha256": "31264083e3ad586f32fd287b9c7ca03081b756cb1379ad12748b94c6ecfe0bcd",
+      "evidence": {
+        "ev-1": {
+          "criterion_ids": [
+            "c-1"
+          ],
+          "event_id": "e-4",
+          "evidence_id": "ev-1",
+          "kind": "observation",
+          "locator": "artifact/observed",
+          "sha256": null
+        }
+      },
+      "findings": {},
+      "knowledge_feedback": [],
+      "knowledge_selection": null,
+      "last_seq": 6,
+      "next_action": "plan",
+      "objective": "verify one bounded outcome",
+      "ok": true,
+      "run_id": "run-1",
+      "tasks": {
+        "t-1": {
+          "completion": "observable check passes",
+          "dependencies": [],
+          "effect": "read",
+          "fork_turns": "none",
+          "id": "t-1",
+          "inputs": [
+            "new requested scope"
+          ],
+          "objective": "complete t-1",
+          "owner": "root",
+          "requested_effort": "high",
+          "requested_model": "gpt-5.6-sol",
+          "returns": [
+            "result",
+            "evidence"
+          ],
+          "revision": 2,
+          "risk": "low",
+          "scope": [
+            "artifact/t-1"
+          ],
+          "state": "planned",
+          "verification": "check-1"
+        }
+      },
+      "terminal": null,
+      "unresolved_user_items": [],
+      "user_decisions": [],
+      "v": 1
+    }
+  },
+  "late-old-result:report": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "report",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/late-old-result",
+      "--write"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/late-old-result/report.md\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "ok": true,
+      "report": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/late-old-result/report.md",
+      "run_id": "run-1"
+    }
+  },
+  "enum-array:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/enum-array"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_event\", \"message\": \"invalid event type\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_event",
+      "message": "invalid event type",
+      "ok": false
+    }
+  },
+  "version-bool:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/version-bool"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_event\", \"message\": \"event 1 has unsupported version\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_event",
+      "message": "event 1 has unsupported version",
+      "ok": false
+    }
+  },
+  "sequence-float:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/sequence-float"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_sequence\", \"message\": \"event e-1 sequence must be 1\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_sequence",
+      "message": "event e-1 sequence must be 1",
+      "ok": false
+    }
+  },
+  "timestamp-invalid:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/timestamp-invalid"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_event\", \"message\": \"invalid timestamp in e-1\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_event",
+      "message": "invalid timestamp in e-1",
+      "ok": false
+    }
+  },
+  "dangling-amendment:snapshot": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "snapshot",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/dangling-amendment",
+      "--write"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_reference\", \"message\": \"correction must reference an earlier event\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_reference",
+      "message": "correction must reference an earlier event",
+      "ok": false
+    }
+  },
+  "valid-amendment-control:snapshot": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "snapshot",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/valid-amendment-control",
+      "--write"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"agents\": {}, \"assumptions\": [], \"baselines\": [], \"checks\": {}, \"constraints\": [], \"criteria\": [{\"id\": \"c-1\", \"text\": \"criterion c-1\"}], \"current_plan_revision\": null, \"decisions\": [], \"events_sha256\": \"a1293c5b948587b9aa1e66f73c6aaf413358c78bce7f40a1db74608c7383111f\", \"evidence\": {}, \"findings\": {}, \"knowledge_feedback\": [], \"knowledge_selection\": null, \"last_seq\": 2, \"next_action\": \"plan\", \"objective\": \"corrected objective\", \"ok\": true, \"run_id\": \"run-1\", \"tasks\": {}, \"terminal\": null, \"unresolved_user_items\": [], \"user_decisions\": [], \"v\": 1}\n",
+    "stderr": "",
+    "output": {
+      "agents": {},
+      "assumptions": [],
+      "baselines": [],
+      "checks": {},
+      "constraints": [],
+      "criteria": [
+        {
+          "id": "c-1",
+          "text": "criterion c-1"
+        }
+      ],
+      "current_plan_revision": null,
+      "decisions": [],
+      "events_sha256": "a1293c5b948587b9aa1e66f73c6aaf413358c78bce7f40a1db74608c7383111f",
+      "evidence": {},
+      "findings": {},
+      "knowledge_feedback": [],
+      "knowledge_selection": null,
+      "last_seq": 2,
+      "next_action": "plan",
+      "objective": "corrected objective",
+      "ok": true,
+      "run_id": "run-1",
+      "tasks": {},
+      "terminal": null,
+      "unresolved_user_items": [],
+      "user_decisions": [],
+      "v": 1
+    }
+  },
+  "new-task-only:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/new-task-only"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 4, \"ok\": true, \"run_id\": \"run-1\", \"terminal\": false}\n",
+    "stderr": "",
+    "output": {
+      "last_seq": 4,
+      "ok": true,
+      "run_id": "run-1",
+      "terminal": false
+    }
+  },
+  "new-task-with-bound-control:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/new-task-with-bound-control"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 4, \"ok\": true, \"run_id\": \"run-1\", \"terminal\": false}\n",
+    "stderr": "",
+    "output": {
+      "last_seq": 4,
+      "ok": true,
+      "run_id": "run-1",
+      "terminal": false
+    }
+  },
+  "retry-initial-reason:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/retry-initial-reason"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"invalid_revision\", \"message\": \"only the first plan may use reason initial\", \"ok\": false}\n",
+    "output": {
+      "code": "invalid_revision",
+      "message": "only the first plan may use reason initial",
+      "ok": false
+    }
+  },
+  "closure-unassociated-evidence:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-unassociated-evidence"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"incomplete_run\", \"message\": \"criterion c-1 lacks associated observation evidence\", \"ok\": false}\n",
+    "output": {
+      "code": "incomplete_run",
+      "message": "criterion c-1 lacks associated observation evidence",
+      "ok": false
+    }
+  },
+  "closure-empty-check-evidence:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-empty-check-evidence"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"incomplete_run\", \"message\": \"criterion c-1 lacks an evidence-bearing passed check\", \"ok\": false}\n",
+    "output": {
+      "code": "incomplete_run",
+      "message": "criterion c-1 lacks an evidence-bearing passed check",
+      "ok": false
+    }
+  },
+  "closure-later-failed-check:validate": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-later-failed-check"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 9, \"ok\": true, \"run_id\": \"run-1\", \"terminal\": true}\n",
+    "stderr": "",
+    "output": {
+      "last_seq": 9,
+      "ok": true,
+      "run_id": "run-1",
+      "terminal": true
+    }
+  },
+  "closure-later-failed-check:report": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "report",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-later-failed-check",
+      "--write"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-later-failed-check/report.md\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "ok": true,
+      "report": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/closure-later-failed-check/report.md",
+      "run_id": "run-1"
+    }
+  },
+  "report-omissions:report": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_state.py",
+      "report",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/report-omissions",
+      "--write"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/report-omissions/report.md\", \"run_id\": \"run-1\"}\n",
+    "stderr": "",
+    "output": {
+      "ok": true,
+      "report": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/sage-a1-r2-replay/report-omissions/report.md",
+      "run_id": "run-1"
+    }
+  },
+  "tiny-example": {
+    "init_exit": 0,
+    "append_exit": 0,
+    "append_stderr": ""
+  }
+}

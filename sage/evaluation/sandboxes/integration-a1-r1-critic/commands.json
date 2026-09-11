@@ -1,0 +1,616 @@
+[
+  {
+    "name": "full-offline-exact-source-copy",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/run_verification.py",
+      "--mode",
+      "red",
+      "--evidence-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/sandboxes/fresh-critic-suite"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"schema_version\": \"sage-verification-run-v1\",\n  \"mode\": \"red\",\n  \"started_and_finished_at\": \"2026-09-07T19:24:25.064475+00:00\",\n  \"command\": [\n    \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n    \"-m\",\n    \"unittest\",\n    \"discover\",\n    \"-s\",\n    \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/tests\",\n    \"-p\",\n    \"test_*.py\",\n    \"-v\"\n  ],\n  \"commands\": [\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ],\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ]\n  ],\n  \"exit_code\": 0,\n  \"passed\": true,\n  \"tests\": 77,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"skipped\": 0,\n  \"live_trials_run\": false,\n  \"network_used\": false,\n  \"stdout\": \"stdout.txt\",\n  \"stderr\": \"stderr.txt\",\n  \"evidence_dir\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replica/sage/evaluation/sandboxes/fresh-critic-suite\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-help",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-I",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target/sage/bin/sage_state.py",
+      "--help"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic",
+    "exit_code": 0,
+    "stdout": "usage: sage_state.py [-h] {init,append,validate,snapshot,resume,report} ...\n\npositional arguments:\n  {init,append,validate,snapshot,resume,report}\n\noptions:\n  -h, --help            show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-help",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-I",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target/sage/bin/sage_knowledge.py",
+      "--help"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target/sage/bin/sage_knowledge.py\", line 23, in <module>\n    from sage_state import (\nModuleNotFoundError: No module named 'sage_state'\n"
+  },
+  {
+    "name": "installed-help",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-E",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target/sage/bin/sage_state.py",
+      "--help"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic",
+    "exit_code": 0,
+    "stdout": "usage: sage_state.py [-h] {init,append,validate,snapshot,resume,report} ...\n\npositional arguments:\n  {init,append,validate,snapshot,resume,report}\n\noptions:\n  -h, --help            show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-help",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-E",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target/sage/bin/sage_knowledge.py",
+      "--help"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic",
+    "exit_code": 0,
+    "stdout": "usage: sage_knowledge.py [-h] {validate,retrieve,stage,activate,rollback} ...\n\npositional arguments:\n  {validate,retrieve,stage,activate,rollback}\n\noptions:\n  -h, --help            show this help message and exit\n",
+    "stderr": ""
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"install conflicts: [{\\\"path\\\": \\\"skills/sage/SKILL.md\\\", \\\"reason\\\": \\\"owned_path_modified_or_replaced\\\"}]\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/nested-positive-target"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"operation\": \"uninstall\",\n  \"removed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"retained\": [\n    {\n      \"path\": \"sage/bin/__pycache__/sage_state.cpython-311.pyc\",\n      \"reason\": \"unowned\"\n    },\n    {\n      \"path\": \"skills/sage/SKILL.md\",\n      \"reason\": \"modified_or_replaced\"\n    },\n    {\n      \"path\": \"skills/sage/private.txt\",\n      \"reason\": \"unowned\"\n    }\n  ],\n  \"runtime_state_removed\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/receipt-link"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"symlink is not allowed at /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/receipt-link/sage\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/receipt-link"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"symlink is not allowed at /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/receipt-link/sage\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index is malformed\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index is malformed\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index is malformed\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index is malformed\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index is malformed\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt path escapes or is not canonical: '../x'\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/malformed"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"receipt ownership index contains duplicates\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/incomplete-target",
+      "--source-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"required source file is missing: skills/sage/references/recovery.md\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/incomplete-target",
+      "--source-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"legacy/generated source is not allowed in the active skill: /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source/skills/sage/source-manifest.json\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source/skills/nested",
+      "--source-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"target root overlaps shipped source paths\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/update-target",
+      "--source-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/extra.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/update-target",
+      "--source-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/alternate-source"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"update\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": [\n    \"skills/sage/references/extra.md\"\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-parent"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-parent"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"[Errno 20] Not a directory: '/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-parent/skills/sage/references/verification.md'\", \"ok\": false}\n"
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "init",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--run-id",
+      "tiny-1",
+      "--objective",
+      "Run the documented bounded read",
+      "--criteria",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/criteria.json"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"event_id\": \"e-1\", \"ok\": true, \"run_id\": \"tiny-1\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "append",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--events",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/wave.jsonl"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"appended\": 7, \"last_seq\": 8, \"ok\": true}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "snapshot",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--write"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"agents\": {}, \"assumptions\": [], \"baselines\": [], \"checks\": {\"check-1\": {\"check_id\": \"check-1\", \"criterion_ids\": [\"c-1\"], \"event_id\": \"e-6\", \"evidence_ids\": [\"ev-1\"], \"outcome\": \"passed\"}}, \"constraints\": [], \"criteria\": [{\"id\": \"c-1\", \"text\": \"The bounded read is observed and checked.\"}], \"current_plan_revision\": 1, \"decisions\": [], \"events_sha256\": \"4900757a817d0b31a9841edef0fe3d26ac48f06e525689e9e76d5adac12bc0b7\", \"evidence\": {\"ev-1\": {\"criterion_ids\": [\"c-1\"], \"event_id\": \"e-4\", \"evidence_id\": \"ev-1\", \"kind\": \"observation\", \"locator\": \"input.txt#observation\", \"sha256\": null}}, \"findings\": {}, \"knowledge_feedback\": [], \"knowledge_selection\": null, \"last_seq\": 8, \"next_action\": \"close\", \"objective\": \"Run the documented bounded read\", \"ok\": true, \"run_id\": \"tiny-1\", \"tasks\": {\"read-1\": {\"completion\": \"one observation is recorded\", \"dependencies\": [], \"effect\": \"read\", \"fork_turns\": \"none\", \"id\": \"read-1\", \"inputs\": [\"input.txt\"], \"objective\": \"inspect the bounded input\", \"owner\": \"root\", \"requested_effort\": \"high\", \"requested_model\": \"gpt-5.6-sol\", \"result\": {\"effect_status\": \"none\", \"evidence_ids\": [\"ev-1\"], \"outcome\": \"passed\", \"task_id\": \"read-1\", \"task_revision\": 1}, \"returns\": [\"observation\"], \"revision\": 1, \"risk\": \"low\", \"scope\": [\"input.txt\"], \"state\": \"passed\", \"verification\": \"check-1\"}}, \"terminal\": {\"criterion_evidence\": {\"c-1\": [\"ev-1\"]}, \"remaining_human_items\": [], \"scope_reconciled\": true, \"status\": \"completed\"}, \"unresolved_user_items\": [], \"user_decisions\": [], \"v\": 1}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "validate",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--terminal"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"tiny-1\", \"terminal\": true}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "report",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--write"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1/report.md\", \"run_id\": \"tiny-1\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_state.py",
+      "resume",
+      "--run-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/tiny-1",
+      "--agents",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/agents.json"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"admission_allowed\": false, \"ok\": true, \"proposed_events\": [], \"recommended_next_action\": \"close\", \"run_id\": \"tiny-1\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "validate",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"current\": \"none\", \"generation_count\": 0, \"ok\": true}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "stage",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--proposal",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/proposal.json",
+      "--generation-id",
+      "g-1",
+      "--expected-current",
+      "none"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"action\": \"create\", \"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"prior_generation_id\": \"none\", \"record\": {\"id\": \"validate-log-before-snapshot\", \"revision\": 1, \"status\": \"supported\"}}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "activate",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--generation-id",
+      "g-1",
+      "--expected-current",
+      "none"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"previous_generation_id\": \"none\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "retrieve",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--cues",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/cues.json",
+      "--limit",
+      "3"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"cue_fingerprint\": \"796f4a13deb7bfe3d5b01f6a5a1a4db3396db15d673d725b482807d6d69e8948\", \"generation_id\": \"g-1\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"The repeatable fixture rejects the corrupt log and preserves the prior projection.\", \"falsifier\": \"A corrupt authoritative log safely regenerates a valid snapshot.\", \"gate_rationale\": \"A repeatable check establishes this ordering in the declared fixture environment.\", \"id\": \"validate-log-before-snapshot\", \"qualifier\": {\"all\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [\"resume\"], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [\"remote managed authority\"], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: artifact=jsonl state; risk=corrupt projection; operation=resume; failure=stale snapshot; qualifier satisfied\", \"revision\": 1, \"rule\": \"Validate the authoritative event log before regenerating its snapshot.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "stage",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--proposal",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/proposal-2.json",
+      "--generation-id",
+      "g-2",
+      "--expected-current",
+      "g-1"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"action\": \"correct\", \"generation_id\": \"g-2\", \"manifest_sha256\": \"5508a62ac1cd9911250486f9daacac5964ce8b04b738c5cf971e49211c117272\", \"ok\": true, \"prior_generation_id\": \"g-1\", \"record\": {\"id\": \"validate-log-before-snapshot\", \"revision\": 2, \"status\": \"supported\"}}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "activate",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--generation-id",
+      "g-2",
+      "--expected-current",
+      "g-1"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"generation_id\": \"g-2\", \"manifest_sha256\": \"5508a62ac1cd9911250486f9daacac5964ce8b04b738c5cf971e49211c117272\", \"ok\": true, \"previous_generation_id\": \"g-1\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "rollback",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge",
+      "--generation-id",
+      "g-1",
+      "--expected-current",
+      "g-2"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"generation_id\": \"g-1\", \"manifest_sha256\": \"9fe79f93feb16bcc4aa2361a7abafbda001e53cc84ffa21e00107964d5740515\", \"ok\": true, \"previous_generation_id\": \"g-2\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "installed-documented-cli",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/docs-install/sage/bin/sage_knowledge.py",
+      "validate",
+      "--store-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples/knowledge"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/installed-doc-examples",
+    "exit_code": 0,
+    "stdout": "{\"current\": \"g-1\", \"generation_count\": 2, \"ok\": true}\n",
+    "stderr": ""
+  },
+  {
+    "name": "install",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "uninstall",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"[Errno 20] Not a directory: '/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-later-parent/skills/sage/agents/openai.yaml'\", \"ok\": false}\n"
+  }
+]

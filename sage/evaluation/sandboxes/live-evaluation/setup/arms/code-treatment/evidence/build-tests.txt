@@ -1,0 +1,15 @@
+test_all_partitions_of_short_stream (test_decoder.DecoderTests.test_all_partitions_of_short_stream) ... ok
+test_constructor_validation (test_decoder.DecoderTests.test_constructor_validation) ... ok
+test_deterministic_random_chunking (test_decoder.DecoderTests.test_deterministic_random_chunking) ... ok
+test_each_incomplete_prefix_and_poisoning (test_decoder.DecoderTests.test_each_incomplete_prefix_and_poisoning) ... ok
+test_every_single_split_and_bytewise_binary (test_decoder.DecoderTests.test_every_single_split_and_bytewise_binary) ... ok
+test_finish_stays_open_and_reset_discards_partial (test_decoder.DecoderTests.test_finish_stays_open_and_reset_discards_partial) ... ok
+test_limit_enforced_before_colon (test_decoder.DecoderTests.test_limit_enforced_before_colon) ... ok
+test_malformed_and_reset (test_decoder.DecoderTests.test_malformed_and_reset) ... ok
+test_raw_vectors (test_decoder.DecoderTests.test_raw_vectors) ... ok
+test_type_errors_preserve_each_partial_state (test_decoder.DecoderTests.test_type_errors_preserve_each_partial_state) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.011s
+
+OK

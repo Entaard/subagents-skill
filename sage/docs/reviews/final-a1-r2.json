@@ -1,0 +1,118 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "module": "final",
+  "approach_id": "final-a1",
+  "round": 2,
+  "review_id": "final-a1-r2",
+  "gate_type": "final",
+  "reviewed_at": "2026-09-08T15:35:42Z",
+  "verdict": "pass",
+  "summary": "The assembled both-skills gate passes within its declared evidence bounds. FINAL-A1-R1-E1 is independently verified fixed: standalone promotion now connects its own durable coordination, routing, checkpoints and recovery to existing installed seams while preserving closed source runs, independent roles and reversible store operations. Fresh normal tests pass 95/95; the identical focused six-check scenario fails only the retained old instruction graph and passes the new package. A separate 13-command installed recovery scenario passes. Original live scores remain failed where originally scored; no historical rescore or fresh post-fix live trial is claimed.",
+  "candidate": {
+    "manifest": "sage/evaluation/sandboxes/final-a1-r2-builder/candidate-manifest.json",
+    "sha256": "3f7f4c9e8ca6a8a76684ef2bbc34f7fd89dde29f5456c27b9ea6d47556a0fdde",
+    "source_files": 42,
+    "all_hashes_verified": true,
+    "retained_source": "sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage",
+    "installed_package": "sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/sandboxes/coordination/critic/installed",
+    "changed_sources": ["sage/ARCHITECTURE.md", "sage/docs/DECISIONS.md", "sage/docs/IMPLEMENTATION.md", "sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md"],
+    "runtime_schema_normal_tests_and_policy_changed": false
+  },
+  "reviewer": {
+    "actor": "/root/whole_skill_critic",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown",
+    "product_builder": false,
+    "delegated": false,
+    "source_modified": false,
+    "actual_status_modified": false,
+    "independence": "The same independent whole-skill critic from round 1 rechecked the separate Sol/xhigh builder's frozen round-2 candidate after release and native completion. Actor reuse and knowledge of the earlier finding are explicit: this is an informed independent repair/final assessment, not a fresh actor or blinded live trial. The critic never authored product changes.",
+    "method": "Verify all 42 hashes and the exact five-file documentation delta. Read repaired text with its unchanged shared operating contracts; independently assess every aspect of E1 and carry forward the prior complete 57-ID semantic trace for unchanged areas. Copy old/current sources and the same builder probe into fresh critic-owned trees, install each and execute the normal and focused checks without modifying retained originals. Add one bounded independently authored lost-activation-acknowledgement scenario. Recheck historical score bindings and validate review/STATUS transition only on a copy."
+  },
+  "scores": {
+    "requirements_and_spec_fit": 8.5,
+    "architecture_and_coherence": 9,
+    "correctness_and_evidence": 8.5,
+    "simplicity_and_context_efficiency": 8.5,
+    "orchestration_and_model_routing": 8.5,
+    "safety_reversibility_and_recovery": 8.5,
+    "verification_strength": 9,
+    "reporting_and_maintainability": 8.5
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "All 57 requirements are explicitly accounted for, with the 17 E1-affected aspects rejudged against current text. Promotion now has separate own authority, bounded plans/assignments, shared native/routing/privacy semantics, checkpoints, baseline-aware recovery and honest finish. Existing functionality remains supported by current tests and scoped historical evidence; no current requirement violation remains.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r2-critic/requirements-assessment.json", "sage/evaluation/sandboxes/final-a1-r2-critic/trace-validation.json", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/final-a1-r2-critic/summary.json"]
+    },
+    "architecture_and_coherence": {
+      "reason": "The repair closes the missing seam with one promotion-specific section and four conditional sibling references, retaining the two independent entrypoints and existing state/store primitives. Coordinator events, immutable closed sources and generations now have explicit separate roles. No helper, schema, invocation policy, test framework or competing state authority was added.",
+      "evidence": ["sage/ARCHITECTURE.md", "sage/docs/DECISIONS.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/final-a1-r2-critic/instruction-graphs.json", "sage/evaluation/sandboxes/final-a1-r2-critic/summary.json"]
+    },
+    "correctness_and_evidence": {
+      "reason": "The exact current source passes all 95 normal tests and six focused installed checks. The identical focused probe distinguishes the old instruction omission from already-correct helper behavior. The independent 13-command scenario observes and reconciles an uncertain activation before allowing closure, preserving source bytes and avoiding replay. Original task evidence retains all 313 bindings; synthetic decisions are not presented as native/semantic proof.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r2-critic/summary.json", "sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json", "sage/evaluation/sandboxes/final-a1-r2-critic/historical-binding-check.json", "sage/docs/LIVE-RESULTS.md"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Main's compact spine and selective retrieval remain unchanged. Promotion reuses existing run/state/delegation/recovery contracts instead of duplicating them or adding runtime machinery. References specify when to read them. Inline main work and promotion no_change remain zero-team; the own promotion record is small and creates no knowledge generation for no_change.",
+      "evidence": ["sage/skills/sage/SKILL.md", "sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/final-a1-r2-critic/installed-audit.json", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-current.json"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "Both workflows now expose capability-first uncalibrated Luna/Sol/Astra routing, full briefing/root/review/retry/integration overhead, user overrides, requested/effective identity and live fork/lifecycle handling through required installed instructions. Promotion preserves distinct author/refuter/reviewer/coordinator roles and source-dependent waves. Original independent task/role evidence is bounded; missing effective identity and money remain unknown.",
+      "evidence": ["sage/skills/sage/references/delegation.md", "sage/skills/sage/references/state.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/final-a1-r2-critic/instruction-graphs.json", "sage/docs/LIVE-RESULTS.md"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Promotion now explicitly validates its own log before rebuilding a projection, reconciles native handles/effects and preserves the writer barrier, then rechecks source/proposal/pointer/generation/authority baselines before revising actions. Fresh tests exercise corrupt/stale authority and unknown writers. The independent lost-acknowledgement control blocks a second writer, observes the landed pointer, records reconciliation and changed authority, then stops honestly without another activation. Existing rollback/history/installer protections remain passing with their stated limits.",
+      "evidence": ["sage/skills/sage-promote/references/promotion.md", "sage/skills/sage/references/recovery.md", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-current.json", "sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json", "sage/evaluation/sandboxes/final-a1-r2-critic/summary.json"]
+    },
+    "verification_strength": {
+      "reason": "Verification is proportionate and sensitive: unchanged 95-test normal gate, identical six-check old/current installed comparison with one old-only failure, full installed link/byte audit and one independent effect-boundary sequence through public CLIs. Complete manual text assessment supplements phrase/graph assertions. All 313 original score bindings match and prior red/green failures remain classified accurately; no repetition of the original live trial is needed for this documentation seam.",
+      "evidence": ["sage/evaluation/sandboxes/final-a1-r2-critic/focused-old.json", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-current.json", "sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json", "sage/evaluation/sandboxes/final-a1-r2-critic/installed-audit.json", "sage/evaluation/sandboxes/final-a1-r2-critic/historical-binding-check.json"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Promotion reports its own run/checkpoint and assignment/overhead evidence alongside actions and store results; truthful open/failed/stopped/completed handling and explicit human items are now connected to shared state. Documentation distinguishes the original live failures, round-1 final failure, probe-only casing error and current informed checks. Exact old candidate/evidence and all protected history remain intact.",
+      "evidence": ["sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/docs/IMPLEMENTATION.md", "sage/evaluation/sandboxes/final-a1-r2-critic/final-preservation.json", "sage/docs/LIVE-RESULTS.md"]
+    }
+  },
+  "open_error_count": 0,
+  "open_error_ids": [],
+  "finding_dispositions": [
+    {
+      "id": "FINAL-A1-R1-E1",
+      "status": "verified_fixed",
+      "reason": "The promotion spine now requires its own coordination/recovery section. That section explicitly establishes a distinct coordinator run and append-only authority, connects mandatory run/state/delegation/recovery references, records bounded graph/assignments/requested-effective identity/full cost, specifies privacy and actual role evidence through shared instructions, checkpoints source/proposal/pointer/generation/authority baselines, and reconciles corrupt/stale/unknown state before any new admission or uncertain retry. It requires stale-action revision and continuing-authority confirmation, preserves source immutability and store rollback limits, and gives honest own-run finish plus zero-team/no-generation no_change. Manual reading confirms semantic completeness; all 15 installed local links resolve. The same focused six-check script independently fails only the exact old installed instruction graph, while current passes all six. The separate 13-command lost-activation-acknowledgement scenario confirms that the connected public seams support safe reconciliation and stopped closure without replay or source mutation. The old package remains immutable.",
+      "evidence": ["sage/skills/sage-promote/references/promotion.md:5", "sage/skills/sage-promote/SKILL.md:10", "sage/evaluation/sandboxes/final-a1-r2-critic/instruction-graphs.json", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-old.json", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-current.json", "sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json", "sage/evaluation/sandboxes/final-a1-r2-critic/requirements-assessment.json"]
+    }
+  ],
+  "errors": [],
+  "suggestions": [],
+  "requirement_trace": "sage/evaluation/sandboxes/final-a1-r2-critic/requirements-assessment.json",
+  "executed_checks": [
+    {"name":"candidate binding", "source_files":42, "mismatches":0, "exact_changed_files":5, "evidence":"sage/evaluation/sandboxes/final-a1-r2-critic/summary.json"},
+    {"name":"normal current offline suite", "tests":95, "failures":0, "errors":0, "skipped":0, "exit_code":0, "live_trials_run":false, "evidence":"sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/sandboxes/critic-offline/report.json"},
+    {"name":"identical focused old/current installed comparison", "old_tests":6, "old_failures":1, "old_exit":1, "current_tests":6, "current_failures":0, "current_exit":0, "classification":"The only old failure is the instruction graph; five existing helper/main/scenario controls pass on both. This is sensitive documentation/integration evidence, not a runtime repair or native trial.", "evidence":["sage/evaluation/sandboxes/final-a1-r2-critic/focused-old.json", "sage/evaluation/sandboxes/final-a1-r2-critic/focused-current.json"]},
+    {"name":"independent lost-activation-acknowledgement scenario", "commands":13, "result":"all asserted outcomes pass, including one expected writer_busy/exit-2 rejection", "live_trials_run":false, "evidence":"sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary-summary.json"},
+    {"name":"installed bytes and local links", "files_including_receipt":15, "local_links":15, "byte_mismatches":0, "unresolved_links":0, "evidence":"sage/evaluation/sandboxes/final-a1-r2-critic/installed-audit.json"},
+    {"name":"unchanged original independent live score bindings", "scorecards":7, "bindings":313, "mismatches":0, "rescored":false, "evidence":"sage/evaluation/sandboxes/final-a1-r2-critic/historical-binding-check.json"},
+    {"name":"complete requirement trace and protected bytes", "requirements":57, "missing":0, "protected_files":1089, "changed":0, "evidence":["sage/evaluation/sandboxes/final-a1-r2-critic/trace-validation.json", "sage/evaluation/sandboxes/final-a1-r2-critic/final-preservation.json"]}
+  ],
+  "builder_evidence_classification": {
+    "red": "Six checks, five existing controls passing and one old documentation-graph failure; independently reproduced on retained exact old source.",
+    "green": "Retained first green has a case-sensitive phrase assertion failure for sentence-leading Knowledge versus lowercase knowledge. The links and clause already existed; this is probe-only mismatch, not a second product failure.",
+    "green2_and_green3": "Case-normalized graph/phrase check passes; final green3 includes finish/continuing-authority refinement. Independent copied current probe also passes 6/6.",
+    "full4": "Builder normal 95/95 claim is corroborated by this critic's separate fresh 95-test run. No normal test or runtime implementation changed.",
+    "synthetic_limits": "Scripted baseline comparison/replan choices, synthetic role identities, seeded terminal sources and recorded authority changes are fixtures. They verify public interface compatibility and instructed sequences, not model judgment, genuine role independence, native compaction or semantic truth."
+  },
+  "limitations": [
+    "This passes the assembled current instruction/integration final gate using existing independent live evidence and separately verified informed repairs. It does not turn the original seven-arm trial into a post-fix live pass. Only original recovery passed its strict arm gate; six report scores remain 7 and creative orchestration remains 7.",
+    "There were two code/data pairs and three unpaired creative/recovery/promotion smokes. Both paired arms used installed Sage with an Astra root; eligible worker routing varied. Equal paired scores were equal failed reporting gates. Same invocation counts and treatment outer intervals shorter by 280/98 seconds are case observations, not general equivalence, efficiency or cost savings.",
+    "Effective model/effort, normalized token/money data and automatic home discovery remain unobserved. Model-role priors are uncalibrated, and no telemetry is inferred from request labels or synthetic fixture identities.",
+    "The same independent critic actor was retained for round 2 and knew E1. The original live workflows also disclosed thread-capacity workarounds, authored journals instead of raw transcripts, a creative unrelated-lifecycle exposure and synthetic promotion source/seed histories. No pristine/blinded claim is made.",
+    "Focused and additional recovery sequences are offline scripted public-CLI checks. In particular, the builder's changed-baseline next-action branch is a local scripted decision, not proof that a resumed model will choose it. Manual installed-instruction review establishes the policy connection; future native behavior remains empirically bounded.",
+    "Creative evidence remains scoped to original two viewports, keyboard interaction and the measured platform/method. Screen-reader speech, physical touch, runtime reduced-motion and additional platforms are untested.",
+    "Helpers validate structure/evidence binding and cooperative transitions; they do not prove authority, persuasive semantic evidence, behavioral independence or physical writer leases. Rollback requires integrity-valid retained history; corrupt-history recovery and crash-atomic multi-file installer behavior are not claimed.",
+    "No home installation, browser, network, package install or new live task was performed. No bundled PyYAML-dependent skill-validator pass is claimed. Old supplemental Sage replay provenance remains qualified rather than reconstructed."
+  ],
+  "next_action": "Record this independently validated final-a1 round-2 pass in actual STATUS after critic RELEASE and native completion, preserving the failed round-1 review and all original live outcomes. Prepare the final handoff with the explicit evidence limits above; no new runtime repair, trial rescore or scope expansion is required."
+}

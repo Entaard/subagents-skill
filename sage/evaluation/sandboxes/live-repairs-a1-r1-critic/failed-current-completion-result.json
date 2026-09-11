@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/installed/sage/bin/sage_state.py",
+    "append",
+    "--run-dir",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/failed-current-completion",
+    "--events",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/failed-current-completion-wave.jsonl"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "{\"code\": \"incomplete_run\", \"message\": \"every task in a completed plan must pass\", \"ok\": false}\n",
+  "atomic_rejection": true
+}

@@ -1,0 +1,65 @@
+{
+  "classification": "exact_retained_fixed_replay",
+  "results": [
+    {
+      "label": "native-run-id-bool",
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate-native",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-run-id-bool.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment has invalid native execution fields\"}\n",
+      "structured_rejection": true
+    },
+    {
+      "label": "native-start-bool",
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate-native",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-start-bool.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment has invalid native execution fields\"}\n",
+      "structured_rejection": true
+    },
+    {
+      "label": "native-finish-object",
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate-native",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-finish-object.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment has invalid native execution fields\"}\n",
+      "structured_rejection": true
+    },
+    {
+      "label": "native-execution-null",
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+        "validate-native",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-execution-null.json",
+        "--manifest",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment needs a native execution object\"}\n",
+      "structured_rejection": true
+    }
+  ]
+}

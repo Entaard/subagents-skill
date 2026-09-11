@@ -1,0 +1,16 @@
+Evaluation-only fallback: the connected Browser preflight on the parent coordinator returned No browser available; bootstrap-troubleshooting was read and browsers.list returned []. No browser was explicitly named by the user. The Browser skill was then fully read by the evaluator before this isolated local fallback. Do not treat that fallback as a connected or personal browser.
+
+Run from this repo with absolute paths:
+node SETUP/browser-harness.mjs ARM/work/index.html ARM/inputs/flow.json ARM/evidence/browser-attempt-1
+
+The output directory must be fresh. The harness creates only an owned fresh profile below that directory, blocks page network URLs, loads the local file, dispatches real CDP keyboard events, records visible text/focus after each input and two-frame wall latency, then captures both declared viewports. It terminates only its owned process. Local environment may require the same sandbox escalation used for the neutral probe. If denied, retain failure and report interaction/visual work as unobserved; do not claim a pass. Do not modify the frozen harness; report any harness issue to the outer coordinator.
+
+Inspect both PNGs with view_image. Read observations.json; keyboard activation must actually cause the required visible state changes. Capturing an image is not visual inspection. Load timings are one file navigation after the browser process already exists; input timings include CDP overhead and two animation frames, no CPU/network throttle. These are scoped local observations, not broad performance or monetary cost. No pass/fail or semantic game assertion is built into this recorder.
+
+Neutral preflight only: attempt-1 failed to expose an endpoint in the restricted shell; attempt-2 under approved isolation created PNGs but Enter did not activate the neutral button; attempt-3 after correcting Enter text generated activeElement=probe for Tab and visible Probeactivated after Enter at both viewports. Those artifacts are probe evidence, never live-game outcomes. The original two failed attempts remain retained.
+
+Official references used for this tiny harness:
+https://developer.chrome.com/docs/automation-and-testing/headless
+https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchKeyEvent
+https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDeviceMetricsOverride
+https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-captureScreenshot

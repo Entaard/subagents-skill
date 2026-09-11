@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "scope": "Scorer artifact/hash/applicability/score-reference completeness for all seven arms; not a replacement pass for frozen pairing.py.",
+  "arms": [
+    {
+      "arm": "code-treatment",
+      "hash_bound_evidence_count": 39,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    },
+    {
+      "arm": "code-baseline",
+      "hash_bound_evidence_count": 36,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    },
+    {
+      "arm": "data-baseline",
+      "hash_bound_evidence_count": 33,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    },
+    {
+      "arm": "data-treatment",
+      "hash_bound_evidence_count": 31,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    },
+    {
+      "arm": "creative-treatment",
+      "hash_bound_evidence_count": 58,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    },
+    {
+      "arm": "recovery-treatment",
+      "hash_bound_evidence_count": 40,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "hash_bound_evidence_count": 83,
+      "scores_complete": true,
+      "frozen_checks_complete": true,
+      "hashes_match": true,
+      "gate_passed": false
+    }
+  ],
+  "smoke_manifest_selfhash": "d40df9c7ea8566d25f1f798e0ffd5033533a0a7708e9e78b16d6a3feee749731",
+  "expected_smoke_manifest_selfhash": "d40df9c7ea8566d25f1f798e0ffd5033533a0a7708e9e78b16d6a3feee749731"
+}

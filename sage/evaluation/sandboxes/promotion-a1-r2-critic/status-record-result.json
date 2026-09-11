@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "review_id": "promotion-a1-r2",
+  "verdict": "fail",
+  "open_errors": [
+    "PROMOTION-A1-R1-E3"
+  ],
+  "history_prefix_preserved": true,
+  "prior_reviews_preserved": true,
+  "integration_unchanged": true,
+  "all_round2_submission_hashes_match": true
+}

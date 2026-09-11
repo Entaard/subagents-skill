@@ -1,0 +1,27 @@
+{
+  "provenance": "Actor-authored integration record of outer coordinator's reported direct native lifecycle observations and reviewer-authored explicit releases; not a raw native transcript.",
+  "reviewer_handle": "/root/live_recovery_review",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "initial_fork_turns": "none",
+  "effective_model": null,
+  "effective_effort": null,
+  "reported_tokens": null,
+  "reported_money": null,
+  "initial_review": {
+    "lifecycle": "completed",
+    "lifecycle_source": "Outer coordinator resume task reports native terminal observation before handing this coordinator the writer lease.",
+    "explicit_release_source": "evidence/independent-review.md, final RELEASE paragraph",
+    "artifact_sha256": "341118f9d55c021e0b69078de144f8108eef104c115c2614b3e7a6cb246844ba",
+    "result": "One minor routing-evidence finding; no other finding."
+  },
+  "focused_recheck": {
+    "lifecycle": "completed",
+    "lifecycle_source": "Outer coordinator final-integration task reports same reviewer's native terminal observation before handing this coordinator the writer lease.",
+    "explicit_release_source": "evidence/independent-recheck.md, final RELEASE paragraph",
+    "artifact_sha256": "a47dc229c3e0d8957da353c03d666dd1faa39475f76b78ac51648b89ce2a1f46",
+    "result": "Original falsifiable repair check passed; no new findings."
+  },
+  "reconciled_effect_scope": "Reviewer-authored artifacts are present at the reviewed hashes. Coordinator byte checks and independent recheck preserve both CSVs and prior authority prefix. Explicit releases state no pending mutation. No source-task effect reconciliation follows from these reviewer lifecycle facts.",
+  "protocol_deviation": "Nested reviewer spawn failed once with agent thread limit reached and no handle. Outer coordinator dispatched the exact saved fresh brief only after this arm coordinator became terminal and released. Same reviewer was resumed for the narrow recheck only after another terminal coordinator release. No repeated failed spawn or invented handle."
+}

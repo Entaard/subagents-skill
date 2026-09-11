@@ -1,0 +1,19 @@
+test_empty_retrieval_round_trips_through_run_state_and_reserves_none (sage.tests.test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none) ... FAIL
+
+======================================================================
+FAIL: test_empty_retrieval_round_trips_through_run_state_and_reserves_none (sage.tests.test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 54, in test_empty_retrieval_round_trips_through_run_state_and_reserves_none
+    self.assertEqual(
+AssertionError: {'cue_fingerprint': '9987d82f62b71efe9f8340[111 chars]tch'} != {'generation_id': 'none', 'cue_fingerprint'[111 chars]: []}
+- {'cue_fingerprint': '9987d82f62b71efe9f83409d2102172e4812d45755295b86f96689f07934137c',
++ {'cue_fingerprint': '1457ea49514f62f34f3abc8fd6b76ddd29d889d89bc5935c389b46a949428db8',
+   'generation_id': 'none',
+   'matches': [],
+   'retrieval_status': 'no_match'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.050s
+
+FAILED (failures=1)

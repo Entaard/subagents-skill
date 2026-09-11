@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "review_id": "promotion-a1-r3",
+  "verdict": "pass",
+  "open_errors": [],
+  "history_prefix_preserved": true,
+  "prior_reviews_preserved": true,
+  "integration_unchanged_and_unscored": true,
+  "active_module": "integration",
+  "all_candidate_hashes_match": true
+}

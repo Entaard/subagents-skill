@@ -1,0 +1,10 @@
+{
+  "commands": 82,
+  "unexpected": [
+    "routing-null",
+    "worker-null",
+    "check-null",
+    "scorer-null"
+  ],
+  "classification": "Independent public-CLI regression diagnostics; historical inputs informed, no live execution."
+}

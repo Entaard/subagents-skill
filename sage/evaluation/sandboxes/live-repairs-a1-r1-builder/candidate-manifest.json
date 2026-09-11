@@ -1,0 +1,84 @@
+{
+  "schema_version": "sage-live-repair-candidate-v1",
+  "approach": "live-repairs-a1",
+  "round": 1,
+  "builder": "/root/live_repairs_builder",
+  "status": "released_for_independent_review",
+  "historical_scores_changed": false,
+  "critic_findings_self_closed": false,
+  "source": [
+    {"path": "sage/ARCHITECTURE.md", "sha256": "4fd3d28229db75999de2521e24c3615267d2808a2a8bc63da70b8111b67d40e2"},
+    {"path": "sage/docs/CONTRACTS.md", "sha256": "380cef7698f95f46832954c76891c49597a0a24cbb31ef3a77345913b0061e52"},
+    {"path": "sage/docs/REQUIREMENTS.md", "sha256": "2a838ce2c5d6045e53909bce38a3f714d4caedab8c62de7a95ae6020bbdb3148"},
+    {"path": "sage/docs/DECISIONS.md", "sha256": "523d1da3b74b1fdd048d0607ac2bea464bb430dc2d3fc0882e71800fb5488144"},
+    {"path": "sage/docs/IMPLEMENTATION.md", "sha256": "fbaeb0dc84c4717c80aced2557866e5462ea723c71b01bb706986895ab88e996"},
+    {"path": "sage/evaluation/README.md", "sha256": "9da232ceb68e74979c86ec6f8fa38be6e44de70a3b94557a97374c38c513e3af"},
+    {"path": "sage/evaluation/native-result-protocol-v3.md", "sha256": "75a4316da2b761b949ee3c058fb75c91464c47d7b07484ac2fc75424e382d5b0"},
+    {"path": "sage/evaluation/pairing.py", "sha256": "92c89bf88998d7bfd8062f3ba7c7cda65b9110f2b52e5eccd6be44224a4ef57a"},
+    {"path": "sage/evaluation/tests/test_live_repairs.py", "sha256": "08a547b2359aa77c1e72b53459b6f33cb6961c534cca7b29b759ed1e573c03eb"},
+    {"path": "sage/scripts/sage_state.py", "sha256": "2fda97567bed5c3b1eb8bdaa1465398ecbbe619da6aab47d83e45f28c1e7a205"},
+    {"path": "sage/skills/sage/references/delegation.md", "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27"},
+    {"path": "sage/skills/sage/references/recovery.md", "sha256": "b3290b8ae3e0e946daa8c608ec3888fd1f2e209e80d2759dfe8cb604c3e75763"},
+    {"path": "sage/skills/sage/references/run.md", "sha256": "d038fb288d8600c79412b95eddca68576f2635a1463ea87fe682887b24a41f84"},
+    {"path": "sage/skills/sage/references/state.md", "sha256": "1ea5bee2746c8fddcc8c1ed61fc3be416ee726331fe09473bb64e3305cc96b41"},
+    {"path": "sage/skills/sage/references/verification.md", "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d"},
+    {"path": "sage/skills/sage-promote/references/promotion.md", "sha256": "10e9adc3c38eeb642a4ab55c4a19e71b322e6616e7284840b43c2af4d36008c4"}
+  ],
+  "protected_source_guards": [
+    {"path": "sage/evaluation/live-protocol.md", "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"},
+    {"path": "sage/evaluation/rubric.json", "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"},
+    {"path": "sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json", "sha256": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25"},
+    {"path": "sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json", "sha256": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"},
+    {"path": "sage/docs/LIVE-RESULTS.md", "sha256": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b"}
+  ],
+  "issue_repair_claims_pending_critic": {
+    "LIVE-01": "The append-only agent.not_created fact requires prior observation evidence, is barred after a request or for root-owned work, permits only a failed/no-effect evidence-bearing result, preserves unknown/genuine-agent barriers and ordinary bounds, and cannot make a completed run from a failed current task. A later genuinely successful bounded revision may complete through ordinary gates.",
+    "LIVE-02": "Reports qualify empty typed sections as no entries recorded and render directly stored unknown agent identity/lifecycle/effect fields; operator docs require material unknown or untested facts to be recorded as typed evidence without claiming prose interpretation.",
+    "LIVE-03": "The frozen v2 validator and protocol remain unchanged. The explicit sage-live-native-scored-results-v3 validate-native path binds completed lifecycle to native_observation references, allows a null unobserved native exit, and keeps actual subprocess integer exits in separately evidenced command records.",
+    "LIVE-04": "The installed state reference publishes note.recorded category assumption|decision and a source-helper-independent executable note example; original rejected appends remain untouched.",
+    "DOC-01": "Architecture and installed references now describe current status, all four arms/two pairs, independent promotion review versus coordinator landing, current installer ownership, and installed state.md as the operator task-field authority."
+  },
+  "tdd_history": [
+    {"phase": "red-live01", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 1; 3 tests, 3 expected failures", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/red-live01/stderr.txt", "sha256": "75cbda742ab76321956be98d910e1d6eed4873902cd0b2dd8537a2d5097c6a3c"},
+    {"phase": "green-live01", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 0; 3 tests passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/green-live01/stderr.txt", "sha256": "c80d2726e27ab85ad2fd795da3de12f69d8e6e81452677ad1cd638ca1be4a281"},
+    {"phase": "red-live02", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 1; 5 tests, 7 expected failing report subcases", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/red-live02/stderr.txt", "sha256": "06f30265089a3fa8dabee5664dfe613a9d39772df94e63fa038b8a4284452719"},
+    {"phase": "green-live02", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 0; 5 tests passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/green-live02/stderr.txt", "sha256": "8a2e7d30b3e177b8baea2685f874fec1609d33897a1876823e152d394cba3e2c"},
+    {"phase": "red-live03-self-contained", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 1; 8 tests, 5 expected failures", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/red-live03-self-contained/stderr.txt", "sha256": "3fb93afdb3b2977d52c1fe4b80825326107a6421054aff49bc9d821e4d72347c"},
+    {"phase": "green-live03", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 0; 8 tests passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/green-live03/stderr.txt", "sha256": "762f999cb385fc09ad2a5bfa17744fa31792919f71f0753111aad13c3298283e"},
+    {"phase": "red-live04", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 1; 9 tests, 1 expected failure", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/red-live04/stderr.txt", "sha256": "1764bc103b1d2d2c711b06cfc44cce765a1beaf33e564e380b75fe8c719ac44c"},
+    {"phase": "green-live04", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 0; 9 tests passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/green-live04/stderr.txt", "sha256": "99b21cc7fff01a86ea58c842161d8b3b264568723c9ac3ed48d49593553bb1dd"},
+    {"phase": "red-live01-closure", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path -v", "result": "exit 1; 1 test, 1 expected failure", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/red-live01-closure/stderr.txt", "sha256": "d88a09a99cf71e5641ecbc4a2e34ad6d56d32bd3cb490975118f86bcbc0613b5"},
+    {"phase": "green-live01-closure", "command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path -v", "result": "exit 0; 1 test passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/green-live01-closure/stderr.txt", "sha256": "3ec952b5ea89aed8403e4eaf3f9f27f6704c23c34241ff44cd20fad965d15bce"}
+  ],
+  "verification": [
+    {"command": "env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sage/evaluation/tests -p test_live_repairs.py -v", "result": "exit 0; 10 tests passed", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/focused-final/stderr.txt", "sha256": "13acd5c60f8d10af1206e576b6beab69813d2721f0830618a18003bf73497002"},
+    {"command": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-builder/final-offline2-tmp SAGE_EVALUATION_SANDBOX=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-builder/final-offline2-work python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/live-repairs-a1-r1-builder/final-offline2", "result": "exit 0; 89 tests passed; 0 failures, 0 errors, 0 skips; live_trials_run false; network_used false", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/final-offline2/report.json", "sha256": "cadb5a8d2e0851cdd130ccadb93b23b4ae1c59c5110e57cd4338f74544e38bc8"},
+    {"command": "env PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-builder TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-repairs-a1-r1-builder/diagnostic-final-tmp python3 sage/evaluation/sandboxes/live-repairs-a1-r1-builder/run_informed_diagnostics.py", "result": "exit 0; exact 22-event creative prefix reconciled to stopped; 7 copied reports regenerated; frozen v2 exit 2; adapted v3 exit 0; 6 subprocess exits separate; 2,239 protected files unchanged", "evidence": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/informed-diagnostics-final/diagnostic-summary.json", "sha256": "20fca72d1ff0ee50c8d667279ac5dce9d9424a835a046bd9550b4045ebbb5692"},
+    {"command": "git diff --check -- sage", "result": "exit 0"},
+    {"command": "env PYTHONDONTWRITEBYTECODE=1 python3 -c 'compile the four changed Python sources'", "result": "exit 0; compiled 4 Python sources"},
+    {"command": "local Markdown link check over changed documents", "result": "exit 0; 7 local links checked; 0 missing"},
+    {"command": "wc -l sage/skills/sage/SKILL.md sage/skills/sage-promote/SKILL.md", "result": "exit 0; 25 and 19 lines"}
+  ],
+  "informed_diagnostic": {
+    "classification": "informed_diagnostic_only",
+    "runner": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/run_informed_diagnostics.py",
+    "runner_sha256": "cedb6a59cc7ef1d86ec9f49770342185ab306e6787819ebc6c58c63799285331",
+    "protected_inventory_sha256": "4a61d7d9b779c5329adf4afcf1da90d9caf8116e209f701094fabb316955a1f4",
+    "before_file_sha256": "621db588d32fe1a7f32e4ed4df730971237f96b8cff9ab3bdc34a6c18573f941",
+    "after_file_sha256": "621db588d32fe1a7f32e4ed4df730971237f96b8cff9ab3bdc34a6c18573f941"
+  },
+  "limitations": [
+    "The new v3 validator checks schema, hashes, and evidence references; execution authenticity and evidence semantics remain independent-evaluator responsibilities.",
+    "The v3 historical adaptation is an informed diagnostic only and does not convert the original trial into a pass or change its score or acceptance criteria.",
+    "The report renderer exposes structured recorded facts and does not infer unknown or untested semantics from arbitrary narrative prose.",
+    "agent.not_created relies on a truthful prior observation record; absence from agent inventory is explicitly insufficient.",
+    "This builder ran no new live trial and performed no independent critic assessment. LIVE-01 through LIVE-04 and DOC-01 remain open pending critic disposition."
+  ],
+  "release": {
+    "state": "RELEASE",
+    "writer_lease": "released",
+    "pending_process": false,
+    "pending_effect": false,
+    "next_owner": "independent Astra critic"
+  }
+}

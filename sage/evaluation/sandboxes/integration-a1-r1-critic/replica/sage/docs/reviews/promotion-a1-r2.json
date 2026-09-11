@@ -1,0 +1,133 @@
+{
+  "schema_version": "sage-rebuild-review-v1",
+  "review_id": "promotion-a1-r2",
+  "module": "promotion",
+  "approach_id": "promotion-a1",
+  "round": 2,
+  "reviewed_at": "2026-09-07T18:34:56Z",
+  "gate_type": "deterministic",
+  "verdict": "fail",
+  "open_error_count": 1,
+  "open_error_ids": ["PROMOTION-A1-R1-E3"],
+  "reviewer": {
+    "agent": "/root/promotion_critic",
+    "role": "independent promotion critic; exact repair verification and bounded adjacent controls; no product repairs",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "effective_model": "unknown",
+    "effective_effort": "unknown"
+  },
+  "scores": {
+    "requirements_and_spec_fit": 8.3,
+    "architecture_and_coherence": 8.6,
+    "correctness_and_evidence": 8.3,
+    "simplicity_and_context_efficiency": 8.6,
+    "orchestration_and_model_routing": 8.7,
+    "safety_reversibility_and_recovery": 8.6,
+    "verification_strength": 8.6,
+    "reporting_and_maintainability": 8.4
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "Reference closure, retirement transition and pointer-shape errors are independently repaired while original frozen controls remain green. The accepted timestamp domain still admits precision that comparison silently discards, so the requirement that review cannot precede creation is not fully met. This is the sole remaining error.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/docs/CONTRACTS.md"]
+    },
+    "architecture_and_coherence": {
+      "reason": "The changes remain narrow: shared reference resolution distinguishes exact external locators from local IDs, the transition boundary reserves existing-record retirement to retire, and pointer shape is checked before absence. Retained-lineage and staged-parent semantics are unchanged. The documented corruption boundary now agrees with the preexisting all-history validation design.",
+      "evidence": ["sage/scripts/sage_knowledge.py", "sage/ARCHITECTURE.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt"]
+    },
+    "correctness_and_evidence": {
+      "reason": "Fresh knowledge frozen 10 and focused 14, plus state frozen 9 and focused 16, pass. Exact original public failures are corrected; valid local comparison/corroboration, hash-bound external URI and full nine-command documentation controls work. A separately retained 100-nanosecond earlier review still stages successfully, directly showing the precision loss rather than inferring it from the parser name.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/contracts.txt", "sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/supplemental-results.json"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "Repairs use local comparisons and boundary checks rather than a new framework. Documentation adds the specific locator, retirement, chronology and corrupt-history distinctions needed by callers. The short spine and conditional references remain intact.",
+      "evidence": ["sage/scripts/sage_knowledge.py", "sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/knowledge.md", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "The unchanged source spine clearly requires a distinct live proposer, refuter and reviewer, excludes the coordinator from those roles, preserves user model choices and labels routing priors uncalibrated. Negative recorded-role controls pass. This score does not assert that fixture actor strings establish live independence or measured routing efficiency.",
+      "evidence": ["sage/skills/sage-promote/SKILL.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/promotion-a1-r2-critic/contracts.txt"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Malformed dangling pointers now reject in both validation and retrieval while preserving the link; truly empty storage remains valid. Retirement bypass rejects while proper retirement and historical imports remain supported by regressions. Normal rollback succeeds and retains generations; corrupted-history mutation still rejects unchanged under its now-explicit boundary. Original stale-stage, refutation and lineage protections remain green.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-assertions.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt", "sage/skills/sage-promote/references/promotion.md"]
+    },
+    "verification_strength": {
+      "reason": "Four new regression methods pair negative boundaries with valid controls. Independent replays preserve exact prior failures in fresh destinations, and a focused precision matrix reveals the remaining accepted-domain gap. Fresh checks use public CLIs and observable bytes; no builder score or installed result is substituted. The stale round-1 hash selector in the replay is explicitly qualified and separately corrected for round-2 binding.",
+      "evidence": ["sage/tests/test_knowledge.py", "sage/evaluation/sandboxes/promotion-a1-r2-critic/review_checks.py", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-assertions.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/record_review.py"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Locator syntax, retired imports, greatest-retained-prior diagnostics and integrity-valid-only rollback are now precise. Failure history and source-versus-live limits are preserved. The timestamp documentation still promises chronological ordering across all accepted fractional values while the helper truncates their precision; that narrow inconsistency prevents acceptance on this axis.",
+      "evidence": ["sage/skills/sage-promote/references/knowledge.md", "sage/skills/sage-promote/references/promotion.md", "sage/docs/IMPLEMENTATION.md", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json"]
+    }
+  },
+  "finding_dispositions": [
+    {
+      "id": "PROMOTION-A1-R1-E1",
+      "status": "verified_fixed",
+      "reason": "Exact missing-comparison and arbitrary-external-fragment probes now reject. Valid comparison and corroboration references stage; an exact recorded external URI with a hash stages, while the same URI without a recorded hash rejects. These are structural closure controls only.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E2",
+      "status": "verified_fixed",
+      "reason": "The original correct-to-retired input now returns invalid_transition before staging. Fresh focused tests preserve proper retire with intentional metadata and the frozen revision-1 historical retired import behavior. Other existing-record action controls remain green.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt", "sage/scripts/sage_knowledge.py:527"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E3",
+      "status": "still_open",
+      "reason": "Original later/earlier fractional-second cases are fixed and equal precision variants pass. However, the shared timestamp grammar still accepts more than six fractional digits. Created .5000002Z followed by reviewed .5000001Z stages with exit 0 because datetime.fromisoformat truncates both to the same microsecond. The chronology invariant remains incomplete over accepted inputs.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/controls/earlier-nanosecond/store/generations/g-1/records/k-1.json"]
+    },
+    {
+      "id": "PROMOTION-A1-R1-E4",
+      "status": "verified_fixed",
+      "reason": "The original dangling-pointer validate probe now rejects with invalid_store. The same pointer also rejects retrieval and remains a symlink to its original destination. Fresh empty-store validation and the unchanged retrieval-to-state sentinel regression succeed.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/supplemental-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-assertions.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt"]
+    }
+  ],
+  "errors": [
+    {
+      "id": "PROMOTION-A1-R1-E3",
+      "rank": 1,
+      "severity": "minor",
+      "title": "Timestamp ordering discards accepted fractional precision beyond microseconds",
+      "requirements": ["R-041"],
+      "location": "sage/scripts/sage_knowledge.py:237",
+      "observed": "The public stage command accepts created_at 2026-09-07T00:00:00.5000002Z and reviewed_at 2026-09-07T00:00:00.5000001Z, returning exit 0 and writing a complete supported generation. The review instant is 100 nanoseconds earlier than creation. Later and equal-instant controls at the same precision also stage, so this is an ordering failure rather than a general unsupported-format rejection.",
+      "cause": "The shared UTC grammar accepts an arbitrary nonempty decimal fraction. datetime.fromisoformat retains only microseconds; converting before comparison erases the digits that distinguish these two valid inputs.",
+      "expected": "Compare the full accepted precision without truncation. Any alternative precision restriction must be explicit and consistent at the input boundary, with a reasoned contract decision rather than silently accepting values and comparing different instants. Retain exact earlier/later/equal controls and the repaired ordinary fractional cases.",
+      "evidence": ["sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-assertions.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/controls/earlier-nanosecond/proposal.json", "sage/evaluation/sandboxes/promotion-a1-r2-critic/controls/earlier-nanosecond/store/generations/g-1/records/k-1.json"]
+    }
+  ],
+  "suggestions": [],
+  "suggestion_dispositions": [
+    {"id":"PROMOTION-A1-R1-S1","status":"addressed","reason":"The promotion reference and architecture explicitly limit normal rollback to integrity-valid history and require evidence-preserving separate recovery for corrupt bytes. The fresh corruption probe still fails unchanged as intended; ordinary rollback succeeds.","evidence":["sage/skills/sage-promote/references/promotion.md","sage/evaluation/sandboxes/promotion-a1-r2-critic/control-results.json"]},
+    {"id":"PROMOTION-A1-R1-S2","status":"addressed","reason":"The revision-link diagnostic now names the greatest retained prior revision, matching D-024 and the successful post-rollback correction tests.","evidence":["sage/scripts/sage_knowledge.py:534","sage/evaluation/sandboxes/promotion-a1-r2-critic/regressions.txt"]}
+  ],
+  "executed_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/promotion-a1-r2-critic/review_checks.py",
+      "exit_code": 0,
+      "tests": 49,
+      "test_failures": 0,
+      "test_errors": 0,
+      "interpretation": "Collector exit 0 is not a gate pass. The four fresh suites pass 10+14+9+16 tests. Prior public CLI scripts execute in new destinations with both __file__ and literal old root names redirected; only the pending-round assertion is updated. The 22 supplemental replay assertions all pass. Of 16 new control assertions, only earlier-nanosecond fails. The documented proposal completes nine commands and retains the second generation after rollback. The primary replay retains its intentionally failing corrupt-current exploratory assertion and seven stale comparison-to-round-1 hash assertions; these are explicitly qualified below, not treated as product failures or silently discarded.",
+      "evidence": "sage/evaluation/sandboxes/promotion-a1-r2-critic/control-assertions.json"
+    }
+  ],
+  "input_hashes_evidence": "sage/evaluation/sandboxes/promotion-a1-r2-critic/input-hashes.json",
+  "evidence_retention": {
+    "prior_evidence_hashes": "sage/evaluation/sandboxes/promotion-a1-r2-critic/original-evidence-hashes.json",
+    "qualification": "The primary old runner selects event builder_candidate_submitted, but round 2 uses builder_repair_submitted. Thus its frozen:* comparisons use the round-1 baseline and correctly report seven changed files. The recorded input-hashes.json contains actual round-2 bytes. record_review.py separately binds all of them to the current round-2 submission before status mutation. The replayed corrupt-current rollback assertion remains an intentionally unmet preference already dispositioned as S1, not an open error. All old round-1 files are hash-verified unchanged."
+  },
+  "limitations": [
+    "Source deterministic gate only. Installation, integration, live role independence, semantic knowledge quality, effective model placement, physical leases, token usage and cost-quality outcomes remain unobserved.",
+    "No global dependency was installed and no bundled quick_validate pass is claimed; dependency-free syntax, local links, frontmatter and explicit-only metadata are covered by the supplemental replay.",
+    "The offline harness 11-test result is a builder claim read in IMPLEMENTATION, not independently rerun in this bounded repair review and not counted among the 49 observed tests.",
+    "All eight source status dimensions are scored. Live case dimensions remain unrun; no numeric live score is inferred from fixture outcomes.",
+    "The chronology defect is minor but remains a real open error and blocks passage under the user's zero-error gate."
+  ],
+  "next_action": "Repair only the remaining accepted-precision chronology error E3 with exact earlier/later/equal public-CLI controls, preserve both failed rounds, and submit promotion-a1 round 3 for independent review. Integration remains pending and unscored."
+}

@@ -1,0 +1,14 @@
+{
+  "source_hashes": true,
+  "prior_store_hashes": true,
+  "artifact_hashes": {
+    "work/proposal-author.json": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+    "work/refutation.json": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee",
+    "evidence/refutation.md": "a04ebff3bb7371dd9a22a3297f3eddb79fa7b437bec2081f19ed82c88ddca64a"
+  }
+}
+164:        "plan.revised": {"revision", "reason", "attempt_limit", "revision_limit", "no_progress", "trigger_event_ids", "tasks"},
+188:        positive(p["revision"], "plan revision"); positive(p["attempt_limit"], "attempt_limit"); positive(p["revision_limit"], "revision_limit")
+287:            fail(revision > (plans[revision - 1]["payload"]["revision_limit"] if revision > 1 else p["revision_limit"]), "limit_exceeded", "plan revision exceeds the previously committed limit")
+296:                changed = p["attempt_limit"] != prior["attempt_limit"] or p["revision_limit"] != prior["revision_limit"] or p["no_progress"] != prior["no_progress"]
+327:            fail(attempts >= plans[p["plan_revision"]]["payload"]["attempt_limit"], "limit_exceeded", f"task {p['task_id']} exceeds its attempt limit")

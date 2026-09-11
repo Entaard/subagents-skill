@@ -1,0 +1,2 @@
+exhaustive_streams=55987; modes=whole,bytewise; mismatches=0
+type_state=preserved; poison_reset=ok; oversize_rejected_at_digit=4; stored_length=999

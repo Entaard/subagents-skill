@@ -1,0 +1,68 @@
+# Sage run code-treatment
+
+## Outcome
+
+- Status: completed
+- Scope reconciled: True
+
+## Recorded passed tasks
+
+- build: passed
+- review: passed
+- integrate: passed
+
+## Failed tasks
+
+- No entries recorded.
+
+## Unfinished tasks
+
+- No entries recorded.
+
+## Observed evidence
+
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/build-tests.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/frozen-hashes.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/review.md
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/review-check-output.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/integration-check-output.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/final-tests.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/final-hash-verification.txt
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/actor-journal.md
+- /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/outcome.md
+
+## Inferences
+
+- No entries recorded.
+
+## Unknowns
+
+- /root/live_code_treatment/review: effective_model=unknown, effective_effort=unknown
+
+## Untested evidence
+
+- No entries recorded.
+
+## Failed checks
+
+- No entries recorded.
+
+## Untested checks
+
+- No entries recorded.
+
+## Open findings
+
+- No entries recorded.
+
+## Accepted limitations
+
+- No entries recorded.
+
+## Remaining human items
+
+- No entries recorded.
+
+## Next action
+
+Run is terminal (completed); no further admission.

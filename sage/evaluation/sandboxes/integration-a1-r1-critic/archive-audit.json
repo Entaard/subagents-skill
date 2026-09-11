@@ -1,0 +1,1134 @@
+{
+  "baseline": "c816a6250d0df74e6cbfa9b2a672a2fc15110deb",
+  "baseline_count": 194,
+  "archive_count": 186,
+  "residual_active_entrypoints": [
+    "README.md",
+    "install.sh",
+    "scripts/__pycache__/check-phase0.cpython-311.pyc",
+    "skills/sage-promote/SKILL.md",
+    "skills/sage-promote/agents/openai.yaml",
+    "skills/sage/SKILL.md",
+    "skills/sage/agents/openai.yaml",
+    "uninstall.sh"
+  ],
+  "exact_physical_inventory": false,
+  "entries": [
+    {
+      "path": "artifacts/fixtures/backup-binding-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/accepted-finding-without-verification.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/accepted-result-without-time.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/adopted-result-wrong-unit.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/adoption-after-plan-creation.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/adoption-decision-mismatch.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/adoption-targets-stale-criterion.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/attempt-before-plan-admission.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/attempt-wrong-brief-revision.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/bootstrap-writer.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/brief-cap-drift.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/carried-prior-unit-absent.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/closed-awaiting-human.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/completed-missing-verification.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/conflicting-unit-spec.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/duplicate-plan-revision.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/estimate-agent-ceiling-drift.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/estimate-profile-constant-drift.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/estimate-task-ceiling-drift.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/estimate-unit-ceiling-drift.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/malformed-result.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/plan-admitted-before-created.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-absence-claims-target-identity.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-config-missing-prior-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-config-protected-alias.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-config-traversal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-empty-preservation.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-entry-alias.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-entry-equals-root.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-entry-outside-root.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-entry-protected-alias.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-install-missing-backup-coverage.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-intent-tamper.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-journal-binding.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-journal-order.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-malformed-state-proof.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-nested-root.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-non-nfc-alias.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-path-traversal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-postcondition-before-precondition.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-protected-physical-alias.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-replaced-without-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-root-traversal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-source-traversal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-uninstall-missing-config-restoration.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-uninstall-missing-owned-removal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-uninstall-missing-user-restoration.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-uninstall-mutates-inherited-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-aliases-inherited-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-drops-inherited-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-intended-state-as-precondition.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-mutates-inherited-backup.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-rollback-not-prior-state.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/receipt-update-wrong-prior-digest.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/rejected-finding-without-evidence.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/result-accepted-before-received.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/result-before-attempt.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/result-before-terminal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/revision-drops-unit.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/stale-current-revision.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/superseded-without-replacement.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/uncapped-without-attendance.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/unknown-spend-misrepresented.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/invalid/untriaged-finding.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/lifecycle-operation-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/manifest.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/ownership-receipt.example.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/ownership-receipt.uninstall.example.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/ownership-receipt.update.example.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/valid/bootstrap-awaiting-human.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/valid/interrupted-handover.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/valid/review-run.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/fixtures/valid/zero-delegation.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/generated/knowledge-record-v1.ts",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/generated/ownership-receipt-v1.ts",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/generated/sage-artifact-v1.ts",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/generated/sage-handoff-v1.ts",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/schemas/knowledge-record-v1.schema.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/schemas/ownership-receipt-v1.schema.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/schemas/sage-artifact-v1.schema.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "artifacts/schemas/sage-handoff-v1.schema.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/README.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/baseline-deltas.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/invariant-ownership.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/lifecycle-contract.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/ownership-boundaries.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/promotion-contract.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/promotion-reconciliation-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase0/reviews/authority-privacy-review.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "docs/phase1/equivalence.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/PREREGISTRATION.sha256",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/STATUS.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/__pycache__/pilot.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/__pycache__/score-pilot.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/pilot.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/preregistration.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/prompts/control.txt",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/prompts/treatment.txt",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/root-loss-fixture.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/rubric.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/score-pilot.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "evaluation/phase-1/tasks.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "knowledge/README.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "knowledge/index.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__init__.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/__init__.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/artifacts.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/common.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/facts.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/knowledge.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/__pycache__/lifecycle.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/artifacts.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/common.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/facts.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/knowledge.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "lib/lifecycle.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/README.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/contracts.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/delegation.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/implementation.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/memory.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/recovery.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/review.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/software-review.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "policy/topologies.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/README.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/adapter-contract.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/authority-matrix.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/approval-argument-binding-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/authorization-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/approval-denied-consumed.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/approval-digest-mismatch.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/approval-one-shot-replay.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/approval-revoked-before-consumption.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/approval-time-order.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/caller-principal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/create-with-version.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/credential-payload.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/mutation-without-version.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/payload-hash-mismatch.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/payload-principal.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/replayable-without-cursor.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/transition-policy-commits-plan.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/transition-unknown-operation.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/invalid/transition-worker-closes-run.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/manifest.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/retention-deletion-cases.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/sequences/idempotency-sequence.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/approval-record.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/capability-snapshot.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/create-run-request.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/environment-offer.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/observation.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/plan-commit-transition.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/fixtures/valid/record-finding-request.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/generated/runtime-envelope-v0.ts",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/schemas/runtime-envelope-v0.schema.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/security-and-privacy.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "runtime/protocol-v0/state-model.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/check-phase0.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/check-phase1.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/generate-schema-types.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/generate-skill-bundle.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/refresh-receipt-fixture.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/sage-lifecycle.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": false
+    },
+    {
+      "path": "scripts/sage-light.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "scripts/sage-promote.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage-promote/references/promotion-contract.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage-promote/references/source-manifest.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage-promote/references/workflow.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/codex.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/docs/phase0/promotion-contract.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/guarantees.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/contracts.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/delegation.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/implementation.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/memory.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/recovery.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/review.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/software-review.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/policy/topologies.md",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "skills/sage/references/source-manifest.json",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "tests/__init__.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "tests/__pycache__/__init__.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "tests/__pycache__/test_phase1.cpython-311.pyc",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    },
+    {
+      "path": "tests/test_phase1.py",
+      "inventory_match": true,
+      "git_match": true,
+      "absent_active": true
+    }
+  ]
+}

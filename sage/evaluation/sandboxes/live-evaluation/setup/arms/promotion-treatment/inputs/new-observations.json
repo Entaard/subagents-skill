@@ -1,0 +1,20 @@
+{
+  "kind": "actual local Python csv observations in controlled fixture",
+  "rows": [
+    {
+      "line": "code,label,count",
+      "plain_split_fields": 3,
+      "csv_reader_fields": 3
+    },
+    {
+      "line": "A3,\"Maps, early years\",6",
+      "plain_split_fields": 4,
+      "csv_reader_fields": 3
+    },
+    {
+      "line": "A4,\"He said \"\"hello\"\"\",2",
+      "plain_split_fields": 3,
+      "csv_reader_fields": 3
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "args": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/sandboxes/coordination/critic/installed/sage/bin/sage_state.py",
+    "init",
+    "--run-dir",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary/coordinator",
+    "--run-id",
+    "promotion-recovery",
+    "--objective",
+    "reconcile one reviewed promotion effect",
+    "--criteria",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/independent-boundary/criteria.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"event_id\": \"e-1\", \"ok\": true, \"run_id\": \"promotion-recovery\"}\n",
+  "stderr": ""
+}

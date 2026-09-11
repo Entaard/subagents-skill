@@ -1,0 +1,57 @@
+{
+  "candidate_hash": "46f9c89edf0d39d0bab0c4853e326c0d1e43b41dfb0096415a16f65ba43f157d",
+  "local_links": [
+    {
+      "source": "sage/evaluation/README.md",
+      "target": "../docs/CONTRACTS.md",
+      "exists": true
+    },
+    {
+      "source": "sage/evaluation/README.md",
+      "target": "native-result-protocol-v3.md",
+      "exists": true
+    },
+    {
+      "source": "sage/evaluation/README.md",
+      "target": "live-protocol.md",
+      "exists": true
+    },
+    {
+      "source": "sage/skills/sage/references/run.md",
+      "target": "state.md",
+      "exists": true
+    },
+    {
+      "source": "sage/skills/sage/references/run.md",
+      "target": "state.md",
+      "exists": true
+    },
+    {
+      "source": "sage/skills/sage/references/state.md",
+      "target": "run.md",
+      "exists": true
+    },
+    {
+      "source": "sage/skills/sage-promote/references/promotion.md",
+      "target": "knowledge.md",
+      "exists": true
+    }
+  ],
+  "missing_links": [],
+  "spines": {
+    "sage": 25,
+    "sage-promote": 19
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--",
+      "sage"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,125 @@
+[
+  {
+    "name": "caller-1",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "test_product_install.InstallContractTests.test_default_source_allows_required_evaluation_sandbox_target",
+      "-v"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/sentinel-source/sage/evaluation/tests",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_default_source_allows_required_evaluation_sandbox_target (test_product_install.InstallContractTests.test_default_source_allows_required_evaluation_sandbox_target) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.094s\n\nOK\n"
+  },
+  {
+    "name": "caller-2",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "test_product_install.InstallContractTests.test_default_source_allows_required_evaluation_sandbox_target",
+      "-v"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/sentinel-source/sage/evaluation/tests",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_default_source_allows_required_evaluation_sandbox_target (test_product_install.InstallContractTests.test_default_source_allows_required_evaluation_sandbox_target) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.093s\n\nOK\n"
+  },
+  {
+    "name": "install-parent-control",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-references"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "uninstall-parent-conflict",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-references"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"path parent must be a directory: /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-references/skills/sage/references\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall-restored-positive",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-references"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"operation\": \"uninstall\",\n  \"removed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"retained\": [],\n  \"runtime_state_removed\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "install-parent-control",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/install.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-agents"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"installed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"ok\": true,\n  \"operation\": \"install\",\n  \"receipt\": \"sage/receipt.json\",\n  \"removed_retired\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "uninstall-parent-conflict",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-agents"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"path parent must be a directory: /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-agents/skills/sage/agents\", \"ok\": false}\n"
+  },
+  {
+    "name": "uninstall-restored-positive",
+    "argv": [
+      "bash",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/uninstall.sh",
+      "--target-root",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/parent-agents"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"operation\": \"uninstall\",\n  \"removed\": [\n    \"sage/bin/sage_knowledge.py\",\n    \"sage/bin/sage_state.py\",\n    \"skills/sage-promote/SKILL.md\",\n    \"skills/sage-promote/agents/openai.yaml\",\n    \"skills/sage-promote/references/knowledge.md\",\n    \"skills/sage-promote/references/promotion.md\",\n    \"skills/sage/SKILL.md\",\n    \"skills/sage/agents/openai.yaml\",\n    \"skills/sage/references/delegation.md\",\n    \"skills/sage/references/knowledge.md\",\n    \"skills/sage/references/recovery.md\",\n    \"skills/sage/references/run.md\",\n    \"skills/sage/references/state.md\",\n    \"skills/sage/references/verification.md\"\n  ],\n  \"retained\": [],\n  \"runtime_state_removed\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "name": "full-offline-original-source",
+    "argv": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/run_verification.py",
+      "--mode",
+      "red",
+      "--evidence-dir",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite"
+    ],
+    "cwd": "/Users/tuananhnguyen/Projects/notes/subagents-skill",
+    "exit_code": 0,
+    "stdout": "{\n  \"schema_version\": \"sage-verification-run-v1\",\n  \"mode\": \"red\",\n  \"started_and_finished_at\": \"2026-09-07T19:48:04.487602+00:00\",\n  \"command\": [\n    \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n    \"-m\",\n    \"unittest\",\n    \"discover\",\n    \"-s\",\n    \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests\",\n    \"-p\",\n    \"test_*.py\",\n    \"-v\"\n  ],\n  \"commands\": [\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ],\n    [\n      \"/Library/Frameworks/Python.framework/Versions/3.11/bin/python3\",\n      \"-m\",\n      \"unittest\",\n      \"discover\",\n      \"-s\",\n      \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests\",\n      \"-p\",\n      \"test_*.py\",\n      \"-v\"\n    ]\n  ],\n  \"exit_code\": 0,\n  \"passed\": true,\n  \"tests\": 79,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"skipped\": 0,\n  \"live_trials_run\": false,\n  \"network_used\": false,\n  \"stdout\": \"stdout.txt\",\n  \"stderr\": \"stderr.txt\",\n  \"evidence_dir\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r2-critic/full-suite\"\n}\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "score_without_evidence_accepted": true,
+  "final_pass_while_dependencies_pending": "passed",
+  "duplicate_round_numbers_accepted": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "five_rounds_same_approach_accepted": true,
+  "paired_scores_without_execution_evidence_accepted": {
+    "ok": true,
+    "pair_count": 5,
+    "claim_scope": "these executed cases only"
+  },
+  "modified_files": []
+}

@@ -1,0 +1,1 @@
+Create a compact keyboard-accessible local status board from status.json. Exercise the flow in flow.txt, inspect both declared viewports, and report scoped load and interaction timing.

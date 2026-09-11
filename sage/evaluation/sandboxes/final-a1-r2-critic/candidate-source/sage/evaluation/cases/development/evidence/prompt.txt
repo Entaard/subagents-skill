@@ -1,0 +1,1 @@
+Reconcile the supplied observations and claims into a concise findings report. Cite record IDs for accepted claims and keep contradictions and missing values explicit.

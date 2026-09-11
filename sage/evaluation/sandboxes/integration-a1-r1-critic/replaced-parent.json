@@ -1,0 +1,8 @@
+{
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "{\"code\": \"lifecycle_rejected\", \"message\": \"[Errno 20] Not a directory: '/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/integration-a1-r1-critic/replaced-parent/skills/sage/references/verification.md'\", \"ok\": false}\n",
+  "removed_before_rejection": [],
+  "replacement_preserved": true,
+  "receipt_preserved": true
+}

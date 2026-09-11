@@ -1,0 +1,49 @@
+{
+  "schema_version": "sage-live-setup-freeze-v1",
+  "kind": "setup only; no live outcomes or scores",
+  "pairs": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+    "sha256": "85a57f6c8763077266b7b552b6dd274724f510d9b08f891b203d72d3e122eeb0"
+  },
+  "smokes": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-smokes.json",
+    "sha256": "c1cbecad6d03c329bdebc905c19bef309d6a978f634b6b3107579f596ff57abb"
+  },
+  "initial_arm_hashes": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial-arm-hashes.json",
+    "sha256": "61df0b0d26577afa61bae01ee9bf3f2f396780a903097eba5daf6686dbc529e0"
+  },
+  "setup_sources": [
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/prepare_setup.py",
+      "sha256": "d657388c4e65cbc892f43b6ed285099676fa51fe29c036179bbfa86b5c71ace4"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/freeze_setup.py",
+      "sha256": "927a65a60e6fca877457cc3875ad8a0dc8ab5cbc8a4cd1d4e893a91ecac405fb"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/checks-spec.json",
+      "sha256": "c589782f7429a27fd9863bb60b19937d2bd4f36d592fb83af2c673ff0a8ecd24"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/actor-packet-template.txt",
+      "sha256": "9121f4dbc069ddc7af9b71b8a746b39c39554016edd9075562becc8fd37d219e"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-harness.mjs",
+      "sha256": "b2e4ac9618f5fb8ec1236b2c8cc7ec849b91cd2c0981f37b69d8b3ec30b11b4d"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606"
+    }
+  ],
+  "limitations": [
+    "STATUS was initially read too broadly and contains prior embedded review history; it was not used to shape live prompts or actor packets.",
+    "The evaluator authored task setup and controlled fixtures, not any live task output.",
+    "Neutral browser probe and fixture structural validation are setup evidence only.",
+    "Raw native transcript is unavailable; actor journals must retain provenance and cannot stand in as raw harness recordings."
+  ],
+  "manifest_sha256": "b7a62da16ea8640e940c1d8912e3658fe0032a1b148808fd4fd83fbd2aa03b8c"
+}

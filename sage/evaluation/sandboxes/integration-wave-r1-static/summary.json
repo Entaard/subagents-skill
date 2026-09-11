@@ -1,0 +1,21 @@
+{
+  "schema_version": "sage-integration-static-v1",
+  "candidate": "integration-a1-r1",
+  "dependency_free_checks": {
+    "active_python_syntax": "passed",
+    "strict_current_json": "passed",
+    "active_local_markdown_links": "passed",
+    "explicit_only_skill_metadata": "passed",
+    "legacy_archive_sha256": "passed_186_files",
+    "active_legacy_absence": "passed",
+    "git_diff_check_sage": "passed"
+  },
+  "quick_validate": {
+    "status": "unavailable",
+    "reason": "The bundled validator cannot import the absent PyYAML module.",
+    "evidence": "validator/stderr.txt",
+    "dependency_installed": false,
+    "claimed_pass": false
+  },
+  "historical_note": "metadata-invocation-error.stderr.txt is a retained quoting mistake in the first ad hoc check command, not a product failure; metadata.txt is the corrected dependency-free check."
+}

@@ -1,0 +1,2624 @@
+{
+  "schema_version": "sage-rebuild-status-v1",
+  "project": "Codex Sage rebuild",
+  "updated_at": "2026-09-07T18:05:14Z",
+  "status": "running",
+  "active_module": "promotion",
+  "module_order": [
+    "architecture",
+    "verification",
+    "sage",
+    "promotion",
+    "integration",
+    "final"
+  ],
+  "quality_gate": {
+    "minimum_each_dimension": 8.5,
+    "required_open_error_count": 0,
+    "aggregate_scores_can_compensate": false,
+    "maximum_rounds_per_approach": 4,
+    "separate_astra_critic_required": true,
+    "unrun_score": null
+  },
+  "score_dimensions": [
+    "requirements_and_spec_fit",
+    "architecture_and_coherence",
+    "correctness_and_evidence",
+    "simplicity_and_context_efficiency",
+    "orchestration_and_model_routing",
+    "safety_reversibility_and_recovery",
+    "verification_strength",
+    "reporting_and_maintainability"
+  ],
+  "modules": {
+    "architecture": {
+      "depends_on": [],
+      "status": "passed",
+      "gate": "passed",
+      "active_approach_id": "architecture-a1",
+      "scores": {
+        "requirements_and_spec_fit": 8.8,
+        "architecture_and_coherence": 8.8,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.7,
+        "orchestration_and_model_routing": 8.8,
+        "safety_reversibility_and_recovery": 8.8,
+        "verification_strength": 8.7,
+        "reporting_and_maintainability": 8.6
+      },
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": [
+        {
+          "approach_id": "architecture-a1",
+          "summary": "Codex-native, instruction-first architecture with minimal deterministic state and reversible promotion",
+          "rounds": [
+            {
+              "round": 1,
+              "review_id": "architecture-a1-r1",
+              "gate_type": "design",
+              "verdict": "fail",
+              "scores": {
+                "requirements_and_spec_fit": 7.5,
+                "architecture_and_coherence": 7.5,
+                "correctness_and_evidence": 7,
+                "simplicity_and_context_efficiency": 8.8,
+                "orchestration_and_model_routing": 8,
+                "safety_reversibility_and_recovery": 8.5,
+                "verification_strength": 8.7,
+                "reporting_and_maintainability": 8.6
+              },
+              "open_error_ids": [
+                "ARCH-A1-R1-E1",
+                "ARCH-A1-R1-E2",
+                "ARCH-A1-R1-E3"
+              ],
+              "suggestion_ids": [
+                "ARCH-A1-R1-S1",
+                "ARCH-A1-R1-S2"
+              ],
+              "review_path": "sage/docs/reviews/architecture-a1-r1.json",
+              "reviewed_at": "2026-09-07T14:18:23Z"
+            },
+            {
+              "round": 2,
+              "review_id": "architecture-a1-r2",
+              "gate_type": "design",
+              "verdict": "pass",
+              "scores": {
+                "requirements_and_spec_fit": 8.8,
+                "architecture_and_coherence": 8.8,
+                "correctness_and_evidence": 8.6,
+                "simplicity_and_context_efficiency": 8.7,
+                "orchestration_and_model_routing": 8.8,
+                "safety_reversibility_and_recovery": 8.8,
+                "verification_strength": 8.7,
+                "reporting_and_maintainability": 8.6
+              },
+              "open_error_ids": [],
+              "suggestion_ids": [],
+              "closed_error_ids": [
+                "ARCH-A1-R1-E1",
+                "ARCH-A1-R1-E2",
+                "ARCH-A1-R1-E3"
+              ],
+              "review_path": "sage/docs/reviews/architecture-a1-r2.json",
+              "reviewed_at": "2026-09-07T14:26:37Z"
+            }
+          ]
+        }
+      ],
+      "pending_review": null,
+      "finding_dispositions": [
+        {
+          "id": "ARCH-A1-R1-E1",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/ARCHITECTURE.md:190",
+            "sage/ARCHITECTURE.md:196",
+            "sage/docs/REQUIREMENTS.md:59"
+          ],
+          "verification": "Static contract check: a repeatably verified local invariant qualifies only within its scope; a joint model-and-prompt change remains provisional; transferable and causal guidance require evidence beyond reviewer assent. Class and rationale are persisted.",
+          "review_id": "architecture-a1-r2"
+        },
+        {
+          "id": "ARCH-A1-R1-E2",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/ARCHITECTURE.md:108",
+            "sage/ARCHITECTURE.md:110",
+            "sage/ARCHITECTURE.md:112",
+            "sage/docs/REQUIREMENTS.md:45"
+          ],
+          "verification": "Static trace check: repeated partial worker results require unmet-criterion evidence and a causal hypothesis; unchanged indistinguishable failure cannot receive the same dispatch. Finite allowances force a materially changed plan, preserving user model choices and allowing continued distinct safe strategies.",
+          "review_id": "architecture-a1-r2"
+        },
+        {
+          "id": "ARCH-A1-R1-E3",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/ARCHITECTURE.md:186",
+            "sage/docs/REQUIREMENTS.md:50"
+          ],
+          "verification": "Static trace check: initial no-match followed by a known failure cue triggers retrieval before retry. Unchanged cues/generation avoid reload; changed generations trigger status/qualifier revalidation; selected generation and revisions survive recovery.",
+          "review_id": "architecture-a1-r2"
+        },
+        {
+          "id": "ARCH-A1-R1-S1",
+          "status": "addressed",
+          "evidence": [
+            "sage/ARCHITECTURE.md:237",
+            "sage/docs/REQUIREMENTS.md:44"
+          ],
+          "verification": "Valid authoritative logs can rebuild stale/missing projections; invalid logs pause admission.",
+          "review_id": "architecture-a1-r2"
+        },
+        {
+          "id": "ARCH-A1-R1-S2",
+          "status": "addressed",
+          "evidence": [
+            "sage/ARCHITECTURE.md:208",
+            "sage/docs/REQUIREMENTS.md:54"
+          ],
+          "verification": "Successful, failed, and stopped terminal runs are eligible when integrity-valid and effects are reconciled; active/unknown-effect runs are excluded.",
+          "review_id": "architecture-a1-r2"
+        }
+      ]
+    },
+    "verification": {
+      "depends_on": [
+        "architecture"
+      ],
+      "status": "passed",
+      "gate": "passed",
+      "active_approach_id": "verification-a1",
+      "scores": {
+        "requirements_and_spec_fit": 8.7,
+        "architecture_and_coherence": 8.7,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.6,
+        "orchestration_and_model_routing": 8.6,
+        "safety_reversibility_and_recovery": 8.5,
+        "verification_strength": 8.6,
+        "reporting_and_maintainability": 8.7
+      },
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": [
+        {
+          "approach_id": "verification-a1",
+          "summary": "Compact public-CLI contracts, sandboxed behavior tests, frozen live boundary, and counterbalanced paired protocol",
+          "rounds": [
+            {
+              "round": 1,
+              "review_id": "verification-a1-r1",
+              "gate_type": "verification_design_and_harness",
+              "verdict": "fail",
+              "scores": {
+                "requirements_and_spec_fit": 6.5,
+                "architecture_and_coherence": 6.5,
+                "correctness_and_evidence": 6,
+                "simplicity_and_context_efficiency": 8.6,
+                "orchestration_and_model_routing": 7,
+                "safety_reversibility_and_recovery": 6.5,
+                "verification_strength": 5.5,
+                "reporting_and_maintainability": 6
+              },
+              "open_error_ids": [
+                "VER-A1-R1-E1",
+                "VER-A1-R1-E2",
+                "VER-A1-R1-E3",
+                "VER-A1-R1-E4",
+                "VER-A1-R1-E5"
+              ],
+              "review_path": "sage/docs/reviews/verification-a1-r1.json",
+              "reviewed_at": "2026-09-07T14:54:53Z",
+              "evidence": [
+                "sage/evaluation/sandboxes/verification-a1-critic-harness/report.json",
+                "sage/evaluation/sandboxes/verification-a1-critic-red/report.json",
+                "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+              ]
+            },
+            {
+              "round": 2,
+              "review_id": "verification-a1-r2",
+              "gate_type": "verification_design_and_harness",
+              "verdict": "fail",
+              "scores": {
+                "requirements_and_spec_fit": 7.5,
+                "architecture_and_coherence": 8.7,
+                "correctness_and_evidence": 7,
+                "simplicity_and_context_efficiency": 8.6,
+                "orchestration_and_model_routing": 8.6,
+                "safety_reversibility_and_recovery": 8,
+                "verification_strength": 7,
+                "reporting_and_maintainability": 7
+              },
+              "open_error_ids": [
+                "VER-A1-R1-E5",
+                "VER-A1-R1-E4",
+                "VER-A1-R1-E3"
+              ],
+              "closed_error_ids": [
+                "VER-A1-R1-E1",
+                "VER-A1-R1-E2"
+              ],
+              "review_path": "sage/docs/reviews/verification-a1-r2.json",
+              "reviewed_at": "2026-09-07T15:26:20Z",
+              "evidence": [
+                "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/report.json",
+                "sage/evaluation/sandboxes/verification-a1-r2-critic-red/report.json",
+                "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+              ]
+            },
+            {
+              "round": 3,
+              "review_id": "verification-a1-r3",
+              "gate_type": "verification_design_and_harness",
+              "verdict": "pass",
+              "scores": {
+                "requirements_and_spec_fit": 8.7,
+                "architecture_and_coherence": 8.7,
+                "correctness_and_evidence": 8.6,
+                "simplicity_and_context_efficiency": 8.6,
+                "orchestration_and_model_routing": 8.6,
+                "safety_reversibility_and_recovery": 8.5,
+                "verification_strength": 8.6,
+                "reporting_and_maintainability": 8.7
+              },
+              "open_error_ids": [],
+              "closed_error_ids": [
+                "VER-A1-R1-E5",
+                "VER-A1-R1-E4",
+                "VER-A1-R1-E3"
+              ],
+              "review_path": "sage/docs/reviews/verification-a1-r3.json",
+              "reviewed_at": "2026-09-07T15:37:21Z",
+              "evidence": [
+                "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/report.json",
+                "sage/evaluation/sandboxes/verification-a1-r3-critic-red/report.json",
+                "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/validator-probes.json"
+              ]
+            }
+          ]
+        }
+      ],
+      "pending_review": null,
+      "finding_dispositions": [
+        {
+          "id": "VER-A1-R1-E1",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/docs/CONTRACTS.md",
+            "sage/evaluation/tests/test_product_state.py"
+          ],
+          "reason": "Synchronous root release, delegated release, explicit unknown-effect observations, and derived-snapshot repair now have consistent contracts and focused test bodies.",
+          "review_id": "verification-a1-r2"
+        },
+        {
+          "id": "VER-A1-R1-E2",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/docs/CONTRACTS.md",
+            "sage/evaluation/tests/test_product_state.py"
+          ],
+          "reason": "Objective/constraint amendments, corrected notes, user decisions, retrieval feedback, and non-failure revision reasons are represented in immutable state and projection.",
+          "review_id": "verification-a1-r2"
+        },
+        {
+          "id": "VER-A1-R1-E3",
+          "status": "open",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+          ],
+          "reason": "Input/manifest/evidence repairs verified; required case dimension enforcement remains incomplete.",
+          "review_id": "verification-a1-r2"
+        },
+        {
+          "id": "VER-A1-R1-E4",
+          "status": "open",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json",
+            "sage/evaluation/tests/test_product_state.py",
+            "sage/evaluation/tests/test_product_knowledge.py"
+          ],
+          "reason": "Many requested controls are added, but namespaced positive fixtures now contain dangling references and two negatives remain confounded.",
+          "review_id": "verification-a1-r2"
+        },
+        {
+          "id": "VER-A1-R1-E5",
+          "status": "open",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+          ],
+          "reason": "Prior false accepts are repaired, but the new disposition gate forbids a legitimate fail-to-fail transition.",
+          "review_id": "verification-a1-r2"
+        },
+        {
+          "id": "VER-A1-R1-E5",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/validator-probes.json",
+            "sage/evaluation/tests/test_harness.py",
+            "sage/evaluation/score_status.py"
+          ],
+          "reason": "Direct probe accepts a second failed round while retaining E-1 and both failures. Harness checks later closure, duplicate/inconsistent dispositions, and round-four replanning.",
+          "review_id": "verification-a1-r3"
+        },
+        {
+          "id": "VER-A1-R1-E4",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/validator-probes.json",
+            "sage/evaluation/tests/support.py",
+            "sage/evaluation/tests/test_product_state.py",
+            "sage/evaluation/tests/test_product_knowledge.py"
+          ],
+          "reason": "Namespacing rewrites trigger/correction references. The limit negative differs only in its initial committed limit. Rollback has a successful control followed by valid-field tampering and an asserted generation_hash_mismatch.",
+          "review_id": "verification-a1-r3"
+        },
+        {
+          "id": "VER-A1-R1-E3",
+          "status": "verified_fixed",
+          "evidence": [
+            "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/validator-probes.json",
+            "sage/evaluation/pairing.py",
+            "sage/evaluation/tests/test_harness.py"
+          ],
+          "reason": "Preparation loads the frozen rubric, requires all base and family dimensions, and records non-applicability. Direct probes reject omitted routing efficiency and creative experience; a compliant unknown-cost pair validates.",
+          "review_id": "verification-a1-r3"
+        }
+      ]
+    },
+    "sage": {
+      "depends_on": [
+        "verification"
+      ],
+      "status": "passed",
+      "gate": "passed",
+      "active_approach_id": "sage-a1",
+      "scores": {
+        "requirements_and_spec_fit": 8.6,
+        "architecture_and_coherence": 8.6,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.5,
+        "orchestration_and_model_routing": 8.7,
+        "safety_reversibility_and_recovery": 8.6,
+        "verification_strength": 8.7,
+        "reporting_and_maintainability": 8.5
+      },
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": [
+        {
+          "approach_id": "sage-a1",
+          "summary": "Instruction-first explicit Sage skill with focused run, delegation, verification, recovery, and installed state-contract references plus one dependency-free append-only state validator/projector",
+          "rounds": [
+            {
+              "schema_version": "sage-rebuild-review-v1",
+              "review_id": "sage-a1-r1",
+              "approach_id": "sage-a1",
+              "round": 1,
+              "reviewed_at": "2026-09-07T16:12:29Z",
+              "gate_type": "deterministic",
+              "verdict": "fail",
+              "open_error_count": 6,
+              "open_error_ids": [
+                "SAGE-A1-R1-E1",
+                "SAGE-A1-R1-E2",
+                "SAGE-A1-R1-E3",
+                "SAGE-A1-R1-E4",
+                "SAGE-A1-R1-E5",
+                "SAGE-A1-R1-E6"
+              ],
+              "reviewer": {
+                "agent": "/root/sage_critic",
+                "role": "independent main Sage critic; no product repairs",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "effective_model": "unknown",
+                "effective_effort": "unknown"
+              },
+              "scores": {
+                "requirements_and_spec_fit": 7.0,
+                "architecture_and_coherence": 8.0,
+                "correctness_and_evidence": 6.5,
+                "simplicity_and_context_efficiency": 8.7,
+                "orchestration_and_model_routing": 7.5,
+                "safety_reversibility_and_recovery": 6.3,
+                "verification_strength": 7.3,
+                "reporting_and_maintainability": 6.8
+              },
+              "score_evidence": {
+                "requirements_and_spec_fit": {
+                  "reason": "The explicit-only skill substantially covers qualification, root ownership, excellence criteria, independent review, native tools, cause-based replanning and evidence boundaries. Recorded lifecycle, recovery, projection, schema, replanning and reporting nevertheless violate applicable R-013/R-015/R-025/R-030 through R-038 requirements in reproducible CLI cases.",
+                  "evidence": [
+                    "sage/skills/sage/SKILL.md",
+                    "sage/docs/REQUIREMENTS.md",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+                  ]
+                },
+                "architecture_and_coherence": {
+                  "reason": "The instruction-first split and single dependency-free helper remain coherent and modest. Implementation derives conflicting truth: append/release considers facts that resume ignores, while a hash-valid projection attributes a historical result to a different current revision. These are repairable within the intended architecture.",
+                  "evidence": [
+                    "sage/ARCHITECTURE.md",
+                    "sage/scripts/sage_state.py:376",
+                    "sage/scripts/sage_state.py:410",
+                    "sage/scripts/sage_state.py:499"
+                  ]
+                },
+                "correctness_and_evidence": {
+                  "reason": "All 9 frozen state tests and 5 focused regressions pass, and the documented tiny event wave initializes and appends. Independent positive/negative controls expose six grouped errors; existing success claims are accurately scoped, but the main module is not yet reliable under valid recovery and revision sequences.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+                    "sage/docs/IMPLEMENTATION.md"
+                  ]
+                },
+                "simplicity_and_context_efficiency": {
+                  "reason": "A 25-line spine plus five focused references gives useful read routing, a zero-agent path, concrete evidence families, and capability-first delegation without a scheduler or protocol framework. The 543-line helper has no third-party dependencies. Active source Markdown links resolve, and the package-local event example is usable. No unrelated legacy references were treated as active.",
+                  "evidence": [
+                    "sage/skills/sage/SKILL.md",
+                    "sage/skills/sage/references/run.md",
+                    "sage/skills/sage/references/state.md",
+                    "sage/scripts/sage_state.py"
+                  ]
+                },
+                "orchestration_and_model_routing": {
+                  "reason": "Routing priors are explicitly uncalibrated; user overrides, fork constraints, effective-identity uncertainty, total coordination cost and independent review are clear. Recorded assignments can nevertheless attach two actors to one writer task and release it while one remains active; later initial-labeled retries also bypass cause fields. Live model placement or savings was not observed.",
+                  "evidence": [
+                    "sage/skills/sage/references/delegation.md",
+                    "sage/skills/sage/SKILL.md",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/two-handles-one-active/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/retry-initial-reason/events.jsonl"
+                  ]
+                },
+                "safety_reversibility_and_recovery": {
+                  "reason": "Atomic append, invalid-log preservation and full-projection snapshot repair have meaningful passing controls. Resume still authorizes admission for unreleased writers and blocks a merely planned root writer; a known failed result with unknown effects can be accepted into an unreconcilable state. This dimension is materially below the gate.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+                  ]
+                },
+                "verification_strength": {
+                  "reason": "The frozen tests cover genuine atomicity, evidence, findings, dependency and recovery failures, and the new regressions improve them. Their boundary cases miss known-result/unknown-effect combinations, multiple handles, late old-revision results, malformed ordinary JSON types and truthful report contents. Independent probes retain exact inputs and outputs; the critique does not turn test count into a pass.",
+                  "evidence": [
+                    "sage/evaluation/tests/test_product_state.py",
+                    "sage/tests/test_state.py",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+                  ]
+                },
+                "reporting_and_maintainability": {
+                  "reason": "The implementation log separates tested source behavior from future dependencies and effective-model uncertainty. Derived reports omit recorded untested evidence, accepted residual limitations, failed checks and terminal status; they can therefore present a stopped run as a clean set of delivered results. An unreachable correction-reference branch also weakens maintainable history validation.",
+                  "evidence": [
+                    "sage/docs/IMPLEMENTATION.md",
+                    "sage/scripts/sage_state.py:255",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/report.md",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/closure-later-failed-check/report.md"
+                  ]
+                }
+              },
+              "errors": [
+                {
+                  "id": "SAGE-A1-R1-E1",
+                  "rank": 1,
+                  "severity": "major",
+                  "title": "Assignment release, resume safety and effect reconciliation disagree about the same recorded facts",
+                  "requirements": [
+                    "R-015",
+                    "R-025",
+                    "R-036",
+                    "R-038"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:308",
+                    "sage/scripts/sage_state.py:326",
+                    "sage/scripts/sage_state.py:376",
+                    "sage/scripts/sage_state.py:499"
+                  ],
+                  "reproducer": "Run the sandbox probes.py with the recorded sandbox environment. Inspect resume-writer-result-no-terminal, resume-root-failed-unknown, root-failed-unknown-reconciliation, resume-planned-root and two-handles-one-active in results.json. Each directory retains its exact JSONL; resume cases retain agents-input.json. Direct CLI commands are also captured in results.json.",
+                  "expected": "Admission advice and append admission must agree on admitted task revisions, their unresolved effects, and all recorded actors that can still write. A known result alone must not release a delegated writer. Merely planned tasks must not hold a writer barrier. Every accepted unknown-effect state needs an append-only reconciliation route, or a contradictory terminal-result shape must be rejected at ingestion.",
+                  "actual": "A delegated passed/reconciled result with no terminal observation and a missing live handle returns admission_allowed=true while proposing missing/unknown. A root failed/unknown-effect result also returns true; a later failed/reconciled result is rejected as invalid_transition, leaving no root-effect reconciliation path. An unadmitted planned root write returns false. Two agent.requested handles attach to one task, and after agent-a completes while agent-b remains active/unknown, validation accepts admission of a second writer because released() uses any terminal handle.",
+                  "fix_verification": "Retain all five reproductions. Missing/idle/interrupted unreleased delegated writers and root unknown effects must forbid admission; planned and genuinely released root work must permit it. Reject concurrent duplicate ownership or keep every unreconciled handle in the barrier. Show a durable reconciliation path for every accepted unknown-effect result without replacing history. Preserve the existing completed-reader control and both result/observation orderings.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/two-handles-one-active/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/single-released-handle-control/events.jsonl"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E2",
+                  "rank": 2,
+                  "severity": "major",
+                  "title": "A late result for an old revision marks the current unadmitted revision passed",
+                  "requirements": [
+                    "R-013",
+                    "R-030",
+                    "R-031",
+                    "R-036"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:410"
+                  ],
+                  "reproducer": "python3 sage/scripts/sage_state.py snapshot --run-dir sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result --write; then run report --write on the same directory. Fixture admits t-1 revision 1, revises its inputs at revision 2, and only then records the revision-1 result.",
+                  "expected": "Retain the late historical result while the current revision-2 task remains planned with no revision-2 result. Reports must not count the revised task as delivered.",
+                  "actual": "The valid hash-bound snapshot contains tasks.t-1.revision=2, state=passed and result.task_revision=1. report.md lists t-1: passed. The projector keys task.result updates only by task_id despite the validator keeping revision-specific results.",
+                  "fix_verification": "Test both a late old result and reconciliation of an old unknown result after a new plan. Snapshot/current report may update only the matching revision, while old facts remain recoverable from immutable history. Verify admission/closure still require the current revision's own result.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/snapshot.json",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/report.md"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E3",
+                  "rank": 3,
+                  "severity": "major",
+                  "title": "Ordinary malformed JSON types escape the structured rejection contract and invalid common fields pass",
+                  "requirements": [
+                    "R-030",
+                    "R-036",
+                    "R-056"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:126",
+                    "sage/scripts/sage_state.py:243",
+                    "sage/scripts/sage_state.py:245",
+                    "sage/scripts/sage_state.py:246",
+                    "sage/scripts/sage_state.py:247"
+                  ],
+                  "reproducer": "Run validate on the enum-array, version-bool, sequence-float and timestamp-invalid directories under the critic sandbox. They differ from a valid run.opened only in type=[], v=true, seq=1.0, or at=2026-99-99T99:99:99Z respectively.",
+                  "expected": "Each input is rejected as a contract/data error, exit 2, with one structured JSON error and no derived-state mutation. Enum fields must be type-checked before hash-set membership; integer and RFC3339 claims must be checked as those types/values.",
+                  "actual": "type=[] produces an uncaught TypeError traceback and exit 1. v=true, seq=1.0 and an impossible calendar/time timestamp validate successfully. Similar unchecked set membership exists in payload enum validation.",
+                  "fix_verification": "Add table-driven wrong-type probes across event kinds and live-agent input, including list/object/null enum values, noninteger common fields and invalid timestamps. Preserve duplicate-key/nonfinite controls and verify invalid append/snapshot inputs preserve existing bytes. Do not mask programmer errors with a blanket success path.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/enum-array/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/timestamp-invalid/events.jsonl"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E4",
+                  "rank": 4,
+                  "severity": "major",
+                  "title": "Plan revision logic rejects real graph expansion while admitting later initial-labeled retries",
+                  "requirements": [
+                    "R-012",
+                    "R-037",
+                    "R-038"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:263",
+                    "sage/scripts/sage_state.py:280"
+                  ],
+                  "reproducer": "Validate new-task-only and retry-initial-reason in the critic sandbox. The first retains t-1 and adds t-2 following recorded evidence without changing allowances. The second retries a failed admitted task at revision 2 with reason=initial and no failure cause/evidence/strategy fields.",
+                  "expected": "A genuinely added task counts as an operational graph change. Only the first plan may use initial; a later revision must satisfy its failure, evidence-change or user-amendment reason contract.",
+                  "actual": "The graph expansion fails with no_progress because adding a new task never sets changed=true; changing only no_progress text makes the otherwise identical control pass. The later initial-labeled retry validates and admits its new revision without any causal retry record.",
+                  "fix_verification": "Accept the pure graph-expansion control with unchanged old task revisions. Reject later initial reasons, preserve valid evidence/user-amendment replans without fictitious failures, and retain finite attempt/revision and unchanged-dispatch negatives.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/new-task-only/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/new-task-with-bound-control/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/retry-initial-reason/events.jsonl"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E5",
+                  "rank": 5,
+                  "severity": "moderate",
+                  "title": "Amendment correction links bypass reference validation",
+                  "requirements": [
+                    "R-013",
+                    "R-030",
+                    "R-031"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:255",
+                    "sage/scripts/sage_state.py:349"
+                  ],
+                  "reproducer": "python3 sage/scripts/sage_state.py snapshot --run-dir sage/evaluation/sandboxes/sage-a1-r1-critic/dangling-amendment --write. The amendment sets corrects_event_id=missing. The valid-amendment-control differs only by pointing at e-1.",
+                  "expected": "Reject a correction that does not reference an earlier event and preserve existing projection bytes; accept the earlier-event control.",
+                  "actual": "Both inputs succeed. The early run.amended branch only adds the event ID to amendments, making the later shared note/amendment correction-reference branch unreachable for amendments.",
+                  "fix_verification": "Validate amendment correction links on every append/validation path. Test missing, future and valid prior IDs, alongside the already covered note correction case.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/dangling-amendment/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/valid-amendment-control/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E6",
+                  "rank": 6,
+                  "severity": "major",
+                  "title": "Derived reports erase recorded uncertainty, residual findings and terminal outcome",
+                  "requirements": [
+                    "R-005",
+                    "R-031",
+                    "R-032",
+                    "R-034"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:509"
+                  ],
+                  "reproducer": "Run report --write for report-omissions and closure-later-failed-check in the critic sandbox. The first records untested mobile-viewport evidence, an accepted minor finding and status=stopped. The second records a later failed integration check after an earlier passed check.",
+                  "expected": "The derived report must show terminal status, untested evidence as well as not_tested checks, accepted residual limitations, and relevant failed checks. It must faithfully surface these recorded facts independently of the root's semantic completion decision.",
+                  "actual": "The first report lists a delivered passed task, Unknowns=None, Untested checks=None and Open findings=None; it omits the stopped outcome, untested viewport and accepted overlap. The second omits the failed integration check. Both show next action close even though their logs are already closed.",
+                  "fix_verification": "Assert report contents against events, not just section headings. Retain terminal outcome, accepted limitations, failed/untested observations and clear terminal next action while keeping observation/inference/unknown distinctions. Failed checks may need root disposition rather than automatic semantic failure, but they must never silently disappear.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/report.md",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/closure-later-failed-check/report.md"
+                  ]
+                }
+              ],
+              "suggestions": [
+                {
+                  "id": "SAGE-A1-R1-S1",
+                  "summary": "Clarify the narrow structural completion gate in installed state.md: it currently accepts a passed check with no evidence, closure evidence with no criterion association in its original record, and a historical passed check despite a later failure. The broader skill correctly assigns semantic completion judgment to root; these probes are not separately scored as helper-contract errors because the frozen contract does not define check supersession or require nonempty check evidence.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+                    "sage/docs/CONTRACTS.md",
+                    "sage/skills/sage/references/verification.md"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-S2",
+                  "summary": "Have focused regressions honor SAGE_EVALUATION_SANDBOX instead of overwriting the shared state-regressions directory. For this review only, the runner overrides the root method to a fresh critic directory without changing assertions or tested behavior.",
+                  "evidence": [
+                    "sage/tests/test_state.py:19",
+                    "sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py"
+                  ]
+                }
+              ],
+              "executed_checks": [
+                {
+                  "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r1-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r1-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py",
+                  "exit_code": 0,
+                  "evidence": "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+                  "interpretation": "Diagnostic runner exits zero after capturing results, not after asserting product correctness. It runs 9 original contract tests and 5 original regressions (all pass), controlled adversarial CLI probes, and the tiny example init/append. Wrong product outcomes are retained and scored above. Regression output root alone is redirected."
+                },
+                {
+                  "command": "Read active Markdown links and assert each resolves relative to its containing file",
+                  "exit_code": 0,
+                  "evidence": "sage/skills/sage/references/state.md",
+                  "interpretation": "Source reference usability check only; installed integration and live behavior are deferred."
+                }
+              ],
+              "input_hashes": {
+                "sage/scripts/sage_state.py": "2799cc3ca19c2ab7bb011268943ad383904f5a35f0be055cec38bbb5fa2bad16",
+                "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+                "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+                "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+                "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+                "sage/skills/sage/references/recovery.md": "57758844100705f4e7731593889e057918e21562acb6e4e2a7cff39a13761ed5",
+                "sage/skills/sage/references/state.md": "f082c8c17e1f9789bc592ab08fb6ec1ace03fe0920b6b792888e77831d36d6bf",
+                "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+                "sage/tests/test_state.py": "8ff449838c5f5f8d791df2166c67c3619e99dc2f408312b04219782531a7a8d7",
+                "sage/docs/STATUS.json": "77942221aff3e459be2aabd763c05a5d84aa598bad0189e840286dfa3c4336fb"
+              },
+              "limitations": [
+                "Only the frozen main Sage module was assessed. Promotion helper, promotion skill rewrite, installer/generator cutover, legacy quarantine and live trials remain later dependencies; no missing-dependency error was invented.",
+                "The reviewer did not change product files or perform live external effects. Fixture-based recorded-state safety checks do not prove a physical writer lease or actual authority.",
+                "Semantic evidence quality, actual independent-worker behavior, installed execution, costs, token savings and effective reviewer model/effort remain unobserved.",
+                "Existing pending gate_type main_sage was unsupported by score_status.py. Review persistence normalizes only that pending bookkeeping field to deterministic; validator code and prior history remain unchanged."
+              ],
+              "next_action": "Repair Sage lifecycle/release accounting first (SAGE-A1-R1-E1), then revision-specific projection, strict input validation, plan transitions, amendment links and truthful reports. Add the retained controlled cases to focused regressions, preserve this failed round, and freeze sage-a1 round 2 for the separate critic. Do not begin promotion."
+            },
+            {
+              "schema_version": "sage-rebuild-review-v1",
+              "review_id": "sage-a1-r2",
+              "approach_id": "sage-a1",
+              "round": 2,
+              "reviewed_at": "2026-09-07T16:45:00Z",
+              "gate_type": "deterministic",
+              "verdict": "fail",
+              "open_error_count": 2,
+              "open_error_ids": [
+                "SAGE-A1-R1-E1",
+                "SAGE-A1-R1-E3"
+              ],
+              "reviewer": {
+                "agent": "/root/sage_critic",
+                "role": "independent main Sage critic; no product repairs",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "effective_model": "unknown",
+                "effective_effort": "unknown"
+              },
+              "scores": {
+                "requirements_and_spec_fit": 7.9,
+                "architecture_and_coherence": 8.3,
+                "correctness_and_evidence": 7.5,
+                "simplicity_and_context_efficiency": 8.6,
+                "orchestration_and_model_routing": 8.0,
+                "safety_reversibility_and_recovery": 7.0,
+                "verification_strength": 7.9,
+                "reporting_and_maintainability": 8.7
+              },
+              "score_evidence": {
+                "requirements_and_spec_fit": {
+                  "reason": "Four prior error groups are independently repaired, and D-020/D-021 improve truthful stopped closure and exact native identity. Existing writer/recovery and data-rejection requirements still fail in two neighboring cases; the main module cannot pass yet.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "architecture_and_coherence": {
+                  "reason": "Revision-specific task replay and one-assignment identity repair the previous projection/ownership split. However, replay preserves the first terminal observation indefinitely while snapshot agents show later active/unknown facts, so derived safety and visible state still disagree.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "correctness_and_evidence": {
+                  "reason": "Fresh unmodified suites pass 9 frozen state tests and 14 regressions. Exact prior probes replay in a new sandbox and confirm four repairs plus substantial partial repairs to E1/E3. New temporal-observation and UTF-8 probes fail with retained CLI evidence; no product or live pass is inferred.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "simplicity_and_context_efficiency": {
+                  "reason": "The short explicit-only spine and focused references retain adaptive zero-agent execution, domain-specific excellence and concise recovery guidance. New replay logic remains a small dependency-free helper, although terminal handling is duplicated and needs one consistent interpretation.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "orchestration_and_model_routing": {
+                  "reason": "Native /root/... handles round-trip and a released same handle can be reassigned without borrowing old completion. Priors, user choices and requested/effective uncertainty remain honest. Current contradictory lifecycle observations can still be ignored by release/admission, undermining orchestration safety.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "safety_reversibility_and_recovery": {
+                  "reason": "Unknown/unknown results reconcile append-only, contradictory known/unknown results reject upfront, and prior root/delegated controls now behave correctly. A terminal lifecycle before result becomes absorbing despite a later active/unknown observation, admitting another writer; invalid UTF-8 in a derived snapshot also blocks valid-log repair.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "verification_strength": {
+                  "reason": "The expanded regressions cover material temporal/revision, handle, graph, schema, evidence and reporting boundaries and honor the fresh sandbox. Missing tests remain for superseded terminal observations before release and UTF-8 across every JSON reader; these were independently reproduced with positive controls.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "reporting_and_maintainability": {
+                  "reason": "Prior report omissions are verified fixed: stopped outcome, untested evidence, failed checks, accepted residuals and terminal next action are all present. Installed guidance explicitly states structural completion limits, and the implementation log preserves failures and unobserved dependencies.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                }
+              },
+              "errors": [
+                {
+                  "id": "SAGE-A1-R1-E1",
+                  "rank": 1,
+                  "severity": "major",
+                  "title": "An early terminal observation becomes irrevocable before the assignment has released",
+                  "requirements": [
+                    "R-015",
+                    "R-025",
+                    "R-030",
+                    "R-036"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:354",
+                    "sage/scripts/sage_state.py:439",
+                    "sage/scripts/sage_state.py:585"
+                  ],
+                  "reproducer": "Run the r2 sandbox probes.py. For terminal-then-active/idle/interrupted/missing, events first admit w-1 and assign /root/writer, then record completed/reconciled, then a later nonterminal/unknown observation BEFORE the result, and only afterward record the passed/reconciled result. Each probe snapshots, resumes with the matching live lifecycle, and appends admission of w-2. Captured exact commands and outputs are in results.json; each directory retains admission.json and its log.",
+                  "expected": "Before both release facts are established, a newer active or unknown lifecycle must invalidate reliance on an earlier terminal observation, or the contradictory event must be explicitly rejected as requiring reconciliation. Resume and append must keep the writer barrier until a fresh terminal reconciliation. Retain historical fully released assignments without inventing a new barrier merely because a completed worker disappears later.",
+                  "actual": "All four histories validate, their snapshots visibly show the newer active/idle/interrupted/missing unknown state, resume returns admission_allowed=true, and append accepts the second writer. validate and execution_facts ignore every later observation once any completed/reconciled observation appears, even when the task result had not yet arrived. command_resume also derives advice only from those retained old facts. The fresh-terminal control succeeds as it should; properly reassigned same-handle work correctly blocks old-completion reuse.",
+                  "fix_verification": "Add the four preserved orderings and a fresh terminal control. Make release a fact of a fully reconciled assignment, not a permanently absorbing first terminal observation. Current live active/unknown contradictions must not be hidden by a historical terminal fact; separate historical release from latest handle state explicitly. Preserve result-first/observation-first success, historical missing released handles, same-handle fresh assignment barriers and append-only unknown reconciliation.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/snapshot.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/admission.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/fresh-terminal-control/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/same-handle-reused/events.jsonl"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-E3",
+                  "rank": 2,
+                  "severity": "major",
+                  "title": "Invalid UTF-8 bypasses structured rejection and prevents repairing a derived snapshot",
+                  "requirements": [
+                    "R-030",
+                    "R-036",
+                    "R-056"
+                  ],
+                  "locations": [
+                    "sage/scripts/sage_state.py:78",
+                    "sage/scripts/sage_state.py:519",
+                    "sage/scripts/sage_state.py:636"
+                  ],
+                  "reproducer": "The r2 probes create utf8/invalid.json containing one 0xff byte, then pass it to append --event, resume --agents and init --criteria. They also replace snapshot.json with that byte while preserving a valid events.jsonl, then invoke resume with a valid empty agents array. Exact commands and stderr are in results.json.",
+                  "expected": "Invalid UTF-8 supplied as JSON data returns exit 2 with one JSON data error. Invalid UTF-8 in a derived snapshot must be treated as corrupt/stale and regenerated from the valid authoritative log. Log bytes must remain unchanged. The existing invalid-authoritative-log control must continue to preserve derived bytes.",
+                  "actual": "All four commands exit 1 with uncaught UnicodeDecodeError tracebacks. read_events handles UnicodeDecodeError, but read_json does not; bound_snapshot does not catch it either. Thus corruption confined to a disposable projection blocks the documented valid-log recovery path.",
+                  "fix_verification": "Exercise invalid UTF-8 for criteria, single-event append, live-agent input, authoritative JSONL and derived snapshot. Require structured rejection for input/log cases, successful projection repair for a valid log plus bad snapshot, and unchanged authoritative bytes throughout. Preserve existing wrong-type, duplicate-key and nonfinite controls.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/events.jsonl",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/invalid.json",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/snapshot.json"
+                  ]
+                }
+              ],
+              "suggestions": [],
+              "executed_checks": [
+                {
+                  "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r2-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r2-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r2-critic/probes.py",
+                  "exit_code": 0,
+                  "evidence": "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+                  "interpretation": "Evidence-capture runner, not a product-success assertion. Runs 9 frozen tests and 14 regressions unchanged (all pass), exact r1 probe replay under a synthetic fresh __file__, and neighboring temporal/reuse/UTF-8 probes. The resulting product failures remain open."
+                }
+              ],
+              "input_hashes": {
+                "sage/scripts/sage_state.py": "1a60766409c5dc7b48413e3f61cf32f3095e2f72016b8c37b7cd1f5106c2c3de",
+                "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+                "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+                "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+                "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+                "sage/skills/sage/references/recovery.md": "f8dbc5e566964c7f75b2e8623d2b43762f855014786e1f28c5a440028e335e6b",
+                "sage/skills/sage/references/state.md": "783581f71ae3e9742d91c063e2558211497e19bbfd38af27f27a1a707f0fa928",
+                "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+                "sage/tests/test_state.py": "74c351548eccc43858133961efa1045915fdd1a835dcd44862999f7334b6afa9",
+                "sage/docs/STATUS.json": "a701a91e690293deaee0f4deeb369509f39018bc08acfcc26c3c6c72a5ee425f",
+                "sage/docs/CONTRACTS.md": "0baf421d7077218429b11d392361efa36bf5f79b6b005c451c81a1d0699837e8",
+                "sage/docs/DECISIONS.md": "31bc683ad0836f066e50174533260803c30a0279169dd9346da9934aa73835b5",
+                "sage/ARCHITECTURE.md": "120ff227a6d82b7f88f2f2be616d139776fff8e670ac1eaf898bc4faf5881a09"
+              },
+              "limitations": [
+                "This is a deterministic main-Sage review only. Promotion, installation, legacy quarantine, live task quality and model/cost comparison remain later dependencies, not missing-module errors.",
+                "Requested reviewer model/effort are Astra/high; effective identity remains unknown. No external effects, physical lease enforcement, actual independence or semantic evidence quality are claimed from fixtures.",
+                "D-020/D-021 are explicit scope/identity clarifications inspected against code and tests; historical passed architecture/verification gates are not rewritten.",
+                "The two remaining error groups are sufficient to reject this round. Further broad exploration is deferred to the repaired frozen candidate."
+              ],
+              "next_action": "Repair Sage E1 temporal release accounting and E3 UTF-8 rejection/projection recovery, preserving four verified repairs and this failed round. Add the exact fresh controls, run the scoped suites, then freeze sage-a1 round 3 for independent review. Do not begin promotion.",
+              "suggestion_dispositions": [
+                {
+                  "id": "SAGE-A1-R1-S1",
+                  "status": "addressed",
+                  "reason": "D-020 and installed state.md define associated observations/evidence-bearing checks and explicitly reserve differently named check supersession for root; replay confirms structural negatives and report visibility.",
+                  "evidence": [
+                    "sage/docs/DECISIONS.md",
+                    "sage/skills/sage/references/state.md",
+                    "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+                  ]
+                },
+                {
+                  "id": "SAGE-A1-R1-S2",
+                  "status": "addressed",
+                  "reason": "The normal 14-test regression suite now honors SAGE_EVALUATION_SANDBOX without a root-method override.",
+                  "evidence": [
+                    "sage/tests/test_state.py",
+                    "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt"
+                  ]
+                }
+              ]
+            },
+            {
+              "schema_version": "sage-rebuild-review-v1",
+              "review_id": "sage-a1-r3",
+              "approach_id": "sage-a1",
+              "round": 3,
+              "reviewed_at": "2026-09-07T17:05:20Z",
+              "gate_type": "deterministic",
+              "verdict": "pass",
+              "open_error_count": 0,
+              "open_error_ids": [],
+              "reviewer": {
+                "agent": "/root/sage_critic",
+                "role": "independent main Sage critic; no product repairs",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "effective_model": "unknown",
+                "effective_effort": "unknown"
+              },
+              "scores": {
+                "requirements_and_spec_fit": 8.6,
+                "architecture_and_coherence": 8.6,
+                "correctness_and_evidence": 8.6,
+                "simplicity_and_context_efficiency": 8.5,
+                "orchestration_and_model_routing": 8.7,
+                "safety_reversibility_and_recovery": 8.6,
+                "verification_strength": 8.7,
+                "reporting_and_maintainability": 8.5
+              },
+              "score_evidence": {
+                "requirements_and_spec_fit": {
+                  "reason": "The six main-module error groups are now independently verified repaired across three retained rounds. Explicit-only execution, proportional delegation, positive artifact criteria, durable state, causal retry records, truthful reports and recovery match the declared source-module scope; later integration/live requirements are not claimed complete.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "architecture_and_coherence": {
+                  "reason": "D-022 defines one temporal release boundary and shared mark_release/record_observation primitives implement it in validation and replay. Revision-specific facts, opaque native identity, immutable historical release and current projections now agree in the repaired cases without a scheduler or physical-lease claim.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "correctness_and_evidence": {
+                  "reason": "Fresh 9-test frozen and 16-test regression suites pass. Sixty-one explicit assertions pass across exact prior adversarial replay, four provisional lifecycle reversals, same-handle reassignment, invalid UTF-8, 32 outcome/effect/owner/order combinations and the five-command documented example. The pass is limited to tested source behavior.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "simplicity_and_context_efficiency": {
+                  "reason": "The 25-line spine stays short, and focused references keep world/domain evidence selection, task-specific excellence and inline execution accessible. The 657-line dependency-free helper has grown to cover the frozen vocabulary and strict boundaries but remains finite and specific; no generic runtime framework or routine worker fleet is introduced.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "orchestration_and_model_routing": {
+                  "reason": "Requested/effective identity, native canonical handles, inherited versus fresh fork behavior, capability-first uncalibrated priors and user overrides remain explicit. Fresh same-handle assignments cannot borrow prior completion, while genuinely released historical assignments remain reusable. Current tests establish recorded orchestration semantics only.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "safety_reversibility_and_recovery": {
+                  "reason": "Latest provisional observations now govern until result and terminal reconciliation coexist. All four unknown/nonterminal reversals block resume and second-writer append; fresh terminal evidence permits release. UTF-8 input/log errors are structured, corrupt derived snapshots rebuild only from valid logs, and authoritative bytes survive rejection.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "verification_strength": {
+                  "reason": "Public CLI and declared-file assertions cover both positive and negative transitions and meaningful byte preservation. The independent 61-assertion runner checks outcome values rather than merely capturing exit codes, and the 32-case reconciliation matrix broadens both fact-order and effect-class coverage. Existing prior repairs remain green.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md"
+                  ]
+                },
+                "reporting_and_maintainability": {
+                  "reason": "Current reports retain terminal status, untested evidence, failed checks and accepted limits, with semantic check supersession explicitly assigned to root. A prior supplemental replay was overwritten by a scratch runner: the exact limitation and current hashes are now preserved rather than relabeled original. Original failed critic outcomes and all score history remain available.",
+                  "evidence": [
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+                    "sage/skills/sage/references/state.md",
+                    "sage/evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json",
+                    "sage/evaluation/sandboxes/sage-a1-r3-replay/report-omissions/report.md"
+                  ]
+                }
+              },
+              "errors": [],
+              "suggestions": [],
+              "executed_checks": [
+                {
+                  "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r3-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r3-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r3-critic/review_checks.py",
+                  "exit_code": 0,
+                  "tests": 25,
+                  "test_failures": 0,
+                  "test_errors": 0,
+                  "explicit_assertions": 61,
+                  "assertion_failures": 0,
+                  "evidence": "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+                  "interpretation": "9 original frozen tests and 16 original regressions run without assertion overrides. Historical critic source is replayed with only output destinations redirected; prior main/supplemental evidence is not modified by this review. The 61 assertions include a 32-case valid reconciliation matrix and the complete documented init/append/snapshot/validate/report example."
+                },
+                {
+                  "command": "Parse helper/regression Python syntax and resolve every local link in the active source skill/reference set",
+                  "exit_code": 0,
+                  "evidence": "sage/skills/sage/references/state.md",
+                  "interpretation": "Source usability only; no installed integration pass."
+                }
+              ],
+              "input_hashes": {
+                "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+                "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+                "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+                "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+                "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+                "sage/skills/sage/references/recovery.md": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+                "sage/skills/sage/references/state.md": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+                "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+                "sage/tests/test_state.py": "bbd82ae6717f322189a6aa14838c030ac0333ffba385a6bc8144c0849c37b3b0",
+                "sage/docs/STATUS.json": "de0e2a443eadd4d9ca5a93ea407ddcbb718d27207c764528f50378d1a7eed335",
+                "sage/docs/CONTRACTS.md": "9825e707e6578afe58cc865768e4ab91b367ea614c11d928b805489ab60714d0",
+                "sage/docs/DECISIONS.md": "97c515a8b773ef78ed055697ce8fec6ed0e46cf2becae6754431c3af22ee2195",
+                "sage/ARCHITECTURE.md": "89cce45aadfb5a15115ee7b3120a1646aeecc9793b5ab6bca571204109c3b100"
+              },
+              "limitations": [
+                "This passes only the deterministic main-Sage source module. Promotion, installer/generator cutover, legacy quarantine, installed execution and live forward evaluation remain later gates.",
+                "Fixture release facts do not establish actual authority, a physical workspace lease, agent independence or persuasive semantic evidence. Root judgment and observed tool/artifact evidence remain necessary.",
+                "Requested reviewer identity is Astra/high; effective model/effort remain unknown. No cost, usage, savings or empirical live-quality conclusion is claimed.",
+                "The old round-2 supplemental replay was overwritten during a later builder execution. Its current files must not be treated as the original round-2 replay; exact provenance limitations are recorded in evidence-retention.json. Original round-2 critic failures and real score history remain present.",
+                "Structural completion checks evidence associations and recorded passed checks, not semantic supersession among differently named checks; current reports surface conflicts for root disposition."
+              ],
+              "next_action": "Begin the sole promotion builder against the passed architecture, verification and main Sage contracts. Preserve all three Sage review rounds and the supplemental evidence-retention qualification. Keep promotion, installed integration and live quality gates unscored until independently observed.",
+              "suggestion_dispositions": [],
+              "evidence_retention": {
+                "qualification": "sage/evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json",
+                "affected_prior_supplemental_directory": "sage/evaluation/sandboxes/sage-a1-r2-replay",
+                "original_failure_directory": "sage/evaluation/sandboxes/sage-a1-r2-critic",
+                "disposition": "Historical supplemental replay provenance is qualified; fresh independently isolated evidence supports this pass. No lost bytes are recreated or described as original."
+              }
+            }
+          ]
+        }
+      ],
+      "pending_review": null,
+      "finding_dispositions": [
+        {
+          "id": "SAGE-A1-R1-E1",
+          "status": "open",
+          "reason": "Original multi-handle, root planned/released and known/unknown cases are repaired, but terminal-then-active/idle/interrupted/missing probes still admit another writer; retain the lifecycle/release group open.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E2",
+          "status": "verified_fixed",
+          "reason": "Exact late-old-result replay and normal late-old-reconciliation regression leave current revision 2 planned without an inherited result; old immutable events remain present.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "status": "open",
+          "reason": "All four prior wrong-type/common-field cases now return structured exit 2. Invalid UTF-8 still escapes through read_json, and a corrupt UTF-8 snapshot prevents valid-log regeneration; retain the data-rejection/recovery group open.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E4",
+          "status": "verified_fixed",
+          "reason": "Exact replay accepts pure graph expansion and rejects later initial-labeled retry; normal regressions preserve legitimate evidence-change and bounded-attempt behavior.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E5",
+          "status": "verified_fixed",
+          "reason": "Exact missing-link replay rejects invalid_reference, the valid prior-link control passes, and the normal future-link regression rejects.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E6",
+          "status": "verified_fixed",
+          "reason": "Exact report fixtures now show stopped status, untested viewport, accepted overlap, failed integration check and terminal next action. Assertions check actual negative facts, not section headings.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E1",
+          "status": "verified_fixed",
+          "reason": "Exact round-2 temporal probes now return admission false and writer_busy for active/idle/interrupted/missing observations superseding an early terminal before result. A fresh terminal control succeeds. Native same-handle reuse binds the fresh assignment without borrowing completion; 32 reconciliation combinations validate both fact orders across all four effects, both owners and both known outcomes.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/results.json",
+            "sage/scripts/sage_state.py:422",
+            "sage/docs/DECISIONS.md"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "status": "verified_fixed",
+          "reason": "Invalid UTF-8 in criteria, single-event and live-agent JSON now produces invalid_json/exit 2; invalid UTF-8 in snapshot.json repairs successfully from valid JSONL. The normal regression asserts log byte preservation and invalid-authoritative-log rejection without replacing the snapshot. Prior common-type/enum negatives remain green.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/scripts/sage_state.py:76"
+          ]
+        }
+      ],
+      "suggestion_dispositions": [
+        {
+          "id": "SAGE-A1-R1-S1",
+          "status": "addressed",
+          "reason": "D-020 and installed state.md define associated observations/evidence-bearing checks and explicitly reserve differently named check supersession for root; replay confirms structural negatives and report visibility.",
+          "evidence": [
+            "sage/docs/DECISIONS.md",
+            "sage/skills/sage/references/state.md",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ],
+          "review_id": "sage-a1-r2"
+        },
+        {
+          "id": "SAGE-A1-R1-S2",
+          "status": "addressed",
+          "reason": "The normal 14-test regression suite now honors SAGE_EVALUATION_SANDBOX without a root-method override.",
+          "evidence": [
+            "sage/tests/test_state.py",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt"
+          ],
+          "review_id": "sage-a1-r2"
+        }
+      ]
+    },
+    "promotion": {
+      "depends_on": [
+        "sage"
+      ],
+      "status": "pending_review",
+      "gate": "not_evaluated",
+      "active_approach_id": "promotion-a1",
+      "scores": null,
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": [
+        {
+          "approach_id": "promotion-a1",
+          "summary": "Frozen-contract immutable knowledge generations with an explicit-only, evidence-gated promotion workflow",
+          "rounds": []
+        }
+      ],
+      "pending_review": {
+        "approach_id": "promotion-a1",
+        "round": 1,
+        "gate_type": "deterministic",
+        "submitted_at": "2026-09-07T18:05:14Z",
+        "candidate_paths": [
+          "sage/scripts/sage_knowledge.py",
+          "sage/tests/test_knowledge.py",
+          "sage/skills/sage-promote/SKILL.md",
+          "sage/skills/sage-promote/agents/openai.yaml",
+          "sage/skills/sage-promote/references/knowledge.md",
+          "sage/skills/sage-promote/references/promotion.md",
+          "sage/skills/sage/references/knowledge.md"
+        ],
+        "evidence": [
+          "sage/evaluation/sandboxes/promotion-wave-r1-final/contracts/stderr.txt",
+          "sage/evaluation/sandboxes/promotion-wave-r1-final/regressions/stderr.txt",
+          "sage/evaluation/sandboxes/promotion-wave-r1-final/state-contracts/stderr.txt",
+          "sage/evaluation/sandboxes/promotion-wave-r1-final/state-regressions/stderr.txt",
+          "sage/evaluation/sandboxes/promotion-wave-r1-doc-example/results.json",
+          "sage/docs/IMPLEMENTATION.md"
+        ]
+      }
+    },
+    "integration": {
+      "depends_on": [
+        "promotion"
+      ],
+      "status": "pending",
+      "gate": "not_evaluated",
+      "active_approach_id": null,
+      "scores": null,
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": []
+    },
+    "final": {
+      "depends_on": [
+        "integration"
+      ],
+      "status": "pending",
+      "gate": "not_evaluated",
+      "active_approach_id": null,
+      "scores": null,
+      "open_errors": [],
+      "suggestions": [],
+      "approaches": []
+    }
+  },
+  "history": [
+    {
+      "event": "critic_review",
+      "module": "architecture",
+      "approach_id": "architecture-a1",
+      "round": 1,
+      "review_id": "architecture-a1-r1",
+      "gate_type": "design",
+      "verdict": "fail",
+      "scores": {
+        "requirements_and_spec_fit": 7.5,
+        "architecture_and_coherence": 7.5,
+        "correctness_and_evidence": 7,
+        "simplicity_and_context_efficiency": 8.8,
+        "orchestration_and_model_routing": 8,
+        "safety_reversibility_and_recovery": 8.5,
+        "verification_strength": 8.7,
+        "reporting_and_maintainability": 8.6
+      },
+      "open_error_ids": [
+        "ARCH-A1-R1-E1",
+        "ARCH-A1-R1-E2",
+        "ARCH-A1-R1-E3"
+      ],
+      "suggestion_ids": [
+        "ARCH-A1-R1-S1",
+        "ARCH-A1-R1-S2"
+      ],
+      "review_path": "sage/docs/reviews/architecture-a1-r1.json",
+      "reviewed_at": "2026-09-07T14:18:23Z",
+      "disposition": "Return frozen design to builder for the three specified contract repairs; verification remains pending."
+    },
+    {
+      "event": "builder_repair_submitted",
+      "module": "architecture",
+      "approach_id": "architecture-a1",
+      "round": 2,
+      "scores": null,
+      "claimed_repair_ids": [
+        "ARCH-A1-R1-E1",
+        "ARCH-A1-R1-E2",
+        "ARCH-A1-R1-E3"
+      ],
+      "submitted_at": "2026-09-07T14:21:51Z",
+      "disposition": "Await independent Astra critic review; no repair is counted closed and no score is assigned by the builder."
+    },
+    {
+      "event": "critic_review",
+      "module": "architecture",
+      "approach_id": "architecture-a1",
+      "round": 2,
+      "review_id": "architecture-a1-r2",
+      "gate_type": "design",
+      "verdict": "pass",
+      "scores": {
+        "requirements_and_spec_fit": 8.8,
+        "architecture_and_coherence": 8.8,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.7,
+        "orchestration_and_model_routing": 8.8,
+        "safety_reversibility_and_recovery": 8.8,
+        "verification_strength": 8.7,
+        "reporting_and_maintainability": 8.6
+      },
+      "open_error_ids": [],
+      "suggestion_ids": [],
+      "closed_error_ids": [
+        "ARCH-A1-R1-E1",
+        "ARCH-A1-R1-E2",
+        "ARCH-A1-R1-E3"
+      ],
+      "review_path": "sage/docs/reviews/architecture-a1-r2.json",
+      "reviewed_at": "2026-09-07T14:26:37Z",
+      "disposition": "All three round-1 errors independently verified fixed at the design level; architecture passes and verification may begin. No downstream or empirical pass is claimed."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "checkpoint": "contracts_and_harness",
+      "scores": null,
+      "recorded_at": "2026-09-07T14:35:52Z",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/rubric.json",
+        "sage/evaluation/holdout-boundary.json",
+        "sage/evaluation/sandboxes/verification-a1-contract-checkpoint/report.json"
+      ],
+      "observed": "Harness-only mode passed 5 tests. No product or live behavior was run.",
+      "disposition": "Contracts are frozen; continue with product-facing state, knowledge, and installer tests before critic submission."
+    },
+    {
+      "event": "builder_submission",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 1,
+      "scores": null,
+      "submitted_at": "2026-09-07T14:51:16Z",
+      "commands": [
+        "python3 sage/evaluation/run_verification.py --mode harness --evidence-dir sage/evaluation/sandboxes/verification-a1-final-harness",
+        "python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/verification-a1-expected-red"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-final-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-final-harness/stderr.txt",
+        "sage/evaluation/sandboxes/verification-a1-expected-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-expected-red/stderr.txt"
+      ],
+      "observed": "Harness-only passed 5 of 5 tests. Red mode ran 23 tests: the same 5 passed and 18 product contract tests failed because the two future helper scripts are intentionally absent. No test was skipped; no product or live trial passed.",
+      "disposition": "Freeze verification-a1 for an independent critic. Product implementation remains gated on that review."
+    },
+    {
+      "event": "critic_review",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 1,
+      "review_id": "verification-a1-r1",
+      "gate_type": "verification_design_and_harness",
+      "verdict": "fail",
+      "scores": {
+        "requirements_and_spec_fit": 6.5,
+        "architecture_and_coherence": 6.5,
+        "correctness_and_evidence": 6,
+        "simplicity_and_context_efficiency": 8.6,
+        "orchestration_and_model_routing": 7,
+        "safety_reversibility_and_recovery": 6.5,
+        "verification_strength": 5.5,
+        "reporting_and_maintainability": 6
+      },
+      "open_error_ids": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E2",
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "review_path": "sage/docs/reviews/verification-a1-r1.json",
+      "reviewed_at": "2026-09-07T14:54:53Z",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-critic-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-critic-harness/validator-probes.json"
+      ],
+      "disposition": "Five required contract/harness repairs; expected missing-product failures do not count as defects. Return to verification builder."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 2,
+      "checkpoint": "r2_contracts_validators_and_oracles",
+      "scores": null,
+      "recorded_at": "2026-09-07T15:19:09Z",
+      "claimed_repair_ids": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E2",
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/evaluation/pairing.py",
+        "sage/evaluation/score_status.py",
+        "sage/evaluation/sandboxes/verification-a1-r2-checkpoint-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-checkpoint-harness/development-pairs.json"
+      ],
+      "observed": "R2 harness checkpoint passed 8 tests, including the critic validator probes, strict-fixture oracle, unseen manifest/tamper/evidence binding, and real development artifact freeze. Product and live behavior remain unrun.",
+      "disposition": "Finish product-facing discriminating tests and trace, then run final r2 harness and expected-red modes."
+    },
+    {
+      "event": "builder_repair_submitted",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 2,
+      "scores": null,
+      "submitted_at": "2026-09-07T15:22:07Z",
+      "claimed_repair_ids": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E2",
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "commands": [
+        "python3 sage/evaluation/run_verification.py --mode harness --evidence-dir sage/evaluation/sandboxes/verification-a1-r2-final-harness",
+        "python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/verification-a1-r2-expected-red"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-final-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-final-harness/stderr.txt",
+        "sage/evaluation/sandboxes/verification-a1-r2-expected-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-expected-red/stderr.txt",
+        "sage/evaluation/sandboxes/verification-a1-r2-checkpoint-harness/development-pairs.json"
+      ],
+      "observed": "R2 harness-only passed 8 of 8 tests. Expected-red ran 32 tests: 8 harness tests passed and all 24 product contract tests failed at the explicit missing-helper precondition. There were zero errors and zero skips. No product or live trial passed.",
+      "disposition": "Await independent Astra critic review; r1 errors remain recorded and are not counted closed by the builder."
+    },
+    {
+      "event": "critic_review",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 2,
+      "review_id": "verification-a1-r2",
+      "gate_type": "verification_design_and_harness",
+      "verdict": "fail",
+      "scores": {
+        "requirements_and_spec_fit": 7.5,
+        "architecture_and_coherence": 8.7,
+        "correctness_and_evidence": 7,
+        "simplicity_and_context_efficiency": 8.6,
+        "orchestration_and_model_routing": 8.6,
+        "safety_reversibility_and_recovery": 8,
+        "verification_strength": 7,
+        "reporting_and_maintainability": 7
+      },
+      "open_error_ids": [
+        "VER-A1-R1-E5",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E3"
+      ],
+      "closed_error_ids": [
+        "VER-A1-R1-E1",
+        "VER-A1-R1-E2"
+      ],
+      "review_path": "sage/docs/reviews/verification-a1-r2.json",
+      "reviewed_at": "2026-09-07T15:26:20Z",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r2-critic-harness/validator-probes.json"
+      ],
+      "disposition": "Two prior errors verified fixed; three remain with targeted reproducible repairs. Expected-red missing product is not an error."
+    },
+    {
+      "event": "builder_repair_submitted",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 3,
+      "scores": null,
+      "submitted_at": "2026-09-07T15:33:44Z",
+      "claimed_repair_ids": [
+        "VER-A1-R1-E3",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E5"
+      ],
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 python3 sage/evaluation/sandboxes/verification-a1-r2-critic-harness/critic_probes.py",
+        "python3 sage/evaluation/run_verification.py --mode harness --evidence-dir sage/evaluation/sandboxes/verification-a1-r3-final-harness",
+        "python3 sage/evaluation/run_verification.py --mode red --evidence-dir sage/evaluation/sandboxes/verification-a1-r3-expected-red"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r3-final-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r3-final-harness/stderr.txt",
+        "sage/evaluation/sandboxes/verification-a1-r3-final-harness/repair-probes.json",
+        "sage/evaluation/sandboxes/verification-a1-r3-expected-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r3-expected-red/stderr.txt"
+      ],
+      "observed": "Round-2 critic probes now accept truthful fail-to-fail, report no dangling namespaced trigger references, and report no omitted real-rubric case dimensions. R3 harness passed 11 of 11 tests. Expected-red ran 35 tests: 11 harness tests passed and all 24 product contract tests failed at the missing-helper precondition, with zero errors and zero skips. No product or live trial passed.",
+      "disposition": "Await independent Astra round-3 review; prior errors remain historical and are not counted closed by the builder."
+    },
+    {
+      "event": "critic_review",
+      "module": "verification",
+      "approach_id": "verification-a1",
+      "round": 3,
+      "review_id": "verification-a1-r3",
+      "gate_type": "verification_design_and_harness",
+      "verdict": "pass",
+      "scores": {
+        "requirements_and_spec_fit": 8.7,
+        "architecture_and_coherence": 8.7,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.6,
+        "orchestration_and_model_routing": 8.6,
+        "safety_reversibility_and_recovery": 8.5,
+        "verification_strength": 8.6,
+        "reporting_and_maintainability": 8.7
+      },
+      "open_error_ids": [],
+      "closed_error_ids": [
+        "VER-A1-R1-E5",
+        "VER-A1-R1-E4",
+        "VER-A1-R1-E3"
+      ],
+      "review_path": "sage/docs/reviews/verification-a1-r3.json",
+      "reviewed_at": "2026-09-07T15:37:21Z",
+      "evidence": [
+        "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r3-critic-red/report.json",
+        "sage/evaluation/sandboxes/verification-a1-r3-critic-harness/validator-probes.json"
+      ],
+      "disposition": "All remaining errors independently verified fixed; verification design/harness passes. Future product expected-red and live gates remain unrun."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 1,
+      "scores": null,
+      "recorded_at": "2026-09-07T16:00:05Z",
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_state.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave/tmp python3 -m unittest sage.tests.test_state -v"
+      ],
+      "evidence": [
+        "sage/scripts/sage_state.py",
+        "sage/tests/test_state.py",
+        "sage/skills/sage/SKILL.md",
+        "sage/skills/sage/references/state.md"
+      ],
+      "observed": "The frozen state slice passed 9 of 9 tests. Five added focused regressions passed after repairing snapshot whole-projection binding, root writer resume admission, completed historical reader handling, stale-plan admission, attempt enforcement, task-revision handle binding, carried task projection, current-plan closure, and append-only unknown-result reconciliation. Skill validation, executable documentation example, final scoped rerun, and candidate submission remained pending at this checkpoint.",
+      "disposition": "Finish proportional static and executable checks, preserve actual evidence, then mark sage-a1 round 1 awaiting independent review without self-scores."
+    },
+    {
+      "event": "builder_candidate_submitted",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 1,
+      "scores": null,
+      "submitted_at": "2026-09-07T16:04:53Z",
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_state.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave/tmp python3 -m unittest sage.tests.test_state -v",
+        "python3 sage/scripts/sage_state.py init/append/snapshot/validate/report using the exact references/state.md tiny-run payload",
+        "dependency-free frontmatter, explicit-only policy, local-link, Python syntax, and STATUS JSON checks"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/state-wave/tiny-doc/run/events.jsonl",
+        "sage/evaluation/sandboxes/state-wave/tiny-doc/run/snapshot.json",
+        "sage/evaluation/sandboxes/state-wave/tiny-doc/run/report.md",
+        "sage/docs/IMPLEMENTATION.md"
+      ],
+      "observed": "Final frozen state slice passed 9 of 9 and focused regressions passed 5 of 5, with zero failures and errors. The documented complete tiny run executed init, seven-event batch append, snapshot, terminal validation, and report successfully. Dependency-free static checks passed 9 local links, explicit-only UI policy, frontmatter shape, Python syntax, and STATUS JSON. The bundled quick_validate.py could not run because PyYAML is absent; no dependency was installed.",
+      "disposition": "Freeze sage-a1 round 1 for independent critic. No promotion, installer, full red-mode, installed-package, paired-comparison, or live pass is claimed."
+    },
+    {
+      "event": "pending_gate_type_normalized",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 1,
+      "from": "main_sage",
+      "to": "deterministic",
+      "reason": "Use the existing score_status.py supported gate type for the frozen main Sage candidate; no product change or prior review changed.",
+      "at": "2026-09-07T16:12:29Z"
+    },
+    {
+      "event": "critic_review",
+      "schema_version": "sage-rebuild-review-v1",
+      "review_id": "sage-a1-r1",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 1,
+      "reviewed_at": "2026-09-07T16:12:29Z",
+      "gate_type": "deterministic",
+      "verdict": "fail",
+      "open_error_count": 6,
+      "open_error_ids": [
+        "SAGE-A1-R1-E1",
+        "SAGE-A1-R1-E2",
+        "SAGE-A1-R1-E3",
+        "SAGE-A1-R1-E4",
+        "SAGE-A1-R1-E5",
+        "SAGE-A1-R1-E6"
+      ],
+      "reviewer": {
+        "agent": "/root/sage_critic",
+        "role": "independent main Sage critic; no product repairs",
+        "requested_model": "gpt-6-astra",
+        "requested_effort": "high",
+        "effective_model": "unknown",
+        "effective_effort": "unknown"
+      },
+      "scores": {
+        "requirements_and_spec_fit": 7.0,
+        "architecture_and_coherence": 8.0,
+        "correctness_and_evidence": 6.5,
+        "simplicity_and_context_efficiency": 8.7,
+        "orchestration_and_model_routing": 7.5,
+        "safety_reversibility_and_recovery": 6.3,
+        "verification_strength": 7.3,
+        "reporting_and_maintainability": 6.8
+      },
+      "score_evidence": {
+        "requirements_and_spec_fit": {
+          "reason": "The explicit-only skill substantially covers qualification, root ownership, excellence criteria, independent review, native tools, cause-based replanning and evidence boundaries. Recorded lifecycle, recovery, projection, schema, replanning and reporting nevertheless violate applicable R-013/R-015/R-025/R-030 through R-038 requirements in reproducible CLI cases.",
+          "evidence": [
+            "sage/skills/sage/SKILL.md",
+            "sage/docs/REQUIREMENTS.md",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+          ]
+        },
+        "architecture_and_coherence": {
+          "reason": "The instruction-first split and single dependency-free helper remain coherent and modest. Implementation derives conflicting truth: append/release considers facts that resume ignores, while a hash-valid projection attributes a historical result to a different current revision. These are repairable within the intended architecture.",
+          "evidence": [
+            "sage/ARCHITECTURE.md",
+            "sage/scripts/sage_state.py:376",
+            "sage/scripts/sage_state.py:410",
+            "sage/scripts/sage_state.py:499"
+          ]
+        },
+        "correctness_and_evidence": {
+          "reason": "All 9 frozen state tests and 5 focused regressions pass, and the documented tiny event wave initializes and appends. Independent positive/negative controls expose six grouped errors; existing success claims are accurately scoped, but the main module is not yet reliable under valid recovery and revision sequences.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+            "sage/docs/IMPLEMENTATION.md"
+          ]
+        },
+        "simplicity_and_context_efficiency": {
+          "reason": "A 25-line spine plus five focused references gives useful read routing, a zero-agent path, concrete evidence families, and capability-first delegation without a scheduler or protocol framework. The 543-line helper has no third-party dependencies. Active source Markdown links resolve, and the package-local event example is usable. No unrelated legacy references were treated as active.",
+          "evidence": [
+            "sage/skills/sage/SKILL.md",
+            "sage/skills/sage/references/run.md",
+            "sage/skills/sage/references/state.md",
+            "sage/scripts/sage_state.py"
+          ]
+        },
+        "orchestration_and_model_routing": {
+          "reason": "Routing priors are explicitly uncalibrated; user overrides, fork constraints, effective-identity uncertainty, total coordination cost and independent review are clear. Recorded assignments can nevertheless attach two actors to one writer task and release it while one remains active; later initial-labeled retries also bypass cause fields. Live model placement or savings was not observed.",
+          "evidence": [
+            "sage/skills/sage/references/delegation.md",
+            "sage/skills/sage/SKILL.md",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/two-handles-one-active/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/retry-initial-reason/events.jsonl"
+          ]
+        },
+        "safety_reversibility_and_recovery": {
+          "reason": "Atomic append, invalid-log preservation and full-projection snapshot repair have meaningful passing controls. Resume still authorizes admission for unreleased writers and blocks a merely planned root writer; a known failed result with unknown effects can be accepted into an unreconcilable state. This dimension is materially below the gate.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+          ]
+        },
+        "verification_strength": {
+          "reason": "The frozen tests cover genuine atomicity, evidence, findings, dependency and recovery failures, and the new regressions improve them. Their boundary cases miss known-result/unknown-effect combinations, multiple handles, late old-revision results, malformed ordinary JSON types and truthful report contents. Independent probes retain exact inputs and outputs; the critique does not turn test count into a pass.",
+          "evidence": [
+            "sage/evaluation/tests/test_product_state.py",
+            "sage/tests/test_state.py",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+          ]
+        },
+        "reporting_and_maintainability": {
+          "reason": "The implementation log separates tested source behavior from future dependencies and effective-model uncertainty. Derived reports omit recorded untested evidence, accepted residual limitations, failed checks and terminal status; they can therefore present a stopped run as a clean set of delivered results. An unreachable correction-reference branch also weakens maintainable history validation.",
+          "evidence": [
+            "sage/docs/IMPLEMENTATION.md",
+            "sage/scripts/sage_state.py:255",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/report.md",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/closure-later-failed-check/report.md"
+          ]
+        }
+      },
+      "finding_dispositions": [],
+      "errors": [
+        {
+          "id": "SAGE-A1-R1-E1",
+          "rank": 1,
+          "severity": "major",
+          "title": "Assignment release, resume safety and effect reconciliation disagree about the same recorded facts",
+          "requirements": [
+            "R-015",
+            "R-025",
+            "R-036",
+            "R-038"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:308",
+            "sage/scripts/sage_state.py:326",
+            "sage/scripts/sage_state.py:376",
+            "sage/scripts/sage_state.py:499"
+          ],
+          "reproducer": "Run the sandbox probes.py with the recorded sandbox environment. Inspect resume-writer-result-no-terminal, resume-root-failed-unknown, root-failed-unknown-reconciliation, resume-planned-root and two-handles-one-active in results.json. Each directory retains its exact JSONL; resume cases retain agents-input.json. Direct CLI commands are also captured in results.json.",
+          "expected": "Admission advice and append admission must agree on admitted task revisions, their unresolved effects, and all recorded actors that can still write. A known result alone must not release a delegated writer. Merely planned tasks must not hold a writer barrier. Every accepted unknown-effect state needs an append-only reconciliation route, or a contradictory terminal-result shape must be rejected at ingestion.",
+          "actual": "A delegated passed/reconciled result with no terminal observation and a missing live handle returns admission_allowed=true while proposing missing/unknown. A root failed/unknown-effect result also returns true; a later failed/reconciled result is rejected as invalid_transition, leaving no root-effect reconciliation path. An unadmitted planned root write returns false. Two agent.requested handles attach to one task, and after agent-a completes while agent-b remains active/unknown, validation accepts admission of a second writer because released() uses any terminal handle.",
+          "fix_verification": "Retain all five reproductions. Missing/idle/interrupted unreleased delegated writers and root unknown effects must forbid admission; planned and genuinely released root work must permit it. Reject concurrent duplicate ownership or keep every unreconciled handle in the barrier. Show a durable reconciliation path for every accepted unknown-effect result without replacing history. Preserve the existing completed-reader control and both result/observation orderings.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/two-handles-one-active/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/single-released-handle-control/events.jsonl"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E2",
+          "rank": 2,
+          "severity": "major",
+          "title": "A late result for an old revision marks the current unadmitted revision passed",
+          "requirements": [
+            "R-013",
+            "R-030",
+            "R-031",
+            "R-036"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:410"
+          ],
+          "reproducer": "python3 sage/scripts/sage_state.py snapshot --run-dir sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result --write; then run report --write on the same directory. Fixture admits t-1 revision 1, revises its inputs at revision 2, and only then records the revision-1 result.",
+          "expected": "Retain the late historical result while the current revision-2 task remains planned with no revision-2 result. Reports must not count the revised task as delivered.",
+          "actual": "The valid hash-bound snapshot contains tasks.t-1.revision=2, state=passed and result.task_revision=1. report.md lists t-1: passed. The projector keys task.result updates only by task_id despite the validator keeping revision-specific results.",
+          "fix_verification": "Test both a late old result and reconciliation of an old unknown result after a new plan. Snapshot/current report may update only the matching revision, while old facts remain recoverable from immutable history. Verify admission/closure still require the current revision's own result.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/snapshot.json",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/late-old-result/report.md"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "rank": 3,
+          "severity": "major",
+          "title": "Ordinary malformed JSON types escape the structured rejection contract and invalid common fields pass",
+          "requirements": [
+            "R-030",
+            "R-036",
+            "R-056"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:126",
+            "sage/scripts/sage_state.py:243",
+            "sage/scripts/sage_state.py:245",
+            "sage/scripts/sage_state.py:246",
+            "sage/scripts/sage_state.py:247"
+          ],
+          "reproducer": "Run validate on the enum-array, version-bool, sequence-float and timestamp-invalid directories under the critic sandbox. They differ from a valid run.opened only in type=[], v=true, seq=1.0, or at=2026-99-99T99:99:99Z respectively.",
+          "expected": "Each input is rejected as a contract/data error, exit 2, with one structured JSON error and no derived-state mutation. Enum fields must be type-checked before hash-set membership; integer and RFC3339 claims must be checked as those types/values.",
+          "actual": "type=[] produces an uncaught TypeError traceback and exit 1. v=true, seq=1.0 and an impossible calendar/time timestamp validate successfully. Similar unchecked set membership exists in payload enum validation.",
+          "fix_verification": "Add table-driven wrong-type probes across event kinds and live-agent input, including list/object/null enum values, noninteger common fields and invalid timestamps. Preserve duplicate-key/nonfinite controls and verify invalid append/snapshot inputs preserve existing bytes. Do not mask programmer errors with a blanket success path.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/enum-array/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/timestamp-invalid/events.jsonl"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E4",
+          "rank": 4,
+          "severity": "major",
+          "title": "Plan revision logic rejects real graph expansion while admitting later initial-labeled retries",
+          "requirements": [
+            "R-012",
+            "R-037",
+            "R-038"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:263",
+            "sage/scripts/sage_state.py:280"
+          ],
+          "reproducer": "Validate new-task-only and retry-initial-reason in the critic sandbox. The first retains t-1 and adds t-2 following recorded evidence without changing allowances. The second retries a failed admitted task at revision 2 with reason=initial and no failure cause/evidence/strategy fields.",
+          "expected": "A genuinely added task counts as an operational graph change. Only the first plan may use initial; a later revision must satisfy its failure, evidence-change or user-amendment reason contract.",
+          "actual": "The graph expansion fails with no_progress because adding a new task never sets changed=true; changing only no_progress text makes the otherwise identical control pass. The later initial-labeled retry validates and admits its new revision without any causal retry record.",
+          "fix_verification": "Accept the pure graph-expansion control with unchanged old task revisions. Reject later initial reasons, preserve valid evidence/user-amendment replans without fictitious failures, and retain finite attempt/revision and unchanged-dispatch negatives.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/new-task-only/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/new-task-with-bound-control/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/retry-initial-reason/events.jsonl"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E5",
+          "rank": 5,
+          "severity": "moderate",
+          "title": "Amendment correction links bypass reference validation",
+          "requirements": [
+            "R-013",
+            "R-030",
+            "R-031"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:255",
+            "sage/scripts/sage_state.py:349"
+          ],
+          "reproducer": "python3 sage/scripts/sage_state.py snapshot --run-dir sage/evaluation/sandboxes/sage-a1-r1-critic/dangling-amendment --write. The amendment sets corrects_event_id=missing. The valid-amendment-control differs only by pointing at e-1.",
+          "expected": "Reject a correction that does not reference an earlier event and preserve existing projection bytes; accept the earlier-event control.",
+          "actual": "Both inputs succeed. The early run.amended branch only adds the event ID to amendments, making the later shared note/amendment correction-reference branch unreachable for amendments.",
+          "fix_verification": "Validate amendment correction links on every append/validation path. Test missing, future and valid prior IDs, alongside the already covered note correction case.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/dangling-amendment/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/valid-amendment-control/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E6",
+          "rank": 6,
+          "severity": "major",
+          "title": "Derived reports erase recorded uncertainty, residual findings and terminal outcome",
+          "requirements": [
+            "R-005",
+            "R-031",
+            "R-032",
+            "R-034"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:509"
+          ],
+          "reproducer": "Run report --write for report-omissions and closure-later-failed-check in the critic sandbox. The first records untested mobile-viewport evidence, an accepted minor finding and status=stopped. The second records a later failed integration check after an earlier passed check.",
+          "expected": "The derived report must show terminal status, untested evidence as well as not_tested checks, accepted residual limitations, and relevant failed checks. It must faithfully surface these recorded facts independently of the root's semantic completion decision.",
+          "actual": "The first report lists a delivered passed task, Unknowns=None, Untested checks=None and Open findings=None; it omits the stopped outcome, untested viewport and accepted overlap. The second omits the failed integration check. Both show next action close even though their logs are already closed.",
+          "fix_verification": "Assert report contents against events, not just section headings. Retain terminal outcome, accepted limitations, failed/untested observations and clear terminal next action while keeping observation/inference/unknown distinctions. Failed checks may need root disposition rather than automatic semantic failure, but they must never silently disappear.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/report-omissions/report.md",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/closure-later-failed-check/report.md"
+          ]
+        }
+      ],
+      "suggestions": [
+        {
+          "id": "SAGE-A1-R1-S1",
+          "summary": "Clarify the narrow structural completion gate in installed state.md: it currently accepts a passed check with no evidence, closure evidence with no criterion association in its original record, and a historical passed check despite a later failure. The broader skill correctly assigns semantic completion judgment to root; these probes are not separately scored as helper-contract errors because the frozen contract does not define check supersession or require nonempty check evidence.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+            "sage/docs/CONTRACTS.md",
+            "sage/skills/sage/references/verification.md"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-S2",
+          "summary": "Have focused regressions honor SAGE_EVALUATION_SANDBOX instead of overwriting the shared state-regressions directory. For this review only, the runner overrides the root method to a fresh critic directory without changing assertions or tested behavior.",
+          "evidence": [
+            "sage/tests/test_state.py:19",
+            "sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py"
+          ]
+        }
+      ],
+      "executed_checks": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r1-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r1-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r1-critic/probes.py",
+          "exit_code": 0,
+          "evidence": "sage/evaluation/sandboxes/sage-a1-r1-critic/results.json",
+          "interpretation": "Diagnostic runner exits zero after capturing results, not after asserting product correctness. It runs 9 original contract tests and 5 original regressions (all pass), controlled adversarial CLI probes, and the tiny example init/append. Wrong product outcomes are retained and scored above. Regression output root alone is redirected."
+        },
+        {
+          "command": "Read active Markdown links and assert each resolves relative to its containing file",
+          "exit_code": 0,
+          "evidence": "sage/skills/sage/references/state.md",
+          "interpretation": "Source reference usability check only; installed integration and live behavior are deferred."
+        }
+      ],
+      "input_hashes": {
+        "sage/scripts/sage_state.py": "2799cc3ca19c2ab7bb011268943ad383904f5a35f0be055cec38bbb5fa2bad16",
+        "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+        "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+        "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+        "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+        "sage/skills/sage/references/recovery.md": "57758844100705f4e7731593889e057918e21562acb6e4e2a7cff39a13761ed5",
+        "sage/skills/sage/references/state.md": "f082c8c17e1f9789bc592ab08fb6ec1ace03fe0920b6b792888e77831d36d6bf",
+        "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+        "sage/tests/test_state.py": "8ff449838c5f5f8d791df2166c67c3619e99dc2f408312b04219782531a7a8d7",
+        "sage/docs/STATUS.json": "77942221aff3e459be2aabd763c05a5d84aa598bad0189e840286dfa3c4336fb"
+      },
+      "limitations": [
+        "Only the frozen main Sage module was assessed. Promotion helper, promotion skill rewrite, installer/generator cutover, legacy quarantine and live trials remain later dependencies; no missing-dependency error was invented.",
+        "The reviewer did not change product files or perform live external effects. Fixture-based recorded-state safety checks do not prove a physical writer lease or actual authority.",
+        "Semantic evidence quality, actual independent-worker behavior, installed execution, costs, token savings and effective reviewer model/effort remain unobserved.",
+        "Existing pending gate_type main_sage was unsupported by score_status.py. Review persistence normalizes only that pending bookkeeping field to deterministic; validator code and prior history remain unchanged."
+      ],
+      "next_action": "Repair Sage lifecycle/release accounting first (SAGE-A1-R1-E1), then revision-specific projection, strict input validation, plan transitions, amendment links and truthful reports. Add the retained controlled cases to focused regressions, preserve this failed round, and freeze sage-a1 round 2 for the separate critic. Do not begin promotion."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 2,
+      "scores": null,
+      "recorded_at": "2026-09-07T16:24:37Z",
+      "claimed_repair_ids": [
+        "SAGE-A1-R1-E1",
+        "SAGE-A1-R1-E2",
+        "SAGE-A1-R1-E3",
+        "SAGE-A1-R1-E4",
+        "SAGE-A1-R1-E5",
+        "SAGE-A1-R1-E6"
+      ],
+      "evidence": [
+        "sage/docs/reviews/sage-a1-r1.json",
+        "sage/docs/CONTRACTS.md",
+        "sage/docs/DECISIONS.md",
+        "sage/scripts/sage_state.py"
+      ],
+      "observed": "The round-1 critic failure and six errors remain preserved. D-020 now distinguishes safely untouched stopped scope from completed scope. Initial round-2 code repairs centralize revision-specific release replay for resume, make common and enum inputs typed, bind one actor per task revision, prevent late old results from updating the current revision, repair graph and correction transitions, and surface terminal/report uncertainty. The unchanged frozen state slice passes 9 of 9; expanded normal regressions and final critic-case evidence remain pending.",
+      "disposition": "Add assertions for every retained critic reproduction under the caller-supplied evaluation sandbox, run all scoped suites, then submit round 2 without self-scores."
+    },
+    {
+      "event": "builder_repair_submitted",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 2,
+      "scores": null,
+      "submitted_at": "2026-09-07T16:39:09Z",
+      "claimed_repair_ids": [
+        "SAGE-A1-R1-E1",
+        "SAGE-A1-R1-E2",
+        "SAGE-A1-R1-E3",
+        "SAGE-A1-R1-E4",
+        "SAGE-A1-R1-E5",
+        "SAGE-A1-R1-E6"
+      ],
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave-r2 TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave-r2/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_state.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave-r2 TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave-r2/tmp python3 -m unittest sage.tests.test_state -v",
+        "Execute the unmodified round-1 probes source with synthetic __file__ rooted at sage/evaluation/sandboxes/state-wave-r2-critic/probes.py",
+        "Execute the complete state.md tiny run through init, append, snapshot, terminal validate, and report"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/state-wave-r2-critic/results.json",
+        "sage/evaluation/sandboxes/state-wave-r2-critic/contracts.txt",
+        "sage/evaluation/sandboxes/state-wave-r2-critic/regressions.txt",
+        "sage/evaluation/sandboxes/state-wave-r2/tiny-doc-run/report.md",
+        "sage/tests/test_state.py",
+        "sage/docs/IMPLEMENTATION.md"
+      ],
+      "observed": "Frozen state tests passed 9 of 9 and normal focused regressions passed 14 of 14 with zero failures or errors. Fresh replay of every retained round-1 critic case shows the intended positive and negative outcomes, including blocked unreleased writers, safe planned/released root controls, one active assignment, revision-specific projection, structured malformed-input exits, repaired plan/correction transitions, and truthful report content. The complete tiny run passed all five CLI phases. Native /root/... handle preservation and safe handle reuse are covered by normal regressions. No independent score or error closure is claimed.",
+      "disposition": "Freeze sage-a1 round 2 for the separate deterministic critic. Round-1 scores and six errors remain historical and open until independently verified."
+    },
+    {
+      "event": "critic_review",
+      "schema_version": "sage-rebuild-review-v1",
+      "review_id": "sage-a1-r2",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 2,
+      "reviewed_at": "2026-09-07T16:45:00Z",
+      "gate_type": "deterministic",
+      "verdict": "fail",
+      "open_error_count": 2,
+      "open_error_ids": [
+        "SAGE-A1-R1-E1",
+        "SAGE-A1-R1-E3"
+      ],
+      "reviewer": {
+        "agent": "/root/sage_critic",
+        "role": "independent main Sage critic; no product repairs",
+        "requested_model": "gpt-6-astra",
+        "requested_effort": "high",
+        "effective_model": "unknown",
+        "effective_effort": "unknown"
+      },
+      "scores": {
+        "requirements_and_spec_fit": 7.9,
+        "architecture_and_coherence": 8.3,
+        "correctness_and_evidence": 7.5,
+        "simplicity_and_context_efficiency": 8.6,
+        "orchestration_and_model_routing": 8.0,
+        "safety_reversibility_and_recovery": 7.0,
+        "verification_strength": 7.9,
+        "reporting_and_maintainability": 8.7
+      },
+      "score_evidence": {
+        "requirements_and_spec_fit": {
+          "reason": "Four prior error groups are independently repaired, and D-020/D-021 improve truthful stopped closure and exact native identity. Existing writer/recovery and data-rejection requirements still fail in two neighboring cases; the main module cannot pass yet.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "architecture_and_coherence": {
+          "reason": "Revision-specific task replay and one-assignment identity repair the previous projection/ownership split. However, replay preserves the first terminal observation indefinitely while snapshot agents show later active/unknown facts, so derived safety and visible state still disagree.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "correctness_and_evidence": {
+          "reason": "Fresh unmodified suites pass 9 frozen state tests and 14 regressions. Exact prior probes replay in a new sandbox and confirm four repairs plus substantial partial repairs to E1/E3. New temporal-observation and UTF-8 probes fail with retained CLI evidence; no product or live pass is inferred.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "simplicity_and_context_efficiency": {
+          "reason": "The short explicit-only spine and focused references retain adaptive zero-agent execution, domain-specific excellence and concise recovery guidance. New replay logic remains a small dependency-free helper, although terminal handling is duplicated and needs one consistent interpretation.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "orchestration_and_model_routing": {
+          "reason": "Native /root/... handles round-trip and a released same handle can be reassigned without borrowing old completion. Priors, user choices and requested/effective uncertainty remain honest. Current contradictory lifecycle observations can still be ignored by release/admission, undermining orchestration safety.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "safety_reversibility_and_recovery": {
+          "reason": "Unknown/unknown results reconcile append-only, contradictory known/unknown results reject upfront, and prior root/delegated controls now behave correctly. A terminal lifecycle before result becomes absorbing despite a later active/unknown observation, admitting another writer; invalid UTF-8 in a derived snapshot also blocks valid-log repair.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "verification_strength": {
+          "reason": "The expanded regressions cover material temporal/revision, handle, graph, schema, evidence and reporting boundaries and honor the fresh sandbox. Missing tests remain for superseded terminal observations before release and UTF-8 across every JSON reader; these were independently reproduced with positive controls.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "reporting_and_maintainability": {
+          "reason": "Prior report omissions are verified fixed: stopped outcome, untested evidence, failed checks, accepted residuals and terminal next action are all present. Installed guidance explicitly states structural completion limits, and the implementation log preserves failures and unobserved dependencies.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json",
+            "sage/skills/sage/references/state.md"
+          ]
+        }
+      },
+      "finding_dispositions": [
+        {
+          "id": "SAGE-A1-R1-E1",
+          "status": "open",
+          "reason": "Original multi-handle, root planned/released and known/unknown cases are repaired, but terminal-then-active/idle/interrupted/missing probes still admit another writer; retain the lifecycle/release group open.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E2",
+          "status": "verified_fixed",
+          "reason": "Exact late-old-result replay and normal late-old-reconciliation regression leave current revision 2 planned without an inherited result; old immutable events remain present.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "status": "open",
+          "reason": "All four prior wrong-type/common-field cases now return structured exit 2. Invalid UTF-8 still escapes through read_json, and a corrupt UTF-8 snapshot prevents valid-log regeneration; retain the data-rejection/recovery group open.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E4",
+          "status": "verified_fixed",
+          "reason": "Exact replay accepts pure graph expansion and rejects later initial-labeled retry; normal regressions preserve legitimate evidence-change and bounded-attempt behavior.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E5",
+          "status": "verified_fixed",
+          "reason": "Exact missing-link replay rejects invalid_reference, the valid prior-link control passes, and the normal future-link regression rejects.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E6",
+          "status": "verified_fixed",
+          "reason": "Exact report fixtures now show stopped status, untested viewport, accepted overlap, failed integration check and terminal next action. Assertions check actual negative facts, not section headings.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        }
+      ],
+      "errors": [
+        {
+          "id": "SAGE-A1-R1-E1",
+          "rank": 1,
+          "severity": "major",
+          "title": "An early terminal observation becomes irrevocable before the assignment has released",
+          "requirements": [
+            "R-015",
+            "R-025",
+            "R-030",
+            "R-036"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:354",
+            "sage/scripts/sage_state.py:439",
+            "sage/scripts/sage_state.py:585"
+          ],
+          "reproducer": "Run the r2 sandbox probes.py. For terminal-then-active/idle/interrupted/missing, events first admit w-1 and assign /root/writer, then record completed/reconciled, then a later nonterminal/unknown observation BEFORE the result, and only afterward record the passed/reconciled result. Each probe snapshots, resumes with the matching live lifecycle, and appends admission of w-2. Captured exact commands and outputs are in results.json; each directory retains admission.json and its log.",
+          "expected": "Before both release facts are established, a newer active or unknown lifecycle must invalidate reliance on an earlier terminal observation, or the contradictory event must be explicitly rejected as requiring reconciliation. Resume and append must keep the writer barrier until a fresh terminal reconciliation. Retain historical fully released assignments without inventing a new barrier merely because a completed worker disappears later.",
+          "actual": "All four histories validate, their snapshots visibly show the newer active/idle/interrupted/missing unknown state, resume returns admission_allowed=true, and append accepts the second writer. validate and execution_facts ignore every later observation once any completed/reconciled observation appears, even when the task result had not yet arrived. command_resume also derives advice only from those retained old facts. The fresh-terminal control succeeds as it should; properly reassigned same-handle work correctly blocks old-completion reuse.",
+          "fix_verification": "Add the four preserved orderings and a fresh terminal control. Make release a fact of a fully reconciled assignment, not a permanently absorbing first terminal observation. Current live active/unknown contradictions must not be hidden by a historical terminal fact; separate historical release from latest handle state explicitly. Preserve result-first/observation-first success, historical missing released handles, same-handle fresh assignment barriers and append-only unknown reconciliation.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/snapshot.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/terminal-then-active/admission.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/fresh-terminal-control/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/same-handle-reused/events.jsonl"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "rank": 2,
+          "severity": "major",
+          "title": "Invalid UTF-8 bypasses structured rejection and prevents repairing a derived snapshot",
+          "requirements": [
+            "R-030",
+            "R-036",
+            "R-056"
+          ],
+          "locations": [
+            "sage/scripts/sage_state.py:78",
+            "sage/scripts/sage_state.py:519",
+            "sage/scripts/sage_state.py:636"
+          ],
+          "reproducer": "The r2 probes create utf8/invalid.json containing one 0xff byte, then pass it to append --event, resume --agents and init --criteria. They also replace snapshot.json with that byte while preserving a valid events.jsonl, then invoke resume with a valid empty agents array. Exact commands and stderr are in results.json.",
+          "expected": "Invalid UTF-8 supplied as JSON data returns exit 2 with one JSON data error. Invalid UTF-8 in a derived snapshot must be treated as corrupt/stale and regenerated from the valid authoritative log. Log bytes must remain unchanged. The existing invalid-authoritative-log control must continue to preserve derived bytes.",
+          "actual": "All four commands exit 1 with uncaught UnicodeDecodeError tracebacks. read_events handles UnicodeDecodeError, but read_json does not; bound_snapshot does not catch it either. Thus corruption confined to a disposable projection blocks the documented valid-log recovery path.",
+          "fix_verification": "Exercise invalid UTF-8 for criteria, single-event append, live-agent input, authoritative JSONL and derived snapshot. Require structured rejection for input/log cases, successful projection repair for a valid log plus bad snapshot, and unchanged authoritative bytes throughout. Preserve existing wrong-type, duplicate-key and nonfinite controls.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/events.jsonl",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/invalid.json",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/utf8/snapshot.json"
+          ]
+        }
+      ],
+      "suggestions": [],
+      "executed_checks": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r2-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r2-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r2-critic/probes.py",
+          "exit_code": 0,
+          "evidence": "sage/evaluation/sandboxes/sage-a1-r2-critic/results.json",
+          "interpretation": "Evidence-capture runner, not a product-success assertion. Runs 9 frozen tests and 14 regressions unchanged (all pass), exact r1 probe replay under a synthetic fresh __file__, and neighboring temporal/reuse/UTF-8 probes. The resulting product failures remain open."
+        }
+      ],
+      "input_hashes": {
+        "sage/scripts/sage_state.py": "1a60766409c5dc7b48413e3f61cf32f3095e2f72016b8c37b7cd1f5106c2c3de",
+        "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+        "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+        "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+        "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+        "sage/skills/sage/references/recovery.md": "f8dbc5e566964c7f75b2e8623d2b43762f855014786e1f28c5a440028e335e6b",
+        "sage/skills/sage/references/state.md": "783581f71ae3e9742d91c063e2558211497e19bbfd38af27f27a1a707f0fa928",
+        "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+        "sage/tests/test_state.py": "74c351548eccc43858133961efa1045915fdd1a835dcd44862999f7334b6afa9",
+        "sage/docs/STATUS.json": "a701a91e690293deaee0f4deeb369509f39018bc08acfcc26c3c6c72a5ee425f",
+        "sage/docs/CONTRACTS.md": "0baf421d7077218429b11d392361efa36bf5f79b6b005c451c81a1d0699837e8",
+        "sage/docs/DECISIONS.md": "31bc683ad0836f066e50174533260803c30a0279169dd9346da9934aa73835b5",
+        "sage/ARCHITECTURE.md": "120ff227a6d82b7f88f2f2be616d139776fff8e670ac1eaf898bc4faf5881a09"
+      },
+      "limitations": [
+        "This is a deterministic main-Sage review only. Promotion, installation, legacy quarantine, live task quality and model/cost comparison remain later dependencies, not missing-module errors.",
+        "Requested reviewer model/effort are Astra/high; effective identity remains unknown. No external effects, physical lease enforcement, actual independence or semantic evidence quality are claimed from fixtures.",
+        "D-020/D-021 are explicit scope/identity clarifications inspected against code and tests; historical passed architecture/verification gates are not rewritten.",
+        "The two remaining error groups are sufficient to reject this round. Further broad exploration is deferred to the repaired frozen candidate."
+      ],
+      "next_action": "Repair Sage E1 temporal release accounting and E3 UTF-8 rejection/projection recovery, preserving four verified repairs and this failed round. Add the exact fresh controls, run the scoped suites, then freeze sage-a1 round 3 for independent review. Do not begin promotion.",
+      "suggestion_dispositions": [
+        {
+          "id": "SAGE-A1-R1-S1",
+          "status": "addressed",
+          "reason": "D-020 and installed state.md define associated observations/evidence-bearing checks and explicitly reserve differently named check supersession for root; replay confirms structural negatives and report visibility.",
+          "evidence": [
+            "sage/docs/DECISIONS.md",
+            "sage/skills/sage/references/state.md",
+            "sage/evaluation/sandboxes/sage-a1-r2-replay/results.json"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-S2",
+          "status": "addressed",
+          "reason": "The normal 14-test regression suite now honors SAGE_EVALUATION_SANDBOX without a root-method override.",
+          "evidence": [
+            "sage/tests/test_state.py",
+            "sage/evaluation/sandboxes/sage-a1-r2-critic/regressions.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "event": "builder_repair_submitted",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 3,
+      "scores": null,
+      "submitted_at": "2026-09-07T17:00:00Z",
+      "claimed_repair_ids": [
+        "SAGE-A1-R1-E1",
+        "SAGE-A1-R1-E3"
+      ],
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave-r3 TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave-r3/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_state.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/state-wave-r3-unit TMPDIR=$PWD/sage/evaluation/sandboxes/state-wave-r3-unit/tmp python3 -m unittest sage.tests.test_state -v",
+        "Execute the unmodified round-2 probes source with synthetic __file__ rooted at sage/evaluation/sandboxes/state-wave-r3-critic/probes.py",
+        "Execute the complete state.md tiny run through init, append, snapshot, terminal validate, and report"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/state-wave-r3-critic/results.json",
+        "sage/evaluation/sandboxes/state-wave-r3-critic/contracts.txt",
+        "sage/evaluation/sandboxes/state-wave-r3-critic/regressions.txt",
+        "sage/evaluation/sandboxes/state-wave-r3/cli-example/results.json",
+        "sage/evaluation/sandboxes/state-wave-r3/cli-example/run/report.md",
+        "sage/tests/test_state.py",
+        "sage/docs/IMPLEMENTATION.md"
+      ],
+      "input_hashes": {
+        "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+        "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+        "sage/skills/sage/references/state.md": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+        "sage/skills/sage/references/recovery.md": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+        "sage/tests/test_state.py": "bbd82ae6717f322189a6aa14838c030ac0333ffba385a6bc8144c0849c37b3b0",
+        "sage/docs/CONTRACTS.md": "9825e707e6578afe58cc865768e4ab91b367ea614c11d928b805489ab60714d0",
+        "sage/docs/DECISIONS.md": "97c515a8b773ef78ed055697ce8fec6ed0e46cf2becae6754431c3af22ee2195",
+        "sage/ARCHITECTURE.md": "89cce45aadfb5a15115ee7b3120a1646aeecc9793b5ab6bca571204109c3b100",
+        "sage/docs/IMPLEMENTATION.md": "d57a498b1b7b67de04f0d9509a6a0054c2f154b554b68d826c67e0dafb9b73cc"
+      },
+      "observed": "The retained round-2 failure remains unchanged. Frozen state tests passed 9 of 9 and normal regressions passed 16 of 16 with no failures or errors. Fresh execution of the exact round-2 critic source produced the intended four blocked temporal resumes, four writer_busy appends, a passing fresh-terminal control, preserved same-handle reuse safety, three structured invalid-UTF-8 exits, and successful invalid-snapshot regeneration. Twenty-two direct assertions checked those outcomes. The tiny CLI example passed all five phases. No independent score or error closure is claimed.",
+      "disposition": "Freeze sage-a1 round 3 for the separate deterministic critic. Prior scores and E1/E3 remain open until independently verified; do not begin promotion or installation."
+    },
+    {
+      "event": "evidence_retention_qualification",
+      "module": "sage",
+      "review_id_context": "sage-a1-r3",
+      "recorded_at": "2026-09-07T17:05:20Z",
+      "qualification": "sage/evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json",
+      "affected_prior_supplemental_directory": "sage/evaluation/sandboxes/sage-a1-r2-replay",
+      "original_failure_directory": "sage/evaluation/sandboxes/sage-a1-r2-critic",
+      "disposition": "Historical supplemental replay provenance is qualified; fresh independently isolated evidence supports this pass. No lost bytes are recreated or described as original."
+    },
+    {
+      "event": "critic_review",
+      "schema_version": "sage-rebuild-review-v1",
+      "review_id": "sage-a1-r3",
+      "module": "sage",
+      "approach_id": "sage-a1",
+      "round": 3,
+      "reviewed_at": "2026-09-07T17:05:20Z",
+      "gate_type": "deterministic",
+      "verdict": "pass",
+      "open_error_count": 0,
+      "open_error_ids": [],
+      "reviewer": {
+        "agent": "/root/sage_critic",
+        "role": "independent main Sage critic; no product repairs",
+        "requested_model": "gpt-6-astra",
+        "requested_effort": "high",
+        "effective_model": "unknown",
+        "effective_effort": "unknown"
+      },
+      "scores": {
+        "requirements_and_spec_fit": 8.6,
+        "architecture_and_coherence": 8.6,
+        "correctness_and_evidence": 8.6,
+        "simplicity_and_context_efficiency": 8.5,
+        "orchestration_and_model_routing": 8.7,
+        "safety_reversibility_and_recovery": 8.6,
+        "verification_strength": 8.7,
+        "reporting_and_maintainability": 8.5
+      },
+      "score_evidence": {
+        "requirements_and_spec_fit": {
+          "reason": "The six main-module error groups are now independently verified repaired across three retained rounds. Explicit-only execution, proportional delegation, positive artifact criteria, durable state, causal retry records, truthful reports and recovery match the declared source-module scope; later integration/live requirements are not claimed complete.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "architecture_and_coherence": {
+          "reason": "D-022 defines one temporal release boundary and shared mark_release/record_observation primitives implement it in validation and replay. Revision-specific facts, opaque native identity, immutable historical release and current projections now agree in the repaired cases without a scheduler or physical-lease claim.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "correctness_and_evidence": {
+          "reason": "Fresh 9-test frozen and 16-test regression suites pass. Sixty-one explicit assertions pass across exact prior adversarial replay, four provisional lifecycle reversals, same-handle reassignment, invalid UTF-8, 32 outcome/effect/owner/order combinations and the five-command documented example. The pass is limited to tested source behavior.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "simplicity_and_context_efficiency": {
+          "reason": "The 25-line spine stays short, and focused references keep world/domain evidence selection, task-specific excellence and inline execution accessible. The 657-line dependency-free helper has grown to cover the frozen vocabulary and strict boundaries but remains finite and specific; no generic runtime framework or routine worker fleet is introduced.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "orchestration_and_model_routing": {
+          "reason": "Requested/effective identity, native canonical handles, inherited versus fresh fork behavior, capability-first uncalibrated priors and user overrides remain explicit. Fresh same-handle assignments cannot borrow prior completion, while genuinely released historical assignments remain reusable. Current tests establish recorded orchestration semantics only.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "safety_reversibility_and_recovery": {
+          "reason": "Latest provisional observations now govern until result and terminal reconciliation coexist. All four unknown/nonterminal reversals block resume and second-writer append; fresh terminal evidence permits release. UTF-8 input/log errors are structured, corrupt derived snapshots rebuild only from valid logs, and authoritative bytes survive rejection.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "verification_strength": {
+          "reason": "Public CLI and declared-file assertions cover both positive and negative transitions and meaningful byte preservation. The independent 61-assertion runner checks outcome values rather than merely capturing exit codes, and the 32-case reconciliation matrix broadens both fact-order and effect-class coverage. Existing prior repairs remain green.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md"
+          ]
+        },
+        "reporting_and_maintainability": {
+          "reason": "Current reports retain terminal status, untested evidence, failed checks and accepted limits, with semantic check supersession explicitly assigned to root. A prior supplemental replay was overwritten by a scratch runner: the exact limitation and current hashes are now preserved rather than relabeled original. Original failed critic outcomes and all score history remain available.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/contracts.txt",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/skills/sage/references/state.md",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-replay/report-omissions/report.md"
+          ]
+        }
+      },
+      "finding_dispositions": [
+        {
+          "id": "SAGE-A1-R1-E1",
+          "status": "verified_fixed",
+          "reason": "Exact round-2 temporal probes now return admission false and writer_busy for active/idle/interrupted/missing observations superseding an early terminal before result. A fresh terminal control succeeds. Native same-handle reuse binds the fresh assignment without borrowing completion; 32 reconciliation combinations validate both fact orders across all four effects, both owners and both known outcomes.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/results.json",
+            "sage/scripts/sage_state.py:422",
+            "sage/docs/DECISIONS.md"
+          ]
+        },
+        {
+          "id": "SAGE-A1-R1-E3",
+          "status": "verified_fixed",
+          "reason": "Invalid UTF-8 in criteria, single-event and live-agent JSON now produces invalid_json/exit 2; invalid UTF-8 in snapshot.json repairs successfully from valid JSONL. The normal regression asserts log byte preservation and invalid-authoritative-log rejection without replacing the snapshot. Prior common-type/enum negatives remain green.",
+          "evidence": [
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/results.json",
+            "sage/evaluation/sandboxes/sage-a1-r3-critic/regressions.txt",
+            "sage/scripts/sage_state.py:76"
+          ]
+        }
+      ],
+      "errors": [],
+      "suggestions": [],
+      "executed_checks": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/sage-a1-r3-critic TMPDIR=$PWD/sage/evaluation/sandboxes/sage-a1-r3-critic/tmp python3 sage/evaluation/sandboxes/sage-a1-r3-critic/review_checks.py",
+          "exit_code": 0,
+          "tests": 25,
+          "test_failures": 0,
+          "test_errors": 0,
+          "explicit_assertions": 61,
+          "assertion_failures": 0,
+          "evidence": "sage/evaluation/sandboxes/sage-a1-r3-critic/assertions.json",
+          "interpretation": "9 original frozen tests and 16 original regressions run without assertion overrides. Historical critic source is replayed with only output destinations redirected; prior main/supplemental evidence is not modified by this review. The 61 assertions include a 32-case valid reconciliation matrix and the complete documented init/append/snapshot/validate/report example."
+        },
+        {
+          "command": "Parse helper/regression Python syntax and resolve every local link in the active source skill/reference set",
+          "exit_code": 0,
+          "evidence": "sage/skills/sage/references/state.md",
+          "interpretation": "Source usability only; no installed integration pass."
+        }
+      ],
+      "input_hashes": {
+        "sage/scripts/sage_state.py": "76b0eeb6a2907970c45cbff86ffc07d0bb5b6fcd9f9980eb44d6ef18e71f941e",
+        "sage/skills/sage/SKILL.md": "d0a51e23b6a07c39cb5ca5ec9e813ec7bbd3db9e7fb6e5ba45eb66e78118a5ce",
+        "sage/skills/sage/references/run.md": "7d5af02d6f46f9d54e52690ec0ae9ea5aa8cad0a027565067e919f60b08771a6",
+        "sage/skills/sage/references/delegation.md": "61bac0f4b0daa363c7ec7e62e453a50a3241255b21180f184d3233a2c4c7969f",
+        "sage/skills/sage/references/verification.md": "9f17318e58cefff8da5d8a3a175d55ac81b0484286e21723c226c3303066ffed",
+        "sage/skills/sage/references/recovery.md": "f4cc8d38a80f3367d9f566d0d4acc7a3678609143a999a630113030bb6b68d1e",
+        "sage/skills/sage/references/state.md": "d1061cdb44c6b2b6c841e42fa3ae988257647ce0aaafebaaed9e381edcc05d21",
+        "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+        "sage/tests/test_state.py": "bbd82ae6717f322189a6aa14838c030ac0333ffba385a6bc8144c0849c37b3b0",
+        "sage/docs/STATUS.json": "de0e2a443eadd4d9ca5a93ea407ddcbb718d27207c764528f50378d1a7eed335",
+        "sage/docs/CONTRACTS.md": "9825e707e6578afe58cc865768e4ab91b367ea614c11d928b805489ab60714d0",
+        "sage/docs/DECISIONS.md": "97c515a8b773ef78ed055697ce8fec6ed0e46cf2becae6754431c3af22ee2195",
+        "sage/ARCHITECTURE.md": "89cce45aadfb5a15115ee7b3120a1646aeecc9793b5ab6bca571204109c3b100"
+      },
+      "limitations": [
+        "This passes only the deterministic main-Sage source module. Promotion, installer/generator cutover, legacy quarantine, installed execution and live forward evaluation remain later gates.",
+        "Fixture release facts do not establish actual authority, a physical workspace lease, agent independence or persuasive semantic evidence. Root judgment and observed tool/artifact evidence remain necessary.",
+        "Requested reviewer identity is Astra/high; effective model/effort remain unknown. No cost, usage, savings or empirical live-quality conclusion is claimed.",
+        "The old round-2 supplemental replay was overwritten during a later builder execution. Its current files must not be treated as the original round-2 replay; exact provenance limitations are recorded in evidence-retention.json. Original round-2 critic failures and real score history remain present.",
+        "Structural completion checks evidence associations and recorded passed checks, not semantic supersession among differently named checks; current reports surface conflicts for root disposition."
+      ],
+      "next_action": "Begin the sole promotion builder against the passed architecture, verification and main Sage contracts. Preserve all three Sage review rounds and the supplemental evidence-retention qualification. Keep promotion, installed integration and live quality gates unscored until independently observed.",
+      "suggestion_dispositions": [],
+      "evidence_retention": {
+        "qualification": "sage/evaluation/sandboxes/sage-a1-r3-critic/evidence-retention.json",
+        "affected_prior_supplemental_directory": "sage/evaluation/sandboxes/sage-a1-r2-replay",
+        "original_failure_directory": "sage/evaluation/sandboxes/sage-a1-r2-critic",
+        "disposition": "Historical supplemental replay provenance is qualified; fresh independently isolated evidence supports this pass. No lost bytes are recreated or described as original."
+      }
+    },
+    {
+      "event": "builder_started",
+      "module": "promotion",
+      "approach_id": "promotion-a1",
+      "round": 1,
+      "scores": null,
+      "recorded_at": "2026-09-07T17:10:52Z",
+      "evidence": [
+        "sage/docs/CONTRACTS.md",
+        "sage/ARCHITECTURE.md",
+        "sage/docs/REQUIREMENTS.md",
+        "sage/docs/DECISIONS.md",
+        "sage/evaluation/tests/test_product_knowledge.py"
+      ],
+      "observed": "The passed architecture, verification, and main Sage modules are fixed dependencies. Promotion-a1 round 1 begins with public knowledge CLI and installed skill seams frozen by docs/CONTRACTS.md. Product behavior, installed integration, live independence, cost, and quality remain unscored.",
+      "disposition": "Write architecture steering before implementation, reproduce the missing knowledge helper as red, then build vertical public-CLI slices and preserve all generated evidence under sage/evaluation/sandboxes."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "promotion",
+      "approach_id": "promotion-a1",
+      "round": 1,
+      "scores": null,
+      "recorded_at": "2026-09-07T17:33:26Z",
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-green3 TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-green3/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_knowledge.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-green3 TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-green3/tmp python3 -m unittest sage.tests.test_knowledge -v"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/promotion-wave-r1-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-unit-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-policy-red/stderr.txt",
+        "sage/scripts/sage_knowledge.py",
+        "sage/tests/test_knowledge.py"
+      ],
+      "observed": "The missing-helper baseline failed all 10 frozen knowledge tests. The empty retrieve-to-state regression and retrieval-policy fingerprint change were each observed red before implementation. The current public helper then passed 10 of 10 frozen knowledge tests and 1 of 1 normal regression with no failures or errors. The helper path was absent only between an apply_patch deletion and replacement; it is present in the tested candidate.",
+      "disposition": "Keep promotion-a1 building. Add adversarial public-CLI regressions for source outcomes, action transitions, full manifest/path integrity, UTF-8, actionable bounded retrieval, and pointer preservation; then rewrite the explicit-only skill and executable references before final scoped evidence."
+    },
+    {
+      "event": "builder_checkpoint",
+      "module": "promotion",
+      "approach_id": "promotion-a1",
+      "round": 1,
+      "scores": null,
+      "recorded_at": "2026-09-07T17:57:01Z",
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_knowledge.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint/tmp python3 -m unittest sage.tests.test_knowledge -v",
+        "Dependency-free Python syntax, frontmatter, JSON-example, local-link, explicit-only metadata, legacy-pointer absence, and git diff whitespace checks"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint/contracts.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-skill-checkpoint/regressions.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-stale-stage-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-revision-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-postrollback-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-path-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-cli-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-refutation-activation-red/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-global-history-red/stderr.txt",
+        "sage/skills/sage-promote/SKILL.md",
+        "sage/skills/sage-promote/references/promotion.md",
+        "sage/skills/sage-promote/references/knowledge.md",
+        "sage/skills/sage/references/knowledge.md"
+      ],
+      "observed": "The current frozen knowledge slice passes 10 of 10 and focused public-CLI regressions pass 10 of 10, with no failures or errors. Retained red evidence covers stale-stage activation, revision collision, safe post-rollback correction, extra empty paths, unstructured arguments, failed-refutation activation, and global history/parent validation before each repair. The explicit-only promotion spine and two installed references now replace legacy promotion instructions; narrow Main Sage retrieval plumbing is present. Dependency-free static checks pass. No independent review or score is claimed.",
+      "disposition": "Run the documented complete proposal and command sequence in a fresh sandbox, audit remaining public-boundary cases, run all state slices unchanged, append the detailed implementation record, then submit promotion-a1 round 1 for independent deterministic review."
+    },
+    {
+      "event": "builder_candidate_submitted",
+      "module": "promotion",
+      "approach_id": "promotion-a1",
+      "round": 1,
+      "scores": null,
+      "submitted_at": "2026-09-07T18:05:14Z",
+      "gate_type": "deterministic",
+      "commands": [
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/contracts TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/contracts/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_knowledge.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/regressions TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/regressions/tmp python3 -m unittest discover -s sage/tests -p test_knowledge.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/state-contracts TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/state-contracts/tmp python3 -m unittest discover -s sage/evaluation/tests -p test_product_state.py -v",
+        "PYTHONDONTWRITEBYTECODE=1 SAGE_EVALUATION_SANDBOX=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/state-regressions TMPDIR=$PWD/sage/evaluation/sandboxes/promotion-wave-r1-final/state-regressions/tmp python3 -m unittest discover -s sage/tests -p test_state.py -v",
+        "Run the complete installed-reference proposal flow through validate, stage, activate, retrieve, a second stage/activate, rollback, and final validate",
+        "Dependency-free Python syntax, JSON-example, local-link, frontmatter, explicit-only metadata, and git diff whitespace checks"
+      ],
+      "evidence": [
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/contracts/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/regressions/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/state-contracts/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/state-regressions/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/static/",
+        "sage/evaluation/sandboxes/promotion-wave-r1-final/validator/stderr.txt",
+        "sage/evaluation/sandboxes/promotion-wave-r1-doc-example/results.json",
+        "sage/docs/IMPLEMENTATION.md"
+      ],
+      "observed": "The frozen knowledge slice passed 10 of 10 and focused public-CLI regressions passed 10 of 10. The unchanged frozen state slice passed 9 of 9 and focused state regressions passed 16 of 16. The documented knowledge flow completed all 9 commands, returned an actionable exact-revision match, rolled back to g-1, and retained g-2. Dependency-free static checks passed. The bundled validator could not start because PyYAML is absent; that failure is retained and no dependency was installed.",
+      "disposition": "Freeze promotion-a1 round 1 for an independent deterministic critic. No self-score, installed-package result, live independence, semantic proof, physical lease, usage, cost, or quality claim is made.",
+      "input_hashes": {
+        "sage/scripts/sage_knowledge.py": "1ecee1a8819504534b73c52374fe395c2b0209e0efc5251788055c50591e8b07",
+        "sage/tests/test_knowledge.py": "96b091ae0d624f940eff9a81649f6d25bcee4d6a5309b16110e932dd5d7968f4",
+        "sage/skills/sage-promote/SKILL.md": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+        "sage/skills/sage-promote/agents/openai.yaml": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+        "sage/skills/sage-promote/references/knowledge.md": "d642fde6b6011e3005635e9d3e9fdcc60c184c53ccc63fe68073177f7432c9a3",
+        "sage/skills/sage-promote/references/promotion.md": "36bb41d8dedc5d7f30c2c78eba01b9961a1370804d8ba2a8135d866c49641e2c",
+        "sage/skills/sage/SKILL.md": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+        "sage/skills/sage/references/knowledge.md": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+        "sage/skills/sage/references/run.md": "040e3be11f10e54ff7df5127743f2274224850deb9786804ff572b61b4551b51",
+        "sage/ARCHITECTURE.md": "59fd76c8db8479586d898c0c0a58220fe0a370d4bf360ab80f0d152f80e8d1a1",
+        "sage/docs/CONTRACTS.md": "9825e707e6578afe58cc865768e4ab91b367ea614c11d928b805489ab60714d0",
+        "sage/docs/DECISIONS.md": "da747d5bdc77034bf08c1a1b0d33529614c673a5d264a3fae2d152a5097b2884",
+        "sage/docs/IMPLEMENTATION.md": "b79f860907c94c69f91dc832fca5a4dfa739027ebfff8885e72a4a96739b1a92"
+      }
+    }
+  ],
+  "next_action": "Run the separate Astra deterministic critic against the frozen promotion-a1 round-1 candidate; preserve this builder evidence and add no self-scores.",
+  "known_limitations": [
+    "Verification design/harness passed in round 3: eleven harness passes and direct regression probes. The 24 missing-helper setup failures remain expected; product and live gates have not passed.",
+    "Verification rounds 1 and 2 failed; round 3 claims the three remaining targeted repairs, but only an independent critic can close them.",
+    "Architecture passed its design gate in round 2; this does not establish deterministic, installed, or live empirical behavior.",
+    "The main state helper and Sage skill passed their source module. Promotion-a1 round 1 is pending independent deterministic review; its source checks do not establish installed or live behavior.",
+    "The broad product-facing red suite has not been rerun because installer integration intentionally remains absent; only exact state and knowledge source slices plus added regressions are claimed green.",
+    "The existing implementation remains active until the later integration cutover is completed and verified."
+  ]
+}

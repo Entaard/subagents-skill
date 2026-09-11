@@ -1,0 +1,2661 @@
+{
+  "arm": "data-treatment",
+  "runs": [
+    {
+      "exit_code": 0,
+      "stdout": "Wrote /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-treatment/regenerated-0.json\n",
+      "stderr": "",
+      "sha256": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e",
+      "equals_original": true
+    },
+    {
+      "exit_code": 0,
+      "stdout": "Wrote /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/data-treatment/regenerated-1.json\n",
+      "stderr": "",
+      "sha256": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e",
+      "equals_original": true
+    }
+  ],
+  "group_scenario_numeric_assertions": 1386,
+  "group_count": 9,
+  "missing_scenarios": 21,
+  "intervals_checked": 23,
+  "sensitivity_bound_assertions": 65,
+  "overall_wilson": [
+    {
+      "sign": "old",
+      "interval": [
+        0.6918928875462823,
+        0.7768855049594493
+      ]
+    },
+    {
+      "sign": "new",
+      "interval": [
+        0.5526380043524287,
+        0.6505708192873226
+      ]
+    }
+  ],
+  "independent_recomputation": {
+    "None": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 229,
+          "denominator": 380,
+          "fraction": 0.6026315789473684
+        },
+        "difference_pp": -13.39537869062901
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 152,
+          "denominator": 290,
+          "fraction": 0.5241379310344828
+        },
+        "difference_pp": 9.556650246305418
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 120,
+          "denominator": 190,
+          "fraction": 0.631578947368421
+        },
+        "difference_pp": -9.842105263157896
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 140,
+          "fraction": 0.55
+        },
+        "difference_pp": 10.0
+      }
+    },
+    "0": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 229,
+          "denominator": 400,
+          "fraction": 0.5725
+        },
+        "difference_pp": -16.408536585365855
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 152,
+          "denominator": 310,
+          "fraction": 0.49032258064516127
+        },
+        "difference_pp": 6.175115207373272
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 120,
+          "denominator": 210,
+          "fraction": 0.5714285714285714
+        },
+        "difference_pp": -15.857142857142858
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 160,
+          "fraction": 0.48125
+        },
+        "difference_pp": 3.125
+      }
+    },
+    "1": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 230,
+          "denominator": 400,
+          "fraction": 0.575
+        },
+        "difference_pp": -16.158536585365855
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 153,
+          "denominator": 310,
+          "fraction": 0.4935483870967742
+        },
+        "difference_pp": 6.497695852534562
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 121,
+          "denominator": 210,
+          "fraction": 0.5761904761904761
+        },
+        "difference_pp": -15.380952380952381
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 78,
+          "denominator": 160,
+          "fraction": 0.4875
+        },
+        "difference_pp": 3.75
+      }
+    },
+    "2": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 231,
+          "denominator": 400,
+          "fraction": 0.5775
+        },
+        "difference_pp": -15.908536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 154,
+          "denominator": 310,
+          "fraction": 0.4967741935483871
+        },
+        "difference_pp": 6.820276497695852
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 122,
+          "denominator": 210,
+          "fraction": 0.580952380952381
+        },
+        "difference_pp": -14.904761904761905
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 79,
+          "denominator": 160,
+          "fraction": 0.49375
+        },
+        "difference_pp": 4.375
+      }
+    },
+    "3": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 232,
+          "denominator": 400,
+          "fraction": 0.58
+        },
+        "difference_pp": -15.658536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 155,
+          "denominator": 310,
+          "fraction": 0.5
+        },
+        "difference_pp": 7.142857142857143
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 123,
+          "denominator": 210,
+          "fraction": 0.5857142857142857
+        },
+        "difference_pp": -14.428571428571429
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 80,
+          "denominator": 160,
+          "fraction": 0.5
+        },
+        "difference_pp": 5.0
+      }
+    },
+    "4": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 233,
+          "denominator": 400,
+          "fraction": 0.5825
+        },
+        "difference_pp": -15.408536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 156,
+          "denominator": 310,
+          "fraction": 0.5032258064516129
+        },
+        "difference_pp": 7.465437788018433
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 124,
+          "denominator": 210,
+          "fraction": 0.5904761904761905
+        },
+        "difference_pp": -13.952380952380953
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 81,
+          "denominator": 160,
+          "fraction": 0.50625
+        },
+        "difference_pp": 5.625
+      }
+    },
+    "5": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 234,
+          "denominator": 400,
+          "fraction": 0.585
+        },
+        "difference_pp": -15.158536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 157,
+          "denominator": 310,
+          "fraction": 0.5064516129032258
+        },
+        "difference_pp": 7.788018433179723
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 125,
+          "denominator": 210,
+          "fraction": 0.5952380952380952
+        },
+        "difference_pp": -13.476190476190476
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 82,
+          "denominator": 160,
+          "fraction": 0.5125
+        },
+        "difference_pp": 6.25
+      }
+    },
+    "6": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 235,
+          "denominator": 400,
+          "fraction": 0.5875
+        },
+        "difference_pp": -14.908536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 158,
+          "denominator": 310,
+          "fraction": 0.5096774193548387
+        },
+        "difference_pp": 8.110599078341014
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 126,
+          "denominator": 210,
+          "fraction": 0.6
+        },
+        "difference_pp": -13.0
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 83,
+          "denominator": 160,
+          "fraction": 0.51875
+        },
+        "difference_pp": 6.875
+      }
+    },
+    "7": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 236,
+          "denominator": 400,
+          "fraction": 0.59
+        },
+        "difference_pp": -14.658536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 159,
+          "denominator": 310,
+          "fraction": 0.5129032258064516
+        },
+        "difference_pp": 8.433179723502304
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 127,
+          "denominator": 210,
+          "fraction": 0.6047619047619047
+        },
+        "difference_pp": -12.523809523809524
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 84,
+          "denominator": 160,
+          "fraction": 0.525
+        },
+        "difference_pp": 7.5
+      }
+    },
+    "8": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 237,
+          "denominator": 400,
+          "fraction": 0.5925
+        },
+        "difference_pp": -14.408536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 160,
+          "denominator": 310,
+          "fraction": 0.5161290322580645
+        },
+        "difference_pp": 8.755760368663594
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 128,
+          "denominator": 210,
+          "fraction": 0.6095238095238096
+        },
+        "difference_pp": -12.047619047619047
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 85,
+          "denominator": 160,
+          "fraction": 0.53125
+        },
+        "difference_pp": 8.125
+      }
+    },
+    "9": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 238,
+          "denominator": 400,
+          "fraction": 0.595
+        },
+        "difference_pp": -14.158536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 161,
+          "denominator": 310,
+          "fraction": 0.5193548387096775
+        },
+        "difference_pp": 9.078341013824884
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 129,
+          "denominator": 210,
+          "fraction": 0.6142857142857143
+        },
+        "difference_pp": -11.571428571428571
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 86,
+          "denominator": 160,
+          "fraction": 0.5375
+        },
+        "difference_pp": 8.75
+      }
+    },
+    "10": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 239,
+          "denominator": 400,
+          "fraction": 0.5975
+        },
+        "difference_pp": -13.908536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 162,
+          "denominator": 310,
+          "fraction": 0.5225806451612903
+        },
+        "difference_pp": 9.400921658986174
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 130,
+          "denominator": 210,
+          "fraction": 0.6190476190476191
+        },
+        "difference_pp": -11.095238095238095
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 87,
+          "denominator": 160,
+          "fraction": 0.54375
+        },
+        "difference_pp": 9.375
+      }
+    },
+    "11": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 240,
+          "denominator": 400,
+          "fraction": 0.6
+        },
+        "difference_pp": -13.658536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 163,
+          "denominator": 310,
+          "fraction": 0.5258064516129032
+        },
+        "difference_pp": 9.723502304147466
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 131,
+          "denominator": 210,
+          "fraction": 0.6238095238095238
+        },
+        "difference_pp": -10.619047619047619
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 88,
+          "denominator": 160,
+          "fraction": 0.55
+        },
+        "difference_pp": 10.0
+      }
+    },
+    "12": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 241,
+          "denominator": 400,
+          "fraction": 0.6025
+        },
+        "difference_pp": -13.408536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 164,
+          "denominator": 310,
+          "fraction": 0.5290322580645161
+        },
+        "difference_pp": 10.046082949308756
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 132,
+          "denominator": 210,
+          "fraction": 0.6285714285714286
+        },
+        "difference_pp": -10.142857142857142
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 89,
+          "denominator": 160,
+          "fraction": 0.55625
+        },
+        "difference_pp": 10.625
+      }
+    },
+    "13": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 242,
+          "denominator": 400,
+          "fraction": 0.605
+        },
+        "difference_pp": -13.158536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 165,
+          "denominator": 310,
+          "fraction": 0.532258064516129
+        },
+        "difference_pp": 10.368663594470046
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 133,
+          "denominator": 210,
+          "fraction": 0.6333333333333333
+        },
+        "difference_pp": -9.666666666666666
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 90,
+          "denominator": 160,
+          "fraction": 0.5625
+        },
+        "difference_pp": 11.25
+      }
+    },
+    "14": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 243,
+          "denominator": 400,
+          "fraction": 0.6075
+        },
+        "difference_pp": -12.908536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 166,
+          "denominator": 310,
+          "fraction": 0.535483870967742
+        },
+        "difference_pp": 10.691244239631336
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 134,
+          "denominator": 210,
+          "fraction": 0.638095238095238
+        },
+        "difference_pp": -9.19047619047619
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 91,
+          "denominator": 160,
+          "fraction": 0.56875
+        },
+        "difference_pp": 11.875
+      }
+    },
+    "15": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 244,
+          "denominator": 400,
+          "fraction": 0.61
+        },
+        "difference_pp": -12.658536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 167,
+          "denominator": 310,
+          "fraction": 0.5387096774193548
+        },
+        "difference_pp": 11.013824884792626
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 135,
+          "denominator": 210,
+          "fraction": 0.6428571428571429
+        },
+        "difference_pp": -8.714285714285714
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 92,
+          "denominator": 160,
+          "fraction": 0.575
+        },
+        "difference_pp": 12.5
+      }
+    },
+    "16": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 245,
+          "denominator": 400,
+          "fraction": 0.6125
+        },
+        "difference_pp": -12.408536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 168,
+          "denominator": 310,
+          "fraction": 0.5419354838709678
+        },
+        "difference_pp": 11.336405529953916
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 136,
+          "denominator": 210,
+          "fraction": 0.6476190476190476
+        },
+        "difference_pp": -8.238095238095237
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 93,
+          "denominator": 160,
+          "fraction": 0.58125
+        },
+        "difference_pp": 13.125
+      }
+    },
+    "17": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 246,
+          "denominator": 400,
+          "fraction": 0.615
+        },
+        "difference_pp": -12.158536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 169,
+          "denominator": 310,
+          "fraction": 0.5451612903225806
+        },
+        "difference_pp": 11.658986175115208
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 137,
+          "denominator": 210,
+          "fraction": 0.6523809523809524
+        },
+        "difference_pp": -7.761904761904762
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 94,
+          "denominator": 160,
+          "fraction": 0.5875
+        },
+        "difference_pp": 13.75
+      }
+    },
+    "18": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 247,
+          "denominator": 400,
+          "fraction": 0.6175
+        },
+        "difference_pp": -11.908536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 170,
+          "denominator": 310,
+          "fraction": 0.5483870967741935
+        },
+        "difference_pp": 11.981566820276498
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 138,
+          "denominator": 210,
+          "fraction": 0.6571428571428571
+        },
+        "difference_pp": -7.285714285714286
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 95,
+          "denominator": 160,
+          "fraction": 0.59375
+        },
+        "difference_pp": 14.375
+      }
+    },
+    "19": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 248,
+          "denominator": 400,
+          "fraction": 0.62
+        },
+        "difference_pp": -11.658536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 171,
+          "denominator": 310,
+          "fraction": 0.5516129032258065
+        },
+        "difference_pp": 12.304147465437788
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 139,
+          "denominator": 210,
+          "fraction": 0.6619047619047619
+        },
+        "difference_pp": -6.809523809523809
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 96,
+          "denominator": 160,
+          "fraction": 0.6
+        },
+        "difference_pp": 15.0
+      }
+    },
+    "20": {
+      "overall": {
+        "old": {
+          "completed": 302,
+          "denominator": 410,
+          "fraction": 0.7365853658536585
+        },
+        "new": {
+          "completed": 249,
+          "denominator": 400,
+          "fraction": 0.6225
+        },
+        "difference_pp": -11.408536585365853
+      },
+      "crowd_quiet": {
+        "old": {
+          "completed": 272,
+          "denominator": 340,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 77,
+          "denominator": 90,
+          "fraction": 0.8555555555555555
+        },
+        "difference_pp": 5.555555555555555
+      },
+      "crowd_busy": {
+        "old": {
+          "completed": 30,
+          "denominator": 70,
+          "fraction": 0.42857142857142855
+        },
+        "new": {
+          "completed": 172,
+          "denominator": 310,
+          "fraction": 0.5548387096774193
+        },
+        "difference_pp": 12.626728110599078
+      },
+      "week_1": {
+        "old": {
+          "completed": 156,
+          "denominator": 210,
+          "fraction": 0.7428571428571429
+        },
+        "new": {
+          "completed": 109,
+          "denominator": 190,
+          "fraction": 0.5736842105263158
+        },
+        "difference_pp": -16.917293233082706
+      },
+      "week_2": {
+        "old": {
+          "completed": 146,
+          "denominator": 200,
+          "fraction": 0.73
+        },
+        "new": {
+          "completed": 140,
+          "denominator": 210,
+          "fraction": 0.6666666666666666
+        },
+        "difference_pp": -6.333333333333333
+      },
+      "week_1_quiet": {
+        "old": {
+          "completed": 144,
+          "denominator": 180,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 34,
+          "denominator": 40,
+          "fraction": 0.85
+        },
+        "difference_pp": 5.0
+      },
+      "week_1_busy": {
+        "old": {
+          "completed": 12,
+          "denominator": 30,
+          "fraction": 0.4
+        },
+        "new": {
+          "completed": 75,
+          "denominator": 150,
+          "fraction": 0.5
+        },
+        "difference_pp": 10.0
+      },
+      "week_2_quiet": {
+        "old": {
+          "completed": 128,
+          "denominator": 160,
+          "fraction": 0.8
+        },
+        "new": {
+          "completed": 43,
+          "denominator": 50,
+          "fraction": 0.86
+        },
+        "difference_pp": 6.0
+      },
+      "week_2_busy": {
+        "old": {
+          "completed": 18,
+          "denominator": 40,
+          "fraction": 0.45
+        },
+        "new": {
+          "completed": 97,
+          "denominator": 160,
+          "fraction": 0.60625
+        },
+        "difference_pp": 15.625
+      }
+    }
+  },
+  "ok": true
+}

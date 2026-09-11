@@ -1,0 +1,148 @@
+{
+  "schema_version": "sage-pairs-v2",
+  "selection": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/selection.json",
+    "sha256": "1f109139278f624556b4efba1c0d9c09c9347f2eed6dd451bda3f2b409807e0e"
+  },
+  "shared": {
+    "rubric": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    "protocol": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    "environment": {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/environment.json",
+      "sha256": "6af106a438ad916de51778e035a66e5cca27c19e0bf522d8f39b2948c23ab298"
+    }
+  },
+  "root_model": "gpt-6-astra",
+  "root_procedure": "installed_sage",
+  "arms": {
+    "treatment": {
+      "eligible_worker_policy": "sage_routing"
+    },
+    "baseline": {
+      "eligible_worker_policy": "astra_for_every_eligible_worker"
+    },
+    "routing_is_only_intended_difference": true
+  },
+  "pairs": [
+    {
+      "case_id": "LIVE-CODE-01",
+      "kind": "code",
+      "case_binding_sha256": "9bcf132c402f4053000611414e4eff32a24528977c69d491c7daa47562d14789",
+      "prompt": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/prompt.txt",
+        "sha256": "cb65ff29552e35ba4a1ac2418b1e0c68b50b78bdcbfcecd1fa71dad12a92f25d"
+      },
+      "inputs": [
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/vectors.json",
+          "sha256": "717d86a57fe4cdd0af16ed2a2dd6fc3e0eb342fefdace082f2f3f0681847bebb"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/install-identity.json",
+          "sha256": "3eeba9152e8504d07cf7adb8ca6b6bf205ea63eed92cb7d3b57891bc51c21ec7"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/actor-packet-template.txt",
+          "sha256": "9121f4dbc069ddc7af9b71b8a746b39c39554016edd9075562becc8fd37d219e"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/launch-packet.txt",
+          "sha256": "4eae9d0391ad03ce1383baece52500282692f04c9df51e87d78bf1ff68f400b5"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/launch-packet.txt",
+          "sha256": "6af805da3d482d07c36712e94532441b4239c70658a5d6ec50ca3201aed55d28"
+        }
+      ],
+      "checks_artifact": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/code/checks.json",
+        "sha256": "03bfb96ecd29001f153e0958600c2fdda2a669595203f7b50b71f95571d1dd72"
+      },
+      "check_ids": [
+        "wire-behavior",
+        "failure-and-reset",
+        "deliverables",
+        "live-procedure"
+      ],
+      "dimensions": [
+        "task_correctness",
+        "task_completeness",
+        "evidence_quality",
+        "orchestration_behavior",
+        "routing_efficiency",
+        "safety_reversibility",
+        "report_quality"
+      ],
+      "order": [
+        "treatment",
+        "baseline"
+      ]
+    },
+    {
+      "case_id": "LIVE-DATA-01",
+      "kind": "evidence_data",
+      "case_binding_sha256": "af6afa62735c5bff5051fcf79510cf411347ba1fbf956457c8245be6a8c762e8",
+      "prompt": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/prompt.txt",
+        "sha256": "59fc36e330e88f84f53ca14afcf0eda03214e3dd2884ed5674d2f0e57c47f7bb"
+      },
+      "inputs": [
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/notes.txt",
+          "sha256": "a79f4ce37b627d54c78861f8fc8ebfedd56f69514de90bc9521d3425164b3c14"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/sessions.csv",
+          "sha256": "9439d6888763978eb42988154a8278f517ae6afdd6aea3384b4f40d923b171ee"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/install-identity.json",
+          "sha256": "3eeba9152e8504d07cf7adb8ca6b6bf205ea63eed92cb7d3b57891bc51c21ec7"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/actor-packet-template.txt",
+          "sha256": "9121f4dbc069ddc7af9b71b8a746b39c39554016edd9075562becc8fd37d219e"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/launch-packet.txt",
+          "sha256": "3a1fc2dd93d8837bfe903c989bbb7a1840e35c492abe7e8976a84ea20b414db4"
+        },
+        {
+          "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/launch-packet.txt",
+          "sha256": "782c5e1ec12fd74fb604e01354d0efd928a0b6df77adf301820395d13620512b"
+        }
+      ],
+      "checks_artifact": {
+        "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/cases/data/checks.json",
+        "sha256": "49bda8ac4d6cb00732d17d27cf57ef81fe154ac63f0cf9b524775e602bea1983"
+      },
+      "check_ids": [
+        "arithmetic",
+        "sensitivity",
+        "interpretation",
+        "deliverables",
+        "live-procedure"
+      ],
+      "dimensions": [
+        "task_correctness",
+        "task_completeness",
+        "evidence_quality",
+        "orchestration_behavior",
+        "routing_efficiency",
+        "safety_reversibility",
+        "report_quality"
+      ],
+      "order": [
+        "baseline",
+        "treatment"
+      ]
+    }
+  ],
+  "manifest_sha256": "bf72f1a3ba12f7bfd123379890dc794e11cdedefdcfdb32380bab92fa28470f4"
+}

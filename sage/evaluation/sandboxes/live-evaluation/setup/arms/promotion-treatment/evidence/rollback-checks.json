@@ -1,0 +1,20 @@
+[
+  {
+    "name": "rollback",
+    "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py rollback --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --generation-id controlled-prior --expected-current promotion-live-v2",
+    "exit_code": 0,
+    "stdout": "{\"generation_id\": \"controlled-prior\", \"manifest_sha256\": \"2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04\", \"ok\": true, \"previous_generation_id\": \"promotion-live-v2\"}\n"
+  },
+  {
+    "name": "post-rollback-validate",
+    "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+    "exit_code": 0,
+    "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 2, \"ok\": true}\n"
+  },
+  {
+    "name": "after-retrieve",
+    "cmd": "env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py retrieve --store-dir /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge --cues /Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json --limit 10",
+    "exit_code": 0,
+    "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"controlled-prior\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"Original unquoted rows have equal plain-split and csv.reader field counts.\", \"falsifier\": \"A museum CSV row has a csv.reader field count different from comma count plus one.\", \"gate_rationale\": \"Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 1, \"rule\": \"For a museum CSV row, count commas and add one to obtain its field count.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n"
+  }
+]

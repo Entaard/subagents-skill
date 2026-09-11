@@ -1,0 +1,178 @@
+{
+  "approach_id": "final-a1",
+  "round": 1,
+  "gate_type": "final",
+  "source": [
+    {
+      "path": "sage/ARCHITECTURE.md",
+      "sha256": "c42a5a68fcbff6d7d576ccb8e92c4e5c307b240b23a8dde10e80453d320b46b0"
+    },
+    {
+      "path": "sage/README.md",
+      "sha256": "f763b9da198346e5c59f17e321343cd94c965d53c8fc8e08bdcc8f71cef3291b"
+    },
+    {
+      "path": "sage/docs/CONTRACTS.md",
+      "sha256": "380cef7698f95f46832954c76891c49597a0a24cbb31ef3a77345913b0061e52"
+    },
+    {
+      "path": "sage/docs/DECISIONS.md",
+      "sha256": "0c8fc5d2e40010fe7a81d1d92f05806ffed87696632390612b44992f4735428e"
+    },
+    {
+      "path": "sage/docs/IMPLEMENTATION.md",
+      "sha256": "6dd8cec0acbbc1b96e4a3afc4fc7386c93ab57533b7e3bc787e6b0417a226ba9"
+    },
+    {
+      "path": "sage/docs/LIVE-RESULTS.md",
+      "sha256": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b"
+    },
+    {
+      "path": "sage/docs/REQUIREMENTS.md",
+      "sha256": "2a838ce2c5d6045e53909bce38a3f714d4caedab8c62de7a95ae6020bbdb3148"
+    },
+    {
+      "path": "sage/evaluation/README.md",
+      "sha256": "9da232ceb68e74979c86ec6f8fa38be6e44de70a3b94557a97374c38c513e3af"
+    },
+    {
+      "path": "sage/evaluation/holdout-boundary.json",
+      "sha256": "8a8e7dcd10b100c65e0cfb540dd9796fa3b29cf40277a9f65aed68fb8dd1542b"
+    },
+    {
+      "path": "sage/evaluation/live-protocol.md",
+      "sha256": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    {
+      "path": "sage/evaluation/native-result-protocol-v3.md",
+      "sha256": "1a880745154172cc796f1c7588866a5b80adfc0e3760c305e7785e3dad6142eb"
+    },
+    {
+      "path": "sage/evaluation/pairing.py",
+      "sha256": "933b027f8251c7942a4c694d4782f428cb3af998f9cde04d237c97cc93d8bd16"
+    },
+    {
+      "path": "sage/evaluation/requirements-trace.json",
+      "sha256": "f564a90436d15c5a2f7cb9aed140262bb9158939d11a2a1fee77b9a08fe916a0"
+    },
+    {
+      "path": "sage/evaluation/rubric.json",
+      "sha256": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    {
+      "path": "sage/evaluation/run_verification.py",
+      "sha256": "d54038c801b63a342ad99b2c539446ad605b407d8f9b9c8505787d1622b277a5"
+    },
+    {
+      "path": "sage/evaluation/score_status.py",
+      "sha256": "6920ce5aa0dc1833b00458327f04cceed241dc9aba0a576342861e486bdbc921"
+    },
+    {
+      "path": "sage/evaluation/tests/support.py",
+      "sha256": "b2e0b23c0d5b615576918054598ff3ae91ec3006ae604c06512758490893c6c4"
+    },
+    {
+      "path": "sage/evaluation/tests/test_harness.py",
+      "sha256": "a2ca302272009cc5fb9093a3128ea60b7aced2abfd9614767fcdf391f8852c3c"
+    },
+    {
+      "path": "sage/evaluation/tests/test_live_repairs.py",
+      "sha256": "d5889467807d18746d6eb3fc8d8d2984bb166e3b58b5b40c4ff0b2926e82f35c"
+    },
+    {
+      "path": "sage/evaluation/tests/test_native_shape.py",
+      "sha256": "026015d2687a8b404ca2588088244a6b4f9c387d8b5387537f89421cba8372c4"
+    },
+    {
+      "path": "sage/evaluation/tests/test_product_install.py",
+      "sha256": "0adca1528eccbc043ebbaef0c919a5d718a8f6802837e088c82c8f09852d4829"
+    },
+    {
+      "path": "sage/evaluation/tests/test_product_knowledge.py",
+      "sha256": "59e07a5dd23573c0c5fbe62aa2b25c6dcfecc81684e4ff8665c35a3c904e2238"
+    },
+    {
+      "path": "sage/evaluation/tests/test_product_state.py",
+      "sha256": "293722e780bccc4483690295f3a14048c9d3819fad8d8955a43b7b6c062c553a"
+    },
+    {
+      "path": "sage/install.sh",
+      "sha256": "56ebb56d909559a6d7a2976b9c0d9e99d777b0eda665359c84d335ba98521aeb"
+    },
+    {
+      "path": "sage/scripts/sage-lifecycle.py",
+      "sha256": "7f13656506857854e3b288f9e722da71648028864e5f87a04981de90ade3c911"
+    },
+    {
+      "path": "sage/scripts/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e"
+    },
+    {
+      "path": "sage/scripts/sage_state.py",
+      "sha256": "2fda97567bed5c3b1eb8bdaa1465398ecbbe619da6aab47d83e45f28c1e7a205"
+    },
+    {
+      "path": "sage/skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f"
+    },
+    {
+      "path": "sage/skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e"
+    },
+    {
+      "path": "sage/skills/sage/references/delegation.md",
+      "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27"
+    },
+    {
+      "path": "sage/skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27"
+    },
+    {
+      "path": "sage/skills/sage/references/recovery.md",
+      "sha256": "b3290b8ae3e0e946daa8c608ec3888fd1f2e209e80d2759dfe8cb604c3e75763"
+    },
+    {
+      "path": "sage/skills/sage/references/run.md",
+      "sha256": "d038fb288d8600c79412b95eddca68576f2635a1463ea87fe682887b24a41f84"
+    },
+    {
+      "path": "sage/skills/sage/references/state.md",
+      "sha256": "1ea5bee2746c8fddcc8c1ed61fc3be416ee726331fe09473bb64e3305cc96b41"
+    },
+    {
+      "path": "sage/skills/sage/references/verification.md",
+      "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d"
+    },
+    {
+      "path": "sage/skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef"
+    },
+    {
+      "path": "sage/skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f"
+    },
+    {
+      "path": "sage/skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c"
+    },
+    {
+      "path": "sage/skills/sage-promote/references/promotion.md",
+      "sha256": "10e9adc3c38eeb642a4ab55c4a19e71b322e6616e7284840b43c2af4d36008c4"
+    },
+    {
+      "path": "sage/tests/test_knowledge.py",
+      "sha256": "5e1c5c523de8ee339e0f024531accba9db2c97facc1e81bfb7e0b0c10e3cb3c1"
+    },
+    {
+      "path": "sage/tests/test_state.py",
+      "sha256": "bbd82ae6717f322189a6aa14838c030ac0333ffba385a6bc8144c0849c37b3b0"
+    },
+    {
+      "path": "sage/uninstall.sh",
+      "sha256": "e7fdcf9855c9dd3ca52794f63e3423245da60f1fec5334fcb9fd53fdc7374f83"
+    }
+  ],
+  "precondition": "All dependency module gates passed; original live failures remain immutable.",
+  "coverage_question": "sage/evaluation/sandboxes/final-whole-critic-coverage-question.json",
+  "release": "Root assembly complete; source frozen for whole-skill critic."
+}

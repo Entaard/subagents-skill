@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+    "validate",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+    "--manifest",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks completed transcript evidence\"}\n",
+  "expected_honest_limitation": "Frozen native result cannot provide an OS exit code; do not substitute verifier exits.",
+  "schema_passed": false
+}

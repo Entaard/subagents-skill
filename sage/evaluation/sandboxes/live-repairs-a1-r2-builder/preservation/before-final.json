@@ -1,0 +1,46 @@
+{
+  "prior_evidence": {
+    "entries": 665,
+    "inventory_sha256": "c64d6be9756fce8d05036ffde551c94da1d3d0bb7c5af28b7685dc33a409ebec"
+  },
+  "frozen_guards": [
+    {
+      "path": "sage/evaluation/live-protocol.md",
+      "expected": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77",
+      "actual": "8726a8fd00e48c074372609f90de562659012037a38461aefb91e1a958bf0c77"
+    },
+    {
+      "path": "sage/evaluation/rubric.json",
+      "expected": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16",
+      "actual": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+      "expected": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25",
+      "actual": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25"
+    },
+    {
+      "path": "sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+      "expected": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf",
+      "actual": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"
+    },
+    {
+      "path": "sage/docs/LIVE-RESULTS.md",
+      "expected": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b",
+      "actual": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b"
+    }
+  ],
+  "original_v2_replay": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py",
+      "validate",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/paired-results.json",
+      "--manifest",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "{\"ok\": false, \"error\": \"LIVE-CODE-01 treatment lacks completed transcript evidence\"}\n"
+  }
+}

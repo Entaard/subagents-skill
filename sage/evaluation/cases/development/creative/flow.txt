@@ -1,0 +1,1 @@
+Tab to each status card, open its detail, close the detail with Escape, then repeat at 1280x720 and 390x844.

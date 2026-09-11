@@ -1,0 +1,4075 @@
+{
+  "events": [
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "typed_evidence": {
+        "observation": 6
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:56:45.190404Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "No repeated unchanged failed criterion without a distinct safe focused correction; at most one repair.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "Frozen memo, deterministic script and JSON with source hashes and successful checks exist.",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "analysis",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/prompt.txt",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/checks.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs"
+                ],
+                "objective": "Build and freeze the requested analysis and memo.",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "artifact/check evidence"
+                ],
+                "revision": 1,
+                "risk": "low; fictional observational analysis",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state"
+                ],
+                "verification": "arithmetic, sensitivity, interpretation, deliverables and live-procedure checks"
+              },
+              {
+                "completion": "Independent recomputation and findings returned with explicit release and observed terminal lifecycle.",
+                "dependencies": [
+                  "analysis"
+                ],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "review",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/prompt.txt",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/checks.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs"
+                ],
+                "objective": "Independently audit arithmetic, reproducibility and interpretation.",
+                "owner": "/root/live_data_treatment/numerical_review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "artifact/check evidence"
+                ],
+                "revision": 1,
+                "risk": "low; fictional observational analysis",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state"
+                ],
+                "verification": "arithmetic, sensitivity, interpretation, deliverables and live-procedure checks"
+              },
+              {
+                "completion": "All findings dispositioned, final checks pass, and terminal state/report validate.",
+                "dependencies": [
+                  "review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integration",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/prompt.txt",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/checks.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/inputs"
+                ],
+                "objective": "Disposition findings and verify final integrated deliverables.",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "artifact/check evidence"
+                ],
+                "revision": 1,
+                "risk": "low; fictional observational analysis",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state"
+                ],
+                "verification": "arithmetic, sensitivity, interpretation, deliverables and live-procedure checks"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "data-treatment",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:56:45.190406Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "analysis",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:00:07.288933Z",
+          "event_id": "e-10",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "candidate-checks",
+              "memo",
+              "analysis-script",
+              "summary"
+            ],
+            "outcome": "passed",
+            "task_id": "analysis",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 10,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:00:07.288934Z",
+          "event_id": "e-11",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 11,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419200Z",
+          "event_id": "e-13",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_data_treatment/numerical_review",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "review"
+          },
+          "run_id": "data-treatment",
+          "seq": 13,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419275Z",
+          "event_id": "e-14",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_data_treatment/numerical_review",
+            "lifecycle": "completed"
+          },
+          "run_id": "data-treatment",
+          "seq": 14,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419280Z",
+          "event_id": "e-17",
+          "payload": {
+            "effect_status": "none",
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "outcome": "passed",
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 17,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419283Z",
+          "event_id": "e-19",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "integration",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 19,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419294Z",
+          "event_id": "e-26",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "candidate-checks",
+              "independent-review",
+              "actor-journal"
+            ],
+            "outcome": "passed",
+            "task_id": "integration",
+            "task_revision": 1
+          },
+          "run_id": "data-treatment",
+          "seq": 26,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:06:51.419286Z",
+          "event_id": "e-20",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-review",
+              "actor-journal",
+              "candidate-checks"
+            ],
+            "text": "Agent request and terminal observation recorded after return to preserve coordinator no-write interval. Native requested handle matched planned owner. Reviewer reported explicit read-only release and zero writes; completed lifecycle observed. No findings; no artifact repairs. Effective identity, tokens and money remain null. Root rechecked frozen hashes and candidate reproducibility."
+          },
+          "run_id": "data-treatment",
+          "seq": 20,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new",
+      "typed_evidence": {
+        "observation": 1
+      },
+      "plans": [
+        {
+          "v": 1,
+          "event_id": "e-2",
+          "run_id": "csv-new",
+          "seq": 2,
+          "at": "2026-09-08T00:00:02Z",
+          "actor": "controlled-fixture-root",
+          "type": "plan.revised",
+          "payload": {
+            "revision": 1,
+            "reason": "initial",
+            "attempt_limit": 1,
+            "revision_limit": 1,
+            "no_progress": "one controlled observation",
+            "trigger_event_ids": [
+              "e-1"
+            ],
+            "tasks": [
+              {
+                "id": "observe",
+                "revision": 1,
+                "objective": "Controlled fixture observation",
+                "completion": "Observation recorded",
+                "dependencies": [],
+                "owner": "root",
+                "effect": "read",
+                "scope": [
+                  "workspace"
+                ],
+                "inputs": [
+                  "fixture inputs"
+                ],
+                "returns": [
+                  "observation"
+                ],
+                "risk": "low",
+                "verification": "fixture-check",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "fork_turns": "none"
+              }
+            ]
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "v": 1,
+          "event_id": "e-3",
+          "run_id": "csv-new",
+          "seq": 3,
+          "at": "2026-09-08T00:00:03Z",
+          "actor": "controlled-fixture-root",
+          "type": "task.admitted",
+          "payload": {
+            "task_id": "observe",
+            "task_revision": 1,
+            "plan_revision": 1
+          }
+        },
+        {
+          "v": 1,
+          "event_id": "e-5",
+          "run_id": "csv-new",
+          "seq": 5,
+          "at": "2026-09-08T00:00:05Z",
+          "actor": "controlled-fixture-root",
+          "type": "task.result",
+          "payload": {
+            "task_id": "observe",
+            "task_revision": 1,
+            "outcome": "passed",
+            "effect_status": "none",
+            "evidence_ids": [
+              "ev-1"
+            ]
+          }
+        }
+      ],
+      "findings": [],
+      "notes": []
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old",
+      "typed_evidence": {
+        "observation": 1
+      },
+      "plans": [
+        {
+          "v": 1,
+          "event_id": "e-2",
+          "run_id": "csv-old",
+          "seq": 2,
+          "at": "2026-09-08T00:00:02Z",
+          "actor": "controlled-fixture-root",
+          "type": "plan.revised",
+          "payload": {
+            "revision": 1,
+            "reason": "initial",
+            "attempt_limit": 1,
+            "revision_limit": 1,
+            "no_progress": "one controlled observation",
+            "trigger_event_ids": [
+              "e-1"
+            ],
+            "tasks": [
+              {
+                "id": "observe",
+                "revision": 1,
+                "objective": "Controlled fixture observation",
+                "completion": "Observation recorded",
+                "dependencies": [],
+                "owner": "root",
+                "effect": "read",
+                "scope": [
+                  "workspace"
+                ],
+                "inputs": [
+                  "fixture inputs"
+                ],
+                "returns": [
+                  "observation"
+                ],
+                "risk": "low",
+                "verification": "fixture-check",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "fork_turns": "none"
+              }
+            ]
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "v": 1,
+          "event_id": "e-3",
+          "run_id": "csv-old",
+          "seq": 3,
+          "at": "2026-09-08T00:00:03Z",
+          "actor": "controlled-fixture-root",
+          "type": "task.admitted",
+          "payload": {
+            "task_id": "observe",
+            "task_revision": 1,
+            "plan_revision": 1
+          }
+        },
+        {
+          "v": 1,
+          "event_id": "e-5",
+          "run_id": "csv-old",
+          "seq": 5,
+          "at": "2026-09-08T00:00:05Z",
+          "actor": "controlled-fixture-root",
+          "type": "task.result",
+          "payload": {
+            "task_id": "observe",
+            "task_revision": 1,
+            "outcome": "passed",
+            "effect_status": "none",
+            "evidence_ids": [
+              "ev-1"
+            ]
+          }
+        }
+      ],
+      "findings": [],
+      "notes": []
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "typed_evidence": {
+        "observation": 18
+      },
+      "plans": [
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-4",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "One candidate; at most one focused repair; one confirmed nested capacity failure uses sequential outer dispatch.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 2,
+            "tasks": [
+              {
+                "completion": "Frozen candidate and evidence received; effects reconciled and terminal release observed",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "author",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-author-brief.txt"
+                ],
+                "objective": "Independently author one bounded promotion candidate",
+                "owner": "/root/live_promotion_author",
+                "requested_effort": "high",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "proposal-author.json",
+                  "proposal-author.md"
+                ],
+                "revision": 1,
+                "risk": "bounded isolated candidate",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-author.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/proposal-author.md"
+                ],
+                "verification": "author-reconciled"
+              }
+            ],
+            "trigger_event_ids": []
+          },
+          "run_id": "promotion-live",
+          "seq": 4,
+          "type": "plan.revised",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-23",
+          "payload": {
+            "attempt_limit": 1,
+            "cause": "candidate_defect",
+            "failure_evidence_ids": [
+              "review-failed"
+            ],
+            "no_progress": "One candidate; at most one focused repair; one confirmed nested capacity failure uses sequential outer dispatch.",
+            "reason": "failure",
+            "revision": 2,
+            "revision_limit": 2,
+            "strategy_change": "One author-owned qualifier repair, then original distinct refuter and reviewer independently check changed candidate before coordinator landing.",
+            "tasks": [
+              {
+                "completion": "Frozen candidate and evidence received; effects reconciled and terminal release observed",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "author",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-author-brief.txt"
+                ],
+                "objective": "Independently author one bounded promotion candidate",
+                "owner": "/root/live_promotion_author",
+                "requested_effort": "high",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "proposal-author.json",
+                  "proposal-author.md"
+                ],
+                "revision": 1,
+                "risk": "bounded isolated candidate",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-author.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/proposal-author.md"
+                ],
+                "verification": "author-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "author"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "refuter",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refuter-brief.txt"
+                ],
+                "objective": "Independent adversarial challenge artifact with evidence-based verdict",
+                "owner": "/root/live_promotion_refuter",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "work/refutation.json",
+                  "evidence/refutation.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refutation.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/refutation.md"
+                ],
+                "verification": "refuter-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "refuter"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "reviewer",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/reviewer-brief.txt"
+                ],
+                "objective": "Independent review artifact with findings and semantic gate decision",
+                "owner": "/root/live_promotion_reviewer",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "work/review.json",
+                  "evidence/review.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/review.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/review.md"
+                ],
+                "verification": "reviewer-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "reviewer"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "repair",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/author-repair-brief.txt"
+                ],
+                "objective": "Single focused repair of actual-task retrieval qualifier while preserving scoped evidence",
+                "owner": "/root/live_promotion_author",
+                "requested_effort": "high",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "work/proposal-repaired.json",
+                  "evidence/author-repair.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-repaired.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/author-repair.md"
+                ],
+                "verification": "repair-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "repair"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "refute-repair",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refuter-repair-brief.txt"
+                ],
+                "objective": "Independently challenge actual repaired candidate and changed retrieval scope",
+                "owner": "/root/live_promotion_refuter",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "work/refutation-repaired.json",
+                  "evidence/refutation-repaired.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refutation-repaired.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/refutation-repaired.md"
+                ],
+                "verification": "refute-repair-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "refute-repair"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "review-repair",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/reviewer-repair-brief.txt"
+                ],
+                "objective": "Independently review actual repaired candidate and refutation with complete finding dispositions",
+                "owner": "/root/live_promotion_reviewer",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "work/review-repaired.json",
+                  "evidence/review-repaired.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/review-repaired.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/review-repaired.md"
+                ],
+                "verification": "review-repair-reconciled"
+              },
+              {
+                "completion": "Reconciled evidence artifact and explicit terminal release; semantic verdict recorded separately",
+                "dependencies": [
+                  "review-repair"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "landing",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/prompt.txt"
+                ],
+                "objective": "Coordinator-only semantic decision, stage/validate/activate/retrieve/rollback and source/history verification",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "state/knowledge",
+                  "work/proposal-final.json",
+                  "evidence/landing-checks.json",
+                  "evidence/final-report.md"
+                ],
+                "revision": 1,
+                "risk": "one bounded candidate and one repair maximum",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-final.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/landing-checks.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/final-report.md"
+                ],
+                "verification": "landing-reconciled"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-19",
+              "e-22"
+            ],
+            "unmet_criterion": "landing-retrieval"
+          },
+          "run_id": "promotion-live",
+          "seq": 23,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-5",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "author",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 5,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-6",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_author",
+            "requested_effort": "high",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "author"
+          },
+          "run_id": "promotion-live",
+          "seq": 6,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-7",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_author",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 7,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-10",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "author-reconciliation",
+              "author-candidate"
+            ],
+            "outcome": "passed",
+            "task_id": "author",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 10,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-24",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "refuter",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 24,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-25",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_refuter",
+            "requested_effort": "high",
+            "requested_model": "gpt-6-astra",
+            "task_id": "refuter"
+          },
+          "run_id": "promotion-live",
+          "seq": 25,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-26",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_refuter",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 26,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-27",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "refutation",
+              "refuter-lifecycle"
+            ],
+            "outcome": "passed",
+            "task_id": "refuter",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 27,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-28",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "reviewer",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 28,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-29",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_reviewer",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "reviewer"
+          },
+          "run_id": "promotion-live",
+          "seq": 29,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-30",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_reviewer",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 30,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-31",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "review-failed",
+              "reviewer-lifecycle"
+            ],
+            "outcome": "passed",
+            "task_id": "reviewer",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 31,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:50:36Z",
+          "event_id": "e-34",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 34,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:50:36Z",
+          "event_id": "e-35",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_author",
+            "requested_effort": "high",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "repair"
+          },
+          "run_id": "promotion-live",
+          "seq": 35,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:50:36Z",
+          "event_id": "e-36",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_author",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 36,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:50:36Z",
+          "event_id": "e-39",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "repaired-candidate",
+              "repair-lifecycle"
+            ],
+            "outcome": "passed",
+            "task_id": "repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 39,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-42",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "refute-repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 42,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-43",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_refuter",
+            "requested_effort": "high",
+            "requested_model": "gpt-6-astra",
+            "task_id": "refute-repair"
+          },
+          "run_id": "promotion-live",
+          "seq": 43,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-44",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_refuter",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 44,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-47",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "refutation-repaired",
+              "refuter-recheck-lifecycle"
+            ],
+            "outcome": "passed",
+            "task_id": "refute-repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 47,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-51",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "review-repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 51,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-52",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_promotion_reviewer",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "review-repair"
+          },
+          "run_id": "promotion-live",
+          "seq": 52,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-53",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_promotion_reviewer",
+            "lifecycle": "completed"
+          },
+          "run_id": "promotion-live",
+          "seq": 53,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-57",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "review-repaired",
+              "reviewer-recheck-lifecycle",
+              "preflight"
+            ],
+            "outcome": "passed",
+            "task_id": "review-repair",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 57,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-62",
+          "payload": {
+            "plan_revision": 2,
+            "task_id": "landing",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 62,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:12:27Z",
+          "event_id": "e-84",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "landing-observations",
+              "final-verification",
+              "final-report"
+            ],
+            "outcome": "passed",
+            "task_id": "landing",
+            "task_revision": 1
+          },
+          "run_id": "promotion-live",
+          "seq": 84,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:30:59Z",
+          "event_id": "e-15",
+          "payload": {
+            "evidence_ids": [
+              "refutation"
+            ],
+            "finding_id": "rf-scope",
+            "severity": "minor",
+            "summary": "Retrieval cues are broader than exact empirical sample scope; explicit sample/version limitations must remain visible and authoritative."
+          },
+          "run_id": "promotion-live",
+          "seq": 15,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:30:59Z",
+          "event_id": "e-16",
+          "payload": {
+            "evidence_ids": [
+              "refutation"
+            ],
+            "finding_id": "rf-strength",
+            "severity": "minor",
+            "summary": "Only row field counts are established; equal A4 counts do not establish general parsing validation."
+          },
+          "run_id": "promotion-live",
+          "seq": 16,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-21",
+          "payload": {
+            "check_id": "initial-review-gate",
+            "criterion_ids": [
+              "landing-retrieval"
+            ],
+            "evidence_ids": [
+              "review-failed"
+            ],
+            "outcome": "failed"
+          },
+          "run_id": "promotion-live",
+          "seq": 21,
+          "type": "check.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-22",
+          "payload": {
+            "evidence_ids": [
+              "review-failed"
+            ],
+            "finding_id": "rv-retrieval-actual-cues",
+            "severity": "blocker",
+            "summary": "Mandatory candidate environment qualifier prevents retrieval with unchanged task cues. Single author repair and fresh checks required."
+          },
+          "run_id": "promotion-live",
+          "seq": 22,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-48",
+          "payload": {
+            "evidence_ids": [
+              "refutation-repaired"
+            ],
+            "finding_id": "rf-retrieval-repair",
+            "severity": "minor",
+            "summary": "Actual-cue predicate repair observed on changed artifact; coordinator must still verify live revision 2 supported retrieval and visible scope after activation."
+          },
+          "run_id": "promotion-live",
+          "seq": 48,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-59",
+          "payload": {
+            "disposition": "accepted",
+            "evidence_ids": [
+              "review-repaired",
+              "refutation-repaired"
+            ],
+            "finding_id": "rf-scope",
+            "verification_check_id": "repaired-semantic-gate"
+          },
+          "run_id": "promotion-live",
+          "seq": 59,
+          "type": "finding.dispositioned",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-60",
+          "payload": {
+            "disposition": "accepted",
+            "evidence_ids": [
+              "review-repaired",
+              "refutation-repaired"
+            ],
+            "finding_id": "rf-strength",
+            "verification_check_id": "repaired-semantic-gate"
+          },
+          "run_id": "promotion-live",
+          "seq": 60,
+          "type": "finding.dispositioned",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:12:27Z",
+          "event_id": "e-69",
+          "payload": {
+            "check_id": "verifier-wrapper-initial",
+            "criterion_ids": [
+              "source-qualification"
+            ],
+            "evidence_ids": [
+              "verifier-initial-failure"
+            ],
+            "outcome": "failed"
+          },
+          "run_id": "promotion-live",
+          "seq": 69,
+          "type": "check.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:12:27Z",
+          "event_id": "e-76",
+          "payload": {
+            "disposition": "fixed",
+            "evidence_ids": [
+              "review-repaired",
+              "landing-observations",
+              "final-verification"
+            ],
+            "finding_id": "rv-retrieval-actual-cues",
+            "verification_check_id": "live-retrieval-fix"
+          },
+          "run_id": "promotion-live",
+          "seq": 76,
+          "type": "finding.dispositioned",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:12:27Z",
+          "event_id": "e-77",
+          "payload": {
+            "disposition": "fixed",
+            "evidence_ids": [
+              "review-repaired",
+              "landing-observations",
+              "final-verification"
+            ],
+            "finding_id": "rf-retrieval-repair",
+            "verification_check_id": "live-retrieval-fix"
+          },
+          "run_id": "promotion-live",
+          "seq": 77,
+          "type": "finding.dispositioned",
+          "v": 1
+        }
+      ],
+      "notes": [
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:17:34Z",
+          "event_id": "e-2",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [],
+            "text": "Nested proposal_author spawn requested gpt-5.6-sol/high/fork none failed: agent thread limit reached. No handle allocated. Outer sequential dispatch requested using frozen work/proposal-author-brief.txt; three roles remain pending. Initial qualification and retrieval outputs retained in evidence/initial-checks.json. Effective identity, tokens and money null. Initial checkpoint append rejected invalid note category without mutation; corrected environment to allowed decision."
+          },
+          "run_id": "promotion-live",
+          "seq": 2,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:24:40Z",
+          "event_id": "e-11",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "author-reconciliation",
+              "author-candidate"
+            ],
+            "text": "Author request/lifecycle recorded retrospectively from normalized outer native observations; explicit RELEASE and completed observed at 22:24:18Z before coordinator resumed. Artifact hashes match and all source/prior-store byte baselines unchanged. Refutation is pending; author passage is reconciliation only, not semantic approval."
+          },
+          "run_id": "promotion-live",
+          "seq": 11,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:30:59Z",
+          "event_id": "e-17",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "refutation",
+              "refuter-lifecycle"
+            ],
+            "text": "Refuter /root/live_promotion_refuter requested Astra/high/fork none; outer observed explicit release and completed 22:30:35Z. All candidate/source/prior-store bytes match initial/frozen hashes. Refuter passed with two nonblocking findings; independent reviewer still required. Requested reviewer Sol/xhigh, fork none using work/reviewer-brief.txt. No desired verdict provided; no repairs performed."
+          },
+          "run_id": "promotion-live",
+          "seq": 17,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:42:31Z",
+          "event_id": "e-32",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "review-failed",
+              "reviewer-lifecycle"
+            ],
+            "text": "Role task results passed mean requested evidence-bearing adversarial/review work delivered, not semantic approval. Original reviewer verdict failed and initial-review-gate remains failed. Retrospective task/lifecycle records use normalized outer observations. One repair now ready; no store mutation until repaired candidate receives actual refutation/review passes."
+          },
+          "run_id": "promotion-live",
+          "seq": 32,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:50:36Z",
+          "event_id": "e-40",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "repaired-candidate",
+              "repair-lifecycle"
+            ],
+            "text": "Retrospective author repair request records existing native handle followup, not a new fork. Explicit release and terminal observed before coordinator resumed. Only semantic JSON diff is qualifier.all.environment cleared; all original candidate/refutation/failed-review and source/prior-store hashes unchanged. One repair consumed. No finding closed until independent changed-candidate checks and eventual live retrieval. Renewed refuter requested Astra/high on same distinct actor."
+          },
+          "run_id": "promotion-live",
+          "seq": 40,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T22:56:43Z",
+          "event_id": "e-49",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "refutation-repaired",
+              "refuter-recheck-lifecycle"
+            ],
+            "text": "Renewed refuter actual changed-candidate pass received with three findings; final reviewer independently dispositions all, including changed environment eligibility and earlier blocker. All candidate/original/source/prior-store hashes remain intact. One repair consumed; no landing before final review. Native followup and terminal/release observed retrospectively from outer normalized record."
+          },
+          "run_id": "promotion-live",
+          "seq": 49,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:06:11Z",
+          "event_id": "e-61",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "review-repaired",
+              "refutation-repaired",
+              "preflight"
+            ],
+            "text": "Coordinator landing decision: direct repeatable A3 count mismatch fires old falsifier; scoped parser-derived count correction remains bounded to supplied Python 3.11.6 samples. Actual distinct actors pass changed candidate with rf-scope accepted nonblocking; field-count-only evidence limit rf-strength accepted by coordinator (review resolved unsupported-extension concern). Final proposal mechanically adds actual refutation/review fields only. One repair consumed. Initial failed review retained; runtime retrieval blockers remain open until CLI check. Root owns landing and rollback; all role actors released/terminal."
+          },
+          "run_id": "promotion-live",
+          "seq": 61,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "/root/live_promotion_treatment",
+          "at": "2026-09-07T23:12:27Z",
+          "event_id": "e-83",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "landing-observations",
+              "final-verification",
+              "final-report"
+            ],
+            "text": "All landing CLI commands exit 0; current controlled-prior restored byte-for-byte and both generations retained intact. Before/after retrieval exactly equal; revision 1 supported original disproven comma-count guidance intentionally active after requested rollback, revision 2 supported retained inactive. Initial-review-gate failed is superseded for repaired artifact by repaired-semantic-gate/live-retrieval-fix. Verifier-wrapper-initial failure was a coordinator test-shape error, compared row arrays with wrapper objects; corrected rows-key comparison passes sources-final without candidate mutation. Source/installed/input/product scope preserved. No further human items; effective identity/tokens/money null."
+          },
+          "run_id": "promotion-live",
+          "seq": 83,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "typed_evidence": {
+        "observation": 6,
+        "unknown": 1
+      },
+      "plans": [
+        {
+          "v": 1,
+          "event_id": "e-2",
+          "run_id": "catalog-export",
+          "seq": 2,
+          "at": "2026-09-08T00:00:02Z",
+          "actor": "controlled-fixture-root",
+          "type": "plan.revised",
+          "payload": {
+            "revision": 1,
+            "reason": "initial",
+            "attempt_limit": 1,
+            "revision_limit": 1,
+            "no_progress": "one controlled observation",
+            "trigger_event_ids": [
+              "e-1"
+            ],
+            "tasks": [
+              {
+                "id": "observe",
+                "revision": 1,
+                "objective": "Controlled fixture observation",
+                "completion": "Observation recorded",
+                "dependencies": [],
+                "owner": "/controlled/catalog-export-writer",
+                "effect": "write",
+                "scope": [
+                  "workspace"
+                ],
+                "inputs": [
+                  "fixture inputs"
+                ],
+                "returns": [
+                  "observation"
+                ],
+                "risk": "low",
+                "verification": "fixture-check",
+                "requested_model": "gpt-6-astra",
+                "requested_effort": "high",
+                "fork_turns": "none"
+              }
+            ]
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "v": 1,
+          "event_id": "e-3",
+          "run_id": "catalog-export",
+          "seq": 3,
+          "at": "2026-09-08T00:00:03Z",
+          "actor": "controlled-fixture-root",
+          "type": "task.admitted",
+          "payload": {
+            "task_id": "observe",
+            "task_revision": 1,
+            "plan_revision": 1
+          }
+        },
+        {
+          "v": 1,
+          "event_id": "e-4",
+          "run_id": "catalog-export",
+          "seq": 4,
+          "at": "2026-09-08T00:00:04Z",
+          "actor": "controlled-fixture-root",
+          "type": "agent.requested",
+          "payload": {
+            "task_id": "observe",
+            "handle": "/controlled/catalog-export-writer",
+            "requested_model": "gpt-6-astra",
+            "requested_effort": "high",
+            "fork_turns": "none"
+          }
+        },
+        {
+          "v": 1,
+          "event_id": "e-5",
+          "run_id": "catalog-export",
+          "seq": 5,
+          "at": "2026-09-08T00:00:05Z",
+          "actor": "controlled-fixture-root",
+          "type": "agent.observed",
+          "payload": {
+            "handle": "/controlled/catalog-export-writer",
+            "lifecycle": "active",
+            "effect_status": "unknown",
+            "effective_model": null,
+            "effective_effort": null
+          }
+        },
+        {
+          "v": 1,
+          "event_id": "e-8",
+          "run_id": "catalog-export",
+          "seq": 8,
+          "at": "2026-09-08T00:00:08Z",
+          "actor": "controlled-fixture-root",
+          "type": "agent.observed",
+          "payload": {
+            "handle": "/controlled/catalog-export-writer",
+            "lifecycle": "idle",
+            "effect_status": "unknown",
+            "effective_model": null,
+            "effective_effort": null
+          }
+        },
+        {
+          "actor": "controlled-fixture-reobservation",
+          "at": "2026-09-07T21:47:09Z",
+          "event_id": "recovery-11",
+          "payload": {
+            "effect_status": "unknown",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/controlled/catalog-export-writer",
+            "lifecycle": "idle"
+          },
+          "run_id": "catalog-export",
+          "seq": 11,
+          "type": "agent.observed",
+          "v": 1
+        }
+      ],
+      "findings": [
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T22:01:17Z",
+          "event_id": "recovery-16",
+          "payload": {
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "finding_id": "routing-evidence",
+            "severity": "minor",
+            "summary": "Initial independent review found requested coordinator routing lacked identity-matched allowed evidence. The export pause decision and preservation checks had no findings."
+          },
+          "run_id": "catalog-export",
+          "seq": 16,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T22:10:14Z",
+          "event_id": "recovery-23",
+          "payload": {
+            "disposition": "fixed",
+            "evidence_ids": [
+              "independent-recheck",
+              "coordinator-dispatch",
+              "corrected-assessment"
+            ],
+            "finding_id": "routing-evidence",
+            "verification_check_id": "routing-independent-recheck"
+          },
+          "run_id": "catalog-export",
+          "seq": 23,
+          "type": "finding.dispositioned",
+          "v": 1
+        }
+      ],
+      "notes": [
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T21:47:09Z",
+          "event_id": "recovery-10",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "recovery-observations"
+            ],
+            "text": "The following observation is accepted only from the explicitly simulated inputs/observer.json and e-8, not as authentic native lifecycle. Native scoped inventory and fixture observations are distinct. The native-derived missing proposal is not accepted as global absence or a real lifecycle event."
+          },
+          "run_id": "catalog-export",
+          "seq": 10,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T21:47:09Z",
+          "event_id": "recovery-13",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": "e-6",
+            "evidence_ids": [
+              "recovery-observations",
+              "recovery-unknowns"
+            ],
+            "text": "Pause source export work under e-7 cancellation. Original export matches baseline; draft remains preserved with unestablished origin. No source-task result, release, admission, retry, replacement, publication or closure is supported. Independent recovery review remains pending."
+          },
+          "run_id": "catalog-export",
+          "seq": 13,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T22:01:17Z",
+          "event_id": "recovery-19",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-review",
+              "coordinator-dispatch",
+              "corrected-assessment"
+            ],
+            "text": "Confirm the initial minor routing-evidence finding. Preserve original candidate and review. A single corrected paragraph now attributes the actual requested coordinator routing to the identity-matched outer dispatch observation, explicitly not raw transcript/effective identity. Effective identity and usage remain null. Independent focused recheck is pending before fixed disposition."
+          },
+          "run_id": "catalog-export",
+          "seq": 19,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T22:10:14Z",
+          "event_id": "recovery-25",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-review",
+              "independent-recheck",
+              "review-lifecycle"
+            ],
+            "text": "Actual independent reviewer /root/live_recovery_review completed its initial review and focused recheck with explicit artifact releases and outer-coordinator-reported direct native terminal observations before each writer handoff. Persisted as provenance-labeled evidence, not synthetic source assignment lifecycle. Requested Sol/xhigh; effective routing/usage/money null. No source-writer release is inferred."
+          },
+          "run_id": "catalog-export",
+          "seq": 25,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "live-recovery-coordinator",
+          "at": "2026-09-07T22:10:14Z",
+          "event_id": "recovery-27",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-review",
+              "independent-recheck",
+              "corrected-assessment"
+            ],
+            "text": "Bounded recovery assessment completed with independently verified pause decision and the sole minor finding fixed. Original and corrected candidates/reviews remain preserved. Final integration report: evidence/final-assessment.md. This does not finish the source export task: admitted synthetic writer effects remain unknown; no source task result or run.closed is supported."
+          },
+          "run_id": "catalog-export",
+          "seq": 27,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "typed_evidence": {
+        "observation": 7
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:10:03.132Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "Stop if approved local browser remains unavailable or one focused repair cannot satisfy a material criterion.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "Frozen HTML and direct gameplay plus two inspected screenshots",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "build",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/game.json",
+                  "inputs/flow.json"
+                ],
+                "objective": "Build and directly play Echo Steps",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "HTML",
+                  "primary browser evidence"
+                ],
+                "revision": 1,
+                "risk": "low isolated local file",
+                "scope": [
+                  "work/index.html",
+                  "evidence"
+                ],
+                "verification": "game-flow and visual-two-viewports"
+              },
+              {
+                "completion": "Evidence-linked findings and explicit release with terminal lifecycle",
+                "dependencies": [
+                  "build"
+                ],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "review",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "work/index.html",
+                  "evidence/browser-attempt-1/observations.json"
+                ],
+                "objective": "Independently review frozen artifact and primary evidence against original acceptance",
+                "owner": "/root/live_creative_treatment/review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "independent findings"
+                ],
+                "revision": 1,
+                "risk": "read-only",
+                "scope": [
+                  "work/index.html",
+                  "evidence",
+                  "inputs"
+                ],
+                "verification": "review findings checked by coordinator"
+              },
+              {
+                "completion": "All required evidence reconciled and terminal state validated",
+                "dependencies": [
+                  "review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integrate",
+                "inputs": [
+                  "candidate",
+                  "review"
+                ],
+                "objective": "Disposition findings and persist final validated state/report",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "final report",
+                  "hashes"
+                ],
+                "revision": 1,
+                "risk": "bounded local",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state"
+                ],
+                "verification": "terminal state and final integration"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "echo-steps",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:10:03.132Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:16:24.869Z",
+          "event_id": "e-11",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "candidate",
+              "game",
+              "focused",
+              "demonstration",
+              "visual"
+            ],
+            "outcome": "passed",
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps",
+          "seq": 11,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:16:24.869Z",
+          "event_id": "e-12",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps",
+          "seq": 12,
+          "type": "task.admitted",
+          "v": 1
+        }
+      ],
+      "findings": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:19:44.295Z",
+          "event_id": "e-20",
+          "payload": {
+            "check_id": "artifact-independent-review",
+            "criterion_ids": [
+              "artifact"
+            ],
+            "evidence_ids": [
+              "dispatch-block"
+            ],
+            "outcome": "not_tested"
+          },
+          "run_id": "echo-steps",
+          "seq": 20,
+          "type": "check.recorded",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:19:44.295Z",
+          "event_id": "e-21",
+          "payload": {
+            "check_id": "live-procedure-independent-review",
+            "criterion_ids": [
+              "live-procedure"
+            ],
+            "evidence_ids": [
+              "dispatch-block"
+            ],
+            "outcome": "not_tested"
+          },
+          "run_id": "echo-steps",
+          "seq": 21,
+          "type": "check.recorded",
+          "v": 1
+        }
+      ],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:19:44.295Z",
+          "event_id": "e-16",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "dispatch-block",
+              "game"
+            ],
+            "text": "Fresh Sol/xhigh review dispatch failed with agent thread limit reached, creating no handle. Outer coordinator instructed checkpoint and actor release before attempting a fresh reviewer. No unchanged retry and no fabricated native lifecycle. Successful supplied-flow locator is browser-attempt-2, replacing planned browser-attempt-1 after restricted launch failure. The attempted environment-category note was rejected atomically; corrected here as decision. Other-arm result text unexpectedly exposed by unfiltered lifecycle listing was not used for candidate or review."
+          },
+          "run_id": "echo-steps",
+          "seq": 16,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "typed_evidence": {
+        "observation": 9
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "Exactly one focused repair. If independent recheck finds a remaining material issue, report incomplete; no additional build wave.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "Real outer reviewer finding report and completed release observed",
+                "dependencies": [],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "initial-review",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "evidence/outer-independent-review.md"
+                ],
+                "objective": "Independently review original frozen candidate",
+                "owner": "/root/live_creative_review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "evidence-bearing result"
+                ],
+                "revision": 1,
+                "risk": "read-only",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state"
+                ],
+                "verification": "Real outer reviewer finding report and completed release observed"
+              },
+              {
+                "completion": "Preserved original, repaired candidate, direct game and disabled-state observations plus platform metadata",
+                "dependencies": [
+                  "initial-review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "repair",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "evidence/outer-independent-review.md"
+                ],
+                "objective": "Apply one focused repair and verify findings",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "evidence-bearing result"
+                ],
+                "revision": 1,
+                "risk": "bounded isolated local",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state"
+                ],
+                "verification": "Preserved original, repaired candidate, direct game and disabled-state observations plus platform metadata"
+              },
+              {
+                "completion": "Evidence-based dispositions and real completed reviewer release",
+                "dependencies": [
+                  "repair"
+                ],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "recheck",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "evidence/outer-independent-review.md"
+                ],
+                "objective": "Independently recheck the one focused repair",
+                "owner": "/root/live_creative_review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "evidence-bearing result"
+                ],
+                "revision": 1,
+                "risk": "read-only",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state"
+                ],
+                "verification": "Evidence-based dispositions and real completed reviewer release"
+              },
+              {
+                "completion": "All findings dispositioned and validated terminal state",
+                "dependencies": [
+                  "recheck"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integrate",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "evidence/outer-independent-review.md"
+                ],
+                "objective": "Reconcile final evidence and publish local final report",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "evidence-bearing result"
+                ],
+                "revision": 1,
+                "risk": "bounded isolated local",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state"
+                ],
+                "verification": "All findings dispositioned and validated terminal state"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "initial-review",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-5",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_creative_review",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "initial-review"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 5,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-7",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_creative_review",
+            "lifecycle": "completed"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 7,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-8",
+          "payload": {
+            "effect_status": "none",
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "outcome": "passed",
+            "task_id": "initial-review",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 8,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-11",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "repair",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 11,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:34:19.378Z",
+          "event_id": "e-23",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "repaired-candidate",
+              "repair-game",
+              "repair-checks",
+              "platform",
+              "procedure"
+            ],
+            "outcome": "passed",
+            "task_id": "repair",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 23,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-25",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "recheck",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 25,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-26",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_creative_review",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "recheck"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 26,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-28",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_creative_review",
+            "lifecycle": "completed"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 28,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-29",
+          "payload": {
+            "effect_status": "none",
+            "evidence_ids": [
+              "independent-recheck"
+            ],
+            "outcome": "passed",
+            "task_id": "recheck",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 29,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-34",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 34,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-41",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "final-report",
+              "final-integration",
+              "independent-recheck"
+            ],
+            "outcome": "passed",
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 41,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-9",
+          "payload": {
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "finding_id": "platform-metadata",
+            "severity": "major",
+            "summary": "Independent reviewer rated moderate: primary timing evidence lacks explicit platform/browser identity. Map to major in Sage's available enum; retain original severity in review."
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 9,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-10",
+          "payload": {
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "finding_id": "terminal-pads",
+            "severity": "minor",
+            "summary": "Pads remain enabled/focusable after success or mistake although their handlers silently ignore activation."
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 10,
+          "type": "finding.opened",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-32",
+          "payload": {
+            "disposition": "fixed",
+            "evidence_ids": [
+              "independent-recheck",
+              "platform"
+            ],
+            "finding_id": "platform-metadata",
+            "verification_check_id": "platform-independent"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 32,
+          "type": "finding.dispositioned",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-33",
+          "payload": {
+            "disposition": "fixed",
+            "evidence_ids": [
+              "independent-recheck",
+              "repair-checks"
+            ],
+            "finding_id": "terminal-pads",
+            "verification_check_id": "terminal-pads-independent"
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 33,
+          "type": "finding.dispositioned",
+          "v": 1
+        }
+      ],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:31:04.280Z",
+          "event_id": "e-2",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [],
+            "text": "Continuation preserves the original incomplete run state/runs/echo-steps (seq 22) unchanged: it admitted a native reviewer before spawn failed and its contract cannot reconcile a nonexistent native handle. Outer coordinator obtained actual /root/live_creative_review after this actor became terminal, supplied the exact saved brief, observed completed lifecycle and explicit read-only RELEASE, and authorized this single focused repair. Events record those outer-observed facts at checkpoint time; no old nonexistent request is fabricated. Prior unfiltered-list exposure remains documented and was not used as evidence. Do not admit recheck until real outer followup has occurred."
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 2,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:34:19.378Z",
+          "event_id": "e-22",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-review",
+              "repair-checks"
+            ],
+            "text": "Both original findings are addressed and direct coordinator checks pass; formal fixed dispositions are deliberately pending focused independent recheck. Repaired candidate frozen. Do not admit recheck before actual native followup succeeds. The outer coordinator will dispatch after this actor's terminal release."
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 22,
+          "type": "note.recorded",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T21:42:36.879Z",
+          "event_id": "e-37",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "independent-recheck",
+              "final-integration"
+            ],
+            "text": "Actual recheck used outer followup_task of the existing /root/live_creative_review after this actor terminal; requested routing unchanged, fork none denotes original fresh dispatch. Native completed lifecycle and separate explicit no-effect RELEASE were observed by outer coordinator and conveyed in resume packet, not invented from a local sibling listing. Both findings fixed on independent evidence. Retain the probe-only 773px overflow and installed-app-version provenance limitation. Original incomplete run stays unchanged; continuation carries final completion. No further repair and no required human items."
+          },
+          "run_id": "echo-steps-continuation",
+          "seq": 37,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "typed_evidence": {
+        "observation": 7
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:21:44.026741Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "Same failing criterion without new evidence or distinct strategy; at most one focused repair.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "decoder.py, tests and README exist and tests pass",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "build",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/prompt.txt",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/inputs/vectors.json"
+                ],
+                "objective": "Implement exact framed byte stream protocol",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "decoder.py",
+                  "test_decoder.py",
+                  "README.md",
+                  "build check output"
+                ],
+                "revision": 1,
+                "risk": "low; framing correctness and bounded memory matter",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state"
+                ],
+                "verification": "stdlib behavior checks and independent review"
+              },
+              {
+                "completion": "Independent behavior checks and severity/evidence/fix checks returned; explicit release",
+                "dependencies": [
+                  "build"
+                ],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "review",
+                "inputs": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/prompt.txt",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/checks.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/inputs/vectors.json",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work"
+                ],
+                "objective": "Independently review frozen decoder against original task",
+                "owner": "/root/live_code_baseline/review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "review findings",
+                  "independent check output",
+                  "explicit release"
+                ],
+                "revision": 1,
+                "risk": "low; framing correctness and bounded memory matter",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state"
+                ],
+                "verification": "stdlib behavior checks and independent review"
+              },
+              {
+                "completion": "All criteria evidenced, input hash unchanged, workers terminal and report persisted",
+                "dependencies": [
+                  "review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integrate",
+                "inputs": [
+                  "candidate",
+                  "independent findings"
+                ],
+                "objective": "Disposition findings, verify final artifacts and close state",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "final checks",
+                  "hashes",
+                  "Sage report"
+                ],
+                "revision": 1,
+                "risk": "low; framing correctness and bounded memory matter",
+                "scope": [
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/work",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence",
+                  "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state"
+                ],
+                "verification": "stdlib behavior checks and independent review"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "decoder-baseline",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:21:44.026743Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:24:13.618239Z",
+          "event_id": "e-7",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "build-check"
+            ],
+            "outcome": "passed",
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 7,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:24:13.618241Z",
+          "event_id": "e-8",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 8,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:25:19.469656Z",
+          "event_id": "e-10",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_code_baseline/review",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-6-astra",
+            "task_id": "review"
+          },
+          "run_id": "decoder-baseline",
+          "seq": 10,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:25:19.469714Z",
+          "event_id": "e-11",
+          "payload": {
+            "effect_status": "none",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_code_baseline/review",
+            "lifecycle": "active"
+          },
+          "run_id": "decoder-baseline",
+          "seq": 11,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:31:30.007327Z",
+          "event_id": "e-14",
+          "payload": {
+            "effect_status": "none",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_code_baseline/review",
+            "lifecycle": "completed"
+          },
+          "run_id": "decoder-baseline",
+          "seq": 14,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:31:30.007328Z",
+          "event_id": "e-15",
+          "payload": {
+            "effect_status": "none",
+            "evidence_ids": [
+              "independent-review"
+            ],
+            "outcome": "passed",
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 15,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:31:30.007330Z",
+          "event_id": "e-16",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 16,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:33:25.873764Z",
+          "event_id": "e-24",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "final-check",
+              "review-reproduced",
+              "journal",
+              "candidate-hashes"
+            ],
+            "outcome": "passed",
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "decoder-baseline",
+          "seq": 24,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:33:25.873763Z",
+          "event_id": "e-23",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "journal",
+              "independent-review"
+            ],
+            "text": "Complete from observed evidence: one bounded implementation and one independent read-only review. No findings or product repair. Requested coordinator gpt-6-astra/high and reviewer gpt-6-astra/xhigh. Observed effective identities, tokens and money remain null in actor records. Runtime observed Python 3.11.6; other versions untested. All effects reconciled; reviewer explicitly released and native completed observed."
+          },
+          "run_id": "decoder-baseline",
+          "seq": 23,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "typed_evidence": {
+        "observation": 9
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:06:32Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "Stop if one implementation and one focused repair cannot satisfy a criterion with a distinct evidence-based strategy.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "Candidate passes stdlib tests and is frozen by hashes",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "build",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/vectors.json"
+                ],
+                "objective": "Implement decoder, tests and usage README",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "decoder.py",
+                  "test_decoder.py",
+                  "README.md"
+                ],
+                "revision": 1,
+                "risk": "low; state correctness and bounded parser memory are material",
+                "scope": [
+                  "work/"
+                ],
+                "verification": "build-check"
+              },
+              {
+                "completion": "Evidence-backed findings and explicit read-only release",
+                "dependencies": [
+                  "build"
+                ],
+                "effect": "read",
+                "fork_turns": "none",
+                "id": "review",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/vectors.json"
+                ],
+                "objective": "Independently inspect and test frozen decoder against original prompt",
+                "owner": "/root/live_code_treatment/review",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-5.6-sol",
+                "returns": [
+                  "independent review observations"
+                ],
+                "revision": 1,
+                "risk": "low; state correctness and bounded parser memory are material",
+                "scope": [
+                  "work/",
+                  "inputs/vectors.json"
+                ],
+                "verification": "review-check"
+              },
+              {
+                "completion": "Criteria have passed observations and no unresolved major findings",
+                "dependencies": [
+                  "review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integrate",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/vectors.json"
+                ],
+                "objective": "Reconcile review and final checks, preserve inputs and persist report",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "final evidence and report"
+                ],
+                "revision": 1,
+                "risk": "low; state correctness and bounded parser memory are material",
+                "scope": [
+                  "work/",
+                  "evidence/",
+                  "state/"
+                ],
+                "verification": "integrate-check"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "code-treatment",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:06:32Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:08:39Z",
+          "event_id": "e-8",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "build-tests",
+              "frozen-hashes"
+            ],
+            "outcome": "passed",
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 8,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:08:39Z",
+          "event_id": "e-10",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 10,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:11:13Z",
+          "event_id": "e-12",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_code_treatment/review",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-5.6-sol",
+            "task_id": "review"
+          },
+          "run_id": "code-treatment",
+          "seq": 12,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:11:13Z",
+          "event_id": "e-13",
+          "payload": {
+            "effect_status": "none",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_code_treatment/review",
+            "lifecycle": "active"
+          },
+          "run_id": "code-treatment",
+          "seq": 13,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:14:50Z",
+          "event_id": "e-15",
+          "payload": {
+            "effect_status": "none",
+            "evidence_ids": [
+              "review"
+            ],
+            "outcome": "passed",
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 15,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:14:50Z",
+          "event_id": "e-16",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_code_treatment/review",
+            "lifecycle": "completed"
+          },
+          "run_id": "code-treatment",
+          "seq": 16,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:14:50Z",
+          "event_id": "e-19",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 19,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:14:50Z",
+          "event_id": "e-27",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "review-rerun",
+              "integration",
+              "final-tests",
+              "final-hashes",
+              "journal",
+              "outcome"
+            ],
+            "outcome": "passed",
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "code-treatment",
+          "seq": 27,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:14:50Z",
+          "event_id": "e-26",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "journal",
+              "review"
+            ],
+            "text": "Root requested gpt-6-astra/high; reviewer requested gpt-5.6-sol/xhigh. Effective model/effort, tokens and money are null. No cost or savings inference. Local Python only; no version/platform matrix. No independent review findings; no repair required."
+          },
+          "run_id": "code-treatment",
+          "seq": 26,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "typed_evidence": {
+        "observation": 5
+      },
+      "plans": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:41:01Z",
+          "event_id": "e-3",
+          "payload": {
+            "attempt_limit": 1,
+            "no_progress": "Stop if a focused repair cannot resolve a material finding with a distinct safe check; no repeated identical retries.",
+            "reason": "initial",
+            "revision": 1,
+            "revision_limit": 1,
+            "tasks": [
+              {
+                "completion": "Frozen artifacts and source hashes exist and script runs",
+                "dependencies": [],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "build",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/sessions.csv",
+                  "inputs/notes.txt"
+                ],
+                "objective": "Produce reproducible analysis, summary and concise memo",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "work/analysis.py",
+                  "work/summary.json",
+                  "work/decision-memo.md"
+                ],
+                "revision": 1,
+                "risk": "low; fictional operations, observational data and missing count",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state",
+                  "tmp"
+                ],
+                "verification": "reproduction and independent review"
+              },
+              {
+                "completion": "Evidence-backed review identifies findings with falsifiable checks or reports none and explicitly releases lease",
+                "dependencies": [
+                  "build"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "review",
+                "inputs": [
+                  "prompt.txt",
+                  "checks.json",
+                  "inputs/sessions.csv",
+                  "inputs/notes.txt",
+                  "work/analysis.py",
+                  "work/summary.json",
+                  "work/decision-memo.md"
+                ],
+                "objective": "Independently check arithmetic, reproducibility, sensitivity and interpretation",
+                "owner": "/root/live_data_baseline/reviewer",
+                "requested_effort": "xhigh",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "evidence/review.md",
+                  "evidence/independent-check.json"
+                ],
+                "revision": 1,
+                "risk": "low; read-only candidate",
+                "scope": [
+                  "evidence/review.md",
+                  "evidence/independent_check.py",
+                  "evidence/independent-check.json",
+                  "tmp"
+                ],
+                "verification": "coordinator checks review locators and lifecycle"
+              },
+              {
+                "completion": "All acceptance checks have evidence and state/report validates; worker leases reconciled",
+                "dependencies": [
+                  "review"
+                ],
+                "effect": "write",
+                "fork_turns": "none",
+                "id": "integrate",
+                "inputs": [
+                  "frozen candidate",
+                  "independent review"
+                ],
+                "objective": "Disposition findings, focus any necessary repair, verify final integration and close",
+                "owner": "root",
+                "requested_effort": "high",
+                "requested_model": "gpt-6-astra",
+                "returns": [
+                  "final artifacts",
+                  "state/run/report.md",
+                  "evidence/actor-journal.md"
+                ],
+                "revision": 1,
+                "risk": "low",
+                "scope": [
+                  "work",
+                  "evidence",
+                  "state",
+                  "tmp"
+                ],
+                "verification": "source hash check, deterministic rerun, review dispositions and terminal state validation"
+              }
+            ],
+            "trigger_event_ids": [
+              "e-1"
+            ]
+          },
+          "run_id": "data-baseline",
+          "seq": 3,
+          "type": "plan.revised",
+          "v": 1
+        }
+      ],
+      "assignments": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:41:02Z",
+          "event_id": "e-4",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 4,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:43:47Z",
+          "event_id": "e-7",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "build-observation"
+            ],
+            "outcome": "passed",
+            "task_id": "build",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 7,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:43:47Z",
+          "event_id": "e-8",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 8,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-10",
+          "payload": {
+            "fork_turns": "none",
+            "handle": "/root/live_data_baseline/reviewer",
+            "requested_effort": "xhigh",
+            "requested_model": "gpt-6-astra",
+            "task_id": "review"
+          },
+          "run_id": "data-baseline",
+          "seq": 10,
+          "type": "agent.requested",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-11",
+          "payload": {
+            "effect_status": "reconciled",
+            "effective_effort": null,
+            "effective_model": null,
+            "handle": "/root/live_data_baseline/reviewer",
+            "lifecycle": "completed"
+          },
+          "run_id": "data-baseline",
+          "seq": 11,
+          "type": "agent.observed",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-14",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "review-observation",
+              "independent-numbers"
+            ],
+            "outcome": "passed",
+            "task_id": "review",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 14,
+          "type": "task.result",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-16",
+          "payload": {
+            "plan_revision": 1,
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 16,
+          "type": "task.admitted",
+          "v": 1
+        },
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-25",
+          "payload": {
+            "effect_status": "reconciled",
+            "evidence_ids": [
+              "integration-observation",
+              "procedure-observation"
+            ],
+            "outcome": "passed",
+            "task_id": "integrate",
+            "task_revision": 1
+          },
+          "run_id": "data-baseline",
+          "seq": 25,
+          "type": "task.result",
+          "v": 1
+        }
+      ],
+      "findings": [],
+      "notes": [
+        {
+          "actor": "root",
+          "at": "2026-09-07T20:50:16Z",
+          "event_id": "e-19",
+          "payload": {
+            "category": "decision",
+            "corrects_event_id": null,
+            "evidence_ids": [
+              "review-observation",
+              "integration-observation",
+              "procedure-observation"
+            ],
+            "text": "Independent reviewer found no actionable defects; coordinator checked review method, source/candidate hashes and retained reproductions. No findings or repair. Reviewer explicit release and completed native lifecycle observed before root resumed writes. Requested root gpt-6-astra/high and reviewer gpt-6-astra/xhigh; effective identities/efforts, tokens and money unobserved/null."
+          },
+          "run_id": "data-baseline",
+          "seq": 19,
+          "type": "note.recorded",
+          "v": 1
+        }
+      ]
+    }
+  ],
+  "evidence_bindings": [
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-6",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/candidate-checks.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "d4a241f23fecb4c4cf8a543b4296959673108f1e917ab44fceef7bb470913157",
+      "actual": "d4a241f23fecb4c4cf8a543b4296959673108f1e917ab44fceef7bb470913157",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-7",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/decision-memo.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "b64361abe06ef9724c12ce9608b59e6665b50e6b569db59b412cb5fd3b55dc54",
+      "actual": "b64361abe06ef9724c12ce9608b59e6665b50e6b569db59b412cb5fd3b55dc54",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-8",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/analysis.py",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "b52dced6d4084ff1e541c4b5be67e261641b84178f359a3cfacd0d9baecf4b38",
+      "actual": "b52dced6d4084ff1e541c4b5be67e261641b84178f359a3cfacd0d9baecf4b38",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-9",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/work/summary.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e",
+      "actual": "0ab019a9262f119e7d2d5715447d49513eebdceef2b4f19131b741a96ec61a7e",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-15",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/independent-review.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "93a4567bb0a456b470d7d6f45e0af971cdf7ff7584c8d8b0c4a21861a59e16ad",
+      "actual": "93a4567bb0a456b470d7d6f45e0af971cdf7ff7584c8d8b0c4a21861a59e16ad",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/state/run",
+      "event": "e-16",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-treatment/evidence/actor-journal.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "312faa5b79d62f01b8c0f510097ffb1117c427a723399ebef16d5f6688b4af10",
+      "actual": "312faa5b79d62f01b8c0f510097ffb1117c427a723399ebef16d5f6688b4af10",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new",
+      "event": "e-4",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/new-observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "4e7b1ef478b480cafb7c1ed4c0320ab7538e5beaf98de145ffc6f1eb5ab9b70a",
+      "actual": "4e7b1ef478b480cafb7c1ed4c0320ab7538e5beaf98de145ffc6f1eb5ab9b70a",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old",
+      "event": "e-4",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/old-observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "5dbbf4615b431385d733936491f09698734f7bddb689a4827a990fb30e9ea82a",
+      "actual": "5dbbf4615b431385d733936491f09698734f7bddb689a4827a990fb30e9ea82a",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-8",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-author-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "2c67080b000578166d9792a2b79a81cde41508f7dbf81753de93689ad6515ac9",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-9",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-author.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+      "actual": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-13",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refutation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee",
+      "actual": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-14",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-refuter-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "110cff482a5a355828f27715dea0ccad4fbc7eb153cb04dc47a8600cc62bf564",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-19",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/review.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "2bcde4320c13d96ed521c5f2e36377c0feee44406ee932cf29d73838e02517a5",
+      "actual": "2bcde4320c13d96ed521c5f2e36377c0feee44406ee932cf29d73838e02517a5",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-20",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-reviewer-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "9003c19ebac7011325d0e867e24150cfa8c06ff88c6f3c957efb94e0c05a5b16",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-37",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/proposal-repaired.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+      "actual": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-38",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-author-repair-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "de0399210090871264cf1d5e74502e3b27716d5c16f92a8bd107b1326a33e5ea",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-45",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/refutation-repaired.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+      "actual": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-46",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-refuter-recheck-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "18d558569edb82bfbdd73ec1d523dbd15bdbb0122fe20c096510422c34863afb",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-54",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/work/review-repaired.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "ea6f55cc43fca781cb17c197fa14056d534f062ac9b82fa76fe24d794a5f805a",
+      "actual": "ea6f55cc43fca781cb17c197fa14056d534f062ac9b82fa76fe24d794a5f805a",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-55",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/outer-reviewer-recheck-lifecycle-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "588226f8493335a417ee8e9ba84545fc4e1553145e45c4c74ef2737a42d361af",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-56",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/preflight-checks.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "7ec47115cd49a2a66e78dcbeb46e1b2e2b11c21cd60f81915d32d07a19b99a5f",
+      "hash_matches": null
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-64",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/initial-checks.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "9c21edb4d6cab45d9bdf1e2d5b9b138d29a919f0309f6175f09990d4527d1542",
+      "actual": "9c21edb4d6cab45d9bdf1e2d5b9b138d29a919f0309f6175f09990d4527d1542",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-65",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/landing-checks.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "a08f028688402fcfcd5d2ff90e702dd87089cfff98475da9d7dd9fe28fa985c6",
+      "actual": "a08f028688402fcfcd5d2ff90e702dd87089cfff98475da9d7dd9fe28fa985c6",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-66",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/final-verification.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "497cc3f4babcc495fb66cd131a7b7856292f9360dac8dbb6d184309a903e25b3",
+      "actual": "497cc3f4babcc495fb66cd131a7b7856292f9360dac8dbb6d184309a903e25b3",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-67",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/final-verification-passed.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "f319d5522af01a42030b2a97bff9dfdf49d0c3a44d8286e3aa523301557bd991",
+      "actual": "f319d5522af01a42030b2a97bff9dfdf49d0c3a44d8286e3aa523301557bd991",
+      "hash_matches": true
+    },
+    {
+      "arm": "promotion-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live",
+      "event": "e-68",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/evidence/final-report.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "a9e11ce51d77f3356aa9b49aaf1af699bd35f5c9b1c91570c538b91b711d76b5",
+      "actual": "a9e11ce51d77f3356aa9b49aaf1af699bd35f5c9b1c91570c538b91b711d76b5",
+      "hash_matches": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-9",
+      "locator": "evidence/resume-checks.json",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": null,
+      "actual": "d6fb9b3600bf3d8b7fcc39df833282b090f8623a5fbbcfe6ad4ab2e1e09f5e43",
+      "hash_matches": null
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-12",
+      "locator": "evidence/recovery-assessment.md#lifecycle-and-admission",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "unknown",
+      "expected": null,
+      "actual": "f5e7409048402fe24c6f8235c9de7b4ea970acd052280408c501e54144069a90",
+      "hash_matches": null
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-15",
+      "locator": "evidence/independent-review.md",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "341118f9d55c021e0b69078de144f8108eef104c115c2614b3e7a6cb246844ba",
+      "actual": "341118f9d55c021e0b69078de144f8108eef104c115c2614b3e7a6cb246844ba",
+      "hash_matches": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-17",
+      "locator": "evidence/outer-coordinator-dispatch-observation.json",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "86dee3f79fbf54f7ab764cfe4daa3432f30c9c48fa090b6787c07a1092e6eca7",
+      "actual": "86dee3f79fbf54f7ab764cfe4daa3432f30c9c48fa090b6787c07a1092e6eca7",
+      "hash_matches": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-18",
+      "locator": "evidence/recovery-assessment-corrected.md",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+      "actual": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+      "hash_matches": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-21",
+      "locator": "evidence/independent-recheck.md",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "a47dc229c3e0d8957da353c03d666dd1faa39475f76b78ac51648b89ce2a1f46",
+      "actual": "a47dc229c3e0d8957da353c03d666dd1faa39475f76b78ac51648b89ce2a1f46",
+      "hash_matches": true
+    },
+    {
+      "arm": "recovery-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+      "event": "recovery-24",
+      "locator": "evidence/review-lifecycle-observations.json",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": null,
+      "actual": "a424b43e1b58fade2d7c189fcdd4ff695e4a07904cd1d6a8d7cf2ca47cd44aa3",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-6",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/work/index.html",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+      "actual": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+      "hash_matches": false
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-7",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-attempt-2/observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "c1518bde7b50e20cb834a0a9585026f2435021f34144b3db70087cdf0657ca04",
+      "actual": "c1518bde7b50e20cb834a0a9585026f2435021f34144b3db70087cdf0657ca04",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-8",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-focused-1/observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "b3738c68d67c2ce14fa9a1091f8ebe1d2f3c9658857ae21bcaaff81afe9640c6",
+      "actual": "b3738c68d67c2ce14fa9a1091f8ebe1d2f3c9658857ae21bcaaff81afe9640c6",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-9",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-demonstration-1/observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "974542cb77b6786462418b28b3c4d09f5afae730d04e32106078e2ba310b1f82",
+      "actual": "974542cb77b6786462418b28b3c4d09f5afae730d04e32106078e2ba310b1f82",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-10",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/actor-journal.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "90e3c580b837bb3511f7dba9a014f6656578303f5cc241322a72058a1ee978a4",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-14",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/check-results.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "b0462efac535c1561805bf160059bd8d04cb321665944841d15f845a468822ae",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps",
+      "event": "e-15",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/dispatch-and-state-limitations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "abbd24a45d69eeeb0d50fa2b25e87b09c0b274033ac5908cea284b850d5780e5",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-6",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/outer-independent-review.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "1aae6bbd38d3a3fc289759fe4ca4da7f28ad5a57065f7da368bbfe255f077bec",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-13",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/work/index.html",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+      "actual": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-14",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-main/observations.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "65187f4c532fc99fc589fa499a887b4a0bdecac2795a4096357fc4e39f4fb7e4",
+      "actual": "65187f4c532fc99fc589fa499a887b4a0bdecac2795a4096357fc4e39f4fb7e4",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-15",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/repair-check-results.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "d264eda1415a335e1a5e4d587e1f4bcd38800872ef59fb51bbf56702739f090c",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-16",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/platform-metadata.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "7d80198062ac60c990e75b779c0463ac4b0ab434f52dcc1b54c1a4311127da77",
+      "actual": "7d80198062ac60c990e75b779c0463ac4b0ab434f52dcc1b54c1a4311127da77",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-17",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/actor-journal.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "90e3c580b837bb3511f7dba9a014f6656578303f5cc241322a72058a1ee978a4",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-27",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/outer-independent-recheck.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "89e13fc7072246a47c5377ec1b50ff168cabc174c7323af0ccf06c8538e25ea3",
+      "actual": "89e13fc7072246a47c5377ec1b50ff168cabc174c7323af0ccf06c8538e25ea3",
+      "hash_matches": true
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-35",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/final-integration-observation.json",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "1d5be3e20c146ed30577f5e1cefa4d5351f958073dbfdca8a75ab2379d0932da",
+      "hash_matches": null
+    },
+    {
+      "arm": "creative-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/state/runs/echo-steps-continuation",
+      "event": "e-36",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/FINAL-REPORT.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "90ea39575d63fea02b1b7e666252f033339796186c7a46695db8885884b4e487",
+      "hash_matches": null
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-6",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/build-check.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "cb0a22258fcd2e25fb6e5f3ece05dcc008e027ab976cf9aa76db02c6ef71684d",
+      "actual": "cb0a22258fcd2e25fb6e5f3ece05dcc008e027ab976cf9aa76db02c6ef71684d",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-13",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/independent-review.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "b1b86c28fc86ee48b33cb0a8355fcbd355e24d5844fe2f5a971c49b60f6ed793",
+      "actual": "b1b86c28fc86ee48b33cb0a8355fcbd355e24d5844fe2f5a971c49b60f6ed793",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-18",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/final-check.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "b4472439313e6abd312ff964fff2a330ea14425313d7d9cec0e95cb2cc35e0e9",
+      "actual": "b4472439313e6abd312ff964fff2a330ea14425313d7d9cec0e95cb2cc35e0e9",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-19",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/coordinator-review-check.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "c27d62597c5739ca1749b9b87052e39038a46de2f9407d61a2476d439dfbdb83",
+      "actual": "c27d62597c5739ca1749b9b87052e39038a46de2f9407d61a2476d439dfbdb83",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-20",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/actor-journal.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "de1121a506271ca0c4ce2a396a2b3ccb652b16145695e23749bfdb463f64bcc5",
+      "actual": "de1121a506271ca0c4ce2a396a2b3ccb652b16145695e23749bfdb463f64bcc5",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-21",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/frozen-sha256.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "8f9b32cad69882d64ef31244e13d3a3cc76cf3efd7f548b5d3735fd15e66b6c8",
+      "actual": "8f9b32cad69882d64ef31244e13d3a3cc76cf3efd7f548b5d3735fd15e66b6c8",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/state/decoder-run",
+      "event": "e-22",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/evidence/independent_check.py",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "9178ebbd5b95f4568f407c05c65ff0f1a3ff54c14abe374abc681cd9d9934a85",
+      "actual": "9178ebbd5b95f4568f407c05c65ff0f1a3ff54c14abe374abc681cd9d9934a85",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-6",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/build-tests.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "1bacaf8112cdcddabb0a7f3a6655f032f7bd2d40d92e7e264d85da9257dd3f98",
+      "hash_matches": null
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-7",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/frozen-hashes.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": null,
+      "actual": "a990f781543da8d281ebfbec9112c38828681cd5c582ab5f448f7fa8a16561e9",
+      "hash_matches": null
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-14",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/review.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "f793dcf0437a05ad790ff82b1393a39fd9291360e07bc326908c77f9a8d3b417",
+      "actual": "f793dcf0437a05ad790ff82b1393a39fd9291360e07bc326908c77f9a8d3b417",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-20",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/review-check-output.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "f095fdeff3c6323705b2ed5e7ac453e4fbd17fb60851bc2460e577f90152f25c",
+      "actual": "f095fdeff3c6323705b2ed5e7ac453e4fbd17fb60851bc2460e577f90152f25c",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-21",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/integration-check-output.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "987b159d06ff7afd6ba4a94488d0355c640d1a4b269542fe6094b6f7a229788b",
+      "actual": "987b159d06ff7afd6ba4a94488d0355c640d1a4b269542fe6094b6f7a229788b",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-22",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/final-tests.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "1bacaf8112cdcddabb0a7f3a6655f032f7bd2d40d92e7e264d85da9257dd3f98",
+      "actual": "1bacaf8112cdcddabb0a7f3a6655f032f7bd2d40d92e7e264d85da9257dd3f98",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-23",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/final-hash-verification.txt",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "4f81fa7a43ad80a55a5531aa2a8ed79bcc93d236e06a1e9e2a634f9c0bb961fe",
+      "actual": "4f81fa7a43ad80a55a5531aa2a8ed79bcc93d236e06a1e9e2a634f9c0bb961fe",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-24",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/actor-journal.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "4d59d51b9c223f8cb34c86c0ea2087f0d25dbd1b91638df42d505e90189dd9ec",
+      "actual": "4d59d51b9c223f8cb34c86c0ea2087f0d25dbd1b91638df42d505e90189dd9ec",
+      "hash_matches": true
+    },
+    {
+      "arm": "code-treatment",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/state/run",
+      "event": "e-25",
+      "locator": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/evidence/outcome.md",
+      "resolution": "absolute locator",
+      "kind": "observation",
+      "expected": "21a1e37d71bb05c66aedb44d9bc9916d9ab63b838b6a76334144bc63671780e1",
+      "actual": "21a1e37d71bb05c66aedb44d9bc9916d9ab63b838b6a76334144bc63671780e1",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "event": "e-6",
+      "locator": "evidence/build-checks.txt",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": null,
+      "actual": "e01781546c677e6a606fcc859dae228e2d9ababa173ca64ecedf8743433d2d64",
+      "hash_matches": null
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "event": "e-12",
+      "locator": "evidence/review.md",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "6400f7a09791800c5fa7522a46134043cb9036be4da8f80f03ab53b1978e0f6f",
+      "actual": "6400f7a09791800c5fa7522a46134043cb9036be4da8f80f03ab53b1978e0f6f",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "event": "e-13",
+      "locator": "evidence/independent-check.json",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "0b01cf6ce21d45ee4cb231a7f2d02eeddec28ea8cce75fac10d6a93e0a85a4a4",
+      "actual": "0b01cf6ce21d45ee4cb231a7f2d02eeddec28ea8cce75fac10d6a93e0a85a4a4",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "event": "e-17",
+      "locator": "evidence/final-integration-check.json",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": "21b448fd69a7dff939cead6876e1f65420b4dade673e223c633485b9e93c5bb0",
+      "actual": "21b448fd69a7dff939cead6876e1f65420b4dade673e223c633485b9e93c5bb0",
+      "hash_matches": true
+    },
+    {
+      "arm": "data-baseline",
+      "run": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/data-baseline/state/run",
+      "event": "e-18",
+      "locator": "evidence/actor-journal.md",
+      "resolution": "arm-relative locator resolved using explicit case root",
+      "kind": "observation",
+      "expected": null,
+      "actual": "39d91fc3956f11005cb0fde84c7f216814358f59b5fa3c5ac1ca4ecfc39a6dc6",
+      "hash_matches": null
+    }
+  ]
+}

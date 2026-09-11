@@ -1,0 +1,52 @@
+{
+  "role": "independent_refuter",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 22:26:29 UTC"
+  },
+  "packet": "setup/arms/promotion-treatment/work/refuter-brief.txt",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null,
+  "spawn_result": {
+    "task_name": "/root/live_promotion_refuter"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 22:27:03 UTC"
+  },
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:29:28 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_refuter",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:30:35 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "final_actor_summary": {
+    "actor": "/root/live_promotion_refuter",
+    "outcome": "passed",
+    "nonblocking_findings": 2,
+    "semantic_blockers": 0,
+    "required_repairs": 0,
+    "refutation_sha256": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee",
+    "evidence_sha256": "a04ebff3bb7371dd9a22a3297f3eddb79fa7b437bec2081f19ed82c88ddca64a",
+    "provenance": "Refuter final claims, not independent evaluation scores."
+  },
+  "observation_provenance": "Outer normalized direct native spawn/request, lifecycle and actor final observations; not raw native transcript."
+}

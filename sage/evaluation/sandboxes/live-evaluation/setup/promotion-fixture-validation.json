@@ -1,0 +1,8 @@
+{
+  "kind": "controlled fixture structural validation, not live promotion",
+  "store": {
+    "current": "controlled-prior",
+    "generation_count": 1,
+    "ok": true
+  }
+}

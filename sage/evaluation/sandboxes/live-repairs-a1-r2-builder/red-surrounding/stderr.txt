@@ -1,0 +1,63 @@
+test_installed_note_enum_and_published_example_work_without_source_helper (test_live_repairs.InstalledStateContractTests.test_installed_note_enum_and_published_example_work_without_source_helper) ... ok
+test_known_precreation_failure_reconciles_append_only_history_without_invented_handle (test_live_repairs.LiveRepairStateTests.test_known_precreation_failure_reconciles_append_only_history_without_invented_handle) ... ok
+test_later_bounded_revision_can_succeed_after_known_noncreation (test_live_repairs.LiveRepairStateTests.test_later_bounded_revision_can_succeed_after_known_noncreation) ... ok
+test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds (test_live_repairs.LiveRepairStateTests.test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds) ... ok
+test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path) ... ok
+test_report_qualifies_empty_sections_and_renders_stored_native_unknowns (test_live_repairs.LiveRepairStateTests.test_report_qualifies_empty_sections_and_renders_stored_native_unknowns) ... ok
+test_report_renders_actual_typed_unknown_and_untested_entries (test_live_repairs.LiveRepairStateTests.test_report_renders_actual_typed_unknown_and_untested_entries) ... ok
+test_frozen_v2_sources_and_original_validator_rejection_remain_unchanged (test_live_repairs.NativeResultProtocolTests.test_frozen_v2_sources_and_original_validator_rejection_remain_unchanged) ... ok
+test_public_cli_accepts_evidenced_native_completion_and_separate_command_exit (test_live_repairs.NativeResultProtocolTests.test_public_cli_accepts_evidenced_native_completion_and_separate_command_exit) ... ok
+test_public_cli_rejects_absent_invented_or_contradictory_native_completion (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_absent_invented_or_contradictory_native_completion) ... ok
+test_public_cli_rejects_invalid_native_execution_shape_and_identity_types (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_invalid_native_execution_shape_and_identity_types) ... ok
+test_public_cli_rejects_nonobject_native_result_pair_and_arm (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_nonobject_native_result_pair_and_arm) ... 
+  test_public_cli_rejects_nonobject_native_result_pair_and_arm (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_nonobject_native_result_pair_and_arm) (label='result-null') ... FAIL
+  test_public_cli_rejects_nonobject_native_result_pair_and_arm (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_nonobject_native_result_pair_and_arm) (label='pair-null') ... FAIL
+
+======================================================================
+FAIL: test_public_cli_rejects_nonobject_native_result_pair_and_arm (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_nonobject_native_result_pair_and_arm) (label='result-null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 404, in test_public_cli_rejects_nonobject_native_result_pair_and_arm
+    self.assertEqual(checked.returncode, 2, checked.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 230, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 224, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 207, in validate_native_result
+    if data.get("schema_version") != "sage-live-native-scored-results-v3":
+       ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+======================================================================
+FAIL: test_public_cli_rejects_nonobject_native_result_pair_and_arm (test_live_repairs.NativeResultProtocolTests.test_public_cli_rejects_nonobject_native_result_pair_and_arm) (label='pair-null')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 404, in test_public_cli_rejects_nonobject_native_result_pair_and_arm
+    self.assertEqual(checked.returncode, 2, checked.stderr)
+AssertionError: 1 != 2 : Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 230, in <module>
+    if __name__ == "__main__": raise SystemExit(main())
+                                                ^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 224, in main
+    result = validate_native_result(strict_load(args.result), strict_load(args.manifest))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 209, in validate_native_result
+    return {**validate_scored_result(data, frozen, True), "result_schema": data["schema_version"]}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 104, in validate_scored_result
+    if not isinstance(pairs, list) or [row.get("case_id") for row in pairs] != [row["case_id"] for row in frozen["pairs"]]:
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/pairing.py", line 104, in <listcomp>
+    if not isinstance(pairs, list) or [row.get("case_id") for row in pairs] != [row["case_id"] for row in frozen["pairs"]]:
+                                       ^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+
+
+----------------------------------------------------------------------
+Ran 12 tests in 1.609s
+
+FAILED (failures=2)

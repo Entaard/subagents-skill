@@ -1,0 +1,1 @@
+{"task":["data analysis","decision memo"],"domain":["fictional museum operations"],"artifact":["python stdlib script","json summary","markdown memo"],"environment":["local files","offline"],"risk":["missing completion count","nonrandom assignment"],"operation":["aggregate fractions","sensitivity bounds","independent review"],"failure":[]}

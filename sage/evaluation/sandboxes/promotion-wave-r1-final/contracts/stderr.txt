@@ -1,0 +1,15 @@
+test_active_and_unknown_effect_sources_are_rejected_without_store_mutation (test_product_knowledge.KnowledgeContractTests.test_active_and_unknown_effect_sources_are_rejected_without_store_mutation) ... ok
+test_contested_refuted_retired_retrieval_policy (test_product_knowledge.KnowledgeContractTests.test_contested_refuted_retired_retrieval_policy) ... ok
+test_correction_preserves_stable_id_history_and_rollback (test_product_knowledge.KnowledgeContractTests.test_correction_preserves_stable_id_history_and_rollback) ... ok
+test_corrupted_prior_generation_cannot_be_rollback_target (test_product_knowledge.KnowledgeContractTests.test_corrupted_prior_generation_cannot_be_rollback_target) ... ok
+test_failed_unsupported_or_nonindependent_refutation_is_rejected (test_product_knowledge.KnowledgeContractTests.test_failed_unsupported_or_nonindependent_refutation_is_rejected) ... ok
+test_malformed_duplicate_and_nonfinite_store_data_is_rejected (test_product_knowledge.KnowledgeContractTests.test_malformed_duplicate_and_nonfinite_store_data_is_rejected) ... ok
+test_missing_source_evidence_reference_is_rejected (test_product_knowledge.KnowledgeContractTests.test_missing_source_evidence_reference_is_rejected) ... ok
+test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues (test_product_knowledge.KnowledgeContractTests.test_stage_activate_and_retrieve_match_exact_generation_revision_and_cues) ... ok
+test_stale_generation_and_partial_generation_cannot_change_pointer (test_product_knowledge.KnowledgeContractTests.test_stale_generation_and_partial_generation_cannot_change_pointer) ... ok
+test_transferable_and_causal_support_gates_have_isolated_controls (test_product_knowledge.KnowledgeContractTests.test_transferable_and_causal_support_gates_have_isolated_controls) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.597s
+
+OK

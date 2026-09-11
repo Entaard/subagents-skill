@@ -1,0 +1,13 @@
+{
+  "operation": "followup_task",
+  "phase": "prepare final reviewer recheck after renewed refutation",
+  "native_handle": "/root/live_promotion_treatment",
+  "recorded_after_dispatch": {
+    "current_time": "2026-09-07 22:56:35 UTC"
+  },
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:58:19 UTC"
+  },
+  "explicit_release": true,
+  "status": "completed; renewed refutation reconciled, final reviewer recheck brief frozen; store unchanged"
+}

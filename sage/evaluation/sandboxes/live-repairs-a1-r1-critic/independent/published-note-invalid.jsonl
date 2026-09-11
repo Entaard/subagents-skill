@@ -1,0 +1,1 @@
+{"v": 1, "event_id": "e-2", "run_id": "tiny-1", "seq": 2, "at": "2026-09-07T00:00:02Z", "actor": "root", "type": "note.recorded", "payload": {"category": "finding-disposition", "text": "Use the bounded read plan.", "evidence_ids": [], "corrects_event_id": null}}

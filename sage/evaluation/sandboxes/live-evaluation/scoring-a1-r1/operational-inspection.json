@@ -1,0 +1,1083 @@
+[
+  {
+    "arm": "code-treatment",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "spawn_result",
+      "after_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "outer_observation_kind",
+      "lifecycle_observations",
+      "actor_messages",
+      "terminal_recorded_at",
+      "final_actor_claim",
+      "independent_terminal_validation",
+      "timing_limit"
+    ],
+    "lifecycle_sections": {
+      "arm": "code-treatment",
+      "packet": "sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 20:04:17 UTC"
+      },
+      "spawn_result": {
+        "task_name": "/root/live_code_treatment"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 20:05:19 UTC"
+      },
+      "packet_sha256": "4eae9d0391ad03ce1383baece52500282692f04c9df51e87d78bf1ff68f400b5",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "terminal_recorded_at": {
+        "current_time": "2026-09-07 20:18:27 UTC"
+      },
+      "independent_terminal_validation": {
+        "chunk_id": "dfa037",
+        "wall_time_seconds": 3.083e-06,
+        "exit_code": 0,
+        "original_token_count": 19,
+        "output": "{\"last_seq\": 30, \"ok\": true, \"run_id\": \"code-treatment\", \"terminal\": true}\n"
+      },
+      "timing_limit": "Before-spawn/after-spawn/terminal-recorded times bound outer observations and include dispatch or recording latency. They are not metered actor compute durations."
+    }
+  },
+  {
+    "arm": "code-baseline",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "spawn_result",
+      "after_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "actor_messages",
+      "terminal_observed_at",
+      "final_status",
+      "explicit_release",
+      "terminal_validation",
+      "actor_final_summary"
+    ],
+    "lifecycle_sections": {
+      "arm": "code-baseline",
+      "packet": "sage/evaluation/sandboxes/live-evaluation/setup/arms/code-baseline/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 20:19:20 UTC"
+      },
+      "spawn_result": {
+        "task_name": "/root/live_code_baseline"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 20:20:02 UTC"
+      },
+      "packet_sha256": "6af805da3d482d07c36712e94532441b4239c70658a5d6ec50ca3201aed55d28",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "terminal_observed_at": {
+        "current_time": "2026-09-07 20:38:10 UTC"
+      },
+      "final_status": "completed",
+      "explicit_release": true,
+      "terminal_validation": {
+        "chunk_id": "0d4db6",
+        "wall_time_seconds": 4.125e-06,
+        "exit_code": 0,
+        "original_token_count": 20,
+        "output": "{\"last_seq\": 30, \"ok\": true, \"run_id\": \"decoder-baseline\", \"terminal\": true}\n"
+      }
+    }
+  },
+  {
+    "arm": "data-baseline",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "spawn_result",
+      "after_spawn",
+      "actor_messages",
+      "terminal_observed_at",
+      "final_status",
+      "explicit_release",
+      "actor_final_summary",
+      "terminal_validation"
+    ],
+    "lifecycle_sections": {
+      "arm": "data-baseline",
+      "packet": "setup/arms/data-baseline/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 20:38:54 UTC"
+      },
+      "packet_sha256": "782c5e1ec12fd74fb604e01354d0efd928a0b6df77adf301820395d13620512b",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "spawn_result": {
+        "task_name": "/root/live_data_baseline"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 20:39:32 UTC"
+      },
+      "terminal_observed_at": {
+        "current_time": "2026-09-07 20:54:11 UTC"
+      },
+      "final_status": "completed",
+      "explicit_release": true,
+      "terminal_validation": {
+        "chunk_id": "19f191",
+        "wall_time_seconds": 2.875e-06,
+        "exit_code": 0,
+        "original_token_count": 19,
+        "output": "{\"last_seq\": 27, \"ok\": true, \"run_id\": \"data-baseline\", \"terminal\": true}\n"
+      }
+    }
+  },
+  {
+    "arm": "data-treatment",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "spawn_result",
+      "after_spawn",
+      "actor_messages",
+      "terminal_observed_at",
+      "final_status",
+      "explicit_release",
+      "actor_final_summary",
+      "terminal_validation"
+    ],
+    "lifecycle_sections": {
+      "arm": "data-treatment",
+      "packet": "setup/arms/data-treatment/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 20:54:12 UTC"
+      },
+      "packet_sha256": "3a1fc2dd93d8837bfe903c989bbb7a1840e35c492abe7e8976a84ea20b414db4",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "spawn_result": {
+        "task_name": "/root/live_data_treatment"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 20:54:50 UTC"
+      },
+      "terminal_observed_at": {
+        "current_time": "2026-09-07 21:07:51 UTC"
+      },
+      "final_status": "completed",
+      "explicit_release": true,
+      "terminal_validation": {
+        "chunk_id": "236035",
+        "wall_time_seconds": 2.708e-06,
+        "exit_code": 0,
+        "original_token_count": 19,
+        "output": "{\"last_seq\": 28, \"ok\": true, \"run_id\": \"data-treatment\", \"terminal\": true}\n"
+      }
+    }
+  },
+  {
+    "arm": "creative-treatment",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "spawn_result",
+      "after_spawn",
+      "actor_messages",
+      "first_turn_terminal_observed_at",
+      "first_turn_status",
+      "explicit_release",
+      "actor_final_summary",
+      "outer_review_attempt",
+      "repair_resume",
+      "recheck_resume",
+      "final_integration_resume",
+      "final_status",
+      "final_actor_summary",
+      "terminal_validation",
+      "original_run_validation"
+    ],
+    "lifecycle_sections": {
+      "arm": "creative-treatment",
+      "packet": "setup/arms/creative-treatment/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 21:07:52 UTC"
+      },
+      "packet_sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "spawn_result": {
+        "task_name": "/root/live_creative_treatment"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 21:08:30 UTC"
+      },
+      "first_turn_terminal_observed_at": {
+        "current_time": "2026-09-07 21:20:58 UTC"
+      },
+      "first_turn_status": "completed; required independent review unavailable",
+      "explicit_release": true,
+      "outer_review_attempt": {
+        "before_spawn": {
+          "current_time": "2026-09-07 21:21:15 UTC"
+        },
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "fork_turns": "none",
+        "reason": "Original coordinator now completed and explicitly released.",
+        "spawn_result": {
+          "task_name": "/root/live_creative_review"
+        },
+        "after_spawn": {
+          "current_time": "2026-09-07 21:21:47 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:27:47 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "final_message_file": "observations/creative-independent-review.md",
+        "reported_findings": 2
+      },
+      "repair_resume": {
+        "native_handle": "/root/live_creative_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:28:12 UTC"
+        },
+        "scope": "One focused repair, then checkpoint/release for independent existing reviewer recheck",
+        "root_effective_identity": null,
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:35:14 UTC"
+        },
+        "explicit_release": true,
+        "candidate_sha256": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+        "status": "completed turn; continuation task nonterminal pending independent recheck"
+      },
+      "recheck_resume": {
+        "native_handle": "/root/live_creative_review",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:35:40 UTC"
+        },
+        "packet": "setup/arms/creative-treatment/evidence/recheck-brief.txt",
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:40:02 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "finding_dispositions": {
+          "platform_metadata": "resolved with provenance limitation",
+          "terminal_pads": "resolved",
+          "new_material_regressions": 0
+        }
+      },
+      "final_integration_resume": {
+        "native_handle": "/root/live_creative_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 21:40:18 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 21:44:28 UTC"
+        },
+        "explicit_release": true
+      },
+      "final_status": "completed via linked continuation; original run incomplete",
+      "terminal_validation": {
+        "chunk_id": "2dd55c",
+        "wall_time_seconds": 2.708e-06,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "{\"last_seq\": 43, \"ok\": true, \"run_id\": \"echo-steps-continuation\", \"terminal\": true}\n"
+      },
+      "original_run_validation": {
+        "chunk_id": "a2f04f",
+        "wall_time_seconds": 1e-06,
+        "exit_code": 0,
+        "original_token_count": 18,
+        "output": "{\"last_seq\": 22, \"ok\": true, \"run_id\": \"echo-steps\", \"terminal\": false}\n"
+      }
+    }
+  },
+  {
+    "arm": "recovery-treatment",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "spawn_result",
+      "after_spawn",
+      "outer_environment_update",
+      "first_turn_terminal_observed_at",
+      "first_turn_status",
+      "explicit_release",
+      "actor_first_final",
+      "outer_review_attempt",
+      "repair_resume",
+      "recheck_resume",
+      "final_integration_resume",
+      "final_status",
+      "final_actor_summary",
+      "source_validation"
+    ],
+    "lifecycle_sections": {
+      "arm": "recovery-treatment",
+      "packet": "setup/arms/recovery-treatment/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 21:44:29 UTC"
+      },
+      "packet_sha256": "7be367d19e41abaf6a7b99c30be13b155bca1105f3118cf2c7aee4d45be93493",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "spawn_result": {
+        "task_name": "/root/live_recovery_treatment"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 21:45:33 UTC"
+      },
+      "outer_environment_update": {
+        "recorded_at": {
+          "current_time": "2026-09-07 21:45:33 UTC"
+        },
+        "kind": "Capacity failure workaround only, not task/output hints",
+        "content": "Nested native spawn recently hit agent thread limit reached; no close capability exposed. Outer fresh spawn after actor terminal succeeded. On same failure preserve exact role brief and failure, checkpoint/release for outer dispatch and resume. Avoid broad listings exposing unrelated completed text.",
+        "protocol_deviation": "Additional current harness fact supplied after exact frozen packet; disclose in evaluation."
+      },
+      "first_turn_terminal_observed_at": {
+        "current_time": "2026-09-07 21:50:43 UTC"
+      },
+      "first_turn_status": "completed turn; required independent review pending",
+      "explicit_release": true,
+      "actor_first_final": {
+        "native_dispatch_failure": "agent thread limit reached",
+        "reviewer_created": false,
+        "source_run_terminal": false,
+        "source_run_dir": "state/runs/catalog-export",
+        "candidate_sha256": "f5e7409048402fe24c6f8235c9de7b4ea970acd052280408c501e54144069a90",
+        "provenance": "Actor message/final claims; independently unscored."
+      },
+      "outer_review_attempt": {
+        "before_spawn": {
+          "current_time": "2026-09-07 21:50:43 UTC"
+        },
+        "requested_model": "gpt-5.6-sol",
+        "requested_effort": "xhigh",
+        "fork_turns": "none",
+        "reason": "Nested spawn capacity failed; original coordinator now completed/released.",
+        "spawn_result": {
+          "task_name": "/root/live_recovery_review"
+        },
+        "after_spawn": {
+          "current_time": "2026-09-07 21:51:13 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 22:00:33 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "reported_findings": {
+          "minor": 1,
+          "major": 0
+        },
+        "final_message_file": "setup/arms/recovery-treatment/evidence/independent-review.md"
+      },
+      "repair_resume": {
+        "native_handle": "/root/live_recovery_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 22:01:11 UTC"
+        },
+        "scope": "One focused identity-evidence correction then freeze/release for independent recheck",
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 22:04:34 UTC"
+        },
+        "explicit_release": true,
+        "candidate_sha256": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+        "status": "completed turn; finding pending independent recheck"
+      },
+      "recheck_resume": {
+        "native_handle": "/root/live_recovery_review",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 22:05:01 UTC"
+        },
+        "packet": "setup/arms/recovery-treatment/evidence/recheck-brief.md",
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 22:09:53 UTC"
+        },
+        "status": "completed",
+        "explicit_release": true,
+        "finding_disposition": "Original minor falsifiable repair check passed; no new findings reported.",
+        "review_file": "setup/arms/recovery-treatment/evidence/independent-recheck.md"
+      },
+      "final_integration_resume": {
+        "native_handle": "/root/live_recovery_treatment",
+        "operation": "followup_task",
+        "recorded_after_dispatch": {
+          "current_time": "2026-09-07 22:10:13 UTC"
+        },
+        "terminal_observed_at": {
+          "current_time": "2026-09-07 22:14:35 UTC"
+        },
+        "explicit_release": true
+      },
+      "final_status": "assessment completed; source fixture intentionally remains open with unknown effects",
+      "source_validation": {
+        "chunk_id": "db980c",
+        "wall_time_seconds": 3.208e-06,
+        "exit_code": 0,
+        "original_token_count": 19,
+        "output": "{\"last_seq\": 28, \"ok\": true, \"run_id\": \"catalog-export\", \"terminal\": false}\n"
+      }
+    }
+  },
+  {
+    "arm": "promotion-treatment",
+    "keys": [
+      "arm",
+      "packet",
+      "requested_model",
+      "requested_effort",
+      "fork_turns",
+      "before_spawn",
+      "packet_sha256",
+      "root_effective_model",
+      "root_effective_effort",
+      "root_reported_tokens",
+      "root_reported_money",
+      "lifecycle_observations",
+      "outer_observation_kind",
+      "spawn_result",
+      "after_spawn",
+      "outer_environment_update",
+      "first_turn_terminal_observed_at",
+      "first_turn_status",
+      "explicit_release",
+      "actor_first_final",
+      "role_observations",
+      "coordinator_resumes",
+      "final_status",
+      "independent_root_validations",
+      "final_actor_summary"
+    ],
+    "lifecycle_sections": {
+      "arm": "promotion-treatment",
+      "packet": "setup/arms/promotion-treatment/launch-packet.txt",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "before_spawn": {
+        "current_time": "2026-09-07 22:14:36 UTC"
+      },
+      "packet_sha256": "0f0407cc058049e763d6ca4bd7f899aa6b84e1824a22bb8f513f2c274f855851",
+      "root_effective_model": null,
+      "root_effective_effort": null,
+      "root_reported_tokens": null,
+      "root_reported_money": null,
+      "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+      "spawn_result": {
+        "task_name": "/root/live_promotion_treatment"
+      },
+      "after_spawn": {
+        "current_time": "2026-09-07 22:15:27 UTC"
+      },
+      "outer_environment_update": {
+        "recorded_at": {
+          "current_time": "2026-09-07 22:15:27 UTC"
+        },
+        "kind": "Capacity workaround only, no task/output hints",
+        "content": "Nested native spawn has hit thread limit with two running; no close tool; outer fresh spawn after coordinator terminal succeeds. On failure preserve exact role brief/routing/failure and release for sequential outer dispatch; may reuse this handoff after one confirmed failure for later distinct real roles. No impersonation; scoped native queries.",
+        "protocol_deviation": "Additional current harness fact supplied after exact frozen packet; disclose in evaluation."
+      },
+      "first_turn_terminal_observed_at": {
+        "current_time": "2026-09-07 22:18:59 UTC"
+      },
+      "first_turn_status": "completed turn; all three native roles pending after nested capacity failure",
+      "explicit_release": true,
+      "actor_first_final": {
+        "native_dispatch_failure": "agent thread limit reached",
+        "author_created": false,
+        "proposal_pending": true,
+        "landing_pending": true,
+        "rollback_pending": true,
+        "source_runs_reported_terminal_valid": true,
+        "store_and_sources_reported_unchanged": true,
+        "run_dir": "state/runs/promotion-live",
+        "provenance": "Coordinator final claims; independent scores unrun."
+      },
+      "role_observations": [
+        {
+          "role": "proposal_author",
+          "requested_model": "gpt-5.6-sol",
+          "requested_effort": "high",
+          "fork_turns": "none",
+          "before_spawn": {
+            "current_time": "2026-09-07 22:18:59 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/proposal-author-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "spawn_result": {
+            "task_name": "/root/live_promotion_author"
+          },
+          "after_spawn": {
+            "current_time": "2026-09-07 22:19:30 UTC"
+          },
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:21:50 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_author",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:24:18 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "proposer": "/root/live_promotion_author",
+            "action": "stable-ID correction candidate",
+            "stable_id": "museum-csv-field-count",
+            "revision": 2,
+            "prior_revision": 1,
+            "proposal_sha256": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+            "evidence_sha256": "5b1d974743a70d33810d7502db3ca5e06582039e1a56f378a25b139d63d5e7f9",
+            "store_and_sources_reported_unchanged": true,
+            "provenance": "Author final claims, not independent evaluation scores."
+          },
+          "observation_provenance": "Outer normalized direct native spawn/request, lifecycle and actor final observations; not raw native transcript."
+        },
+        {
+          "role": "independent_refuter",
+          "requested_model": "gpt-6-astra",
+          "requested_effort": "high",
+          "fork_turns": "none",
+          "before_spawn": {
+            "current_time": "2026-09-07 22:26:29 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/refuter-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "spawn_result": {
+            "task_name": "/root/live_promotion_refuter"
+          },
+          "after_spawn": {
+            "current_time": "2026-09-07 22:27:03 UTC"
+          },
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:29:28 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_refuter",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:30:35 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "actor": "/root/live_promotion_refuter",
+            "outcome": "passed",
+            "nonblocking_findings": 2,
+            "semantic_blockers": 0,
+            "required_repairs": 0,
+            "refutation_sha256": "e5e16eccf68afdcfeb2915c580f34170b779f7dde73d56d27aa7e34d63d6fcee",
+            "evidence_sha256": "a04ebff3bb7371dd9a22a3297f3eddb79fa7b437bec2081f19ed82c88ddca64a",
+            "provenance": "Refuter final claims, not independent evaluation scores."
+          },
+          "observation_provenance": "Outer normalized direct native spawn/request, lifecycle and actor final observations; not raw native transcript."
+        },
+        {
+          "role": "independent_reviewer",
+          "requested_model": "gpt-5.6-sol",
+          "requested_effort": "xhigh",
+          "fork_turns": "none",
+          "before_spawn": {
+            "current_time": "2026-09-07 22:32:42 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/reviewer-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "spawn_result": {
+            "task_name": "/root/live_promotion_reviewer"
+          },
+          "after_spawn": {
+            "current_time": "2026-09-07 22:33:17 UTC"
+          },
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:35:43 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_reviewer",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            },
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:39:35 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_reviewer",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:42:10 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "actor": "/root/live_promotion_reviewer",
+            "outcome": "failed",
+            "gate_decision": "focused_repair_required",
+            "refutation_dispositions": {
+              "rf-scope": "resolved",
+              "rf-strength": "resolved"
+            },
+            "blocker": "Mandatory environment qualifier prevents retrieval under unchanged task cues.",
+            "minimal_repair_reported": "Clear qualifier.all.environment, retain Python/sample semantic boundary in text/evidence.",
+            "review_sha256": "2bcde4320c13d96ed521c5f2e36377c0feee44406ee932cf29d73838e02517a5",
+            "evidence_sha256": "8556c4e1e70c2424d8466ab189fa4c246a001f5cd94e61eed5a282e66ac0d8f7",
+            "landing_and_rollback_unexecuted": true,
+            "provenance": "Reviewer final claims, not independent evaluation scores."
+          },
+          "observation_provenance": "Outer normalized direct native spawn/request, lifecycle and actor final observations; not raw native transcript."
+        },
+        {
+          "role": "proposal_author_single_repair",
+          "requested_model": "gpt-5.6-sol",
+          "requested_effort": "high",
+          "operation": "followup_task",
+          "native_handle": "/root/live_promotion_author",
+          "before_resume": {
+            "current_time": "2026-09-07 22:44:54 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/author-repair-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:47:53 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_author",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "after_resume": {
+            "current_time": "2026-09-07 22:45:25 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:50:00 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "actor": "/root/live_promotion_author",
+            "changed_path": "/record/qualifier/all/environment",
+            "original_preserved": true,
+            "unchanged_actual_cues_predicate": {
+              "before": false,
+              "after": true
+            },
+            "proposal_sha256": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+            "evidence_sha256": "fdcd3fc34561c71db19c30cbf33c90e3363336d17cfa1dcb2afeed210c2b8107",
+            "store_mutation": false,
+            "provenance": "Author final claims; independent rechecks pending."
+          },
+          "observation_provenance": "Outer normalized direct native followup/lifecycle/final observations; not raw native transcript."
+        },
+        {
+          "role": "independent_refuter_recheck",
+          "requested_model": "gpt-6-astra",
+          "requested_effort": "high",
+          "operation": "followup_task",
+          "native_handle": "/root/live_promotion_refuter",
+          "before_resume": {
+            "current_time": "2026-09-07 22:52:10 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/refuter-repair-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 22:55:03 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_refuter",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "after_resume": {
+            "current_time": "2026-09-07 22:52:42 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:56:10 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "actor": "/root/live_promotion_refuter",
+            "outcome": "passed",
+            "findings": [
+              "rf-scope",
+              "rf-strength",
+              "rf-retrieval-repair"
+            ],
+            "semantic_blockers": 0,
+            "additional_repairs_requested": 0,
+            "refutation_sha256": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+            "evidence_sha256": "41750483eb8318feada3714a1471af1bbf6014bf1540c259bf0a0d588df165bd",
+            "store_retrieval_unexecuted": true,
+            "provenance": "Refuter recheck final claims; independent final review pending."
+          },
+          "observation_provenance": "Outer normalized direct native followup/lifecycle/final observations; not raw native transcript."
+        },
+        {
+          "role": "independent_reviewer_recheck",
+          "requested_model": "gpt-5.6-sol",
+          "requested_effort": "xhigh",
+          "operation": "followup_task",
+          "native_handle": "/root/live_promotion_reviewer",
+          "before_resume": {
+            "current_time": "2026-09-07 22:58:19 UTC"
+          },
+          "packet": "setup/arms/promotion-treatment/work/reviewer-repair-brief.txt",
+          "effective_model": null,
+          "effective_effort": null,
+          "tokens": null,
+          "money": null,
+          "lifecycle_observations": [
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 23:01:18 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_reviewer",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            },
+            {
+              "recorded_at": {
+                "current_time": "2026-09-07 23:05:01 UTC"
+              },
+              "tool": "collaboration.list_agents",
+              "result": {
+                "agents": [
+                  {
+                    "agent_name": "/root/live_promotion_reviewer",
+                    "agent_status": "running"
+                  }
+                ]
+              }
+            }
+          ],
+          "after_resume": {
+            "current_time": "2026-09-07 22:58:53 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 23:05:44 UTC"
+          },
+          "status": "completed",
+          "explicit_release": true,
+          "final_actor_summary": {
+            "actor": "/root/live_promotion_reviewer",
+            "outcome": "passed",
+            "gate_decision": "supported",
+            "dispositions": {
+              "rf-scope": "accepted nonblocking discoverability limitation",
+              "rf-strength": "resolved",
+              "rf-retrieval-repair": "resolved",
+              "rv-retrieval-actual-cues": "resolved"
+            },
+            "review_sha256": "ea6f55cc43fca781cb17c197fa14056d534f062ac9b82fa76fe24d794a5f805a",
+            "evidence_sha256": "1f5c5181ee47f127a02eed4404c7ad0d6a146a077a1cab497024146a523b0e6d",
+            "landing_retrieval_rollback_unexecuted": true,
+            "provenance": "Reviewer recheck final claims; coordinator live landing checks and independent scoring pending."
+          },
+          "observation_provenance": "Outer normalized direct native followup/lifecycle/final observations; not raw native transcript."
+        }
+      ],
+      "coordinator_resumes": [
+        {
+          "operation": "followup_task",
+          "phase": "prepare independent refuter",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 22:24:38 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:26:28 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed; author reconciled, refuter brief frozen, store unchanged reported"
+        },
+        {
+          "operation": "followup_task",
+          "phase": "prepare independent final reviewer",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 22:30:55 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:32:42 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed; refuter reconciled, reviewer brief frozen, no repair or landing reported"
+        },
+        {
+          "operation": "followup_task",
+          "phase": "prepare single focused original-author repair after failed review",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 22:42:31 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:44:53 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed; failed review preserved, single repair brief frozen, landing blocked"
+        },
+        {
+          "operation": "followup_task",
+          "phase": "prepare renewed refuter after sole author repair",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 22:50:31 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:52:10 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed; repaired candidate frozen, single repair consumed, renewed refuter brief ready"
+        },
+        {
+          "operation": "followup_task",
+          "phase": "prepare final reviewer recheck after renewed refutation",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 22:56:35 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 22:58:19 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed; renewed refutation reconciled, final reviewer recheck brief frozen; store unchanged"
+        },
+        {
+          "operation": "followup_task",
+          "phase": "final justified landing/retrieval/rollback and reconciliation",
+          "native_handle": "/root/live_promotion_treatment",
+          "recorded_after_dispatch": {
+            "current_time": "2026-09-07 23:06:08 UTC"
+          },
+          "terminal_observed_at": {
+            "current_time": "2026-09-07 23:14:48 UTC"
+          },
+          "explicit_release": true,
+          "status": "completed final turn"
+        }
+      ],
+      "final_status": "completed after single candidate repair, actual three roles, activation/retrieval and rollback",
+      "independent_root_validations": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py validate --run-dir sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/promotion-live --terminal",
+          "result": {
+            "chunk_id": "f0422a",
+            "wall_time_seconds": 3.25e-06,
+            "exit_code": 0,
+            "original_token_count": 19,
+            "output": "{\"last_seq\": 86, \"ok\": true, \"run_id\": \"promotion-live\", \"terminal\": true}\n"
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py validate --store-dir sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+          "result": {
+            "chunk_id": "12e94f",
+            "wall_time_seconds": 9.58e-07,
+            "exit_code": 0,
+            "original_token_count": 17,
+            "output": "{\"current\": \"controlled-prior\", \"generation_count\": 2, \"ok\": true}\n"
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py validate --run-dir sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old --terminal",
+          "result": {
+            "chunk_id": "8cba67",
+            "wall_time_seconds": 6.25e-07,
+            "exit_code": 0,
+            "original_token_count": 17,
+            "output": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-old\", \"terminal\": true}\n"
+          }
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 TMPDIR=/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/tmp python3 sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py validate --run-dir sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new --terminal",
+          "result": {
+            "chunk_id": "f65dff",
+            "wall_time_seconds": 6.25e-07,
+            "exit_code": 0,
+            "original_token_count": 17,
+            "output": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-new\", \"terminal\": true}\n"
+          }
+        }
+      ]
+    }
+  }
+]

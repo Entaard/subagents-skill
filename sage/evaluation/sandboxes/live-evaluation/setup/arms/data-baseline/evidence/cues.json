@@ -1,0 +1,1 @@
+{"task":["data audit","decision memo"],"domain":["fictional exhibit operations"],"artifact":["python script","json summary","markdown memo"],"environment":["stdlib only","offline"],"risk":["missing aggregate count","nonrandom assignment"],"operation":["analysis","independent review"],"failure":[]}

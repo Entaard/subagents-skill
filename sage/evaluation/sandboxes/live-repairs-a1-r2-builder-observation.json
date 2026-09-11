@@ -1,0 +1,30 @@
+{
+  "native_handle": "/root/live_repairs_builder",
+  "operation": "followup_task",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "effective_identity": null,
+  "observed_at": {
+    "current_time": "2026-09-08 13:53:31 UTC"
+  },
+  "brief": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder-brief.txt",
+  "prior_assignment_released": true,
+  "root_writer_state": "read-only until new release/native terminal",
+  "completion": {
+    "observed_at": "2026-09-08T14:14:54Z",
+    "native_status": "completed",
+    "explicit_release": true,
+    "pending_effects": "none reported",
+    "candidate": "sage/evaluation/sandboxes/live-repairs-a1-r2-builder/candidate-manifest.json",
+    "candidate_sha256": "5744b40b326d72a750e1b3afbb295883eceaf405393c36fbf7600514321ffb29",
+    "builder_claims": {
+      "focused_passed": 13,
+      "offline_passed": 92,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "root_hash_check": "All six changed source, ten preserved source and five frozen guard hashes match",
+    "critic_pass": false
+  }
+}

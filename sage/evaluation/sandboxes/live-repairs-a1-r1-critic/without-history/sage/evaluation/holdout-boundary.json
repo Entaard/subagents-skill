@@ -1,0 +1,11 @@
+{
+  "schema_version": "sage-holdout-boundary-v1",
+  "frozen_before_product_outcomes": true,
+  "families": ["code", "evidence_data", "creative_interaction_smoke", "recovery", "promotion"],
+  "selection": "One unseen prompt per family, selected by the independent evaluator from a corpus unavailable to builders; no prompt may be a paraphrase of a development case.",
+  "actor_packet": ["user task", "installed skill tree", "minimum raw case inputs", "declared sandbox and permissions"],
+  "withheld_from_actor": ["expected answer", "suspected defects", "prior outcomes", "proposed fixes", "rubric score target", "other arm output"],
+  "freeze": "The evaluator hashes prompt, input tree, checks, rubric version, environment facts, and arm order before either arm starts.",
+  "independence": "A builder may not act as the live scorer or refuter for its own output.",
+  "claims": "Report only results from executed cases; no sample supports universal quality, cost, or savings claims."
+}

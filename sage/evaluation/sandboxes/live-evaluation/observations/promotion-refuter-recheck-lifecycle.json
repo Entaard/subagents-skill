@@ -1,0 +1,55 @@
+{
+  "role": "independent_refuter_recheck",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "operation": "followup_task",
+  "native_handle": "/root/live_promotion_refuter",
+  "before_resume": {
+    "current_time": "2026-09-07 22:52:10 UTC"
+  },
+  "packet": "setup/arms/promotion-treatment/work/refuter-repair-brief.txt",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:55:03 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_refuter",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "after_resume": {
+    "current_time": "2026-09-07 22:52:42 UTC"
+  },
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:56:10 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "final_actor_summary": {
+    "actor": "/root/live_promotion_refuter",
+    "outcome": "passed",
+    "findings": [
+      "rf-scope",
+      "rf-strength",
+      "rf-retrieval-repair"
+    ],
+    "semantic_blockers": 0,
+    "additional_repairs_requested": 0,
+    "refutation_sha256": "187145f60e5758944411ce0533efff322a5c9b6047c84f3204d9f76db134b857",
+    "evidence_sha256": "41750483eb8318feada3714a1471af1bbf6014bf1540c259bf0a0d588df165bd",
+    "store_retrieval_unexecuted": true,
+    "provenance": "Refuter recheck final claims; independent final review pending."
+  },
+  "observation_provenance": "Outer normalized direct native followup/lifecycle/final observations; not raw native transcript."
+}

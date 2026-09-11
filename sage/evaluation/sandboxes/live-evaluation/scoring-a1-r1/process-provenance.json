@@ -1,0 +1,15 @@
+{
+  "scorer": "/root/live_scorer",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null,
+  "interruption": {
+    "source": "root followup task",
+    "observation": "Prior native scorer turn errored with usage-limit message; root found no produced files or scores; resumed same task and lease."
+  },
+  "writes": "scoring-a1-r1 plus new docs/LIVE-RESULTS.md only",
+  "native_exit_code": null
+}

@@ -1,0 +1,9 @@
+{
+  "kind": "controlled fixture structural validation, not live recovery",
+  "authority": {
+    "last_seq": 8,
+    "ok": true,
+    "run_id": "catalog-export",
+    "terminal": false
+  }
+}

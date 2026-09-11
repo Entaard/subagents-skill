@@ -1,0 +1,42 @@
+{
+  "prior_manifest_sha256": "c0767e686daa9ed9edc885b6335e441e143af9a526f8a9df9fbee49c4324f692",
+  "prior_candidate_source_files": 42,
+  "prior_candidate_source_mismatches": [],
+  "current_source_files": 42,
+  "intended_changed_source": [
+    "sage/ARCHITECTURE.md",
+    "sage/docs/DECISIONS.md",
+    "sage/docs/IMPLEMENTATION.md",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/references/promotion.md"
+  ],
+  "observed_changed_source": [
+    "sage/ARCHITECTURE.md",
+    "sage/docs/DECISIONS.md",
+    "sage/docs/IMPLEMENTATION.md",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/references/promotion.md"
+  ],
+  "source_change_scope_matches": true,
+  "protected_baseline_files": 331,
+  "protected_changes": [
+    "sage/ARCHITECTURE.md",
+    "sage/docs/DECISIONS.md",
+    "sage/docs/IMPLEMENTATION.md",
+    "sage/docs/STATUS.json",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/references/promotion.md"
+  ],
+  "round1_status_matches_retained_review": true,
+  "protected_changes_are_intended_source_plus_retained_round1_status": true,
+  "retained_evidence_sha256": {
+    "sage/docs/LIVE-RESULTS.md": "73bc34cd4ce190ebe43aafc7521536d3831768afee7322e6f248f7b01d73532b",
+    "sage/evaluation/native-result-protocol-v3.md": "1a880745154172cc796f1c7588866a5b80adfc0e3760c305e7785e3dad6142eb",
+    "sage/evaluation/rubric.json": "6abd4368dd443b8cd1cf10515638500bb849e59833764622348070382b2c8d16",
+    "sage/evaluation/sandboxes/final-a1-r1-candidate/candidate-manifest.json": "c0767e686daa9ed9edc885b6335e441e143af9a526f8a9df9fbee49c4324f692",
+    "sage/docs/reviews/final-a1-r1.json": "8f1d2fc65010b3d9287dc80d08927bf7e8b031d462dfc68bf8847ae4e5051194",
+    "sage/evaluation/sandboxes/final-a1-r1-critic/standalone-promotion-contract.json": "93dd5068264b454c00122a3a463a274f1d8bc027b630ff3b1932df608a5294c9",
+    "sage/evaluation/sandboxes/final-a1-r1-critic/instruction-reachability.json": "74c8d41fda82862254444fce6152587d581f8fdfca2f504464a9e45e101e84a9",
+    "sage/evaluation/sandboxes/final-a1-r1-critic/installed-audit.json": "0a014b8e05f0c77d4c621fe6ae814b1c15c4a92872ec4cf5fd493bad5708b096"
+  }
+}

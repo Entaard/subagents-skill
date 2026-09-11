@@ -1,0 +1,1 @@
+{"provenance":"Fictional gallery transport, evaluator-created raw wire examples; explicit prompt defines the protocol.","valid_wire_hex":["303a2c","333a612c622c323a3a002c","323ac3a92c"],"chunk_sizes":[1,2,3,5,13],"invalid_wire_hex":["30313a612c","2d313a612c","313a613b","783a2c"],"unfinished_wire_hex":["31","313a","313a61"]}

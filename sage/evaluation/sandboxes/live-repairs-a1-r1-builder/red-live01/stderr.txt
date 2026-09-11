@@ -1,0 +1,45 @@
+test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite (test_live_repairs.LiveRepairStateTests.test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite) ... FAIL
+test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds (test_live_repairs.LiveRepairStateTests.test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds) ... FAIL
+test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path) ... FAIL
+
+======================================================================
+FAIL: test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite (test_live_repairs.LiveRepairStateTests.test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 75, in test_known_precreation_failure_reconciles_exact_creative_history_without_rewrite
+    self.assertEqual(appended.returncode, 0, appended.stderr)
+AssertionError: 2 != 0 : {"code": "invalid_event", "message": "invalid event type", "ok": false}
+
+
+======================================================================
+FAIL: test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds (test_live_repairs.LiveRepairStateTests.test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 122, in test_no_creation_cannot_bypass_real_assignments_root_ownership_or_bounds
+    self.assert_rejected(root, "post-request", requested, "invalid_transition")
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 49, in assert_rejected
+    self.assertEqual(json.loads(result.stderr)["code"], code)
+AssertionError: 'invalid_event' != 'invalid_transition'
+- invalid_event
++ invalid_transition
+
+
+======================================================================
+FAIL: test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 91, in test_no_creation_fact_requires_direct_observation_and_is_single_final_path
+    self.assert_rejected(root, "missing-evidence", missing, "invalid_reference")
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/tests/test_live_repairs.py", line 49, in assert_rejected
+    self.assertEqual(json.loads(result.stderr)["code"], code)
+AssertionError: 'invalid_event' != 'invalid_reference'
+- invalid_event
+?          ^  ^
++ invalid_reference
+?         + ^^^  ^^
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.138s
+
+FAILED (failures=3)

@@ -1,0 +1,17 @@
+{
+  "public_cli": {
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/score_status.py",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/docs/reviews/live-repairs-a1-r3.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"ok\": true,\n  \"review_id\": \"live-repairs-a1-r3\"\n}\n",
+    "stderr": ""
+  },
+  "status_transition_validated_on_own_copy": true,
+  "status_bytes_unchanged": true,
+  "projected_gate": "passed",
+  "exact_failure_inputs_covered": 42,
+  "review_sha256": "12027b724d703024871715aadd6336a3f6b1624d8edec5001a675b22e44b786d"
+}

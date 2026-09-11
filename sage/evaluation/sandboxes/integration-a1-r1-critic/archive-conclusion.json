@@ -1,0 +1,22 @@
+{
+  "exact_baseline_matches": 186,
+  "archive_metadata_outside_inventory": [
+    "README.md",
+    "SHA256SUMS"
+  ],
+  "rewritten_active_path_also_archived": [
+    "scripts/sage-lifecycle.py"
+  ],
+  "nonarchived_baseline_paths": [
+    "README.md",
+    "install.sh",
+    "scripts/__pycache__/check-phase0.cpython-311.pyc",
+    "skills/sage-promote/SKILL.md",
+    "skills/sage-promote/agents/openai.yaml",
+    "skills/sage/SKILL.md",
+    "skills/sage/agents/openai.yaml",
+    "uninstall.sh"
+  ],
+  "nonarchived_bytecode": "scripts/__pycache__/check-phase0.cpython-311.pyc",
+  "note": "The parent's eight-entrypoint shorthand was inaccurate. Actual 186-file archive claims hold. The baseline bytecode remains recoverable in Git; no product-source omission is identified."
+}

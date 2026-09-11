@@ -1,0 +1,80 @@
+{
+  "python": "3.11.6 (v3.11.6:8b6ee5ba3b, Oct  2 2023, 11:18:21) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "source_hashes": {
+    "state/runs/csv-new/events.jsonl": "70511264eee2e393953fc2fccd5749c7d600dc003816d0ba156d63b69921aa80",
+    "state/runs/csv-new/snapshot.json": "0b3be1f86c5892405b31f823458799011d3a5ccbb726b2c96e8771f9252ce6d9",
+    "state/runs/csv-old/events.jsonl": "f1794020c3650775d3d87b1ce6dcd288be75181fb74f44a2aeedcfacaa68943d",
+    "state/runs/csv-old/snapshot.json": "0ae792a6a2a54f8a4616ed167aac2d1daeda4ccbbb129d09306b8f7df446081e"
+  },
+  "prior_store_hashes": {
+    "state/knowledge/current.json": "5865416e744707ae21c84917d7138511eb136674d1546c47d94a9c2686dcf78d",
+    "state/knowledge/generations/controlled-prior/index.json": "002ae23273650b86744af9262dbf6100cd2b0eb7a08dc1caae85b8e29129a388",
+    "state/knowledge/generations/controlled-prior/manifest.json": "2cf29eed1489c27e4e05def968dde8b41befd122f4db96b4c4bfd37c25b87b04",
+    "state/knowledge/generations/controlled-prior/records/museum-csv-field-count.json": "69980f4f353b123935dab1e78c074bf4508dadeda351e8228a4ab21d2c8cf643"
+  },
+  "commands": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-old",
+        "--terminal"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-old\", \"terminal\": true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/runs/csv-new",
+        "--terminal"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 8, \"ok\": true, \"run_id\": \"csv-new\", \"terminal\": true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/observe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"old\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A1,Map room,4\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A2,North hall,9\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ],\n  \"new\": [\n    {\n      \"line\": \"code,label,count\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A3,\\\"Maps, early years\\\",6\",\n      \"plain_split_fields\": 4,\n      \"csv_reader_fields\": 3\n    },\n    {\n      \"line\": \"A4,\\\"He said \\\"\\\"hello\\\"\\\"\\\",2\",\n      \"plain_split_fields\": 3,\n      \"csv_reader_fields\": 3\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+        "validate",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"current\": \"controlled-prior\", \"generation_count\": 1, \"ok\": true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/installed/sage/bin/sage_knowledge.py",
+        "retrieve",
+        "--store-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/state/knowledge",
+        "--cues",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/promotion-treatment/inputs/cues.json",
+        "--limit",
+        "10"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"cue_fingerprint\": \"7b4fa620a62fdf1b50210230b7792138f6b38cb6140796ecc1898567924c4d29\", \"generation_id\": \"controlled-prior\", \"matches\": [{\"counterevidence\": [], \"evidence_class\": \"scoped_fact\", \"evidence_summary\": \"Original unquoted rows have equal plain-split and csv.reader field counts.\", \"falsifier\": \"A museum CSV row has a csv.reader field count different from comma count plus one.\", \"gate_rationale\": \"Synthetic prior acceptance based only on the original three unquoted museum rows; not a real live review.\", \"id\": \"museum-csv-field-count\", \"qualifier\": {\"all\": {\"artifact\": [\"csv\"], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}, \"none\": {\"artifact\": [], \"domain\": [], \"environment\": [], \"failure\": [], \"operation\": [], \"risk\": [], \"task\": []}}, \"reason\": \"recognizer intersection: domain=museum imports; artifact=csv; operation=count fields; qualifier satisfied\", \"revision\": 1, \"rule\": \"For a museum CSV row, count commas and add one to obtain its field count.\", \"status\": \"supported\"}], \"retrieval_status\": \"matched\"}\n",
+      "stderr": ""
+    }
+  ]
+}

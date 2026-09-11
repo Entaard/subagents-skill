@@ -1,0 +1,27 @@
+{
+  "old_evidence_free_review": "rejected",
+  "truthful_fail_then_fail": {
+    "result": "rejected",
+    "reason": "prior-error dispositions need status and resolvable evidence"
+  },
+  "valid_source_fixture_dangling_trigger_ids": [
+    "e-1"
+  ],
+  "paired_dimensions_with_real_rubric": [
+    "task_correctness"
+  ],
+  "required_case_dimensions_omitted": [
+    "evidence_quality",
+    "orchestration_behavior",
+    "report_quality",
+    "routing_efficiency",
+    "safety_reversibility",
+    "task_completeness"
+  ],
+  "reduced_dimension_result": {
+    "ok": true,
+    "pair_count": 1,
+    "validation_scope": "hash-bound schema and evidence references; execution authenticity remains an independent-evaluator responsibility"
+  },
+  "old_score_only_pair": "rejected"
+}

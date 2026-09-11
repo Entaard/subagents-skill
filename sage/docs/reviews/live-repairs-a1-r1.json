@@ -1,0 +1,139 @@
+{
+  "module": "live_repairs",
+  "approach_id": "live-repairs-a1",
+  "round": 1,
+  "review_id": "live-repairs-a1-r1",
+  "gate_type": "integration",
+  "reviewed_at": "2026-09-08T13:46:46Z",
+  "verdict": "fail",
+  "summary": "LIVE-01, LIVE-02, LIVE-04 and DOC-01 are verified fixed within this frozen source repair candidate. LIVE-03 remains open for the v3 validator's malformed execution metadata acceptance and non-object execution traceback. Original live scores and v2 rejection remain unchanged; this is not the final whole-skill gate.",
+  "candidate": {
+    "manifest": "sage/evaluation/sandboxes/live-repairs-a1-r1-builder/candidate-manifest.json",
+    "sha256": "46f9c89edf0d39d0bab0c4853e326c0d1e43b41dfb0096415a16f65ba43f157d",
+    "retained_source_index": "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-candidate-source.json"
+  },
+  "critic": {
+    "actor": "/root/live_repairs_critic",
+    "builder_or_original_scorer": false,
+    "delegated_review": false,
+    "source_modified": false,
+    "status_modified": false,
+    "method": "Read original findings and actual source, inspect compact instruction routing under writing-for-agents, run the complete offline gate, execute installed examples and independently designed public-CLI negative checks. Reused inspected historical replay mechanics with every output root redirected to the critic sandbox; classify this reuse as informed diagnostics."
+  },
+  "scores": {
+    "requirements_and_spec_fit": 8.0,
+    "architecture_and_coherence": 8.5,
+    "correctness_and_evidence": 8.0,
+    "simplicity_and_context_efficiency": 9.0,
+    "orchestration_and_model_routing": 8.5,
+    "safety_reversibility_and_recovery": 9.0,
+    "verification_strength": 8.0,
+    "reporting_and_maintainability": 8.5
+  },
+  "score_evidence": {
+    "requirements_and_spec_fit": {
+      "reason": "The scoped lifecycle, uncertainty-reporting, installed-enum and documentation repairs satisfy their observed boundaries. R-059's native result schema remains incomplete: wrong primitive metadata types validate, and a null execution shape escapes structured rejection. All five prior findings receive explicit dispositions.",
+      "evidence": ["sage/docs/REQUIREMENTS.md", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-validator-reproductions.json"]
+    },
+    "architecture_and_coherence": {
+      "reason": "One append-only no-creation fact fits the existing assignment/release model. V3 is explicit and leaves v2 history intact. Architecture, contracts and installed promotion references consistently allocate independent review and coordinator landing. The result-schema implementation defect is separately open; no broader architectural redesign is warranted.",
+      "evidence": ["sage/ARCHITECTURE.md", "sage/docs/CONTRACTS.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json"]
+    },
+    "correctness_and_evidence": {
+      "reason": "Both 89-test offline runs pass, copied history reconciles honestly, and independent state probes preserve atomicity. Four independent malformed v3 cases fail the expected behavior: three false accepts and one traceback. Exact candidate bytes and their repeated failures are retained, so an all-correctness pass is not justified.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/offline/report.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-validator-reproductions.json"]
+    },
+    "simplicity_and_context_efficiency": {
+      "reason": "The active spines stay at 25 and 19 lines. Changed operational details remain behind branch-specific references; the repair adds a narrow event and result encoding rather than a scheduler or semantic prose parser. The installed state example is executable and local pointers resolve.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/static.json", "sage/skills/sage/SKILL.md", "sage/skills/sage-promote/SKILL.md", "sage/skills/sage/references/state.md"]
+    },
+    "orchestration_and_model_routing": {
+      "reason": "The repaired path represents known pre-creation failure without a fictitious handle, preserves genuine-request barriers, and permits an in-budget changed strategy to succeed. Requested/effective distinctions and uncalibrated routing priors remain explicit. This score concerns the repair's recorded-state and instruction behavior, not a new empirical routing pass.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json", "sage/skills/sage/references/delegation.md"]
+    },
+    "safety_reversibility_and_recovery": {
+      "reason": "Known no-creation requires prior observation references and a failed/no-effect result before writer release. Missing/inference/unknown proof, root ownership, real requests, duplicate results, absent reconciliation, stale revisions and exhausted bounds reject in covered checks. A failed current task cannot close completed. Candidate, scorer, source-run and archive inventory entries remain unchanged; no physical lease or native authenticity claim is inferred from structural checks.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/failed-current-completion-result.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/preservation.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/offline/stderr.txt"]
+    },
+    "verification_strength": {
+      "reason": "The normal gate has 89 meaningful tests, including 10 repair regressions, and passes independently from a copy without retained live sandboxes or archives. The new primitive/shape failures are absent from that gate and were found through independent public-CLI mutation checks; v3 boundary coverage therefore needs another repair round.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/sandboxes/critic-offline/report.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/tests/test_live_repairs.py"]
+    },
+    "reporting_and_maintainability": {
+      "reason": "Seven copied historical reports no longer deny uncertainty, directly stored native unknown fields render, and new typed task unknown/untested entries appear. The failed original creative assignment is reported failed/stopped. Operator instructions explicitly require material unobserved facts to be typed and disclaim arbitrary prose parsing. Historical scores, unobserved native exits, provenance limitations and informed-diagnostic status remain visible.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/typed-uncertainty/report.md", "sage/skills/sage/references/verification.md", "sage/docs/LIVE-RESULTS.md"]
+    }
+  },
+  "open_error_ids": ["LIVE-03"],
+  "finding_dispositions": [
+    {
+      "id": "LIVE-01",
+      "status": "verified_fixed",
+      "reason": "The exact 22-event creative prefix remains intact on a stopped, terminal-valid copy; its failed assignment has no fabricated request. Native rejection evidence is explicitly actor-authored retained observation, corroborated as an actor report in outer observations, not independently re-observed raw tool output. The source validates observation/reference structure only. Independent CLI cases and the normal suite retain evidence, ownership, genuine-request, unknown-effect, dependency, attempt and revision barriers; a bounded later strategy can complete while a current failed task cannot.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/failed-current-completion-result.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/offline/stderr.txt", "sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/dispatch-and-state-limitations.json", "sage/evaluation/sandboxes/live-evaluation/observations/creative-treatment-first-turn.json"]
+    },
+    {
+      "id": "LIVE-02",
+      "status": "verified_fixed",
+      "reason": "All seven original report histories regenerate on copies with unchanged log bytes, qualified empty sections and directly stored unknown identities/effects. Independent typed missing-value and untested-touch evidence renders. Guidance requires material task facts to be typed before closure and makes no semantic parsing claim. Original delivered reports and their six scores of 7 are unchanged.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/typed-uncertainty/report.md", "sage/skills/sage/references/verification.md", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/preservation.json"]
+    },
+    {
+      "id": "LIVE-03",
+      "status": "open",
+      "reason": "The conceptual mismatch is repaired: v3 accepts evidenced nullable native completion, separates actual subprocess exits, qualifies journals and preserves the original v2 exit 2. However, its advertised structural boundary still accepts invalid execution identity/time primitives and throws an uncaught AttributeError for execution:null. These exact public-CLI failures reproduce against the retained frozen validator.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/historical-replay/summary.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-validator-reproductions.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-candidate-source.json"]
+    },
+    {
+      "id": "LIVE-04",
+      "status": "verified_fixed",
+      "reason": "A fresh installation publishes assumption|decision. The critic extracted the actual installed JSON example and appended it successfully through the installed helper; an invalid finding-disposition category rejects atomically. The complete published tiny-run example also passes terminal validation. No original rejected append was rewritten.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/results.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/installed/skills/sage/references/state.md", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/preservation.json"]
+    },
+    {
+      "id": "DOC-01",
+      "status": "verified_fixed",
+      "reason": "Current architecture status preserves the original reporting failures, four paired arms/two pairs and pending source repair. Operator paths and task-field authority resolve within the installed package. Contracts and promotion references consistently distinguish author, independent refuter/reviewer and coordinator landing; a material author repair requires renewed refutation/review. This does not preempt the separate whole-skill assessment.",
+      "evidence": ["sage/ARCHITECTURE.md", "sage/docs/CONTRACTS.md", "sage/skills/sage/references/run.md", "sage/skills/sage-promote/references/promotion.md", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/static.json"]
+    }
+  ],
+  "open_errors": [
+    {
+      "id": "LIVE-03",
+      "rank": 1,
+      "severity": "major",
+      "category": "evaluation_schema_validation",
+      "summary": "V3 execution identity/time metadata accepts wrong primitive types, and null execution crashes outside structured rejection.",
+      "location": "sage/evaluation/pairing.py:110",
+      "violated_contract": "R-059 native result evidence/schema boundary and the v3 protocol's claim that schema, frozen identity and operational-reference validation remain in force. This concerns structural shape, not the explicitly out-of-scope authenticity of referenced native observations.",
+      "reproduction": "Run python3 sage/evaluation/sandboxes/live-repairs-a1-r1-critic/without-history/sage/evaluation/pairing.py validate-native sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-run-id-bool.json --manifest sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json. It exits 0 with ok:true despite execution.run_id=true. Substitute native-start-bool.json or native-finish-object.json for two more exit-0 false accepts. Substitute native-execution-null.json: exit 1 with AttributeError at arm.get('execution', {}).get('evidence'). Each fixture changes only its named execution field from the valid informed v3 control.",
+      "cause": "The v3 branch checks run_id/started_at/finished_at only for truthiness, and common evidence extraction dereferences execution before validating its object shape.",
+      "fix_check": "Add explicit v3 object/primitive validation before nested access, document and enforce the v3 run-ID and timestamp types, and cover each retained malformed case through the public CLI. These four inputs must return structured JSON rejection with exit 2, without false acceptance or traceback. Keep a valid evidenced null-native-exit v3 control passing, retain new native/subprocess primitive and provenance/reference negatives, and preserve v2's original rejection and frozen protocol/rubric bytes. Do not solve this by merely catching every exception or by changing v2 acceptance.",
+      "evidence": ["sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-run-id-bool.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-start-bool.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-finish-object.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/independent/native-execution-null.json", "sage/evaluation/sandboxes/live-repairs-a1-r1-critic/retained-validator-reproductions.json"]
+    }
+  ],
+  "suggestions": [],
+  "verification": {
+    "normal_offline": "89 tests passed; 0 failures, 0 errors, 0 skips; no live trial or network use.",
+    "without_history_offline": "89 tests passed in a complete active-source copy with no historical live sandbox or archive bundle.",
+    "independent_commands": "103 public CLI observations in boundaries.py: 99 expected outcomes, three malformed-v3 false accepts, one malformed-v3 traceback; all tested state append rejections atomic. Four failures additionally reproduced with retained validator bytes; an additional false completed-run append rejected atomically.",
+    "historical_diagnostics": "Exact 22-event creative prefix reconciled on a copy; seven copied reports regenerated; original v2 exits 2; adapted v3 exits 0; six actual subprocess exits remain separate from null native exits.",
+    "static": "16 retained candidate source hashes match; candidate manifest raw hash matches; seven changed-document local links resolve; diff whitespace check passes; 25/19-line spines.",
+    "preservation": "1,143 protected source/history/archive files unchanged. Browser profile/cache/session contents were excluded and not inspected or hashed. Guard inventory includes STATUS, frozen protocol/rubric, original scorer results, source run histories and inert archive files."
+  },
+  "limitations": [
+    "No new live arm, UI/browser observation, cost/model-placement measurement or empirical routing pass was performed.",
+    "Historical replays reuse inspected builder mechanics with critic-owned outputs and are informed diagnostics, not fresh holdouts. Independent malformed-input and installed-state probes are separately authored.",
+    "Structural evidence/reference/hash validity cannot prove native execution authenticity, independence, effect truth, or physical writer exclusivity. The original nested refusal is retained as an actor-reported observation, not newly observed by this critic.",
+    "The report renderer surfaces structured fields and typed unknown/untested evidence; it does not recover material facts that were recorded only as arbitrary prose.",
+    "The four paired arms across two pairs and six original report scores of 7 remain failed historical gates; creative orchestration remains 7; recovery's pass is unchanged.",
+    "This review assesses only the frozen live repair integration candidate. A later fresh whole-skill critic must assess the assembled two-skill product, including its separate promotion-recovery coverage question."
+  ],
+  "release": {
+    "state": "RELEASE",
+    "writer_lease": "released",
+    "pending_process": false,
+    "pending_effect": false,
+    "next_owner": "root for read-only validation and persistence of this failed round, then the authorized builder for round 2"
+  }
+}

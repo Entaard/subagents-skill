@@ -1,0 +1,37 @@
+[
+  {
+    "original": "sage/ARCHITECTURE.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/ARCHITECTURE.md",
+    "sha256": "4f9cc6310ebd4ca436225fd101e59ec1d0720ea9ca6b57af0685e85bbb715b8a"
+  },
+  {
+    "original": "sage/docs/DECISIONS.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/docs/DECISIONS.md",
+    "sha256": "0c8fc5d2e40010fe7a81d1d92f05806ffed87696632390612b44992f4735428e"
+  },
+  {
+    "original": "sage/docs/IMPLEMENTATION.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/docs/IMPLEMENTATION.md",
+    "sha256": "6293328cf7383fb3cc3f368ef000461c620bea168217c5dde3860c8b87612a23"
+  },
+  {
+    "original": "sage/evaluation/native-result-protocol-v3.md",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/native-result-protocol-v3.md",
+    "sha256": "1a880745154172cc796f1c7588866a5b80adfc0e3760c305e7785e3dad6142eb"
+  },
+  {
+    "original": "sage/evaluation/pairing.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/pairing.py",
+    "sha256": "933b027f8251c7942a4c694d4782f428cb3af998f9cde04d237c97cc93d8bd16"
+  },
+  {
+    "original": "sage/evaluation/tests/test_live_repairs.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/tests/test_live_repairs.py",
+    "sha256": "d5889467807d18746d6eb3fc8d8d2984bb166e3b58b5b40c4ff0b2926e82f35c"
+  },
+  {
+    "original": "sage/evaluation/tests/test_native_shape.py",
+    "retained": "sage/evaluation/sandboxes/live-repairs-a1-r3-critic/candidate-source/sage/evaluation/tests/test_native_shape.py",
+    "sha256": "026015d2687a8b404ca2588088244a6b4f9c387d8b5387537f89421cba8372c4"
+  }
+]

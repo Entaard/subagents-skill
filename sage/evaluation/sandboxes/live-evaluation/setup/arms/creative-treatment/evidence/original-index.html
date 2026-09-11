@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Echo Steps — A little orbit for your memory</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #f3f1e8; background: #101a20; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; background: radial-gradient(ellipse at 75% 35%, #24404666, transparent 55%), #101a20; }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .22; background-image: radial-gradient(#9cafaa 1px, transparent 1px); background-size: 43px 43px; mask-image: linear-gradient(transparent, #000); }
+    .shell { position: relative; max-width: 1136px; margin: auto; padding: 34px 36px 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 23px; border-bottom: 1px solid #3a494c; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+    .brand { display: flex; gap: 11px; align-items: center; font-weight: 700; }
+    .mark { font-size: 25px; line-height: 1; color: #c7efb3; }
+    .edition { color: #a7b9b9; }
+    main { display: grid; grid-template-columns: .95fr 1fr; gap: 68px; align-items: center; padding: 57px 0 43px; }
+    .eyebrow { margin: 0 0 19px; color: #c7efb3; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(54px, 6vw, 76px); line-height: .99; font-weight: 550; letter-spacing: -.065em; }
+    h1 span { display: block; color: #c7efb3; }
+    .intro { max-width: 340px; margin: 24px 0; font-size: 17px; line-height: 1.6; color: #b6c5c5; }
+    .instructions { list-style: none; counter-reset: directions; margin: 0 0 28px; padding: 0; display: grid; gap: 12px; font-size: 13px; line-height: 1.5; color: #d5dedb; }
+    .instructions li { counter-increment: directions; display: flex; align-items: baseline; gap: 12px; }
+    .instructions li::before { content: "0" counter(directions); font-size: 10px; color: #a3b7b5; font-variant-numeric: tabular-nums; }
+    kbd { font: inherit; font-size: .9em; color: #eef5e7; border: 1px solid #5c706f; border-radius: 4px; padding: 1px 5px; }
+    button { font: inherit; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible { outline: 3px solid #fff7cc; outline-offset: 5px; }
+    #start { min-height: 48px; min-width: 170px; border: 0; border-radius: 9px; padding: 13px 22px; color: #152421; background: #c7efb3; font-size: 14px; font-weight: 700; cursor: pointer; }
+    #start:hover { background: #dcffcb; }
+    .restart-hint { font-size: 12px; color: #a7b9b9; margin: 16px 0 0; }
+    .board { min-width: 0; border: 1px solid #4b605e; border-radius: 23px; padding: 24px; background: #17272bd9; box-shadow: 0 22px 60px #030e1638; }
+    .board-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 17px; }
+    .board-label { font-size: 10px; text-transform: uppercase; letter-spacing: .16em; color: #b6c5c5; }
+    #phase { font-size: 11px; font-weight: 600; border: 1px solid #617572; padding: 5px 9px; border-radius: 100px; color: #e6eddf; }
+    .pads { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+    .pad { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; aspect-ratio: 1.2; border: 1px solid #627875; border-radius: 14px; background: #273d40; color: #e9f0e7; cursor: pointer; transition: background 120ms, border-color 120ms; }
+    .pad:disabled { cursor: default; opacity: 1; }
+    .pad:not(:disabled):hover { background: #375053; border-color: #d2e4d1; }
+    .number { font-size: 48px; font-weight: 450; line-height: 1; letter-spacing: -.05em; }
+    .cue { font-size: 9px; letter-spacing: .17em; text-transform: uppercase; min-height: 12px; color: #b6c9c5; }
+    .pad.watching { background: #c7efb3; color: #172c24; border: 3px solid #f1ffe8; }
+    .pad.watching .cue { color: #172c24; font-weight: 800; }
+    .pad.correct { border: 3px solid #c7efb3; }
+    .pad.correct .cue { color: #d8fac9; }
+    .pad.wrong { border: 3px solid #ffd0b3; }
+    .pad.wrong .cue { color: #ffd0b3; }
+    .feedback { min-height: 99px; padding-top: 21px; }
+    #message { margin: 0 0 7px; font-size: 17px; font-weight: 600; letter-spacing: -.025em; }
+    #detail { margin: 0; color: #bccbc5; font-size: 12px; line-height: 1.6; }
+    .progress { border-top: 1px solid #455b57; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    #progress-text { font-size: 11px; color: #c2d1c8; }
+    .steps { display: flex; gap: 6px; }
+    .step { width: 25px; height: 5px; border: 1px solid #80918a; border-radius: 3px; background: transparent; }
+    .step.done { background: #c7efb3; border-color: #c7efb3; }
+    footer { display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid #3a494c; padding-top: 19px; color: #9cafad; font-size: 10px; letter-spacing: .06em; }
+    @media (max-width: 700px) {
+      .shell { padding: 21px 22px 19px; }
+      header { padding-bottom: 16px; font-size: 9px; }
+      .edition { font-size: 8px; }
+      main { grid-template-columns: 1fr; gap: 24px; padding: 27px 0 24px; }
+      .eyebrow { font-size: 9px; margin-bottom: 11px; }
+      h1 { font-size: 48px; }
+      h1 span { display: inline; }
+      .intro { margin: 14px 0; font-size: 14px; line-height: 1.5; }
+      .instructions { gap: 7px; margin-bottom: 17px; font-size: 12px; }
+      #start { min-height: 44px; padding: 11px 20px; }
+      .restart-hint { display: inline; margin-left: 12px; font-size: 10px; }
+      .board { padding: 18px; border-radius: 18px; }
+      .board-top { margin-bottom: 13px; }
+      .pads { gap: 11px; }
+      .pad { aspect-ratio: 1.55; border-radius: 11px; }
+      .number { font-size: 36px; }
+      .feedback { min-height: 87px; padding-top: 17px; }
+      #message { font-size: 16px; }
+      #detail { font-size: 11px; }
+      footer { font-size: 9px; padding-top: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header><div class="brand"><span class="mark" aria-hidden="true">✳</span> Small moments / sharp minds</div><span class="edition">Memory study · 01</span></header>
+    <main>
+      <section aria-labelledby="title">
+        <p class="eyebrow">A little orbit for your memory</p>
+        <h1 id="title">Echo <span>Steps.</span></h1>
+        <p class="intro">Three quiet signals. One small challenge.<br>Watch the pattern, then send it back.</p>
+        <ol class="instructions" id="instructions">
+          <li><span>Start, then watch three pads light up in order.</span></li>
+          <li><span>Repeat with keys <kbd>1</kbd>–<kbd>4</kbd> or tap the pads.</span></li>
+        </ol>
+        <button type="button" id="start">Start <span aria-hidden="true">↗</span></button>
+        <p class="restart-hint"><kbd>R</kbd> to restart a round</p>
+      </section>
+      <section class="board" aria-label="Memory game" aria-describedby="instructions">
+        <div class="board-top"><span class="board-label">Your constellation</span><span id="phase">Ready</span></div>
+        <div class="pads" role="group" aria-label="Numbered pads">
+          <button class="pad" type="button" id="pad-1" data-pad="1" aria-label="Pad 1" disabled><span class="number">1</span><span class="cue" aria-hidden="true">Pad one</span></button>
+          <button class="pad" type="button" id="pad-2" data-pad="2" aria-label="Pad 2" disabled><span class="number">2</span><span class="cue" aria-hidden="true">Pad two</span></button>
+          <button class="pad" type="button" id="pad-3" data-pad="3" aria-label="Pad 3" disabled><span class="number">3</span><span class="cue" aria-hidden="true">Pad three</span></button>
+          <button class="pad" type="button" id="pad-4" data-pad="4" aria-label="Pad 4" disabled><span class="number">4</span><span class="cue" aria-hidden="true">Pad four</span></button>
+        </div>
+        <div class="feedback" role="status" aria-live="polite" aria-atomic="true">
+          <p id="message">Find your focus.</p>
+          <p id="detail">Press Start to see the three-step pattern.</p>
+        </div>
+        <div class="progress"><span id="progress-text">0 / 3 steps repeated</span><span class="steps" aria-hidden="true"><i class="step"></i><i class="step"></i><i class="step"></i></span></div>
+      </section>
+    </main>
+    <footer><span>NO TIMER. JUST A LITTLE ATTENTION.</span><span>Watch · remember · echo</span></footer>
+  </div>
+  <script>
+    (() => {
+      'use strict';
+      const sequence = [2, 4, 1];
+      const pads = [...document.querySelectorAll('.pad')];
+      const start = document.querySelector('#start');
+      const phaseLabel = document.querySelector('#phase');
+      const message = document.querySelector('#message');
+      const detail = document.querySelector('#detail');
+      const progress = document.querySelector('#progress-text');
+      const steps = [...document.querySelectorAll('.step')];
+      const padNames = ['Pad one', 'Pad two', 'Pad three', 'Pad four'];
+      let phase = 'ready';
+      let count = 0;
+      let timers = [];
+      function resetPads() {
+        pads.forEach((pad, i) => {
+          pad.classList.remove('watching', 'correct', 'wrong');
+          pad.querySelector('.cue').textContent = padNames[i];
+        });
+      }
+      function setStatus(label, headline, explanation) {
+        phaseLabel.textContent = label;
+        message.textContent = headline;
+        detail.textContent = explanation;
+      }
+      function updateProgress() {
+        progress.textContent = `${count} / 3 steps repeated`;
+        steps.forEach((step, i) => step.classList.toggle('done', i < count));
+      }
+      function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+      function begin() {
+        timers.forEach(clearTimeout);
+        timers = [];
+        phase = 'watch';
+        count = 0;
+        updateProgress();
+        resetPads();
+        pads.forEach(pad => { pad.disabled = true; });
+        start.innerHTML = 'Restart <span aria-hidden="true">↗</span>';
+        setStatus('Watch', 'Watch the pattern.', 'Three signals, one at a time. Guesses wait until your turn.');
+        sequence.forEach((number, i) => {
+          later(() => {
+            resetPads();
+            const pad = pads[number - 1];
+            pad.classList.add('watching');
+            pad.querySelector('.cue').textContent = '● Watch';
+            setStatus('Watch', `Watch · step ${i + 1} of 3`, `Pad ${number}. Remember its place in the pattern.`);
+          }, 100 + i * 500);
+          later(resetPads, 500 + i * 500);
+        });
+        later(() => {
+          phase = 'input';
+          resetPads();
+          pads.forEach(pad => { pad.disabled = false; });
+          setStatus('Your turn', 'Your turn. Echo the pattern.', 'Use keys 1–4 or the pads. Start with the first signal.');
+        }, 1650);
+      }
+      function guess(number) {
+        if (phase !== 'input') return;
+        resetPads();
+        const pad = pads[number - 1];
+        if (number !== sequence[count]) {
+          phase = 'mistake';
+          pad.classList.add('wrong');
+          pad.querySelector('.cue').textContent = '× Try again';
+          setStatus('Try again', `Not quite · step ${count + 1}`, `You chose ${number}; the next signal was ${sequence[count]}. Press R or Restart to watch again.`);
+          return;
+        }
+        count += 1;
+        updateProgress();
+        pad.classList.add('correct');
+        pad.querySelector('.cue').textContent = '✓ Correct';
+        if (count === sequence.length) {
+          phase = 'success';
+          setStatus('Complete', 'Perfect echo. Nicely remembered.', 'All three signals returned: 2 → 4 → 1. Press R or Restart to play again.');
+        } else {
+          setStatus('Your turn', `Correct · ${count} of 3`, `Pad ${number} matched. What was signal ${count + 1}?`);
+        }
+      }
+      start.addEventListener('click', begin);
+      pads.forEach(pad => pad.addEventListener('click', () => guess(Number(pad.dataset.pad))));
+      document.addEventListener('keydown', event => {
+        if (event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
+        if (/^[1-4]$/.test(event.key)) {
+          event.preventDefault();
+          guess(Number(event.key));
+        } else if (event.key.toLowerCase() === 'r' && phase !== 'ready') {
+          event.preventDefault();
+          begin();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

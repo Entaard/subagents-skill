@@ -1,0 +1,240 @@
+{
+  "arm": "creative-treatment",
+  "packet": "setup/arms/creative-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 21:07:52 UTC"
+  },
+  "packet_sha256": "f90668091ea04ef667b6b08fb65a9e274526f89d6a53fd35cc520704ea2112b8",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:10:50 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:13:26 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:23:02 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:26:28 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:31:47 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:37:58 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_creative_review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "spawn_result": {
+    "task_name": "/root/live_creative_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 21:08:30 UTC"
+  },
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:15:55 UTC"
+      },
+      "sender": "/root/live_creative_treatment",
+      "content": "Creative treatment candidate is built; full supplied keyboard flow and two focused flows observed at both viewports. Both screenshots actually inspected, no horizontal overflow. Restricted launch failed and retained; explicitly approved isolated escalation succeeded. Preparing fresh Sol/xhigh independent review; no product/state files outside this arm touched.",
+      "provenance": "Actor message; claims not independently scored."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:17:08 UTC"
+      },
+      "sender": "/root/live_creative_treatment",
+      "content": "Independent review dispatch failed: native spawn_agent returned 'agent thread limit reached'. No reviewer handle was created. Candidate and all browser evidence are frozen; build writer released. Please free one concurrency slot so this arm can perform its required fresh Sol/xhigh review. I can continue read-only integration preparation meanwhile.",
+      "provenance": "Actor message; tool failure not independently reproduced."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 21:29:22 UTC"
+      },
+      "sender": "/root/live_creative_treatment",
+      "content": "Read both findings; will add immutable platform metadata and disable pads after success/mistake while retaining outcome styling. Original Sage run admitted a reviewer before native spawn failed; its installed contract cannot close/reassign that nonexistent handle, and revision_limit=1 prevents a new plan. I will preserve that honest incomplete run and create a linked continuation run recording your real /root/live_creative_review observation, one focused repair, outer recheck and integration. No invented old request or lifecycle.",
+      "provenance": "Actor message; potential contract recovery limitation for independent evaluation, not verified here."
+    }
+  ],
+  "first_turn_terminal_observed_at": {
+    "current_time": "2026-09-07 21:20:58 UTC"
+  },
+  "first_turn_status": "completed; required independent review unavailable",
+  "explicit_release": true,
+  "actor_final_summary": {
+    "candidate_sha256": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "reviewer_created": false,
+    "native_dispatch_failure": "agent thread limit reached",
+    "state_terminal": false,
+    "run_dir": "state/runs/echo-steps",
+    "provenance": "Coordinator final claims, independent score unrun."
+  },
+  "outer_review_attempt": {
+    "before_spawn": {
+      "current_time": "2026-09-07 21:21:15 UTC"
+    },
+    "requested_model": "gpt-5.6-sol",
+    "requested_effort": "xhigh",
+    "fork_turns": "none",
+    "reason": "Original coordinator now completed and explicitly released.",
+    "spawn_result": {
+      "task_name": "/root/live_creative_review"
+    },
+    "after_spawn": {
+      "current_time": "2026-09-07 21:21:47 UTC"
+    },
+    "terminal_observed_at": {
+      "current_time": "2026-09-07 21:27:47 UTC"
+    },
+    "status": "completed",
+    "explicit_release": true,
+    "final_message_file": "observations/creative-independent-review.md",
+    "reported_findings": 2
+  },
+  "repair_resume": {
+    "native_handle": "/root/live_creative_treatment",
+    "operation": "followup_task",
+    "recorded_after_dispatch": {
+      "current_time": "2026-09-07 21:28:12 UTC"
+    },
+    "scope": "One focused repair, then checkpoint/release for independent existing reviewer recheck",
+    "root_effective_identity": null,
+    "terminal_observed_at": {
+      "current_time": "2026-09-07 21:35:14 UTC"
+    },
+    "explicit_release": true,
+    "candidate_sha256": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+    "status": "completed turn; continuation task nonterminal pending independent recheck"
+  },
+  "recheck_resume": {
+    "native_handle": "/root/live_creative_review",
+    "operation": "followup_task",
+    "recorded_after_dispatch": {
+      "current_time": "2026-09-07 21:35:40 UTC"
+    },
+    "packet": "setup/arms/creative-treatment/evidence/recheck-brief.txt",
+    "terminal_observed_at": {
+      "current_time": "2026-09-07 21:40:02 UTC"
+    },
+    "status": "completed",
+    "explicit_release": true,
+    "finding_dispositions": {
+      "platform_metadata": "resolved with provenance limitation",
+      "terminal_pads": "resolved",
+      "new_material_regressions": 0
+    }
+  },
+  "final_integration_resume": {
+    "native_handle": "/root/live_creative_treatment",
+    "operation": "followup_task",
+    "recorded_after_dispatch": {
+      "current_time": "2026-09-07 21:40:18 UTC"
+    },
+    "terminal_observed_at": {
+      "current_time": "2026-09-07 21:44:28 UTC"
+    },
+    "explicit_release": true
+  },
+  "final_status": "completed via linked continuation; original run incomplete",
+  "final_actor_summary": {
+    "candidate_sha256": "3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0",
+    "report_sha256": "90ea39575d63fea02b1b7e666252f033339796186c7a46695db8885884b4e487",
+    "product_repairs": 1,
+    "review_findings": 2,
+    "findings_independently_resolved": 2,
+    "hash_comparisons_reported": 31,
+    "run_dir": "state/runs/echo-steps-continuation",
+    "original_run_dir": "state/runs/echo-steps",
+    "original_run_terminal": false,
+    "provenance": "Coordinator final claims plus separately persisted independent review/recheck; evaluation scores unrun."
+  },
+  "terminal_validation": {
+    "chunk_id": "2dd55c",
+    "wall_time_seconds": 0.000002708,
+    "exit_code": 0,
+    "original_token_count": 21,
+    "output": "{\"last_seq\": 43, \"ok\": true, \"run_id\": \"echo-steps-continuation\", \"terminal\": true}\n"
+  },
+  "original_run_validation": {
+    "chunk_id": "a2f04f",
+    "wall_time_seconds": 0.000001,
+    "exit_code": 0,
+    "original_token_count": 18,
+    "output": "{\"last_seq\": 22, \"ok\": true, \"run_id\": \"echo-steps\", \"terminal\": false}\n"
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "kind": "direct owned-headless harness observations",
+  "scope": "one local file navigation and keyboard sequence per viewport, no throttle; wall includes CDP and frame waits; not population performance or monetary cost",
+  "observations": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "loadWallMs": 42.838708,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 33.64862500000004,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nStart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nReady\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nFind your focus.\n\nPress Start to see the three-step pattern.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Ready\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 33.34083399999986,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": "start"
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 31.33075000000008,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 30.60912499999995,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 30.73783400000002,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 31.37391600000001,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 34.09833299999991,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": ""
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 32.274374999999964,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": ""
+        },
+        {
+          "key": "3",
+          "inputToTwoFramesMs": 27.956250000000182,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": ""
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 33.67016700000022,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 32.16399999999976,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": "start"
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 32.183750000000146,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": "start"
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 29.943500000000313,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 32.24679200000082,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 32.20341600000029,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho\nSteps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗\n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": "start"
+        }
+      ],
+      "screenshot": "viewport-1280x800.png",
+      "metrics": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "nav": [
+          {
+            "duration": 6.9000000059604645,
+            "domContentLoadedEventEnd": 6.200000002980232,
+            "loadEventEnd": 6.9000000059604645
+          }
+        ]
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "loadWallMs": 7.645792000000256,
+      "steps": [
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 27.831500000000233,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nStart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nReady\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nFind your focus.\n\nPress Start to see the three-step pattern.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Ready\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Enter",
+          "inputToTwoFramesMs": 32.69862499999999,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": "start"
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 31.51337500000045,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 29.68345799999952,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": "start"
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 33.14408300000105,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 30.930875000000015,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": ""
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 31.930374999999913,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": "start"
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 31.34570800000074,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": "start"
+        },
+        {
+          "key": "3",
+          "inputToTwoFramesMs": 28.343249999999898,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 29.224874999999884,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": "start"
+        },
+        {
+          "key": "Tab",
+          "inputToTwoFramesMs": 32.988124999999854,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nTry again\n1\nPAD ONE\n2\nPAD TWO\n3\n× TRY AGAIN\n4\nPAD FOUR\n\nNot quite · step 1\n\nYou chose 3; the next signal was 2. Press R or Restart to watch again.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Try again\"}",
+          "focus": ""
+        },
+        {
+          "key": "r",
+          "inputToTwoFramesMs": 31.884249999999156,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nWatch\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nWatch the pattern.\n\nThree signals, one at a time. Guesses wait until your turn.\n\n0 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Watch\"}",
+          "focus": ""
+        },
+        {
+          "key": "2",
+          "inputToTwoFramesMs": 31.3940419999999,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\n✓ CORRECT\n3\nPAD THREE\n4\nPAD FOUR\n\nCorrect · 1 of 3\n\nPad 2 matched. What was signal 2?\n\n1 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": ""
+        },
+        {
+          "key": "4",
+          "inputToTwoFramesMs": 31.066749999999956,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nYour turn\n1\nPAD ONE\n2\nPAD TWO\n3\nPAD THREE\n4\n✓ CORRECT\n\nCorrect · 2 of 3\n\nPad 4 matched. What was signal 3?\n\n2 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":false},{\"id\":\"pad-2\",\"disabled\":false},{\"id\":\"pad-3\",\"disabled\":false},{\"id\":\"pad-4\",\"disabled\":false}],\"phase\":\"Your turn\"}",
+          "focus": ""
+        },
+        {
+          "key": "1",
+          "inputToTwoFramesMs": 31.55737500000032,
+          "visible": "✳\nSMALL MOMENTS / SHARP MINDS\nMEMORY STUDY · 01\n\nA LITTLE ORBIT FOR YOUR MEMORY\n\nEcho Steps.\n\nThree quiet signals. One small challenge.\nWatch the pattern, then send it back.\n\nStart, then watch three pads light up in order.\nRepeat with keys 1–4 or tap the pads.\nRestart ↗ \n\nR to restart a round\n\nYOUR CONSTELLATION\nComplete\n1\n✓ CORRECT\n2\nPAD TWO\n3\nPAD THREE\n4\nPAD FOUR\n\nPerfect echo. Nicely remembered.\n\nAll three signals returned: 2 → 4 → 1. Press R or Restart to play again.\n\n3 / 3 steps repeated\nNO TIMER. JUST A LITTLE ATTENTION.\nWatch · remember · echo\nDIAGNOSTIC {\"sourceSha256\":\"3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0\",\"pads\":[{\"id\":\"pad-1\",\"disabled\":true},{\"id\":\"pad-2\",\"disabled\":true},{\"id\":\"pad-3\",\"disabled\":true},{\"id\":\"pad-4\",\"disabled\":true}],\"phase\":\"Complete\"}",
+          "focus": ""
+        }
+      ],
+      "screenshot": "viewport-390x844.png",
+      "metrics": {
+        "scrollWidth": 773,
+        "innerWidth": 390,
+        "nav": [
+          {
+            "duration": 4.799999997019768,
+            "domContentLoadedEventEnd": 4.5,
+            "loadEventEnd": 4.799999997019768
+          }
+        ]
+      }
+    }
+  ]
+}

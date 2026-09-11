@@ -1,0 +1,13 @@
+{
+  "schema_version": "sage-case-selection-v1",
+  "rubric": "../rubric.json",
+  "protocol": "../live-protocol.md",
+  "environment": "development/environment.json",
+  "root_model": "gpt-6-astra",
+  "root_procedure": "installed_sage",
+  "cases": [
+    {"case_id": "DEV-CODE-01", "kind": "code", "prompt": "development/code/prompt.txt", "inputs": ["development/code/scheduler.py", "development/code/test_scheduler.py"], "checks": "development/code/checks.json"},
+    {"case_id": "DEV-EVIDENCE-01", "kind": "evidence_data", "prompt": "development/evidence/prompt.txt", "inputs": ["development/evidence/observations.json", "development/evidence/claims.json"], "checks": "development/evidence/checks.json"},
+    {"case_id": "DEV-CREATIVE-01", "kind": "creative_interaction_smoke", "prompt": "development/creative/prompt.txt", "inputs": ["development/creative/status.json", "development/creative/flow.txt"], "checks": "development/creative/checks.json"}
+  ]
+}

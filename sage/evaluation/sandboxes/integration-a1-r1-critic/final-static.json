@@ -1,0 +1,14 @@
+{
+  "python_syntax": [
+    "scripts/sage_knowledge.py",
+    "scripts/sage_state.py",
+    "scripts/sage-lifecycle.py"
+  ],
+  "candidate_input_hashes_unchanged": true,
+  "submitted_hashes": {},
+  "active_skill_files": 12,
+  "skill_metadata": {
+    "skills/sage-promote/agents/openai.yaml": "interface:\n  display_name: \"Sage Promote\"\n  short_description: \"Review and land closed-run knowledge safely\"\n  default_prompt: \"Use $sage-promote to review selected closed Sage runs and reversibly land only evidence-supported knowledge.\"\n\npolicy:\n  allow_implicit_invocation: false\n",
+    "skills/sage/agents/openai.yaml": "interface:\n  display_name: \"Sage\"\n  short_description: \"Adaptive, evidence-led Codex task orchestration\"\n  default_prompt: \"Use $sage to complete this task with explicit excellence criteria, proportional delegation, and observed verification.\"\n\npolicy:\n  allow_implicit_invocation: false\n"
+  }
+}

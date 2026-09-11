@@ -1,0 +1,53 @@
+{
+  "role": "proposal_author_single_repair",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "high",
+  "operation": "followup_task",
+  "native_handle": "/root/live_promotion_author",
+  "before_resume": {
+    "current_time": "2026-09-07 22:44:54 UTC"
+  },
+  "packet": "setup/arms/promotion-treatment/work/author-repair-brief.txt",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null,
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:47:53 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_author",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "after_resume": {
+    "current_time": "2026-09-07 22:45:25 UTC"
+  },
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:50:00 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "final_actor_summary": {
+    "actor": "/root/live_promotion_author",
+    "changed_path": "/record/qualifier/all/environment",
+    "original_preserved": true,
+    "unchanged_actual_cues_predicate": {
+      "before": false,
+      "after": true
+    },
+    "proposal_sha256": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+    "evidence_sha256": "fdcd3fc34561c71db19c30cbf33c90e3363336d17cfa1dcb2afeed210c2b8107",
+    "store_mutation": false,
+    "provenance": "Author final claims; independent rechecks pending."
+  },
+  "observation_provenance": "Outer normalized direct native followup/lifecycle/final observations; not raw native transcript."
+}

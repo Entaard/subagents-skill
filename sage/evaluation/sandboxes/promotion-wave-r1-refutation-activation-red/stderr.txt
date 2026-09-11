@@ -1,0 +1,14 @@
+test_activation_rejects_rehashed_generation_with_failed_refutation (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_rehashed_generation_with_failed_refutation) ... FAIL
+
+======================================================================
+FAIL: test_activation_rejects_rehashed_generation_with_failed_refutation (sage.tests.test_knowledge.KnowledgeRegressionTests.test_activation_rejects_rehashed_generation_with_failed_refutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 342, in test_activation_rejects_rehashed_generation_with_failed_refutation
+    self.assertEqual(activated.returncode, 2, activated.stderr)
+AssertionError: 0 != 2 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.100s
+
+FAILED (failures=1)

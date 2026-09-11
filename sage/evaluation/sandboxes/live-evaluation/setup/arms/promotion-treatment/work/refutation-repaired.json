@@ -1,0 +1,46 @@
+{
+  "actor": "/root/live_promotion_refuter",
+  "outcome": "passed",
+  "findings": [
+    {
+      "id": "rf-scope",
+      "summary": "Reassessed against the repaired bytes: removing qualifier.all.environment broadens retrieval to absent or different environment cues, including a different parser or Python version. It does not establish support there. The unchanged rule names Python csv.reader and these inputs, while gate_rationale, gate_evidence and evidence_summary explicitly preserve the Python 3.11.6 supplied-sample boundary. Because those limits accompany retrieval, this broader discovery behavior does not by itself establish a semantic blocker; the reviewer must explicitly disposition it and must not describe environment filtering as retained.",
+      "evidence": ["csv-old:ev-1", "csv-new:ev-1"]
+    },
+    {
+      "id": "rf-strength",
+      "summary": "The repeated local observation again fires revision 1's falsifier on A3: literal splitting gives 4 pieces and csv.reader gives 3 fields. Every supplied row gives 3 parser fields. A4 count agreement and the old unquoted rows do not establish generic escaping correctness, malformed-input validation, dialect coverage or cross-context transfer. The repaired proposal retains its scoped field-count claim and original counterevidence without introducing those unsupported extensions.",
+      "evidence": ["csv-new:ev-1", "csv-old:ev-1"]
+    },
+    {
+      "id": "rf-retrieval-repair",
+      "summary": "The sole semantic JSON change is qualifier.all.environment from [python 3 stdlib csv] to []. Against unchanged actual task cues, the documented retrieval predicate rejects the original candidate and accepts the repaired candidate. Missing domain, missing operation or a different artifact still rejects the repaired candidate. This resolves the previous actual-cue predicate defect in the frozen artifact; actual revision-2 store retrieval remains a coordinator-owned check and was not performed in this pass.",
+      "evidence": ["csv-old:ev-1", "csv-new:ev-1"]
+    }
+  ],
+  "evidence": ["csv-old:ev-1", "csv-old:e-5", "csv-old:e-8", "csv-new:ev-1", "csv-new:e-5", "csv-new:e-8"],
+  "metadata": {
+    "candidate_path": "work/proposal-repaired.json",
+    "candidate_sha256": "d6ad2320f1495490238b8b801e79f4830f02f4e1c12f3fd3f32b850cfd0ab8b8",
+    "original_candidate_sha256": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+    "actual_cues_path": "inputs/cues.json",
+    "actual_cues_sha256": "3734ff44664301de73a2d9a87707bbcb3d2789519301a7aa97cd26a9ebbdab8b",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "high",
+    "requested_fork_turns": "none",
+    "effective_identity": null,
+    "effective_model": null,
+    "effective_effort": null,
+    "tokens": null,
+    "money": null,
+    "semantic_blockers": [],
+    "required_repair_checks": [],
+    "finding_details": {
+      "rf-scope": {"severity": "nonblocking_scope_limit", "criterion": "applicability and scoped_fact evidence predicate", "assessment": "Environment is no longer a machine retrieval requirement. Explicitly different environments retrieve too; the declared evidence boundary must accompany and constrain use of the result."},
+      "rf-strength": {"severity": "nonblocking_evidence_limit", "criterion": "fired prior falsifier, counterevidence and unsupported transfer", "assessment": "Supported only for the repeated field-count observations in the declared supplied fixture."},
+      "rf-retrieval-repair": {"severity": "nonblocking_runtime_verification_remaining", "criterion": "landing-retrieval", "previous_review_finding": "rv-retrieval-actual-cues", "predicate_check": "passed", "coordinator_fix_check": "After reviewed assembly, staging and activation, retrieve with unchanged inputs/cues.json. Require museum-csv-field-count revision 2 status supported and the intact supplied-sample/Python boundary. This is completion verification, not a request for another repair cycle.", "local_evidence": ["inputs/cues.json", "work/proposal-author.json#/record/qualifier/all/environment", "work/proposal-repaired.json#/record/qualifier/all/environment", "installed/skills/sage-promote/references/knowledge.md#Retrieval"]}
+    },
+    "source_authenticity": "Exactly two synthetic controlled source runs and synthetic seed role attestations; local Python observations were independently reproduced during this focused pass.",
+    "writer_lease": "RELEASE"
+  }
+}

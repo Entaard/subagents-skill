@@ -1,0 +1,6 @@
+test_no_creation_fact_requires_direct_observation_and_is_single_final_path (test_live_repairs.LiveRepairStateTests.test_no_creation_fact_requires_direct_observation_and_is_single_final_path) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.288s
+
+OK

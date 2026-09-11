@@ -1,0 +1,1 @@
+{"v":1,"event_id":"promotion-recovery-e-5","run_id":"promotion-recovery","seq":5,"at":"2026-09-08T10:00:05Z","actor":"root","type":"task.admitted","payload":{"task_id":"follow-on","task_revision":1,"plan_revision":1}}

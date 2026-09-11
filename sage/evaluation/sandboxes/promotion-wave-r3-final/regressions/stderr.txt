@@ -1,0 +1,20 @@
+test_activation_rejects_generation_staged_from_a_different_base (test_knowledge.KnowledgeRegressionTests.test_activation_rejects_generation_staged_from_a_different_base) ... ok
+test_activation_rejects_rehashed_generation_with_failed_refutation (test_knowledge.KnowledgeRegressionTests.test_activation_rejects_rehashed_generation_with_failed_refutation) ... ok
+test_all_gate_references_and_exact_external_locators_are_closed (test_knowledge.KnowledgeRegressionTests.test_all_gate_references_and_exact_external_locators_are_closed) ... ok
+test_cli_argument_rejection_is_structured_json (test_knowledge.KnowledgeRegressionTests.test_cli_argument_rejection_is_structured_json) ... ok
+test_correct_cannot_bypass_intentional_retirement_metadata (test_knowledge.KnowledgeRegressionTests.test_correct_cannot_bypass_intentional_retirement_metadata) ... ok
+test_correction_after_rollback_cannot_reuse_revision_for_different_bytes (test_knowledge.KnowledgeRegressionTests.test_correction_after_rollback_cannot_reuse_revision_for_different_bytes) ... ok
+test_dangling_pointer_is_not_an_empty_store (test_knowledge.KnowledgeRegressionTests.test_dangling_pointer_is_not_an_empty_store) ... ok
+test_disuse_is_not_an_accepted_retirement_basis (test_knowledge.KnowledgeRegressionTests.test_disuse_is_not_an_accepted_retirement_basis) ... ok
+test_empty_retrieval_round_trips_through_run_state_and_reserves_none (test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none) ... ok
+test_every_revision_action_preserves_prior_generation_and_retrieval_policy (test_knowledge.KnowledgeRegressionTests.test_every_revision_action_preserves_prior_generation_and_retrieval_policy) ... ok
+test_failed_and_stopped_terminal_sources_are_eligible (test_knowledge.KnowledgeRegressionTests.test_failed_and_stopped_terminal_sources_are_eligible) ... ok
+test_generation_validation_rejects_extra_empty_paths (test_knowledge.KnowledgeRegressionTests.test_generation_validation_rejects_extra_empty_paths) ... ok
+test_record_chronology_preserves_all_accepted_fraction_digits (test_knowledge.KnowledgeRegressionTests.test_record_chronology_preserves_all_accepted_fraction_digits) ... ok
+test_record_chronology_uses_parsed_utc_instants (test_knowledge.KnowledgeRegressionTests.test_record_chronology_uses_parsed_utc_instants) ... ok
+test_store_validation_checks_global_lineage_and_parent_references (test_knowledge.KnowledgeRegressionTests.test_store_validation_checks_global_lineage_and_parent_references) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 3.897s
+
+OK

@@ -1,0 +1,66 @@
+{
+  "outcome": "passed",
+  "assessment_complete": true,
+  "source_run_terminal": false,
+  "source_effects": "unknown",
+  "last_seq": 28,
+  "original_8_event_prefix_preserved": true,
+  "reviewed_20_event_prefix_preserved": true,
+  "preserved_bytes_sha256": {
+    "evidence/recovery-assessment.md": "f5e7409048402fe24c6f8235c9de7b4ea970acd052280408c501e54144069a90",
+    "evidence/recovery-assessment-corrected.md": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+    "evidence/independent-review.md": "341118f9d55c021e0b69078de144f8108eef104c115c2614b3e7a6cb246844ba",
+    "evidence/independent-recheck.md": "a47dc229c3e0d8957da353c03d666dd1faa39475f76b78ac51648b89ce2a1f46",
+    "evidence/outer-coordinator-dispatch-observation.json": "86dee3f79fbf54f7ab764cfe4daa3432f30c9c48fa090b6787c07a1092e6eca7",
+    "evidence/resume-checks.json": "d6fb9b3600bf3d8b7fcc39df833282b090f8623a5fbbcfe6ad4ab2e1e09f5e43",
+    "evidence/final-checks.json": "4922aacb22abbf03015020db2b02bbbab2ce4379658be94d8214f7add06d2e00",
+    "inputs/baseline.json": "042248522ec784d538787efbcc656d0445579d7dd4a741f566a9723b55bd9904",
+    "inputs/fixture-notes.txt": "66b01cd5c6b91db95020eb342d80c0698f39c0d587caca6a64e8b61c3ceb4719",
+    "inputs/observer.json": "ddb594ac4e9b596f23e009c1a8491ca918e9f14d80dffa255b0babf78574df8d",
+    "work/export.csv": "c309390f0eb4283f38c369a17b36cdb86e29172d3bf25f0fe7123a7822427bfd",
+    "work/export.draft.csv": "8da84d528ed97d2d43b8470da26b8b3a1294a866bba03d28daf2982e964bbbbd",
+    "evidence/original-events.jsonl": "453b62cdea9132afe07bf22c6ad39baea3d03cc63f06d3ac46522e8191dbd1d6",
+    "evidence/original-stale-snapshot.json": "3f5b079bcfd8862cb48f0ad1435663c5b4a1e98cb70f2476d988f6334952a8c2"
+  },
+  "snapshot_binding_valid": true,
+  "sole_finding_disposition": "fixed",
+  "no_open_findings": true,
+  "no_source_result_close_admission_or_retry_added": true,
+  "explicit_reviewer_releases_present": true,
+  "terminal_lifecycle_provenance": "Outer coordinator reported direct native observations; see review-lifecycle-observations.json",
+  "helper_outputs": [
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+        "validate",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"last_seq\": 28, \"ok\": true, \"run_id\": \"catalog-export\", \"terminal\": false}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+        "report",
+        "--run-dir",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export",
+        "--write"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"ok\": true, \"report\": \"/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export/report.md\", \"run_id\": \"catalog-export\"}\n",
+      "stderr": ""
+    }
+  ],
+  "final_artifact_sha256": {
+    "evidence/final-assessment.md": "d1388b9ce7db824c9e55db4705ddb0310c4cbe64e3a47e74cc3a5ebd7142092d",
+    "evidence/review-lifecycle-observations.json": "a424b43e1b58fade2d7c189fcdd4ff695e4a07904cd1d6a8d7cf2ca47cd44aa3",
+    "evidence/repair-checks.json": "fefb2c0df2559444576e01e47e2d804c1e644af3fcc8a5ec18c617199ebe02c7",
+    "state/runs/catalog-export/events.jsonl": "70aa2ca7d7c33eae12c73072849d434185c9a23966f87b8ba25bb1874f2834a3",
+    "state/runs/catalog-export/snapshot.json": "fbb057a0930ad9c572f9cb86c3bc078a86a9cf095b0dea9c632e4a0aeb32c5ae",
+    "state/runs/catalog-export/report.md": "6d915f4e3d47a2bfd1d63656de6e5436c9bcbb719d27df742592a733fb7aba40"
+  }
+}

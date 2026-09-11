@@ -1,0 +1,26 @@
+{
+  "check": "routing-evidence-focused-repair",
+  "outcome": "passed",
+  "original_candidate_and_review_preserved": true,
+  "old_check_outputs_preserved": true,
+  "one_paragraph_changed": true,
+  "dispatch_identity_matched": true,
+  "effective_identity_and_usage_null": true,
+  "original_log_prefix_preserved": true,
+  "inputs_and_csv_bytes_preserved": true,
+  "snapshot_bound": true,
+  "source_run_terminal": false,
+  "candidate_sha256": "3f9bb605067a18a042ec2bc78fef32aa573850d57bd189e1eefd88c8d0aff8cb",
+  "review_sha256": "341118f9d55c021e0b69078de144f8108eef104c115c2614b3e7a6cb246844ba",
+  "dispatch_sha256": "86dee3f79fbf54f7ab764cfe4daa3432f30c9c48fa090b6787c07a1092e6eca7",
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/installed/sage/bin/sage_state.py",
+    "validate",
+    "--run-dir",
+    "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/recovery-treatment/state/runs/catalog-export"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"last_seq\": 20, \"ok\": true, \"run_id\": \"catalog-export\", \"terminal\": false}\n",
+  "stderr": ""
+}

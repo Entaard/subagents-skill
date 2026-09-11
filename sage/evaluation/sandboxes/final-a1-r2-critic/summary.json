@@ -1,0 +1,80 @@
+{
+  "manifest_sha256": "3f7f4c9e8ca6a8a76684ef2bbc34f7fd89dde29f5456c27b9ea6d47556a0fdde",
+  "source_count": 42,
+  "changed_source": [
+    "sage/ARCHITECTURE.md",
+    "sage/docs/DECISIONS.md",
+    "sage/docs/IMPLEMENTATION.md",
+    "sage/skills/sage-promote/SKILL.md",
+    "sage/skills/sage-promote/references/promotion.md"
+  ],
+  "offline": {
+    "schema_version": "sage-verification-run-v1",
+    "mode": "red",
+    "started_and_finished_at": "2026-09-08T15:32:31.972348+00:00",
+    "command": [
+      "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "commands": [
+      [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/evaluation/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      [
+        "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/final-a1-r2-critic/candidate-source/sage/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ]
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "tests": 95,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "live_trials_run": false,
+    "network_used": false,
+    "stdout": "stdout.txt",
+    "stderr": "stderr.txt"
+  },
+  "focused": {
+    "old": {
+      "tests": 6,
+      "failures": 1,
+      "errors": 0,
+      "passed": false
+    },
+    "current": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "passed": true
+    }
+  },
+  "installed_links": 15,
+  "historical_bindings": 313,
+  "historical_mismatches": [],
+  "protected_files": 1089,
+  "protected_changed": []
+}

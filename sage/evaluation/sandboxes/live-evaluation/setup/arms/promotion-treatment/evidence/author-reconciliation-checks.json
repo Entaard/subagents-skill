@@ -1,0 +1,8 @@
+{
+  "source_hashes": true,
+  "prior_store_hashes": true,
+  "artifact_hashes": {
+    "work/proposal-author.json": "0b47528af48379b92da23bacecc7aab9812564840907f3eb53ba141d94309ed9",
+    "evidence/proposal-author.md": "5b1d974743a70d33810d7502db3ca5e06582039e1a56f378a25b139d63d5e7f9"
+  }
+}

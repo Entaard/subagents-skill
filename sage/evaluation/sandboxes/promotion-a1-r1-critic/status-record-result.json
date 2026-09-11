@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "review_id": "promotion-a1-r1",
+  "verdict": "fail",
+  "open_errors": 4,
+  "history_prefix_preserved": true,
+  "prior_reviews_preserved": true,
+  "integration_unchanged": true,
+  "status_next_action": "Repair promotion promotion-a1 for round 2; preserve this failed round.",
+  "review_next_action": "Repair PROMOTION-A1-R1-E1 first, then E2-E4, adding narrow public-CLI controls without weakening the frozen tests. Submit promotion-a1 round 2 for independent review; preserve this failed review and every original artifact. Integration remains pending and unscored.",
+  "prior_review_hashes": {
+    "docs/reviews/verification-a1-r1.json": "b94acbed59196a7de99e2c171bb7d6dd00c1d49faac0b3f456df7b0393c64661",
+    "docs/reviews/sage-a1-r2.json": "6f3aedbdd497b0257e156c4d9c245c2418d23df6e7dab01d91df005ddb9fcc6f",
+    "docs/reviews/architecture-a1-r2.json": "b02bb96a4020b9846b3ebabe87a656678713c274b5141cc496e71bd3dc539cfd",
+    "docs/reviews/sage-a1-r3.json": "387a271707d9e269072da4d0d7608f94e4eac3e207e39db97a986f5818d6ee10",
+    "docs/reviews/architecture-a1-r1.json": "0b3089d4d906aebc56a412284a188d58f6453bf267f5da6c06e54904c85a9aa0",
+    "docs/reviews/sage-a1-r1.json": "7854c76b162e948cc5d08dd1d62d2af9490be80a6f8595879920ebfb15fadc25",
+    "docs/reviews/verification-a1-r3.json": "8b46967817cea81f8294b3d56004c180808cc0e673a9f3b6cc2d88a46da110d9",
+    "docs/reviews/verification-a1-r2.json": "daeb0f0088c233bdbbede248590fc44ae3f5dc21a24bcfed94f7c18aaa6ec3b2"
+  }
+}

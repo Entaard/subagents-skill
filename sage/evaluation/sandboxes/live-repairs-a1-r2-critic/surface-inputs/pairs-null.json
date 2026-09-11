@@ -1,0 +1,8 @@
+{
+  "schema_version": "sage-live-native-scored-results-v3",
+  "frozen_manifest_sha256": "aa93a4b33bfa4a346179c5a2371fbe8fcec148249dcbd5ffcc56725b758a0dfd",
+  "pairs": null,
+  "provenance": "Not raw transcripts; authored journals plus independently normalized outer observations and new scorer checks. Native exit_code remains null.",
+  "diagnostic_classification": "informed_diagnostic_from_historical_result",
+  "source_result_sha256": "68efe28cbf510be2ff4cae31eb67df18d9c51c1fd89ebb2d96e217e62e307caf"
+}

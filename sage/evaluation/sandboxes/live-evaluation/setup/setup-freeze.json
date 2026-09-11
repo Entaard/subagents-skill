@@ -1,0 +1,58 @@
+{
+  "schema_version": "sage-live-setup-freeze-v1",
+  "kind": "setup only; no live outcomes or scores",
+  "pairs": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-pairs.json",
+    "sha256": "50bd4d8693644aada5121ef6be5bfa6ce5c7e9ba53016cfbb9eb0e32b2e95a25"
+  },
+  "smokes": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/frozen-smokes.json",
+    "sha256": "c1cbecad6d03c329bdebc905c19bef309d6a978f634b6b3107579f596ff57abb"
+  },
+  "initial_arm_hashes": {
+    "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/initial-arm-hashes.json",
+    "sha256": "93861a5e1f7156bd9c1c20468996f9ea938c8a9b54e82a2b3e5499f400ac4a31"
+  },
+  "setup_sources": [
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/prepare_setup.py",
+      "sha256": "d657388c4e65cbc892f43b6ed285099676fa51fe29c036179bbfa86b5c71ace4"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/freeze_setup.py",
+      "sha256": "927a65a60e6fca877457cc3875ad8a0dc8ab5cbc8a4cd1d4e893a91ecac405fb"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/checks-spec.json",
+      "sha256": "c589782f7429a27fd9863bb60b19937d2bd4f36d592fb83af2c673ff0a8ecd24"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/actor-packet-template.txt",
+      "sha256": "9121f4dbc069ddc7af9b71b8a746b39c39554016edd9075562becc8fd37d219e"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-harness.mjs",
+      "sha256": "b2e4ac9618f5fb8ec1236b2c8cc7ec849b91cd2c0981f37b69d8b3ec30b11b4d"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/browser-usage.txt",
+      "sha256": "ffdadfe937db35cdaef9dd9735e5d5ebde808bc98c1c28af62c205a184278606"
+    },
+    {
+      "path": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/clarify_before_actors.py",
+      "sha256": "b834ded433ddbb5ae3038efd31de31699224be69fd3424c50bf71e803749954a"
+    }
+  ],
+  "limitations": [
+    "STATUS was initially read too broadly and contains prior embedded review history; it was not used to shape live prompts or actor packets.",
+    "The evaluator authored task setup and controlled fixtures, not any live task output.",
+    "Neutral browser probe and fixture structural validation are setup evidence only.",
+    "Raw native transcript is unavailable; actor journals must retain provenance and cannot stand in as raw harness recordings."
+  ],
+  "pre_actor_revision": {
+    "reason": "Clarified feed TypeError versus invalid constructor ValueError before any actor started; no behavior outcome informed change.",
+    "superseded_manifests": "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/superseded-before-actors-v1",
+    "unstarted_all_arms": true
+  },
+  "manifest_sha256": "6c65b62f17ac1eb2546b87f966057a0b861a1aee15281ba7b7bf717074679ece"
+}

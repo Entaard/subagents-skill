@@ -1,0 +1,14 @@
+test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection (contracts.StateContractTests.test_amendments_corrected_notes_user_decision_and_retrieval_feedback_survive_projection) ... ok
+test_dependencies_one_writer_and_unknown_effect_hold_admission (contracts.StateContractTests.test_dependencies_one_writer_and_unknown_effect_hold_admission) ... ok
+test_init_append_snapshot_report_and_stale_rebuild (contracts.StateContractTests.test_init_append_snapshot_report_and_stale_rebuild) ... ok
+test_knowledge_selection_preserves_status_cues_and_revision_identity (contracts.StateContractTests.test_knowledge_selection_preserves_status_cues_and_revision_identity) ... ok
+test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot (contracts.StateContractTests.test_malformed_duplicate_nonfinite_and_invalid_log_do_not_replace_snapshot) ... ok
+test_requested_effective_unknown_and_resume_is_advisory (contracts.StateContractTests.test_requested_effective_unknown_and_resume_is_advisory) ... ok
+test_retry_requires_resolved_failure_evidence_cause_and_material_change (contracts.StateContractTests.test_retry_requires_resolved_failure_evidence_cause_and_material_change) ... ok
+test_synchronous_root_write_releases_without_fabricated_agent (contracts.StateContractTests.test_synchronous_root_write_releases_without_fabricated_agent) ... ok
+test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings (contracts.StateContractTests.test_terminal_rejects_incomplete_criteria_and_open_or_accepted_major_findings) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.236s
+
+OK

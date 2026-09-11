@@ -1,0 +1,9 @@
+test_all_gate_references_and_exact_external_locators_are_closed (sage.tests.test_knowledge.KnowledgeRegressionTests.test_all_gate_references_and_exact_external_locators_are_closed) ... ok
+test_correct_cannot_bypass_intentional_retirement_metadata (sage.tests.test_knowledge.KnowledgeRegressionTests.test_correct_cannot_bypass_intentional_retirement_metadata) ... ok
+test_record_chronology_uses_parsed_utc_instants (sage.tests.test_knowledge.KnowledgeRegressionTests.test_record_chronology_uses_parsed_utc_instants) ... ok
+test_dangling_pointer_is_not_an_empty_store (sage.tests.test_knowledge.KnowledgeRegressionTests.test_dangling_pointer_is_not_an_empty_store) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.751s
+
+OK

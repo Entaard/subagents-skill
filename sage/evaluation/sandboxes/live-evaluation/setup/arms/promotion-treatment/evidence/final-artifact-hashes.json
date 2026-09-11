@@ -1,0 +1,11 @@
+{
+  "evidence/final-report.md": "a9e11ce51d77f3356aa9b49aaf1af699bd35f5c9b1c91570c538b91b711d76b5",
+  "evidence/actor-journal.md": "af6e7efd1447c082dc7882fde61bff7ffd555fae8e52182db55d3ee63dab156b",
+  "evidence/outcome.json": "98da73c8c013e948366c62d059dbadbfc4f37f7f7e1c60234432e1bec06e6f0d",
+  "evidence/landing-checks.json": "a08f028688402fcfcd5d2ff90e702dd87089cfff98475da9d7dd9fe28fa985c6",
+  "evidence/final-verification-passed.json": "f319d5522af01a42030b2a97bff9dfdf49d0c3a44d8286e3aa523301557bd991",
+  "evidence/state-terminal-checks.json": "741b754011fe5ac8e11eb553c91e2cd1b30df85a490476fb79a068e607e99906",
+  "state/runs/promotion-live/events.jsonl": "4c82d7694c51f22223c47d6774128a39c674a9db028152dd64414320b4d4e7a0",
+  "state/runs/promotion-live/snapshot.json": "e8c0d84c31169ab27651a35010a4cc6a69b0d5e44785057d98ade02b1536dbd1",
+  "state/runs/promotion-live/report.md": "8d184bc05acccef1127c150cba5ff914cf1d4b4d0f63278d94d1ddb52c26e0ad"
+}

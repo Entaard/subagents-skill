@@ -1,0 +1,13 @@
+{
+  "actor": "/root/final_repairs_builder",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "effective_model": null,
+  "effective_effort": null,
+  "native_status": "completed",
+  "release_observed": true,
+  "candidate": "sage/evaluation/sandboxes/final-a1-r2-builder/candidate-manifest.json",
+  "candidate_sha256": "3f7f4c9e8ca6a8a76684ef2bbc34f7fd89dde29f5456c27b9ea6d47556a0fdde",
+  "source_bindings_verified": 42,
+  "observation_kind": "root-normalized direct tool observations, not raw transcript"
+}

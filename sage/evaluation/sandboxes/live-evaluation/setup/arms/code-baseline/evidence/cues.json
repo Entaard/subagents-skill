@@ -1,0 +1,1 @@
+{"task":["implement streaming decoder"],"domain":["fictional binary framing"],"artifact":["python module","stdlib tests","README"],"environment":["Python 3","no dependencies","isolated local files"],"risk":["unbounded headers","state corruption"],"operation":["build","independent review"],"failure":[]}

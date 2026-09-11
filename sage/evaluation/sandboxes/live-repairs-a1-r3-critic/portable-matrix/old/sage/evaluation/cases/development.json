@@ -1,0 +1,50 @@
+{
+  "schema_version": "sage-development-cases-v1",
+  "cases": [
+    {
+      "id": "DEV-CODE-01",
+      "kind": "code",
+      "task": "Repair a small dependency scheduler so a task is admitted only after all predecessors pass, while preserving the public function signature.",
+      "minimum_input": ["scheduler.py", "test_scheduler.py"],
+      "checks": ["stdlib unit suite passes", "cycle and unknown dependency are rejected", "unrelated files unchanged"],
+      "dimensions": ["task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior", "routing_efficiency", "safety_reversibility", "report_quality"],
+      "artifact_experience_applicable": false
+    },
+    {
+      "id": "DEV-EVIDENCE-01",
+      "kind": "evidence_data",
+      "task": "Reconcile two supplied JSON datasets into a traceable findings report without inventing missing values.",
+      "minimum_input": ["observations.json", "claims.json", "field-notes.md"],
+      "checks": ["all accepted claims cite record IDs", "contradictions and unknowns remain explicit", "numeric reconciliation script passes"],
+      "dimensions": ["task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior", "routing_efficiency", "safety_reversibility", "report_quality"],
+      "artifact_experience_applicable": false
+    },
+    {
+      "id": "DEV-CREATIVE-01",
+      "kind": "creative_interaction_smoke",
+      "task": "Create a compact keyboard-accessible local status board from supplied static data.",
+      "minimum_input": ["status.json", "viewport-and-flow.txt"],
+      "checks": ["specified keyboard flow is exercised", "two declared viewports are visually inspected", "load and interaction timings are reported with scope", "automated structure checks pass"],
+      "dimensions": ["task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior", "routing_efficiency", "safety_reversibility", "report_quality", "artifact_experience"],
+      "artifact_experience_applicable": true
+    },
+    {
+      "id": "DEV-RECOVERY-01",
+      "kind": "recovery",
+      "task": "Resume a recorded run after snapshot drift and an idle writer observation.",
+      "minimum_input": ["events.jsonl", "stale-snapshot.json", "agents.json"],
+      "checks": ["snapshot rebuilt from log", "idle writer remains incomplete with unknown effect", "admission remains blocked and next action revised"],
+      "dimensions": ["task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior", "routing_efficiency", "safety_reversibility", "recovery_behavior", "report_quality"],
+      "artifact_experience_applicable": false
+    },
+    {
+      "id": "DEV-PROMOTION-01",
+      "kind": "promotion",
+      "task": "Correct a promoted record using terminal evidence and independent refutation, then demonstrate rollback.",
+      "minimum_input": ["knowledge-store", "source-run", "proposal.json"],
+      "checks": ["stable ID and prior revision retained", "activation is one pointer replacement", "rollback restores prior generation without deleting history"],
+      "dimensions": ["task_correctness", "task_completeness", "evidence_quality", "orchestration_behavior", "routing_efficiency", "safety_reversibility", "report_quality", "knowledge_behavior"],
+      "artifact_experience_applicable": false
+    }
+  ]
+}

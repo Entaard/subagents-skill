@@ -1,0 +1,21 @@
+test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier (test_state.StateRegressionTests.test_completed_reader_missing_from_live_list_does_not_hold_writer_barrier) ... ok
+test_completion_associations_and_reports_preserve_negative_facts (test_state.StateRegressionTests.test_completion_associations_and_reports_preserve_negative_facts) ... ok
+test_invalid_utf8_is_rejected_or_repaired_at_the_correct_boundary (test_state.StateRegressionTests.test_invalid_utf8_is_rejected_or_repaired_at_the_correct_boundary) ... ok
+test_late_old_results_never_change_current_revision_projection (test_state.StateRegressionTests.test_late_old_results_never_change_current_revision_projection) ... ok
+test_malformed_types_are_structured_contract_errors (test_state.StateRegressionTests.test_malformed_types_are_structured_contract_errors) ... ok
+test_native_canonical_handle_round_trips_without_aliasing (test_state.StateRegressionTests.test_native_canonical_handle_round_trips_without_aliasing) ... ok
+test_one_assignment_per_task_revision (test_state.StateRegressionTests.test_one_assignment_per_task_revision) ... ok
+test_plan_expansion_later_initial_and_correction_links (test_state.StateRegressionTests.test_plan_expansion_later_initial_and_correction_links) ... ok
+test_planned_root_is_safe_released_root_is_safe_and_known_unknown_is_rejected (test_state.StateRegressionTests.test_planned_root_is_safe_released_root_is_safe_and_known_unknown_is_rejected) ... ok
+test_released_native_handle_can_be_reassigned_without_reusing_old_completion (test_state.StateRegressionTests.test_released_native_handle_can_be_reassigned_without_reusing_old_completion) ... ok
+test_snapshot_tamper_with_valid_digest_is_repaired (test_state.StateRegressionTests.test_snapshot_tamper_with_valid_digest_is_repaired) ... ok
+test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected (test_state.StateRegressionTests.test_stale_plan_attempt_limit_and_old_handle_reuse_are_rejected) ... ok
+test_unknown_result_can_reconcile_once_and_terminal_scope_is_outcome_specific (test_state.StateRegressionTests.test_unknown_result_can_reconcile_once_and_terminal_scope_is_outcome_specific) ... ok
+test_unresolved_root_writer_blocks_resume_without_agents (test_state.StateRegressionTests.test_unresolved_root_writer_blocks_resume_without_agents) ... ok
+test_writer_release_requires_result_and_latest_terminal_observation_to_coexist (test_state.StateRegressionTests.test_writer_release_requires_result_and_latest_terminal_observation_to_coexist) ... ok
+test_writer_release_resume_and_both_fact_orders_share_one_rule (test_state.StateRegressionTests.test_writer_release_resume_and_both_fact_orders_share_one_rule) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 2.446s
+
+OK

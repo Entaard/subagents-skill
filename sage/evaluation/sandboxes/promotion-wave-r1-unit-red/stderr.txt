@@ -1,0 +1,15 @@
+test_empty_retrieval_round_trips_through_run_state_and_reserves_none (sage.tests.test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none) ... FAIL
+
+======================================================================
+FAIL: test_empty_retrieval_round_trips_through_run_state_and_reserves_none (sage.tests.test_knowledge.KnowledgeRegressionTests.test_empty_retrieval_round_trips_through_run_state_and_reserves_none)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/tests/test_knowledge.py", line 52, in test_empty_retrieval_round_trips_through_run_state_and_reserves_none
+    self.assertEqual(retrieved.returncode, 0, retrieved.stderr)
+AssertionError: 2 != 0 : /Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/scripts/sage_knowledge.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.018s
+
+FAILED (failures=1)

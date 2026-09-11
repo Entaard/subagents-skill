@@ -1,0 +1,130 @@
+{
+  "checkedAt": "2026-09-07T21:15:42.511Z",
+  "status": "passed",
+  "checks": [
+    "supplied keyboard success/mistake/recovery at both viewports",
+    "first Tab focuses Start; Enter starts",
+    "no horizontal overflow at both viewports",
+    "demonstration ignores guesses",
+    "native pad 2 and 4 buttons activate with Enter",
+    "demonstration visibly shows only 2, then 4, then 1, then announces input",
+    "static native-control/accessibility/reduced-motion/self-contained checks"
+  ],
+  "platform": "Darwin 27.0.0 arm64; Google Chrome owned headless; Node v26.7.0; deviceScaleFactor=1; mobile=false",
+  "performanceScope": "Each load is one local file navigation after the owned browser exists, awaiting readyState complete. Keyboard-to-two-frame wall duration includes CDP keyDown/keyUp and two animation frames, no CPU or network throttling. Different viewports share a process within each run; each run starts a fresh owned profile. These are local samples, not general performance or cost claims.",
+  "performance": [
+    {
+      "run": "supplied-flow",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "fileNavigationWallMs": 55.28558300000009,
+      "navigationSamples": 1,
+      "keyboardSamples": 11,
+      "keyboardToTwoFramesMs": {
+        "min": 29.05512499999986,
+        "max": 41.0479170000001,
+        "mean": 32.0834394545453
+      }
+    },
+    {
+      "run": "supplied-flow",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fileNavigationWallMs": 8.023041000000376,
+      "navigationSamples": 1,
+      "keyboardSamples": 11,
+      "keyboardToTwoFramesMs": {
+        "min": 28.37895800000115,
+        "max": 33.65099999999984,
+        "mean": 31.244981000000156
+      }
+    },
+    {
+      "run": "focused-flow",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "fileNavigationWallMs": 43.612707999999884,
+      "navigationSamples": 1,
+      "keyboardSamples": 14,
+      "keyboardToTwoFramesMs": {
+        "min": 28.112041999999747,
+        "max": 33.39087500000005,
+        "mean": 31.075621999999903
+      }
+    },
+    {
+      "run": "focused-flow",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fileNavigationWallMs": 7.229957999999897,
+      "navigationSamples": 1,
+      "keyboardSamples": 14,
+      "keyboardToTwoFramesMs": {
+        "min": 27.352499999999054,
+        "max": 32.739042000000154,
+        "mean": 31.627470357142816
+      }
+    },
+    {
+      "run": "demonstration-flow",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "fileNavigationWallMs": 43.571459000000004,
+      "navigationSamples": 1,
+      "keyboardSamples": 6,
+      "keyboardToTwoFramesMs": {
+        "min": 28.762917000000016,
+        "max": 35.695667000000185,
+        "mean": 31.2627640000001
+      }
+    },
+    {
+      "run": "demonstration-flow",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "fileNavigationWallMs": 6.807499999999891,
+      "navigationSamples": 1,
+      "keyboardSamples": 6,
+      "keyboardToTwoFramesMs": {
+        "min": 24.185291000000234,
+        "max": 32.68491699999959,
+        "mean": 29.483722333333237
+      }
+    }
+  ],
+  "hashes": {
+    "work/index.html": "8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21",
+    "inputs/game.json": "45c2060f9098010e3a443c8d3c14c371bfa427183a869bd5819155758b650454",
+    "inputs/flow.json": "84e7bd9186cf2df54d25f72f92196a20f693a81420c8276dffe71734439063ca",
+    "evidence/focused-flow.json": "dac2be4ea6504c43193f530081b9a978164b469c398966c61a24d77f953c8205",
+    "evidence/demonstration-flow.json": "916028725b18668dea46cc7535641ec211d6679404e71a1ef4a049fe959a5070",
+    "evidence/browser-attempt-2/observations.json": "c1518bde7b50e20cb834a0a9585026f2435021f34144b3db70087cdf0657ca04",
+    "evidence/browser-attempt-2/viewport-1280x800.png": "34ef52f543ca4d136207a360a09a9b9e3d23c867991ca5fbc801e58b1a3dd468",
+    "evidence/browser-attempt-2/viewport-390x844.png": "55a3d63ad7274c1e8fa86c6906d2f6832568158c6984fddc4904484d8abdeb96",
+    "evidence/browser-focused-1/observations.json": "b3738c68d67c2ce14fa9a1091f8ebe1d2f3c9658857ae21bcaaff81afe9640c6",
+    "evidence/browser-focused-1/viewport-1280x800.png": "f6c0258f93fd21364d131f626e5e791a83cf0fd0105a3ce599212c0e4fa8c228",
+    "evidence/browser-focused-1/viewport-390x844.png": "59b72b86334f068c070819c5b6dbfa48302beb70e082a55dca43aeb8079aad7d",
+    "evidence/browser-demonstration-1/observations.json": "974542cb77b6786462418b28b3c4d09f5afae730d04e32106078e2ba310b1f82",
+    "evidence/browser-demonstration-1/viewport-1280x800.png": "d742865a3858dd0402ad96f52f6fe107fa6631ac0068fdeb19c77f5980f24f94",
+    "evidence/browser-demonstration-1/viewport-390x844.png": "ef90bfeba7ce17e3288ed39d861e24f05f11522bcd3ddaca18df88ae0c45fdcf"
+  },
+  "limitations": [
+    "Reduced-motion media rule inspected statically, not emulated.",
+    "Screen-reader speech and physical touch/mouse input untested.",
+    "Exact wall-clock time from demonstration start to input not directly timestamped by this frozen recorder; source schedules 1650 ms and temporal samples observe the progression and readiness before a two-second programmed wait.",
+    "Only the declared viewports and installed Chrome were exercised.",
+    "Effective model identity, tokens and monetary cost are null."
+  ]
+}

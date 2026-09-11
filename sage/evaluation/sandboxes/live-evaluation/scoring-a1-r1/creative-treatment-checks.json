@@ -1,0 +1,100 @@
+{
+  "ok": true,
+  "same_harness_bytes": true,
+  "same_candidate_bytes": true,
+  "game_flow_checks": "Start Enter; Watch ignores 3; 2-4-1 succeeds; R; 3 fails; R; 2-4-1 succeeds at both viewports.",
+  "timings": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "load_ms": 60.15041700000006,
+      "samples": 12,
+      "key_min_ms": 31.01850000000013,
+      "key_max_ms": 33.293791000000056
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "load_ms": 10.690666999999848,
+      "samples": 12,
+      "key_min_ms": 29.404458000000886,
+      "key_max_ms": 37.054165999999896
+    }
+  ],
+  "platform": [
+    {
+      "cmd": [
+        "sw_vers"
+      ],
+      "exit_code": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5425a\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "uname",
+        "-srm"
+      ],
+      "exit_code": 0,
+      "stdout": "Darwin 27.0.0 arm64\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v26.7.0\n",
+      "stderr": ""
+    },
+    {
+      "cmd": [
+        "/usr/libexec/PlistBuddy",
+        "-c",
+        "Print :CFBundleShortVersionString",
+        "/Applications/Google Chrome.app/Contents/Info.plist"
+      ],
+      "exit_code": 0,
+      "stdout": "152.0.7977.82\n",
+      "stderr": ""
+    }
+  ],
+  "python": "3.11.6",
+  "platform_provenance": "Observed installed Chrome app version, not browser protocol identity. Fresh owned profile; mobile=false; no throttle; one navigation and 12 key-to-two-frame samples per viewport.",
+  "browser_attempts": [
+    {
+      "attempt": 1,
+      "exit_code": 1,
+      "error": "owned Chrome did not expose a debugging endpoint"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 0,
+      "sandbox_escalation": "approved",
+      "scope": "owned headless local file, fresh scorer profile"
+    }
+  ],
+  "visual_inspection": {
+    "images_inspected": [
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-main/viewport-1280x800.png",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/setup/arms/creative-treatment/evidence/browser-repair-main/viewport-390x844.png",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/browser-attempt-2/viewport-1280x800.png",
+      "/Users/tuananhnguyen/Projects/notes/subagents-skill/sage/evaluation/sandboxes/live-evaluation/scoring-a1-r1/browser-attempt-2/viewport-390x844.png"
+    ],
+    "assessment": "Actually viewed all four real-game PNGs. Clear 2x2 pad order, legible instructions/status, non-color completion cue, conspicuous Restart focus outline. Desktop game fits; decorative footer below lower edge. Narrow layout fits complete game and footer without horizontal clipping.",
+    "diagnostic_probe": "Not used as game visual or performance evidence; appended JSON creates its own overflow."
+  },
+  "untested": [
+    "screen-reader speech",
+    "runtime reduced-motion emulation",
+    "physical touch/pointer",
+    "other platforms/viewports",
+    "exact wall-clock demonstration completion timestamp"
+  ],
+  "demonstration_timing": "Source schedules input at 1650 ms; final-candidate gameplay accepts input after 1750 ms waits. Recorded per-key overhead and unrecorded snapshot latency prevent an exact independently measured start-to-input interval."
+}

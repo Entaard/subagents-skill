@@ -1,0 +1,2 @@
+{"v": 1, "event_id": "e-5", "run_id": "tiny-1", "seq": 5, "at": "2026-09-08T13:45:00Z", "actor": "root", "type": "evidence.recorded", "payload": {"evidence_id": "missing-cell", "criterion_ids": [], "kind": "unknown", "locator": "task/missing-cell-value", "sha256": null}}
+{"v": 1, "event_id": "e-6", "run_id": "tiny-1", "seq": 6, "at": "2026-09-08T13:45:00Z", "actor": "root", "type": "evidence.recorded", "payload": {"evidence_id": "untested-input", "criterion_ids": [], "kind": "untested", "locator": "task/touch-not-tested", "sha256": null}}

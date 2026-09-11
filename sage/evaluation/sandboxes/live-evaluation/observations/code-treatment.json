@@ -1,0 +1,212 @@
+{
+  "arm": "code-treatment",
+  "packet": "sage/evaluation/sandboxes/live-evaluation/setup/arms/code-treatment/launch-packet.txt",
+  "requested_model": "gpt-6-astra",
+  "requested_effort": "high",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 20:04:17 UTC"
+  },
+  "spawn_result": {
+    "task_name": "/root/live_code_treatment"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 20:05:19 UTC"
+  },
+  "packet_sha256": "4eae9d0391ad03ce1383baece52500282692f04c9df51e87d78bf1ff68f400b5",
+  "root_effective_model": null,
+  "root_effective_effort": null,
+  "root_reported_tokens": null,
+  "root_reported_money": null,
+  "outer_observation_kind": "Direct native spawn result and clock tool times; not raw child transcript",
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:07:29 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:08:41 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:09:57 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:11:29 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:12:46 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "agent_status": "running"
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:14:27 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "lifecycle": "running"
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "lifecycle": "completed",
+            "release_text": "RELEASE: read-only review complete; no files authored or changed; no remaining reviewer actions.",
+            "complete_final_text_in_observer": false
+          }
+        ]
+      },
+      "provenance": "Normalized direct native tool status; long reviewer final not copied here. No model identity inferred."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:16:24 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "lifecycle": "running"
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "lifecycle": "completed",
+            "same_previously_observed_final": true
+          }
+        ]
+      },
+      "provenance": "Normalized direct native tool status; repeated long reviewer final omitted."
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:18:27 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "path_prefix": "/root/live_code_treatment",
+      "result_summary": {
+        "agents": [
+          {
+            "agent_name": "/root/live_code_treatment",
+            "lifecycle": "completed",
+            "explicit_release": true
+          },
+          {
+            "agent_name": "/root/live_code_treatment/review",
+            "lifecycle": "completed",
+            "explicit_release": true
+          }
+        ]
+      },
+      "provenance": "Normalized direct native terminal statuses; timestamp is outer recording time, not exact actor completion."
+    }
+  ],
+  "actor_messages": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 20:09:57 UTC"
+      },
+      "sender": "/root/live_code_treatment",
+      "content": "Code-treatment inline candidate frozen; 10 stdlib tests pass, input hash unchanged. Fresh independent review active at /root/live_code_treatment/review, requested gpt-5.6-sol / xhigh. Coordinator also observed 114381 exhaustive wire/split cases against a separate whole-stream grammar. No product or state outside this arm accessed or edited.",
+      "provenance": "Actor message; claims not independently scored."
+    }
+  ],
+  "terminal_recorded_at": {
+    "current_time": "2026-09-07 20:18:27 UTC"
+  },
+  "final_actor_claim": {
+    "delivered": [
+      "work/decoder.py",
+      "work/test_decoder.py",
+      "work/README.md"
+    ],
+    "tests": 10,
+    "review_findings": 0,
+    "review_streams": 55987,
+    "coordinator_wire_split_cases": 114381,
+    "implementation_repairs": 0,
+    "state_payload_rejections_corrected": 1,
+    "release": "code-treatment arm writer lease released; no remaining worker or coordinator actions",
+    "provenance": "Actor final message, not independent evaluation."
+  },
+  "independent_terminal_validation": {
+    "chunk_id": "dfa037",
+    "wall_time_seconds": 0.000003083,
+    "exit_code": 0,
+    "original_token_count": 19,
+    "output": "{\"last_seq\": 30, \"ok\": true, \"run_id\": \"code-treatment\", \"terminal\": true}\n"
+  },
+  "timing_limit": "Before-spawn/after-spawn/terminal-recorded times bound outer observations and include dispatch or recording latency. They are not metered actor compute durations."
+}

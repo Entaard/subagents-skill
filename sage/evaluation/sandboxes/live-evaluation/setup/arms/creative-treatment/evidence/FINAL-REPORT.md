@@ -1,0 +1,28 @@
+# Echo Steps — completed
+
+Deliverable: work/index.html, a self-contained local memory game. SHA-256: 3daf1331277df84d6f9abe9e18576a872fc6e564aa6d4e621d815b649cc667c0.
+
+The original candidate is preserved at evidence/original-index.html (SHA-256 8b5abbf89ee581a6621f65c269adb4f9971075a059b12cd3bc58b250740a8f21). One build wave and one focused repair were performed. Final integration did not alter candidate or prior observation artifacts. Final read-only verification passed 31 stored hash comparisons.
+
+All requested checks have observation evidence. Direct keyboard interaction at both 1280×800 and 390×844 starts the game with first Tab → Start and Enter, succeeds with 2–4–1, restarts with R, shows a mistake for 3, restarts and succeeds again. Focused original evidence observes guesses ignored during demonstration and individual signals 2, 4, 1 followed by the input announcement. Source schedules input at 1650 ms; the frozen recorder does not provide an exact start-to-transition timestamp, so no exact measured demonstration duration is claimed. The terminal-control repair leaves this timing and sequence unchanged.
+
+Native buttons have accessible names, numbered non-color feedback, visible phase/progress/outcome text, sensible reading order, a polite atomic status region, and a reduced-motion CSS rule. After success or mistake all four pads are disabled; terminal Tab skips them. A pad that held focus returns focus to Restart. Restart makes pads available again for input. Both coordinator and independent reviewer actually inspected repaired uninstrumented screenshots at the two viewports; readable instructions, focus, final outcome styling and no horizontal overflow are retained. The decorative desktop footer extends beyond the lower viewport edge; all gameplay content is visible.
+
+Independent reviewer /root/live_creative_review (requested gpt-5.6-sol/xhigh) reviewed the original frozen candidate and returned two findings: missing platform metadata (moderate, represented as major in Sage's enum) and silently inert enabled terminal pads (minor). The single focused repair addressed both. The same independent reviewer rechecked the frozen repair via the exact bounded recheck brief, resolved both findings, and found no material regression. Exact returned reviews remain in outer-independent-review.md and outer-independent-recheck.md. The outer coordinator observed each completed native lifecycle and explicit read-only RELEASE before this actor resumed writing. Effective identity/effort, tokens and money remain null; no cost or savings claim is made.
+
+Scoped repaired-candidate performance:
+
+| Viewport | Local-file navigation wall | Key dispatch to two frames | Samples |
+| --- | ---: | ---: | --- |
+| 1280×800 | 53.664 ms | 21.855–38.442 ms | 1 navigation, 11 keys |
+| 390×844 | 7.298 ms | 24.849–33.136 ms | 1 navigation, 11 keys |
+
+Platform observed immediately before the repair runs: macOS 27.0 build 26A5425a, Darwin 27.0.0 arm64, Google Chrome installed app version 152.0.7977.82, Node.js v26.7.0. Chrome version comes from the installed app plist, not the running browser's protocol; runtimeProtocolVersion is null. Each load is one local-file navigation after process startup, awaiting readyState complete. Each input wall duration includes CDP keyDown/keyUp plus two animation frames. Fresh owned profile per run, only local arm content, page network URLs blocked, no CPU/network throttle, deviceScaleFactor=1, mobile=false. These are local observations, not population or cross-device performance claims. Exact primary samples are retained in browser-repair-main/observations.json and platform provenance in platform-metadata.json.
+
+Evidence limits remain explicit. Disabled/focus properties are observed through a hash-bound diagnostic copy with appended non-focusable output and read-only DOM observers; the uninstrumented harness does not record those properties. Its unbroken diagnostic JSON causes a 773-pixel scrollWidth at the 390-pixel viewport. That is probe-only overflow: diagnostic screenshots, layout metrics and timings are not used as product visual/performance evidence. The uninstrumented game reports scrollWidth equal to innerWidth at 1280 and 390. Runtime reduced-motion emulation, screen-reader speech, physical pointer/touch input, and other platforms/viewports were not exercised. CSS reduced-motion behavior was source-inspected.
+
+Orchestration limitations are preserved. Initial nested review dispatch returned agent thread limit reached without creating a handle. A later unfiltered lifecycle listing exposed unrelated completed-arm result text; it was not used as candidate guidance or evidence. The outer coordinator obtained and later resumed the real independent reviewer only after this actor's terminal releases. The initial run state/runs/echo-steps remains an unchanged incomplete checkpoint at 22 events because the installed contract cannot reconcile its admitted-but-uncreated delegate without fabricating a handle. The linked continuation state/runs/echo-steps-continuation records the actual review, focused repair, recheck, finding dispositions and final completion. The original incomplete run is historical, not an active physical writer or a claim of successful review.
+
+Current run/report: state/runs/echo-steps-continuation/events.jsonl, snapshot.json and report.md. Historical DELIVERY.md, REPAIR-DELIVERY.md and check-results files describe their recorded boundaries; this final report and completed continuation are the current outcome.
+
+No remaining required task or human action. No publication or deployment performed. RELEASE: coordinator releases the arm writer lease with no pending write, process, worker or external effect.

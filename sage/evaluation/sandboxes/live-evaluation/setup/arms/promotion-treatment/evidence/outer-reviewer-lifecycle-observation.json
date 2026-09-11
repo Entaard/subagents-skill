@@ -1,0 +1,71 @@
+{
+  "role": "independent_reviewer",
+  "requested_model": "gpt-5.6-sol",
+  "requested_effort": "xhigh",
+  "fork_turns": "none",
+  "before_spawn": {
+    "current_time": "2026-09-07 22:32:42 UTC"
+  },
+  "packet": "setup/arms/promotion-treatment/work/reviewer-brief.txt",
+  "effective_model": null,
+  "effective_effort": null,
+  "tokens": null,
+  "money": null,
+  "spawn_result": {
+    "task_name": "/root/live_promotion_reviewer"
+  },
+  "after_spawn": {
+    "current_time": "2026-09-07 22:33:17 UTC"
+  },
+  "lifecycle_observations": [
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:35:43 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_reviewer",
+            "agent_status": "running"
+          }
+        ]
+      }
+    },
+    {
+      "recorded_at": {
+        "current_time": "2026-09-07 22:39:35 UTC"
+      },
+      "tool": "collaboration.list_agents",
+      "result": {
+        "agents": [
+          {
+            "agent_name": "/root/live_promotion_reviewer",
+            "agent_status": "running"
+          }
+        ]
+      }
+    }
+  ],
+  "terminal_observed_at": {
+    "current_time": "2026-09-07 22:42:10 UTC"
+  },
+  "status": "completed",
+  "explicit_release": true,
+  "final_actor_summary": {
+    "actor": "/root/live_promotion_reviewer",
+    "outcome": "failed",
+    "gate_decision": "focused_repair_required",
+    "refutation_dispositions": {
+      "rf-scope": "resolved",
+      "rf-strength": "resolved"
+    },
+    "blocker": "Mandatory environment qualifier prevents retrieval under unchanged task cues.",
+    "minimal_repair_reported": "Clear qualifier.all.environment, retain Python/sample semantic boundary in text/evidence.",
+    "review_sha256": "2bcde4320c13d96ed521c5f2e36377c0feee44406ee932cf29d73838e02517a5",
+    "evidence_sha256": "8556c4e1e70c2424d8466ab189fa4c246a001f5cd94e61eed5a282e66ac0d8f7",
+    "landing_and_rollback_unexecuted": true,
+    "provenance": "Reviewer final claims, not independent evaluation scores."
+  },
+  "observation_provenance": "Outer normalized direct native spawn/request, lifecycle and actor final observations; not raw native transcript."
+}

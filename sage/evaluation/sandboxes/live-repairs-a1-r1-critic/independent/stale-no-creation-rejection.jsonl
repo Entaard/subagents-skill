@@ -1,0 +1,1 @@
+{"v": 1, "event_id": "e-5", "run_id": "tiny-1", "seq": 5, "at": "2026-09-08T13:45:00Z", "actor": "root", "type": "agent.not_created", "payload": {"task_id": "work", "task_revision": 2, "reason": "Synthetic direct pre-creation refusal fixture", "evidence_ids": ["dispatch"]}}

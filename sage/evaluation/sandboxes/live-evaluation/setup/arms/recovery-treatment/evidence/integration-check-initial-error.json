@@ -1,0 +1,11 @@
+{
+  "provenance": "Actor-authored record of the observed integration-check tool output, not a raw native transcript.",
+  "command": "python3 evidence/check-integration.py",
+  "observed_error": "AssertionError at line 32: assert snapshot[\"findings\"][\"routing-evidence\"][\"disposition\"] == \"fixed\"",
+  "cause": "The local integration verifier compared the projected disposition object to a string. The validated snapshot stores the string at disposition.disposition.",
+  "correction": "Adjusted only the new verifier's access to disposition.disposition, then reran it. No candidate, review, source event, export or draft repair was made.",
+  "preceding_helper_results": {
+    "append": {"appended": 8, "last_seq": 28, "ok": true},
+    "snapshot": "ok true; terminal null; projected routing-evidence disposition object contained disposition fixed"
+  }
+}

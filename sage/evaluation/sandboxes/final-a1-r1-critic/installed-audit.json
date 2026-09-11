@@ -1,0 +1,159 @@
+{
+  "files": [
+    "skills/sage-promote/SKILL.md",
+    "skills/sage-promote/references/knowledge.md",
+    "skills/sage-promote/references/promotion.md",
+    "skills/sage-promote/agents/openai.yaml",
+    "skills/sage/SKILL.md",
+    "skills/sage/references/knowledge.md",
+    "skills/sage/references/state.md",
+    "skills/sage/references/delegation.md",
+    "skills/sage/references/recovery.md",
+    "skills/sage/references/verification.md",
+    "skills/sage/references/run.md",
+    "skills/sage/agents/openai.yaml",
+    "sage/receipt.json",
+    "sage/bin/sage_knowledge.py",
+    "sage/bin/sage_state.py"
+  ],
+  "links": [
+    {
+      "source": "skills/sage-promote/SKILL.md",
+      "target": "references/promotion.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage-promote/SKILL.md",
+      "target": "references/knowledge.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage-promote/references/promotion.md",
+      "target": "knowledge.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/SKILL.md",
+      "target": "references/recovery.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/SKILL.md",
+      "target": "references/run.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/SKILL.md",
+      "target": "references/delegation.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/SKILL.md",
+      "target": "references/knowledge.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/SKILL.md",
+      "target": "references/verification.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/references/state.md",
+      "target": "run.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/references/run.md",
+      "target": "state.md",
+      "exists": true,
+      "inside": true
+    },
+    {
+      "source": "skills/sage/references/run.md",
+      "target": "state.md",
+      "exists": true,
+      "inside": true
+    }
+  ],
+  "source_matches": [
+    {
+      "path": "skills/sage-promote/SKILL.md",
+      "sha256": "129d3387951aff0098067483c2a395a0b51e5c58338d0a7ea053fa7e3f8a43ef",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage-promote/references/knowledge.md",
+      "sha256": "1e58a0652b7b15ed58d8f5ba7b7eb79b76d244dad7a803804c10bd2f270dc90c",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage-promote/references/promotion.md",
+      "sha256": "10e9adc3c38eeb642a4ab55c4a19e71b322e6616e7284840b43c2af4d36008c4",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage-promote/agents/openai.yaml",
+      "sha256": "26056664b872b1973013f93e18e0ba25bc7e574504266921e93b7a24db60c84f",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/SKILL.md",
+      "sha256": "4c35bb542e5d93a67ca20dfa84fd8975fe2f9cd6cc85128a08602ea75ec04f4f",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/knowledge.md",
+      "sha256": "12de261953cdf554a509e16dd72e54c340741af681dd20f06dba5eae7ed4fb27",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/state.md",
+      "sha256": "1ea5bee2746c8fddcc8c1ed61fc3be416ee726331fe09473bb64e3305cc96b41",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/delegation.md",
+      "sha256": "e21abe44c6c28b69a655f8774d045093f2850d049ceae3318ae9766957b05a27",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/recovery.md",
+      "sha256": "b3290b8ae3e0e946daa8c608ec3888fd1f2e209e80d2759dfe8cb604c3e75763",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/verification.md",
+      "sha256": "463ba89960a500bf0fc8cbd5cfb4c6ebf0eee411ad0eedc7f74abd184850825d",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/references/run.md",
+      "sha256": "d038fb288d8600c79412b95eddca68576f2635a1463ea87fe682887b24a41f84",
+      "matches_source": true
+    },
+    {
+      "path": "skills/sage/agents/openai.yaml",
+      "sha256": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+      "matches_source": true
+    },
+    {
+      "path": "sage/bin/sage_knowledge.py",
+      "sha256": "6f968ec2cd153b3369193ebe8ecb93ebbf28bb6926754420c0c86f226443e10e",
+      "matches_source": true
+    },
+    {
+      "path": "sage/bin/sage_state.py",
+      "sha256": "2fda97567bed5c3b1eb8bdaa1465398ecbbe619da6aab47d83e45f28c1e7a205",
+      "matches_source": true
+    }
+  ]
+}

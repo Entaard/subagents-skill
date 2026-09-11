@@ -12,6 +12,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 import shutil
 import stat
 import sys
@@ -384,8 +385,37 @@ def validate_generation(path: Path, expected_id: str | None = None, *, staging: 
     return {"generation_id": actual_id, "parent_generation_id": parent_id, "manifest": manifest, "manifest_sha256": sha256(manifest_path), "records": records}
 
 
+def validate_staging(store: Path) -> None:
+    """Recognize scratch paths without treating partial bytes as published history."""
+    root = store / '.staging'
+    fail(root.is_symlink(), 'invalid_staging', 'staging must not be a symlink')
+    if not root.exists(): return
+    fail(not root.is_dir(), 'invalid_staging', 'staging must be a directory')
+    for operation in root.iterdir():
+        fail(operation.is_symlink() or not operation.is_dir() or re.fullmatch(r'stage-[a-z0-9_]{8}', operation.name) is None,
+             'invalid_staging', f'unrecognized staging operation: {operation.name}')
+        for child in operation.rglob('*'):
+            mode = child.lstat().st_mode
+            relative = child.relative_to(operation)
+            fail(stat.S_ISLNK(mode) or not (stat.S_ISREG(mode) or stat.S_ISDIR(mode)),
+                 'invalid_staging', f'unsafe staging path: {relative}')
+            if stat.S_ISDIR(mode):
+                valid = relative.as_posix() == 'records'
+            else:
+                name = child.name
+                # atomic_write may itself be interrupted before replacing a JSON file.
+                temporary = re.fullmatch(r'\.(.+\.json)\.[a-z0-9_]{8}', name)
+                if temporary: name = temporary.group(1)
+                valid = ((len(relative.parts) == 1 and name in {'index.json', 'manifest.json'}) or
+                         (len(relative.parts) == 2 and relative.parts[0] == 'records' and
+                          name.endswith('.json') and ID.fullmatch(name[:-5]) is not None))
+            fail(not valid, 'invalid_staging', f'unrecognized staging path: {relative}')
+
+
 def validated_generations(store: Path) -> dict[str, dict[str, Any]]:
+    validate_staging(store)
     root = store / "generations"
+    fail(root.is_symlink(), "invalid_store", "generations must not be a symlink")
     if not root.exists(): return {}
     fail(not root.is_dir() or root.is_symlink(), "invalid_store", "generations must be a directory")
     generations: dict[str, dict[str, Any]] = {}
@@ -464,7 +494,7 @@ def command_validate(args: argparse.Namespace) -> dict[str, Any]:
     store = Path(args.store_dir).resolve()
     if not store.exists(): return {"ok": True, "current": EMPTY_GENERATION, "generation_count": 0}
     fail(not store.is_dir() or store.is_symlink(), "invalid_store", "store must be a directory")
-    allowed = {"current.json", "generations"}
+    allowed = {"current.json", "generations", ".staging"}
     fail(any(child.name not in allowed for child in store.iterdir()), "invalid_store", "store contains unexpected paths")
     generations = validated_generations(store); count = len(generations)
     active, _, _ = current_pointer(store)
@@ -511,6 +541,51 @@ def command_retrieve(args: argparse.Namespace) -> dict[str, Any]:
         )}
         match["reason"] = reason; matches.append(match)
     return {"generation_id": active, "cue_fingerprint": fingerprint, "retrieval_status": "matched" if matches else "no_match", "matches": matches}
+
+
+def command_revalidate(args: argparse.Namespace) -> dict[str, Any]:
+    """Diagnose every supplied prior selection, independently of recommendation rank."""
+    cues, inclusive = normalize_cues(read_json(Path(args.cues).resolve()), allow_option=True)
+    previous = read_json(Path(args.previous).resolve())
+    fail(not isinstance(previous, list) or len(previous) > MAX_LIST, 'invalid_previous', 'previous must be an array of at most 128 selections')
+    seen = set()
+    for selection in previous:
+        exact_object(selection, {'id', 'revision', 'generation_id'}, 'previous selection', 'invalid_previous')
+        identifier(selection['id'], 'previous ID', 'invalid_previous')
+        positive(selection['revision'], 'previous revision', 'invalid_previous')
+        identifier(selection['generation_id'], 'previous generation', 'invalid_previous')
+        fail(selection['generation_id'] == EMPTY_GENERATION, 'invalid_previous', 'empty generation cannot contain a selection')
+        key = (selection['id'], selection['revision'], selection['generation_id'])
+        fail(key in seen, 'invalid_previous', 'duplicate previous selection'); seen.add(key)
+    active, _, generation = current_pointer(Path(args.store_dir).resolve())
+    diagnostics = []
+    for selection in previous:
+        record = generation['records'].get(selection['id']) if generation else None
+        result = {**selection, 'current_revision': None, 'current_status': None,
+                  'qualifier': None, 'eligible': False}
+        if record is None:
+            diagnostic, reason = 'not_present_in_active_generation', 'Exact ID is absent from the active generation.'
+        else:
+            result.update(current_revision=record['revision'], current_status=record['status'],
+                          qualifier=copy.deepcopy(record['qualifier']))
+            intersects = any(set(record['recognizer'][key]).intersection(cues[key]) for key in CUE_KEYS)
+            applicable = intersects and qualifier_matches(record['qualifier'], cues)
+            status = record['status']
+            result['eligible'] = applicable and (status == 'supported' or (inclusive and status in {'provisional', 'contested'}))
+            if status in {'refuted', 'retired', 'contested', 'provisional'}:
+                diagnostic, reason = status, f'Current status is {status}; diagnostics do not authorize application.'
+            elif not applicable:
+                diagnostic, reason = 'out_of_scope', 'Current recognizer or qualifier does not match the observed cues.'
+            elif record['revision'] != selection['revision']:
+                diagnostic, reason = 'revised', 'Active revision differs from the loaded revision; rollback may select an older revision.'
+            else:
+                diagnostic, reason = 'unchanged_applicable', 'Same revision remains applicable regardless of recommendation ranking.'
+            result['recognizer_matches'] = intersects
+            result['qualifier_matches'] = qualifier_matches(record['qualifier'], cues)
+        result.update(diagnostic=diagnostic, reason=reason)
+        diagnostics.append(result)
+    return {'generation_id': active, 'manifest_sha256': generation['manifest_sha256'] if generation else None,
+            'cue_fingerprint': cue_fingerprint(cues, inclusive), 'diagnostics': diagnostics}
 
 
 def validate_proposal(value: Any) -> dict[str, Any]:
@@ -583,11 +658,14 @@ def command_stage(args: argparse.Namespace) -> dict[str, Any]:
     generations = store / "generations"; target = generations / new_id
     fail(target.exists(), "generation_exists", f"generation already exists: {new_id}")
     generations.mkdir(parents=True, exist_ok=True)
-    temporary = Path(tempfile.mkdtemp(prefix=f".{new_id}.", dir=generations))
+    staging = store / '.staging'; staging.mkdir(exist_ok=True)
+    fail(staging.stat().st_dev != generations.stat().st_dev, 'invalid_staging', 'staging and generations must share a filesystem')
+    fsync_directory(store)
+    temporary = Path(tempfile.mkdtemp(prefix='stage-', dir=staging))
     try:
         built = write_generation(temporary, new_id, expected, records, authors)
         require_expected(store, expected, token); fail(target.exists(), "generation_exists", f"generation appeared during stage: {new_id}")
-        os.rename(temporary, target); fsync_directory(generations)
+        os.rename(temporary, target); fsync_directory(generations); fsync_directory(staging)
     finally:
         if temporary.exists(): shutil.rmtree(temporary)
     return {
@@ -626,6 +704,7 @@ def parser() -> argparse.ArgumentParser:
     root = CliParser(); commands = root.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate"); validate.add_argument("--store-dir", required=True); validate.set_defaults(func=command_validate)
     retrieve = commands.add_parser("retrieve"); retrieve.add_argument("--store-dir", required=True); retrieve.add_argument("--cues", required=True); retrieve.add_argument("--limit", required=True); retrieve.set_defaults(func=command_retrieve)
+    revalidate = commands.add_parser('revalidate'); revalidate.add_argument('--store-dir', required=True); revalidate.add_argument('--cues', required=True); revalidate.add_argument('--previous', required=True); revalidate.set_defaults(func=command_revalidate)
     stage = commands.add_parser("stage"); stage.add_argument("--store-dir", required=True); stage.add_argument("--proposal", required=True); stage.add_argument("--generation-id", required=True); stage.add_argument("--expected-current", required=True); stage.set_defaults(func=command_stage)
     activate = commands.add_parser("activate"); activate.add_argument("--store-dir", required=True); activate.add_argument("--generation-id", required=True); activate.add_argument("--expected-current", required=True); activate.set_defaults(func=command_activate)
     rollback = commands.add_parser("rollback"); rollback.add_argument("--store-dir", required=True); rollback.add_argument("--generation-id", required=True); rollback.add_argument("--expected-current", required=True); rollback.set_defaults(func=command_rollback)

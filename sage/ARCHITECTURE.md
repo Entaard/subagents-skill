@@ -96,6 +96,7 @@ The implementation resolves one explicit `state_root`; the standard default is t
 |   `-- report.md                  # derived, never resume authority
 `-- knowledge/
     |-- current.json               # active generation pointer
+    |-- .staging/stage-<token>/     # unpublished scratch, separate from history
     `-- generations/<generation-id>/
         |-- index.json
         |-- records/<stable-id>.json

@@ -7,12 +7,15 @@ Read when retrieving, drafting, staging, activating, validating, or rolling back
 ```text
 python3 SAGE_KNOWLEDGE validate --store-dir STORE
 python3 SAGE_KNOWLEDGE retrieve --store-dir STORE --cues CUES_JSON --limit N
+python3 SAGE_KNOWLEDGE revalidate --store-dir STORE --previous PREVIOUS_JSON --cues CUES_JSON
 python3 SAGE_KNOWLEDGE stage --store-dir STORE --proposal PROPOSAL_JSON --generation-id ID --expected-current ID_OR_NONE
 python3 SAGE_KNOWLEDGE activate --store-dir STORE --generation-id ID --expected-current ID_OR_NONE
 python3 SAGE_KNOWLEDGE rollback --store-dir STORE --generation-id PRIOR_ID --expected-current CURRENT_ID
 ```
 
 `STORE/current.json` points to one immutable `STORE/generations/<id>` directory. The real generation ID `none` is reserved: a truly absent pointer is the valid empty state, while a dangling pointer symlink is invalid. Every manifest binds its staged parent, exact sorted file paths/hashes, and proposer/refuter/reviewer identities. Validation rejects extra paths (including empty directories), symlinks, partial generations, bad hashes, dangling/cyclic parents, duplicate stable IDs, and conflicting retained `(id,revision)` bytes.
+
+Unpublished work lives separately in `STORE/.staging/stage-<8-character-token>/`. Partial regular JSON files and the helper's atomic-write scratch files may remain there after abrupt termination. Validation checks recognized path shapes and rejects symlinks, special files, and unknown paths, while committed generations still receive full content and lineage validation. Staging names identify scratch format, not proof of ownership or permission to delete it. Both parents share a filesystem and are fsynced after publication by rename. Existing stores without `.staging` remain valid.
 
 ## Retrieval
 
@@ -25,6 +28,8 @@ A cue file has these array keys; omitted keys become empty arrays. Values are Un
 A recognizer matches when any cue value intersects. Every nonempty `qualifier.all` key must intersect; every `qualifier.none` key must remain disjoint. Results are ordered by intersection count, status, stable ID, and revision, then bounded by `--limit` (1–100). Ordinary retrieval returns `supported`; explicit non-supported retrieval may also return `provisional` and `contested`. `refuted` and `retired` never return.
 
 The result is `{generation_id,cue_fingerprint,retrieval_status,matches}`. Empty storage returns `generation_id: "none"`, `no_match`, and `[]`. Each match includes exact ID/revision/status/reason plus evidence class, gate rationale, rule, qualifier, falsifier, evidence summary, and counterevidence—enough to judge application without loading raw runs.
+
+`revalidate` accepts an array of at most 128 distinct `{id,revision,generation_id}` prior selections (positive revisions and real generation IDs). It reads only the validated active generation and returns `{generation_id,manifest_sha256,cue_fingerprint,diagnostics}`. Each diagnostic preserves the supplied identity and reports `current_revision`, `current_status`, `qualifier`, `eligible`, `diagnostic`, and `reason`; present records also report recognizer and qualifier matches. Status diagnostics (`refuted`, `retired`, `contested`, `provisional`) take precedence over scope mismatch, then `out_of_scope`, then `revised` or `unchanged_applicable`. Absent IDs return `not_present_in_active_generation`. Revision changes in either direction are valid diagnostics. This uncached channel is independent of ranking and never emits usable `matches`; supplied prior identities are caller observations, not authenticated historical application. See main Sage's [revalidation procedure](../../sage/references/knowledge.md) for cumulative inventory, batching, evidence and decision review.
 
 ## Complete proposal
 

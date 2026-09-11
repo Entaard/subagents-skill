@@ -23,8 +23,9 @@ ID = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
 UTC = re.compile(r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z$")
 COMMON = {"v", "event_id", "run_id", "seq", "at", "actor", "type", "payload"}
 KINDS = {
-    "run.opened", "run.amended", "note.recorded", "user.decision", "plan.revised",
+    "run.opened", "run.amended", "criteria.revised", "note.recorded", "user.decision", "plan.revised",
     "task.admitted", "agent.requested", "agent.not_created", "agent.observed", "task.result",
+    "task.dispositioned",
     "evidence.recorded", "check.recorded", "finding.opened", "finding.dispositioned",
     "knowledge.selected", "knowledge.feedback", "checkpoint.written", "run.closed",
 }
@@ -153,12 +154,33 @@ def check_task(item: Any, where: str) -> dict[str, Any]:
     return item
 
 
+def task_signature(item: dict[str, Any]) -> str:
+    """Compare task work independently of its stable ID and revision."""
+    return json.dumps({key: item[key] for key in sorted(OPERATIONAL_TASK_FIELDS)}, sort_keys=True, separators=(",", ":"))
+
+
+def check_criterion(item: Any, where: str, *, replacement: bool = False) -> dict[str, Any]:
+    fail(not isinstance(item, dict), "invalid_event", f"{where} must be an object")
+    fields = {"id", "text"}
+    if replacement: fields.add("supersedes")
+    need(item, fields, where)
+    identifier(item["id"], f"{where}.id"); text(item["text"], f"{where}.text")
+    if replacement: identifier(item["supersedes"], f"{where}.supersedes")
+    return item
+
+
+def optional_cap(value: Any, where: str) -> int | None:
+    if value is None: return None
+    return positive(value, where)
+
+
 def validate_payload(row: dict[str, Any]) -> None:
     p, kind = row["payload"], row["type"]
     fail(not isinstance(p, dict), "invalid_event", f"{row['event_id']} payload must be an object")
     required = {
         "run.opened": {"objective", "criteria", "constraints", "next_action"},
         "run.amended": {"kind", "value", "reason", "corrects_event_id"},
+        "criteria.revised": {"revision", "authority_event_id", "reason", "added", "replaced", "retired"},
         "note.recorded": {"category", "text", "evidence_ids", "corrects_event_id"},
         "user.decision": {"request_id", "question", "decision", "received_at"},
         "plan.revised": {"revision", "reason", "attempt_limit", "revision_limit", "no_progress", "trigger_event_ids", "tasks"},
@@ -167,6 +189,7 @@ def validate_payload(row: dict[str, Any]) -> None:
         "agent.not_created": {"task_id", "task_revision", "reason", "evidence_ids"},
         "agent.observed": {"handle", "lifecycle", "effect_status", "effective_model", "effective_effort"},
         "task.result": {"task_id", "task_revision", "outcome", "effect_status", "evidence_ids"},
+        "task.dispositioned": {"task_id", "task_revision", "disposition", "authority_event_id", "reason", "dependent_tasks"},
         "evidence.recorded": {"evidence_id", "criterion_ids", "kind", "locator", "sha256"},
         "check.recorded": {"check_id", "criterion_ids", "outcome", "evidence_ids"},
         "finding.opened": {"finding_id", "severity", "summary", "evidence_ids"},
@@ -182,28 +205,54 @@ def validate_payload(row: dict[str, Any]) -> None:
         fail(not isinstance(p["criteria"], list) or not p["criteria"], "invalid_event", "criteria must be a nonempty array")
         ids = []
         for criterion in p["criteria"]:
-            fail(not isinstance(criterion, dict), "invalid_event", "criterion must be an object"); need(criterion, {"id", "text"}, "criterion")
-            ids.append(identifier(criterion["id"], "criterion id")); text(criterion["text"], "criterion text")
+            check_criterion(criterion, "criterion"); ids.append(criterion["id"])
         fail(len(ids) != len(set(ids)), "duplicate_id", "duplicate criterion id")
+    elif kind == "criteria.revised":
+        positive(p["revision"], "criteria revision"); identifier(p["authority_event_id"], "criteria authority_event_id"); text(p["reason"], "criteria revision reason")
+        fail(not isinstance(p["added"], list) or not isinstance(p["replaced"], list), "invalid_event", "criterion additions and replacements must be arrays")
+        added = [check_criterion(item, f"added criterion[{index}]") for index, item in enumerate(p["added"])]
+        replaced = [check_criterion(item, f"replacement criterion[{index}]", replacement=True) for index, item in enumerate(p["replaced"])]
+        strings(p["retired"], "retired criteria")
+        for criterion_id in p["retired"]: identifier(criterion_id, "retired criterion id")
+        introduced = [item["id"] for item in added + replaced]
+        fail(len(introduced) != len(set(introduced)), "duplicate_id", "criterion revision introduces a duplicate id")
+        superseded = [item["supersedes"] for item in replaced]
+        fail(len(superseded) != len(set(superseded)) or len(p["retired"]) != len(set(p["retired"])), "duplicate_id", "criterion revision repeats a current criterion")
+        fail(not introduced and not p["retired"], "no_progress", "criterion revision must add, replace, or retire a criterion")
     elif kind == "plan.revised":
         positive(p["revision"], "plan revision"); positive(p["attempt_limit"], "attempt_limit"); positive(p["revision_limit"], "revision_limit")
-        choice(p["reason"], {"initial", "failure", "user_amendment", "evidence_change"}, "plan reason")
+        choice(p["reason"], {"initial", "failure", "user_amendment", "evidence_change", "approach_renewal"}, "plan reason")
         text(p["no_progress"], "no_progress"); strings(p["trigger_event_ids"], "trigger_event_ids")
         fail(not isinstance(p["tasks"], list), "invalid_event", "tasks must be an array")
         tasks = [check_task(x, f"task[{i}]") for i, x in enumerate(p["tasks"])]
         tids = [x["id"] for x in tasks]; fail(len(tids) != len(set(tids)), "duplicate_id", "duplicate task id in plan")
         for task in tasks:
             fail(any(x not in tids or x == task["id"] for x in task["dependencies"]), "invalid_dependency", f"invalid dependency for {task['id']}")
-        if p["reason"] == "failure":
+        if p["reason"] in {"failure", "approach_renewal"}:
             need(p, {"unmet_criterion", "failure_evidence_ids", "cause", "strategy_change"}, "failure plan")
             identifier(p["unmet_criterion"], "unmet criterion"); strings(p["failure_evidence_ids"], "failure_evidence_ids"); text(p["strategy_change"], "strategy_change")
             choice(p["cause"], CAUSES, "failure cause")
+        if p["reason"] == "approach_renewal":
+            need(p, {"authority_event_id", "total_attempt_limit"}, "approach renewal")
+            identifier(p["authority_event_id"], "approach authority_event_id"); positive(p["total_attempt_limit"], "total_attempt_limit")
     elif kind in {"task.admitted", "task.result"}:
         identifier(p["task_id"], "task_id"); positive(p["task_revision"], "task_revision")
         if kind == "task.admitted": positive(p["plan_revision"], "plan_revision")
         else:
             choice(p["outcome"], {"passed", "failed", "unknown"}, "task outcome")
             choice(p["effect_status"], {"none", "reconciled", "unknown"}, "effect status"); strings(p["evidence_ids"], "evidence_ids")
+    elif kind == "task.dispositioned":
+        identifier(p["task_id"], "task_id"); positive(p["task_revision"], "task_revision")
+        choice(p["disposition"], {"cancelled", "superseded"}, "task disposition")
+        identifier(p["authority_event_id"], "task disposition authority_event_id"); text(p["reason"], "task disposition reason")
+        fail(not isinstance(p["dependent_tasks"], list), "invalid_event", "dependent_tasks must be an array")
+        dependent_ids = []
+        for item in p["dependent_tasks"]:
+            fail(not isinstance(item, dict), "invalid_event", "dependent task treatment must be an object")
+            need(item, {"task_id", "treatment"}, "dependent task treatment")
+            dependent_ids.append(identifier(item["task_id"], "dependent task id"))
+            choice(item["treatment"], {"cancelled", "replanned"}, "dependent task treatment")
+        fail(len(dependent_ids) != len(set(dependent_ids)), "duplicate_id", "dependent task treatment is duplicated")
     elif kind == "agent.requested":
         identifier(p["task_id"], "task_id"); native_handle(p["handle"])
         for key in ("requested_model", "requested_effort", "fork_turns"): text(p[key], key)
@@ -236,6 +285,11 @@ def validate_payload(row: dict[str, Any]) -> None:
         choice(p["category"], {"assumption", "decision"}, "note category"); text(p["text"], "text"); strings(p["evidence_ids"], "evidence_ids")
     elif kind == "user.decision":
         identifier(p["request_id"], "request_id"); text(p["question"], "question"); text(p["decision"], "decision"); utc_timestamp(p["received_at"], "received_at")
+        if "hard_caps" in p:
+            caps = p["hard_caps"]
+            fail(not isinstance(caps, dict) or set(caps) != {"total_attempt_limit", "plan_revision_limit"}, "invalid_event", "hard_caps must contain total_attempt_limit and plan_revision_limit")
+            values = [optional_cap(caps[key], f"hard_caps.{key}") for key in ("total_attempt_limit", "plan_revision_limit")]
+            fail(all(value is None for value in values), "invalid_event", "hard_caps must set at least one finite limit")
     elif kind == "knowledge.selected":
         identifier(p["generation_id"], "generation_id"); text(p["cue_fingerprint"], "cue_fingerprint")
         fail(not isinstance(p["cues"], dict) or not isinstance(p["matches"], list), "invalid_event", "invalid knowledge selection")
@@ -260,12 +314,16 @@ def validate_payload(row: dict[str, Any]) -> None:
 
 def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, Any]:
     event_ids: set[str] = set(); run_id = None; closed = False
-    criteria: set[str] = set(); evidence: dict[str, dict[str, Any]] = {}; checks: dict[str, dict[str, Any]] = {}
+    criteria: set[str] = set(); known_criteria: set[str] = set(); criteria_revision = 0
+    evidence: dict[str, dict[str, Any]] = {}; checks: dict[str, dict[str, Any]] = {}
     plans: dict[int, dict[str, Any]] = {}; current_tasks: dict[str, dict[str, Any]] = {}
     task_history: dict[tuple[str, int], dict[str, Any]] = {}; admitted: dict[tuple[str, int], dict[str, Any]] = {}
     results: dict[tuple[str, int], dict[str, Any]] = {}; requests: dict[tuple[str, int], str] = {}; not_created: dict[tuple[str, int], dict[str, Any]] = {}; observations: dict[tuple[str, int], dict[str, Any]] = {}; current_assignment: dict[str, tuple[str, int]] = {}; released_tasks: set[tuple[str, int]] = set(); released_assignments: set[tuple[str, int]] = set()
+    task_dispositions: dict[tuple[str, int], dict[str, Any]] = {}; pending_dispositions: set[tuple[str, int]] = set()
     findings: dict[str, dict[str, Any]] = {}; dispositioned: dict[str, dict[str, Any]] = {}
-    amendments: set[str] = set(); decisions: set[str] = set()
+    amendments: set[str] = set(); decisions: set[str] = set(); decision_events: set[str] = set(); authority_events: set[str] = set()
+    hard_caps: dict[str, int | None] = {"total_attempt_limit": None, "plan_revision_limit": None}
+    approach_total_attempt_limit: int | None = None; approach_revision_limit: int | None = None
     for index, row in enumerate(rows, 1):
         fail(not isinstance(row, dict), "invalid_event", f"event {index} must be an object")
         fail(set(row) != COMMON, "invalid_event", f"event {index} common fields must be exactly {sorted(COMMON)}")
@@ -282,22 +340,75 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
         fail(index > 1 and kind == "run.opened", "invalid_transition", "run.opened may occur only once")
         correction = p.get("corrects_event_id")
         fail(correction is not None and correction not in event_ids, "invalid_reference", "correction must reference an earlier event")
-        if kind == "run.opened": criteria = {x["id"] for x in p["criteria"]}
-        elif kind == "run.amended": amendments.add(row["event_id"])
+        if kind == "run.opened":
+            criteria = {x["id"] for x in p["criteria"]}; known_criteria = set(criteria); criteria_revision = 1
+        elif kind == "run.amended":
+            amendments.add(row["event_id"]); authority_events.add(row["event_id"])
+        elif kind == "criteria.revised":
+            fail(p["revision"] != criteria_revision + 1, "invalid_revision", "criteria revisions must be contiguous")
+            fail(p["authority_event_id"] not in authority_events, "invalid_reference", "criteria revision needs an earlier decision or amendment authority")
+            introduced = {item["id"] for item in p["added"] + p["replaced"]}
+            fail(bool(introduced & known_criteria), "immutable_history", "criterion ids cannot be reused")
+            superseded = {item["supersedes"] for item in p["replaced"]}
+            retired = set(p["retired"])
+            fail(not superseded <= criteria or not retired <= criteria, "invalid_reference", "only current criteria may be replaced or retired")
+            fail(bool(superseded & retired), "invalid_event", "a criterion cannot be both replaced and retired")
+            criteria = (criteria - superseded - retired) | introduced
+            fail(not criteria, "invalid_event", "the current acceptance contract cannot be empty")
+            known_criteria.update(introduced); criteria_revision = p["revision"]
+            authority_events.add(row["event_id"]); amendments.add(row["event_id"])
         elif kind == "user.decision":
-            fail(p["request_id"] in decisions, "duplicate_id", "duplicate user decision request_id"); decisions.add(p["request_id"])
+            fail(p["request_id"] in decisions, "duplicate_id", "duplicate user decision request_id")
+            decisions.add(p["request_id"]); decision_events.add(row["event_id"]); authority_events.add(row["event_id"])
+            if "hard_caps" in p:
+                for cap_name in hard_caps:
+                    proposed = p["hard_caps"][cap_name]
+                    if proposed is None: continue
+                    used = len(admitted) if cap_name == "total_attempt_limit" else len(plans)
+                    fail(proposed < used, "limit_exceeded", f"{cap_name} is already exceeded by recorded history")
+                    current_cap = hard_caps[cap_name]
+                    fail(current_cap is not None and proposed > current_cap, "limit_exceeded", f"user hard cap {cap_name} cannot be relaxed")
+                    hard_caps[cap_name] = proposed
         elif kind == "plan.revised":
             revision = p["revision"]; fail(revision != len(plans) + 1, "invalid_revision", "plan revisions must be contiguous")
-            fail(revision > (plans[revision - 1]["payload"]["revision_limit"] if revision > 1 else p["revision_limit"]), "limit_exceeded", "plan revision exceeds the previously committed limit")
+            hard_revision_cap = hard_caps["plan_revision_limit"]
+            fail(hard_revision_cap is not None and revision > hard_revision_cap, "limit_exceeded", "plan revision exceeds the user hard cap")
+            fail(hard_revision_cap is not None and p["revision_limit"] > hard_revision_cap, "limit_exceeded", "plan allowance exceeds the user hard cap")
             triggers = p["trigger_event_ids"]
             fail(any(x not in event_ids for x in triggers), "invalid_reference", "plan trigger must reference an earlier event")
-            if revision == 1: fail(p["reason"] != "initial", "invalid_revision", "first plan reason must be initial")
+            if revision == 1:
+                fail(p["reason"] != "initial", "invalid_revision", "first plan reason must be initial")
+                fail(p["revision_limit"] < 1, "limit_exceeded", "initial plan has an exhausted revision limit")
+                fail(hard_revision_cap is not None and p["revision_limit"] > hard_revision_cap, "limit_exceeded", "plan allowance exceeds the user hard cap")
             else:
                 fail(p["reason"] == "initial", "invalid_revision", "only the first plan may use reason initial")
                 prior = plans[revision - 1]["payload"]
+                over_prior_limit = revision > prior["revision_limit"]
+                fail(over_prior_limit and p["reason"] != "approach_renewal", "limit_exceeded", "plan revision exceeds the previously committed limit")
+                fail(not over_prior_limit and p["reason"] == "approach_renewal", "invalid_transition", "approach renewal requires an exhausted plan revision allowance")
+                if approach_revision_limit is not None and p["reason"] != "approach_renewal":
+                    fail(p["revision_limit"] > approach_revision_limit, "limit_exceeded", "an active approach revision allowance cannot be expanded without renewal")
                 old = {x["id"]: x for x in prior["tasks"]}; new = {x["id"]: x for x in p["tasks"]}
-                fail(set(old) - set(new), "immutable_history", "later plan cannot drop a task")
-                changed = p["attempt_limit"] != prior["attempt_limit"] or p["revision_limit"] != prior["revision_limit"] or p["no_progress"] != prior["no_progress"]
+                dropped = set(old) - set(new)
+                pending_current = {key for key in pending_dispositions if key[0] in old and old[key[0]]["revision"] == key[1]}
+                fail(any((task_id, old[task_id]["revision"]) not in pending_dispositions for task_id in dropped), "immutable_history", "a dropped task needs an authorized disposition")
+                fail(any(key[0] not in dropped for key in pending_current), "invalid_transition", "a task disposition must be consumed by the next plan")
+                for task_id in dropped:
+                    disposition = task_dispositions[(task_id, old[task_id]["revision"])]
+                    treatments = {item["task_id"]: item["treatment"] for item in disposition["dependent_tasks"]}
+                    dependents = {item_id for item_id, item in old.items() if task_id in item["dependencies"]}
+                    fail(set(treatments) != dependents, "invalid_dependency", f"task {task_id} must explicitly treat every dependent edge")
+                    for dependent_id, treatment in treatments.items():
+                        if treatment == "cancelled":
+                            dep_key = (dependent_id, old[dependent_id]["revision"])
+                            fail(dependent_id not in dropped or dep_key not in pending_dispositions, "invalid_dependency", f"cancelled dependent {dependent_id} needs its own disposition")
+                        else:
+                            fail(dependent_id not in new or task_id in new[dependent_id]["dependencies"], "invalid_dependency", f"replanned dependent {dependent_id} must remove the obsolete edge")
+                changed = bool(dropped) or p["attempt_limit"] != prior["attempt_limit"] or p["revision_limit"] != prior["revision_limit"] or p["no_progress"] != prior["no_progress"]
+                old_signatures = {task_signature(item) for item in old.values()}
+                new_signatures = {task_signature(item) for item in new.values()}
+                operational_changed = any(signature not in new_signatures for signature in old_signatures)
+                operational_changed = operational_changed or any(signature not in old_signatures for signature in new_signatures)
                 for task_id, task_value in new.items():
                     if task_id in old:
                         before = old[task_id]
@@ -308,16 +419,32 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
                             was_admitted = (task_id, before["revision"]) in admitted
                             expected = before["revision"] + 1 if was_admitted else before["revision"]
                             fail(task_value["revision"] != expected, "immutable_history", f"changed task {task_id} has invalid revision")
-                            changed = True
+                            changed = True; operational_changed = True
                     else:
+                        fail(any(key[0] == task_id for key in task_history), "immutable_history", f"historically dropped task id {task_id} cannot be reintroduced")
                         fail(task_value["revision"] != 1, "immutable_history", f"new task {task_id} must start at revision 1")
                         changed = True
                 fail(not changed, "no_progress", "later plan has no operational change")
                 if p["reason"] == "failure":
                     fail(p["unmet_criterion"] not in criteria, "invalid_reference", "unknown unmet criterion")
                     fail(not p["failure_evidence_ids"] or any(x not in evidence for x in p["failure_evidence_ids"]), "invalid_reference", "failure evidence must already exist")
+                elif p["reason"] == "approach_renewal":
+                    fail(p["authority_event_id"] not in decision_events, "invalid_reference", "approach renewal needs an earlier user decision authority")
+                    fail(p["authority_event_id"] not in triggers, "invalid_reference", "approach renewal authority must also be a plan trigger")
+                    fail(p["unmet_criterion"] not in criteria, "invalid_reference", "unknown unmet criterion")
+                    failure_ids = set(p["failure_evidence_ids"])
+                    fail(not failure_ids or any(item not in evidence or evidence[item]["kind"] != "observation" for item in failure_ids), "invalid_reference", "approach renewal needs recorded observation evidence")
+                    fail(not any(result["outcome"] == "failed" and failure_ids & set(result["evidence_ids"]) for result in results.values()), "invalid_reference", "approach renewal evidence must come from a failed task result")
+                    fail(not operational_changed, "no_progress", "approach renewal needs an operational task or graph change")
+                    fail(p["revision_limit"] < revision, "limit_exceeded", "renewed revision allowance is already exhausted")
+                    fail(p["total_attempt_limit"] <= len(admitted), "limit_exceeded", "renewed total attempt allowance must leave a finite next attempt")
+                    hard_attempt_cap = hard_caps["total_attempt_limit"]
+                    fail(hard_attempt_cap is not None and p["total_attempt_limit"] > hard_attempt_cap, "limit_exceeded", "renewed total attempt allowance exceeds the user hard cap")
+                    fail(hard_revision_cap is not None and p["revision_limit"] > hard_revision_cap, "limit_exceeded", "renewed revision allowance exceeds the user hard cap")
+                    approach_total_attempt_limit = p["total_attempt_limit"]; approach_revision_limit = p["revision_limit"]
                 elif p["reason"] == "user_amendment": fail(not triggers or not any(x in amendments or next((r["payload"]["request_id"] for r in rows[:index-1] if r["event_id"] == x and r["type"] == "user.decision"), None) in decisions for x in triggers), "invalid_reference", "user amendment needs an amendment/decision trigger")
                 elif p["reason"] == "evidence_change": fail(not any(next((r["type"] for r in rows[:index-1] if r["event_id"] == x), "") in {"evidence.recorded", "check.recorded", "finding.opened", "finding.dispositioned", "user.decision"} for x in triggers), "invalid_reference", "evidence change needs new evidence or decision")
+                pending_dispositions.difference_update(pending_current)
             plans[revision] = row; current_tasks = {x["id"]: x for x in p["tasks"]}
             for task_value in p["tasks"]:
                 task_history[(task_value["id"], task_value["revision"])] = copy.deepcopy(task_value)
@@ -327,8 +454,13 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             plan_tasks = {x["id"]: x for x in plans[p["plan_revision"]]["payload"]["tasks"]}
             fail(p["task_id"] not in plan_tasks or plan_tasks[p["task_id"]]["revision"] != p["task_revision"], "invalid_reference", "task not in named plan revision")
             fail(key in admitted, "invalid_transition", "task revision already admitted")
+            fail(key in task_dispositions, "invalid_transition", "a dispositioned task revision cannot be admitted")
             attempts = sum(1 for prior in admitted if prior[0] == p["task_id"])
             fail(attempts >= plans[p["plan_revision"]]["payload"]["attempt_limit"], "limit_exceeded", f"task {p['task_id']} exceeds its attempt limit")
+            total_cap = approach_total_attempt_limit
+            if hard_caps["total_attempt_limit"] is not None:
+                total_cap = min(total_cap, hard_caps["total_attempt_limit"]) if total_cap is not None else hard_caps["total_attempt_limit"]
+            fail(total_cap is not None and len(admitted) >= total_cap, "limit_exceeded", "run exceeds its cumulative total attempt limit")
             task_value = plan_tasks[p["task_id"]]
             for dep in task_value["dependencies"]:
                 dep_task = plan_tasks[dep]; dep_key = (dep, dep_task["revision"]); dep_result = results.get(dep_key)
@@ -367,10 +499,10 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             assignment = current_assignment[p["handle"]]
             record_observation(assignment, p, task_history, results, requests, not_created, observations, released_tasks, released_assignments)
         elif kind == "evidence.recorded":
-            fail(p["evidence_id"] in evidence, "duplicate_id", "duplicate evidence id"); fail(any(x not in criteria for x in p["criterion_ids"]), "invalid_reference", "unknown criterion in evidence")
+            fail(p["evidence_id"] in evidence, "duplicate_id", "duplicate evidence id"); fail(any(x not in known_criteria for x in p["criterion_ids"]), "invalid_reference", "unknown criterion in evidence")
             evidence[p["evidence_id"]] = p
         elif kind == "check.recorded":
-            fail(p["check_id"] in checks, "duplicate_id", "duplicate check id"); fail(any(x not in criteria for x in p["criterion_ids"]), "invalid_reference", "unknown criterion in check")
+            fail(p["check_id"] in checks, "duplicate_id", "duplicate check id"); fail(any(x not in known_criteria for x in p["criterion_ids"]), "invalid_reference", "unknown criterion in check")
             fail(any(x not in evidence for x in p["evidence_ids"]), "invalid_reference", "check references missing evidence"); checks[p["check_id"]] = p
         elif kind == "task.result":
             key = (p["task_id"], p["task_revision"]); fail(key not in admitted, "invalid_transition", "result needs an admitted task")
@@ -392,6 +524,16 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             if task_value["effect"] in {"write", "external", "unknown"} and p["outcome"] != "unknown" and key not in not_created: fail(p["effect_status"] != "reconciled", "unknown_effect", "known effectful result must be reconciled")
             results[key] = p
             mark_release(key, task_history, results, requests, not_created, observations, released_tasks, released_assignments)
+        elif kind == "task.dispositioned":
+            key = (p["task_id"], p["task_revision"])
+            fail(p["task_id"] not in current_tasks or current_tasks[p["task_id"]]["revision"] != p["task_revision"], "invalid_reference", "task disposition must name a current task revision")
+            fail(key in task_dispositions, "invalid_transition", "task revision already has a disposition")
+            fail(p["authority_event_id"] not in authority_events, "invalid_reference", "task disposition needs an earlier criteria, decision, or amendment authority")
+            fail(key in admitted and key not in released_tasks, "unknown_effect", "an admitted task must reconcile its result and effects before disposition")
+            dependents = {task_id for task_id, task_value in current_tasks.items() if p["task_id"] in task_value["dependencies"]}
+            recorded_dependents = {item["task_id"] for item in p["dependent_tasks"]}
+            fail(recorded_dependents != dependents, "invalid_dependency", "task disposition must enumerate every current dependent")
+            task_dispositions[key] = p; pending_dispositions.add(key)
         elif kind == "finding.opened":
             fail(p["finding_id"] in findings, "duplicate_id", "duplicate finding id"); fail(any(x not in evidence for x in p["evidence_ids"]), "invalid_reference", "finding references missing evidence"); findings[p["finding_id"]] = p
         elif kind == "finding.dispositioned":
@@ -402,10 +544,12 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             dispositioned[p["finding_id"]] = p
         elif kind == "note.recorded":
             fail(any(x not in evidence for x in p.get("evidence_ids", [])), "invalid_reference", "note references missing evidence")
+            if p["category"] == "decision": authority_events.add(row["event_id"])
         elif kind == "knowledge.feedback": fail(any(x not in evidence for x in p["evidence_ids"]), "invalid_reference", "feedback references missing evidence")
         elif kind == "run.closed":
             fail(any(x not in criteria for x in p["criterion_evidence"]), "invalid_reference", "closure references an unknown criterion")
             fail(any(x not in evidence for refs in p["criterion_evidence"].values() for x in refs), "invalid_reference", "closure references missing evidence")
+            fail(bool(pending_dispositions), "invalid_transition", "task dispositions must be reconciled by a later plan before closure")
             closed = True
         event_ids.add(row["event_id"])
     state = project(rows)
@@ -502,19 +646,52 @@ def execution_facts(rows: list[dict[str, Any]]) -> dict[str, Any]:
 def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
     opened = rows[0]["payload"]; objective = opened["objective"]; constraints = list(opened["constraints"]); next_action = opened["next_action"]
     state: dict[str, Any] = {"v": 1, "run_id": rows[0]["run_id"], "last_seq": rows[-1]["seq"], "terminal": None,
-        "objective": objective, "constraints": constraints, "criteria": opened["criteria"], "current_plan_revision": None,
+        "objective": objective, "constraints": constraints, "criteria": copy.deepcopy(opened["criteria"]),
+        "criteria_history": [{"revision": 1, "event_id": rows[0]["event_id"], "authority_event_id": None,
+                              "reason": "run opened", "added": copy.deepcopy(opened["criteria"]), "replaced": [],
+                              "retired": [], "criteria": copy.deepcopy(opened["criteria"])}],
+        "current_plan_revision": None, "current_approach": None, "approach_history": [], "plan_history": [],
+        "task_history": [], "task_results": [], "task_dispositions": [], "attempt_history": [],
         "tasks": {}, "agents": {}, "findings": {}, "evidence": {}, "checks": {}, "assumptions": [], "decisions": [],
-        "user_decisions": [], "knowledge_selection": None, "knowledge_feedback": [], "baselines": [],
+        "user_decisions": [], "hard_caps": {"total_attempt_limit": None, "plan_revision_limit": None},
+        "knowledge_selection": None, "knowledge_selected_revisions": [], "knowledge_feedback": [], "baselines": [],
         "next_action": next_action, "unresolved_user_items": []}
+    selected_revisions: set[tuple[str, int, str]] = set()
     for row in rows:
         p, kind = row["payload"], row["type"]
         if kind == "run.amended":
             if p["kind"] == "objective": state["objective"] = p["value"]
             else: state["constraints"].append(p["value"])
+        elif kind == "criteria.revised":
+            replacements = {item["supersedes"]: {"id": item["id"], "text": item["text"]} for item in p["replaced"]}
+            retired = set(p["retired"]); current = []
+            for criterion in state["criteria"]:
+                if criterion["id"] in replacements: current.append(replacements[criterion["id"]])
+                elif criterion["id"] not in retired: current.append(copy.deepcopy(criterion))
+            current.extend(copy.deepcopy(p["added"])); state["criteria"] = current
+            state["criteria_history"].append({**copy.deepcopy(p), "event_id": row["event_id"], "criteria": copy.deepcopy(current)})
         elif kind == "note.recorded": state[p["category"] + "s"].append({**p, "event_id": row["event_id"]})
-        elif kind == "user.decision": state["user_decisions"].append({**p, "event_id": row["event_id"]})
+        elif kind == "user.decision":
+            state["user_decisions"].append({**p, "event_id": row["event_id"]})
+            for cap_name, cap in p.get("hard_caps", {}).items():
+                if cap is not None: state["hard_caps"][cap_name] = cap
         elif kind == "plan.revised":
             state["current_plan_revision"] = p["revision"]
+            state["plan_history"].append({**copy.deepcopy(p), "event_id": row["event_id"]})
+            state["task_history"].extend({**copy.deepcopy(task), "plan_revision": p["revision"]} for task in p["tasks"])
+            if state["current_approach"] is None:
+                state["current_approach"] = 1
+                state["approach_history"].append({"approach": 1, "plan_revision": p["revision"],
+                    "attempt_limit": p["attempt_limit"], "revision_limit": p["revision_limit"],
+                    "total_attempt_limit": None, "reason": "initial", "event_id": row["event_id"]})
+            elif p["reason"] == "approach_renewal":
+                state["current_approach"] += 1
+                state["approach_history"].append({"approach": state["current_approach"],
+                    "plan_revision": p["revision"], "attempt_limit": p["attempt_limit"],
+                    "revision_limit": p["revision_limit"], "total_attempt_limit": p["total_attempt_limit"],
+                    "reason": p["reason"], "authority_event_id": p["authority_event_id"],
+                    "failure_evidence_ids": copy.deepcopy(p["failure_evidence_ids"]), "cause": p["cause"],
+                    "strategy_change": p["strategy_change"], "event_id": row["event_id"]})
             prior = state["tasks"]
             state["tasks"] = {}
             for task in p["tasks"]:
@@ -522,11 +699,15 @@ def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 carry = old if old.get("revision") == task["revision"] else {}
                 state["tasks"][task["id"]] = {**copy.deepcopy(task), "state": carry.get("state", "planned")}
                 if "result" in carry: state["tasks"][task["id"]]["result"] = carry["result"]
-        elif kind == "task.admitted" and p["task_id"] in state["tasks"]: state["tasks"][p["task_id"]]["state"] = "admitted"
+        elif kind == "task.admitted":
+            state["attempt_history"].append({**copy.deepcopy(p), "event_id": row["event_id"]})
+            if p["task_id"] in state["tasks"]: state["tasks"][p["task_id"]]["state"] = "admitted"
         elif kind == "task.result":
+            state["task_results"].append({**copy.deepcopy(p), "event_id": row["event_id"]})
             current = state["tasks"].get(p["task_id"])
             if current and current.get("revision") == p["task_revision"]:
                 current["state"] = p["outcome"]; current["result"] = p
+        elif kind == "task.dispositioned": state["task_dispositions"].append({**copy.deepcopy(p), "event_id": row["event_id"]})
         elif kind == "agent.requested": state["agents"][p["handle"]] = {**p, "lifecycle": "unknown", "effect_status": "unknown", "effective_model": "unknown", "effective_effort": "unknown"}
         elif kind == "agent.observed":
             agent = state["agents"].setdefault(p["handle"], {})
@@ -535,7 +716,15 @@ def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
         elif kind == "check.recorded": state["checks"][p["check_id"]] = {**p, "event_id": row["event_id"]}
         elif kind == "finding.opened": state["findings"][p["finding_id"]] = {**p, "event_id": row["event_id"], "disposition": None}
         elif kind == "finding.dispositioned": state["findings"][p["finding_id"]]["disposition"] = p
-        elif kind == "knowledge.selected": state["knowledge_selection"] = copy.deepcopy(p)
+        elif kind == "knowledge.selected":
+            state["knowledge_selection"] = copy.deepcopy(p)
+            for match in p["matches"]:
+                key = (match["id"], match["revision"], p["generation_id"])
+                if key not in selected_revisions:
+                    selected_revisions.add(key)
+                    state["knowledge_selected_revisions"].append({"id": match["id"], "revision": match["revision"],
+                        "generation_id": p["generation_id"], "status": match["status"], "reason": match["reason"],
+                        "application": "unknown"})
         elif kind == "knowledge.feedback": state["knowledge_feedback"].append({**p, "event_id": row["event_id"]})
         elif kind == "checkpoint.written": state.update({"baselines": p["baselines"], "next_action": p["next_action"], "unresolved_user_items": p["unresolved_user_items"]})
         elif kind == "run.closed": state["terminal"] = p
@@ -655,11 +844,20 @@ def command_report(args: argparse.Namespace) -> dict[str, Any]:
     delivered = [f"{key}: {value.get('state', 'planned')}" for key, value in state["tasks"].items() if value.get("state") == "passed"]
     failed_tasks = [f"{key}: failed" for key, value in state["tasks"].items() if value.get("state") == "failed"]
     unfinished = [f"{key}: {value.get('state', 'planned')}" for key, value in state["tasks"].items() if value.get("state") not in {"passed", "failed"}]
+    current_result_keys = {(task_id, task["revision"]) for task_id, task in state["tasks"].items()}
+    historical_results = [f"{item['task_id']} revision {item['task_revision']}: {item['outcome']}"
+                          for item in state["task_results"]
+                          if (item["task_id"], item["task_revision"]) not in current_result_keys]
+    approaches = [f"Approach {item['approach']}: plan revision {item['plan_revision']} ({item['reason']})" +
+                  (f"; cause={item['cause']}; strategy={item['strategy_change']}" if "strategy_change" in item else "")
+                  for item in state["approach_history"]]
+    task_dispositions = [f"{item['task_id']} revision {item['task_revision']}: {item['disposition']} — {item['reason']}"
+                         for item in state["task_dispositions"]]
     human = state["terminal"]["remaining_human_items"] if state["terminal"] else state["unresolved_user_items"]
     status = state["terminal"]["status"] if state["terminal"] else "active"
     scope = state["terminal"]["scope_reconciled"] if state["terminal"] else "not closed"
     next_action = f"Run is terminal ({status}); no further admission." if state["terminal"] else state["next_action"]
-    report = f"# Sage run {state['run_id']}\n\n## Outcome\n\n- Status: {status}\n- Scope reconciled: {scope}\n\n## Recorded passed tasks\n\n{bullets(delivered)}\n\n## Failed tasks\n\n{bullets(failed_tasks)}\n\n## Unfinished tasks\n\n{bullets(unfinished)}\n\n## Observed evidence\n\n{bullets(observations, lambda x: x['locator'])}\n\n## Inferences\n\n{bullets(inferences, lambda x: x['locator'])}\n\n## Unknowns\n\n{bullets(unknowns)}\n\n## Untested evidence\n\n{bullets(untested_evidence, lambda x: x['locator'])}\n\n## Failed checks\n\n{bullets(failed_checks, lambda x: x['check_id'])}\n\n## Untested checks\n\n{bullets(untested_checks, lambda x: x['check_id'])}\n\n## Open findings\n\n{bullets(open_findings, lambda x: x['summary'])}\n\n## Accepted limitations\n\n{bullets(accepted, lambda x: x['summary'])}\n\n## Remaining human items\n\n{bullets(human)}\n\n## Next action\n\n{next_action}\n"
+    report = f"# Sage run {state['run_id']}\n\n## Outcome\n\n- Status: {status}\n- Scope reconciled: {scope}\n\n## Approach history\n\n{bullets(approaches)}\n\n## Recorded passed tasks\n\n{bullets(delivered)}\n\n## Failed tasks\n\n{bullets(failed_tasks)}\n\n## Historical task results\n\n{bullets(historical_results)}\n\n## Task dispositions\n\n{bullets(task_dispositions)}\n\n## Unfinished tasks\n\n{bullets(unfinished)}\n\n## Observed evidence\n\n{bullets(observations, lambda x: x['locator'])}\n\n## Inferences\n\n{bullets(inferences, lambda x: x['locator'])}\n\n## Unknowns\n\n{bullets(unknowns)}\n\n## Untested evidence\n\n{bullets(untested_evidence, lambda x: x['locator'])}\n\n## Failed checks\n\n{bullets(failed_checks, lambda x: x['check_id'])}\n\n## Untested checks\n\n{bullets(untested_checks, lambda x: x['check_id'])}\n\n## Open findings\n\n{bullets(open_findings, lambda x: x['summary'])}\n\n## Accepted limitations\n\n{bullets(accepted, lambda x: x['summary'])}\n\n## Remaining human items\n\n{bullets(human)}\n\n## Next action\n\n{next_action}\n"
     atomic_write(run_dir / "report.md", report.encode()); return {"ok": True, "run_id": state["run_id"], "report": str(run_dir / "report.md")}
 
 

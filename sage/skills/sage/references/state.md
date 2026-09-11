@@ -21,14 +21,16 @@ Each JSONL event has exactly `v,event_id,run_id,seq,at,actor,type,payload`. Vers
 | --- | --- |
 | `run.opened` | `objective,criteria:[{id,text}],constraints,next_action` |
 | `run.amended` | `kind,value,reason,corrects_event_id` |
+| `criteria.revised` | `revision,authority_event_id,reason,added:[{id,text}],replaced:[{id,text,supersedes}],retired` |
 | `note.recorded` | `category` (`assumption|decision`), `text,evidence_ids,corrects_event_id` |
-| `user.decision` | `request_id,question,decision,received_at` |
-| `plan.revised` | `revision,reason,attempt_limit,revision_limit,no_progress,trigger_event_ids,tasks` |
+| `user.decision` | `request_id,question,decision,received_at`; optional `hard_caps:{total_attempt_limit,plan_revision_limit}` |
+| `plan.revised` | `revision,reason,attempt_limit,revision_limit,no_progress,trigger_event_ids,tasks`; approach renewal also has `authority_event_id,total_attempt_limit` and failure fields |
 | `task.admitted` | `task_id,task_revision,plan_revision` |
 | `agent.requested` | `task_id,handle,requested_model,requested_effort,fork_turns` |
 | `agent.not_created` | `task_id,task_revision,reason,evidence_ids` |
 | `agent.observed` | `handle,lifecycle,effect_status,effective_model,effective_effort` |
 | `task.result` | `task_id,task_revision,outcome,effect_status,evidence_ids` |
+| `task.dispositioned` | `task_id,task_revision,disposition,authority_event_id,reason,dependent_tasks:[{task_id,treatment}]` |
 | `evidence.recorded` | `evidence_id,criterion_ids,kind,locator,sha256` |
 | `check.recorded` | `check_id,criterion_ids,outcome,evidence_ids` |
 | `finding.opened` | `finding_id,severity,summary,evidence_ids` |
@@ -38,7 +40,13 @@ Each JSONL event has exactly `v,event_id,run_id,seq,at,actor,type,payload`. Vers
 | `checkpoint.written` | `next_action,baselines,unresolved_user_items` |
 | `run.closed` | `status,criterion_evidence,scope_reconciled,remaining_human_items` |
 
-A task has `id,revision,objective,completion,dependencies,owner,effect,scope,inputs,returns,risk,verification,requested_model,requested_effort,fork_turns`. Effects are `read`, `write`, `external`, or `unknown`. Plan reasons are `initial`, `failure`, `user_amendment`, or `evidence_change`; a failure revision also supplies `unmet_criterion,failure_evidence_ids,cause,strategy_change`. Causes are `missing_input_or_authority`, `ambiguous_brief`, `decomposition`, `capability`, `environment_or_tool`, or `candidate_defect`.
+A task has `id,revision,objective,completion,dependencies,owner,effect,scope,inputs,returns,risk,verification,requested_model,requested_effort,fork_turns`. Effects are `read`, `write`, `external`, or `unknown`. Plan reasons are `initial`, `failure`, `user_amendment`, `evidence_change`, or `approach_renewal`; failure and renewal revisions also supply `unmet_criterion,failure_evidence_ids,cause,strategy_change`. Causes are `missing_input_or_authority`, `ambiguous_brief`, `decomposition`, `capability`, `environment_or_tool`, or `candidate_defect`.
+
+Acceptance changes are append-only. `criteria.revised` must cite a prior user decision, amendment, or decision note; replacements use a new ID and `supersedes`, and historical IDs cannot be reused. Current closure covers only the resulting current criteria, so evidence for a replaced criterion cannot satisfy its successor. Historical criteria, evidence, and checks remain in the projection.
+
+To remove obsolete work, append `task.dispositioned` only after any admitted result/effect is released and reconciled. It must list every direct dependent as `cancelled` or `replanned`; cancelled dependents receive their own disposition, while replanned dependents remain in the next plan without the obsolete edge. The next plan consumes the pending dispositions. It cannot silently drop tasks or later resurrect a disposed stable ID.
+
+After the prior revision limit is exhausted, `approach_renewal` is the only continuation. It cites an earlier user persistence decision, observation evidence used by a failed result, the unmet current criterion, cause, and a real operational change, then commits finite new plan and cumulative total-attempt limits. An ordinary revision cannot expand the active renewed approach's revision allowance. Per-task attempts remain cumulative by stable ID and total attempts count admissions across all IDs. A pure ID rename does not establish a new approach. Optional structured hard caps in `user.decision` may only tighten and cannot be erased by omission or exceeded by a plan/renewal/admission. The root continues to enforce user time, spend, model, and other limits the helper cannot measure.
 
 Each delegated task revision normally has one `agent.requested`; its native handle equals the plan owner. If native creation is directly observed to fail before returning a handle, append one `agent.not_created` with nonempty observation-evidence references instead. It accepts only one subsequent `task.result` with `outcome: failed`, `effect_status: none`, and at least one of the same evidence IDs; it cannot follow or substitute for a real request, and absence from `list_agents` is not proof of non-creation. A bounded later revision may use a genuinely new strategy within the committed attempt/revision limits.
 
@@ -50,7 +58,7 @@ Lifecycle is `active,idle,completed,failed,interrupted,missing`; effect status i
 
 An unknown task result may be reconciled once by appending a known, evidence-bearing result for the same task revision. Both remain in the log; a known result is final. A known outcome with unknown effect is rejected so accepted uncertainty always has that reconciliation path.
 
-The helper's completion gate is deliberately structural. Every admitted task must finish with reconciled effects. `completed` also requires every current-plan task to pass, criterion-associated observation evidence, and a passed evidence-bearing check. `failed` or `stopped` may retain safely never-admitted tasks as visibly unfinished. Reports surface later failed checks; the helper does not infer which differently named check semantically supersedes another, judge evidence persuasiveness, prove authority, or enforce a physical lease. Invalid UTF-8 in criteria, event, live-agent, or authoritative-log input is a structured data error; invalid UTF-8 confined to `snapshot.json` is disposable and rebuilt from a valid log.
+The helper's completion gate is deliberately structural. Every admitted task must finish with reconciled effects. `completed` also requires every current-plan task to pass, observation evidence and an evidence-bearing passed check for every current criterion, and no pending task disposition. `failed` or `stopped` may retain safely never-admitted tasks as visibly unfinished. Reports surface later failed checks and failed prior approaches. The snapshot's `knowledge_selected_revisions` preserves every first-seen `(id,revision,generation_id)` selection with status/reason and `application: "unknown"`; selection never proves use. Extract its identity fields for exact knowledge revalidation in batches of at most 128. The helper does not infer which differently named check semantically supersedes another, judge evidence persuasiveness, prove authority, or enforce a physical lease. Invalid UTF-8 in criteria, event, live-agent, or authoritative-log input is a structured data error; invalid UTF-8 confined to `snapshot.json` is disposable and rebuilt from a valid log.
 
 ## Executable tiny run
 

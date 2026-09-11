@@ -17,6 +17,10 @@ Stage a large outcome into dependency-ordered milestones without shrinking its d
 
 Use a compact graph. Every task records the fields in the installed [state contract](state.md): stable ID/revision, objective, falsifiable completion, dependencies, owner, effect/scope, inputs/returns, risk, verification, requested model/effort, and fork. Source builders may additionally consult `sage/docs/CONTRACTS.md`. Commit finite, task-specific attempt and revision allowances plus a no-progress condition. A retry records the unmet criterion, evidence, failure cause, and strategy change. Never use an automatic model ladder after a retry count.
 
+Keep every unmet current criterion active until evidence satisfies it or applicable user authority changes the scope. For an acceptance change, first persist the existing user decision or amendment authority, then append `criteria.revised` with explicit additions, new-ID replacements, and retirements. Existing standing authority may be referenced without asking again. A root-authored decision note is structurally acceptable for a non-relaxing clarification; it does not authorize a substantive scope relaxation. Preserve prior criteria/evidence, disposition obsolete tasks only after their effects are reconciled, enumerate every dependent edge, and commit the resulting task removals/replans in the next plan revision.
+
+When a committed plan-revision allowance is exhausted, diagnose the failed approach before more admission. If a distinct safe strategy remains and existing user persistence authority covers it, append an `approach_renewal` plan without a new approval ceremony. Cite that recorded user decision, the observation evidence from the failed result, the unmet criterion, cause, and actual operational change; commit new finite per-task, total-attempt, and plan-revision limits. Never use a task rename or a larger number alone as a strategy change, and never override a recorded hard cap or an unmeasured user time, spend, or model limit.
+
 Prefer `init`, batched `append`, and boundary `snapshot` calls. Example tiny run:
 
 ```text

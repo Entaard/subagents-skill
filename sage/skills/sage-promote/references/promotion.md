@@ -66,7 +66,9 @@ python3 SAGE_KNOWLEDGE validate --store-dir STORE
 python3 SAGE_KNOWLEDGE activate --store-dir STORE --generation-id NEW --expected-current EXPECTED
 ```
 
-`stage` validates every source/reference, copies the active snapshot, checks retained lineage, writes and fsyncs a complete sibling generation, rechecks the pointer, and renames it without activating it. `activate` validates all retained history, requires the target’s staged parent to equal the live expected pointer, and atomically changes only `current.json`. These are cooperative checks; maintain one live promotion writer.
+`stage` validates every source/reference, copies the active snapshot, checks retained lineage, writes and fsyncs a complete candidate beneath `.staging`, rechecks the pointer, and renames it into `generations` without activating it. Both parent directories are fsynced. `activate` validates all retained history, requires the target’s staged parent to equal the live expected pointer, and atomically changes only `current.json`. These are cooperative checks; maintain one live promotion writer.
+
+After an abrupt staging exit, validate the store and inspect the intended generation before retrying. If publication did not happen, recognized partial `.staging` residue is safely isolated: preserve it as evidence and retry from the reviewed proposal with a fresh scratch directory after reconciling the prior writer. No automatic orphan adoption or deletion is provided. If the intended generation exists, validate its manifest, parent, exact record/proposal bytes and source bindings against the checkpoint, and recheck the current pointer before activation. Do not restage an already published revision or activate scratch. Unknown or symlinked scratch paths fail closed. Legacy abandoned dot directories under `generations` also remain rejected; preserve them for explicit evidence-preserving recovery rather than silently treating arbitrary committed-namespace paths as scratch.
 
 Rollback is explicit and does not delete either generation:
 

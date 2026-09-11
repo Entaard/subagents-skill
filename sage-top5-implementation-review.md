@@ -1,0 +1,51 @@
+# Top-five proposal: implementation disposition
+
+Reviewed `sage_codex_top5_quality_token_improvements.md` against baseline `bcab058`, not only its historical `b10bab2` links. The linked companion file is absent from this checkout; prerequisite implementation was checked directly in the current helpers and regression suites. No existing worktree edits were present at the start.
+
+The adopted changes retain legacy logs, default retrieval output, full checkpoint output, single-record promotion and existing routing priors. New authoring/context/card modes are explicit interfaces; versioned check/application events require the updated helper. No native tool fields or implicit promotion were added.
+
+## Dispositions
+
+| Item | Decision and evidence |
+| --- | --- |
+| 1A compact checkpoint | Implemented `snapshot --write --summary`; identical persisted state, compact receipt. Full default remains available. |
+| 1B next-decision view | Implemented read-only `context` with task/criterion/finding/event selectors, counted inventory drill-down and digest-bound pagination. It prioritizes unreleased effects and open findings. Item count is bounded; individual item text is intact. Uncorrected decisions remain visible because the helper cannot infer expired authority. |
+| 1C event authoring | Implemented atomic `append --payloads`, generated envelopes, earlier-item aliases and assigned-ID receipts. Semantic facts still come from the caller and the whole validator still runs. |
+| 1D selective recovery | Recovery now uses paginated context and targeted inventories while retaining complete snapshots/logs, approach history, criterion revisions and exact knowledge inventory. Native-effect reconciliation remains unchanged. |
+| 1E small implementation | Adopted as a design constraint: projections and thin helpers in existing modules; no scheduler or second durable state representation. |
+| 2A evidence map | Added a bounded, root-verified map to delegation guidance; counted source artifacts replace repeated repository dumps. No separate mapping service is justified. |
+| 2B role packets | Added one compact inline packet template with current criteria, verified locators/digests, effects, unknowns, completion and stopping conditions. Reviewer/test-author inputs preserve independence. |
+| 2C bounded returns | Added status, conclusion, evidence, changed files, actual checks, uncertainty and next action; complete enumerations retain counts/IDs/artifact locators. Worker prose cannot grant authority. |
+| 2D reuse | Added explicit implementer/focused-verifier reuse criteria and fresh review after material design changes; existing lifecycle rules still govern new assignments. |
+| 2E measured routing | Existing uncalibrated priors and user overrides retained. Task-shape comparison is guidance; a persistent routing-history subsystem or new defaults is not warranted without comparable observations. |
+| 3A bound verification | Added version-1 artifact facts, required check obligations and optional bound attempts. Every active obligation needs its own latest current pass. Unique criterion IDs identify changed criterion versions; old attempts remain in history. |
+| 3B decisive checks first | Already required in `verification.md`; preserved. A command succeeding still does not establish every semantic criterion. |
+| 3C compliance/quality | Added two explicit reviewer verdicts without requiring two agents; additional lenses need distinct failure modes. |
+| 3D impact-aware fixes | Artifact changes invalidate affected bound checks. Unrelated artifact changes preserve passes. Bound repair checks must follow the finding and assess current digests; guidance requires a final integration freeze and wider checking when impact is uncertain. |
+| 3E bounded review | Added information-gain and finding-dedup rules; existing finite attempts, user caps and continuation authority remain authoritative. No review scheduler added. |
+| 4A self-contained cards | Added opt-in version-1 complete cards with gate evidence, alternative explanations, exact generation/record hash and locator. These expose actual stored support and qualifiers; they do not invent a new reviewed summary or transfer claim. |
+| 4B byte budgeting | Added exact successful-stdout UTF-8 ceiling, deterministic ranked-prefix selection by whole card, candidate/withheld counts, validated index lookup and cue-qualified targeted retrieval. An all-withheld result explicitly rejects as `budget_too_small`, never a false successful no-match. |
+| 4C delta/revalidation | Core exact rank-independent revalidation and cumulative inventory already exist in current source and tests. Retained the uncached operation. A combined cache/comparison token is not warranted without measured overhead and would add invalidation risks. |
+| 4D matching changes | Not warranted: no measured misses or diversity failures supplied. Existing qualifier intersection semantics, deterministic order and status filtering remain unchanged. No aliases, embeddings or Boolean-language migration added. |
+| 4E actual application | Added exact selected generation/revision links to a prior task admission, plan or decision plus evidence. Loading alone still does not prove application or truth. |
+| 5A observed usage vector | Added an experimental reporting utility for explicitly supplied disjoint request observations, with nulls and source locators. It is not a telemetry collector, source authenticator or billing estimate. Native collection/parser integration is not warranted because no trustworthy producer is exposed in this session. |
+| 5B workflow comparison | Added a separate experimental procedure covering six task classes, direct-vs-Sage and component comparisons, matched inputs, frozen criteria and blind scoring. Concrete fixture admission and live execution remain future experiments; existing frozen v2/v3 cases/results/protocols are unchanged. |
+| 5C accepted-outcome accounting | The small reporting utility includes failed-attempt costs, avoids cached/reasoning double counting, rejects duplicate request IDs and parent aggregates, and leaves ratios undefined for incomplete coverage or zero accepted outcomes. It makes no empirical savings claim. |
+| 5D promotion catalog | Added one bounded hash-bound navigation artifact for validated selected evidence, application/feedback and contradictions, reused by role; exact unchanged candidates are pre-screened without suppressing counterevidence. Stage still revalidates sources. |
+| 5E coherent batch proposals | Not warranted now. Current single-record provenance requires exact source cover; a batch schema would need per-candidate evidence bindings, verdict digest renewal, multiple lineage transitions and atomic batch validation. No observed common multi-candidate workload justifies that risk/complexity. Existing distinct live author/refuter/reviewer roles remain. |
+| 5F forward learning | Existing qualitative scoped/transfer/causal gates retained, with explicit forward-case guidance. No fixed confidence thresholds, automatic promotion or fabricated forward evidence. |
+| Bootstrap rollback design | Deferred as explicitly future lifecycle design: empty-pointer rollback needs a declared representation and authority. Current real-generation rollback remains unchanged; malformed/dangling pointers are not treated as empty. |
+
+## Verification and limits
+
+Before edits, the full offline gate passed **120 tests** with zero failures/errors/skips: `sage/evaluation/sandboxes/top5-baseline/report.json`. The initial candidate passed **130 tests** at `sage/evaluation/sandboxes/top5-candidate/report.json`. New focused regressions cover compact/full persisted equivalence, large resolved histories, alias authorship and atomic rejection, paginated unresolved state and stale digests, multiple check obligations, artifact invalidation, independent repair chronology, exact application links, full card support/budget behavior and partial/duplicate usage accounting.
+
+The final full offline gate passed **133 tests**, zero failures/errors/skips: [report](sage/evaluation/sandboxes/top5-final/report.json). New commands also passed a temporary installation check. In the 500-resolved-event fixture, baseline full stdout was **181,287 bytes**, the final compact receipt **254 bytes**, and the working view **1,014 bytes**; the baseline helper's digest matches `bcab058`. [Installed checks and byte measurements](sage/evaluation/sandboxes/top5-installed.json) distinguish these observations from native token usage.
+
+The initial independent review found three valid issues, all repaired with regressions: application chronology, superseded failed attempts in working context, and pagination without a digest. The independent recheck passed compliance and quality, verified all three repairs and ran all 13 focused improvement tests with no new major finding. [Review evidence](sage/evaluation/sandboxes/top5-review.md) records the frozen artifacts and checks. The root also added required-obligation state to generated reports. The standalone skill-creator validator could not start because PyYAML is absent; skill entrypoint/frontmatter files were unchanged, and the repository's installed-link and packaging tests passed.
+
+Frozen historical evaluation artifacts were not rewritten. Live model comparisons and native token measurements were not performed; output-byte reductions and offline passes do not establish billed-token savings or general model-quality improvement. Effective worker identity remains unobserved where the native tools do not report it.
+
+Read-only proposal assessment used a fresh Sol/xhigh worker. The root checked the assessment's load-bearing source claims, adopted the supported changes and retained the accounting utility as a small experimental reporter rather than a native meter. A separate fresh reviewer received the final candidate, original request and criteria without this rationale.
+
+Sage run: `20260911-top5-improvements` under `/Users/tuananhnguyen/.codex/sage/runs/20260911-top5-improvements`. Its generated `report.md` records criterion evidence, reconciled effects, independent findings and explicit unknowns. Repository changes are ready for review; the user's global installation was not updated.

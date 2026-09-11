@@ -519,11 +519,18 @@ def command_retrieve(args: argparse.Namespace) -> dict[str, Any]:
     try: limit = int(args.limit)
     except (TypeError, ValueError) as exc: raise ContractError("invalid_limit", "limit must be an integer between 1 and 100") from exc
     fail(limit < 1 or limit > 100, "invalid_limit", "limit must be between 1 and 100")
+    cards = getattr(args, "cards", False)
+    budget = getattr(args, "max_bytes", None)
+    fail(budget is not None and (not cards or budget < 1024), "invalid_limit", "max-bytes requires --cards and at least 1024 bytes")
+    record_id = getattr(args, "record_id", None)
+    if record_id is not None:
+        identifier(record_id, "record ID"); fail(not cards, "invalid_arguments", "record-id requires --cards")
     active, _, generation = current_pointer(store); fingerprint = cue_fingerprint(cues, include_non_supported)
-    if generation is None:
+    if generation is None and not cards:
         return {"generation_id": EMPTY_GENERATION, "cue_fingerprint": fingerprint, "retrieval_status": "no_match", "matches": []}
     candidates: list[tuple[int, int, str, dict[str, Any], str]] = []
-    for record_id, record in generation["records"].items():
+    for candidate_id, record in (generation["records"].items() if generation else []):
+        if record_id is not None and candidate_id != record_id: continue
         if record["status"] in {"refuted", "retired"}: continue
         if record["status"] != "supported" and not include_non_supported: continue
         intersections = []
@@ -534,7 +541,7 @@ def command_retrieve(args: argparse.Namespace) -> dict[str, Any]:
         reason = "recognizer intersection: " + "; ".join(intersections) + "; qualifier satisfied"
         status_priority = {"supported": 0, "provisional": 1, "contested": 2}[record["status"]]
         score = sum(len(set(record["recognizer"][key]).intersection(cues[key])) for key in CUE_KEYS)
-        candidates.append((-score, status_priority, record_id, record, reason))
+        candidates.append((-score, status_priority, candidate_id, record, reason))
     candidates.sort(key=lambda item: (item[0], item[1], item[2], item[3]["revision"]))
     matches = []
     for _, _, _, record, reason in candidates[:limit]:
@@ -542,8 +549,30 @@ def command_retrieve(args: argparse.Namespace) -> dict[str, Any]:
             "id", "revision", "status", "evidence_class", "gate_rationale", "rule",
             "qualifier", "falsifier", "evidence_summary", "counterevidence",
         )}
-        match["reason"] = reason; matches.append(match)
-    return {"generation_id": active, "cue_fingerprint": fingerprint, "retrieval_status": "matched" if matches else "no_match", "matches": matches}
+        match["reason"] = reason
+        if cards:
+            relative = f"records/{record['id']}.json"
+            match.update(card_version=1, generation_id=active,
+                         record_sha256=next(entry["sha256"] for entry in generation["manifest"]["files"] if entry["path"] == relative),
+                         record_locator=str(store / "generations" / active / relative),
+                         gate_evidence=copy.deepcopy(record["gate_evidence"]),
+                         alternative_explanations=copy.deepcopy(record["alternative_explanations"]))
+        matches.append(match)
+    result = {"generation_id": active, "cue_fingerprint": fingerprint, "retrieval_status": "matched" if matches else "no_match", "matches": matches}
+    if cards:
+        result.update(card_version=1, manifest_sha256=generation["manifest_sha256"] if generation else None,
+                      candidate_count=len(candidates), withheld_count=len(candidates) - len(matches),
+                      max_bytes=budget, drill_down="Use --record-id ID with these cues; complete IDs are in the validated generation index.json.")
+        # Include the root-mode envelope in the actual wire budget. Never truncate a card.
+        if getattr(args, "runtime_root", None) is not None: result["store_dir"] = args.store_dir
+        def wire_size() -> int:
+            return len((json.dumps(result, allow_nan=False, sort_keys=True) + "\n").encode("utf-8"))
+        while budget is not None and wire_size() > budget and matches:
+            matches.pop(); result["withheld_count"] += 1
+            result["retrieval_status"] = "matched" if matches else "no_match"
+        fail(bool(candidates) and not matches, "budget_too_small", "Eligible cards were withheld; increase max-bytes or use --record-id with a larger budget. No cards were loaded.")
+        fail(budget is not None and wire_size() > budget, "invalid_limit", "budget cannot fit the receipt; increase max-bytes")
+    return result
 
 
 def command_revalidate(args: argparse.Namespace) -> dict[str, Any]:
@@ -724,7 +753,7 @@ class CliParser(argparse.ArgumentParser):
 def parser() -> argparse.ArgumentParser:
     root = CliParser(); commands = root.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate"); validate.set_defaults(func=command_validate)
-    retrieve = commands.add_parser("retrieve"); retrieve.add_argument("--cues", required=True); retrieve.add_argument("--limit", required=True); retrieve.set_defaults(func=command_retrieve)
+    retrieve = commands.add_parser("retrieve"); retrieve.add_argument("--cues", required=True); retrieve.add_argument("--limit", required=True); retrieve.add_argument("--cards", action="store_true"); retrieve.add_argument("--max-bytes", type=int); retrieve.add_argument("--record-id"); retrieve.set_defaults(func=command_retrieve)
     revalidate = commands.add_parser('revalidate'); revalidate.add_argument('--cues', required=True); revalidate.add_argument('--previous', required=True); revalidate.set_defaults(func=command_revalidate)
     stage = commands.add_parser("stage"); stage.add_argument("--proposal", required=True); stage.add_argument("--generation-id", required=True); stage.add_argument("--expected-current", required=True); stage.set_defaults(func=command_stage)
     activate = commands.add_parser("activate"); activate.add_argument("--generation-id", required=True); activate.add_argument("--expected-current", required=True); activate.set_defaults(func=command_activate)

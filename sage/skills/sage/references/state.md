@@ -10,8 +10,10 @@ python3 SAGE_STATE list-runs --state-root ROOT [--limit 20 --offset 0]
 python3 SAGE_STATE register --state-root ROOT --run-dir LEGACY_RUN
 python3 SAGE_STATE init --state-root ROOT --run-id ID --objective TEXT --criteria CRITERIA_JSON
 python3 SAGE_STATE append --state-root ROOT --run-id ID (--event EVENT_JSON | --events EVENTS_JSONL)
+python3 SAGE_STATE append --state-root ROOT --run-id ID --payloads PAYLOADS_JSON [--actor root]
 python3 SAGE_STATE validate --state-root ROOT --run-id ID [--terminal]
-python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write
+python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write --summary
+python3 SAGE_STATE context --state-root ROOT --run-id ID --view next [--limit 20 --offset 0 --events-sha256 DIGEST]
 python3 SAGE_STATE resume --state-root ROOT --run-id ID --agents AGENTS_JSON
 python3 SAGE_STATE report --state-root ROOT --run-id ID --write
 ```
@@ -64,6 +66,45 @@ Knowledge selection validates cue keys and string-array values, match statuses (
 An unknown task result may be reconciled once by appending a known, evidence-bearing result for the same task revision. Both remain in the log; a known result is final. A known outcome with unknown effect is rejected so accepted uncertainty always has that reconciliation path.
 
 The helper's completion gate is deliberately structural. Every admitted task must finish with reconciled effects. `completed` also requires every current-plan task to pass, observation evidence and an evidence-bearing passed check for every current criterion, and no pending task disposition. `failed` or `stopped` may retain safely never-admitted tasks as visibly unfinished. Reports surface later failed checks and failed prior approaches. The snapshot's `knowledge_selected_revisions` preserves every first-seen `(id,revision,generation_id)` selection with status/reason and `application: "unknown"`; selection never proves use. Extract its identity fields for exact knowledge revalidation in batches of at most 128. The helper does not infer which differently named check semantically supersedes another, judge evidence persuasiveness, prove authority, or enforce a physical lease. Invalid UTF-8 in criteria, event, live-agent, or authoritative-log input is a structured data error; invalid UTF-8 confined to `snapshot.json` is disposable and rebuilt from a valid log.
+
+## Compact output and authoring
+
+`snapshot --write --summary` persists the same complete validated snapshot as the default command and returns its locator, digest, sequence, status and working-item count. Omitting `--summary` retains the full projection. `context` reads the authoritative log and returns paginated working items, current objective/criteria/plan versions, caps and next action. Its `partial`, `total_items`, `omitted_items` and `next_offset` make omissions explicit. Use the returned digest with `--events-sha256` on subsequent pages; a stale page fails closed. Pagination bounds item count, not individual text length. A filtered view is not the complete acceptance contract.
+
+Targeted selectors are `--task ID`, `--criterion ID`, `--finding ID`, `--since-seq N`, and `--section` for `checks`, `task_dispositions`, `approach_history`, `knowledge_selected_revisions`, `knowledge_feedback`, or `knowledge_applications`. Nonzero offsets require the first page's `--events-sha256`; missing or stale digests reject continuation. Context prioritizes unreleased effects and open findings, retains current criteria and uncorrected decisions, and links cumulative history through inventory counts. Superseded bound attempts stay in the check inventory; only the current attempt of an active obligation belongs in the working view. Legacy failures have no declared supersession and remain visible. Knowledge invalidations still require the exact revalidation procedure; the view does not read the knowledge store.
+
+`append --payloads` accepts a nonempty JSON array of `{type,payload}` with optional `as` alias. The helper assigns real UTC timestamps, contiguous sequences and unique event IDs, then runs the same whole-log validator before atomic append. Only mechanical fields are generated. The receipt returns assigned `event_ids` in order and the alias map. Within a payload, `{"$event":"alias"}` resolves to an **earlier** item's generated event ID. Duplicate, forward and self aliases reject the entire batch. Stored events contain ordinary IDs; the authoring notation is not a second log format.
+
+```json
+[
+  {"as":"decision","type":"note.recorded","payload":{"category":"decision","text":"Add an integration criterion.","evidence_ids":[],"corrects_event_id":null}},
+  {"type":"criteria.revised","payload":{"revision":2,"authority_event_id":{"$event":"decision"},"reason":"Non-relaxing clarification","added":[{"id":"c-integration","text":"Installed integration passes."}],"replaced":[],"retired":[]}}
+]
+```
+
+## Artifact and check bindings v1
+
+These opt-in events retain envelope version 1 and declare payload `v:1`. Old logs remain readable; older helpers reject the new event types. Install a compatible helper before using them. Legacy unbound checks keep their original structural meaning; they cannot satisfy a declared bound obligation.
+
+| Event | Payload |
+| --- | --- |
+| `artifact.recorded` | `v,artifact_id,sha256,locator` (digest is required) |
+| `verification.required` | `v,obligation_id,revision,criterion_ids,artifact_ids` (nonempty unique arrays) |
+| `knowledge.applied` | `v,id,revision,generation_id,decision_event_id,evidence_ids` |
+
+Record each artifact's observed digest before declaring its check obligations. Re-recording an artifact changes its current digest while preserving history. Required obligation revisions start at 1 and advance contiguously; revising one cannot drop a still-current criterion. Replaced criterion IDs are distinct versions. An obligation with only retired/replaced criteria becomes inactive; one retaining a current criterion remains required and must be revised if it also names obsolete criteria.
+
+An existing `check.recorded` may add:
+
+```json
+{"binding":{"v":1,"obligation_id":"integration","obligation_revision":1,"attempt":1,"artifacts":{"package":"ACTUAL_64_HEX_SHA256"}}}
+```
+
+Each attempt retains a unique `check_id`, covers exactly its obligation's criteria and artifacts, and increments `attempt` across that obligation's revisions. A pass requires observation evidence for each criterion. The latest attempt of **each** active obligation must pass against the current obligation revision and artifact digests for completed closure. An unrelated artifact change leaves that check valid. The projection exposes `artifacts` and `verification_obligations`, including latest check IDs and current satisfaction. Hashes bind recorded facts; inspect files again at freeze/recovery because the helper does not discover unrecorded changes.
+
+A fixed finding that references a bound check must use a current pass recorded after the finding opened. Independent review of a final freeze and the relevance of that check remain root judgments. Use required obligations for every substantive acceptance check; an arbitrary legacy pass is not a substitute.
+
+`knowledge.applied` links an exact previously selected `(id,revision,generation_id)` to a prior decision note, user decision, plan revision, or task admission event plus nonempty evidence IDs. The exact selection must precede its target event, which must precede the application claim. If guidance is loaded during an ongoing task, link the later decision it influenced rather than the earlier admission. The `knowledge_applications` projection records these explicit claims; historical selection alone continues to say application is unknown. Neither a link nor usage frequency proves the rule true or currently applicable.
 
 ## Executable tiny run
 

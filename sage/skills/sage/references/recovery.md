@@ -6,7 +6,7 @@ Use [runtime paths and discovery](runtime.md) to locate the requested run and pi
 
 On resume:
 
-1. Read the validated snapshot, active skill spine, and only references named by the next action.
+1. Read `context --view next`, the active skill spine, and only references named by the next action. Follow every `next_offset` with the returned `--events-sha256` until outstanding obligations are enumerated; a changed digest requires restarting pagination. Use `--task`, `--criterion`, `--finding`, `--since-seq`, or the returned inventory `--section` for details. The complete snapshot/log remains available; partial output never establishes completion.
 2. Recheck recorded task/artifact baselines against the workspace.
 3. Call `list_agents` and reconcile every unreleased assignment. Map by returned ID or canonical name; append accepted `agent.observed` proposals before relying on them. Released assignment projections retain their terminal reconciliation; a new `agent.requested` binds future lifecycle to a new assignment.
 4. Preserve an unknown-effect barrier for idle, missing, interrupted, or otherwise unreconciled effectful work. Before release, the newest lifecycle observation governs; an older terminal observation cannot override newer active/unknown evidence. A directly observed pre-creation rejection may use `agent.not_created`; absence from the inventory cannot. Establish absence or safe idempotence before retry.
@@ -19,5 +19,7 @@ Normalize the current native `list_agents` response into the small `--agents` ar
 ```
 
 The helper’s `resume` command repairs only a derived snapshot and returns advisory observations; proposals become facts only through `append`, followed by a new snapshot. Effective model/effort absent from live output remains `unknown`.
+
+Use `snapshot --write --summary` for checkpoint receipts. Context views read and validate authority directly without requiring a snapshot. Inspect the cumulative knowledge selection/application inventory before revalidation; a compact view does not itself check the current knowledge generation. Constraints and uncorrected decisions remain visible because the helper cannot infer when their authority expires.
 
 For a report, validate the log/snapshot binding, run `report --write`, and present delivered observations separately from inference, unknowns, untested checks, open findings, next action, and human items. The report does not change run state.

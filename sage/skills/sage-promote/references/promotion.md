@@ -10,6 +10,8 @@ Commit a bounded task graph that records source selection and candidate/attempt 
 
 Checkpoint after plan commitment, before and after each delegation wave, after proposal/refutation/review, and before and after staging or activation. Each checkpoint records the next action, unresolved authority, and current source-log/terminal hashes, proposal hash, expected and actual pointer, generation/manifest hash when present, and landing authority. These are the coordinator's baselines; they never turn source logs or generations into its state.
 
+Request `snapshot --write --summary` for checkpoint receipts; use the shared paginated context views for recovery.
+
 Before context loss, resume, or any unknown actor/effect, read [recovery](../../sage/references/recovery.md). Validate the coordinator's own log and snapshot binding; rebuild only a stale projection from valid authority, while preserving a corrupt log and pausing admission. Reconcile every actual handle and unknown effect, retain the one-writer barrier, then recheck the actual source, proposal, current pointer, generation, and authority baselines. Before retrying an uncertain mutation, inspect the store and proposal bytes and establish the prior effect, absence, or safe idempotence. Append accepted observations, revise a stale next action or plan, confirm existing authority still covers it, and obtain new authority only when the action or scope requires it. Never use this procedure to resume or edit a source run.
 
 Close the coordinator `completed` only after every criterion has observation evidence, required checks pass, every finding is dispositioned, admitted effects are reconciled, and scope is reconciled. Otherwise keep a truthful checkpointed open run or close `failed`/`stopped` with unfinished scope and human items explicit.
@@ -27,6 +29,8 @@ Before reading widely, cap the run set, candidate count, attempts, and stop cond
 ## Extract and reconcile
 
 Treat run facts as observations. Extract candidate rule text, observable recognizer cues, exact applicability qualifier, a falsifier that can fire, direct evidence, counterevidence, alternative explanations, and exact provenance. Include `knowledge.feedback` and missed recognizers when deciding whether a cue, qualifier, index entry, or rule needs refinement. Frequency can prioritize examination; it cannot establish truth. Disuse is not falsehood.
+
+For a substantive source set, freeze one bounded evidence catalog after source validation: selected IDs/log hashes, relevant observation and application/feedback IDs, unresolved contradictions, and exact evidence locators. Reuse its role-relevant portions in actor packets. Source hashes still require revalidation before staging; the catalog is a navigation artifact, not a new authority. Pre-screen exact unchanged candidates against retained records and explain exclusions without suppressing contrary evidence. A useful forward test exercises a new qualifying task and the rule's predicted decision consequence; correlated repetitions and confounded comparisons remain limited evidence.
 
 Compare the candidate with active and retained records by stable ID and meaning:
 

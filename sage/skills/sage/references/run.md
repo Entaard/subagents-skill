@@ -21,12 +21,12 @@ Keep every unmet current criterion active until evidence satisfies it or applica
 
 When a committed plan-revision allowance is exhausted, diagnose the failed approach before more admission. If a distinct safe strategy remains and existing user persistence authority covers it, append an `approach_renewal` plan without a new approval ceremony. Cite that recorded user decision, the observation evidence from the failed result, the unmet criterion, cause, and actual operational change; commit new finite per-task, total-attempt, and plan-revision limits. Never use a task rename or a larger number alone as a strategy change, and never override a recorded hard cap or an unmeasured user time, spend, or model limit.
 
-Prefer `init`, batched `append`, and boundary `snapshot` calls. Example tiny run:
+Prefer `init`, batched `append --payloads`, and boundary `snapshot --write --summary` calls. The authoring interface supplies envelope IDs, sequence and time; optional aliases connect earlier events in a batch. See [state contract](state.md). Example tiny run (fully authored JSONL remains supported):
 
 ```text
 python3 SAGE_STATE init --state-root ROOT --run-id ID --objective TEXT --criteria criteria.json
 python3 SAGE_STATE append --state-root ROOT --run-id ID --events wave.jsonl
-python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write
+python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write --summary
 python3 SAGE_STATE validate --state-root ROOT --run-id ID --terminal
 python3 SAGE_STATE report --state-root ROOT --run-id ID --write
 ```

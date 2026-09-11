@@ -27,6 +27,8 @@ The integration builder uses the same form with `test_product_install.py`. Captu
 
 The product interface is frozen in [../docs/CONTRACTS.md](../docs/CONTRACTS.md). Development cases are public and may guide implementation. `holdout-boundary.json` freezes what later independent prompts may contain without revealing those prompts or expected answers. Live trials are a later gate and must not be marked passed by this harness.
 
+For new whole-workflow or component comparisons, use the separate [experimental workflow-overhead procedure](workflow-overhead.md). Its observed-usage reporting utility does not collect native telemetry or change the frozen routing protocols. Deterministic coordinator/card/binding/accounting regressions run in the focused product suite.
+
 `pairing.py` prepares a hash-bound manifest from an explicit evaluator case selection and validates evidence-bearing paired records:
 
 ```bash

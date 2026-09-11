@@ -15,6 +15,7 @@ import os
 import re
 import sys
 import tempfile
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,7 @@ KINDS = {
     "task.dispositioned",
     "evidence.recorded", "check.recorded", "finding.opened", "finding.dispositioned",
     "knowledge.selected", "knowledge.feedback", "checkpoint.written", "run.closed",
+    "artifact.recorded", "verification.required", "knowledge.applied",
 }
 TASK_FIELDS = {
     "id", "revision", "objective", "completion", "dependencies", "owner", "effect",
@@ -199,6 +201,9 @@ def validate_payload(row: dict[str, Any]) -> None:
         "knowledge.feedback": {"id", "revision", "outcome", "evidence_ids", "missed_recognizers"},
         "checkpoint.written": {"next_action", "baselines", "unresolved_user_items"},
         "run.closed": {"status", "criterion_evidence", "scope_reconciled", "remaining_human_items"},
+        "artifact.recorded": {"v", "artifact_id", "sha256", "locator"},
+        "verification.required": {"v", "obligation_id", "revision", "criterion_ids", "artifact_ids"},
+        "knowledge.applied": {"v", "id", "revision", "generation_id", "decision_event_id", "evidence_ids"},
     }[kind]
     need(p, required, row["event_id"])
     if kind == "run.opened":
@@ -273,6 +278,20 @@ def validate_payload(row: dict[str, Any]) -> None:
     elif kind == "check.recorded":
         identifier(p["check_id"], "check_id"); strings(p["criterion_ids"], "criterion_ids"); strings(p["evidence_ids"], "evidence_ids")
         choice(p["outcome"], {"passed", "failed", "not_tested"}, "check outcome")
+    elif kind in {"artifact.recorded", "verification.required", "knowledge.applied"}:
+        fail(type(p["v"]) is not int or p["v"] != 1, "invalid_event", "unsupported extension version")
+        if kind == "artifact.recorded":
+            identifier(p["artifact_id"], "artifact ID"); text(p["locator"], "artifact locator")
+            fail(not isinstance(p["sha256"], str) or re.fullmatch(r"[0-9a-f]{64}", p["sha256"]) is None, "invalid_event", "artifact needs a SHA-256 digest")
+        elif kind == "verification.required":
+            identifier(p["obligation_id"], "obligation ID"); positive(p["revision"], "obligation revision")
+            for field in ("criterion_ids", "artifact_ids"):
+                strings(p[field], field)
+                fail(not p[field] or len(p[field]) != len(set(p[field])), "invalid_event", f"{field} must be nonempty and unique")
+        else:
+            identifier(p["id"], "knowledge ID"); positive(p["revision"], "knowledge revision")
+            identifier(p["generation_id"], "generation ID"); identifier(p["decision_event_id"], "decision event")
+            strings(p["evidence_ids"], "application evidence")
     elif kind == "finding.opened":
         identifier(p["finding_id"], "finding_id"); text(p["summary"], "summary"); strings(p["evidence_ids"], "evidence_ids")
         choice(p["severity"], {"blocker", "major", "minor"}, "finding severity")
@@ -574,7 +593,9 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             fail(bool(pending_dispositions), "invalid_transition", "task dispositions must be reconciled by a later plan before closure")
             closed = True
         event_ids.add(row["event_id"])
+    verification = verification_facts(rows)
     state = project(rows)
+    state.update(verification)
     if terminal:
         fail(not closed, "incomplete_run", "terminal validation requires run.closed")
     if closed:
@@ -583,6 +604,8 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
             fail(any((task_id, task["revision"]) not in results for task_id, task in current_tasks.items()), "incomplete_run", "every task in a completed plan must have a result")
             fail(any(results[(task_id, task["revision"])]["outcome"] != "passed" for task_id, task in current_tasks.items()), "incomplete_run", "every task in a completed plan must pass")
             fail(not close["scope_reconciled"], "incomplete_run", "completed run must reconcile scope")
+            fail(any(not item["satisfied"] for item in verification["verification_obligations"].values() if item["active"]),
+                 "incomplete_run", "required verification is missing, failed, or bound to stale artifacts/criteria")
             for criterion in criteria:
                 refs = close["criterion_evidence"].get(criterion, [])
                 fail(not refs or any(x not in evidence or evidence[x]["kind"] != "observation" or criterion not in evidence[x]["criterion_ids"] for x in refs), "incomplete_run", f"criterion {criterion} lacks associated observation evidence")
@@ -591,6 +614,69 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
                 disp = dispositioned.get(finding_id); fail(disp is None, "open_finding", f"finding {finding_id} remains open")
                 fail(finding["severity"] in {"blocker", "major"} and disp["disposition"] == "accepted", "open_finding", f"material finding {finding_id} is accepted")
     return state
+
+
+def verification_facts(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Versioned, opt-in bindings; legacy check facts retain their v1 interpretation."""
+    artifacts = {}; obligations = {}; attempts = {}; checks = {}; criteria = set()
+    selected = {}; applied = []; decisions = {}; evidence = {}; opened = {}
+    def current(check: dict[str, Any]) -> bool:
+        binding = check["binding"]; obligation = obligations[binding["obligation_id"]]
+        return (binding["obligation_revision"] == obligation["revision"] and
+                set(obligation["criterion_ids"]) <= criteria and
+                all(artifacts[key]["sha256"] == digest for key, digest in binding["artifacts"].items()))
+    for row in rows:
+        kind, p = row["type"], row["payload"]
+        if kind == "run.opened": criteria = {c["id"] for c in p["criteria"]}
+        elif kind == "criteria.revised":
+            criteria -= set(p["retired"]) | {c["supersedes"] for c in p["replaced"]}
+            criteria |= {c["id"] for c in p["added"] + p["replaced"]}
+        elif kind == "artifact.recorded": artifacts[p["artifact_id"]] = {**p, "event_id": row["event_id"]}
+        elif kind == "verification.required":
+            prior = obligations.get(p["obligation_id"])
+            fail(p["revision"] != (prior["revision"] + 1 if prior else 1), "invalid_revision", "obligation revisions must be contiguous")
+            fail(not set(p["criterion_ids"]) <= criteria or not set(p["artifact_ids"]) <= artifacts.keys(), "invalid_reference", "obligation needs current criteria and recorded artifacts")
+            # Replacement may change a check, but cannot silently waive surviving requirements.
+            fail(prior is not None and not (set(prior["criterion_ids"]) & criteria) <= set(p["criterion_ids"]), "invalid_reference", "obligation revision drops a current criterion")
+            obligations[p["obligation_id"]] = {**p, "event_id": row["event_id"]}
+        elif kind == "evidence.recorded": evidence[p["evidence_id"]] = p
+        elif kind == "check.recorded" and "binding" in p:
+            b = p["binding"]
+            fail(not isinstance(b, dict) or set(b) != {"v", "obligation_id", "obligation_revision", "attempt", "artifacts"}, "invalid_event", "invalid check binding")
+            fail(type(b["v"]) is not int or b["v"] != 1, "invalid_event", "unsupported binding version")
+            identifier(b["obligation_id"], "obligation ID"); positive(b["obligation_revision"], "obligation revision"); positive(b["attempt"], "check attempt")
+            fail(b["obligation_id"] not in obligations, "invalid_reference", "unknown check obligation")
+            obligation = obligations[b["obligation_id"]]
+            fail(b["obligation_revision"] != obligation["revision"], "stale_revision", "check uses an old obligation revision")
+            fail(set(p["criterion_ids"]) != set(obligation["criterion_ids"]), "invalid_reference", "check must cover the exact obligation criteria")
+            fail(not isinstance(b["artifacts"], dict) or set(b["artifacts"]) != set(obligation["artifact_ids"]), "invalid_reference", "check must bind every obligation artifact")
+            fail(any(b["artifacts"][key] != artifacts[key]["sha256"] for key in b["artifacts"]), "stale_revision", "check uses stale artifact digests")
+            prior_attempts = attempts.setdefault(b["obligation_id"], [])
+            fail(b["attempt"] != len(prior_attempts) + 1, "invalid_revision", "check attempts must be contiguous across obligation revisions")
+            if p["outcome"] == "passed":
+                fail(any(not any(evidence[e]["kind"] == "observation" and c in evidence[e]["criterion_ids"] for e in p["evidence_ids"]) for c in p["criterion_ids"]), "invalid_reference", "bound pass needs observation evidence for each criterion")
+            checks[p["check_id"]] = {**p, "seq": row["seq"]}; prior_attempts.append(p["check_id"])
+        elif kind == "finding.opened": opened[p["finding_id"]] = row["seq"]
+        elif kind == "finding.dispositioned" and p["disposition"] == "fixed" and p["verification_check_id"] in checks:
+            check = checks[p["verification_check_id"]]
+            fail(check["seq"] <= opened[p["finding_id"]] or not current(check), "stale_revision", "fixed finding requires current verification after the finding was opened")
+        elif kind == "knowledge.selected":
+            for match in p["matches"]:
+                selected.setdefault((match["id"], match["revision"], p["generation_id"]), row["seq"])
+        elif kind in {"user.decision", "plan.revised", "task.admitted"} or (kind == "note.recorded" and p["category"] == "decision"):
+            decisions[row["event_id"]] = row["seq"]
+        elif kind == "knowledge.applied":
+            fail((p["id"], p["revision"], p["generation_id"]) not in selected, "invalid_reference", "application needs an exact prior selection")
+            fail(p["decision_event_id"] not in decisions or not p["evidence_ids"] or not set(p["evidence_ids"]) <= evidence.keys(), "invalid_reference", "application needs a prior decision and recorded evidence")
+            fail(selected[(p["id"], p["revision"], p["generation_id"])] >= decisions[p["decision_event_id"]],
+                 "invalid_reference", "knowledge must be selected before the decision or task admission it influenced")
+            applied.append({**p, "event_id": row["event_id"]})
+    for key, obligation in obligations.items():
+        latest = checks[attempts[key][-1]] if attempts.get(key) else None
+        obligation.update(active=bool(set(obligation["criterion_ids"]) & criteria),
+                          latest_check_id=latest["check_id"] if latest else None,
+                          satisfied=bool(latest and latest["outcome"] == "passed" and current(latest)))
+    return {"artifacts": artifacts, "verification_obligations": obligations, "knowledge_applications": applied}
 
 
 def released(key: tuple[str, int], task: dict[str, Any], results: dict, requests: dict,
@@ -936,7 +1022,31 @@ def command_init(args: argparse.Namespace) -> dict[str, Any]:
 
 def command_append(args: argparse.Namespace) -> dict[str, Any]:
     run_dir = Path(args.run_dir).resolve(); rows, raw = read_events(run_dir / "events.jsonl")
-    if args.event:
+    if getattr(args, "payloads", None):
+        payloads = read_json(Path(args.payloads).resolve())
+        fail(not isinstance(payloads, list) or not payloads, "invalid_event", "payloads must be a nonempty array")
+        additions = []; aliases = {}
+        def resolve_refs(value: Any) -> Any:
+            if isinstance(value, dict):
+                if set(value) == {"$event"}:
+                    alias = identifier(value["$event"], "event alias")
+                    fail(alias not in aliases, "invalid_reference", "event alias must name an earlier item in this batch")
+                    return aliases[alias]
+                return {key: resolve_refs(item) for key, item in value.items()}
+            if isinstance(value, list): return [resolve_refs(item) for item in value]
+            return value
+        for item in payloads:
+            fail(not isinstance(item, dict) or not {"type", "payload"} <= set(item) or set(item) - {"type", "payload", "as"}, "invalid_event", "authored events require type, payload, and optional as")
+            alias = item.get("as")
+            if "as" in item:
+                identifier(alias, "event alias"); fail(alias in aliases, "duplicate_id", "duplicate event alias")
+            payload = resolve_refs(item["payload"]); assigned = "auto-" + uuid.uuid4().hex
+            additions.append({"v": 1, "event_id": assigned,
+                "run_id": rows[0]["run_id"], "seq": len(rows) + len(additions) + 1,
+                "at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                "actor": args.actor, "type": item["type"], "payload": payload})
+            if alias is not None: aliases[alias] = assigned
+    elif args.event:
         additions = [read_json(Path(args.event).resolve())]
     else:
         additions, _ = read_events(Path(args.events).resolve())
@@ -944,7 +1054,100 @@ def command_append(args: argparse.Namespace) -> dict[str, Any]:
     proposed = rows + additions; validate(proposed)
     appended = b"".join(encode(x) for x in additions); prefix = raw if not raw or raw.endswith(b"\n") else raw + b"\n"
     atomic_write(run_dir / "events.jsonl", prefix + appended)
-    return {"ok": True, "appended": len(additions), "last_seq": proposed[-1]["seq"]}
+    receipt = {"ok": True, "appended": len(additions), "last_seq": proposed[-1]["seq"]}
+    if getattr(args, "payloads", None):
+        receipt["event_ids"] = [item["event_id"] for item in additions]; receipt["aliases"] = aliases
+    return receipt
+
+
+def decision_items(state: dict[str, Any], rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """A locateable working set, never a claim that omitted obligations are satisfied."""
+    facts = execution_facts(rows)
+    items = []
+    def add(kind: str, key: str, value: Any) -> None:
+        items.append({"kind": kind, "id": key, "value": value})
+    for key in sorted(facts["admitted"] - facts["released"]):
+        add("unresolved_effect", f"{key[0]}:{key[1]}", facts["tasks"][key])
+    for key, finding in state["findings"].items():
+        if finding["disposition"] is None: add("finding", key, finding)
+    for criterion in state["criteria"]: add("criterion", criterion["id"], criterion)
+    for key, task in state["tasks"].items():
+        if task["state"] != "passed":
+            ready = task["state"] == "planned" and all(
+                (dep, state["tasks"][dep]["revision"]) in facts["released"] and
+                state["tasks"][dep]["state"] == "passed" for dep in task["dependencies"])
+            add("task", key, {**task, "dependencies_ready": ready})
+    corrected = {r["payload"].get("corrects_event_id") for r in rows}
+    for key in ("constraints", "user_decisions", "decisions", "assumptions", "unresolved_user_items", "baselines"):
+        for index, value in enumerate(state[key]):
+            if isinstance(value, dict) and value.get("event_id") in corrected: continue
+            add(key, str(index), value)
+    if state["approach_history"]: add("current_approach", "latest", state["approach_history"][-1])
+    # Retain cumulative inventories on disk and expose explicit drill-down, not repeated bodies.
+    for key in ("task_dispositions", "approach_history", "knowledge_selected_revisions", "knowledge_feedback", "knowledge_applications"):
+        if state[key]: add("inventory", key, {"count": len(state[key]), "selector": f"--section {key}"})
+    # Unknown/untested evidence includes exact revalidation diagnostics. Keep its locator visible.
+    for key, value in state["evidence"].items():
+        if value["kind"] in {"unknown", "untested"}: add("evidence", key, value)
+    for key, value in state["checks"].items():
+        if "binding" in value:
+            obligation = state["verification_obligations"][value["binding"]["obligation_id"]]
+            if not obligation["active"] or obligation["latest_check_id"] != key: continue
+        if value["outcome"] != "passed": add("check", key, value)
+    if state["checks"]: add("inventory", "checks", {"count": len(state["checks"]), "selector": "--section checks"})
+    for key, value in state["verification_obligations"].items():
+        if value["active"]: add("verification_obligation", key, value)
+    if state["knowledge_selection"]: add("knowledge_selection", "latest", state["knowledge_selection"])
+    return items
+
+
+def command_snapshot(args: argparse.Namespace) -> dict[str, Any]:
+    run_dir = Path(args.run_dir).resolve(); state = write_snapshot(run_dir)
+    if not args.summary: return {"ok": True, **state}
+    rows, _ = read_events(run_dir / "events.jsonl")
+    return {"ok": True, "run_id": state["run_id"], "last_seq": state["last_seq"],
+            "events_sha256": state["events_sha256"], "snapshot": str(run_dir / "snapshot.json"),
+            "working_items": len(decision_items(state, rows)),
+            "status": state["terminal"]["status"] if state["terminal"] else "active"}
+
+
+def command_context(args: argparse.Namespace) -> dict[str, Any]:
+    run_dir = Path(args.run_dir).resolve(); rows, raw = read_events(run_dir / "events.jsonl")
+    state = validate(rows); digest = hashlib.sha256(raw).hexdigest()
+    fail(args.limit < 1 or args.limit > 100 or args.offset < 0, "invalid_arguments", "limit must be 1..100 and offset nonnegative")
+    fail(args.offset > 0 and args.events_sha256 is None, "invalid_arguments", "continuation offsets require --events-sha256 from the first page")
+    fail(args.events_sha256 is not None and args.events_sha256 != digest, "stale_context", "log changed; restart pagination")
+    if args.section:
+        collection = state[args.section]
+        if isinstance(collection, dict): collection = list(collection.values())
+        items = [{"kind": args.section, "id": str(index), "value": value} for index, value in enumerate(collection)]
+    elif args.since_seq is not None:
+        fail(args.since_seq < 0 or args.since_seq > state["last_seq"], "invalid_arguments", "since-seq is outside this log")
+        items = [{"kind": "event", "id": row["event_id"], "value": row} for row in rows if row["seq"] > args.since_seq]
+    elif args.task:
+        fail(args.task not in state["tasks"], "invalid_reference", "unknown current task")
+        items = [{"kind": "task", "id": args.task, "value": state["tasks"][args.task]}]
+    elif args.criterion:
+        fail(not any(c["id"] == args.criterion for h in state["criteria_history"] for c in h["criteria"]), "invalid_reference", "unknown criterion")
+        items = [{"kind": kind, "id": key, "value": value}
+                 for kind, collection in (("evidence", state["evidence"]), ("check", state["checks"]))
+                 for key, value in collection.items() if args.criterion in value["criterion_ids"]]
+        items[:0] = [{"kind": "criteria_revision", "id": str(h["revision"]), "value": h}
+                     for h in state["criteria_history"] if any(c["id"] == args.criterion for c in h["criteria"])]
+    elif args.finding:
+        fail(args.finding not in state["findings"], "invalid_reference", "unknown finding")
+        items = [{"kind": "finding", "id": args.finding, "value": state["findings"][args.finding]}]
+    else: items = decision_items(state, rows)
+    page = items[args.offset:args.offset + args.limit]; end = args.offset + len(page)
+    return {"ok": True, "view_version": 1, "run_id": state["run_id"], "events_sha256": digest,
+            "last_seq": state["last_seq"], "objective": state["objective"],
+            "criteria_revision": state["criteria_history"][-1]["revision"],
+            "plan_revision": state["current_plan_revision"], "hard_caps": state["hard_caps"],
+            "status": state["terminal"]["status"] if state["terminal"] else "active",
+            "next_action": "terminal; no further admission" if state["terminal"] else state["next_action"],
+            "log": str(run_dir / "events.jsonl"), "items": page, "total_items": len(items),
+            "omitted_items": len(items) - len(page), "next_offset": end if end < len(items) else None,
+            "partial": len(page) != len(items)}
 
 
 def command_validate(args: argparse.Namespace) -> dict[str, Any]:
@@ -1015,6 +1218,10 @@ def command_report(args: argparse.Namespace) -> dict[str, Any]:
     scope = state["terminal"]["scope_reconciled"] if state["terminal"] else "not closed"
     next_action = f"Run is terminal ({status}); no further admission." if state["terminal"] else state["next_action"]
     report = f"# Sage run {state['run_id']}\n\n## Outcome\n\n- Status: {status}\n- Scope reconciled: {scope}\n\n## Approach history\n\n{bullets(approaches)}\n\n## Recorded passed tasks\n\n{bullets(delivered)}\n\n## Failed tasks\n\n{bullets(failed_tasks)}\n\n## Historical task results\n\n{bullets(historical_results)}\n\n## Task dispositions\n\n{bullets(task_dispositions)}\n\n## Unfinished tasks\n\n{bullets(unfinished)}\n\n## Observed evidence\n\n{bullets(observations, lambda x: x['locator'])}\n\n## Inferences\n\n{bullets(inferences, lambda x: x['locator'])}\n\n## Unknowns\n\n{bullets(unknowns)}\n\n## Untested evidence\n\n{bullets(untested_evidence, lambda x: x['locator'])}\n\n## Failed checks\n\n{bullets(failed_checks, lambda x: x['check_id'])}\n\n## Untested checks\n\n{bullets(untested_checks, lambda x: x['check_id'])}\n\n## Open findings\n\n{bullets(open_findings, lambda x: x['summary'])}\n\n## Accepted limitations\n\n{bullets(accepted, lambda x: x['summary'])}\n\n## Remaining human items\n\n{bullets(human)}\n\n## Next action\n\n{next_action}\n"
+    if state["verification_obligations"]:
+        obligations = bullets(state["verification_obligations"].values(),
+            lambda item: f"{item['obligation_id']} revision {item['revision']}: active={item['active']}, satisfied={item['satisfied']}, latest check={item['latest_check_id']}")
+        report = report.replace("## Open findings\n", f"## Required verification\n\n{obligations}\n\n## Open findings\n")
     atomic_write(run_dir / "report.md", report.encode()); return {"ok": True, "run_id": state["run_id"], "report": str(run_dir / "report.md")}
 
 
@@ -1029,14 +1236,17 @@ def parser() -> argparse.ArgumentParser:
     listing = commands.add_parser("list-runs"); listing.add_argument("--limit", type=int, default=20); listing.add_argument("--offset", type=int, default=0); listing.set_defaults(func=command_list_runs)
     register = commands.add_parser("register"); register.add_argument("--run-dir", required=True); register.set_defaults(func=command_register)
     init = commands.add_parser("init"); init.add_argument("--run-dir"); init.add_argument("--run-id", required=True); init.add_argument("--objective", required=True); init.add_argument("--criteria", required=True); init.set_defaults(func=command_init)
-    append = commands.add_parser("append"); choice = append.add_mutually_exclusive_group(required=True); choice.add_argument("--event"); choice.add_argument("--events"); append.set_defaults(func=command_append)
+    append = commands.add_parser("append"); choice = append.add_mutually_exclusive_group(required=True); choice.add_argument("--event"); choice.add_argument("--events"); choice.add_argument("--payloads"); append.add_argument("--actor", default="root"); append.set_defaults(func=command_append)
     valid = commands.add_parser("validate"); valid.add_argument("--terminal", action="store_true"); valid.set_defaults(func=command_validate)
-    snap = commands.add_parser("snapshot"); snap.add_argument("--write", action="store_true", required=True); snap.set_defaults(func=lambda a: {"ok": True, **write_snapshot(Path(a.run_dir).resolve())})
+    snap = commands.add_parser("snapshot"); snap.add_argument("--write", action="store_true", required=True); snap.add_argument("--summary", action="store_true"); snap.set_defaults(func=command_snapshot)
+    context = commands.add_parser("context"); context.add_argument("--view", choices=["next"], default="next")
+    selectors = context.add_mutually_exclusive_group(); selectors.add_argument("--task"); selectors.add_argument("--criterion"); selectors.add_argument("--finding"); selectors.add_argument("--since-seq", type=int); selectors.add_argument("--section", choices=["checks", "task_dispositions", "approach_history", "knowledge_selected_revisions", "knowledge_feedback", "knowledge_applications"])
+    context.add_argument("--limit", type=int, default=20); context.add_argument("--offset", type=int, default=0); context.add_argument("--events-sha256"); context.set_defaults(func=command_context)
     resume = commands.add_parser("resume"); resume.add_argument("--agents", required=True); resume.set_defaults(func=command_resume)
     report = commands.add_parser("report"); report.add_argument("--write", action="store_true", required=True); report.set_defaults(func=command_report)
-    for command in (paths, listing, register, init, append, valid, snap, resume, report):
+    for command in (paths, listing, register, init, append, valid, snap, context, resume, report):
         command.add_argument("--state-root", help="absolute runtime root; otherwise SAGE_STATE_ROOT, CODEX_HOME/sage, or ~/.codex/sage")
-    for command in (append, valid, snap, resume, report):
+    for command in (append, valid, snap, context, resume, report):
         target = command.add_mutually_exclusive_group(required=True)
         target.add_argument("--run-dir"); target.add_argument("--run-id")
     return root

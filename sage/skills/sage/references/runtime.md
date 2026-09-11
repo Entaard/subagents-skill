@@ -21,7 +21,7 @@ Choose a unique ID (for example date, task slug, and a short unique suffix). Cre
 ```text
 python3 SAGE_STATE init --state-root ROOT --run-id ID --objective TEXT --criteria criteria.json
 python3 SAGE_STATE append --state-root ROOT --run-id ID --events wave.jsonl
-python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write
+python3 SAGE_STATE snapshot --state-root ROOT --run-id ID --write --summary
 ```
 
 `init` returns `run_dir: ROOT/runs/ID` and `discoverable: true`. Reusing an occupied ID fails; resume the intended run or select a new ID. Keep authoritative events append-only and close using the [state contract](state.md). Return the exact run/report path at handoff.

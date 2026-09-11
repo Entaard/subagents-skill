@@ -4,6 +4,8 @@ Status: implemented source contract plus the live-repairs-a1 round-1 candidate d
 
 ## Common CLI rules
 
+Additive coordinator/card extensions (2026-09-11) are specified in the installed [state extension contract](../skills/sage/references/state.md#compact-output-and-authoring) and [card retrieval contract](../skills/sage/references/knowledge.md). They add optional compact output, authoring aliases, paginated context, version-1 artifact/check/application bindings and complete-card byte budgets. Existing CLI defaults and legacy logs/records remain supported. New event types require the updated helper; the original unbound check semantics below remain the legacy contract. Native paired-result v2/v3 artifacts are unchanged.
+
 Both Python helpers are dependency-free and are invoked with the repository interpreter. They accept UTF-8 JSON, reject duplicate object keys and non-finite numbers, resolve all supplied paths, and never infer a state root from the current task repository.
 
 Success exits `0` and prints one JSON object to stdout. Contract/data rejection exits `2` and prints one JSON error object to stderr with `ok: false`, `code`, and `message`. Unexpected I/O failure exits `3`. Runtime writes target the shared resolved root or explicitly supplied legacy/fixture directory. Sage-owned run, event, task, criterion, evidence, check, finding, request, generation, and knowledge IDs match `^[a-z0-9][a-z0-9._-]{0,63}$`. Native agent handles are different: persist the nonempty, control-free string returned by the collaboration tool exactly, up to 512 characters, so canonical names such as `/root/scout` can reconcile with `list_agents` without invented aliases.

@@ -1,0 +1,31 @@
+{
+  "installed_commands": "passed",
+  "baseline_helper": "/Users/tuananhnguyen/.agents/sage/bin/sage_state.py",
+  "baseline_helper_sha256": "641121a5cec6d94d00338d76b5b117363f92cc61cbec400ac868352a6ef1930a",
+  "candidate_state_sha256": "9f61d3082fdb03dcd5282b5d9640bab754325a2dbf48cb527de856748ea99898",
+  "measurements": [
+    {
+      "resolved_evidence_events": 10,
+      "baseline_full_stdout_bytes": 6618,
+      "candidate_full_stdout_bytes": 6697,
+      "summary_stdout_bytes": 252,
+      "context_stdout_bytes": 1012
+    },
+    {
+      "resolved_evidence_events": 100,
+      "baseline_full_stdout_bytes": 38487,
+      "candidate_full_stdout_bytes": 38566,
+      "summary_stdout_bytes": 254,
+      "context_stdout_bytes": 1014
+    },
+    {
+      "resolved_evidence_events": 500,
+      "baseline_full_stdout_bytes": 181287,
+      "candidate_full_stdout_bytes": 181366,
+      "summary_stdout_bytes": 254,
+      "context_stdout_bytes": 1014
+    }
+  ],
+  "native_tokens": null,
+  "live_model_comparison": false
+}

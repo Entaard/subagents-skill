@@ -2,6 +2,16 @@
 
 Read before dispatching or materially revising a team.
 
+## Model eligibility
+
+Sage-controlled reasoning work requires GPT-5.6 or higher. Resolve exact IDs and supported efforts from the live tool schema or host model catalog. The current eligible choices are `gpt-5.6-luna`, `gpt-5.6-terra`, `gpt-5.6-sol`, and `gpt-6-astra`; newer GPT generations are eligible when exposed by the host. GPT-5.5 and older are excluded from every role, fallback, retry, and nested delegation. Historical runs and learned routing suggestions cannot relax this floor. Honor user model choices within it; report a conflicting choice instead of silently substituting.
+
+Coding requires at least Sol: use `gpt-5.6-sol`, `gpt-6-astra`, or a host-exposed successor established as at least Sol-capable. This includes implementation, bug fixes, refactoring, test authorship, and code patches during promotion. Luna and Terra are eligible only for non-coding work; a newer generation number alone does not qualify a smaller model for coding. Apply this role requirement to inline root work, inherited and reused workers, fallbacks, and descendants.
+
+Before inline work, confirm the root's configured model meets the applicable floor. If it does not or cannot be established, ask the user to select or confirm an eligible root model; the skill cannot switch it. For fresh or bounded workers, supply an explicit eligible model ID. Use full-history inheritance only when the inherited model is established and eligible for the role. Before `followup_task` or resumed work, check the existing worker's routing; replace an ineligible or unresolved worker with an explicitly routed fresh worker after reconciling its effects. Include the generation and coding floors in every worker brief so descendants obey them. If a model is unavailable, choose another eligible model capable of the criterion, or report the availability conflict; never fall back below the applicable floor.
+
+Record requested and observed effective identity separately. An observed effective model that fails either applicable floor requires stopping that worker and reconciling effects before replacement. Missing effective telemetry remains `unknown`, even with an explicit eligible request. Host-owned automatic approval review is outside Sage routing: labels such as `codex-auto-review` and usage-report fallback prices do not establish its underlying model. Keep this limitation visible when reporting model compliance; do not alter approval safeguards to satisfy routing preferences.
+
 ## Place work for total value
 
 Delegate only a bounded, packageable unit whose expected gain from parallelism, context protection, independent evidence, or cohesive ownership exceeds briefing, root-context, review, integration, verification, and retry cost. Keep small or tightly coupled judgment inline. Batch independent scouts over the same corpus so they share a coherent question and return non-overlapping evidence. Admit only dependency-ready tasks.
@@ -10,12 +20,15 @@ Initial uncalibrated priors:
 
 | Unit | Initial request |
 | --- | --- |
-| Bulk reads, web/source scans, log exploration | Luna, high |
-| Guided implementation with exact boundaries | Sol, high or xhigh |
-| Independent exacting review | Sol, xhigh |
-| Ambiguous architecture, adversarial refutation | Astra, high |
+| Bulk reads, web/source scans, log exploration | `gpt-5.6-luna`, high |
+| Coding, from routine changes to guided implementation | `gpt-5.6-sol`, high or xhigh |
+| Complex implementation beyond Sol at higher effort | `gpt-6-astra`, high or xhigh |
+| Independent exacting review | `gpt-5.6-sol`, xhigh |
+| Ambiguous architecture, demanding adversarial review or refutation, hardest coupled reasoning | `gpt-6-astra`, high or xhigh |
 
 Capability to satisfy the criterion comes first. These are placement hypotheses, not rankings, prices, or guarantees. Fetch current official prices only if cost comparison materially affects this run; never hard-code or invent them. Respect an explicit user model/effort choice. If it is unavailable, report the conflict.
+
+Use Astra for complex implementation when Sol at higher supported effort is insufficient, based on observed results or a justified assessment of the task. Use Astra directly for adversarial review, architecture, or consequential competing explanations when their difficulty warrants it; it need not wait for Sol to fail. A diagnosed capability gap may justify Astra as the implementation or review worker, as well as bounded advice. For a future stronger model, reassess placement against live capability information and the criterion rather than treating Sol or Astra as a permanent ceiling. Keep the root's model and decision ownership unchanged.
 
 Use a fresh or bounded fork for a model/effort override and include exact files/sources, objective, boundaries, completion condition, effect scope, expected return, and evidence format. Ask scouts for concise evidence pointers, while preserving full enumeration or a complete artifact when the task requires it. Use full history only when its context value exceeds load and inherited routing is acceptable.
 

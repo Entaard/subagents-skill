@@ -7,6 +7,8 @@ description: Run a user-requested task with explicit quality criteria, adaptive 
 
 Use Sage only after explicit `$sage` invocation. Preserve the user’s scope, model choices, standing approvals, and effect boundaries. Continue routine in-scope work without ceremonial approval; ask only for essential user-only input or new authority.
 
+Use GPT-5.6 or higher for all Sage-controlled reasoning work, including inline work, resumed workers, and nested delegation. Apply the [model eligibility policy](references/delegation.md#model-eligibility) before work or worker reuse, including on resume.
+
 ## Start or resume
 
 For `report` or `resume`, read [recovery](references/recovery.md). For a new run:

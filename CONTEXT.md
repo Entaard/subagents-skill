@@ -25,11 +25,11 @@ Curated, tested guidance eligible for selective loading by a future Sage run.
 _Avoid_: Raw memory, previous logs
 
 **Installed promotion**:
-The default promotion destination, scoped to the current Sage installation and invisible to the source repository.
+The promotion destination for active runtime knowledge in the current environment, with retained revisions and reversible activation.
 _Avoid_: Local promotion
 
 **Global promotion**:
-An explicit promotion destination that changes the Sage source repository and reaches an installation only through a later install/update.
+The source promotion destination: reviewed improvements to shared Sage behavior, delivered as uncommitted changes for human review and later manual installation across environments.
 _Avoid_: Automatic update
 
 **Handover threshold**:

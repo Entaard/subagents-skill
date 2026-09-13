@@ -145,6 +145,12 @@ bash sage/uninstall.sh --target-root TARGET_ROOT
 
 `SOURCE_ROOT` defaults to the directory containing `install.sh`; its explicit form exists for sandbox cutover tests. Install/update owns only `skills/sage/**`, `skills/sage-promote/**`, `sage/bin/sage_state.py`, `sage/bin/sage_knowledge.py`, and `sage/receipt.json` beneath `TARGET_ROOT`. The receipt records source hashes, installed hashes, operation, and inherited ownership. Any legacy policy, schema, fixture, phase-1 evaluator, source manifest, or runtime protocol is excluded. A missing allowlisted source fails before mutation. New unowned paths or locally modified owned files are never overwritten; update fails with a conflict report. Uninstall removes only receipt-owned files whose hashes still match, retains modified/unowned files, reports them, and removes no unrelated directory.
 
+## Source promotion boundary
+
+The installed [source promotion procedure](../skills/sage-promote/references/source.md) governs source changes; the knowledge CLI continues to govern runtime generations only. Promotion assesses both destinations by default and records their independent baselines, review, effects, and outcomes in its coordinator run. The installed receipt's existing `source_root` is a checkout-discovery hint; explicit user selection or the skill's absolute `SAGE_SOURCE_ROOT` environment convention takes precedence. Neither is a runtime-root setting or a new CLI option.
+
+A source result is a verified, independently reviewed uncommitted patch plus a portable review note. Promotion preserves the existing Git index and unrelated edits, and does not commit, push, or install it into real environments. The user later synchronizes and installs the source; the installer already reads working-tree bytes, copies shipped skill/helper paths, and removes unchanged owned paths absent from the new source. It neither copies nor merges runtime knowledge. Source patch recovery and knowledge-pointer rollback are separate. A completed runtime activation cannot conceal undelivered requested source work, and a source-only improvement requires no knowledge generation.
+
 ## Role-policy boundary
 
 The deterministic helpers validate recorded lifecycle facts; they do not claim to enforce whether an agent was well briefed, independent, or appropriately routed. Those semantics are evaluated by frozen live scenarios with the actor receiving only the task, installed skill, and minimum case input.

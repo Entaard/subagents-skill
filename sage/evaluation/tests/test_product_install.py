@@ -123,6 +123,117 @@ class InstallContractTests(unittest.TestCase):
                 first["files"]["skills/sage/SKILL.md"]["installed_sha256"],
             )
 
+    def test_source_changes_ship_only_on_manual_update_across_targets(self) -> None:
+        with sandbox() as raw:
+            root = Path(raw); source = root / "checkout/sage"; copy_source(source)
+            obsolete = "skills/sage/references/obsolete-fixture.md"
+            replacement = "skills/sage/references/replacement-fixture.md"
+            entrypoint = "skills/sage/SKILL.md"
+            (source / obsolete).write_text("Fixture guidance awaiting retirement.\n", encoding="utf-8")
+            initial = (source / entrypoint).read_text() + "\nFor fixture work, read [fixture guidance](references/obsolete-fixture.md).\n"
+            (source / entrypoint).write_text(initial, encoding="utf-8")
+            targets = [root / "machine-a/package", root / "docker-b/package"]
+            inventories = []
+            for target in targets:
+                result = shell(source / "install.sh", target)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                receipt = json.loads((target / "sage/receipt.json").read_text())
+                self.assertEqual(Path(receipt["source_root"]), source)
+                self.assertIn("skills/sage-promote/references/source.md", receipt["installed_files"])
+                inventories.append({p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()})
+
+            closed = root / "runtime/source-1"; write_log(closed, complete_read_run("source-1"))
+            proposal = dump(root / "runtime/proposal.json", {"action": "create", "proposer": "proposer", "reviewer": "reviewer", "source_runs": [str(closed)], "record": record()})
+            store = root / "runtime/knowledge"; helper = targets[0] / "sage/bin/sage_knowledge.py"
+            self.assertEqual(invoke(helper, "stage", "--store-dir", str(store), "--proposal", str(proposal), "--generation-id", "g-1", "--expected-current", "none").returncode, 0)
+            self.assertEqual(invoke(helper, "activate", "--store-dir", str(store), "--generation-id", "g-1", "--expected-current", "none").returncode, 0)
+            runtime_before = {p.relative_to(root / "runtime"): p.read_bytes() for p in (root / "runtime").rglob("*") if p.is_file()}
+
+            # Model a reviewed source patch; package bytes change only on later explicit install calls.
+            (source / obsolete).unlink()
+            (source / replacement).write_text("Replacement fixture guidance with its declared scope.\n", encoding="utf-8")
+            revised = initial.replace("references/obsolete-fixture.md", "references/replacement-fixture.md")
+            (source / entrypoint).write_text(revised, encoding="utf-8")
+            note = source / "docs/promotions/fixture.md"; note.parent.mkdir(parents=True)
+            note.write_text("Fixture retirement review; source evidence only.\n", encoding="utf-8")
+            for target, before in zip(targets, inventories):
+                self.assertEqual({p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}, before)
+                user_file = target / "skills/sage/user-note.txt"; user_file.write_bytes(b"keep user data")
+                updated = shell(source / "install.sh", target)
+                self.assertEqual(updated.returncode, 0, updated.stderr)
+                self.assertIn(obsolete, output(updated)["removed_retired"])
+                self.assertFalse((target / obsolete).exists())
+                self.assertEqual((target / replacement).read_bytes(), (source / replacement).read_bytes())
+                self.assertEqual((target / entrypoint).read_text(), revised)
+                self.assertEqual(user_file.read_bytes(), b"keep user data")
+                self.assertFalse((target / "docs/promotions/fixture.md").exists())
+                self.assertEqual(shell(source / "uninstall.sh", target).returncode, 0)
+                self.assertEqual(user_file.read_bytes(), b"keep user data")
+            self.assertEqual({p.relative_to(root / "runtime"): p.read_bytes() for p in (root / "runtime").rglob("*") if p.is_file()}, runtime_before)
+
+    def test_missing_source_promotion_procedure_rejects_update_before_mutation(self) -> None:
+        with sandbox() as raw:
+            root = Path(raw); source = root / "source"; copy_source(source)
+            target = root / "package"
+            self.assertEqual(shell(source / "install.sh", target).returncode, 0)
+            before = {p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}
+            (source / "skills/sage-promote/references/source.md").unlink()
+            result = shell(source / "install.sh", target)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual({p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}, before)
+
+    def test_update_and_reinstall_preserve_colocated_promoted_knowledge(self) -> None:
+        with sandbox() as raw:
+            root = Path(raw); source = root / "source"; copy_source(source)
+            target = root / "package"; state = target / "sage"; store = state / "knowledge"
+            environment = dict(os.environ, SAGE_STATE_ROOT=str(state), PYTHONDONTWRITEBYTECODE="1")
+
+            def command(*args):
+                result = subprocess.run(list(map(str, args)), env=environment, text=True, capture_output=True, check=False)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                return output(result)
+
+            def inventory():
+                return {p.relative_to(state): p.read_bytes() for directory in (store, state / "runs") for p in directory.rglob("*") if p.is_file()}
+
+            def knowledge(*args):
+                return command(sys.executable, target / "sage/bin/sage_knowledge.py", *args)
+
+            command("bash", source / "install.sh", "--target-root", target)
+            closed = state / "runs/source-1"; write_log(closed, complete_read_run("source-1"))
+            selected = command(sys.executable, target / "sage/bin/sage_state.py", "list-runs", "--limit", "20")["runs"][0]
+            revisions = [(record(), "create"), (record(revision=2, prior_revision=1, status="retired"), "retire"), (record("k-provisional", status="provisional"), "create")]
+            revisions[1][0]["review"].update(retirement_basis="superseded", retirement_reason="Replaced fixture guidance.")
+            for index, (item, action) in enumerate(revisions, 1):
+                proposal = dump(root / f"proposal-{index}.json", {"action": action, "proposer": "proposer", "reviewer": "reviewer", "source_runs": [str(closed)], "source_hashes": {selected["run_id"]: selected["events_sha256"]}, "record": item})
+                parent = "none" if index == 1 else f"g-{index-1}"
+                knowledge("stage", "--proposal", proposal, "--generation-id", f"g-{index}", "--expected-current", parent)
+                knowledge("activate", "--generation-id", f"g-{index}", "--expected-current", parent)
+            ordinary = dump(root / "ordinary.json", cues(operation=["resume"]))
+            explicit = dump(root / "explicit.json", {**cues(operation=["resume"]), "include_non_supported": True})
+            selections = [knowledge("retrieve", "--cues", path, "--limit", "3") for path in (ordinary, explicit)]
+            self.assertEqual(selections[0]["matches"], [])
+            self.assertEqual([item["id"] for item in selections[1]["matches"]], ["k-provisional"])
+            before = inventory()
+            updated_helper = source / "scripts/sage_knowledge.py"
+            updated_helper.write_bytes(updated_helper.read_bytes() + b"\n# Source update fixture.\n")
+            for cycle in range(2):
+                with self.subTest(update=cycle):
+                    self.assertEqual(command("bash", source / "install.sh", "--target-root", target)["operation"], "update")
+                    self.assertEqual((target / "sage/bin/sage_knowledge.py").read_bytes(), updated_helper.read_bytes())
+                    self.assertEqual(inventory(), before)
+                    self.assertEqual(knowledge("validate")["generation_count"], 3)
+                    self.assertEqual([knowledge("retrieve", "--cues", path, "--limit", "3") for path in (ordinary, explicit)], selections)
+            command("bash", source / "uninstall.sh", "--target-root", target)
+            self.assertEqual(inventory(), before)
+            self.assertEqual(command("bash", source / "install.sh", "--target-root", target)["operation"], "install")
+            self.assertEqual(inventory(), before)
+            self.assertEqual(knowledge("validate")["current"], "g-3")
+            knowledge("rollback", "--generation-id", "g-1", "--expected-current", "g-3")
+            restored = knowledge("retrieve", "--cues", ordinary, "--limit", "3")
+            self.assertEqual([(item["id"], item["revision"]) for item in restored["matches"]], [("k-1", 1)])
+            self.assertTrue((store / "generations/g-3").is_dir())
+
     def test_unowned_destination_conflict_is_reported_before_mutation(self) -> None:
         with sandbox() as raw:
             target = Path(raw) / "target"

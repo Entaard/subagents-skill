@@ -1,7 +1,7 @@
 interface:
   display_name: "Sage Promote"
-  short_description: "Review and land closed-run knowledge safely"
-  default_prompt: "Use $sage-promote to review selected closed Sage runs and reversibly land only evidence-supported knowledge."
+  short_description: "Update knowledge and prepare Sage source changes"
+  default_prompt: "Use $sage-promote to review closed Sage runs, update installed knowledge, and leave verified Sage source improvements uncommitted for my review and later installation."
 
 policy:
   allow_implicit_invocation: false

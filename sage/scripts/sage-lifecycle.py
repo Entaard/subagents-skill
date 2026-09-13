@@ -33,6 +33,7 @@ REQUIRED = (
     "skills/sage-promote/agents/openai.yaml",
     "skills/sage-promote/references/promotion.md",
     "skills/sage-promote/references/knowledge.md",
+    "skills/sage-promote/references/source.md",
     *HELPERS.values(),
 )
 

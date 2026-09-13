@@ -1,6 +1,6 @@
 # Sage for Codex
 
-Sage is an explicit Codex workflow for demanding tasks: define observable quality, use the smallest useful team, preserve durable run facts, verify independently, and report evidence honestly. `$sage-promote` is a separate workflow that reviews closed runs and lands bounded, reversible knowledge. There is no active Claude adapter, managed scheduler, or automatic lesson extraction in this rebuild.
+Sage is an explicit Codex workflow for demanding tasks: define observable quality, use the smallest useful team, preserve durable run facts, verify independently, and report evidence honestly. `$sage-promote` reviews closed runs, updates runtime knowledge, and prepares evidence-backed improvements to Sage's source. There is no active Claude adapter, managed scheduler, or background promotion in this rebuild.
 
 The active package is deliberately small:
 
@@ -10,7 +10,7 @@ The active package is deliberately small:
 - `install.sh`, `uninstall.sh`, and the source-only `scripts/sage-lifecycle.py` manage the receipt-bound installation.
 - `archive/legacy/` preserves the superseded implementation as inert, hash-inventoried history.
 
-The root `CONTEXT.md` describes the superseded cross-host product. For this Codex-only package, its Light/Managed split, 30-percent handover trigger, and source-global promotion destination are historical terms, not active behavior. The current contract is [ARCHITECTURE.md](ARCHITECTURE.md) plus [docs/CONTRACTS.md](docs/CONTRACTS.md). The operational path authority is [runtime paths and discovery](skills/sage/references/runtime.md).
+The root `CONTEXT.md` retains historical cross-host terminology; its Light/Managed split and 30-percent handover trigger are not active behavior. Source promotion now prepares uncommitted changes for human review and manual installation. The current contract is [ARCHITECTURE.md](ARCHITECTURE.md) plus [docs/CONTRACTS.md](docs/CONTRACTS.md). The operational path authority is [runtime paths and discovery](skills/sage/references/runtime.md).
 
 ## Install, update, and uninstall
 
@@ -29,6 +29,8 @@ bash sage/install.sh \
 ```
 
 Run the same install command to update. Update proceeds only when every previously owned destination still matches its receipt hash and every new destination is unowned. Predictable path, parent-type, ownership, and receipt conflicts are reported before mutation. With the recommended target, the receipt and helpers are under `$HOME/.agents/sage/`. Runtime history is separate and is resolved by the helpers; the installer has no runtime-root setting.
+
+Promoted knowledge is not installer-owned: updating the package does not merge, reset, overwrite, or retire its records, change its active generation, or remove rollback history. This also holds when runtime data lives alongside package helpers. Keep the same runtime-root configuration to continue reading the same store. Source promotions that change helpers must verify backward compatibility with existing generations; data migrations are separate explicit work.
 
 Uninstall preflights predictable parent/type conflicts, removes only unchanged receipt-owned files, reports edited or replaced paths it retained, and leaves runtime runs and knowledge stores alone. The operation is conservative but is not a crash-atomic multi-file transaction; unexpected I/O can still interrupt it:
 
@@ -72,7 +74,15 @@ Registration retains a path and log-hash binding in `run-references/`. Keep the 
 
 ## Promote closed-run evidence
 
-Invoke `$sage-promote` separately. It discovers canonical and registered history with `list-runs`, then accepts only integrity-valid terminal run directories with reconciled effects. Missing or unreviewed sources are reported separately from `no_change` after reviewing eligible evidence. The workflow uses distinct proposer, refuter, and reviewer actors for a real change, then stages and activates through the knowledge helper. Source and installed retrieval examples are:
+Invoke `$sage-promote` separately. It discovers canonical and registered history with `list-runs`, then accepts only integrity-valid terminal run directories with reconciled effects. By default it assesses two destinations: the runtime knowledge store and the Sage source checkout. Missing or unreviewed inputs/destinations are reported separately from `no_change`. Distinct author, refuter, and reviewer actors check every real change.
+
+Runtime knowledge uses the existing stage/activate/rollback commands. Source promotion can add or correct instructions and helper code, or remove obsolete behavior, leaving verified edits **unstaged and uncommitted** with a review note under `sage/docs/promotions/`. It never commits, pushes, or installs those changes into your real environments. You review and commit the diff, synchronize it to other machines or Docker build contexts, then run `install.sh` yourself.
+
+Name the source package explicitly when needed, for example: `$sage-promote; use /workspace/subagents-skill/sage as the source root`. An absolute `SAGE_SOURCE_ROOT` environment setting also selects the checkout; otherwise the skill uses its loaded source package or the installed receipt's `source_root`. A missing checkout or read-only Docker mount leaves source work explicitly pending. See [source promotion](skills/sage-promote/references/source.md).
+
+Shared improvements are ordinary shipped skill/reference/helper edits. The installer already copies these and removes unchanged receipt-owned files retired from source. Local knowledge generations and closed-run history are not automatically copied or merged across machines. A narrowly scoped project fact may remain runtime-only; every pass reports why each destination changed or did not.
+
+Source and installed retrieval examples are:
 
 ```sh
 python3 sage/scripts/sage_knowledge.py retrieve \
@@ -81,7 +91,7 @@ python3 sage/scripts/sage_knowledge.py retrieve \
 python3 "$HOME/.agents/sage/bin/sage_knowledge.py" validate
 ```
 
-Staging requires a reviewed proposal and explicit source-run paths; activation and rollback require the expected current generation. The complete installed procedure and proposal schema are in `skills/sage-promote/references/promotion.md` and `knowledge.md`.
+Staging requires a reviewed proposal and explicit source-run paths; activation and rollback require the expected current generation. The complete installed procedures are in `skills/sage-promote/references/promotion.md`, `knowledge.md`, and `source.md`.
 
 ## Offline verification
 

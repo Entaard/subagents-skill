@@ -23,11 +23,11 @@ Round 3 addresses the common cause left by the first two narrow repairs: shared 
 
 ## Outcome and boundary
 
-Sage is a Codex-native orchestration skill that improves the quality of substantive work by making planning, delegation, verification, recovery, and reporting explicit. It spends extra agents only when their placement or independence is likely to improve the result. `sage-promote` is a separate skill that turns evidence from closed Sage runs into bounded, reviewed knowledge for later retrieval.
+Sage is a Codex-native orchestration skill that improves the quality of substantive work by making planning, delegation, verification, recovery, and reporting explicit. It spends extra agents only when their placement or independence is likely to improve the result. `sage-promote` is a separate skill that turns closed-run evidence into reviewed runtime knowledge and uncommitted improvements to shared Sage source.
 
-The rebuild targets Codex only. The live collaboration tool schema is the authority for available behavior. Cross-host adapters, a managed scheduler, durable leases, transaction protocols, universal performance claims, and automatic self-modification are outside this version.
+The rebuild targets Codex only. The live collaboration tool schema is the authority for available behavior. Cross-host adapters, a managed scheduler, durable leases, transaction protocols, universal performance claims, and unattended source deployment are outside this version.
 
-The repository-root `CONTEXT.md` remains historical project context, but its Light/Managed split, 30-percent handover threshold, and source-global promotion destination are superseded for this Codex-only product. Active Sage uses boundary checkpoints, an explicitly supplied state root, and one explicitly supplied knowledge store. It never edits source policy as a promotion destination.
+The repository-root `CONTEXT.md` retains historical project context; its Light/Managed split and 30-percent handover threshold are superseded for this Codex-only product. Active Sage uses boundary checkpoints and the shared runtime-root resolver. Explicit promotion assesses both runtime knowledge and the source checkout by default. Source promotion may change Sage policy and implementation, with independent review and verification, while leaving the changes unstaged, uncommitted, and uninstalled for the user.
 
 The architecture favors a short instruction spine plus branch-specific references. Python helpers are justified only for deterministic validation, state projection, retrieval, or reversible knowledge updates. Human- or model-judgment rules stay in prose instead of becoming a large pseudo-runtime.
 
@@ -36,7 +36,7 @@ The architecture favors a short instruction spine plus branch-specific reference
 There are two active entrypoints:
 
 - `sage/skills/sage/SKILL.md`: plan and complete a task, or report/resume a Sage run.
-- `sage/skills/sage-promote/SKILL.md`: inspect closed runs and create, correct, contest, or retire reusable knowledge.
+- `sage/skills/sage-promote/SKILL.md`: inspect closed runs, create/correct/contest/refute/retire runtime knowledge, and prepare additions, corrections, or removals in Sage source.
 
 They share file formats and deterministic helpers, not an implicit lifecycle. A Sage run cannot promote its own observations. Promotion cannot resume or finish the source task.
 
@@ -63,7 +63,8 @@ sage/
 |       |-- agents/openai.yaml
 |       `-- references/
 |           |-- knowledge.md
-|           `-- promotion.md
+|           |-- promotion.md
+|           `-- source.md
 |-- scripts/
 |   |-- sage_state.py
 |   |-- sage_knowledge.py
@@ -243,12 +244,14 @@ Promotion is an explicit, separately invoked workflow over terminal, integrity-v
 
 1. **Qualify inputs.** Verify that every source run is closed, identify its scope and evidence, and quarantine malformed inputs without rewriting them.
 2. **Extract.** A bounded reader or the root extracts candidate rules, applicability cues, falsifiers, direct evidence, counterevidence, and contradictions with existing records. One-run outcomes are not silently generalized.
-3. **Compare.** Match candidates to stable IDs and active records. Choose create, correct, mark contested/refuted, retire, or no change. A correction keeps identity and history.
+3. **Compare.** Match candidates to stable IDs, active records, and current source behavior. Choose each candidate's destinations and actions. An empty runtime store does not prevent a source correction or retirement. A knowledge correction keeps identity and history.
 4. **Refute.** An independent refuter receives the candidate, its intended evidence class, source evidence, relevant existing record, and a mandate to find boundary failures, contradictory evidence, weak causality, or a better narrower qualifier. It does not receive a target approval verdict.
 5. **Review.** An independent reviewer dispositions every refutation and counterexample and applies the declared evidence-class predicate above. Any material proposal change returns to its author and requires renewed independent refutation and review. Any unresolved material counterevidence yields `contested` or no landing, never `supported`.
-6. **Stage and validate.** Build a complete new generation, validate stable references and hashes, and compare it with the prior generation. The active pointer has not changed yet.
-7. **Land reversibly.** The promotion coordinator lands the independently reviewed proposal by atomically replacing only `current.json` after the generation is durable. Retain the prior generation. Rollback changes the pointer to a validated earlier generation; it never deletes audit history.
-8. **Report.** Name source runs, record actions, evidence status, counterevidence, refutation dispositions, changed stable IDs, generation hashes, and rollback target.
+6. **Prepare and validate.** Build the needed knowledge generation and/or source patch. Review exact source changes with their baseline, qualifiers, counterevidence, and behavior checks. A source-only correction needs no empty generation.
+7. **Land reversibly.** Runtime landing changes `current.json` only after the generation is durable; retain the prior generation for rollback. Source landing applies the reviewed patch against unchanged preimages, preserving user edits and the Git index. These are separate checkpointed effects; source changes remain uncommitted and real installation is left to the user.
+8. **Report.** Name each destination's result, source runs, actions, evidence status, counterevidence, refutation dispositions, stable IDs, generation hashes, source diff/review-note paths, checks, and separate recovery targets. An uninspected or inaccessible source checkout is pending work, not no change.
+
+The installed [source procedure](skills/sage-promote/references/source.md) is the authority for checkout discovery, source patch review, portable evidence, and handoff. Source improvements travel through the user's Git synchronization and subsequent `install.sh` on each machine or Docker environment. Runtime generations and closed-run logs remain local and are not automatically merged by installation. Supported scoped guidance must keep its limits when encoded in source; provisional or contested findings cannot become unconditional instructions. A promotion patch cannot rewrite its own running gates to approve itself.
 
 Rollback is for an integrity-valid generation whose landed rule or status proves unsuitable. If any retained generation or pointer is structurally corrupt or hash-invalid, every normal mutation—including rollback—fails without changing the store. Preserve the corrupt bytes as evidence and use a separately designed recovery procedure; weakening history validation or deleting the damaged generation would make the audit trail untrustworthy.
 

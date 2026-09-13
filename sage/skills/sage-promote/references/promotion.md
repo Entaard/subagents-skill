@@ -1,20 +1,20 @@
 # Promotion workflow
 
-Read for every `$sage-promote` run. The root is the promotion coordinator: it selects scope, checks evidence, dispositions risk, and alone decides whether to land. The source tasks remain closed.
+Read for every `$sage-promote` run. The root is the promotion coordinator: it selects scope, checks evidence, dispositions risk, and alone decides whether to land. Assess installed knowledge and Sage source improvements by default; the user may narrow the destinations. Follow [source promotion](source.md) for checkout discovery, patch review, and uncommitted delivery. The source tasks remain closed.
 
 ## Own coordination and recovery
 
 Every invocation owns a separate coordinator run. Before planning, read the sibling [runtime paths](../../sage/references/runtime.md), [run procedure](../../sage/references/run.md) and [state contract](../../sage/references/state.md). Initialize the coordinator by unique ID in the pinned shared root, distinct from every selected source. Its own `events.jsonl` is append-only authority for promotion work. Source runs remain closed and read-only; validate them without appending, resuming, or repairing them. Knowledge generations are store artifacts, not the coordinator's task state.
 
-Commit a bounded task graph that records source selection and candidate/attempt limits, user authority, proposal and expected-pointer/generation baselines, actual role handles, and dependencies through landing. Before dispatch or material rerouting, read [delegation](../../sage/references/delegation.md). Record each assignment's requested and effective model/effort separately, its context fork, scope/effect, evidence handling, and actual result. Judge placement using total delegation overhead: briefing, root context, review, integration, verification, and retry cost. A bounded `no_change` may instead use one root-owned inspection task, no candidate team, and no generation write.
+Commit a bounded task graph that records source-run selection and candidate/attempt limits, requested destinations, user authority, proposal and expected-pointer/generation baselines, source checkout/diff baselines, actual role handles, and dependencies through each landing. Before dispatch or material rerouting, read [delegation](../../sage/references/delegation.md). Record each assignment's requested and effective model/effort separately, its context fork, scope/effect, evidence handling, and actual result. Judge placement using total delegation overhead: briefing, root context, review, integration, verification, and retry cost. A bounded `no_change` may instead use one root-owned inspection task and no candidate team; it requires no eligible change in either requested destination.
 
-Checkpoint after plan commitment, before and after each delegation wave, after proposal/refutation/review, and before and after staging or activation. Each checkpoint records the next action, unresolved authority, and current source-log/terminal hashes, proposal hash, expected and actual pointer, generation/manifest hash when present, and landing authority. These are the coordinator's baselines; they never turn source logs or generations into its state.
+Checkpoint after plan commitment, before and after each delegation wave, after proposal/refutation/review, and before and after source integration, staging, or activation. Each checkpoint records the next action, unresolved authority, source-log/terminal hashes, proposal/patch hashes, source file preimages/postimages and application status, expected and actual pointer, generation/manifest hash when present, and landing authority. These are the coordinator's baselines; they never turn source logs or generations into its state. A source patch and runtime activation are separate effects; recovery must reconcile both.
 
 Request `snapshot --write --summary` for checkpoint receipts; use the shared paginated context views for recovery.
 
 Before context loss, resume, or any unknown actor/effect, read [recovery](../../sage/references/recovery.md). Validate the coordinator's own log and snapshot binding; rebuild only a stale projection from valid authority, while preserving a corrupt log and pausing admission. Reconcile every actual handle and unknown effect, retain the one-writer barrier, then recheck the actual source, proposal, current pointer, generation, and authority baselines. Before retrying an uncertain mutation, inspect the store and proposal bytes and establish the prior effect, absence, or safe idempotence. Append accepted observations, revise a stale next action or plan, confirm existing authority still covers it, and obtain new authority only when the action or scope requires it. Never use this procedure to resume or edit a source run.
 
-Close the coordinator `completed` only after every criterion has observation evidence, required checks pass, every finding is dispositioned, admitted effects are reconciled, and scope is reconciled. Otherwise keep a truthful checkpointed open run or close `failed`/`stopped` with unfinished scope and human items explicit.
+Close the coordinator `completed` only after every criterion has observation evidence, required checks pass, every finding is dispositioned, admitted effects are reconciled, and both requested destinations have a delivered result or evidenced no-change reason. A verified uncommitted source patch is delivered; committing and real installation belong to the user. A missing checkout or unapplied patch is unfinished source work. Otherwise keep a truthful checkpointed open run or close `failed`/`stopped` with unfinished scope and human items explicit.
 
 ## Resolve and qualify
 
@@ -24,7 +24,7 @@ Report a missing/empty root, active-only history, and quarantined sources distin
 
 Run the state helper’s terminal validation for each selected source, then let `stage` revalidate it. Eligible status is `completed`, `failed`, or `stopped`; every admitted effect must be reconciled. Active, malformed, non-UTF-8, integrity-invalid, or unknown-effect runs are quarantined and reported without repair. Failed and safely stopped work can contain valuable negative evidence.
 
-Before reading widely, cap the run set, candidate count, attempts, and stop condition. A heterogeneous batch that cannot receive one coherent review is split or stopped. If the bounded evidence yields no reusable, falsifiable rule or status change, return `no_change` with the source IDs and reason. This path needs no candidate team and writes no generation.
+Before reading widely, cap the run set, candidate count, attempts, and stop condition. A heterogeneous batch that cannot receive one coherent review is split or stopped. If the bounded evidence yields no reusable, falsifiable rule, status change, or source improvement after comparison with both requested destinations, return `no_change` with the source IDs and per-destination reasons. This path needs no candidate team and writes no generation or source patch. Existing source defects or obsolete guidance remain candidates even with no retained knowledge records.
 
 ## Extract and reconcile
 
@@ -64,7 +64,7 @@ Independent refutation and review are necessary for all classes and sufficient f
 
 ## Stage, land, and report
 
-Read [knowledge CLI and schema](knowledge.md), prepare the complete proposal, and record the observed active generation (`none` for an empty store). Then:
+For each installed-knowledge action, read [knowledge CLI and schema](knowledge.md), prepare the complete proposal, and record the observed active generation (`none` for an empty store). Source patches follow the separate [source landing procedure](source.md#apply-recover-and-hand-off); they do not pass through the knowledge CLI. For runtime knowledge:
 
 ```text
 python3 SAGE_KNOWLEDGE stage --state-root ROOT --proposal proposal.json --generation-id NEW --expected-current EXPECTED
@@ -84,4 +84,4 @@ python3 SAGE_KNOWLEDGE rollback --state-root ROOT --generation-id PRIOR --expect
 
 This rollback handles an integrity-valid bad landing. Because every normal mutation validates all retained history, corrupt generation bytes or a malformed pointer block rollback unchanged. Preserve that evidence and stop for a separately designed recovery; do not delete history or weaken validation inside promotion.
 
-Return the no-change reason or all actions, source IDs, quarantines, actor IDs and behavioral-independence evidence, findings/dispositions, evidence class and semantic gate decision, generation IDs/hashes, current pointer, exact changed paths, rollback target, executed validation, failures, and unobserved claims.
+Return each destination's no-change reason or actions, source-run IDs, quarantines, actor IDs and behavioral-independence evidence, findings/dispositions, evidence class and semantic gate decision, generation IDs/hashes, current pointer, source checkout and diff/review-note paths, exact changed paths, separate recovery targets, executed validation, failures, and unobserved claims. Source changes remain unstaged and uncommitted; real installed package bytes stay unchanged until the user runs `install.sh`.

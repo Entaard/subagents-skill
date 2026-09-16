@@ -31,7 +31,7 @@ The `run` read is the one exception to the rule that a run reads no log, and its
 <date> mark promote | drained through here by the <date> pass
 ```
 
-Grammar: `date type session | payload`, types `run`, `obs`, `use`, `mark`. Write one line per fact and never reflow an existing line. A `|` inside payload is harmless — only the first three fields are positional. A malformed line is a question for the next `/sage-promote` pass, never damage.
+Grammar: `date type session | payload`, types `run`, `obs`, `use`, `mark`. On an `obs` line **`<class>` is `portable` or `local`, those two words and no others** — a topic word there is not a smaller mistake, it is what stops a lesson ever reaching `memory/shared/`, because the promotion signal accepts `portable` alone. Write one line per fact and never reflow an existing line. A `|` inside payload is harmless — only the first three fields are positional. A malformed line is a question for the next `/sage-promote` pass, never damage.
 
 The five fields after `wall=` come from `sage-watch.sh --status` read over the parent transcript at close (`record.md`): the parent's measured model, its compaction count, its deduplicated turn count, the sum of occupancy over those turns, and the most a fresh window after the checkpoint could have saved. Write `none` where the sensor could not run.
 
@@ -52,7 +52,7 @@ Automatic, every run, to `memory/journal.md` only, via shell append (`>>`) — n
 
 - **The `run` line, every run, hits included** — a band you can trust needs its hits recorded next to its misses. Write the note so Step 2 can act on it: "fetch-heavy research runs 70–120k per agent" is usable at plan time; "unit 3 was expensive" is not.
 - **The `use` line** — every KI read at Step 2, `hit` or `miss: <why>`. A `miss` is the KI misleading the run, not the run not needing it; not-needed is simply absent from the line.
-- **`obs` lines as earned** — a new lesson, gap, defect or contradiction, with kind and class named, and a falsifier for anything that could one day be a rule; `confirm <ki-id>` where this run re-observed an existing KI (that is what makes counts reach three and mean it); `settle <ki-id>` where this run produced the artifact that answers a KI, naming the artifact — `settled` requires the artifact to exist, not to be intended, because promote will flip the status on this line's word.
+- **`obs` lines as earned** — a new lesson, gap, defect or contradiction, with kind named and class written as `portable` or `local`, and a falsifier for anything that could one day be a rule; `confirm <ki-id>` where this run re-observed an existing KI (that is what makes counts reach three and mean it); `settle <ki-id>` where this run produced the artifact that answers a KI, naming the artifact — `settled` requires the artifact to exist, not to be intended, because promote will flip the status on this line's word.
 
 Then read the tail back — `tail -n 5 memory/journal.md` — and confirm your lines are there, whole, one line each. That is the entire post-append check: there is nothing an append can structurally break.
 

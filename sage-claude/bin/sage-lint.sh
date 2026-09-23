@@ -291,7 +291,9 @@
 #     Keyword sets (case-insensitive substring, heuristic — say so plainly): a same-family /
 #       residual maker-checker bias disclosure is recognised by `same-family`, `same family`,
 #       or `self-preference bias`; its one required home is `Findings and dispositions`. A
-#       rail-1 authorisation is recognised by `rail-1` or `rail 1`; its one required home is
+#       rail-1 authorisation is recognised by `rail-1`, or by `rail 1` when what follows is not a
+#       digit, a decimal point, or a `k`/`m` unit suffix (a `k` or `m` that no letter follows) -- a rail FIGURE such as `task rail 1.08M` or `rail 150k` is
+#       bookkeeping, not an authorisation, and once fired this check on it; its one required home is
 #       `Decisions and deviations`.
 #     Fires: a keyword set appears somewhere in the document while NO line under its home
 #       section carries that same set — one violation per keyword set, pointing at the first
@@ -1779,7 +1781,7 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
       if (heading == "Findings and dispositions") fam_home = 1
       else if (fam_first == 0) fam_first = NR
     }
-    if (index(low, "rail-1") > 0 || index(low, "rail 1") > 0) {
+    if (index(low, "rail-1") > 0 || low ~ /rail 1([^0-9.km]|[km][a-z]|\.[^0-9]|\.?$)/) {
       if (heading == "Decisions and deviations") rail_home = 1
       else if (rail_first == 0) rail_first = NR
     }

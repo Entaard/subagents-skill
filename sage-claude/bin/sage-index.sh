@@ -51,6 +51,12 @@
 #   and skipped -- the quarantine rule in the memory contract beside sage-promote, "Structural invariants". It
 #   never aborts the walk: one bad KI costs one line of stderr, not the index.
 #
+#   A well-shaped file carrying an ILLEGAL VALUE is named on stderr and STILL indexed: a `kind:`
+#   outside the eight kinds, a `class:` other than `portable` or `local` on a lesson, gap, defect
+#   or contradiction, or any `class:` but `portable` under shared/. Default mode only. It exists
+#   because KIs once carried topic words in `class:` through every check, and a lesson with no
+#   legal class can never reach shared/. Quarantine stays the promote preflight's call.
+#
 # EXIT CODES
 #   0  index or stale notice printed (possibly empty on a fresh install). A missing or empty
 #      shared/ is NOT fatal: the protocol's degraded mode (references/memory.md: a missing
@@ -156,6 +162,11 @@ walk_knowledge_items() {
       if (lastused=="") lastused="—"
 
       if (MODE=="index") {
+        bad = ""
+        if (kind ~ /[ \t]/ || index(" rule stats band lesson gap defect contradiction stamp ", " " kind " ") == 0) bad = "kind: " kind
+        else if (SHARED && class != "portable") bad = "class: " class
+        else if (index(" lesson gap defect contradiction ", " " kind " ") && class != "portable" && class != "local") bad = "class: " class
+        if (bad != "") print "sage-index: illegal value, indexed anyway: " bad " in " FILENAME > "/dev/stderr"
         if (length(body)>90) body=substr(body,1,90) "…"
         print id " | " kind " | " class " | " band " | " created " | " lastused " | " status " | " body
         exit 0

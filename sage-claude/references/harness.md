@@ -1,6 +1,6 @@
 # Claude Code mechanics
 
-Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Model facts verified against the vendor's model docs 2026-09-10 on local install v2.1.267; the limits section carries its own date. Every dated figure behind a rule here lives in `harness-measurements.md`.
+Your job here: resolve a tier to a real model, dispatch a unit that is actually bounded, and read a running unit's transcript. Model facts verified against the vendor's model docs 2026-09-23 on local install v2.1.280; the limits section carries its own date. Every dated figure behind a rule here lives in `harness-measurements.md`.
 
 **Docs-drift trigger:** `claude --version` reports a build newer than that line → re-verify this file's tables against the changelog before trusting them.
 
@@ -21,7 +21,7 @@ Your job here: resolve a tier to a real model, dispatch a unit that is actually 
 
 | Role | Model | Effort | Tools | Scope — what it cannot do |
 | --- | --- | --- | --- | --- |
-| `explorer` | `haiku` | `low` | `Read`, `Glob`, `Grep` | codebase only; no shell, no network, **cannot write** |
+| `explorer` | `sonnet` | `low` | `Read`, `Glob`, `Grep` | codebase only; no shell, no network, **cannot write** |
 | `verifier` | `opus` | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; `Edit`/`Write`/`NotebookEdit` denied | Bash is bound to running checks — but it **can** reach the network, so the brief must say when it should not |
 | `web-researcher` | `sonnet` | `medium` | `WebSearch`, `WebFetch`, `Read` | outside sources only; no shell, no repo edits, **cannot write** |
 | `implementer` | `sonnet` | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` — no Agent tool | writes only inside its briefed lease; `skills:` preloads `clean-code` at startup, and with no Skill tool it can load nothing else; cannot spawn agents |
@@ -62,24 +62,22 @@ Set → write the model that will really run and record the substitution as an a
 
 Tiers outlive model releases; a dispatch takes a name and the ledger records a name. Resolve from the live session, from the first source that answers: **the `model` parameter on the Agent tool schema you have loaded** (authoritative); **the model list in your environment or system context**, or `/model`; **the snapshot table below**, a cached answer and the first thing to go stale.
 
-Map by role, not by remembered name: cheapest and fastest → fast, mid-cost general worker → standard, strong reviewer and judge → frontier, strongest long-horizon model above that → apex. A lineup with nothing above frontier resolves an apex row to the frontier model with a note. A model the harness offers and this table does not list: place it by role and write an assumption-log row; making it a row here is `/sage-promote` stage three's job.
+Map by role, not by remembered name: mid-cost general worker → standard, strong reviewer and judge → frontier. A model the harness offers and this table does not list: place it by role and write an assumption-log row; making it a row here is `/sage-promote` stage three's job.
 
-Snapshot (verify against source 1 first; vendor price ratio haiku : sonnet : opus : fable = 1 : 2 : 5 : 10, input and output alike — `harness-measurements.md`, Model lineup study):
+Snapshot (verify against source 1 first; vendor price ratio sonnet : opus : fable = 1 : 2 : 5, input and output alike — `harness-measurements.md`, Model lineup study):
 
 | Tier | Model param | Notes |
 | --- | --- | --- |
-| fast | `haiku` (Haiku 4.5) | exploration, mechanical work, high volume. **200K window, no 1M variant** — the one hard bound in the lineup: a scout that must hold a corpus past ~150k tokens goes to `sonnet` or `explorer-alt`, never `haiku` |
-| standard | `sonnet` (Sonnet 5) | default workers. 1M window |
-| frontier | `opus` (Opus 5) | hard review, judging; the default checker seat. 1M window |
-| apex | `fable` (Fable 5.1) | the escalation rung and genuinely ambiguous, cross-system, long-horizon single-owner units. ~2× frontier price and the slowest latency in the family, so no explorer, web-researcher or implementer seat. 5.1 kept the tier; cache reads cut to a quarter (`harness-measurements.md`, Model lineup study) |
+| standard | `sonnet` (Sonnet 5) | default workers, and search and mechanical work through `explorer` at `low` effort. 1M window |
+| frontier | `opus` (Opus 5.5) | hard review, judging, and the genuinely ambiguous, long-horizon single-owner unit; the default checker seat. 1M window |
 
-`claude-mythos-5` and `claude-mythos-5-1` are not values the Agent tool's `model` schema accepts here, so neither holds a seat (`harness-measurements.md`, Model lineup study).
+**Only these two tiers dispatch, on the user's word.** `haiku` left sage's lineup, so no row resolves to it. **`fable` runs only as the parent, and only where the user chose it for the session**: no unit, ladder rung or checker override resolves to it. `claude-mythos-5` and `claude-mythos-5-1` are not values the Agent tool's `model` schema accepts here, so neither holds a seat (`harness-measurements.md`, Model lineup study).
 
-**Cross the tier choice with the unit's step count.** A cheap model on single-pass work is the cheapest thing in the fleet; on **multi-step** work it takes 2–3× the turns and can cost more overall. The brief decides, never the seat: exact paths, commands and decisions make the work transcription, and the cheap tier holds; a unit that must discover its own path and then act on it in many steps floors at standard. The evidence is external and thin — a reason to ask, not a number to compute with (calibration: provisional; `harness-measurements.md`, Model lineup study). `dispatch.md` is the one home of the ground-truth-brief discount this reads from the cost side.
+**Cross the seat choice with the unit's step count.** The cheapest seat, `explorer`, is the cheapest thing in the fleet on single-pass work; on **multi-step** work a cheaper seat can take 2–3× the turns and cost more overall. The brief decides, never the seat: exact paths, commands and decisions make the work transcription, and the cheapest seat holds; a unit that must discover its own path and then act on it in many steps floors above it. The evidence is external and thin — a reason to ask, not a number to compute with (calibration: provisional; `harness-measurements.md`, Model lineup study). `dispatch.md` is the one home of the ground-truth-brief discount this reads from the cost side.
 
-**The parent is apex's real home.** Run sage sessions on `fable` where the choice exists: the expensive failures in the run log are parent-judgment failures. The parent's model belongs in the ledger's Plan section.
+**The parent's model is the user's choice**, made per session. Record it in the ledger's Plan section; never advise it.
 
-**Apex stays out of the checker seat.** `verifier` keeps `opus`: checking is bought with clean context and a tight mandate more than with raw capability, and refuter rows are already the most expensive a run carries. Under a `fable` parent an `opus` checker is a different model reviewing the maker's work; `verifier-alt` is the true cross-family check. Escalate a review row to `fable` only when the maker was not `fable`, as a logged deviation.
+**`verifier` keeps `opus`**: checking is bought with clean context and a tight mandate more than with raw capability. Which checker a given maker gets is `verify.md`'s.
 
 ### The alt lane
 
@@ -103,7 +101,7 @@ A saved agent file is the only place a per-unit constraint becomes real:
 | `background` | forces background execution | a role that should never block the parent |
 | `isolation: worktree` | frontmatter twin of the Agent-tool param | a writer role that must never share a tree |
 
-A unit that hits `maxTurns` is `blocked`, not failed, and charges no rung (`dispatch.md` Step 3 owns when to set the cap); nothing documents whether the caller can tell the cap was the reason a report came back thin, so that is policy for an ambiguous signal, not a harness status.
+Nothing documents whether the caller can tell a cap was why a report came back thin, so the `blocked` status `dispatch.md` Step 3 gives a capped unit is policy for an ambiguous signal, not a harness status; that step also owns when to set the cap.
 
 ## Transcripts and the token arithmetic
 
@@ -154,4 +152,4 @@ Two facts that price acting on a signal. `TaskStop` returns nothing usable — i
 
   The test governs what gets **said**, not where the ledger lives; `/sage report`'s resolution order in `record.md` is untouched.
 - **Skill install:** `~/.claude/skills/sage/` (personal) or `.claude/skills/sage/` (project), plus `~/.claude/agents/` for the four roles; the source repo's `install.sh` handles both. `disable-model-invocation: true` is set, so sage runs on `/sage` only.
-- **Everything under `~/.claude/skills/sage/memory/` is excluded from the synced tree.** `shared/` is the machine's clone of the repo's template, rewritten only by an install sync and by `/sage-promote`; a missing or empty clone means sage runs on `local/` and the journal alone, prints one line saying so, and the fix is `install.sh`. A run appends journal lines and rewrites nothing (`memory.md`).
+- **Everything under `~/.claude/skills/sage/memory/` is excluded from the synced tree.** `shared/` is the machine's clone of the repo's template, rewritten only by an install sync and by `/sage-promote`. `memory.md` owns the rest: what a run does when the clone is missing, and the journal append that is a run's only write.

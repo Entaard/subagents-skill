@@ -449,7 +449,7 @@
 #       IN SCOPE, resolved BY BASENAME under `<dir>/memory/`, `<dir>/memory/shared/` and
 #         `<dir>/memory/archive/`: everything else the corpus calls by a memory name — a
 #         portable KI (`shared/<slug>.md`, `../memory/shared/<slug>.md`, or repo-rooted), an
-#         archived file (`memory/archive/shared-v2.md`), and the retired v2 spellings
+#         archived file (`memory/archive/<file>.md`), and the retired v2 spellings
 #         (shared.md, shared-*.md), which now correctly flag as dangling. Those files are
 #         real and checked in, so a dangling citation is a real defect and is reported. Only
 #         the basename is common to the spellings, so the basename is what resolves, in any

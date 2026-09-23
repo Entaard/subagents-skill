@@ -2,7 +2,7 @@
 id: spot-check-every-successors-final-report
 kind: rule
 class: portable
-status: live
+status: archived → subject gone: the successor handover this rule calibrated left SKILL.md, whose `## Compaction and resume` says "nothing spawns a successor"; the user delegated the removal-bar decision to the 2026-09-23 /sage run 9832cdf3 2026-09-23
 ---
 
 **Spot-check every successor's final report, unconditionally — one command batch, whether or not you suspect it.** The check's value is that it is near-free and always run, not that it catches often: what it finds is reporting drift over work that was itself correct.

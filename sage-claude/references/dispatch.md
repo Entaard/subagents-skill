@@ -45,16 +45,16 @@ Choose the tier from the unit's properties, then resolve it to a model:
 
 | Unit property | Tier | Target effort |
 | --- | --- | --- |
-| Mechanical, high-volume, search/exploration | fast | low–medium |
+| Mechanical, high-volume, search/exploration | standard | low–medium |
 | Standard implementation, integration | standard | medium |
 | Ambiguous, cross-system integration | standard→frontier | high |
 | Correctness/security review, verification | frontier | high–max |
-| Genuinely ambiguous, long-horizon, single-owner unit | apex | high–max |
+| Genuinely ambiguous, long-horizon, single-owner unit | frontier | high–max |
 | Synthesis, triage, completion claim | **the parent — you** | — |
 
-Apex is an escalation and dedicated-owner tier, never a default seat. **Tier is one axis; the unit's step count is the other** — a cheap model on multi-step work can cost more than the tier above it (`harness.md`, Models and effort, owns both rules). Four saved agent files make the effort column real — **`explorer`**, **`verifier`**, **`web-researcher`**, **`implementer`** (`harness.md`, the role table) — and three optional alt twins place a reader outside this harness's model family (`alt-lane.md`).
+**Tier is one axis; the unit's step count is the other** — a cheaper seat on multi-step work can cost more than the seat above it (`harness.md`, Models and effort, owns both rules). Four saved agent files make the effort column real — **`explorer`**, **`verifier`**, **`web-researcher`**, **`implementer`** (`harness.md`, the role table) — and three optional alt twins place a reader outside this harness's model family (`alt-lane.md`).
 
-- On a retry, escalate one tier rather than re-dispatching the same row; the ladder tops out at the highest tier the harness resolves (`execute.md`, the failure ladder).
+- On a retry, take the rung the failure's signature earns (`execute.md`, the failure ladder).
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write, with a no-source-edit rule.
 - Nested delegation off unless you grant a self-contained subtree; only a saved agent whose `tools:` omits the Agent tool enforces it — the spawn-depth cap bounds runaway recursion and does not implement "off".
 
@@ -155,7 +155,7 @@ PARENT: <the model you are running on> — synthesis, triage, completion claim
 
 | # | Unit (done when)         | R/W | Model (tier)      | Effort (via)         | Flow       | Isolation   | Est. tokens |
 |---|--------------------------|-----|-------------------|----------------------|------------|-------------|-------------|
-| 1 | ...                      | R   | haiku (fast)      | low (explorer)       | bg, batch1 | —           | ~20k        |
+| 1 | ...                      | R   | sonnet (standard) | low (explorer)       | bg, batch1 | —           | ~20k        |
 | 2 | ...                      | W   | sonnet (standard) | medium (implementer) | bg, after1 | write lease | ~80k        |
 | 3 | review of #2 (lens: ...) | R   | opus (frontier)   | high (verifier)      | bg, after2 | frozen diff | ~50k        |
 

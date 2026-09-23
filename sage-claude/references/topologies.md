@@ -55,7 +55,7 @@ Pick the smallest pattern that fits the task, then compose patterns for larger w
 
 **When:** the end of any large orchestration.
 **Flow:** one fresh agent asks only what is missing — an angle not swept, a claim unverified, a criterion without evidence, a file outside the diff scope. Its findings become quick follow-ups or explicit `Gaps:` lines in the ledger's run record.
-**Rules:** the critic is cheap (fast or standard tier); it audits coverage, it does not redo the work.
+**Rules:** the critic is cheap (standard tier); it audits coverage, it does not redo the work.
 
 ## 10. Blind acceptance suite (the independent test designer)
 

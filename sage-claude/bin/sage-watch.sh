@@ -195,7 +195,8 @@
 #   occ-sum    the sum of `occupancy` over the deduplicated records, in order — every
 #              turn's whole window, counted once per turn. This is the cache-read cost the
 #              `spend` formula excludes, and it is real money: cache reads bill at 0.1x the
-#              input price on most models, and 0.025x on Fable 5.1 and Mythos 5.1. That
+#              input price on most models, 0.05x on Opus 5.5, and 0.025x on Fable 5.1 and
+#              Mythos 5.1. That
 #              rate table is why `model=` is on the parent line — the parent needs the id
 #              to pick the row before it can price `saving-post-rung`.
 #

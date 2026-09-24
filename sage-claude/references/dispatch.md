@@ -52,7 +52,7 @@ Choose the tier from the unit's properties, then resolve it to a model:
 | Genuinely ambiguous, long-horizon, single-owner unit | frontier | high–max |
 | Synthesis, triage, completion claim | **the parent — you** | — |
 
-**Tier is one axis; the unit's step count is the other** — a cheaper seat on multi-step work can cost more than the seat above it (`harness.md`, Models and effort, owns both rules). Four saved agent files make the effort column real — **`explorer`**, **`verifier`**, **`web-researcher`**, **`implementer`** (`harness.md`, the role table) — and three optional alt twins place a reader outside this harness's model family (`alt-lane.md`).
+**Tier is one axis; the unit's step count is the other** — a cheaper seat on multi-step work can cost more than the seat above it (`harness.md`, Models and effort, owns both rules). Four saved agent files make the effort column real — **`explorer`**, **`verifier`**, **`web-researcher`**, **`implementer`** (`harness.md`, the role table) — and optional alt twins place a reader outside this harness's model family (`alt-lane.md`).
 
 - On a retry, take the rung the failure's signature earns (`execute.md`, the failure ladder).
 - Reviewers: read-only *role* always; a writable *sandbox* only when verification must write, with a no-source-edit rule.

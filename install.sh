@@ -498,8 +498,9 @@ if [ -e "$orchestrator_dest" ] || [ -L "$orchestrator_dest" ]; then
   fi
 fi
 
-# Alt agents are the same three reader roles, on a model outside this harness's own family
-# when the machine serves one. Never a different role. Never a name this repo hardcodes.
+# Alt agents are the three reader roles, on a model outside this harness's own family when the
+# machine serves one, plus refuter-alt, the refuting half of the verifier role. Never a role the
+# base agents lack. Never a name this repo hardcodes.
 # The templates live in claude-agents-alt/, a SIBLING of claude-agents/, never a subdirectory of it.
 # The rsync above has no exclude for a subdirectory. The backup guard above it globs only
 # "$agents_src"*.md. A subdirectory file would be copied to ~/.claude/agents/ wholesale, with no
@@ -566,6 +567,12 @@ if [ -d "$alt_src" ]; then
     # render and back up over its own first render. Its second backup() call would overwrite the
     # first saved copy with this run's own output, and that loses the user's real file for good.
     seen_names=()
+    is_alt_checker_role() {
+      case "$1" in
+        verifier-alt|refuter-alt) return 0 ;;
+        *) return 1 ;;
+      esac
+    }
     while IFS= read -r line || [ -n "$line" ]; do
       # Trim first, then classify. Classifying the raw line made a whitespace-only line and an
       # indented '# comment' both fall through to the "has no '='" NOTE, contradicting the tip this
@@ -612,22 +619,18 @@ if [ -d "$alt_src" ]; then
       seen_names+=("$name")
       enabled_names+=("$name")
 
-      # verifier-alt is the one twin whose value IS its model family: it exists to be the checker
-      # half of a maker/checker pair, and that is the one benefit no same-family model can supply.
-      # An Anthropic model here installs a same-family checker wearing an alt name, while its own
-      # description claims the diversity — the exact false claim this lane exists to make honest.
-      # The other two twins buy price and window headroom, where an Anthropic model is a perfectly
-      # good choice, so this checks verifier-alt alone.
+      # A checker twin's only value is a second model family, so an Anthropic model makes its own
+      # description false. The other twins buy price and window headroom, where one is fine.
       #
       # It warns and installs anyway rather than skipping. The config is the user's call, this
       # pattern cannot know every non-Anthropic model name, and refusing to install would turn a
       # questionable model choice into no checker at all. The run that would be misled by a
       # same-family checker is a later one, and it has the report's MODEL-FAMILY: line to catch it.
-      if [ "$name" = "verifier-alt" ]; then
+      if is_alt_checker_role "$name"; then
         case "$model" in
           claude*|*haiku*|*sonnet*|*opus*)
-            echo "NOTE: $alt_conf: verifier-alt is set to '$model', which looks like an Anthropic"
-            echo "      model. verifier-alt exists to be a checker from a different model family, so"
+            echo "NOTE: $alt_conf: $name is set to '$model', which looks like an Anthropic"
+            echo "      model. $name exists to be a checker from a different model family, so"
             echo "      that setting gives it no diversity to offer. Installing it as configured;"
             echo "      set a non-Anthropic model if you want the maker/checker diversity."
             ;;
@@ -1221,7 +1224,7 @@ if [ -d "$sage_src" ]; then
 fi
 echo "Installed subagent agents  -> $agents_dest"
 if [ "${alt_installed:-0}" -gt 0 ]; then
-  echo "Installed alt agents       -> $alt_installed of the three, at $agents_dest"
+  echo "Installed alt agents       -> $alt_installed of ${#alt_names[@]}, at $agents_dest"
   echo "  Start a new Claude Code session before an alt agent can be dispatched."
   echo "  The agent registry resolves once at session start. One added mid-session is not yet"
   echo "  visible."
@@ -1261,8 +1264,10 @@ cat <<'ALTTIP'
 Optional, to place orchestration units on an external model:
 
   Write ~/.claude/subagents-alt-models.conf (SUBAGENTS_ALT_CONF overrides this path). One role per
-  line, as <name>=<model>: explorer-alt, verifier-alt, web-researcher-alt. Blank lines and '#'
-  comments are ignored. No model name is guessed for you. Put in the model your own gateway serves.
+  line, as <name>=<model>: explorer-alt, verifier-alt, refuter-alt, web-researcher-alt. Blank
+  lines and '#' comments are ignored. No model name is guessed for you. Put in the model your own
+  gateway serves. Give refuter-alt your strongest outside model: it takes the adversarial checks.
+  Without a refuter-alt line, verifier-alt takes them.
   Re-run this installer after editing the file. Removing a line removes that agent on the next run.
   Then start a new session. A file added mid-session is not yet dispatchable.
 ALTTIP

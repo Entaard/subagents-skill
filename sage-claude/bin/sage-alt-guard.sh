@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------------
 # WHY THIS ONE RULE
 #
-#   The alt roles — explorer-alt, verifier-alt, web-researcher-alt — exist to place a unit
+#   The alt roles — explorer-alt, verifier-alt, refuter-alt, web-researcher-alt — exist to place a unit
 #   on a model OUTSIDE this harness's own family. Their model comes from the agent file.
 #   The per-invocation `model` parameter WINS over that file, so passing one silently
 #   deletes the only thing the alt row was dispatched for: the dispatch succeeds, the
@@ -58,7 +58,8 @@
 #
 #   1. the payload parses as JSON, and
 #   2. `.tool_name` is exactly "Agent", and
-#   3. `.tool_input.subagent_type` is one of: explorer-alt, verifier-alt, web-researcher-alt
+#   3. `.tool_input.subagent_type` is one of: explorer-alt, verifier-alt, refuter-alt,
+#      web-researcher-alt
 #   4. `.tool_input.model` is a JSON STRING, and is non-empty.
 #
 # Point 4 is a TYPE test, deliberately. An earlier draft used jq's `//` alternative operator,
@@ -109,7 +110,7 @@
 #     `../references/harness.md` says, because nothing enforces that one.
 #   - It cannot tell whether the alt agent is even installed, so a dispatch of an
 #     uninstalled alt role passes through untouched and fails later on its own.
-#   - It knows the three alt role names as a literal list. A fourth alt role added to the
+#   - It knows the four alt role names as a literal list. A fifth alt role added to the
 #     harness is not covered until its name is added below.
 #   - It is one rule. Nothing else in sage's prose is enforced by anything.
 #
@@ -117,7 +118,7 @@
 # JSON decision object on stdout, not as an exit code. 0/1 in --selftest mode. 2 for an
 # unknown option.
 
-ALT_ROLES="explorer-alt verifier-alt web-researcher-alt"
+ALT_ROLES="explorer-alt verifier-alt refuter-alt web-researcher-alt"
 
 JQ=jq
 command -v "$JQ" >/dev/null 2>&1 || JQ=/usr/bin/jq
@@ -194,6 +195,8 @@ selftest() {
       '{"tool_name":"Agent","tool_input":{"subagent_type":"verifier","model":"opus"}}' allow
   run "explorer-alt + model        -> deny" \
       '{"tool_name":"Agent","tool_input":{"subagent_type":"explorer-alt","model":"haiku"}}' deny
+  run "refuter-alt + model         -> deny" \
+      '{"tool_name":"Agent","tool_input":{"subagent_type":"refuter-alt","model":"opus"}}' deny
   run "web-researcher-alt + model  -> deny" \
       '{"tool_name":"Agent","tool_input":{"subagent_type":"web-researcher-alt","model":"sonnet"}}' deny
   run "other tool                  -> allow" \

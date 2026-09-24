@@ -1,7 +1,9 @@
 # The alt agent templates
 
 `explorer-alt`, `verifier-alt`, `web-researcher-alt` are the three reader roles from
-`../claude-agents/`, rendered onto a model this machine configures. `install.sh` renders each
+`../claude-agents/`, rendered onto a model this machine configures. `refuter-alt` is the fourth
+template: the refuting half of `verifier`, on its own configured model, so a machine can put its
+strongest outside model on adversarial checks and a cheaper one on routine review. `install.sh` renders each
 `*.md.in` here only when `~/.claude/subagents-alt-models.conf` names a model for it
 (`SUBAGENTS_ALT_CONF` overrides the path). This repo ships no model name; `__ALT_MODEL__` is the
 placeholder the installer substitutes.
@@ -66,6 +68,14 @@ Do not restore it when syncing a base-agent change.
 Everything else — `tools:`, `disallowedTools:`, `effort:`, the rules, the rest of the return format
 — stays byte-identical, so a change to a base agent is a change to its twin in the same commit.
 Check with `diff <(sed 's/__ALT_MODEL__/MODEL/' <role>-alt.md.in) ../claude-agents/<role>.md`.
+
+**`refuter-alt` is a twin of `verifier` with one planned difference: it keeps only the refute
+mode.** Beyond the seven places, it differs in the description's role sentence, the role line
+("You refute"), the mode section, the "survives" wording of the no-findings rule, and the
+`Result:` line. Everything else follows
+`verifier` byte for byte, so a change to `verifier`'s rules, schema, or tool scope is a change to
+both `verifier-alt` and `refuter-alt` in the same commit. Run the same diff against
+`../claude-agents/verifier.md`.
 
 Each twin also carries the `MODEL-FAMILY:` self-identification rule, because the family claim is
 measured from the report rather than assumed. A model that cannot observe its own identity writes

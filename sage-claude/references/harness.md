@@ -82,7 +82,7 @@ Snapshot (verify against source 1 first; vendor price ratio sonnet : opus : fabl
 
 ### The alt lane
 
-`explorer-alt`, `verifier-alt` and `web-researcher-alt` place a reader on a model outside this harness's family. An alt agent exists for a plan only when it is in your live agent list; `alt-lane.md` is the one home of the lane, opened only when one is listed or a plan wants one.
+`explorer-alt`, `verifier-alt`, `refuter-alt` and `web-researcher-alt` place a reader outside this harness's family. An alt agent exists for a plan only when it is in your live agent list; `alt-lane.md` is the one home of the lane, opened only when one is listed or a plan wants one.
 
 **Reasoning effort has exactly one lever**: `effort` frontmatter in a saved agent file (`low | medium | high | xhigh | max`; levels depend on the model). The Agent tool has no per-dispatch `effort` parameter, and effort written into prompt text changes nothing — a plain dispatch has no lever, which is why its ledger cell reads `medium (no control)` (`dispatch.md`). Name the model explicitly on every plain dispatch, so no fleet inherits an expensive parent model. Overriding a saved agent's frontmatter model can invalidate its `effort`: do it only as a logged deviation and write the effort cell `high (unverified: model override)`.
 

@@ -1,113 +1,113 @@
 # Memory contract
 
-The shape, the knowledge-item field contract, the removal bar, the structural invariants and the compression floor of sage's v3 memory. `/sage-promote` reads this file at preflight and before every corpus write, and whoever authors corpus text reads it for the floor. A sage run reads `~/.claude/skills/sage/references/memory.md` instead and needs nothing here: `~/.claude/skills/sage/bin/sage-index.sh` reads the frontmatter for it.
+The layout, the ownership rules, the lessons contract, the structural invariants and the compression floor of sage memory v4. `/sage-promote` reads this file before it triages. Whoever writes corpus text reads `## The compression floor` and `## The editing test`. A sage run reads `~/.claude/skills/sage/references/memory.md` instead and needs nothing here.
 
-**Contents** — [The shape](#the-shape) · [Knowledge items](#knowledge-items) · [Promotion, consolidation, eviction](#promotion-consolidation-eviction) · [Structural invariants](#structural-invariants) · [The compression floor](#the-compression-floor)
+**Contents:** [The layout](#the-layout) · [Ownership](#ownership) · [lessons.md](#lessonsmd) · [From inbox line to lesson](#from-inbox-line-to-lesson) · [Structural invariants](#structural-invariants) · [The editing test](#the-editing-test) · [The compression floor](#the-compression-floor)
 
-This is the v3 protocol. v2 kept the machine's knowledge in two table-structured files that every run edited in place, and the record is unambiguous about how that ended: blank-line splits, glued rows, misfiled appends, a consolidation pass that could only abort — six distinct corruption classes across two machines, every one produced by an LLM hand-editing a strict-format table mid-run. v3 removes the failure class instead of guarding it: **a run's only write is an append of plain lines, and there is no table to break.** Design: the source repo's design notes under `docs/designs/` — the 2026-08-27 sage-memory-v3 note, cross-machine half revised by the 2026-08-28 clone-model note.
+## The layout
 
-## The shape
-
-Two kinds of text, two ownership rules:
-
-- **Cortex** — `~/.claude/skills/sage/SKILL.md`, `references/`, `bin/`: the protocol itself. Hand-owned. Changed only by `/sage-promote`'s gated stages or by build-authoring on the user's explicit word. No run and no consolidation touches it.
-- **Knowledge items and the journal** — everything under `memory/`. Perishable, modular, statistical. A run reads KIs and appends journal lines; `/sage-promote` does every other write.
-
-The `memory/` layout, installed:
+`<mem>` is `~/.claude/skills/sage/memory/`. `<repo>` is the path in `<mem>/source-repo`.
 
 | Path | Holds | Written by |
 | --- | --- | --- |
-| `memory/shared/` | the **clone**: a real directory, one file per **portable** KI — rules that hold on any machine, rule text only, nothing machine-specific. The authoritative copy is the **template**, `<repo>/sage-claude/memory/shared/` | the installer's sync (template → clone) and `/sage-promote`'s landing step — nothing else, ever |
-| `memory/source-repo` | one line: the absolute path of the repo the clone came from. `/sage-promote` resolves `<repo>` from it; a run never needs it | the installer, rewritten on every run |
-| `memory/local/` | one file per **machine-local** KI: cost bands, stats sidecars for shared KIs, lessons, gaps, defects, contradictions, the harness stamp | `/sage-promote` only |
-| `memory/journal.md` | append-only plain lines: run actuals, observations, KI usage | **every run**, at Step 6 — the only file a run writes |
-| `memory/archive/` | drained journal segments, archived and retired KIs, superseded format versions, clone files the installer's sync retired | `/sage-promote`, plus the installer's sync when a template retirement removes a clone file |
+| `<repo>/sage-claude/memory/lessons.md` | the curated lessons: the source of truth | `/sage-promote` only |
+| `<mem>/lessons.md` | the installed copy of the repo file | `install.sh` (the template always wins) and the landing step of `/sage-promote` |
+| `<mem>/runs.log` | run lines only, never drained | every run appends one line; `/sage-promote` appends its own |
+| `<mem>/inbox.log` | observation lines, append-only; the lines after the last batch wait for triage | every run appends; nothing rewrites it |
+| `<mem>/lineup.json` | the lineup snapshot: pinned agent models, alt models, price ratio, changelog cursor | `sage-lineup-check.sh --ack <token>` only |
+| `<mem>/archive/inbox-lines-<from>.log` | one batch of drained inbox lines, from inbox line `<from>` | `sage-promote-prep.sh --drain` only |
+| `<mem>/archive/v3/` | the whole v3 memory, moved once | `sage-memory-migrate.sh`, run by the installer |
+| `<mem>/source-repo` | one line: the repo's absolute path | `install.sh` |
 
-**The split is by content class:** counts, dates, uses, absolute costs and the strength band stay per-machine in `local/`; rule text, qualifiers, recognisers and falsifiers live in the template and reach the machine as its clone. A count in a shared file would fork across machines — machine B, having seen less, would write the number back down in a clean edit no merge catches — which is why tracking never enters the template, and why the seed ships no stats sidecars: a sidecar is pure tracking, minted zeroed on the machine at first use.
+## Ownership
 
-**The template carries no `band:` — a band is calibration a machine earns, so it lives only on the machine.** A shared KI's strength band sits on its stats sidecar in `local/` (`band:`, optional; absent reads `provisional` until a pass writes it), raised by this machine's own counts through `/sage-promote`'s crossing — a `local/` write, no template byte, no landing step. The one place a band is shared is the skill-text `(calibration: <band>)` tag, and it records the highest band any single machine's counts have earned: raises only — a machine whose own band sits below the tag has seen less, which is never counter-evidence. Downward movement belongs to eviction and to the user, only. (Design: the clone-model note in `docs/designs/` — the recorded failure was one rule's shared band flipping five times across two machines, each pass locally correct under its own reading. The first fix kept a template `band:` under a highest-earned merge rule; the user cut the field instead: tracking never enters the template.)
+Two properties from the v3 design and the clone model survive into v4. Every writer above keeps them.
 
-**A missing or empty `memory/shared/` is a run-time condition; `~/.claude/skills/sage/references/memory.md` owns what a run does about it.** The clone has exactly two writers — the installer's sync and `/sage-promote`'s landing step. Anything else that lands in it is overwritten, after a backup, at the next sync: the template always wins.
+1. **A sage run only appends to memory.** It writes `runs.log` and `inbox.log` with `>>` and nothing else. v2 let runs hand-edit table files, and every recorded corruption came from that path. A plain appended line has no table to break. Every restructuring write belongs to `/sage-promote`, on the user's word.
+2. **The repo copy is the source of truth for shared text.** `/sage-promote` writes `<repo>` first and lands the installed copy after. The installer overwrites a differing installed copy. So an interrupted pass leaves the repo ahead, never the installed copy, and a hand edit in the wrong place is lost on the next install.
 
-**The editing test, for a fact that could sit in more than one place.** It governs every corpus file, not only `memory/`:
+`lessons.md` is the only shared memory file. Per-machine facts stay in `runs.log`, `inbox.log` and `archive/`. A count written into a shared file forks across machines: a machine that has seen less writes the number back down in a clean edit no merge catches.
 
-- **Skill text carries the clause and the anecdote that makes it recognisable** — never the arithmetic behind it, which is what `(calibration: <band>)` stands in for. A rule earns three homes in order, one content class each: the stats sidecar in `local/` holds its counts, dates and this machine's band, the shared KI holds the rule with its recogniser and falsifier, and skill text carries the clause tagged `(calibration: <band>)`. No home restates another home's bookkeeping.
-- **Harness facts go to `~/.claude/skills/sage/references/harness.md` as rules, and their measurement, date and population go to `~/.claude/skills/sage/references/harness-measurements.md` beside it.** The measurements file is the declared home for corpus statistics and is exempt from the rest of this test: its dates are deliberate, because a standing instruction to re-measure before quoting is only meaningful when a reader can see how old the figure is. A run reads the run sheet and never the measurements file.
-- **Counts, dates and absolute costs go to `local/` or the journal.**
-- **A number survives in skill text only where the sentence's purpose is to stop a run using it.** An anti-band — one observation, warning a reader off pricing from it — loses its whole point once the provenance is stripped, so that sentence keeps its figure.
+## lessons.md
 
-**And a pointer must resolve on the machine that reads it.** `local/` and the journal are per-machine, so skill text may point at the *shape* of what lives there — "append the run line, hits included" — and never at a specific KI, figure or date only the authoring machine ever had. `memory/shared/` and everything under `references/` are identical on every install and may be cited precisely. Cite a KI by its `id:`, never by a line number — promote moves files to `archive/` on its own schedule, and where a deliverable quotes one, say in the deliverable that these files are live.
+**Cap: about 1,500 words.** One bullet per lesson or band:
 
-## Knowledge items
+```
+- **<id>** — <rule, one sentence>. When: <recogniser>. Falsifier: <text>. Runs: <run ids>.
+```
 
-One file per KI. Frontmatter between `---` fences — one `key: value` per line, no tables — then a markdown body. A malformed KI file quarantines that one KI (skip it, surface one line); it cannot damage its neighbours, which is the point of the one-file grain.
+- `<id>` is a stable slug. A run cites it in `changed-by: <id> <how>` on its run line. Never rename an id that a run line cites.
+- **The rule** is one sentence in the imperative. A rule that needs a paragraph is not distilled yet. It stays out.
+- **When** is the recogniser: the shape of task or evidence where the rule applies. A reader must match it without the rule's history.
+- **Falsifier** is the observation that would remove the rule, stated concretely.
+- **Runs** lists the run ids that confirmed it, oldest first.
+- **A band** is a cost or duration range for a named class of work. It may carry figures and run ids, because a run prices from them.
+- **No machine path, ever.** A path that exists on one machine does not resolve on another. `sage-lint.sh --corpus` checks this.
+- No secret, token or credential. The same lint checks this.
 
-**Portable KI** (`shared/<slug>.md`): `id`, `kind: rule`, `class: portable`, `status`. Body: the **rule** as a bold sentence, then `- Qualifier:`, `- Recogniser:`, `- Falsifier:` list items. No band, date, count or absolute cost anywhere in the file; ratios and discount factors yes, because the skill computes with them. The rule's strength band is machine tracking and lives on its stats sidecar (below).
+A lesson that already stands at full strength in the sage corpus does not also go into `lessons.md`. One home per rule.
 
-**Local KI** (`local/<file>.md`), seven kinds:
+**Removal.** A lesson leaves `lessons.md` for two reasons only:
 
-| `kind` | file name | records | ends when |
-| --- | --- | --- | --- |
-| `stats` | `<slug>.stats.md` | this machine's numbers for the shared KI its `for:` names — `count`, `first`, `last`, `provenance`, `band` (this machine's strength band), `promoted` (append-only ` · ` history), `uses`, `last-used`, `misses` | the shared KI retires |
-| `band` | `band-<slug>.md` | a cost band: class of work (`name:`), figure, qualifiers, evidence | superseded by a newer band, or retired on recorded misses |
-| `lesson` | `lesson-<slug>.md` | something a run learned that would change how a later run acts | promotion to `shared/` at three confirmations — the only `kind` the → shared signal accepts |
-| `gap` | `gap-<slug>.md` | a task class, rate or behaviour with no coverage yet — a programme of work, never promotable | the measurement lands and promote settles it against the artifact |
-| `defect` | `defect-<slug>.md` | a fault in sage's own corpus, scripts or protocol | `/sage-promote`'s corpus-repair stage fixes the corpus and settles it |
-| `contradiction` | `contradiction-<slug>.md` | a local run cut against a shared KI, named in `contradicts:` | the retirement signal, on its second confirmation; it never overturns the rule on its own |
-| `stamp` | `harness-stamp.md` | the `sage-harness-stamp:` line and its verification prose | never — re-dated by every promote pass |
+1. its falsifier fired, or a `contradiction` line on it survived triage;
+2. the user said so, for example to meet the cap.
 
-**The field contract by kind — these are the fields the promotion signals read, so they are load-bearing, not decoration.** A `lesson`, `gap`, `defect` or `contradiction` file carries `class:` (`portable` or `local` — the → shared signal accepts only a portable lesson), `count:`, `first:`, `last:`, and `promoted:` (the append-only ` · ` history, `—` when empty); a `contradiction` also carries `contradicts:` naming the shared KI id. A `stats` file may carry `band:` — this machine's strength band for the rule its `for:` names: `established` (six or more confirmations), `recurring` (three to five), `provisional` (below bar). The field is optional; **absent, it reads `provisional`** — a band no pass has assessed yet, whatever the count says, so the next pass's crossing can fire and materialize the field (a Step 2 reader weighing an unassessed rule reads the sidecar's `count:` directly). Only `/sage-promote` writes it — set from the count when stage one mints the sidecar at promotion; consolidation's lazy mint writes no band; the crossing rewrites it — and only upward: counts only accumulate, and downward movement is eviction's or the user's. A `band` file carries `name:` — the class of work as verbatim prose, because a slug is not a name and a qualifier like "≤10k words" must survive somewhere live — with its figure, qualifiers and evidence in the body. **Every local KI carries `created:` and `last-used:`**, in every `kind`, bands and the stamp included — the two dates the disuse notice reads (`/sage-promote`, `## The stale notice`). `created:` is the date the KI was filed and never moves again; `last-used:` is the date a run last cited it, `—` until one does. Neither is legal on a file under `shared/`, which carries no date at all: a shared KI's dates are machine-specific and live on its stats sidecar, the same fork the count split exists to prevent. **The two remaining usage fields — `uses:` and `misses:` — stay optional, and an absent one reads as zero**; `/sage-promote`'s consolidation bumps `uses:`, `misses:` and `last-used:` from the journal's `use` lines. It never touches `created:`, which is set once at filing. A KI filed before these fields existed carries `created: —`, which reads as *age unproven* and never as *old*. **`reconciled:` is the migration-debt stamp** — one date, written by `/sage-promote`'s consolidation step 2 to every local KI it has walked, whether or not the walk found anything. It is what stops a one-time archive reconciliation running twice and double-counting, so a KI carrying it is skipped there for ever. **A seeded KI carries its authoring date, not its install date**, so a fresh install more than three months old will see its whole seed corpus in the first stale notice — correct rather than noisy, since the notice removes nothing and clears itself as the machine starts citing them.
+Disuse is not a reason. A lesson no run cited is evidence about the runs, not about the lesson.
 
-**Neither date can remove anything, and that is the point of recording them.** Age and disuse are reported, never acted on — the removal bar below is the whole of what takes a KI out of the corpus.
+## From inbox line to lesson
 
-**When two `kind`s both fit, choose by what would close the KI, not by what it is about.** Closing it means editing sage's own corpus or scripts → `defect`; closing it means three confirmations and a promotion → `lesson`. The tiebreak is load-bearing: only `lesson` reaches `shared/`, so an observation filed `defect` when a rule was what travelled is a rule that can never graduate. One that genuinely needs both gets two KIs, each with its own closure.
+Inbox grammar:
 
-`status` is machine-readable by its **first word**: `live`, `watching` (the filing default for lesson/gap/defect/contradiction), `settled → <artifact>`, `promoted → <shared KI id>`, `dropped → <reason>`, `retired → <observation>`, `archived → <reason>` — that last one written **only on the user's word**, after the manual check the removal bar below names, and never by a signal. The rest of the value is free payload. The closure evidence rules are unchanged from v2 and live with their owner: `settled` requires the named artifact to **exist**, not to be intended — building the mechanism a KI complained about is not the same as settling it; the KI settles when the artifact the complaint asked for actually lands. Who may write each state: **a run writes none of them.** A run that settles a KI records a `settle` line in the journal (`~/.claude/skills/sage/references/memory.md`, `## The journal`); `/sage-promote`'s consolidation flips the status against that line's evidence.
+```
+<YYYY-MM-DD> obs <session> | <kind> <class> | <observation> | falsifier: <text>
+```
 
-`~/.claude/skills/sage/bin/sage-index.sh` prints one line per KI — `id | kind | class | band | created | last-used | status | <first words>` — from the frontmatter, on demand. A shared row prints `—` in the band column by design: its band is machine tracking, printed on the sidecar's row once a promote pass has written it — `—` there too until one has, and the sidecar's `count:` is the signal in the meantime. `--stale [months]` re-reads the same walk and prints only the KIs unused for that long, oldest first, with a trailing `#` line naming any whose age no date proves. There is no stored index file to go stale.
+`kind` is one of `lesson`, `gap`, `defect`, `contradiction`, `confirm`, `correction`. `class` is `portable` or `local`.
 
-### The removal bar
-
-**A knowledge item leaves the corpus for exactly two reasons. Being unused is not one of them.**
-
-1. **It was falsified** — its own `Falsifier` fired, or a `contradiction` KI naming it reached two confirmations. `/sage-promote`'s eviction owns this, and it is the only removal any signal may perform on its own.
-2. **It records a defect that cannot be fixed, and the user has said so.** No signal reaches this: it takes the manual check in `/sage-promote`, `## The stale notice`, and the user's answer is what licenses the move.
-
-Everything else is **reported and kept**. A KI nothing has cited in months is not evidence the KI is wrong — it is evidence about the runs, which may have solved no problem the KI covers, or may simply have failed to report the citation. The measured case: on 2026-08-28 every shared rule in this corpus read `uses: 0`, including rules at counts of 24, 13 and 12, because the counter had existed for one day. A disuse rule read literally would have archived the entire shared corpus on its first run. **Never lower this bar to give a pass something to write.**
-
-
-## Promotion, consolidation, eviction
-
-All three belong to **`/sage-promote`**, a separate skill, on the user's word only — consolidation included, which in v2 ran automatically at Step 2 and in v3 is the pass's first stage. A run never loads the procedures it will not run.
-
-`/sage-promote` reads this file for three things and writes none of it: the KI shapes above and the journal grammar in `~/.claude/skills/sage/references/memory.md`, `## The journal`, which tell it what to ingest and mint; `## Structural invariants`, which its preflight checks; and `## The compression floor`, which bounds what its corpus edits may remove. It writes the template (`<repo>/sage-claude/memory/shared/`, landed on the clone in the same pass), `local/`, the journal's `mark` line, `archive/`, and — at its gated stages — sage's own corpus, `bin/*.sh`, and the model lineup's agent sources.
-
-Its KI-review stage is the retirement path that v2 lacked in practice: **recorded misses** are a first-class signal there, beside the fired falsifiers and contradictions v2 already recognised — a miss is the KI misleading a run, which is its falsifier firing in miniature. **Disuse is not on that list and never routes there** (`## Knowledge items`, the removal bar): it produces a notice for the user and nothing else. A rule whose `Falsifier` fires leaves `shared/` **with the observation attached**, and any skill text citing its band comes out with it.
+- **A lesson needs a falsifier.** A line with no falsifier that the triage can state never lands.
+- **Only class `portable` lands in `lessons.md`.** A `local` fact holds on one machine only. Its evidence stays in `runs.log` and the archive, where a Step 2 grep finds it.
+- **`confirm`** adds a run id to an existing bullet's `Runs:` field.
+- **`contradiction`** is evidence against a bullet. It removes or narrows the bullet only after the refuting gate.
+- **`correction`** starts its observation with the date and session of the line it corrects. Triage applies the corrected text in place of the old line. Both lines stay in the archive.
+- **`defect`** and **`gap`** never become lessons. They become a corpus fix or a GitHub issue with the label `sage-corpus`.
 
 ## Structural invariants
 
-The contract the checks test against — a check written from this section and nothing else is a complete check. The repo's `memory/local-seed/` satisfies every **file-level** marker below (the journal sentinel and the KI shapes), so it doubles as the worked example and the fixture for those; marker 4's directories and `source-repo` exist only on an installed tree, where the installer creates them.
+A check written from this section alone is a complete check.
 
-1. **The journal**: line 1 is exactly `<!-- sage-local-memory v3 -->` — the header sentinel the installer greps; absent, the file is not sage memory and every pass aborts before reading further. Every payload line matches `^<date> (run|obs|use|mark) ` in shape. A line that does not is surfaced by promote's consolidation as a question, never silently dropped and never "repaired".
-2. **Every KI file**: opens with a `---` fence on line 1, closes the frontmatter with a second `---`, and carries at least `id:`, `kind:`, `status:`. `kind` is one of `rule`, `stats`, `band`, `lesson`, `gap`, `defect`, `contradiction`, `stamp`. A file under `shared/` carries `class: portable` and no `band`, `count`, `first`, `last`, `created`, `last-used`, `uses` or absolute cost; a `stats` file carries a `for:` naming a shared KI id that `shared/` holds or, once retired or archived, `memory/archive/` holds; a `lesson`/`gap`/`defect`/`contradiction` file carries `class:` and `count:`; a `band` file carries `name:`; and every file under `local/` carries `created:` and `last-used:` (the field contract above lists the rest, and those two fields plus `uses:`/`misses:` are legal on a **local** KI only).
-3. **The stamp KI** holds exactly one line matching `^sage-harness-stamp: ` — the lineup hint compares against it, so a rewrite that drops or reflows it disarms that hint with nothing to show for it.
-4. **`memory/shared/`**, **`memory/local/`** and **`memory/archive/`** are real directories, and **`memory/source-repo`** exists with a path that holds `sage-claude/memory/shared/`. Only `/sage-promote` needs that path to resolve; a run reads the clone and never the repo.
+1. **Sentinels.** Line 1 of `runs.log` starts with `# sage-local-memory v4 — runs.log:`. Line 1 of `inbox.log` starts with `# sage-local-memory v4 — inbox.log:`. Without its sentinel a file is not sage memory, and `/sage-promote` stops before it reads further.
+2. **Run lines.** Every line after line 1 of `runs.log` matches `^<YYYY-MM-DD> run <session> | `. v4 lines carry `agents= spend= wall= target= effort= outcome=`. Migrated v3 lines carry `est=` and `actual=`. Both shapes are valid.
+3. **Inbox lines.** Every line after line 1 of `inbox.log` matches `^<YYYY-MM-DD> obs <session> | <kind> <class> | `, with `kind` and `class` from the lists above. One legacy shape stays valid: a migrated v3 line `<date> obs <session> | confirm <v3-ki-id> | <what happened>`. Triage reads it as a `confirm` whose KI now sits in `archive/v3/`: it adds a run id to the matching `lessons.md` bullet, or drops with the reason `KI not in lessons.md`.
+4. **`runs.log` never shrinks.** Its line count after any write is at least its line count before.
+5. **Every drained line is in exactly one batch, and `inbox.log` is never rewritten.** The batch files tile inbox lines 1 to `<to>` in order, each byte-equal to those lines. A rewrite could drop a line a run appended during it, so a batch file, written in one rename, marks what is done.
+6. **The repo copy and the installed copy of `lessons.md` are byte-identical** between passes.
+7. **`source-repo`** names a directory that holds `sage-claude/memory/lessons.md`.
 
-**On failure: quarantine, never repair.** A malformed KI is skipped and surfaced by name; a broken journal sentinel, or a `source-repo` that does not resolve, aborts the pass that found it. No writer repairs the shape it is validating against — a rewriter that does cannot detect damage it caused itself.
+**On failure, stop. Never repair.** A line that fails 2 or 3 is a question for triage, never silently dropped or rewritten. A writer that repairs the shape it validates cannot detect damage it caused itself.
 
-**The blind spot, stated so you compensate for it: these checks catch structural damage, never a wrong rule.** A perfectly shaped KI full of false claims passes every marker. Falsifiers, misses, and eviction are the only defence against that second failure, and they run on the user's word rather than on a check.
+**The blind spot.** These checks catch structural damage, never a wrong lesson. A perfectly shaped `lessons.md` full of false rules passes every marker. Falsifiers and contradiction lines are the only defence.
+
+## The editing test
+
+For a fact that could sit in more than one place. It governs every corpus file.
+
+- **Skill text carries the rule and the anecdote that makes it recognisable.** It never carries the arithmetic behind the rule.
+- **Harness facts go to `~/.claude/skills/sage/references/harness.md` as rules.** Their measurement, date and population go to `harness-measurements.md` beside it. That file is the declared home for dated figures, so its dates are deliberate. A run never reads it.
+- **Counts, dates and absolute costs go to `runs.log`, a `lessons.md` band, or `harness-measurements.md`.** Never to other skill text.
+- **A number survives in skill text only where the sentence exists to stop a run using it.** A warning against pricing from one observation loses its point without the figure.
+- **A pointer must resolve on the machine that reads it.** Cite a lesson by its `<id>`, never by line number. Never cite a run, figure or date that only the authoring machine has.
 
 ## The compression floor
 
 Never removed under any "make it shorter". A cut that changes what a fresh instance does is a spec change, not compression.
 
-- The **undated anecdote** that makes a rule recognisable in the wild.
-- Any **number the skill computes with** — a ratio, a band, a boot cost, a discount factor.
+- The **undated anecdote** that makes a rule recognisable.
+- Any **number the skill computes with**: a ratio, a band, a boot cost, a discount factor.
 - A rule's **qualifier**.
 - The **literal command** that satisfies it.
 - The **completion criterion**.
 - A **precedence sentence** wherever two rules can both fire.
 - The **strength band**.
-- Whether a constraint **binds or is merely asked for**.
+- Whether a constraint **binds or is only asked for**.
 
-Cut past the floor and a rule breaks in a known order: the trigger word goes, so it fires on everything or on nothing; the literal command goes, so "verify" is satisfiable by asking a second model, which is the failure rather than the fix; the anecdote goes, so the rule has no shape left to match against; the band goes, so it can no longer be traded off against anything.
+Cut past the floor and a rule breaks in a known order. The trigger word goes, so it fires on everything or on nothing. The literal command goes, so "verify" is satisfied by asking a second model, which is the failure, not the fix. The anecdote goes, so the rule has no shape left to match. The band goes, so it can no longer be traded off against anything.

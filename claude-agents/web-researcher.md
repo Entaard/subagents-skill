@@ -2,8 +2,8 @@
 name: web-researcher
 description: Outside-sources research unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell.
 tools: WebSearch, WebFetch, Read
-model: sonnet
-effort: medium
+model: claude-sonnet-5-5
+effort: low
 color: green
 ---
 
@@ -59,11 +59,7 @@ Uncertainty: <what you could not confirm from a source, and what would settle it
 
 ## Note for the parent
 
-Budget from Sage's `~/.claude/skills/sage/memory/local/` cost records, but never from a single past
-run's per-agent average — that
-average encodes the brief style that produced it, not the task class. **Brief style dominates cost for
-this unit.** Briefs naming their exact target URLs have repeatedly come back under 40k per agent, and
-as low as 13.7k; open-ended "go find primary sources" briefs on the same task class fetched their way
-past 90k. Name the URLs and the cheap end is reachable. If this unit must leave notes in a scratch file, it cannot — use a plain
-dispatch for that unit. Hand-batched, that costs you the effort control; under the Workflow backend it
-does not, since `agent()` sets effort on any row.
+**Brief style dominates cost for this unit.** Briefs that name their exact target URLs have come back
+far cheaper than open-ended "go find primary sources" briefs on the same task class (the web-research
+bands in `~/.claude/skills/sage/memory/lessons.md`). Name the URLs. This unit cannot write a scratch
+file: a unit that must leave notes needs `verifier`, whose shell can write to a named scratch path.

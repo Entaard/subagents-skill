@@ -1,82 +1,72 @@
-# Dispatch contracts
+# Plan, brief, and the ledger
 
-Copy these shapes; do not improvise them. Trim a field only where it is irrelevant and never rename one. **The fenced blocks below are presentation, never content**: copy the shape *inside* the fence into the ledger as real headings and unfenced tables, never the fence markers — `bin/sage-lint.sh` blanks every fenced line, so a ledger that carried them reads as a Plan section holding no table (measured).
+Copy the shapes below. Trim a field only where it does not apply, and never rename one.
 
 ## Step 2 — Plan and record
 
-The whole plan is written before any dispatch, as a ledger section, never as a message.
+Write the whole plan into the ledger before any dispatch. Never present it as a message.
 
-**Read before you estimate.** `harness.md` resolves tiers to the model names the plan must carry; `alt-lane.md` only when an alt agent is in your live agent list. Then read memory (`memory.md`, `## Read at Step 2`) and remember what you loaded, because Step 6's `use` line reports it; a run consolidates nothing. **Price off a same-shape row before reaching for band arithmetic** (calibration: established). Rules carry a strength band — `(calibration: established)`, `(recurring)`, `(provisional)` — which is what to weigh when budget forces a choice.
+1. **Read first.** `harness.md` for the agent roster. `alt-lane.md` only when an alt agent is in your live agent list. Then memory (`memory.md`).
+2. **Create the ledger** with the helper (`## The ledger` below). It writes `Started:`, the section skeleton and your framing fields.
+3. **Add one Plan row per unit** with `sage-ledger.sh unit`. Every row names its agent and model, reader or writer, a done-when sentence, and its flow.
+4. **Plan the framing critic** at medium risk and above (`topologies.md`). It attacks the framing block and the criteria before the first writer.
+5. **Build the measurement harness first** where the task turns on a number. Reproduce the central claim yourself before you brief anyone, and give every unit that reports the same metric one shared harness.
+6. **Write the wall target**: `Wall target: <n> min`, from the same-shape rows in `runs.log` or from the task class. It is advisory. `bin/sage-clock.sh`, where installed, prints the elapsed time against it.
+7. **Choose the acceptance suite**: `full`, `light` or `none`, with its deciding signal (`conditional.md`).
+8. **A diff to be reviewed, with the `diff-review` skill installed:** put its Spec and Standards reader briefs into the plan verbatim as two reader rows. The Standards row carries that skill's smell baseline verbatim, because nothing else hands that reader the list.
+9. **Record every resolved ambiguity** as an `assumption` row with `sage-ledger.sh decision`, when you resolve it. Its reason names what else was plausible and how a wrong choice would show. Ambiguity that changes the split is also a surfaced line at Step 6.
 
-**Estimate from the corpus a unit must hold and the lenses it must apply — never from the deliverable's size or the role's name.** Add 60–150% where a unit reads widely before it reasons; a blind acceptance-suite author priced from its requirement's length has missed high by 1.6–1.7× (calibration: established).
+Where the call to fan out is close, write a `Solo alternative:` field: what one strong agent inline would cost or miss. Writing it is what keeps fan-out from being automatic.
 
-**Price a review round and its fix-verification round as a pair, then the follow-up rounds the loop may still need.** The verify round has repeatedly cost more than the review; steering the same verifier for a narrow re-verdict on named fixes runs ~4–7× cheaper **only while that thread's occupancy is still small** — a resume re-creates the whole context as billable cache creation, so the same narrow steer of a thread that has read a corpus prices as a fresh dispatch or worse (calibration: established). Send it after that agent reports. The pair is a **floor**: budget at least one blocker/major-only follow-up, and write in the plan that the count is a condition (`verify.md`), not a number.
-
-**Build the measurement harness first.** Where the task turns on a number, reproduce the central claim yourself before drafting and brief every unit against that baseline; where several units report one metric, mandate **one shared harness** (calibration: recurring).
-
-Write the plan into the ledger (`## The ledger` below):
-
-- `### Plan` in full, including the **solo alternative with its tradeoff** when the call is close — writing it is what keeps fan-out from being automatic; `### Unit table`; `### Resume state` with the snapshot baseline's hashes.
-- **Resolve every tier to a concrete model at plan time**, and name every effort level with the control that sets it (Model and Effort columns, below).
-- A **writer** unit plus checkable criteria extractable without inventing behaviour → plan a **blind acceptance suite**, `light`, `full`, or `none`; `topologies.md` #10 owns the decision. Record the choice, its deciding signal, and the criteria text verbatim in `### Plan`.
-- A writer's diff to be reviewed, with the `diff-review` skill installed → its Spec and Standards reader briefs go into `### Unit table` verbatim as two reader rows, **the Standards row carrying that skill's smell baseline verbatim**, because nothing else hands that reader the list. `verify.md` owns the review.
-- **Stamp `SAGE_WINDOW` into the ledger header line** — from your environment when knowable, else the sensor's default — and `SAGE_COMPACT_AT` where the user set `/autocompact <size>` or named a smaller model variant; the watchdog reads both back (`execute.md`). **The model id never carries the window.**
-
-**The assumption log.** Every ambiguity you resolve that would otherwise need the user — scope, interpretation, a design fork with no evidence either way — is one row in `### Assumption log`, written **when you resolve it**, with a **falsifier** a later run could observe. Ambiguity that changes the decomposition is a surfaced line at Step 6.
-
-The plan is complete when every unit has a named model, a reader/writer class, a done-when sentence, and an estimate; Step 3 begins in the same turn.
+The plan is complete when every unit has an agent, a reader/writer class and a done-when sentence. Step 3 begins in the same turn.
 
 ## Step 3 — Brief
 
-Write every dispatch against the task brief contract (`## Task brief` below). Briefing rules:
+Write every dispatch against the task brief below.
 
-- The agent starts with **zero context**. Name files, boundaries, the output shape, and the **decisions already made**: two units deciding one question differently is how coupled work fails. Name line ranges only where the location is certain. **Name the ground truth outright: exact files, line numbers, URLs, measured baselines, and the harness to measure with** — such a brief has run ~2–2.5× cheaper and failed less (calibration: established) — and **forbid re-deriving it**: one that named the payload but let the unit build its own decoder forfeited the discount (calibration: provisional).
-- **One dispatch class is exempt from naming the decisions: a blind acceptance-suite author** (`topologies.md` #10). It receives the decisions' *observable consequences*, never the decisions, and its criteria are phrased at the requirement's observable surface for the same reason.
-- **Grep the claim before you brief it — and before you assert it.** A brief asserts that a file, symbol, number, or state exists only after one command has proven it, and cites only what its named artifacts contain: a pointer into a transcript or report the agent cannot read is a briefing error. The rule reaches your own **completion claims** (calibration: recurring): where the deliverable cites artifacts, one `ls` loop over every path it names runs before the claim — either they resolve on the machine where the document is filed, or the document says where they resolve instead. **Prove a negative grep on a fixture that should match before you report a zero**: whether `[^\t]` means *not a tab* depends on the grep in `PATH` — GNU grep reads it as *not a backslash and not the letter t*, ugrep reads a tab — and a field pattern anchored on that run has returned a false clearance on a tab-separated evidence file. `printf 'dog\tX\n' | grep -cE '^[^\t]+\t'` prints 0 under GNU grep and 1 under ugrep; split tab-separated fields with `cut -f` or `awk -F'\t'` and the question goes away.
-- **A reader's structural claim is a lead, not ground truth.** Fetch the primary source locally and grep it yourself (calibration: established).
-- **Hand off via artifacts, never via transcript**: everything pasted into a dispatch, and everything it prints back, stays resident in your context. Point at files; require summaries back.
-- **Record every dispatch's `agentId` in `### Unit table` the moment it returns, and name its model.** The `agentId` is the parent's only handle for `SendMessage` and `TaskStop`; the `description` is a label (`harness.md`, `## Spawning`). On a saved-agent dispatch the frontmatter model *is* the named value; override only as a logged deviation, and never on an alt agent (`alt-lane.md`). Set effort only through a control the harness exposes (`harness.md`, `## Models and effort`).
-- **Scope the tools, not just the writes** — network, shell, MCP — to what the objective needs: an agent that cannot write source but can fetch URLs and run shell is not contained. Only a saved agent file *enforces* this; on a plain dispatch the line is an instruction. The shipped `verifier` keeps shell and network, so narrow it in the brief.
-- **A unit's toolset comes from its agent file, not from its self-report.** A unit whose `tools:` omits `Skill` reaches guidance **only through a path it can `Read`**: name the file path, never the slash command (`harness.md`, `## Frontmatter beyond tools`; calibration: recurring).
-- **A repo's own `PreToolUse` hooks gate your units too**, silently. Satisfy the repo's gate yourself, one call, **before** the wave launches. A gate you **cannot** satisfy — its MCP server absent, its cache holding stale stubs — still blocks every unit whose only file reader is a tool the hook matches, while a unit holding an unmatched one, typically `Bash`, reads straight past it: readers have been lost that way to a hook matching `Read` alone. Read the hook's matcher first, never forbid the unmatched tool in the brief, and hand a seat that has none its ranges as scratch `.txt` files outside the repo, at paths the hook's own patterns do not match — a scratch file keeping its source extension can be gated outside the repo too — each carrying its source path and line numbers.
-- **`maxTurns` in a saved agent file is the only per-unit budget rail**; a plain dispatch has none. Set it where a role's shape is known, never as a guess, because a low cap truncates silently; a unit that hits it is `blocked`, not failed, and charges no rung. `harness.md`, `## Frontmatter beyond tools`, lists what else an agent file binds.
+- **The agent starts with zero context.** Name the files, the boundaries, the output shape, and the decisions already made. Two units that decide one question differently is how coupled work fails.
+- **Name the ground truth outright, and forbid re-deriving it**: exact files, line numbers, URLs, measured baselines, and the harness to measure with. Such briefs have run about 2–2.5× cheaper and failed less. A brief that named the payload but let the unit build its own decoder lost the discount.
+- **A blind acceptance-suite author is the one exception to naming the decisions.** It gets the decisions' observable consequences, never the decisions (`conditional.md`).
+- **Grep the claim before you brief it, and before you assert it.** A brief asserts that a file, symbol, number or state exists only after one command proved it. The rule reaches your own completion claim: `ls` every path the deliverable cites before you claim it. Prove a negative grep on a fixture that should match before you report a zero. Split tab-separated fields with `cut -f` or `awk -F'\t'`, never with `[^\t]`, which GNU grep reads as "not a backslash and not t".
+- **A reader's structural claim is a lead, not ground truth.** Fetch the primary source yourself and grep it.
+- **Hand off via artifacts, never via transcript.** Point at files and require summaries back.
+- **Record each dispatch's `agentId` in its Plan row when it returns.** It is your only handle for `SendMessage` and `TaskStop`.
+- **Scope the tools, not just the writes.** An agent that cannot write source but can fetch URLs and run shell is not contained. Only a saved agent file enforces a tool scope. **Give every unit that holds Bash a scratch path outside the repo**, and name it in the brief. A Bash-holding reviewer briefed "read-only" once wrote test files into the tree.
+- **A unit's toolset comes from its agent file, not its self-report.** A unit without the Skill tool reaches guidance only through a path it can `Read`. Name the file path, never the slash command.
+- **A repo's own `PreToolUse` hooks gate your units too.** Satisfy the gate yourself, once, before the wave. A gate you cannot satisfy blocks every unit whose only file reader is a tool the hook matches. Read the hook's matcher, and hand such a unit scratch `.txt` copies outside the repo, each with its source path and line numbers.
+- **`maxTurns` in an agent file is the only per-unit turn cap.** Set it only where a role's shape is known, because a low cap truncates silently. A unit that hits it is `blocked`, not failed, and charges no rung.
+- **Reviewers are read-only roles.** Nested delegation is off unless you grant a self-contained subtree.
 
-Choose the tier from the unit's properties, then resolve it to a model:
+Choose the agent from the unit's properties. The `model:` rule for a saved agent is in `harness.md`.
 
-| Unit property | Tier | Target effort |
-| --- | --- | --- |
-| Mechanical, high-volume, search/exploration | standard | low–medium |
-| Standard implementation, integration | standard | medium |
-| Ambiguous, cross-system integration | standard→frontier | high |
-| Correctness/security review, verification | frontier | high–max |
-| Genuinely ambiguous, long-horizon, single-owner unit | frontier | high–max |
-| Synthesis, triage, completion claim | **the parent — you** | — |
+| Unit property | Agent |
+| --- | --- |
+| Search, bulk reading, mechanical enumeration | `explorer` |
+| Outside sources | `web-researcher` |
+| Standard implementation or integration | `implementer` |
+| Ambiguous or long-horizon writing, or a handed-off parent row | `implementer-frontier` |
+| Review, verification, refutation | `verifier`, or an alt checker (`alt-lane.md`) |
+| Synthesis, triage, the completion claim | the parent |
 
-**Tier is one axis; the unit's step count is the other** — a cheaper seat on multi-step work can cost more than the seat above it (`harness.md`, Models and effort, owns both rules). Four saved agent files make the effort column real — **`explorer`**, **`verifier`**, **`web-researcher`**, **`implementer`** (`harness.md`, the role table) — and optional alt twins place a reader outside this harness's model family (`alt-lane.md`).
+**The unit's step count is a second axis.** A cheaper seat on multi-step work that must find its own path can take 2–3× the turns and cost more. A brief with exact paths and commands keeps the cheap seat cheap.
 
-- On a retry, take the rung the failure's signature earns (`execute.md`, the failure ladder).
-- Reviewers: read-only *role* always; a writable *sandbox* only when verification must write, with a no-source-edit rule.
-- Nested delegation off unless you grant a self-contained subtree; only a saved agent whose `tools:` omits the Agent tool enforces it — the spawn-depth cap bounds runaway recursion and does not implement "off".
+On a retry, take the rung the failure's signature earns (`execute.md`).
 
 ## Task brief
 
 ```text
-Role: <implementer | explorer | reviewer(lens) | verifier | judge>
+Role: <explorer | implementer | reviewer(lens) | verifier | judge>
 Objective: <one sentence>
-Inputs / source of truth: <file paths, briefs, diffs — the agent starts blank. Name the exact ground truth: files, line numbers, URLs, the measured baseline, the harness to measure with — and say it is not to be re-derived (Step 3 above carries the measured ratio)>
+Inputs / source of truth: <exact files, line numbers, URLs, the measured baseline, the harness to measure with — not to be re-derived>
 Scope and relevant files: <explicit>
-Allowed writes: <none | exact paths | worktree path>
-Allowed tools: <"read + search only, no network, no shell" | "repo tools + Bash for the test command only" | "inherit". Reviewers and explorers: deny network and shell unless the objective names a use for them. Read-only writes plus open network access is not read-only>
-Per-unit caps: <`maxTurns` / `permissionMode` where a saved agent file sets them, else "none — plain dispatch". Unlike the two lines above, these BIND>
+Allowed writes: <none | exact paths | worktree path>, plus <scratch path outside the repo> for any unit with Bash
+Allowed tools: <"read + search only, no network, no shell" | "repo tools + Bash for <commands>" | "inherit">
 Must not do: <boundaries, non-goals, no nested delegation unless granted>
-Baseline / snapshot: <revision, diff, or file manifest being worked against>
+Baseline / snapshot: <revision, diff, or file manifest>
 Done when: <one falsifiable sentence>
-Model: <the exact value passed to this dispatch, matching its ledger Plan row; tier in brackets. On a saved-agent dispatch its frontmatter model is that value; an alt agent passes no `model` parameter and the cell records what its file sets (`alt-lane.md`)>
-Effort: <the level, always, plus the control setting it — agent-file frontmatter, or "no control" on a plain dispatch. Matches its ledger Plan row>
-Return format: the agent report below, ≤1–2k tokens where the unit returns a **conclusion**; where it returns an **enumeration**, one line per item plus a pointer to <scratch path>, which this brief must name (omit it for a unit that cannot write — `explorer` and `web-researcher` distill instead)
+Agent: <saved agent name — its file pins the model and effort>
+Return format: the agent report below, ≤1–2k tokens for a conclusion; an enumeration returns one line per item plus a pointer to <scratch path>. As text: the harness blocks a subagent's report-file write
 ```
-
-**Where an acceptance suite runs** (`topologies.md` #10): the blind author's `Inputs` are the requirement text and the criteria in the ledger's Plan section, nothing else; the implementer's brief carries the criterion IDs and never the suite path; the verifier's brief carries the suite path and the per-case verdict set — pass / fail / `Awaiting human`, with evidence on each.
 
 ## Agent report
 
@@ -90,149 +80,61 @@ Uncertainty: <unverified assumptions, remaining risks>
 Recommended next action: <if any>
 ```
 
-## Finding schema
+## Findings and triage
 
-```text
-ID:
-Severity: blocker | major | minor
-Confidence: high | medium | low
-Location: file and symbol/line
-Failure mode / impact:
-Evidence or reproduction:
-Violated criterion, requirement, invariant, or risk boundary: <a missing criterion may itself be the finding>
-Suggested direction:
-How to verify a fix:
-```
+The finding schema and the blocker/major/minor definitions live in the `verifier` agent file. A review row dispatched as a plain agent must carry them in its brief. A finding id must match the shape the lint recognises (`bin/sage-lint.sh` header), or `triage-orphan` skips it.
 
-- **`ID:` must match the id shape `bin/sage-lint.sh` recognises, or its `triage-orphan` check silently skips that id** — the grammar is in that script's header.
-- **Blocker**: crash, corruption, security failure, broken build, unusable core path, failed mandatory criterion. **Major**: credible user-visible incorrectness, regression, serious performance or near-term maintainability failure. **Minor**: bounded improvement; never blocks acceptance.
-- Low-confidence hypotheses are investigation leads, not blockers. Style-only comments are omitted.
-- Triage states: **accepted / rejected with evidence / deferred with owner / user decision.** Every finding gets exactly one.
+Triage states: **accepted / rejected with evidence / deferred with owner / user decision.**
 
 ## Risk rubric
 
-Axes: failure impact; breadth of coupling; novelty/uncertainty; reversibility; strength of automated verification; external compatibility or human-decision dependencies.
+Axes: failure impact; breadth of coupling; novelty; reversibility; strength of automated verification; external or human-decision dependencies.
 
-**Hard triggers → high risk regardless of other axes:** data/save migration, security or credentials, networking or deterministic simulation, public API compatibility, irreversible conversion, a core performance budget, behavior with no reliable test oracle. Reclassify mid-task if exploration reveals a different blast radius.
+**Hard triggers, which make a task high risk whatever the other axes say:** data or save migration, security or credentials, networking or deterministic simulation, public API compatibility, irreversible conversion, a core performance budget, behavior with no reliable test oracle. Reclassify when exploration shows a different blast radius.
 
-- **Low**: parent or one worker; focused checks; review only if behavior is non-obvious.
-- **Medium**: ≤2 explorers for real unknowns; one writer; one lens-specific reviewer; targeted fix verification.
-- **High**: bounded exploration; optional pre-write plan critic (`topologies.md` #11) and blind acceptance suite (`topologies.md` #10), **sage deciding both** on a named trigger; one writer per isolated tree; staged checks; two independent reviewers on the same frozen diff; parent triage; targeted regression verification; human checkpoint for subjective criteria (`Awaiting human`, `topologies.md`, evidence menus).
+- **Low:** the parent or one worker; focused checks; review only if the behaviour is not obvious.
+- **Medium:** ≤2 explorers for real unknowns; the framing critic; one writer; one lens-specific reviewer; targeted fix verification.
+- **High:** everything in medium, plus the blind acceptance suite, one writer per isolated tree, staged checks, two independent reviewers on the same frozen diff, and a human checkpoint for subjective criteria.
 
 ## Snapshot protocol
 
-Runs whenever any writer is present, the parent included.
+It runs whenever any writer is present, the parent included.
 
-1. **Baseline** — record starting revision, dirty files, task-owned files; unrelated dirty changes must survive. **This is the only recovery map once a writer has run** (`harness.md`, Cautions), and **a name is not a recovery path**: copy task-adjacent untracked files into the scratchpad at baseline time.
-2. **Write lease** — one named writer; everyone else source-read-only.
-3. **Stabilize** — writer finishes; run focused checks; capture the diff or changed-file manifest.
-4. **Freeze** — no source changes while reviewers inspect the candidate.
-5. **Triage** — merge and dedupe findings by root cause, not by wording, before any fix.
-6. **New lease** — one writer for accepted fixes (prefer the original; a fresh one needs the complete brief).
-7. **Verify** — targeted checks on fixes and regressions. A new full review only if design materially changed.
+1. **Baseline:** record the starting revision, dirty files and task-owned files, with `sage-ledger.sh restamp … -- <files>`. Unrelated dirty changes must survive. This is the only recovery map once a writer has run, so take it before the writer starts, not after something looks wrong. A name is not a recovery path: copy task-adjacent untracked files into the scratchpad now.
+2. **Write lease:** one named writer. Everyone else is source-read-only.
+3. **Stabilise:** the writer finishes, focused checks run, and you capture the diff.
+4. **Freeze:** no source changes while reviewers inspect the candidate.
+5. **Triage:** merge and dedupe findings by root cause before any fix.
+6. **New lease:** one writer for the accepted fixes.
+7. **Verify:** targeted checks on the fixes and regressions (`verify.md`).
 
-No manufactured commits to make a snapshot — a stable diff or file-hash manifest is enough; non-git projects record the task-owned files with before/after hashes. The parent taking a writer unit inline **moves the lease to the parent**; a rail stopping the run (`../SKILL.md`, `## Rails`) **freezes the lease**. Log either.
+No manufactured commits: a stable diff or a file-hash manifest is enough. The parent taking a writer row inline **moves the lease to the parent**. A rail that stops the run **freezes the lease**. Record either in the lease line of `### Resume state`.
 
 ## The ledger
 
-One file, `.claude/plans/sage-ledger-<session>.md` — durable; **gitignored only where that repo says so, a `git check-ignore -q .claude/plans/` test run before the first write** (`harness.md`, Ledger location); the session scratchpad only where no durable path exists. It is the only record of a run and **it is not written for the user**: its readers are the budget rail, the snapshot baseline, the failure ladder, a post-compaction parent or `/sage resume`, and `/sage report` (`record.md`). **Bring it current before launching a wave and after each integration** (`execute.md`).
+One file, `.claude/plans/sage-ledger-<session-id>.md`, where the id is the one `../SKILL.md` Step 2 names. Never derive it from a path: the elapsed-time hook finds the ledger by the harness's own session id. Its readers are you after a compaction, `/sage resume`, `/sage report`, and the elapsed-time hook. It is not written for the user.
 
-**The ledger's first line is a fixed header comment**, so the occupancy duty survives a compaction summary:
+- **Where:** before the first write, run `git check-ignore -q .claude/plans/`. Exit 1 means the file is visible to `git status`: write there anyway and print one line naming the path and the fix (`.claude/plans/` in `.gitignore`). Never edit a user's `.gitignore` unasked. Use the session scratchpad only when `.claude/plans/` is not writable, and print the path.
+- **How:** write it only through `bin/sage-ledger.sh`. Never hand-edit it with a Python or sed replace. Read the helper's run block once: `sed -n '1,/^# END RUN BLOCK/p' ~/.claude/skills/sage/bin/sage-ledger.sh`.
 
-```text
-<!-- sage occupancy duty: at every bring-current point, read parent occupancy from sage-watch.sh --status and restamp this line; window=<SAGE_WINDOW> compact-at=<n> (<measured|stated|assumed>) rung=<n>; at the rung, run the checkpoint in SKILL.md ## Compaction and resume. After a compaction: re-read ### Resume state, then SKILL.md, then the step file it names, before dispatching anything. Last check: <occ> (<pct>) at <when>. -->
+```sh
+L=.claude/plans/sage-ledger-<session-id>.md
+H=~/.claude/skills/sage/bin/sage-ledger.sh
+printf '%s\n' "ASK: <verbatim>" "PURPOSE: ..." "PREMISES: ..." "DELIVERABLE: ..." "APPROACHES: ..." \
+  "RISK: ..." "TOPOLOGY: ..." "PARENT: <your model>" "Wall target: <n> min" "Acceptance suite: ..." "Criteria: R1 ...; R2 ..." \
+  | $H init "$L" "<one-line task>"
+$H unit "$L" 1 unit="<unit>" done-when="<sentence>" rw=R agent="explorer (claude-sonnet-5-5)" flow="bg, batch1" state=planned
+$H decision "$L" assumption "<what I chose>" "<what else was plausible; how it would show if wrong>"
+$H restamp "$L" step="4 — execute.md" next="<one line>" lease="<holder|frozen|none>" baseline="<rev>" -- <task-owned files>
+$H finding "$L" F1 severity=major stage=r1 author=parent location="<file:line>" evidence="<text>"
+$H finding "$L" F1 triage="accepted"
 ```
 
-Written at Plan time, restamped at every bring-current point.
+The four working sections:
 
-### Plan
+- **`### Plan`:** the framing fields, the run fields, and one unit table. Columns: id, unit, done-when, rw, agent (model), flow, state, agentId, evidence. State ∈ `planned | running | reported | blocked | failed | abandoned | inline`.
+- **`### Decisions`:** one table for every assumption, deviation, dropped disagreement, discarded approach, open question, reopen and rail-1 authorisation, keyed by a `kind` column. A plan change is a `deviation` row, and you update the affected unit row in place. Silent discard is forbidden. A later user correction is a new row that names the row it corrects.
+- **`### Findings`:** one row per finding, with a `stage` (frame, plan, r1, r2+, final-run, post-close, user) and an `author` (parent, unit, pre-existing). **The residual same-family maker/checker bias disclosure has its only home here**, wherever no cross-family checker was available (`verify.md`).
+- **`### Run record`:** written at Step 6 (`record.md`).
 
-```text
-TASK: <one line>
-RISK: low | medium | high (rubric above)
-TOPOLOGY: <pattern number and name, or custom> — <one-line why>
-PARENT: <the model you are running on> — synthesis, triage, completion claim
-
-| # | Unit (done when)         | R/W | Model (tier)      | Effort (via)         | Flow       | Isolation   | Est. tokens |
-|---|--------------------------|-----|-------------------|----------------------|------------|-------------|-------------|
-| 1 | ...                      | R   | sonnet (standard) | low (explorer)       | bg, batch1 | —           | ~20k        |
-| 2 | ...                      | W   | sonnet (standard) | medium (implementer) | bg, after1 | write lease | ~80k        |
-| 3 | review of #2 (lens: ...) | R   | opus (frontier)   | high (verifier)      | bg, after2 | frozen diff | ~50k        |
-
-Cap: <N> concurrent.
-Budget: ~<total> tokens, ~<min> wall clock — basis: <the same-shape row you priced off, named, or the band>. The token figure sets the run's own ceiling, so estimate honestly in both directions (`../SKILL.md`, `## Rails`).
-Acceptance suite: light | full | none — chosen because <one line>.
-        Criteria: R1 <text>; R2 <text>; ...
-Scouting: <N explorer scouts, rounds where two, ~actual tokens — already spent (`decompose.md`)>.
-Risks: <top 1–3. With any writer present, name the `/rewind` gap explicitly>.
-Solo alternative: <what one strong agent inline would cost or miss>.
-```
-
-**Model and Effort columns** — the exact model value you will pass with its tier in brackets, never a tier alone (an **alt** row passes no model and records the value its file sets, `alt-lane.md`); and the effort **level always**, with the control that sets it in brackets — `low (explorer)`, `high (verifier)`, or `medium (no control)` on a plain dispatch — never a bare level and never a dash. Run the `CLAUDE_CODE_SUBAGENT_MODEL` check first (`harness.md`, Models and effort).
-
-**Flow column** — `bg, batch1` for a wave, `bg, after1` for a row consuming a whole prior wave, `bg, per-item after <id>` for the pipeline-per-item flow `decompose.md` prefers; a per-item stage over N items is **one row**, with the item count in its `done when` clause. **Acceptance-suite criteria go in as text, verbatim**, each at the requirement's observable surface — no module names, no data stores, no mechanism choices.
-
-**Compress the table**: **one physical line per row**, `done when` clauses in a numbered list under it keyed by row id; **a constant column is not a column** — state a shared value once above the table.
-
-### Unit table
-
-```text
-| id | unit | agent/thread name | model used | state | messages | evidence | actual tokens |
-```
-
-The live per-unit state, updated on every state change. State ∈ `planned | running | reported | blocked | failed | abandoned | inline`. **`agent/thread name`** is the `agentId` the dispatch returned, never the `description`, filled the moment the dispatch returns. **`model used`** is the value `sage-watch.sh --status` measured from the unit's transcript, marked `measured` (`execute.md`); a cell filled from your own dispatch says `asserted`, because the harness can swap a requested model in silence. **`messages`** holds every failure-ladder `SendMessage` you sent to this unit, when, and whether a reply landed; an empty cell means none were sent.
-
-### Resume state
-
-```text
-### Resume state
-step: <1–6> — <the step file to re-read>
-next action: <one line>
-checkpoint: <turn <n> | none>
-write lease: <holder | frozen | none>
-watchdog: <hosted on Monitor over <subagents-dir> | re-hosted after compaction at <when> | disabled: <reason>>
-baseline: <revision>; dirty files: <list>
-<sha256sum output, one line per task-owned file>
-subagents: <path to this session's subagents/ directory>
-<agentId> → <description>   (one line per agent dispatched)
-```
-
-Restamped at every bring-current point and at the checkpoint rung. The `sha256sum` lines are the baseline `/sage resume` re-runs — `git status` alone misses untracked and out-of-repo files. A post-compaction parent reads this section first (`../SKILL.md`, `## Compaction and resume`), so a stale one is the same as none.
-
-### Assumption log
-
-```text
-| assumption | what I chose | what else was plausible | how it would show if wrong |
-```
-
-One row per ambiguity a human would otherwise have been asked about (Step 2 above). Ambiguity that changes the decomposition is always a row. A later user correction is written **next to the row it corrects**, never as a fresh row elsewhere.
-
-### Decisions and deviations
-
-```text
-| id | when | decision, plan amendment, or dropped disagreement | reason |
-```
-
-Every plan amendment — model, effort, scope, count, topology, cap — with its reason and when, and **every abandoned disagreement**: what was dropped, which unit held it, and why it lost. Silent discard is forbidden.
-
-**An amendment writes its row here *and* marks the rows it amends.** Every row carries an id — `D1`, `D2`, … in order written — and the affected `### Plan` and `### Unit table` rows are tagged in their own first cell, `2 superseded → D2`, so the plan in force reads off the table. Both halves or neither. `bin/sage-lint.sh` strips the tag before comparing the Plan and Unit id sets.
-
-**A rail-1 authorisation is a row here too**, written before the authorised action runs (`../SKILL.md`, `## Rails`). It has no other home.
-
-### Findings and dispositions
-
-```text
-| id | severity | location | triage | evidence |
-```
-
-One row per finding, each carrying exactly one triage state; an open triage is an unfinished run. **One disclosure has its only home here**: the **residual same-family maker/checker bias**, wherever no cross-family checker was available (`verify.md`).
-
-### Open questions and discarded approaches
-
-```text
-| kind | item | current hypothesis, or why it was dropped | what would settle it |
-```
-
-`kind` is `open` or `discarded`. Written when the question opens or the approach is dropped, so the next session does not re-buy it; restamped with the rest at each bring-current point.
-
-`### Run record` is `record.md`'s.
+**`### Resume state`** is small and current: step, next action, write lease, baseline, and the `sha256sum` lines of the task-owned files. The helper writes it at Plan time, even on a read-only run. Restamp it at each wave launch and each integration. The compaction hook sends every compacted session here, so a stale one is the same as none.

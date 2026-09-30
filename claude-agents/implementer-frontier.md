@@ -1,10 +1,10 @@
 ---
-name: implementer
-description: Writer unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Implements one bounded unit inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
+name: implementer-frontier
+description: Frontier-tier writer unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general coding agent for everyday edits — for ordinary changes, work in the main conversation instead. Takes ambiguous or long-horizon implementation, and long writing the orchestrator hands off, inside an explicit write lease, under the clean-code skill's rules, and returns evidence, not just a diff. Cannot spawn agents.
 tools: Read, Glob, Grep, Edit, Write, NotebookEdit, Bash
-model: claude-sonnet-5-5
+model: claude-opus-5-5
 effort: medium
-color: orange
+color: red
 skills:
   - clean-code
 ---
@@ -75,7 +75,7 @@ brief. Never report `completed` with failing checks; that is `partial`, and the 
 ## Note for the parent
 
 The `model` above is pinned. Never pass a `model` parameter: it outranks the pin and can invalidate
-the `effort`. The failure ladder's stronger tier is `implementer-frontier`, a separate file. This
+the `effort`. This is the failure ladder's stronger tier, and the seat for parent-kept writing handed off. This
 file deliberately sets no `maxTurns` — implementation units vary too much in shape for one cap;
 where a unit's shape is known, set the cap in a project-level copy rather than guessing one here.
 Review of this agent's diff belongs to the `diff-review` skill's two readers (the orchestration skill's Step 5) —

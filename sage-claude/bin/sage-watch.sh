@@ -34,6 +34,17 @@
 #   stderr instead names a fixable cause — fix that and probe again. Exit 0 always,
 #   except exit 2 on unusable arguments.
 #
+#   WHEN TO HOST IT: only on a parent window of 400,000 tokens or less. On a 1M window a
+#   run reads `--status` once, at harvest or close, and hosts nothing.
+#   1. Resolve the dir: `readlink -f` the `output_file` a dispatch returned. Its parent is
+#      `<project>/<session-id>/subagents/`. Take the session id from the resolved target.
+#   2. Probe once with `--status` and that explicit dir (never `-`). Lines back that carry
+#      this run's session id → host it. See FAIL OPEN for the other outcomes.
+#   3. Host it on `Monitor`, command `while true; do SAGE_WINDOW=<n> sage-watch.sh <dir>;
+#      sleep 60; done`. A Monitor watch expires after 30 minutes: re-arm it on expiry.
+#   On the rung: restamp `### Resume state` with `sage-ledger.sh restamp` and write one
+#   `### Decisions` row with room remaining and work remaining. Never a handover.
+#
 #   The rest of this header is the maintainer's manual.
 # END RUN BLOCK
 #
@@ -45,10 +56,9 @@
 #   SAGE_WINDOW=200000 SAGE_STATE_DIR=$(mktemp -d) sage-watch.sh d/sess/subagents  -> the rung line
 #
 # It reads the in-flight subagent transcripts of one session, watches the single
-# parent-occupancy rung — the checkpoint rule in `../SKILL.md` ## Compaction and resume,
-# and `../references/execute.md` — and prints ONE LINE PER FIRED RUNG. A healthy sample
-# prints nothing and exits 0. It is hosted on `Monitor` with `persistent: true`, where
-# every stdout line becomes a notification, so silence is the default output.
+# parent-occupancy rung described in the run block above — and prints ONE LINE PER FIRED RUNG. A healthy sample
+# prints nothing and exits 0. It is hosted on a `Monitor` loop, where every stdout line
+# becomes a notification, so silence is the default output.
 #
 # It writes nothing but one empty marker directory per fired rung (THE LADDER below), never
 # calls `TaskStop`, never kills a process, and never touches a transcript. It reports; the
@@ -143,7 +153,7 @@
 # nothing else: 197 transcripts, measured 2026-08-18 — every
 # `<session>/subagents/agent-*.jsonl` under `~/.claude/projects/`, NON-RECURSIVE, across
 # all projects, `workflows/wf_*/` excluded. That is exactly the population this script's
-# own glob can read, and it is the same one `../references/harness.md` quotes; the two
+# own glob can read, and it is the same one `../references/harness-measurements.md` quotes; the two
 # must agree, figure for figure. A recursive sweep instead drags in the `wf_*` sidecars
 # of the deleted `Workflow` backend — units this probe never opens and sage never
 # produces — and moves every number below. Symlinked duplicates are counted once. This is
@@ -155,7 +165,7 @@
 # fraction of real spend and alarms on healthy agents constantly. Always
 # `group_by(.message.id) | map(.[-1])` before any sum — the inflation is a DISTRIBUTION,
 # not a constant: the median transcript inflates about 2x and the tail past 8x, which is
-# the magnitude, and `../references/harness.md`, `## Transcripts and the token arithmetic`
+# the magnitude, and `../references/harness-measurements.md`, `## Dedup distribution`
 # holds the distribution as its single home. This is why the dedup is not optional.
 #
 #   done       the unit is presumed FINISHED. Read off the FINAL assistant record in FILE
@@ -168,7 +178,7 @@
 #                c. `idle` is past IDLE_CEIL — evidence this cold describes a unit that is
 #                   gone, not one that is stalling, and there is nothing left to steer.
 #              Clause (b) is the load-bearing one: with it the predicate covers 95.5% of
-#              the reference corpus. `../references/harness.md` is the single home for the
+#              the reference corpus. `../references/harness-measurements.md` is the single home for the
 #              rest — the per-clause split, the superseded `any`-record rule it replaced,
 #              and what `done` still cannot see. Read a coverage figure there, not here.
 #   spend      sum of `input + cache_creation + output` over DEDUPLICATED records.
@@ -184,7 +194,7 @@
 #   idle       now minus the last record timestamp, which PROBE requires to be a string:
 #              a numeric or null one yields `-`, never a stale age (see the probe
 #              block). Reliable for liveness, noisy as a stall
-#              proxy (`../references/harness.md` has the base rates). IDLE_CEIL
+#              proxy (`../references/harness-measurements.md` has the base rates). IDLE_CEIL
 #              below is set well past the largest returns this corpus has measured.
 #   repeat     the largest count of one identical tool call (same name AND same input)
 #              across deduplicated records. Diagnostic only now — `--status` reports it,
@@ -236,8 +246,7 @@
 #   rung             action      fires when
 #   occ-checkpoint   checkpoint  parent occupancy >= rung (THE COMPACTION POINT above),
 #                                once per compaction segment -> bring the ledger current
-#                                and restamp `### Resume state`; `../SKILL.md`
-#                                ## Compaction and resume
+#                                and restamp `### Resume state` (the run block above)
 #
 # ONE RUNG, deliberately. There is nothing above it: the checkpoint is the whole of what a
 # parent can do about its own occupancy, and doing it twice buys nothing. The parent rung
@@ -264,7 +273,7 @@
 # WHAT SAMPLING STILL CANNOT SEE: a segment that begins and ends between two samples. Its
 # compaction has already happened when the next sample lands, and a checkpoint fired then
 # would bring the ledger current for a window the compaction has already summarised, so
-# the rung does not fire on past segments. At the 60-second cadence `../references/execute.md` sets, every
+# the rung does not fire on past segments. At the 60-second cadence the run block sets, every
 # crossing segment of the reference parent (each 4 to 30 minutes long) was seen, and at 120
 # seconds too; replaying
 # it at 300 seconds missed 3 of 15 and at 3600 seconds 12 of 15. The cadence is the bound.
@@ -285,7 +294,7 @@
 # `raw` is the undeduplicated sum, printed only here, only so the dedupe stays auditable.
 # `compact=` above zero on a UNIT line says that unit compacted mid-work, so its report was
 # written from a summary of its own transcript rather than from the transcript — the parent
-# treats that as a deviation to record (`../references/execute.md`). `model=` is the
+# treats that as a deviation to record. `model=` is the
 # `message.model` of that unit's newest assistant record that is not an API error, `unknown`
 # when it has none.
 #
@@ -353,7 +362,7 @@
 # able from a stall. The verification layer is the only defence for the first.
 #
 # What the `done` predicate specifically cannot see, since it decides on the last record
-# written rather than on any statement of intent — `../references/harness.md` carries the
+# written rather than on any statement of intent — `../references/harness-measurements.md` carries the
 # full corpus breakdown:
 #   - A unit that stalls just after emitting a text block and before its tool call lands
 #     in the same turn reads as finished under clause (b). While the unit is alive this
@@ -400,8 +409,7 @@ RESUME_FLOOR=60000      # what a resumed parent carries anyway; saving-post-rung
 STATE_DIR="${SAGE_STATE_DIR:-${TMPDIR:-/tmp}/sage-watch}"
 
 # WINDOW: an integer, or an integer with a k/K (x1000) or m/M (x1000000) suffix. An
-# unparseable or unset SAGE_WINDOW falls back to the measured figure in
-# ../references/harness.md.
+# unparseable or unset SAGE_WINDOW falls back to the 1M window figure above.
 parse_amount() {  # parse_amount <raw> <default> — echoes an integer, never fails
   local raw="$1" fallback="$2" num mult=1
   case "$raw" in
@@ -502,8 +510,8 @@ if [ -n "$DIR" ]; then EXPLICIT_DIR=1; else EXPLICIT_DIR=0; fi
 # the two failures need opposite answers and used to be byte-identical. A missing jq is a
 # fixable dependency -- jq does NOT ship with Claude Code, and the /usr/bin fallback above
 # is a macOS-shaped assumption, so this fires on Linux and not here -- while an unresolved
-# layout is the signal ../SKILL.md Step 4 turns into disabling the sensor for the whole
-# run. One silent exit 0 for both told the parent to give up permanently on a one-line fix,
+# layout is the signal the run block's FAIL OPEN rule turns into disabling the sensor for the
+# whole run. One silent exit 0 for both told the parent to give up permanently on a one-line fix,
 # killing the only rail with a measured true positive. The diagnostics are --status only
 # and go to stderr: stdout lines become notifications in the hosting loop, and the loop
 # must stay silent. An explicit dir that does not resolve is a caller error, not a layout
@@ -585,7 +593,7 @@ emit() {  # rung action id type desc figures...
 # realpath-deduped `agent-*.jsonl` under `~/.claude/projects` -- 632 transcripts / 80,566
 # stamps when the change was made, and 637 / 80,784 on an independent re-run the same day
 # (2026-08-27), the drift being that session's own five dispatches, exactly as
-# `../references/harness.md` says to expect. Zero non-string stamps in either run, so the
+# `../references/harness-measurements.md` says to expect. Zero non-string stamps in either run, so the
 # repaired path stays documented rather than observed and no figure a caller reads moved.
 # `assistant_records` is the evidence count, and what it gates is narrower than it looks.
 # It gates the PARENT line and the parent rung, which both test `records >= 1`: a session

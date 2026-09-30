@@ -1,0 +1,247 @@
+## a58bd85c  model=claude-opus-5 effort=high  run 2026-09-03T10:30:26.743Z -> 2026-09-03T14:05:52.482Z  wall=215.4 min
+API calls=188 out=209,198 thinking=78,283 fit: gen_s = 3.0 + 11.8ms*tok (n=188)  compactions=15 (37.5 min)
+buckets (min): idle:agents=90.2, gen=50.7, compaction=39.5, tool:bash:test/build=11.5, tool:agent-wait(TaskOutput)=10.0, tool:bash:task-other=9.5, tool:bash:ledger=1.4, tool:bash:git=0.8, tool:task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=0.6, tool:agent-dispatch=0.3, tool:agent-steer=0.2, tool:task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=0.2, tool:bash:skill-read=0.2, tool:task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=0.1, tool:bash:journal/memory=0.1, tool:bash:watch=0.1, tool:bash:lint=0.1, tool:watch=0.0, tool:task-tool:ListAgents=0.0
+gen by cat (min): bash:task-other=17.7, bash:ledger=11.9, bash:test/build=7.5, agent-dispatch=4.1, agent-steer=2.2, text=2.0, bash:git=2.0, bash:journal/memory=0.7, task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=0.6, bash:skill-read=0.5, bash:watch=0.4, task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=0.3, task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=0.3, watch=0.2, bash:lint=0.1, task-tool:ListAgents=0.1, agent-wait(TaskOutput)=0.0
+calls by cat: bash:task-other=94, bash:ledger=46, bash:test/build=29, bash:git=11, agent-dispatch=10, bash:skill-read=7, agent-steer=6, task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=4, bash:journal/memory=3, bash:watch=3, watch=3, bash:lint=2, task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=2, agent-wait(TaskOutput)=1, task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=1, task-tool:ListAgents=1
+out tokens by cat: bash:task-other=69.7k, bash:ledger=48.3k, bash:test/build=33.2k, agent-dispatch=21.4k, agent-steer=9.4k, bash:git=7.6k, text=7.0k, task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=2.4k, bash:journal/memory=2.3k, bash:skill-read=2.2k, bash:watch=1.8k, task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=1.4k, task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=1.4k, watch=0.4k, task-tool:ListAgents=0.3k, bash:lint=0.2k, agent-wait(TaskOutput)=0.1k
+  phase S1-2 decompose/plan (+inline work): 8.3 min (parent gen 3.9), api=19, out=16.3k, think=7.3k, tools=36 (bookkeeping 10, ~7.6k out)
+  phase S3-4 brief/first wave: 3.5 min (parent gen 1.5), api=7, out=7.4k, think=1.4k, tools=12 (bookkeeping 4, ~0.9k out)
+  phase S5 triage/fix/re-review: 197.0 min (parent gen 41.4), api=147, out=172.9k, think=67.0k, tools=161 (bookkeeping 41, ~39.7k out)
+  phase S6 close/record: 6.7 min (parent gen 3.9), api=15, out=12.7k, think=2.6k, tools=14 (bookkeeping 9, ~7.1k out)
+  sub a129b415 explorer      claude-haiku-4-5-20251001 out=7.2k calls=23 @8.8m +1.9m | Scan tddmon repo for retry handling
+  sub a1c90d67 explorer      claude-haiku-4-5-20251001 out=5.4k calls=17 @8.5m +1.8m | Map export-report pipeline wiring
+  sub a1ecea43 explorer      claude-haiku-4-5-20251001 out=11.1k calls=42 @8.3m +3.5m | Map in-worker test retry and TRX output
+  sub a20b8eb1 implementer   claude-opus-5          out=59.8k calls=62 @80.6m +52.6m | Consolidated retry-logging fix round
+  sub a2957b23 verifier      claude-opus-5          out=59.3k calls=62 @59.2m +14.3m; @155.3m +7.2m; @174.9m +5.9m; @181.4m +7.7m | Review unit 4: correctness and dedup regression
+  sub a3ac6cce verifier-alt  gpt-5.6-sol            out=3.1k calls=34 @59.5m +8.2m; @155.5m +3.8m | Review unit 4: satisfies all-retry-logs goal
+  sub ab43a190 implementer   claude-sonnet-5        out=55.7k calls=91 @14.4m +40.4m | Fix retry attempts dropped before OTel export
+  sub ae71f46a verifier-alt  gpt-5.6-sol            out=1.4k calls=13 @194.0m +7.5m; @208.5m +0.3m | Re-verdict G1 grafana window fix
+  idle gaps >1m: @39.3m 15.5m idle:agents; @60.5m 1.4m idle:agents; @69.5m 4.0m idle:agents; @83.4m 49.9m idle:agents; @176.1m 4.7m idle:agents; @182.0m 7.2m idle:agents; @195.0m 6.6m idle:agents
+### a58bd85c (second pass)
+waits by awaited role (min): writer=65.4, review-steer=11.9, review-r1=11.5, writer(TaskOutput block)=10.0, other=1.4
+parent output tokens by chunk category: task-other=86.9k(42%), ledger=39.0k(19%), text=31.2k(15%), agent-dispatch=24.8k(12%), agent-steer=9.1k(4%), test/build=6.6k(3%), git=4.3k(2%), journal/memory=2.0k(1%), watch=1.4k(1%), task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=1.4k(1%), task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=1.1k(1%), skill-read=0.6k(0%), lint=0.3k(0%), task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=0.3k(0%), task-tool:ListAgents=0.3k(0%), agent-wait(TaskOutput)=0.1k(0%)
+parent gen minutes by chunk category: task-other=21.7, ledger=9.4, text=7.9, agent-dispatch=4.7, agent-steer=2.1, test/build=1.7, git=1.2, journal/memory=0.6, watch=0.4, task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=0.3, task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=0.2, skill-read=0.1, lint=0.1, task-tool:ListAgents=0.1
+visible chars by chunk category: task-other=81.6k(32%), ledger=57.1k(23%), agent-dispatch=50.6k(20%), text=29.2k(12%), agent-steer=19.5k(8%), test/build=5.7k(2%), journal/memory=4.7k(2%), git=2.5k(1%), watch=0.7k(0%), task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=0.5k(0%)
+  dispatch-group 1 @8.3m: A:scout:Map in-worker test retry and TRX output
+  dispatch-group 2 @8.5m: A:scout:Map export-report pipeline wiring
+  dispatch-group 3 @8.7m: A:scout:Scan tddmon repo for retry handling
+  dispatch-group 4 @14.3m: A:writer:Fix retry attempts dropped before OTel export
+  dispatch-group 5 @58.2m: A:review:Review unit 4: correctness and dedup regressi; A:review:Review unit 4: satisfies all-retry-logs goal; A:review:Review unit 4: satisfies all-retry-logs goal
+  dispatch-group 6 @80.5m: A:writer:Consolidated retry-logging fix round
+  dispatch-group 7 @83.0m: S:review:FIX 3 exact anchors, scope confirmed
+  dispatch-group 8 @155.2m: S:review:unit 5 re-verdict on its five findings; S:review:unit 6 re-verdict on R1-R4 plus dashboard
+  dispatch-group 9 @174.9m: S:review:re-verdict G1 fix only
+  dispatch-group 10 @181.4m: S:review:retry re-verdict G1 after 529
+  dispatch-group 11 @193.6m: A:review:Re-verdict G1 grafana window fix; A:review:Re-verdict G1 grafana window fix
+  dispatch-group 12 @208.5m: S:review:Narrow re-verdict on the two G1 findings
+  post-compaction recovery: n=15 calls-before-task-work=11 minutes=5.1
+critical: wall=215.4 agent-covered=139.5 first-report@54.80938333272934 last-report@201.51803333361943
+  serial (no agent running): gen=33.1, compaction=23.1, tool:bash:test/build=10.4, tool:bash:task-other=6.9, tool:task-tool:mcp__claude_ai_ol-orange-mcp__CortexGrepCode=0.6, tool:bash:ledger=0.6, tool:bash:git=0.5, tool:bash:skill-read=0.2, tool:agent-dispatch=0.2, tool:agent-steer=0.2, tool:task-tool:mcp__claude_ai_ol-grafana-mcp__ListStreams=0.1, idle:wait=0.1, tool:bash:journal/memory=0.1
+  overlapped (agents running): idle:wait=90.1, gen=17.6, compaction=16.3, tool:agent-wait(TaskOutput)=10.0, tool:bash:task-other=2.6, tool:bash:test/build=1.2, tool:bash:ledger=0.8, tool:bash:git=0.4, tool:task-tool:mcp__claude_ai_ol-grafana-mcp__QueryLogVolume=0.1
+  longest agent segments: 14.3m verifier claude-opus-5 Review unit 4: correctness and dedup regressi; 40.4m implementer claude-sonnet-5 Fix retry attempts dropped before OTel export; 52.6m implementer claude-opus-5 Consolidated retry-logging fix round
+  idle waits by round (group:kind): 10:review=7.2, 11:review=6.6, 4:writer=15.5, 5:review=5.0, 6:writer=49.9, 9:review=4.7
+
+## 61de7190  model=claude-fable-5-1 effort=medium  run 2026-09-09T07:13:48.606Z -> 2026-09-09T09:36:53.721Z  wall=143.1 min
+API calls=80 out=102,185 thinking=25,374 fit: gen_s = 6.6 + 13.1ms*tok (n=80)  compactions=0 (0.0 min)
+buckets (min): idle:agents=102.2, gen=31.1, api-stall/error=4.7, tool:bash:task-other=1.2, tool:bash:ledger=0.8, tool:task-tool:WebFetch=0.8, tool:agent-dispatch=0.4, tool:bash:watch=0.3, tool:bash:git=0.3, idle:human=0.3, tool:bash:skill-read=0.3, tool:task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.2, tool:bash:journal/memory=0.1, tool:task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=0.1, tool:agent-steer=0.1, tool:bash:lint=0.0, tool:watch=0.0, tool:read:task=0.0
+gen by cat (min): bash:ledger=11.6, bash:task-other=7.5, agent-dispatch=3.9, text=1.8, bash:skill-read=1.6, bash:watch=1.0, bash:git=1.0, agent-steer=0.7, task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=0.6, task-tool:WebFetch=0.5, bash:journal/memory=0.4, bash:lint=0.3, watch=0.3, task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.1, read:task=0.1
+calls by cat: bash:task-other=23, bash:ledger=16, agent-dispatch=8, bash:skill-read=6, bash:git=4, bash:watch=3, bash:journal/memory=2, watch=2, task-tool:WebFetch=2, agent-steer=2, read:task=1, bash:lint=1, task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=1, task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=1
+out tokens by cat: bash:ledger=43.7k, bash:task-other=24.7k, agent-dispatch=13.6k, bash:skill-read=4.0k, text=3.4k, bash:git=3.0k, bash:watch=2.9k, task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=2.0k, agent-steer=1.8k, bash:lint=0.9k, task-tool:WebFetch=0.9k, bash:journal/memory=0.7k, watch=0.4k, task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.2k, read:task=0.1k
+  phase S1-2 decompose/plan (+inline work): 6.8 min (parent gen 5.5), api=18, out=17.1k, think=8.1k, tools=18 (bookkeeping 10, ~12.1k out)
+  phase S3-4 brief/first wave: 19.0 min (parent gen 7.0), api=20, out=21.9k, think=3.8k, tools=18 (bookkeeping 6, ~7.1k out)
+  phase S5 triage/fix/re-review: 113.9 min (parent gen 15.6), api=37, out=53.0k, think=12.7k, tools=32 (bookkeeping 11, ~25.8k out)
+  phase S6 close/record: 3.3 min (parent gen 2.9), api=5, out=10.2k, think=0.7k, tools=4 (bookkeeping 3, ~7.6k out)
+  sub a1b357d3 verifier      claude-opus-5          out=43.2k calls=33 @8.9m +12.8m | Pedagogy lens: readability, sufficiency, visuals, links
+  sub a397886b verifier-alt  gpt-5.6-sol            out=0.0k calls=1 @6.4m +0.0m | verifier-alt dispatchability probe
+  sub a416471a verifier      claude-opus-5          out=49.8k calls=31 @6.9m +19.0m | Helm general-knowledge lens over teaching course
+  sub a524a9b2 verifier      claude-opus-5          out=77.0k calls=108 @108.5m +22.3m; @135.7m +4.1m | Post-fix verification round over corrected Helm course
+  sub a8363fd9 general-purpose claude-opus-5          out=55.9k calls=68 @8.1m +17.6m | Orange DAM claims lens: Link refs + code validation
+  sub a84842af verifier-alt  gpt-5.6-sol            out=5.8k calls=48 @109.0m +13.3m | Cross-family refuter over parent claims about corrected cour
+  sub adefbc56 general-purpose claude-opus-5          out=204.2k calls=233 @31.0m +27.5m; @64.2m +41.3m | Writer: apply 63 accepted findings to Helm course
+  sub ae6d9109 verifier      claude-opus-5          out=39.9k calls=57 @7.5m +13.1m | Reproduction lens: re-run measured Helm claims
+  api errors: @63.3m [{"type": "text", "text": "API Error: Server is temporarily limiting requests (not your usage limit) \u00b7 {\"type\":\"
+  idle gaps >1m: @10.1m 10.5m idle:agents; @31.5m 27.0m idle:agents; @64.7m 40.8m idle:agents; @109.3m 13.0m idle:agents; @123.9m 7.0m idle:agents; @136.5m 3.3m idle:agents
+### 61de7190 (second pass)
+waits by awaited role (min): writer=67.8, review-r1=31.0, review-steer=3.3, human=0.3
+parent output tokens by chunk category: task-other=43.5k(43%), ledger=29.4k(29%), agent-dispatch=13.5k(13%), text=6.6k(7%), task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=2.0k(2%), agent-steer=1.8k(2%), journal/memory=1.7k(2%), skill-read=1.0k(1%), watch=0.8k(1%), task-tool:WebFetch=0.6k(1%), git=0.5k(1%), lint=0.5k(0%), task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.2k(0%), read:task=0.1k(0%)
+parent gen minutes by chunk category: task-other=12.9, ledger=7.9, agent-dispatch=3.8, text=3.0, agent-steer=0.7, task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=0.6, journal/memory=0.5, watch=0.4, skill-read=0.4, task-tool:WebFetch=0.4, git=0.2, lint=0.1, task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.1, read:task=0.1
+visible chars by chunk category: task-other=58.4k(37%), ledger=45.3k(28%), agent-dispatch=34.0k(21%), text=10.3k(6%), agent-steer=3.8k(2%), journal/memory=3.4k(2%), watch=0.9k(1%), task-tool:WebFetch=0.8k(1%), skill-read=0.6k(0%), lint=0.6k(0%), git=0.6k(0%)
+  dispatch-group 1 @6.8m: A:review:Helm general-knowledge lens over teaching cou; A:review:Reproduction lens: re-run measured Helm claim; A:review:Orange DAM claims lens: Link refs + code vali; A:review:Pedagogy lens: readability, sufficiency, visu
+  dispatch-group 2 @30.9m: A:writer:Writer: apply 63 accepted findings to Helm co
+  dispatch-group 3 @64.1m: S:review:Resume writer after rate-limit interruption
+  dispatch-group 4 @108.5m: A:review:Post-fix verification round over corrected He; A:review:Cross-family refuter over parent claims about
+  dispatch-group 5 @135.6m: S:review:Narrow re-verdict on V-01 and X fixes
+critical: wall=143.1 agent-covered=114.2 first-report@20.611766668160758 last-report@139.8032333334287
+  serial (no agent running): gen=20.8, api-stall=4.7, tool:bash:task-other=0.9, tool:bash:ledger=0.5, tool:task-tool:WebFetch=0.3, idle:human=0.3, tool:bash:watch=0.3, tool:bash:skill-read=0.2, tool:task-tool:mcp__claude_ai_ol-orange-mcp__SearchTask=0.2, idle:wait=0.2, tool:agent-dispatch=0.1, tool:task-tool:mcp__claude_ai_ol-orange-mcp__GetCurrentUser=0.1
+  overlapped (agents running): idle:wait=102.0, gen=10.3, tool:task-tool:WebFetch=0.5, tool:bash:ledger=0.4, tool:bash:git=0.3, tool:bash:task-other=0.2, tool:agent-dispatch=0.2
+  longest agent segments: 22.3m verifier claude-opus-5 Post-fix verification round over corrected He; 27.5m general-purpose claude-opus-5 Writer: apply 63 accepted findings to Helm co; 41.3m general-purpose claude-opus-5 Writer: apply 63 accepted findings to Helm co
+  idle waits by round (group:kind): 1:review=11.1, 2:writer=27.0, 3:review=40.8, 4:review=20.0, 5:review=3.3
+
+## e4bebf20  model=claude-opus-5 effort=xhigh  run 2026-09-11T08:04:12.418Z -> 2026-09-11T09:44:49.130Z  wall=100.6 min
+API calls=164 out=244,377 thinking=77,870 fit: gen_s = 4.5 + 11.2ms*tok (n=164)  compactions=0 (0.0 min)
+buckets (min): gen=58.0, idle:agents=29.5, tool:bash:task-other=8.4, tool:bash:ledger=1.5, tool:task-tool:WebFetch=0.8, tool:bash:watch=0.5, tool:agent-dispatch=0.5, tool:bash:git=0.5, tool:bash:skill-read=0.4, tool:bash:journal/memory=0.2, tool:bash:lint=0.2, tool:bash:test/build=0.1, tool:watch=0.0
+gen by cat (min): bash:task-other=25.6, bash:ledger=13.3, agent-dispatch=6.6, bash:git=3.0, bash:skill-read=2.5, bash:test/build=1.5, task-tool:WebFetch=1.4, bash:watch=1.4, text=1.0, bash:journal/memory=0.8, bash:lint=0.7, watch=0.2
+calls by cat: bash:task-other=97, bash:ledger=31, bash:skill-read=14, agent-dispatch=11, bash:watch=9, bash:git=6, bash:lint=5, bash:journal/memory=4, task-tool:WebFetch=4, bash:test/build=3, watch=2
+out tokens by cat: bash:task-other=112.9k, bash:ledger=58.1k, agent-dispatch=31.9k, bash:git=8.5k, bash:test/build=7.4k, bash:skill-read=6.2k, task-tool:WebFetch=5.6k, bash:watch=4.3k, bash:journal/memory=3.5k, text=2.8k, bash:lint=2.7k, watch=0.5k
+  phase S1-2 decompose/plan (+inline work): 16.0 min (parent gen 9.5), api=28, out=31.4k, think=17.1k, tools=46 (bookkeeping 25, ~17.3k out)
+  phase S3-4 brief/first wave: 15.7 min (parent gen 7.6), api=15, out=34.6k, think=8.7k, tools=19 (bookkeeping 9, ~14.1k out)
+  phase S5 triage/fix/re-review: 65.7 min (parent gen 38.0), api=114, out=166.9k, think=50.2k, tools=115 (bookkeeping 25, ~35.0k out)
+  phase S6 close/record: 3.3 min (parent gen 2.9), api=7, out=11.5k, think=1.9k, tools=6 (bookkeeping 6, ~8.8k out)
+  sub a00c5726 verifier      claude-opus-5          out=52.2k calls=45 @54.2m +13.6m | Post-fix verification round
+  sub a1edbb5a verifier      claude-opus-5          out=50.8k calls=19 @18.6m +12.1m | Lens E cross-document consistency
+  sub a2bf7c31 verifier      claude-opus-5          out=49.5k calls=34 @17.2m +12.8m | Lens C build publish version chain
+  sub a6d3752d verifier      claude-opus-5          out=60.1k calls=21 @16.0m +15.6m | Lens A generic tooling semantics
+  sub a89d67f2 verifier-alt  gpt-5.6-sol            out=2.2k calls=10 @84.6m +7.1m | Round 4 dry-round check
+  sub a98f060b verifier-alt  gpt-5.6-sol            out=3.4k calls=11 @73.1m +7.2m | Round 3 narrow re-review
+  sub a9ce94a5 verifier-alt  gpt-5.6-sol            out=7.0k calls=22 @54.8m +12.5m | Cross-family refuter on parent fixes
+  sub aa2c367e verifier      claude-opus-5          out=45.9k calls=22 @17.8m +11.7m | Lens D teach conformance and clarity
+  sub ab0d18c0 verifier      claude-opus-5          out=52.7k calls=35 @16.6m +13.7m | Lens B chart source fidelity
+  sub ad2e0f0c verifier-alt  gpt-5.6-sol            out=0.0k calls=1 @18.7m +0.4m | Alt lane clearance probe
+  sub af24bee5 verifier-alt  gpt-5.6-sol            out=0.0k calls=5 @93.7m +3.6m | Round 5 final dry check
+  idle gaps >1m: @21.3m 8.1m idle:agents; @56.6m 10.7m idle:agents; @76.9m 3.4m idle:agents; @86.8m 4.9m idle:agents; @95.1m 2.3m idle:agents
+### e4bebf20 (second pass)
+waits by awaited role (min): review-r1=29.5
+parent output tokens by chunk category: task-other=119.0k(49%), ledger=49.6k(20%), agent-dispatch=32.6k(13%), text=16.2k(7%), test/build=6.6k(3%), git=6.2k(3%), task-tool:WebFetch=4.0k(2%), skill-read=3.1k(1%), lint=2.7k(1%), journal/memory=2.3k(1%), watch=2.2k(1%)
+parent gen minutes by chunk category: task-other=27.4, ledger=11.3, agent-dispatch=6.7, text=5.2, git=1.8, test/build=1.3, skill-read=1.3, task-tool:WebFetch=1.0, watch=0.8, lint=0.7, journal/memory=0.6
+visible chars by chunk category: task-other=142.8k(41%), ledger=92.5k(26%), agent-dispatch=72.6k(21%), text=16.9k(5%), test/build=14.7k(4%), journal/memory=4.6k(1%), git=2.5k(1%), watch=2.1k(1%), task-tool:WebFetch=1.5k(0%), skill-read=1.0k(0%), lint=0.6k(0%)
+  dispatch-group 1 @16.0m: A:review:Lens A generic tooling semantics; A:review:Lens B chart source fidelity; A:review:Lens C build publish version chain; A:review:Lens D teach conformance and clarity; A:review:Lens E cross-document consistency
+  dispatch-group 2 @54.2m: A:review:Post-fix verification round; A:review:Cross-family refuter on parent fixes
+  dispatch-group 3 @73.0m: A:review:Round 3 narrow re-review
+  dispatch-group 4 @84.5m: A:review:Round 4 dry-round check
+  dispatch-group 5 @93.6m: A:review:Round 5 final dry check
+critical: wall=100.6 agent-covered=47.2 first-report@29.461249999205272 last-report@97.4090833346049
+  serial (no agent running): gen=42.5, tool:bash:task-other=7.6, tool:task-tool:WebFetch=0.8, tool:bash:ledger=0.7, tool:bash:git=0.5, tool:bash:skill-read=0.4, tool:agent-dispatch=0.3, tool:bash:journal/memory=0.2, tool:bash:lint=0.2, tool:bash:test/build=0.1, idle:wait=0.1
+  overlapped (agents running): idle:wait=29.3, gen=15.6, tool:bash:task-other=0.8, tool:bash:ledger=0.8, tool:bash:watch=0.5, tool:agent-dispatch=0.2
+  longest agent segments: 13.6m verifier claude-opus-5 Post-fix verification round; 13.7m verifier claude-opus-5 Lens B chart source fidelity; 15.6m verifier claude-opus-5 Lens A generic tooling semantics
+  idle waits by round (group:kind): 1:review=8.1, 2:review=10.7, 3:review=3.4, 4:review=4.9, 5:review=2.3
+
+## 54dd10c5  model=claude-opus-5-5 effort=high  run 2026-09-28T06:40:22.303Z -> 2026-09-28T08:40:50.323Z  wall=120.5 min
+API calls=121 out=264,202 thinking=193,779 fit: gen_s = 1.7 + 10.8ms*tok (n=121)  compactions=0 (0.0 min)
+buckets (min): gen=51.2, idle:agents=22.9, idle:human=19.4, api-stall/error=13.1, tool:bash:test/build=11.0, tool:bash:task-other=1.7, tool:bash:ledger=0.4, tool:bash:skill-read=0.4, tool:bash:git=0.2, tool:agent-dispatch=0.1, tool:bash:journal/memory=0.1, tool:bash:watch=0.0, tool:write:task=0.0, tool:skill-read=0.0
+gen by cat (min): bash:task-other=27.1, bash:test/build=8.6, bash:ledger=6.3, bash:skill-read=4.0, bash:git=1.7, text=1.0, agent-dispatch=1.0, write:task=0.7, skill-read=0.5, bash:journal/memory=0.2, bash:watch=0.1
+calls by cat: bash:task-other=53, bash:test/build=25, bash:ledger=14, bash:skill-read=10, bash:git=7, agent-dispatch=4, skill-read=1, write:task=1, bash:watch=1, bash:journal/memory=1
+out tokens by cat: bash:task-other=138.7k, bash:test/build=48.1k, bash:ledger=31.7k, bash:skill-read=19.3k, bash:git=8.5k, agent-dispatch=6.0k, text=4.3k, write:task=3.8k, skill-read=2.8k, bash:journal/memory=0.8k, bash:watch=0.3k
+  phase S1-2 decompose/plan (+inline work): 75.6 min (parent gen 39.2), api=69, out=203.9k, think=174.8k, tools=70 (bookkeeping 14, ~43.1k out)
+  phase S3-4 brief/first wave: 41.4 min (parent gen 10.3), api=43, out=51.6k, think=17.8k, tools=39 (bookkeeping 7, ~6.3k out)
+  phase S5 triage/fix/re-review: 0.0 min (parent gen 0.0), api=0, out=0.0k, think=0.0k, tools=0 (bookkeeping 0, ~0.0k out)
+  phase S6 close/record: 3.5 min (parent gen 1.7), api=9, out=8.7k, think=1.1k, tools=8 (bookkeeping 6, ~5.4k out)
+  sub a32020bb verifier-alt  api-plan-gpt-6-sol     out=2.3k calls=38 @75.8m +13.0m | Spec and correctness review of tddmon fix
+  sub abb00e93 refuter-alt   api-plan-gpt-6-astra   out=1.6k calls=14 @101.3m +4.6m | Round-2 refutation of tddmon fix round
+  sub ac37cec6 verifier      claude-sonnet-5        out=175.2k calls=87 @75.6m +41.4m | Standards review of tddmon stderr fix
+  sub aca6b2de refuter-alt   api-plan-gpt-6-astra   out=0.4k calls=12 @109.3m +6.5m | Round-3 refutation of webhook error fix
+  api errors: @15.6m [{"type": "text", "text": "API Error: The response stopped arriving. The response above may be incomplete."}]
+  idle gaps >1m: @15.6m 19.4m idle:human; @76.2m 12.3m idle:agents; @101.6m 3.9m idle:agents; @109.7m 5.8m idle:agents
+### 54dd10c5 (second pass)
+waits by awaited role (min): review-r1=22.9, human=19.4
+parent output tokens by chunk category: task-other=172.1k(65%), text=40.8k(15%), ledger=18.3k(7%), test/build=10.9k(4%), skill-read=8.6k(3%), agent-dispatch=5.9k(2%), write:task=3.8k(1%), git=2.7k(1%), journal/memory=0.8k(0%), watch=0.1k(0%), lint=0.1k(0%)
+parent gen minutes by chunk category: task-other=33.0, text=8.3, ledger=3.6, test/build=2.0, skill-read=1.8, agent-dispatch=0.9, write:task=0.7, git=0.6, journal/memory=0.2
+visible chars by chunk category: task-other=51.0k(40%), ledger=24.0k(19%), text=19.0k(15%), agent-dispatch=14.9k(12%), test/build=11.0k(9%), write:task=2.1k(2%), journal/memory=1.6k(1%), git=1.2k(1%), skill-read=1.0k(1%)
+  dispatch-group 1 @75.6m: A:review:Standards review of tddmon stderr fix; A:review:Spec and correctness review of tddmon fix
+  dispatch-group 2 @101.2m: A:review:Round-2 refutation of tddmon fix round
+  dispatch-group 3 @109.3m: A:review:Round-3 refutation of webhook error fix
+critical: wall=120.5 agent-covered=41.4 first-report@88.45263333320618 last-report@116.92544999917348
+  serial (no agent running): gen=41.2, idle:human=19.4, api-stall=13.1, tool:bash:test/build=4.3, tool:bash:skill-read=0.4, tool:bash:task-other=0.3, tool:bash:ledger=0.2, tool:bash:git=0.1
+  overlapped (agents running): idle:wait=22.9, gen=10.0, tool:bash:test/build=6.7, tool:bash:task-other=1.3, tool:bash:ledger=0.2
+  longest agent segments: 6.5m refuter-alt api-plan-gpt-6-astra Round-3 refutation of webhook error fix; 13.0m verifier-alt api-plan-gpt-6-sol Spec and correctness review of tddmon fix; 41.4m verifier claude-sonnet-5 Standards review of tddmon stderr fix
+  idle waits by round (group:kind): 1:review=13.3, 2:review=3.9, 3:review=5.8
+
+## d4096102  model=claude-fable-5-1 effort=high  run 2026-09-04T08:20:11.657Z -> 2026-09-04T09:44:05.024Z  wall=83.9 min
+API calls=71 out=298,705 thinking=73,714 fit: gen_s = 8.7 + 10.0ms*tok (n=71)  compactions=0 (0.0 min)
+buckets (min): gen=59.9, idle:agents=19.9, tool:bash:task-other=2.5, tool:bash:ledger=1.0, tool:agent-steer=0.2, tool:agent-dispatch=0.2, tool:bash:journal/memory=0.1, tool:edit:task=0.0, tool:bash:watch=0.0, tool:watch=0.0, tool:write:task=0.0, tool:skill-read=0.0, tool:bash:lint=0.0, tool:task-tool:ToolSearch=0.0
+gen by cat (min): bash:task-other=27.5, bash:ledger=12.9, write:task=9.0, edit:task=3.8, agent-dispatch=1.9, text=1.4, agent-steer=1.1, task-tool:ToolSearch=0.6, watch=0.6, bash:watch=0.5, bash:journal/memory=0.3, bash:lint=0.2, skill-read=0.1
+calls by cat: bash:task-other=66, edit:task=32, bash:ledger=26, write:task=10, agent-dispatch=6, agent-steer=5, bash:lint=2, watch=2, bash:journal/memory=1, task-tool:ToolSearch=1, skill-read=1, bash:watch=1
+out tokens by cat: bash:task-other=140.1k, bash:ledger=57.4k, write:task=51.9k, edit:task=21.2k, agent-dispatch=10.0k, agent-steer=5.3k, text=2.8k, watch=2.8k, task-tool:ToolSearch=2.6k, bash:watch=2.3k, bash:journal/memory=1.3k, bash:lint=0.8k, skill-read=0.2k
+  phase S1-2 decompose/plan (+inline work): 46.2 min (parent gen 43.0), api=42, out=225.6k, think=60.2k, tools=119 (bookkeeping 17, ~38.6k out)
+  phase S3-4 brief/first wave: 11.7 min (parent gen 4.2), api=8, out=17.9k, think=4.4k, tools=8 (bookkeeping 4, ~9.3k out)
+  phase S5 triage/fix/re-review: 23.1 min (parent gen 10.0), api=17, out=44.2k, think=7.5k, tools=21 (bookkeeping 8, ~8.9k out)
+  phase S6 close/record: 2.9 min (parent gen 2.7), api=4, out=11.0k, think=1.5k, tools=5 (bookkeeping 4, ~7.9k out)
+  sub a1f8af82 verifier      claude-opus-5          out=24.7k calls=15 @46.6m +4.1m; @63.5m +1.5m | Standards reader over the script hunks
+  sub a462646f verifier      claude-opus-5          out=50.0k calls=61 @46.2m +11.7m; @63.3m +2.5m | Spec reader over the frozen diff
+  sub a59259a7 verifier      claude-opus-5          out=44.5k calls=50 @65.6m +12.8m; @80.5m +0.5m | Adversarial pass on the seven fixes
+  sub a7c34cb9 verifier      claude-opus-5          out=39.4k calls=27 @47.0m +8.2m; @63.6m +1.0m | dispatch.md regression lens
+  sub a7cca8aa verifier-alt  <synthetic>            out=0.0k calls=1 @8.7m +0.0m | verifier-alt identity probe
+  sub aee82149 verifier      claude-opus-5          out=35.7k calls=17 @47.3m +7.2m; @63.8m +2.2m | harness.md regression and consistency lens
+  idle gaps >1m: @47.9m 2.9m idle:agents; @51.5m 3.1m idle:agents; @55.8m 2.1m idle:agents; @66.6m 11.8m idle:agents
+### d4096102 (second pass)
+waits by awaited role (min): review-r1=19.8, review-steer=0.2
+parent output tokens by chunk category: task-other=100.9k(34%), write:task=97.2k(33%), ledger=47.2k(16%), edit:task=19.6k(7%), agent-dispatch=13.1k(4%), text=10.7k(4%), agent-steer=4.5k(1%), journal/memory=2.6k(1%), skill-read=0.9k(0%), lint=0.7k(0%), git=0.5k(0%), task-tool:ToolSearch=0.4k(0%), watch=0.3k(0%), test/build=0.1k(0%)
+parent gen minutes by chunk category: task-other=21.1, write:task=16.7, ledger=10.6, edit:task=3.4, text=3.2, agent-dispatch=2.6, agent-steer=0.9, journal/memory=0.6, skill-read=0.2, lint=0.2, git=0.1
+visible chars by chunk category: write:task=243.0k(44%), task-other=120.3k(22%), ledger=98.8k(18%), edit:task=29.7k(5%), agent-dispatch=28.3k(5%), text=12.1k(2%), agent-steer=9.4k(2%), journal/memory=4.3k(1%), lint=0.6k(0%), skill-read=0.5k(0%)
+  dispatch-group 1 @46.2m: A:review:Spec reader over the frozen diff; A:review:Standards reader over the script hunks; A:review:dispatch.md regression lens; A:review:harness.md regression and consistency lens
+  dispatch-group 2 @63.3m: S:review:Spec re-verdict on the fixed freeze; S:review:Standards re-verdict on the fixed scripts; S:review:dispatch.md re-verdict after restorations; S:review:harness.md re-verdict after restorations; A:review:Adversarial pass on the seven fixes
+  dispatch-group 3 @80.4m: S:review:Re-verdict on A1 and A3 after fixes
+critical: wall=83.9 agent-covered=27.2 first-report@50.7842666665713 last-report@80.98369999726613
+  serial (no agent running): gen=53.4, tool:bash:task-other=2.2, tool:bash:ledger=0.6, idle:wait=0.1
+  overlapped (agents running): idle:wait=19.8, gen=6.5, tool:bash:ledger=0.4, tool:bash:task-other=0.2, tool:agent-steer=0.1, tool:agent-dispatch=0.1
+  longest agent segments: 8.2m verifier claude-opus-5 dispatch.md regression lens; 11.7m verifier claude-opus-5 Spec reader over the frozen diff; 12.8m verifier claude-opus-5 Adversarial pass on the seven fixes
+  idle waits by round (group:kind): 1:review=8.0, 2:review=11.9, 3:review=0.0
+
+## 9832cdf3  model=claude-opus-5-5 effort=xhigh  run 2026-09-23T08:20:28.554Z -> 2026-09-23T08:49:14.026Z  wall=28.8 min
+API calls=101 out=105,222 thinking=50,909 fit: gen_s = 2.8 + 8.7ms*tok (n=101)  compactions=0 (0.0 min)
+buckets (min): gen=19.9, idle:agents=6.5, tool:bash:task-other=1.3, tool:bash:ledger=0.3, tool:bash:skill-read=0.2, tool:bash:watch=0.2, tool:agent-dispatch=0.2, tool:bash:journal/memory=0.1, tool:watch=0.0, tool:edit:task=0.0, tool:bash:lint=0.0, tool:task-tool:WebFetch=0.0
+gen by cat (min): bash:task-other=11.2, bash:ledger=3.2, bash:watch=1.2, agent-dispatch=1.2, bash:skill-read=0.8, text=0.8, edit:task=0.5, task-tool:WebFetch=0.3, bash:lint=0.3, bash:journal/memory=0.2, watch=0.2
+calls by cat: bash:task-other=57, bash:ledger=11, bash:skill-read=9, bash:watch=6, agent-dispatch=6, bash:journal/memory=3, edit:task=3, bash:lint=3, watch=2, task-tool:WebFetch=1
+out tokens by cat: bash:task-other=60.2k, bash:ledger=19.3k, agent-dispatch=7.7k, bash:watch=5.6k, bash:skill-read=3.5k, edit:task=3.1k, text=2.0k, task-tool:WebFetch=1.7k, bash:journal/memory=0.9k, bash:lint=0.7k, watch=0.6k
+  phase S1-2 decompose/plan (+inline work): 14.7 min (parent gen 12.9), api=69, out=69.6k, think=39.7k, tools=73 (bookkeeping 21, ~17.3k out)
+  phase S3-4 brief/first wave: 8.3 min (parent gen 2.8), api=13, out=13.6k, think=5.4k, tools=11 (bookkeeping 4, ~3.0k out)
+  phase S5 triage/fix/re-review: 2.6 min (parent gen 1.5), api=6, out=7.2k, think=0.9k, tools=5 (bookkeeping 1, ~1.7k out)
+  phase S6 close/record: 3.1 min (parent gen 2.8), api=13, out=14.8k, think=5.0k, tools=12 (bookkeeping 8, ~8.5k out)
+  sub a3908d92 explorer      claude-haiku-4-5-20251001 out=0.9k calls=4 @26.2m +0.2m | explorer identity probe
+  sub a3f3771b verifier-alt  gpt-6-astra            out=0.7k calls=15 @15.0m +8.1m | Standards gate over corpus edits
+  sub a54fb4c1 verifier-alt  gpt-6-astra            out=0.1k calls=3 @8.8m +0.2m | verifier-alt lane probe
+  sub a96faa8b verifier-alt  gpt-6-astra            out=0.3k calls=9 @14.8m +2.4m | Spec gate over corpus edits
+  sub aa26882a verifier-alt  gpt-6-astra            out=0.9k calls=11 @15.2m +5.6m | Measurement gate over lineup write-ups
+  sub ae5cd1c6 verifier-alt  gpt-6-astra            out=0.5k calls=7 @23.9m +1.8m | Fix-verification gate, round 2
+  idle gaps >1m: @17.4m 3.0m idle:agents; @21.2m 1.5m idle:agents; @24.3m 1.0m idle:agents
+### 9832cdf3 (second pass)
+waits by awaited role (min): review-r1=6.5, probe=0.0
+parent output tokens by chunk category: task-other=56.5k(54%), ledger=14.9k(14%), text=9.9k(9%), agent-dispatch=7.6k(7%), watch=4.1k(4%), journal/memory=3.5k(3%), skill-read=3.2k(3%), edit:task=2.8k(3%), task-tool:WebFetch=1.7k(2%), test/build=0.6k(1%), lint=0.4k(0%), git=0.3k(0%)
+parent gen minutes by chunk category: task-other=10.7, ledger=2.4, text=2.3, agent-dispatch=1.2, watch=1.0, skill-read=0.7, journal/memory=0.6, edit:task=0.4, task-tool:WebFetch=0.3, lint=0.1, test/build=0.1
+visible chars by chunk category: task-other=37.2k(34%), ledger=29.0k(27%), agent-dispatch=17.5k(16%), text=8.6k(8%), edit:task=5.8k(5%), journal/memory=5.7k(5%), watch=2.0k(2%), skill-read=1.5k(1%)
+  dispatch-group 1 @14.7m: A:review:Spec gate over corpus edits; A:review:Standards gate over corpus edits; A:review:Measurement gate over lineup write-ups
+  dispatch-group 2 @23.9m: A:review:Fix-verification gate, round 2
+critical: wall=28.8 agent-covered=10.1 first-report@16.821066669623058 last-report@25.31090000073115
+  serial (no agent running): gen=16.6, tool:bash:task-other=1.2, tool:bash:skill-read=0.2, tool:bash:ledger=0.2, tool:bash:watch=0.1, tool:bash:journal/memory=0.1, tool:agent-dispatch=0.1
+  overlapped (agents running): idle:wait=6.5, gen=3.2
+  longest agent segments: 2.4m verifier-alt gpt-6-astra Spec gate over corpus edits; 5.6m verifier-alt gpt-6-astra Measurement gate over lineup write-ups; 8.1m verifier-alt gpt-6-astra Standards gate over corpus edits
+  idle waits by round (group:kind): 1:review=5.5, 2:review=1.0
+
+## c81599fd  model=claude-opus-5 effort=xhigh  run 2026-09-21T03:11:19.114Z -> 2026-09-21T03:40:54.243Z  wall=29.6 min
+API calls=64 out=93,827 thinking=42,221 fit: gen_s = 2.0 + 12.4ms*tok (n=64)  compactions=0 (0.0 min)
+buckets (min): gen=21.5, tool:bash:task-other=2.4, idle:agents=2.4, tool:bash:test/build=1.5, tool:bash:ledger=0.5, tool:bash:skill-read=0.5, tool:bash:watch=0.2, tool:bash:git=0.2, tool:bash:journal/memory=0.1, tool:agent-dispatch=0.1, tool:watch=0.1
+gen by cat (min): bash:task-other=7.8, bash:ledger=4.3, agent-dispatch=1.9, bash:test/build=1.8, text=1.7, bash:skill-read=1.1, bash:journal/memory=1.0, bash:git=0.9, bash:watch=0.8, watch=0.2
+calls by cat: bash:task-other=41, bash:ledger=12, bash:skill-read=10, bash:watch=5, bash:journal/memory=3, bash:git=3, agent-dispatch=3, bash:test/build=3, watch=2
+out tokens by cat: bash:task-other=33.3k, bash:ledger=18.8k, agent-dispatch=8.9k, bash:test/build=8.4k, text=6.8k, bash:skill-read=4.7k, bash:journal/memory=4.3k, bash:git=4.3k, bash:watch=3.1k, watch=1.2k
+  phase S1-2 decompose/plan (+inline work): 7.0 min (parent gen 5.0), api=14, out=22.6k, think=14.1k, tools=25 (bookkeeping 7, ~8.6k out)
+  phase S3-4 brief/first wave: 11.3 min (parent gen 8.3), api=26, out=36.5k, think=15.8k, tools=32 (bookkeeping 11, ~10.5k out)
+  phase S5 triage/fix/re-review: 7.9 min (parent gen 5.1), api=16, out=21.3k, think=8.2k, tools=15 (bookkeeping 5, ~5.0k out)
+  phase S6 close/record: 3.4 min (parent gen 3.1), api=8, out=13.5k, think=4.1k, tools=10 (bookkeeping 9, ~8.1k out)
+  sub a0620bb4 verifier      claude-opus-5          out=18.2k calls=20 @7.5m +10.8m | Classify the failed timing test
+  sub a4fe2b5e verifier      claude-opus-5          out=19.7k calls=16 @7.0m +8.5m | Def 362 test count baseline
+  sub aa7e61c5 verifier-alt  gpt-6-astra            out=4.1k calls=12 @17.2m +9.0m | Refute the flake root cause
+  idle gaps >1m: @13.0m 2.0m idle:agents
+### c81599fd (second pass)
+waits by awaited role (min): human=2.0, review-r1=0.4
+parent output tokens by chunk category: task-other=36.2k(39%), text=19.6k(21%), ledger=17.3k(18%), agent-dispatch=8.8k(9%), watch=3.1k(3%), journal/memory=3.0k(3%), test/build=2.8k(3%), skill-read=1.9k(2%), git=0.9k(1%)
+parent gen minutes by chunk category: task-other=8.2, text=4.8, ledger=3.9, agent-dispatch=1.9, watch=0.8, journal/memory=0.7, test/build=0.6, skill-read=0.5, git=0.2
+visible chars by chunk category: task-other=30.0k(29%), ledger=28.7k(28%), agent-dispatch=17.5k(17%), text=16.8k(16%), test/build=4.6k(4%), journal/memory=2.9k(3%), watch=1.7k(2%), skill-read=0.6k(1%)
+  dispatch-group 1 @7.0m: A:review:Def 362 test count baseline; A:review:Classify the failed timing test
+  dispatch-group 2 @17.2m: A:review:Refute the flake root cause
+critical: wall=29.6 agent-covered=19.2 first-report@25.614466667175293 last-report@25.614466667175293
+  serial (no agent running): gen=8.7, tool:bash:task-other=0.7, tool:bash:skill-read=0.3, tool:bash:ledger=0.2, tool:bash:git=0.1, tool:bash:journal/memory=0.1
+  overlapped (agents running): gen=12.7, idle:human=2.0, tool:bash:task-other=1.7, tool:bash:test/build=1.5, idle:wait=0.4, tool:bash:ledger=0.3, tool:bash:watch=0.2, tool:bash:skill-read=0.2
+  longest agent segments: 8.5m verifier claude-opus-5 Def 362 test count baseline; 9.0m verifier-alt gpt-6-astra Refute the flake root cause; 10.8m verifier claude-opus-5 Classify the failed timing test
+  idle waits by round (group:kind): 2:review=0.4
+
+| session | parent model / effort | run wall | parent gen (serial) | idle on agents | compaction | API stall + human | parent tool wait | agents (rounds) | parent API calls | parent out / thinking | bookkeeping calls (only/mixed) | bookkeeping out tokens | bookkeeping gen min | longest agent |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a58bd85c | opus-5 / high | 215 | 51 (33) | 100 | 39 | 0 | 25 | 8+0p (5) | 188 | 209k / 78k | 16/48 of 223 (1 --status) | 43k (21%) | 10.7 | 53m implementer (claude-opus-5) |
+| 61de7190 | fable-5-1 / medium | 143 | 31 (21) | 102 | 0 | 5 | 5 | 7+1p (3) | 80 | 102k / 25k | 2/28 of 72 (4 --status) | 33k (33%) | 9.3 | 41m general-purpose (claude-opus-5) |
+| e4bebf20 | opus-5 / xhigh | 101 | 58 (42) | 29 | 0 | 0 | 13 | 10+1p (5) | 164 | 244k / 78k | 21/43 of 186 (11 --status) | 60k (25%) | 14.6 | 16m verifier (claude-opus-5) |
+| 54dd10c5 | opus-5-5 / high | 120 | 51 (41) | 23 | 0 | 32 | 14 | 4+0p (3) | 121 | 264k / 194k | 15/12 of 117 (1 --status) | 28k (11%) | 5.7 | 41m verifier (claude-sonnet-5) |
+| d4096102 | fable-5-1 / high | 84 | 60 (53) | 20 | 0 | 0 | 4 | 5+1p (3) | 71 | 299k / 74k | 15/31 of 153 (0 --status) | 52k (17%) | 11.7 | 13m verifier (claude-opus-5) |
+| 9832cdf3 | opus-5-5 / xhigh | 29 | 20 (17) | 7 | 0 | 0 | 2 | 4+2p (2) | 101 | 105k / 51k | 14/29 of 101 (8 --status) | 26k (25%) | 4.8 | 8m verifier-alt (gpt-6-astra) |
+| c81599fd | opus-5 / xhigh | 30 | 21 (9) | 2 | 0 | 0 | 6 | 3+0p (2) | 64 | 94k / 42k | 21/11 of 82 (7 --status) | 25k (27%) | 5.8 | 11m verifier (claude-opus-5) |
+
+SLOW-5 totals (min): wall=663.5, gen=251.0 (38%), gen_serial=191.0 (29%), idle_agents=274.7 (41%), comp=39.5 (6%), stall=37.5 (6%), toolw=61.0 (9%), book_tok=216215.9, book_gen=51.9 (8%), out=1118667.0, think=449020.0
+FAST-2 totals (min): wall=58.3, gen=41.4 (71%), gen_serial=25.4 (44%), idle_agents=8.9 (15%), comp=0.0 (0%), stall=0.0 (0%), toolw=8.0 (14%), book_tok=51365.6, book_gen=10.7 (18%), out=199049.0, think=93130.0

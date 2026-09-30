@@ -20,6 +20,7 @@ alt_conf="${SUBAGENTS_ALT_CONF:-$claude_dir/subagents-alt-models.conf}"
 # on it — the same narrow rule install.sh applies when a config line goes away.
 alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
 guard_hook_command="$skills_dest/sage/bin/sage-alt-guard.sh"
+clock_hook_command="$skills_dest/sage/bin/sage-clock.sh"
 compact_hook_marker="sage-reanchor"
 
 sage_only=0
@@ -56,8 +57,8 @@ usage() {
   cat <<'USAGE'
 uninstall.sh — remove what install.sh placed under ~/.claude/.
 
-  --sage-only   Remove the sage skill, its sage-promote companion, all four shipped agents,
-                generated alt agents and its two settings hooks. Leaves the other ecosystem
+  --sage-only   Remove the sage skill, its sage-promote companion, every shipped agent,
+                generated alt agents and its settings hooks. Leaves the other ecosystem
                 skills and output styles.
   --dry-run     Print what would be removed and change nothing.
   --yes, -y     Skip the confirmation prompt. Required when stdin is not a terminal.
@@ -375,6 +376,7 @@ settings_has_sage_hooks() {
   # compaction hook by hand — on a machine that never had jq at all. Reporting "nothing to
   # remove" over a hook that is still there is the worse error, so name either marker anywhere.
   grep -qF "$(basename "$guard_hook_command")" "$settings" ||
+    grep -qF "$(basename "$clock_hook_command")" "$settings" ||
     grep -qF "$compact_hook_marker" "$settings"
 }
 
@@ -386,7 +388,7 @@ print_plan() {
   done
   if settings_has_sage_hooks; then
     if command -v jq >/dev/null 2>&1; then
-      echo "  sage's two hooks in $settings (every other entry is kept; jq rewrites the file)"
+      echo "  sage's hooks in $settings (every other entry is kept; jq rewrites the file)"
     else
       echo "  ...but NOT sage's hooks in $settings: editing that file needs jq and jq is not"
       echo "     installed, so they stay. The closing summary says how to delete them by hand."
@@ -454,7 +456,7 @@ discard() { # discard <path> <category>
   removed_any=1
 }
 
-# The user's settings.json holds arbitrary config this repo does not own, so this drops the two
+# The user's settings.json holds arbitrary config this repo does not own, so this drops the
 # hook commands install.sh added and leaves every other entry. Each bailout says why: under
 # `set -euo pipefail` a silent one would read as "removed" and abort the run.
 remove_settings_hooks() {
@@ -469,7 +471,8 @@ remove_settings_hooks() {
   fi
   if ! command -v jq >/dev/null 2>&1; then
     echo "NOTE: jq is not installed, so sage's hooks in $settings were left in place. Delete by"
-    echo "      hand: the PreToolUse entry whose command is $guard_hook_command, and the"
+    echo "      hand: the PreToolUse entry whose command is $guard_hook_command, the"
+    echo "      PostToolBatch entry whose command is $clock_hook_command, and the"
     echo "      SessionStart entry whose command mentions $compact_hook_marker."
     left_standing+=("$settings — sage's hooks are still in it; jq was not available to edit it")
     return 0
@@ -512,7 +515,7 @@ remove_settings_hooks() {
 # by a marker substring, which is loose enough to hit a hook of the user's that merely mentions the
 # marker, so that half is confined to the matcher install.sh writes it under.
 strip_sage_hooks() { # strip_sage_hooks <settings-file>
-  jq --arg guard "$guard_hook_command" --arg compact "$compact_hook_marker" '
+  jq --arg guard "$guard_hook_command" --arg clock "$clock_hook_command" --arg compact "$compact_hook_marker" '
     def is_command(f):
       (type == "object") and ((.command | type) == "string") and (.command | f);
     def strip(entry_ok; f):
@@ -536,10 +539,14 @@ strip_sage_hooks() { # strip_sage_hooks <settings-file>
         (if (.hooks.PreToolUse | type) == "array"
            then .hooks.PreToolUse |= strip(true; . == $guard or startswith($guard + " "))
            else . end)
+        | (if (.hooks.PostToolBatch | type) == "array"
+             then .hooks.PostToolBatch |= strip(true; . == $clock or startswith($clock + " "))
+             else . end)
         | (if (.hooks.SessionStart | type) == "array"
              then .hooks.SessionStart |= strip(.matcher == "compact"; contains($compact))
              else . end)
         | prune("PreToolUse"; $orig)
+        | prune("PostToolBatch"; $orig)
         | prune("SessionStart"; $orig)
         | (if (.hooks | length) == 0 and (($orig.hooks // {}) | length) > 0
              then del(.hooks) else . end)

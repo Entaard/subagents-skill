@@ -69,11 +69,12 @@ fi
 # hard-tool comment above calls the realistic one. Testing PATH alone reports a degradation
 # that is not one on any macOS box whose PATH omits /usr/bin but still has jq where it ships.
 if ! command -v jq >/dev/null 2>&1 && ! [ -x /usr/bin/jq ]; then
-  echo "NOTE: jq was not found on PATH or at /usr/bin/jq. Three optional features degrade without it:" >&2
+  echo "NOTE: jq was not found on PATH or at /usr/bin/jq. Four optional features degrade without it:" >&2
   echo "  - the sage-watch.sh occupancy watchdog probe (fails open: reports it cannot run, fires no rungs)" >&2
   echo "  - the sage-alt-guard.sh alt-lane guard hook: this installer SKIPS OFFERING it (the guard needs jq)" >&2
+  echo "  - the sage-clock.sh elapsed-time hook: this installer SKIPS OFFERING it" >&2
   echo "  - the SessionStart(compact) hook: this installer SKIPS INSTALLING it; a manual TIP prints instead" >&2
-  echo "  Install jq for all three to work fully; the install continues without it either way:" >&2
+  echo "  Install jq for all four to work fully; the install continues without it either way:" >&2
   echo "    macOS:         brew install jq" >&2
   echo "    Debian/Ubuntu: sudo apt install jq" >&2
 fi
@@ -181,258 +182,156 @@ migrate_legacy_bak() { # migrate_legacy_bak <path> <category>
   echo "NOTE: moved legacy backup $1 -> $backup_root/$2/ (backups no longer live in discovered directories)"
 }
 
-# Sage's journal does NOT get the byte comparison above, and reusing it here would be a bug.
-# Every sage run appends lines to it, and /sage-promote's consolidation stage is licensed to
-# drain it, so any byte comparison against the seed latches on permanently after the first run
-# and then blames the seed for a change sage made itself. What it compares instead is the header
-# sentinel
-#
-#     <!-- sage-local-memory v3 -->
-#
-# which claude-skills/sage-promote/references/memory-contract.md, "Structural invariants", declares as line 1 of
-# journal.md and requires every drain to preserve verbatim — so it survives the rewrites a byte
-# comparison cannot survive, and it moves only when the format really does. That makes the notice
-# ask the question that matters, is this file still the shape the current sage expects, and go
-# quiet again as soon as the answer is yes. A seed carrying no sentinel cannot be compared against,
-# so it says so rather than failing open in silence.
-sage_memory_sentinel() { # sage_memory_sentinel <file> — the sentinel line, empty when there is none
-  sed -n -E '/sage-local-memory/{s/^[[:space:]]*//;s/[[:space:]]*$//;p;q;}' "$1"
-}
+# Line 1 of each log, as claude-skills/sage-promote/references/memory-contract.md, "Structural
+# invariants", declares it. A log without its sentinel is not sage memory.
+runs_log_sentinel='# sage-local-memory v4 — runs.log: one run line per sage run, append-only, never drained'
+inbox_log_sentinel='# sage-local-memory v4 — inbox.log: obs lines for /sage-promote, drained by its pass'
 
-drift_memory_sentinel() { # drift_memory_sentinel <seed> <installed>
-  local want have
-  want="$(sage_memory_sentinel "$1")"
-  have="$(sage_memory_sentinel "$2")"
-  if [ -z "$want" ]; then
-    echo "NOTE: $1 carries no sage-local-memory sentinel, so memory-format drift cannot be checked."
-    return 0
-  fi
-  if [ "$want" != "$have" ]; then
-    echo
-    echo "NOTE: sage's memory format is now \"$want\"; your memory/journal.md says"
-    echo "      \"${have:-nothing}\". Your copy was left untouched, because it holds this machine's"
-    echo "      numbers. This note repeats until the two sentinels match. To see what moved:"
-    echo "        diff $1 $2"
-  fi
-}
-
-# Sage's v3 memory is a tree whose installed copy contains user data, so it has a dedicated seed step.
-# Four machine states, checked in this order:
-#   v2 machine    -> local.md exists, journal.md does not: the data is this machine's numbers
-#                    in the old shape, so migrate by hand (the design doc's Migration procedure),
-#                    never here — auto-migrating user data is how it gets lost
-#   half-migrated -> local.md AND journal.md both exist: a migration that has not finished, or a
-#                    journal a run's Step 6 append created on an unmigrated machine
-#   v3 machine    -> journal.md exists, local.md does not: compare its sentinel to the seed's
-#   fresh machine -> neither exists: copy the seed tree once (journal.md + local/), create archive/
-# local.md is tested before journal.md because the migration ends by archiving local.md — its
-# presence at the top level means the migration has not finished, and a journal.md standing
-# beside it must not make this machine read as v3, or the migration notice never prints again.
-seed_sage_memory() { # seed_sage_memory <src> <dest>
-  local seed="$1memory/local-seed" mem="$2memory"
-  if [ ! -f "$seed/journal.md" ]; then
-    echo "NOTE: $seed/journal.md is missing; sage's memory was not seeded."
-    return 0
-  fi
+# Sage's memory holds this machine's data, so it is prepared in place, never copied over. States,
+# checked in this order:
+#   v2 / half-migrated -> local.md exists: migrate by hand, never here — auto-migrating the v2
+#                         shape is how its data gets lost
+#   v4                 -> runs.log carries the v4 sentinel: only re-create the cheap missing parts
+#   foreign runs.log   -> runs.log without the sentinel: not this installer's to overwrite
+#   v3                 -> journal.md exists: save the tree, then run the one-time migration
+#   fresh              -> none of these: seed empty logs
+# local.md is tested first because a v2->v3 migration ends by archiving it — its presence means
+# that migration has not finished, and a journal.md beside it must not make this machine read as v3.
+prepare_sage_memory() { # prepare_sage_memory <mem> <migrator>
+  local mem="$1" migrator="$2"
   if [ -f "$mem/local.md" ]; then
-    echo
-    if [ -f "$mem/journal.md" ]; then
-      # Same repair as the v3 branch below: the directories are installer-owned and cheap, and
-      # the half state must not be the one shape that leaves structural invariant 4 broken.
-      mkdir -p "$mem/local" "$mem/archive"
-      echo "NOTE: sage's memory migration is half-done: memory/journal.md (v3) and memory/local.md"
-      echo "      (v2) both exist. Nothing was changed. Until local.md's data is migrated and the"
-      echo "      file itself is moved into memory/archive/, sage cannot see the v2 numbers."
-    else
-      echo "NOTE: sage's memory format is now v3 — a journal plus one file per knowledge item."
-      echo "      Your memory/local.md is the v2 format and was left untouched, because it holds"
-      echo "      this machine's numbers. Until the migration runs, /sage-promote fails closed"
-      echo "      (its preflight requires memory/journal.md) and sage runs without local memory."
-    fi
-    echo "      This note repeats until the migration runs. The migration is an agent task, not a"
-    echo "      script: ask Claude to run the 'Migration procedure' in the source repo's"
-    echo "      docs/designs/2026-08-27-sage-memory-v3-design.md against this machine's local.md."
-    if [ -L "$mem/shared.md" ]; then
-      echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
-      echo "      memory/archive/shared-v2.md); the migration removes it."
-    fi
-    return 0
+    print_v2_memory_notice "$mem"
+  elif is_v4_memory "$mem"; then
+    seed_missing_v4_memory "$mem"
+  elif [ -e "$mem/runs.log" ] || [ -L "$mem/runs.log" ]; then
+    echo "NOTE: $mem/runs.log does not start with the sage v4 sentinel; sage's memory was left untouched."
+  elif [ -f "$mem/journal.md" ] || [ -f "$mem/archive/v3/journal.md" ]; then
+    # The second test is a migration that stopped after the old tree moved: the migrator
+    # finishes it from archive/v3/. Seeding empty logs there would hide every run line.
+    migrate_v3_memory "$mem" "$migrator"
+  else
+    seed_missing_v4_memory "$mem"
+    printf 'Seeded %-20s-> %s\n' "runs.log + inbox.log" "$mem/"
   fi
+}
+
+print_v2_memory_notice() { # print_v2_memory_notice <mem>
+  local mem="$1"
+  echo
   if [ -f "$mem/journal.md" ]; then
-    # The directories are cheap to re-create and nothing else repairs them, so a v3 machine
-    # that lost one gets it back here rather than failing sage's invariant check later.
+    # The directories are installer-owned and cheap, and the half state must not be the one
+    # shape that leaves a structural invariant broken.
     mkdir -p "$mem/local" "$mem/archive"
-    drift_memory_sentinel "$seed/journal.md" "$mem/journal.md"
-    return 0
+    echo "NOTE: sage's memory migration is half-done: memory/journal.md (v3) and memory/local.md"
+    echo "      (v2) both exist. Nothing was changed. Until local.md's data is migrated and the"
+    echo "      file itself is moved into memory/archive/, sage cannot see the v2 numbers."
+  else
+    echo "NOTE: sage's memory format is now v3 — a journal plus one file per knowledge item."
+    echo "      Your memory/local.md is the v2 format and was left untouched, because it holds"
+    echo "      this machine's numbers. Until the migration runs, /sage-promote fails closed"
+    echo "      (its preflight requires memory/journal.md) and sage runs without local memory."
   fi
-  mkdir -p "$mem/local" "$mem/archive"
-  cp "$seed/journal.md" "$mem/journal.md"
-  # An explicit loop, not `cp "$seed/local/"*.md`: under set -e an unmatched glob makes cp
-  # abort the whole install after the journal landed but before local/ is populated.
-  for _seed_ki in "$seed/local/"*.md; do
-    [ -f "$_seed_ki" ] && cp "$_seed_ki" "$mem/local/"
-  done
-  printf 'Seeded %-20s-> %s\n' "journal.md + local/" "$mem/"
-}
-
-# sync_sage_shared <template-dir> <clone-dir> -- copies every file the template ships into the
-# installed clone, one direction only. The template always wins: a differing clone file can only
-# be a hand edit or a stale copy, never a legitimate machine-side change (/sage-promote lands its
-# writes in the template first, then copies the same bytes to the clone), so it is backed up, not
-# merged. A clone file the template no longer ships was retired by another machine's promote pass;
-# it moves to archive/ rather than being deleted outright.
-sync_sage_shared() {
-  local tmpl="$1" clone="$2" archive_dir file rel
-  local added=0 updated=0 archived=0
-
-  if [ ! -d "$tmpl" ]; then
-    echo "NOTE: $tmpl does not exist; sage's shared memory was not synced."
-    return 0
-  fi
-
-  if [ -e "$clone" ] && [ ! -d "$clone" ]; then
-    # A file or a symlink sitting where the clone directory belongs. mkdir -p below would fail
-    # on it and set -e would abort the run half-done, so it is preserved and cleared first, the
-    # same bargain the eco-skills loop gives a stray non-directory.
-    backup "$clone" sage-memory
-    rm -f "$clone"
-    echo "NOTE: $clone was not a directory; replaced it with the shared-memory clone."
-  fi
-
-  archive_dir="$(dirname "$clone")/archive"
-  mkdir -p "$clone"
-
-  # One backup of the whole clone, taken before anything below is written -- not one per file --
-  # so a second, unchanged run produces no backup at all.
-  if shared_clone_diverges "$tmpl" "$clone"; then
-    backup_once "$clone" sage-memory
-  fi
-
-  # An explicit loop, not `cp "$tmpl/"*`: under set -e an unmatched glob (an empty template)
-  # would abort the install, the same reason seed_sage_memory's local/ loop above is explicit.
-  for file in "$tmpl"/*; do
-    [ -f "$file" ] || continue
-    rel="$(basename "$file")"
-    if [ -L "$clone/$rel" ]; then
-      # A symlink at a template filename is never something this sync created. Writing the
-      # template's bytes through `cp` onto an existing symlink follows it and clobbers whatever
-      # it points at, so the link is removed first and the real file copied into its place.
-      backup_symlinked_shared "$clone/$rel"
-      rm -f "$clone/$rel"
-      cp "$file" "$clone/$rel"
-      updated=$((updated + 1))
-    elif [ ! -e "$clone/$rel" ]; then
-      cp "$file" "$clone/$rel"
-      added=$((added + 1))
-    elif [ -d "$clone/$rel" ]; then
-      # A directory squatting on a template filename: `cp` onto it would nest the file inside
-      # and the clone would never converge. The whole-clone backup above already preserved it.
-      rm -rf "$clone/$rel"
-      cp "$file" "$clone/$rel"
-      updated=$((updated + 1))
-    elif ! cmp -s "$file" "$clone/$rel"; then
-      cp "$file" "$clone/$rel"
-      updated=$((updated + 1))
-    fi
-  done
-
-  for file in "$clone"/*; do
-    [ -f "$file" ] || [ -L "$file" ] || [ -d "$file" ] || continue
-    rel="$(basename "$file")"
-    [ -f "$tmpl/$rel" ] && continue
-    archive_shared_file "$file" "$archive_dir" "$rel"
-    archived=$((archived + 1))
-  done
-
-  if [ "$((added + updated + archived))" -gt 0 ]; then
-    printf 'Synced shared memory: %d added, %d updated, %d archived\n' "$added" "$updated" "$archived"
+  echo "      This note repeats until the migration runs. The migration is an agent task, not a"
+  echo "      script: ask Claude to run the 'Migration procedure' in the source repo's"
+  echo "      docs/designs/2026-08-27-sage-memory-v3-design.md against this machine's local.md."
+  if [ -L "$mem/shared.md" ]; then
+    echo "      Your v2 memory/shared.md symlink now dangles (its repo target moved to"
+    echo "      memory/archive/shared-v2.md); the migration removes it."
   fi
 }
 
-# shared_clone_diverges <template-dir> <clone-dir> -- true if sync_sage_shared's loops below
-# would touch anything: a symlink or directory at a template filename, a differing file, or a
-# clone-only entry (file, link, or directory).
-# Answering this up front is what lets the caller take one whole-directory backup before any of
-# it happens, instead of a flag threaded through both loops.
-shared_clone_diverges() {
-  local tmpl="$1" clone="$2" file rel
-  for file in "$tmpl"/*; do
-    [ -f "$file" ] || continue
-    rel="$(basename "$file")"
-    [ -L "$clone/$rel" ] && return 0
-    [ -d "$clone/$rel" ] && return 0
-    if [ -e "$clone/$rel" ] && ! cmp -s "$file" "$clone/$rel"; then
+is_v4_memory() { # is_v4_memory <mem>
+  [ -f "$1/runs.log" ] && [ "$(head -n 1 "$1/runs.log")" = "$runs_log_sentinel" ]
+}
+
+seed_missing_v4_memory() { # seed_missing_v4_memory <mem>
+  local mem="$1"
+  mkdir -p "$mem/archive"
+  seed_log "$mem/runs.log" "$runs_log_sentinel"
+  seed_log "$mem/inbox.log" "$inbox_log_sentinel"
+}
+
+seed_log() { # seed_log <path> <sentinel> — writes the sentinel only where nothing stands yet
+  if [ -e "$1" ] || [ -L "$1" ]; then
+    return 0
+  fi
+  printf '%s\n' "$2" > "$1"
+}
+
+# The migration verifies before it moves and deletes nothing, but it reshapes data only this
+# machine holds, so the whole tree is saved first. A failed migration must not end the install
+# under set -e: memory stays v3 and every later section still has to run.
+migrate_v3_memory() { # migrate_v3_memory <mem> <migrator>
+  local mem="$1" migrator="$2" result saved
+  backup_once "$mem" sage-memory
+  if result="$(bash "$migrator" "$mem" 2>&1)"; then
+    echo "Sage memory: $result"
+    return 0
+  fi
+  saved="$backup_root/sage-memory/$(basename "$mem")"
+  [ -d "$saved" ] || saved="the identical earlier copy named in the NOTE above"
+  echo
+  echo "NOTE: sage's memory migration to v4 did not finish; nothing was deleted, and the migration left"
+  echo "      every file it could not complete untouched."
+  echo "      The migration said: $result"
+  echo "      The memory as it stood before the attempt is saved at: $saved"
+  echo "      Fix what the migration names and re-run install.sh."
+}
+
+# The repo copy is the source of truth and always wins: a differing installed copy can only be a
+# hand edit or a stale copy (/sage-promote writes the repo first), so it is backed up, not merged.
+sync_sage_lessons() { # sync_sage_lessons <template> <installed>
+  local tmpl="$1" dest="$2"
+  if [ ! -f "$tmpl" ]; then
+    echo "NOTE: $tmpl does not exist; sage's lessons.md was not synced."
+    return 0
+  fi
+  if [ -L "$dest" ]; then
+    # `cp` onto a symlink writes through it and clobbers its target, so the link goes first. Plain
+    # `cp` on a link saves the bytes it names; a dangling link has none, and that is not fatal.
+    mkdir -p "$backup_root/sage-memory"
+    cp "$dest" "$backup_root/sage-memory/$(basename "$dest")" 2>/dev/null || true
+    rm -f "$dest"
+  elif [ -d "$dest" ]; then
+    # `cp` onto a directory nests the file inside it, and the copy would never converge.
+    backup_once "$dest" sage-memory
+    rm -rf "$dest"
+  elif [ -f "$dest" ]; then
+    if cmp -s "$tmpl" "$dest"; then
       return 0
     fi
-  done
-  for file in "$clone"/*; do
-    [ -f "$file" ] || [ -L "$file" ] || [ -d "$file" ] || continue
-    rel="$(basename "$file")"
-    [ -f "$tmpl/$rel" ] || return 0
-  done
-  return 1
-}
-
-# backup_symlinked_shared <clone-file> -- saves the bytes a stray symlink points at, not the link
-# itself. A plain `cp` on one symlink argument dereferences it by default, unlike backup_once's
-# whole-directory `cp -R`, which would preserve the link and save none of the data it names. A
-# dangling link has nothing to save; that failure is swallowed rather than aborting the install.
-backup_symlinked_shared() {
-  local path="$1" dest="$backup_root/sage-memory/$(basename "$path")"
-  mkdir -p "$(dirname "$dest")"
-  cp "$path" "$dest" 2>/dev/null || true
-}
-
-# archive_shared_file <file> <archive-dir> <rel> -- moves a retired clone file into archive-dir
-# without clobbering an existing entry of the same name. A collision gets its own run-stamped
-# name instead of silently overwriting whatever archive already holds under <rel>.
-archive_shared_file() {
-  local file="$1" dir="$2" rel="$3" dest
-  mkdir -p "$dir"
-  dest="$dir/$rel"
-  if [ -e "$dest" ] || [ -L "$dest" ]; then
-    dest="$dir/$(date +%Y%m%d-%H%M%S)-$$-$rel"
-    echo "NOTE: $dir/$rel already exists; archiving this retired copy as $(basename "$dest") instead."
+    backup_once "$dest" sage-memory
   fi
-  mv "$file" "$dest"
-  echo "Archived $rel (retired from the template) -> $dest"
+  cp "$tmpl" "$dest"
+  echo "Synced lessons.md          -> $dest"
 }
 
-# The sage skill. journal.md and local/ are user data: written by sage and /sage-promote, never
-# copied from the repo, so --delete must never reach memory/ — which also means local-seed/ is
-# never installed, only read from the repo by seed_sage_memory. memory/shared/ is the one
-# exception: it is a clone of the repo's template (sage-claude/memory/shared/), kept in step by
-# sync_sage_shared on every run, template always wins.
+# The sage skill. memory/ is user data, written by sage runs and /sage-promote and never copied
+# from the repo, so --delete must never reach it. lessons.md is the one file in it the repo owns.
 sage_src="$repo_dir/sage-claude/"
 sage_dest="$HOME/.claude/skills/sage/"
-shared_src="$repo_dir/sage-claude/memory/shared"
-shared_dest="${sage_dest}memory/shared"
+lessons_src="$repo_dir/sage-claude/memory/lessons.md"
 
 if [ -d "$sage_src" ]; then
   mkdir -p "$sage_dest"
-  rsync -av --delete --exclude='/memory/' "$sage_src" "$sage_dest"
-  seed_sage_memory "$sage_src" "$sage_dest"
-
-  # A v3.0 install left an absolute symlink here, pointing straight into the repo. The symlink
-  # itself holds no data to preserve — rm removes the link, never the file it points at — so the
-  # migration is just: drop the link and let sync_sage_shared below stand up a real clone, exactly
-  # as it would on a fresh machine.
-  if [ -L "$shared_dest" ]; then
-    _old_shared_target="$(readlink "$shared_dest")"
-    rm -f "$shared_dest"
-    echo "NOTE: $shared_dest was the old v3.0 symlink (-> $_old_shared_target); replaced it with a"
-    echo "      real directory synced from the template. Nothing under local/, journal.md, or"
-    echo "      archive/ was touched."
-    unset _old_shared_target
+  # `/memory`, not `/memory/`: the trailing slash matches only a directory, so --delete removed a
+  # memory/ that is a symlink.
+  rsync -av --delete --exclude='/memory' "$sage_src" "$sage_dest"
+  if [ -L "${sage_dest}memory" ]; then
+    echo "NOTE: ${sage_dest}memory is a symlink; sage's memory was left untouched (no migration,"
+    echo "      no lessons.md sync). Replace the link with a real directory to let install.sh manage it."
+  else
+    mkdir -p "${sage_dest}memory"
+    prepare_sage_memory "${sage_dest}memory" "${sage_dest}bin/sage-memory-migrate.sh"
+    sync_sage_lessons "$lessons_src" "${sage_dest}memory/lessons.md"
+    echo "$repo_dir" > "${sage_dest}memory/source-repo"
   fi
-  sync_sage_shared "$shared_src" "$shared_dest"
-  mkdir -p "${sage_dest}memory"
-  echo "$repo_dir" > "${sage_dest}memory/source-repo"
 
   # rsync -a carries the source mode across, so this only matters when the repo's copy lost its
   # executable bit (a zip download, a checkout with no exec support). The watchdog is spawned as a
   # command, so a probe that is not executable disables the watchdog on every run.
-  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh sage-index.sh; do
+  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh sage-ledger.sh sage-clock.sh \
+                   sage-lineup-check.sh sage-memory-migrate.sh sage-promote-prep.sh; do
     if [ -f "${sage_dest}bin/$_sage_bin" ]; then
       chmod +x "${sage_dest}bin/$_sage_bin"
     fi
@@ -1074,6 +973,70 @@ offer_alt_guard_hook() {
   echo "Added the alt-lane guard hook to $settings. Check it with: $guard --selftest"
 }
 
+# offer_clock_hook: an advisory clock, so offered and never imposed, with the same guards as
+# offer_alt_guard_hook. The clock never blocks and always exits 0 — see sage-claude/bin/sage-clock.sh.
+offer_clock_hook() {
+  local settings="$HOME/.claude/settings.json"
+  local clock="${sage_dest}bin/sage-clock.sh"
+  local marker="sage-clock.sh"
+  local reply
+
+  if [ ! -f "$clock" ]; then
+    return 0
+  fi
+  if [ -L "$settings" ]; then
+    echo "NOTE: $settings is a symlink; skipping the elapsed-time hook offer."
+    return 0
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "NOTE: jq is not installed; skipping the elapsed-time hook offer."
+    return 0
+  fi
+  if [ -e "$settings" ]; then
+    if ! jq empty "$settings" >/dev/null 2>&1; then
+      echo "NOTE: $settings does not parse as JSON; leaving it untouched — no elapsed-time hook offered."
+      return 0
+    fi
+    if jq -e --arg m "$marker" '[.hooks.PostToolBatch // [] | .[] | .hooks // [] | .[] | .command // ""] | any(contains($m))' \
+         "$settings" >/dev/null 2>&1; then
+      return 0
+    fi
+  fi
+  if [ ! -t 0 ]; then
+    return 0
+  fi
+
+  printf 'Add a PostToolBatch hook to %s that shows a sage run its elapsed time against its wall target? [y/N] ' "$settings"
+  read -r reply || reply=""
+  case "$reply" in
+    y|Y|yes|YES|Yes) : ;;
+    *) return 0 ;;
+  esac
+
+  # Past the `y`, every bailout says why, and none may abort the installer under set -e.
+  if [ -e "$settings" ]; then
+    # Its own category: backup() names the saved copy by basename, so sharing one with another
+    # hook's edit in the same run would overwrite the user's original.
+    backup "$settings" settings-clock || {
+      echo "NOTE: could not back up $settings; leaving it untouched, no elapsed-time hook added."
+      return 0
+    }
+  else
+    mkdir -p "$(dirname "$settings")" || {
+      echo "NOTE: could not create $(dirname "$settings"); skipping the elapsed-time hook."
+      return 0
+    }
+    printf '{}\n' > "$settings" || {
+      echo "NOTE: could not write $settings; skipping the elapsed-time hook."
+      return 0
+    }
+  fi
+
+  merge_into_settings "$settings" "$marker" "$clock" \
+    '.hooks.PostToolBatch = ((.hooks.PostToolBatch // []) + [{"hooks": [{"type": "command", "command": $cmd}]}])' || return 0
+  echo "Added the elapsed-time hook to $settings. Check it with: $clock --self-test"
+}
+
 # install_compact_hook: the run ledger's `### Resume state` section carries a run's state across a
 # compaction, but only a SessionStart(compact) hook makes the compacted session actually go back
 # and read it (sage-claude/references/harness.md, Cautions). Installed rather than offered — a run
@@ -1090,7 +1053,7 @@ install_compact_hook() {
   cmd="echo '$marker: a compaction landed. Before dispatching anything: re-read the run ledger section ### Resume state (.claude/plans/sage-ledger-*.md; fallback: the session scratchpad), then ~/.claude/skills/sage/SKILL.md ## Compaction and resume, then the step file ### Resume state names.'"
 
   # A symlink is another owner's property, the same rule the installer already applies to
-  # symlinked skills and shared memory — never write through it.
+  # symlinked skills and lessons.md — never write through it.
   if [ -L "$settings" ]; then
     echo "NOTE: $settings is a symlink; leaving it alone. See the TIP below for the manual hook."
     return 0
@@ -1212,17 +1175,30 @@ merge_into_settings() { # merge_into_settings <settings> <marker> <command> <jq-
   rm -f "$tmp"
 }
 
+# Prints only: an install that dispatched a probe would spend the user's money unasked. A skipped
+# agent has no file to read, so a missing one is silent rather than fatal under set -e.
+print_pinned_models() { # print_pinned_models <agents-dir>
+  local dir="$1" hit
+  echo "Pinned agent models (a probe dispatch settles access; nothing is dispatched here):"
+  while IFS= read -r hit; do
+    printf '  %s  %s\n' "$(basename "${hit%%:*}" .md)" "${hit#*:model: }"
+  done < <(grep -H '^model:' "$dir"{explorer,implementer,implementer-frontier,verifier,web-researcher}.md 2>/dev/null || true)
+  echo '  Probe one: claude -p --model <model> "Reply OK"'
+}
+
 if [ -d "$sage_src" ]; then
   install_compact_hook
   offer_alt_guard_hook
+  offer_clock_hook
 fi
 
 echo
 if [ -d "$sage_src" ]; then
   echo "Installed sage skill       -> $sage_dest"
-  echo "  shared memory synced from -> $shared_src"
+  echo "  lessons.md synced from   -> $lessons_src"
 fi
 echo "Installed subagent agents  -> $agents_dest"
+print_pinned_models "$agents_dest"
 if [ "${alt_installed:-0}" -gt 0 ]; then
   echo "Installed alt agents       -> $alt_installed of ${#alt_names[@]}, at $agents_dest"
   echo "  Start a new Claude Code session before an alt agent can be dispatched."
@@ -1240,11 +1216,10 @@ echo
 cat <<'TIP'
 For long orchestration runs:
 
-  Sage reads its own occupancy and checkpoints its ledger before the expected compaction.
-  Triggering /compact is yours, not the model's. To compact earlier, set
-  CLAUDE_AUTOCOMPACT_PCT_OVERRIDE (1-100) or run /autocompact <size>; if you set one, tell the run
-  with SAGE_COMPACT_AT=<size> so its sensor expects the right point. Verify those two knob names
-  against the current Claude Code docs before relying on them; this installer cannot check them.
+  A sage run cannot trigger /compact; that is yours. When a compaction lands, the
+  SessionStart(compact) hook below re-anchors the compacted run on its ledger. On a parent
+  window smaller than 1M, you can host the occupancy sensor
+  ~/.claude/skills/sage/bin/sage-watch.sh yourself, as its header describes.
 
   If a NOTE above says the compaction hook was not installed (no jq, or a symlinked settings
   file), add it to ~/.claude/settings.json by hand:

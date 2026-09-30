@@ -1,0 +1,83 @@
+5f8bfa2d	a-readers-structural-claim-is-a-lead	hit: all 9 lens findings re-run as the parent's own command before acting, 7 held and 2 were qualified away (one rejected, one whose fix regressed)
+5f8bfa2d	band-adversarial-refuter-multi-claim-mandate-across-2-corpora-frontier-model	hit: correctly rejected as not applicable
+87b40637	price-off-a-same-shape-row	hit: the 2026-08-27 6-agent disjoint-lens row priced the fleet within 10%
+87b40637	disjoint-mandates-produce-disjoint-find-sets	hit: 15 of 17 findings were seen by exactly one lens
+d20b9a1f	review-and-verify-are-one-price	hit: the pair pricing was right in shape, low in size
+promote-pass-2	lesson-a-table-introducing-sentence-describes-the-table	hit: the same read-back error class it names, one pass after it was minted
+42dd56d4	price-off-a-same-shape-row	hit: 87b40637 priced the fleet within 1%
+42dd56d4	estimate-from-the-corpus-and-the-lenses	hit on the lenses, miss: prose-word count under-prices Python/JSON slices by ~1.35×
+42dd56d4	band-frontier-review-lens-prose-corpus-10k-words	hit: round 1 of both lenses landed 113k/140k against 100–120k
+a58bd85c	review-and-verify-are-one-price	hit: the floor half fired, 4 rounds where 2 were budgeted
+a58bd85c	settle-a-disagreement-with-a-command	hit: both majors and the withdrawn 198-vs-201 arithmetic settled by grep and `git show`, never by argument
+a58bd85c	grep-before-you-brief	hit: it is what refuted G3
+a58bd85c	disjoint-mandates-produce-disjoint-find-sets	hit: the criteria lens returned PASS on R1-R4 while the purpose lens returned G1 on the same diff
+a58bd85c	dispatch-floor-band	hit: 3 scouts, not 6, for the three open facts
+promote-pass-3	settle-a-disagreement-with-a-command	hit: the fable/opus/sonnet/haiku identity question settled by four probes and a transcript grep, not by argument
+promote-pass-3	a-brief-that-names-its-ground-truth-runs-cheaper	hit: every gate brief named its ground truth and its prior round's findings
+promote-pass-3	review-and-verify-are-one-price	hit: the floor half fired, 4 rounds on a prose batch
+promote-pass-3	lesson-an-alt-agent-can-be-listed-and-not-dispatchable	hit: minted and used in the same pass, on the seat it cost
+bc00ef0a	band-frontier-review-lens-prose-corpus-10k-words	hit (moved up for >10k-word corpora and script code: landed 95-149k)
+bc00ef0a	disjoint-mandates-produce-disjoint-find-sets	hit (6 lenses; two pairs constructed independently, the rest disjoint)
+bc00ef0a	point-one-adversarial-pass-at-your-own-fixes	hit (5 of the parent's answer clauses refuted)
+bc00ef0a	settle-a-disagreement-with-a-command	hit (B1, C2, E1 settled against the finder by command)
+bc00ef0a	a-readers-structural-claim-is-a-lead	hit (E1 rejected on a marker grep; C2 count re-run)
+d6ca31ad	price-off-a-same-shape-row	hit (c5aef490 single-lesson actuals; missed the multi-doc scaling)
+d6ca31ad	disjoint-mandates-produce-disjoint-find-sets	hit (three lenses, one finding, three routes)
+d6ca31ad	settle-a-disagreement-with-a-command	hit (XR-6 fetched; XR-7 curl GET vs HEAD)
+d6ca31ad	a-readers-structural-claim-is-a-lead	hit (RA-7 StorageClass grep; QZ-2)
+d6ca31ad	an-alt-agent-can-be-listed-and-not-dispatchable	hit (probe cleared before the refuter seat)
+d6ca31ad	lesson-teaching-corpus-can-carry-wrong-verification	hit (NOTES.md treated as under review)
+promote-pass-4	price-off-a-same-shape-row	hit (the pass-3 row predicted the multi-round gate)
+promote-pass-4	a-readers-structural-claim-is-a-lead	hit (the reader's "no Mythos row" was re-fetched by the gate before it entered the stamp)
+promote-pass-4	settle-a-disagreement-with-a-command	hit (the Mythos floor settled by one fetch, not by weighing the two KIs)
+promote-pass-4	an-alt-agent-can-be-listed-and-not-dispatchable	hit (probed both roles first)
+056e20a8	point-one-adversarial-pass-at-your-own-fixes	hit (refuter overturned F5 wording, F6 severity, R2 verdict)
+056e20a8	band-frontier-review-lens-prose-corpus-10k-words	hit via its 87b40637 code-lens miss note
+056e20a8	an-alt-agent-can-be-listed-and-not-dispatchable	hit (probe first; lane was live)
+056e20a8	band-dispatch-floor	hit (alt probe 4k)
+056e20a8	gap-uncovered-band-classes	hit (no code-review-branch row existed; this run line is the first)
+cf94c4c4	price-off-a-same-shape-row	hit: the b1457e61 row was the same shape and set the plan
+cf94c4c4	band-any-single-agent-all-classes	hit: its own "prices nothing on its own" qualifier sent me to the journal row instead of to band arithmetic
+cf94c4c4	an-alt-agent-can-be-listed-and-not-dispatchable	hit: the probe cleared verifier-alt before it reached the checker seat
+61de7190	estimate-from-the-corpus-and-the-lenses	hit (direction right, magnitude low)
+61de7190	point-one-adversarial-pass-at-your-own-fixes	hit: refuter and verifier each caught round-1-fix defects
+61de7190	an-alt-agent-can-be-listed-and-not-dispatchable	hit: probe cleared the lane, MODEL-FAMILY self-report said "unknown" but transcript grep measured gpt-5.6-sol
+61de7190	a-readers-structural-claim-is-a-lead	hit: parent re-ran O-01/O-02/O-14/O-15/R-01..R-06 before accepting
+promote-pass-5	point-one-adversarial-pass-at-your-own-fixes	hit (the refuter killed the parent's shared draft on three fronts the four text checks would have passed)
+promote-pass-5	settle-a-disagreement-with-a-command	hit (three model self-reports settled by transcript grep)
+promote-pass-5	lesson-a-drain-archives-every-line-above-the-new-mark	hit (minted this pass from the promote-pass-4 line, then applied: the three kept run rows and the old mark were archived)
+promote-pass-5	a-readers-structural-claim-is-a-lead	hit (the fetch unit's "2026-09-06" fetch date was not copied into the stamp as the dispatch date)
+21c23a0e	an-alt-agent-can-be-listed-and-not-dispatchable	hit (probed the seat before briefing it — the run's own subject was that this rule is missing from /sage-promote's checker seat; the lane was up, cost one line)
+21c23a0e	a-brief-that-names-its-ground-truth-runs-cheaper	hit (both briefs named every file, line and section, and forbade re-deriving; 25% of estimate)
+21c23a0e	point-one-adversarial-pass-at-your-own-fixes	hit (every edit was the parent's own and a gate killed one of them on a blocker)
+21c23a0e	disjoint-mandates-produce-disjoint-find-sets	hit (2 gates, 2 mandates, 1 find-set each, no overlap)
+21c23a0e	settle-a-disagreement-with-a-command	hit (both gates reported MODEL-FAMILY: unknown; --status settled gpt-6-astra on both)
+21c23a0e	price-off-a-same-shape-row	hit (promote-pass-6 as the same-shape row)
+21c23a0e	lesson-price-a-corpus-clause-edit-as-a-multi-round-loop	hit (budgeted follow-up rounds; the loop took exactly one fix round and went dry)
+21c23a0e	lesson-a-precision-fix-adds-claim-surface	hit (the accepted blocker was fixed by REMOVING the duplicated procedure, not by qualifying it, and the re-verdict passed in one round)
+21c23a0e	band-dispatch-floor	hit (probe at 3.7k against ~5k scoped)
+21c23a0e	a-readers-structural-claim-is-a-lead	hit (read all three cited run rows from the archive myself before triaging the gate that read them)
+promote-pass-6	point-one-adversarial-pass-at-your-own-fixes	hit (two gates aimed at the parent's own edits killed two of them, both correctly)
+promote-pass-6	settle-a-disagreement-with-a-command	hit (four model identities settled by transcript grep, not by self-report)
+promote-pass-6	a-readers-structural-claim-is-a-lead	hit (re-fetched the changelog for verbatim quotes and sol's model page directly, rather than trusting either reader's summary)
+promote-pass-6	spot-check-every-successors-final-report	hit (all four unit reports spot-checked by command; the rule's named subject is retired from the corpus but the practice paid twice this pass — evidence for the user's pending removal-bar decision on it)
+promote-pass-6	a-brief-that-names-its-ground-truth-runs-cheaper	hit (every gate brief named its ground-truth files by path)
+promote-pass-6	disjoint-mandates-produce-disjoint-find-sets	hit (three gates, three disjoint batches)
+promote-pass-6	review-and-verify-are-one-price	hit (the floor half: budgeted one gate round per batch and got one each)
+promote-pass-6	lesson-a-drain-archives-every-line-above-the-new-mark	hit (the newest three run rows kept live, everything above the new mark archived, count checked in and out)
+promote-pass-6	lesson-a-sidecar-less-shared-rule-is-invisible-to-every-signal	hit (minted this pass from the 2026-09-10 line and applied at once: the stale notice's only output was that sidecar-less rule)
+9832cdf3	price-off-a-same-shape-row	hit (21c23a0e priced the plan)
+9832cdf3	an-alt-agent-can-be-listed-and-not-dispatchable	hit (verifier-alt probed before any brief; cleared at 3k)
+9832cdf3	point-one-adversarial-pass-at-your-own-fixes	hit (every round-1 gate refuted part of the parent's edits)
+9832cdf3	a-brief-that-names-its-ground-truth-runs-cheaper	hit (briefs named the diff, the URLs, the stamp lines)
+9832cdf3	settle-a-disagreement-with-a-command	hit (one pricing-page fetch replaced a hedge with a measurement)
+9832cdf3	a-readers-structural-claim-is-a-lead	hit (the parent re-fetched the pricing page before writing the gate's cache-write lead)
+9832cdf3	spot-check-every-successors-final-report	hit (archived)
+promote-pass-7	an-alt-agent-can-be-listed-and-not-dispatchable	hit (probed both alt roles before any brief; both cleared)
+promote-pass-7	lesson-a-self-report-of-model-identity-is-not-a-measurement	hit (ten identities settled by transcript grep; every alt unit self-reported unknown)
+promote-pass-7	a-readers-structural-claim-is-a-lead	hit (the parent re-fetched the Opus 5.5, overview and deprecations pages and the changelog before landing the fetch unit's figures)
+promote-pass-7	point-one-adversarial-pass-at-your-own-fixes	hit (three gates on the parent's own edits; two refuted parts, both correctly)
+promote-pass-7	a-brief-that-names-its-ground-truth-runs-cheaper	hit (every brief named files, lines, URLs and commands)
+promote-pass-7	lesson-a-sidecar-less-shared-rule-is-invisible-to-every-signal	hit (minted the spot-check sidecar; the stale notice came back empty, with nothing unassessable)
+promote-pass-7	lesson-whole-file-prose-compression-does-not-converge	hit (cut only second homes; no whole-file rewrite)
+promote-pass-7	lesson-zsh-unquoted-expansion-does-not-word-split	hit (a one-home grep over an unquoted path variable returned nothing; recognised and re-run with explicit paths)

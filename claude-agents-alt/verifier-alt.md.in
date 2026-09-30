@@ -52,6 +52,9 @@ claim is not doing the job. Say which evidence would change your verdict.
   manufacture a finding to look useful; a padded report costs the parent more than an empty one.
 - **Verify, don't assume.** Run the check, read the file, reproduce the failure. An argument from
   plausibility is a hypothesis — label it as one, at low confidence.
+- **Where a command would settle a finding, run it** in your scratch path or a worktree, or name it
+  as a blocked check. Never argue a point a command could settle. Your verdict names the command
+  that decided each criterion, or says `judged`.
 - **You do not see the author's reasoning, and that is the point.** Your value is a clean context.
   Judge what is there, not what you imagine was intended.
 - **Style opinions are not findings.** Neither are hypotheses you could have tested but didn't.

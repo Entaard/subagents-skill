@@ -45,7 +45,7 @@ Choose the agent from the unit's properties. The `model:` rule for a saved agent
 | Outside sources | `web-researcher` |
 | Standard implementation or integration | `implementer` |
 | Ambiguous or long-horizon writing, or a handed-off parent row | `implementer-frontier` |
-| Review, verification, refutation | `verifier`, or an alt checker (`alt-lane.md`) |
+| Review, verification, refutation | `verifier`; `verifier-standard` when the maker is on `verifier`'s model; or an alt checker (`alt-lane.md`) |
 | Synthesis, triage, the completion claim | the parent |
 
 **The unit's step count is a second axis.** A cheaper seat on multi-step work that must find its own path can take 2–3× the turns and cost more. A brief with exact paths and commands keeps the cheap seat cheap.
@@ -112,14 +112,14 @@ No manufactured commits: a stable diff or a file-hash manifest is enough. The pa
 
 ## The ledger
 
-One file, `.claude/plans/sage-ledger-<session-id>.md`, where the id is the one `../SKILL.md` Step 2 names. Never derive it from a path: the elapsed-time hook finds the ledger by the harness's own session id. Its readers are you after a compaction, `/sage resume`, `/sage report`, and the elapsed-time hook. It is not written for the user.
+One file per run. The first run in a session writes `.claude/plans/sage-ledger-<session-id>.md`, where the id is the one `../SKILL.md` Step 2 names. A later run in the same session writes `sage-ledger-<session-id>-<n>.md`, with the lowest free n from 2. `sage-ledger.sh next-path .claude/plans <session-id>` prints the path to use. Never derive the session id from a path: the elapsed-time hook finds the ledger by the harness's own session id. Its readers are you after a compaction, `/sage resume`, `/sage report`, and the elapsed-time hook. It is not written for the user.
 
 - **Where:** before the first write, run `git check-ignore -q .claude/plans/`. Exit 1 means the file is visible to `git status`: write there anyway and print one line naming the path and the fix (`.claude/plans/` in `.gitignore`). Never edit a user's `.gitignore` unasked. Use the session scratchpad only when `.claude/plans/` is not writable, and print the path.
 - **How:** write it only through `bin/sage-ledger.sh`. Never hand-edit it with a Python or sed replace. Read the helper's run block once: `sed -n '1,/^# END RUN BLOCK/p' ~/.claude/skills/sage/bin/sage-ledger.sh`.
 
 ```sh
-L=.claude/plans/sage-ledger-<session-id>.md
 H=~/.claude/skills/sage/bin/sage-ledger.sh
+L=$($H next-path .claude/plans <session-id>)
 printf '%s\n' "ASK: <verbatim>" "PURPOSE: ..." "PREMISES: ..." "DELIVERABLE: ..." "APPROACHES: ..." \
   "RISK: ..." "TOPOLOGY: ..." "PARENT: <your model>" "Wall target: <n> min" "Acceptance suite: ..." "Criteria: R1 ...; R2 ..." \
   | $H init "$L" "<one-line task>"

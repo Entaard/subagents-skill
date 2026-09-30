@@ -6,15 +6,16 @@ disable-model-invocation: true
 
 # sage-promote
 
-One pass, on the user's word. It moves what sage runs observed into the text later runs read. Sage never calls this skill. A run only prints a hint line. Every step below keeps the edits small, checkable and reversible. Do the steps in order.
+One pass, on the user's word. It moves what sage runs observed into the text later runs read. A sage run only prints a hint line. Every step below keeps the edits small, checkable and reversible. Do the steps in order.
 
 ## Ground
 
-- `<sage>` is the installed sage skill. Resolve it and fail closed: the candidates are `~/.claude/skills/sage/` and a project-local `.claude/skills/sage/` under the working directory, and each one that holds both `SKILL.md` and `memory/runs.log` qualifies. Exactly one qualifying root continues the pass. Zero or two stop it, printing the paths tried, so the user names the one they meant. Never break a tie by precedence. `<mem>` is `<sage>/memory/`.
+- `<sage>` is the installed sage skill. Resolve it and fail closed: the candidates are `~/.claude/skills/sage/` and a project-local `.claude/skills/sage/` under the working directory, and each one that holds both `SKILL.md` and `memory/runs.log` qualifies. Exactly one qualifying root continues the pass. Zero or two stop it and print the paths tried. Never break a tie by precedence. `<mem>` is `<sage>/memory/`.
 - `<repo>` is the path in `<mem>/source-repo`.
+- `<lineup>` is `<sage>/bin/sage-lineup-check.sh --memory <mem> --repo <repo>`. Pass `--memory <mem>` to every prep and lineup call.
 - The layout, the lessons contract, the structural invariants and the compression floor are in `~/.claude/skills/sage-promote/references/memory-contract.md`. Read it before Step 2.
 
-Two properties from the v3 memory design bind every step:
+Two properties bind every step:
 
 1. **A sage run only appends to memory.** This pass is the only restructuring writer.
 2. **The repo copy is the source of truth for shared text.** Write `<repo>` first. The installed copy changes only at the landing in Step 5. Never hand-edit an installed file into agreement.
@@ -54,7 +55,7 @@ Any failure stops the pass with zero bytes written. Print one line that names th
 Then run the prep script. It writes nothing:
 
 ```sh
-<sage>/bin/sage-promote-prep.sh
+<sage>/bin/sage-promote-prep.sh --memory <mem> --repo <repo>
 cmp <repo>/sage-claude/memory/lessons.md <mem>/lessons.md
 ```
 
@@ -64,7 +65,7 @@ It prints four blocks: `== inbox (<n> lines, drain with --drain <to>)`, `== line
 - **`== trees` shows a difference** → write nothing to the sage corpus or the agent files. File those fixes as issues. Merges into `lessons.md` still run. The landing proof cannot tell this pass's edits from earlier drift.
 - **`== corpus lint` fails** → each failure is one more line for Step 2, beside the inbox lines.
 
-**Stop early** when the inbox is empty, `== lineup` is empty, the lint is clean and the trees agree. Run `sage-lineup-check.sh --ack none` to move the changelog cursor, print `sage-promote: nothing to do`, and stop. Never lower a bar to give the pass something to write.
+**Stop early** when the inbox is empty, `== lineup` is empty, the lint is clean and the trees agree. Run `<lineup> --ack none` to move the changelog cursor, print `sage-promote: nothing to do`, and stop. Never lower a bar to give the pass something to write.
 
 ## Step 2 — Triage every line
 
@@ -124,8 +125,8 @@ A failing edit reverts by its draft.
 
 When `== lineup` printed a line, do Step 4's study first, so its edits join this diff. The maker of every edit is you. So the checker is another model, from another family where one exists. **Dispatch one checker over the whole frozen diff, never one per edit.**
 
-- **`refuter-alt`** takes the seat when it is in your live agent list and its one-line lane probe clears it. The probe, what a reply clears and what a 404 drops are in `<sage>/references/alt-lane.md`. **Dispatch it with no `model` parameter.** The parameter silently overrides the outside-family model in the agent file.
-- Otherwise **`verifier`** takes the seat with a refute brief. Never place it on your own model: when its pin is your model, dispatch it with `model: sonnet`, the one override `<sage>/references/verify.md` allows. Log it. The report names the residual same-family bias next to the verdict.
+- **`refuter-alt`** takes the seat when it is in your live agent list and its one-line lane probe clears it. The probe, what a reply clears and what a 404 drops are in `<sage>/references/alt-lane.md`. **Dispatch it with no `model` parameter.**
+- Otherwise **`verifier`** takes the seat with a refute brief. When its pin is your model, dispatch **`verifier-standard`** instead. The report names the residual same-family bias next to the verdict.
 
 The brief:
 
@@ -150,19 +151,24 @@ The study runs only when `== lineup` printed a line. A build change alone prints
 4. **Write the results.** Update the tier table in `<repo>/sage-claude/references/harness.md` (ratios only, never absolute prices), `<repo>/sage-claude/references/harness-measurements.md`, `## Model lineup study`, and the `model:` pins in `<repo>/claude-agents/*.md` (full model IDs). These edits join the Step 3 diff, with one extra gate mandate: name a dispatch the old lineup served that the new one serves worse.
 5. **Acknowledge in Step 5**, after the landing proves every printed line resolved.
 
-On an empty diff, run `<sage>/bin/sage-lineup-check.sh --ack none` now to move the changelog cursor.
+On an empty diff, run `<lineup> --ack none` now to move the changelog cursor.
 
 **An interrupted study never runs `--ack`.** Its lines stay pending and print again on the next check.
 
 ## Step 5 — Land, drain, report
 
-**Land every surviving edit.** The repo copy is already written.
+**Land every surviving edit.**
 
 - **`lessons.md`, the sage tree and `claude-agents/*.md`:** byte-copy each edited file to its installed path. Prove the copy with `diff -rq <repo>/sage-claude/ <sage>/ -x memory`, `cmp` for `lessons.md`, and `cmp` for each agent file against `~/.claude/agents/`.
-- **`claude-agents-alt/*.md.in`:** these are templates. Never copy one to `~/.claude/agents/`. `install.sh` renders them from `~/.claude/subagents-alt-models.conf`. Tell the user to re-run `install.sh`, and list the template as pending in the report.
+- **`claude-agents-alt/*.md.in`:** these are templates. Never copy one to `~/.claude/agents/`. Ask the user to run `! <repo>/install.sh`. This pass never runs it. Then prove each edited template that `~/.claude/subagents-alt-models.conf` enables, with `<model>` from its `<name>=` line:
+
+  ```sh
+  m='<model>' awk '{i=index($0,"__ALT_MODEL__"); if (i) $0=substr($0,1,i-1) ENVIRON["m"] substr($0,i+13)} 1' \
+    <repo>/claude-agents-alt/<name>.md.in | cmp - ~/.claude/agents/<name>.md
+  ```
 - **This skill's own files:** byte-copy to `~/.claude/skills/sage-promote/` and prove with `diff -rq`.
 
-A copy that does not prove → stop and name it. Never hand-edit the installed tree into agreement. When Step 4 studied lines and every one landed, run `<sage>/bin/sage-lineup-check.sh --ack <token>`, with the token from the `lineup review <token>` line that `== lineup` printed. It refuses when the lineup changed after that check: run the check again and study the new lines.
+A declined install or a copy that does not prove → stop as not landed and name it. When Step 4 studied lines and every one landed, run `<lineup> --ack <token>`, with the token from the `lineup review <token>` line that `== lineup` printed. It refuses when the lineup changed after that check: run the check again and study the new lines.
 
 **Gate a status write on its read-back's exit status.** Never record an action as done from your draft or from a tool result that said "success". Read the landed artifact back with a command, and write the status only when that command exits 0:
 
@@ -171,12 +177,12 @@ A copy that does not prove → stop and name it. Never hand-edit the installed t
 | merged, fixed | `grep -F '<distinctive phrase>'` in the installed file |
 | removed | the same grep, which must now exit non-zero |
 | issue opened | `gh issue view <number>` |
-| lineup acknowledged | `sage-lineup-check.sh` prints nothing for the resolved lines |
+| lineup acknowledged | `<lineup>` prints nothing for the resolved lines |
 | drained | `--drain`'s own exit status |
 
 A failed read-back → record the action as `not landed` and name it in the report. Before the report, re-run every read-back once: a later revert can undo an artifact an earlier read-back proved.
 
-**Drain after the diff is final:** `<sage>/bin/sage-promote-prep.sh --drain <to>`, with the `<to>` that Step 1's `== inbox` line printed. It archives exactly the lines this pass triaged, in one batch file. A line that arrived after Step 1 stays pending. A stopped pass drains nothing.
+**Drain after the diff is final:** `<sage>/bin/sage-promote-prep.sh --drain <to> --memory <mem>`, with the `<to>` that Step 1's `== inbox` line printed. It archives exactly the lines this pass triaged, in one batch file. A line that arrived after Step 1 stays pending. A stopped pass drains nothing.
 
 **Append this pass's run line** to `<mem>/runs.log` with `>>`, in the run-line grammar, task class `sage-promote`.
 
@@ -189,7 +195,7 @@ sage-promote — <date>
   gate:    <agent> <MODEL-FAMILY> — <n> survived, <n> refuted
   lineup:  <no change | n lines studied, acked | pending>
   trees:   <identical | divergent: files>
-  pending: <install.sh re-render, gh commands to run, or none>
+  pending: <gh commands to run, or none>
 ```
 
 Then the triage table, and only then anything that needs the user's eyes.
@@ -203,7 +209,7 @@ Then the triage table, and only then anything that needs the user's eyes.
 | The trees differ before the pass | no sage corpus or agent-file writes; those fixes become issues |
 | A Step 2 batch check fails on an edit | that edit reverts by its draft |
 | The gate refutes an edit | that edit reverts; the line becomes `drop` with the refutation |
-| A landing does not prove | stop and name the file; never hand-edit the installed tree |
+| A landing does not prove, or the user declines `install.sh` | the pass stops as not landed; no drain, no `--ack` |
 | A read-back fails | that action is `not landed`, named in the report |
 | The lineup study stops early | no `--ack`; the lines stay pending |
 | The pass stops before the drain | the inbox lines stay for the next pass |

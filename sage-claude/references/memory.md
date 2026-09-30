@@ -4,11 +4,11 @@ A run reads memory at Step 2 and appends at Step 6. It never edits, reorders or 
 
 ## Step 2
 
-1. **Same-shape rows.** `grep -iE '<task words>' <mem>/runs.log | tail -5`. Price and pace from those rows before any band.
-2. **Lessons.** Read `<mem>/lessons.md` whole (its source is the repo's `sage-claude/memory/lessons.md`). A lesson that changes a decision goes on the run line as `changed-by: <id> <how>`.
+1. **Same-shape rows.** `grep -iE '<task words>' <mem>/runs.log | tail -5`. Price and pace from them before any band. None → read each file `grep -liE '<task words>' <mem>/archive/v3/local/band-*.md` lists.
+2. **Lessons.** Read `<mem>/lessons.md` whole. A lesson that changes a decision goes on the run line as `changed-by: <id> <how>`.
 3. **The hints.** Run `bin/sage-promote-prep.sh --pending` (the pending inbox count) and `bin/sage-lineup-check.sh`. Both write nothing.
 
-A missing file is not an error: plan without it, and print one line that says so.
+A missing file is not an error: plan without it and print one line saying so.
 
 ## Step 6
 

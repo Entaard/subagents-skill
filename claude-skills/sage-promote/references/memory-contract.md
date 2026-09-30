@@ -65,7 +65,7 @@ Inbox grammar:
 `kind` is one of `lesson`, `gap`, `defect`, `contradiction`, `confirm`, `correction`. `class` is `portable` or `local`.
 
 - **A lesson needs a falsifier.** A line with no falsifier that the triage can state never lands.
-- **Only class `portable` lands in `lessons.md`.** A `local` fact holds on one machine only. Its evidence stays in `runs.log` and the archive, where a Step 2 grep finds it.
+- **Only class `portable` lands in `lessons.md`.** A `local` fact holds on one machine only. Its evidence stays in `runs.log` and the archive. Step 2 finds a migrated band with `grep -liE '<task words>' <mem>/archive/v3/local/band-*.md`, only when `runs.log` has no same-shape row.
 - **`confirm`** adds a run id to an existing bullet's `Runs:` field.
 - **`contradiction`** is evidence against a bullet. It removes or narrows the bullet only after the refuting gate.
 - **`correction`** starts its observation with the date and session of the line it corrects. Triage applies the corrected text in place of the old line. Both lines stay in the archive.

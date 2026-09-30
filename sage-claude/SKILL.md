@@ -42,7 +42,7 @@ Read `references/decompose.md`, then `references/topologies.md`.
 
 ## Step 2 — Plan and record
 
-Write the plan into the ledger, `.claude/plans/sage-ledger-${CLAUDE_SESSION_ID}.md`, through the helper before any dispatch. At medium risk and up, a framing critic attacks it first.
+Write the plan into the ledger, `.claude/plans/sage-ledger-${CLAUDE_SESSION_ID}[-<n>].md`, through the helper before any dispatch. At medium risk and up, a framing critic attacks it first.
 
 Read `references/dispatch.md`, `references/harness.md`, `references/memory.md`, and the run block of `bin/sage-ledger.sh`.
 

@@ -268,8 +268,9 @@
 #       citations.
 #     Finding the agent files: the first of these that exists —
 #       `$SAGE_AGENT_DIR`, then `<dir>/../claude-agents`, then `~/.claude/agents` — supplies
-#       the directory, and ONLY these five basenames are read from it:
-#       explorer.md, implementer.md, implementer-frontier.md, verifier.md, web-researcher.md.
+#       the directory, and ONLY these six basenames are read from it:
+#       explorer.md, implementer.md, implementer-frontier.md, verifier.md, verifier-standard.md,
+#       web-researcher.md.
 #       The alt agent templates `<dir>/../claude-agents-alt/*.md.in` are read too, resolved
 #       corpus-relative like the agent files; no such directory → none read.
 #       `~/.claude/agents/` is the user's own directory and holds agents unrelated to this
@@ -690,7 +691,7 @@ $_bf"
     fi
   done
   if [ -n "$AGENT_DIR" ]; then
-    for _an in explorer implementer implementer-frontier verifier web-researcher; do
+    for _an in explorer implementer implementer-frontier verifier verifier-standard web-researcher; do
       _af="$AGENT_DIR/$_an.md"
       [ -e "$_af" ] && CORPUS_FILES="$CORPUS_FILES
 $_af"

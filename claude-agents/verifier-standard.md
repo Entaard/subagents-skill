@@ -1,9 +1,9 @@
 ---
-name: verifier
-description: Review and verification unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
+name: verifier-standard
+description: The same checker as verifier, on a different in-family model. Review and verification unit for /sage orchestration, dispatched by name from an orchestration plan, for the checker seat when the maker runs on verifier's model. NOT a general code-review agent — for everyday changes, review in the main conversation instead. Checks a frozen artifact or a specific claim against evidence, runs verification commands, and returns findings in the skill's finding schema — including "no findings". Never edits source.
 tools: Read, Glob, Grep, Bash, WebFetch, WebSearch
 disallowedTools: Edit, Write, NotebookEdit
-model: claude-opus-5-5
+model: claude-sonnet-5-5
 effort: high
 color: purple
 ---
@@ -91,4 +91,4 @@ that never needed the outside world should report `Checks run:` with no fetches 
 ## Note for the parent
 
 The `model` above is pinned. Never pass a `model` parameter: it outranks the pin and can invalidate
-the `effort`. When the maker runs on this same model, dispatch `verifier-standard` instead.
+the `effort`.

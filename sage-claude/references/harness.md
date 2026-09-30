@@ -4,7 +4,7 @@ Your job here: know which agent a unit goes to, what that agent can do, and how 
 
 ## The roster
 
-Five saved agents ship with sage, installed to `~/.claude/agents/` by the source repo's `install.sh`. Each file pins a full model ID and an effort level, so a dispatch of it runs exactly that pair.
+Six saved agents ship with sage, installed to `~/.claude/agents/` by the source repo's `install.sh`. Each file pins a full model ID and an effort level, so a dispatch of it runs exactly that pair.
 
 | Agent | Model | Effort | Tools | What it cannot do |
 | --- | --- | --- | --- | --- |
@@ -13,13 +13,14 @@ Five saved agents ship with sage, installed to `~/.claude/agents/` by the source
 | `implementer` | `claude-sonnet-5-5` | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` | spawn agents, load a skill other than its preloaded `clean-code` |
 | `implementer-frontier` | `claude-opus-5-5` | `medium` | the same as `implementer` | the same as `implementer` |
 | `verifier` | `claude-opus-5-5` | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; edit tools denied | edit through an edit tool. Its Bash can still write and reach the network, so the brief must say when it must not |
+| `verifier-standard` | `claude-sonnet-5-5` | `high` | the same as `verifier` | the same as `verifier`. It is the checker seat when the maker runs on `verifier`'s model |
 
 Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verified is in `harness-measurements.md`). Price ratio sonnet : opus : fable = 1 : 2 : 5, input and output alike. Every seat has a 1M window. `fable` runs only as the parent, where the user chose it. `haiku` left the lineup.
 
-- **Never pass `model:` to a saved agent**, except the one checker case in `verify.md`. The per-dispatch parameter outranks the file's pin and can invalidate its effort. The alt agents are the sharpest case, with no exception (`alt-lane.md`).
+- **Never pass `model:` to a saved agent.** The per-dispatch parameter outranks the file's pin and can invalidate its effort. The alt agents are the sharpest case (`alt-lane.md`).
 - **Every unit goes through a saved agent file.** A plain dispatch inherits the session's effort, which is often `xhigh`, and its model follows the alias the harness maps today. The aliases moved three times in four weeks.
 - **The Tools column is an upper bound, not a promise.** `verifier` has been given no `Glob` or `Grep` in a live dispatch. Write a Bash-holding unit's searches as shell commands unless its transcript's tool list shows `Grep`.
-- **Only a `tools:` allow-list enforces a scope.** A brief line is an instruction. None of the five agents has the Agent tool, so none can nest.
+- **Only a `tools:` allow-list enforces a scope.** A brief line is an instruction. None of the six agents has the Agent tool, so none can nest.
 - **Never dispatch a reviewer as a `fork`.** A fork inherits your whole context. **Keep the optional persistent `memory` field off any reviewer file**, for the same reason: a reviewer's value is a clean context.
 
 ## Models and effort

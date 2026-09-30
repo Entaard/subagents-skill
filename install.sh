@@ -191,7 +191,8 @@ inbox_log_sentinel='# sage-local-memory v4 — inbox.log: obs lines for /sage-pr
 # checked in this order:
 #   v2 / half-migrated -> local.md exists: migrate by hand, never here — auto-migrating the v2
 #                         shape is how its data gets lost
-#   v4                 -> runs.log carries the v4 sentinel: only re-create the cheap missing parts
+#   v4                 -> runs.log carries the v4 sentinel: re-create the cheap missing parts and
+#                         recover v3-format lines an old-skill session wrote after the migration
 #   foreign runs.log   -> runs.log without the sentinel: not this installer's to overwrite
 #   v3                 -> journal.md exists: save the tree, then run the one-time migration
 #   fresh              -> none of these: seed empty logs
@@ -203,6 +204,7 @@ prepare_sage_memory() { # prepare_sage_memory <mem> <migrator>
     print_v2_memory_notice "$mem"
   elif is_v4_memory "$mem"; then
     seed_missing_v4_memory "$mem"
+    recover_late_v3_lines "$mem" "$migrator"
   elif [ -e "$mem/runs.log" ] || [ -L "$mem/runs.log" ]; then
     echo "NOTE: $mem/runs.log does not start with the sage v4 sentinel; sage's memory was left untouched."
   elif [ -f "$mem/journal.md" ] || [ -f "$mem/archive/v3/journal.md" ]; then
@@ -251,6 +253,17 @@ seed_missing_v4_memory() { # seed_missing_v4_memory <mem>
   seed_log "$mem/inbox.log" "$inbox_log_sentinel"
 }
 
+# Silent when there is nothing to recover. A failure must not end the install under set -e.
+recover_late_v3_lines() { # recover_late_v3_lines <mem> <migrator>
+  local result
+  if result="$(bash "$2" --recover-late "$1" 2>&1)"; then
+    if [ -n "$result" ]; then echo "NOTE: sage memory: $result"; fi
+    return 0
+  fi
+  echo "NOTE: sage could not recover v3 journal lines written after the migration; nothing was deleted."
+  echo "      The recovery said: $result"
+}
+
 seed_log() { # seed_log <path> <sentinel> — writes the sentinel only where nothing stands yet
   if [ -e "$1" ] || [ -L "$1" ]; then
     return 0
@@ -271,11 +284,11 @@ migrate_v3_memory() { # migrate_v3_memory <mem> <migrator>
   saved="$backup_root/sage-memory/$(basename "$mem")"
   [ -d "$saved" ] || saved="the identical earlier copy named in the NOTE above"
   echo
-  echo "NOTE: sage's memory migration to v4 did not finish; nothing was deleted, and the migration left"
-  echo "      every file it could not complete untouched."
+  echo "NOTE: sage's memory migration to v4 did not finish; nothing was deleted."
   echo "      The migration said: $result"
-  echo "      The memory as it stood before the attempt is saved at: $saved"
-  echo "      Fix what the migration names and re-run install.sh."
+  echo "      Do not delete $mem/archive/v3: it may hold data the migration already moved."
+  echo "      Fix the cause and re-run install.sh; the migration resumes from where it stopped."
+  echo "      To restore by hand instead, the memory as it stood before the attempt is at: $saved"
 }
 
 # The repo copy is the source of truth and always wins: a differing installed copy can only be a
@@ -1182,7 +1195,7 @@ print_pinned_models() { # print_pinned_models <agents-dir>
   echo "Pinned agent models (a probe dispatch settles access; nothing is dispatched here):"
   while IFS= read -r hit; do
     printf '  %s  %s\n' "$(basename "${hit%%:*}" .md)" "${hit#*:model: }"
-  done < <(grep -H '^model:' "$dir"{explorer,implementer,implementer-frontier,verifier,web-researcher}.md 2>/dev/null || true)
+  done < <(grep -H '^model:' "$dir"{explorer,implementer,implementer-frontier,verifier,verifier-standard,web-researcher}.md 2>/dev/null || true)
   echo '  Probe one: claude -p --model <model> "Reply OK"'
 }
 

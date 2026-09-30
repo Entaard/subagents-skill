@@ -4,6 +4,7 @@
 #
 # RUN BLOCK. The ledger path is always explicit, never discovered.
 #
+#   sage-ledger.sh next-path <plans-dir> <session-id>   prints the ledger path a new run uses
 #   sage-ledger.sh init <ledger> <title>            (stdin lines = the field block)
 #   sage-ledger.sh unit <ledger> <id> <key>=<value>...
 #   sage-ledger.sh finding <ledger> <id> <key>=<value>...
@@ -19,6 +20,8 @@
 # violation and close again. `--keep-lint` appends anyway, for a violation you name in the
 # run record with the reason it stands.
 #
+# The first run in a session uses `sage-ledger-<session-id>.md`, a later one
+# `sage-ledger-<session-id>-<n>.md` (lowest free n from 2). `init` refuses an existing file.
 # Every write builds a temp file beside the ledger, then `mv`s it over: atomic.
 # Everything below is the maintainer's manual.
 # END RUN BLOCK
@@ -115,7 +118,7 @@ rewrite_ledger() {
 cmd_init() {
   [ $# -eq 2 ] || die 2 "usage: init <ledger> <title>"
   local ledger=$1 title=$2 fields="" tmp
-  [ ! -e "$ledger" ] || die 1 "$ledger exists; init refuses to overwrite"
+  [ ! -e "$ledger" ] || die 1 "$ledger exists; init refuses to overwrite$(next_path_hint "$ledger")"
   mkdir -p "$(dirname "$ledger")" || die 1 "cannot create the directory of $ledger"
   if [ ! -t 0 ]; then
     fields=$(sed -e '/^Started:/d' | awk 'NF { seen = 1 } seen')
@@ -124,6 +127,40 @@ cmd_init() {
   tmp=$(mktemp "$(dirname "$ledger")/.sage-ledger.XXXXXX") || die 1 "cannot create a temp file beside $ledger"
   ledger_skeleton "$title" "$fields" >"$tmp"
   swap_in "$ledger" "$tmp"
+}
+
+# next_path_hint <existing-ledger> — `; a new run uses <path>` for a ledger named by the
+# session convention, else nothing. A `-<n>` suffix is a run number only when the bare
+# ledger it follows exists, since a session id may itself end in digits.
+next_path_hint() {
+  local dir name session base
+  dir=$(dirname "$1")
+  name=$(basename "$1")
+  case "$name" in sage-ledger-?*.md) ;; *) return 0 ;; esac
+  session=${name#sage-ledger-}
+  session=${session%.md}
+  base=${session%-*}
+  case "${session##*-}" in
+    ''|*[!0-9]*) ;;
+    *) [ "$base" = "$session" ] || [ ! -e "$dir/sage-ledger-$base.md" ] || session=$base ;;
+  esac
+  printf '; a new run uses %s' "$(next_ledger_path "$dir" "$session")"
+}
+
+# ---------------------------------------------------------------------------
+# next-path
+
+cmd_next_path() {
+  [ $# -eq 2 ] || die 2 "usage: next-path <plans-dir> <session-id>"
+  case "$2" in ''|*/*) die 2 "next-path: session id '$2' is empty or holds a /" ;; esac
+  next_ledger_path "$1" "$2"
+}
+
+next_ledger_path() {  # next_ledger_path <plans-dir> <session-id>
+  local n=2
+  if [ ! -e "$1/sage-ledger-$2.md" ]; then printf '%s\n' "$1/sage-ledger-$2.md"; return; fi
+  while [ -e "$1/sage-ledger-$2-$n.md" ]; do n=$((n + 1)); done
+  printf '%s\n' "$1/sage-ledger-$2-$n.md"
 }
 
 empty_field_block() {
@@ -499,6 +536,8 @@ append_log_line() {
     printf 'sage-ledger: %s is missing or not a v4 log (run install.sh); line NOT appended: %s\n' "$1" "$2" >&2
     return 1
   fi
+  # A last line without its newline would glue to the appended line.
+  if [ -s "$1" ] && [ "$(tail -c 1 "$1" | wc -l)" -eq 0 ]; then printf '\n' >>"$1"; fi
   printf '%s\n' "$2" >>"$1" || { printf 'sage-ledger: line NOT appended: %s\n' "$2" >&2; return 1; }
 }
 
@@ -571,6 +610,21 @@ self_test_build() {
   self_test_close "$dir" "$ledger"
 }
 
+self_test_next_path() {
+  local plans=$1/next/.claude/plans sid=5e55-1 err rc=0
+  [ "$("$SELF" next-path "$plans" "$sid")" = "$plans/sage-ledger-$sid.md" ]
+  check "next-path: a free session prints the bare name" $?
+  "$SELF" init "$plans/sage-ledger-$sid.md" first </dev/null
+  [ "$("$SELF" next-path "$plans" "$sid")" = "$plans/sage-ledger-$sid-2.md" ]
+  check "next-path: after the first run it prints -2" $?
+  "$SELF" init "$plans/sage-ledger-$sid-2.md" second </dev/null
+  [ "$("$SELF" next-path "$plans" "$sid")" = "$plans/sage-ledger-$sid-3.md" ]
+  check "next-path: after the second run it prints -3" $?
+  err=$("$SELF" init "$plans/sage-ledger-$sid.md" again </dev/null 2>&1) || rc=$?
+  [ "$rc" -eq 1 ] && printf '%s\n' "$err" | grep -q -F "$plans/sage-ledger-$sid-3.md"
+  check "init: refusing an existing ledger names the next free path" $?
+}
+
 self_test_close() {
   local dir=$1 ledger=$2 out
   mkdir -p "$dir/nomem"
@@ -599,6 +653,10 @@ self_test_close() {
   printf '2026-09-29 run dirty2 x\n' | SAGE_MEMORY_DIR="$dir/mem" "$SELF" close --keep-lint "$dir/dirty.md" >/dev/null 2>&1
   [ $? -eq 1 ] && [ "$(grep -c 'run dirty2' "$dir/mem/runs.log")" -eq 1 ]
   check "close: --keep-lint appends once and still exits 1" $?
+  printf '2026-09-29 run nonl x' >>"$dir/mem/runs.log"
+  printf '2026-09-29 run afternonl x\n' | SAGE_MEMORY_DIR="$dir/mem" "$SELF" close "$ledger" >/dev/null 2>&1
+  [ $? -eq 0 ] && grep -qx '2026-09-29 run nonl x' "$dir/mem/runs.log" && grep -qx '2026-09-29 run afternonl x' "$dir/mem/runs.log"
+  check "close: a log missing its last newline gets the line on its own line" $?
 }
 
 self_test_negative_fixtures() {
@@ -638,6 +696,7 @@ cmd_self_test() {
   local dir
   dir=$(mktemp -d) || die 1 "cannot create a temp directory"
   self_test_build "$dir"
+  self_test_next_path "$dir"
   self_test_negative_fixtures "$dir"
   self_test_corpus "$dir"
   rm -rf "$dir"
@@ -650,6 +709,7 @@ main() {
   local cmd=${1-}
   [ $# -eq 0 ] || shift
   case "$cmd" in
+    next-path) cmd_next_path "$@" ;;
     init) cmd_init "$@" ;;
     unit) cmd_unit "$@" ;;
     finding) cmd_finding "$@" ;;

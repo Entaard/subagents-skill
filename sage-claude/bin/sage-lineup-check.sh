@@ -75,6 +75,8 @@ find_jq() {
 run_check() {
   local ack="$1" mem="$2" repo="$3" alt_conf="$4" changelog="$5" scan="$6" token="$7" status=0
   local work; work="$(mktemp -d)" || exit 0
+  # A reader that closes the pipe early (| head) kills this shell before its own rm.
+  trap 'rm -rf "$work"' EXIT
   current_lineup_tsv "$repo" "$alt_conf" > "$work/current.tsv"
   local cursor="$NO_CURSOR" have_snapshot=0
   if [ -f "$mem/lineup.json" ] && snapshot_tsv "$mem/lineup.json" > "$work/snapshot.tsv" 2> /dev/null; then
@@ -177,7 +179,8 @@ alt_models() {
 price_ratio() {
   local file="$1/sage-claude/references/harness.md"
   if [ -f "$file" ]; then
-    sed -n 's/.*[Pp]rice ratio sonnet : opus : fable = \([0-9.][0-9.]*\) : \([0-9.][0-9.]*\) : \([0-9.][0-9.]*\).*/ratio\t\t\1 : \2 : \3/p' "$file" | head -n 1
+    awk 'match($0, /[Pp]rice ratio sonnet : opus : fable = [0-9.]+ : [0-9.]+ : [0-9.]+/) {
+           r = substr($0, RSTART, RLENGTH); sub(/.*= /, "", r); printf "ratio\t\t%s\n", r; exit }' "$file"
   fi
 }
 
@@ -219,12 +222,12 @@ diff_lineups() {
 fetch_changelog() {
   case "$1" in
     http://*|https://*)
-      local err
-      if ! curl -fsSL --max-time 20 "$1" 2> /tmp/.sage-lineup-curl.$$; then
-        err="$(head -n 1 /tmp/.sage-lineup-curl.$$)"; rm -f /tmp/.sage-lineup-curl.$$
-        echo "changelog not scanned: ${err:-fetch failed}" >&2; return 1
-      fi
-      rm -f /tmp/.sage-lineup-curl.$$ ;;
+      # stderr is captured in a variable: no temp file, so no fixed path under /tmp.
+      local err status
+      { err="$(curl -fsSL --max-time 20 "$1" 2>&1 >&3 3>&-)"; status=$?; } 3>&1
+      if [ "$status" -ne 0 ]; then
+        echo "changelog not scanned: $(printf '%s\n' "${err:-fetch failed}" | head -n 1)" >&2; return 1
+      fi ;;
     *)
       if [ ! -r "$1" ]; then echo "changelog not scanned: cannot read $1" >&2; return 1; fi
       cat "$1" ;;
@@ -318,6 +321,23 @@ case_ratio_change_is_one_line() {
   [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup price-ratio: 1 : 2 : 5 -> 1 : 2 : 6" ]
 }
 
+# install_bsd_style_sed <dir> — writes <dir>/sed, which turns `\t` in its arguments into a
+# literal `t`, the way BSD sed reads `\t` in a replacement.
+install_bsd_style_sed() {
+  local shim_dir="$1"
+  mkdir -p "$shim_dir"
+  { echo '#!/usr/bin/env bash'
+    echo 'args=(); for a in "$@"; do args+=("${a//\\t/t}"); done'
+    echo "exec $(command -v sed) \"\${args[@]}\""; } > "$shim_dir/sed"
+  chmod +x "$shim_dir/sed"
+}
+
+case_bsd_style_sed_reads_the_ratio() {
+  local d="$1/n"; build_fixture "$d"
+  install_bsd_style_sed "$d/bsd-sed"
+  [ -z "$(PATH="$d/bsd-sed:$PATH" run_check_in "$d" --no-changelog)" ]
+}
+
 case_no_snapshot_one_line() {
   local d="$1/h"; build_fixture "$d"; rm "$d/mem/lineup.json"
   [ "$(run_check_in "$d" --no-changelog | head -n 1)" = "lineup no snapshot: run the lineup study, then sage-lineup-check.sh --ack <token>" ]
@@ -385,6 +405,7 @@ run_self_test() {
   check "added alt name prints (none)" case_alt_added_uses_none "$dir"
   check "price ratio change prints one line" case_ratio_change_is_one_line "$dir"
   check "no snapshot prints one line" case_no_snapshot_one_line "$dir"
+  check "a BSD-style sed (\\t written as t) still reads the price ratio" case_bsd_style_sed_reads_the_ratio "$dir"
   check "E4b announcement repeats until ack, snapshot untouched, ack silences" case_model_announcement_survives_until_ack "$dir"
   check "ack without a scan keeps the old cursor" case_ack_without_scan_keeps_cursor "$dir"
   check "ack refuses a change that arrived after the check" case_ack_refuses_a_change_nobody_saw "$dir"

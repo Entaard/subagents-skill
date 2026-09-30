@@ -21,7 +21,9 @@
 # INPUT. One hook payload on stdin. Fields read: `session_id`, `cwd`, `agent_id`.
 # Uses jq when on PATH or at /usr/bin/jq; else a sed fallback for flat string fields.
 #
-# LEDGER. `<cwd>/.claude/plans/sage-ledger-<session_id>.md`. Lines read:
+# LEDGER. `<cwd>/.claude/plans/sage-ledger-<session_id>.md`, or `...-<session_id>-<n>.md`
+# for a later run in the same session (only while the bare one exists): the most recently
+# modified one still open. Lines read:
 #   `Started: <UTC ISO-8601>`   `Wall target: <n> min`
 # and the marker `pending — written at Step 6` in the Run record. Once Step 6
 # overwrites that marker the run is closed and the clock goes quiet.
@@ -71,6 +73,28 @@ isRunOpen() {
   grep -q -F "$RUN_OPEN_MARKER" "$1"
 }
 
+# isSessionLedgerName <file-name> <session> <plans-dir> -> true for sage-ledger-<session>.md,
+# or for sage-ledger-<session>-<digits>.md when the bare one exists. The digits test keeps a
+# longer session id out. The bare test keeps out session <session>-<digits>'s own first run:
+# `sage-ledger.sh next-path` writes a -<n> name only after the bare name is taken.
+isSessionLedgerName() {
+  case "$1" in "sage-ledger-$2.md") return 0 ;; esac
+  runNumber=${1#"sage-ledger-$2-"}
+  [ "$runNumber" != "$1" ] || return 1
+  runNumber=${runNumber%.md}
+  case "$runNumber" in ''|*[!0-9]*) return 1 ;; esac
+  [ -f "$3/sage-ledger-$2.md" ]
+}
+
+# newestOpenLedger <plans-dir> <session> -> path of the most recently modified open ledger
+# of that session, or empty
+newestOpenLedger() {
+  ls -t "$1/sage-ledger-$2.md" "$1/sage-ledger-$2-"*.md 2>/dev/null | while IFS= read -r candidate; do
+    isSessionLedgerName "${candidate##*/}" "$2" "$1" && [ -f "$candidate" ] || continue
+    isRunOpen "$candidate" && { printf '%s\n' "$candidate"; break; }
+  done
+}
+
 # epochOf <utc-iso> -> epoch seconds, or empty when neither date flavour parses it
 epochOf() {
   date -u -d "$1" +%s 2>/dev/null \
@@ -91,9 +115,8 @@ clockLine() {
   case "$session" in */*) return 0 ;; esac
   [ -z "$(payloadField "$payload" agent_id)" ] || return 0
 
-  ledger="$dir/.claude/plans/sage-ledger-$session.md"
-  [ -f "$ledger" ] || return 0
-  isRunOpen "$ledger" || return 0
+  ledger=$(newestOpenLedger "$dir/.claude/plans" "$session")
+  [ -n "$ledger" ] || return 0
 
   started=$(ledgerValue "$ledger" Started | head -n 1)
   target=$(targetMinutes "$ledger")
@@ -112,7 +135,7 @@ clockLine() {
 # self-test
 
 writeLedger() {
-  # writeLedger <dir> <session> <started-line> <target-line> <run-record-line>
+  # writeLedger <dir> <session[-n]> <started-line> <target-line> <run-record-line>
   mkdir -p "$1/.claude/plans"
   {
     printf '## Plan\n'
@@ -162,7 +185,25 @@ selfTest() {
   writeLedger "$root" nostart '' "$targetLine" "$pending"
   writeLedger "$root" badstamp 'Started: not-a-date' "$targetLine" "$pending"
 
+  otherTarget='Wall target: 99 min (advisory)'
+  writeLedger "$root" multi "$startedLine" "$otherTarget" "$pending"
+  writeLedger "$root" multi-2 "$startedLine" "$targetLine" "$pending"
+  writeLedger "$root" multi-3 "$startedLine" "$otherTarget" 'OUTCOME: done'
+  touch -t 202601010100 "$root/.claude/plans/sage-ledger-multi.md"
+  touch -t 202601010200 "$root/.claude/plans/sage-ledger-multi-2.md"
+  touch -t 202601010300 "$root/.claude/plans/sage-ledger-multi-3.md"
+  writeLedger "$root" pair-x-2 "$startedLine" "$targetLine" "$pending"
+  writeLedger "$root" own "$startedLine" "$targetLine" "$pending"
+  writeLedger "$root" own-x-2 "$startedLine" "$otherTarget" "$pending"
+  touch -t 202601010100 "$root/.claude/plans/sage-ledger-own.md"
+  touch -t 202601010200 "$root/.claude/plans/sage-ledger-own-x-2.md"
+  writeLedger "$root" numeric-2 "$startedLine" "$targetLine" "$pending"
+
   expectCase "ledger with Started and target -> one line" "$(payloadFor live "$root" '')" line
+  expectCase "newest open ledger of the session, closed newer one skipped -> its line" "$(payloadFor multi "$root" '')" line
+  expectCase "only another session's -2 ledger -> empty" "$(payloadFor pair "$root" '')" empty
+  expectCase "newer open -2 ledger of another session skipped -> own line" "$(payloadFor own "$root" '')" line
+  expectCase "session numeric-2's first ledger is not session numeric's run 2 -> empty" "$(payloadFor numeric "$root" '')" empty
   expectCase "no ledger -> empty" "$(payloadFor absent "$root" '')" empty
   expectCase "agent_id present -> empty" "$(payloadFor live "$root" ',"agent_id":"a1","agent_type":"explorer"')" empty
   expectCase "closed Run record -> empty" "$(payloadFor closed "$root" '')" empty

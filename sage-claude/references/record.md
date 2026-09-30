@@ -17,7 +17,7 @@ Awaiting human: <subjective or product checkpoints, and every finding the partia
 
 **The coordination check.** Did any result depend on the agents being independent, or would one agent at the same budget have matched it? This is the only line that can falsify sage's own premise, so answer it honestly. "The fan-out bought nothing" is a real result, and a negative answer is a surfaced event.
 
-**`/sage report`** reads this session's ledger, else the newest `.claude/plans/sage-ledger-*.md` under the working directory (naming which one). With neither, it says so. It never rebuilds a record from memory.
+**`/sage report`** reads this session's newest ledger, else the newest `.claude/plans/sage-ledger-*.md` under the working directory (naming which one). With neither, it says so. It never rebuilds a record from memory.
 
 ## Close
 
@@ -37,7 +37,7 @@ It refuses a Run record that is still pending, runs the lint, reads `--status` o
 
    ```text
    artifacts:
-     ledger   .claude/plans/sage-ledger-<session>.md
+     ledger   <ledger path>
      diff     <revision range or changed-file manifest>
    ```
 

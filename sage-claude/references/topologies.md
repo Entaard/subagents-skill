@@ -21,7 +21,7 @@ Cutting an *angle* loses the findings only that angle sees, while cutting a seco
 
 ## The framing critic
 
-**Dispatch one critic before the first writer or the first review wave**, at medium risk and above. It runs in parallel with the first scouts where it can. It takes the refuting seat: `alt-lane.md` names it where an alt checker is live, else the checker rule in `verify.md` picks it.
+**Dispatch one critic before the first writer or the first review wave**, at medium risk and above. It runs in parallel with the first scouts where it can. It takes the refuting seat: `alt-lane.md` names it where a codex seat is cleared, else the checker rule in `verify.md` picks it.
 
 - It receives the ASK, PURPOSE, PREMISES and DELIVERABLE fields and the acceptance criteria, verbatim. It never receives your reasoning behind them.
 - **Its mandate:** "Refute that these criteria, if they pass, give the user what the ASK and PURPOSE need. Refute each premise you can test with a command." Pre-bless "no findings".

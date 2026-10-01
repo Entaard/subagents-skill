@@ -8,9 +8,10 @@ Write it with `sage-ledger.sh record <ledger>`, body on stdin. `/sage report` re
 
 ```text
 OUTCOME: <done | partial | stopped> — <one line>
-Cost: <N agents; spend from `sage-watch.sh --status`, or "not measured"; wall clock against the wall target>
+Cost: <N agents; spend from `sage-watch.sh --status`, or "not measured"; Codex spend from the receipts; wall clock against the wall target>
 Verification: MEASURED — <each command run and its outcome>. JUDGED — <each case a reviewer ruled on by reading>. A runtime claim that nothing ran is JUDGED. Name any machine-checkable case that fell back to judged
 Coordination check: <what depended on the agents being independent — a disagreement, a refutation, a cross-angle finding — or "nothing; one agent at this budget would likely have matched it">
+Alt lane: <per codex unit: seat, model= effort= outcome= spend= from its receipt, and what it contributed — finding ids with triage, refuted/survives per claim, a finding no other checker raised, or "nothing". A seat probed and dropped: its outcome. "not used" when no seat ran>
 Gaps: <anything bounded, sampled, skipped, or unverified — explicitly>
 Awaiting human: <subjective or product checkpoints, and every finding the partial stop left open>
 ```

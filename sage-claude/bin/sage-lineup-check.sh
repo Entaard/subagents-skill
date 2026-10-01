@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # RUN BLOCK
-#   sage-lineup-check.sh [--memory <mem>] [--repo <dir>] [--alt-conf <file>]
+#   sage-lineup-check.sh [--memory <mem>] [--repo <dir>]
 #                        [--changelog <file-or-url> | --no-changelog]
 #   sage-lineup-check.sh --ack <token> [same options]   accept the lineup a check printed
 #   sage-lineup-check.sh --self-test            fixtures, one ok/FAIL line each
-# Default mode compares <mem>/lineup.json with the live lineup (agent model: lines, alt
-# config, price ratio, new changelog entries naming a model) and prints one line per
+# Default mode compares <mem>/lineup.json with the live lineup (agent model: lines, codex seat
+# model: and effort: lines, price ratio, new changelog entries naming a model) and prints one line per
 # difference, then `lineup review <token>`. It never writes. Print nothing = no change.
 # Only `--ack <token>` writes lineup.json, and only while the differences still hash to that
 # token: a change that arrived after the check was printed makes --ack refuse (exit 1).
@@ -15,13 +15,12 @@
 #
 # MAINTAINER MANUAL
 #
-# Snapshot: {"pinned":{agent:model},"alt":{name:model},"price_ratio":"1 : 2 : 5",
+# Snapshot: {"pinned":{agent:model},"alt":{seat:"model effort"},"price_ratio":"1 : 2 : 5",
 # "changelog_cursor":"2.1.284"}. pinned = the `model:` frontmatter line of each
-# <repo>/claude-agents/*.md. alt = <alt-conf> name=value lines, parsed like install.sh
-# (trim both halves, skip blank, '#', no '=' and empty values). price ratio = first
+# <repo>/claude-agents/*.md. alt = the `model:` and `effort:` frontmatter lines of each
+# <repo>/sage-claude/codex/*.md seat file. price ratio = first
 # `price ratio sonnet : opus : fable = a : b : c` in <repo>/sage-claude/references/harness.md.
-# Defaults: mem ~/.claude/skills/sage/memory; repo = the path in <mem>/source-repo; alt conf
-# $SUBAGENTS_ALT_CONF else ~/.claude/subagents-alt-models.conf.
+# Defaults: mem ~/.claude/skills/sage/memory; repo = the path in <mem>/source-repo.
 #
 # Changelog: `## <version>` headings, `-`/`*` bullets. Bullets under versions newer than the
 # cursor (numeric dotted compare) that name a model, an alias/default move or pricing are
@@ -40,13 +39,12 @@ NO_CURSOR=""
 
 main() {
   if [ "${1:-}" = "--self-test" ]; then run_self_test; exit $?; fi
-  local ack=0 token="" mem="" repo="" alt_conf="" changelog="$DEFAULT_CHANGELOG_URL" scan=1
+  local ack=0 token="" mem="" repo="" changelog="$DEFAULT_CHANGELOG_URL" scan=1
   while [ $# -gt 0 ]; do
     case "$1" in
       --ack) [ $# -ge 2 ] || usage_error "--ack needs the token a check printed, or none"; ack=1; token="$2"; shift ;;
       --memory) [ $# -ge 2 ] || usage_error "--memory needs a value"; mem="$2"; shift ;;
       --repo) [ $# -ge 2 ] || usage_error "--repo needs a value"; repo="$2"; shift ;;
-      --alt-conf) [ $# -ge 2 ] || usage_error "--alt-conf needs a value"; alt_conf="$2"; shift ;;
       --changelog) [ $# -ge 2 ] || usage_error "--changelog needs a value"; changelog="$2"; scan=1; shift ;;
       --no-changelog) scan=0 ;;
       *) usage_error "unknown argument $1" ;;
@@ -55,14 +53,13 @@ main() {
   done
   mem="${mem:-$HOME/.claude/skills/sage/memory}"
   if [ -z "$repo" ] && [ -f "$mem/source-repo" ]; then repo="$(head -n 1 "$mem/source-repo")"; fi
-  alt_conf="${alt_conf:-${SUBAGENTS_ALT_CONF:-$HOME/.claude/subagents-alt-models.conf}}"
   JQ="$(find_jq)" || { echo "sage-lineup-check: jq not found; lineup not compared" >&2; exit 0; }
-  run_check "$ack" "$mem" "$repo" "$alt_conf" "$changelog" "$scan" "$token"
+  run_check "$ack" "$mem" "$repo" "$changelog" "$scan" "$token"
 }
 
 usage_error() {
   echo "sage-lineup-check: $1" >&2
-  echo "usage: sage-lineup-check.sh [--ack <token|none>] [--memory <mem>] [--repo <dir>] [--alt-conf <file>] [--changelog <file-or-url> | --no-changelog]" >&2
+  echo "usage: sage-lineup-check.sh [--ack <token|none>] [--memory <mem>] [--repo <dir>] [--changelog <file-or-url> | --no-changelog]" >&2
   exit 2
 }
 
@@ -73,11 +70,11 @@ find_jq() {
 }
 
 run_check() {
-  local ack="$1" mem="$2" repo="$3" alt_conf="$4" changelog="$5" scan="$6" token="$7" status=0
+  local ack="$1" mem="$2" repo="$3" changelog="$4" scan="$5" token="$6" status=0
   local work; work="$(mktemp -d)" || exit 0
   # A reader that closes the pipe early (| head) kills this shell before its own rm.
   trap 'rm -rf "$work"' EXIT
-  current_lineup_tsv "$repo" "$alt_conf" > "$work/current.tsv"
+  current_lineup_tsv "$repo" > "$work/current.tsv"
   local cursor="$NO_CURSOR" have_snapshot=0
   if [ -f "$mem/lineup.json" ] && snapshot_tsv "$mem/lineup.json" > "$work/snapshot.tsv" 2> /dev/null; then
     have_snapshot=1
@@ -147,9 +144,9 @@ newer_version() {
 # ---- current lineup -----------------------------------------------------
 
 current_lineup_tsv() {
-  local repo="$1" alt_conf="$2"
+  local repo="$1"
   pinned_models "$repo"
-  alt_models "$alt_conf"
+  seat_models "$repo"
   price_ratio "$repo"
 }
 
@@ -165,15 +162,17 @@ pinned_models() {
   done
 }
 
-alt_models() {
-  if [ -f "$1" ]; then
-    awk '{ sub(/\r$/, "") }
-      /^[ \t]*$/ || /^[ \t]*#/ { next }
-      index($0, "=") == 0 { next }
-      { i = index($0, "="); n = substr($0, 1, i - 1); v = substr($0, i + 1)
-        gsub(/^[ \t]+|[ \t]+$/, "", n); gsub(/^[ \t]+|[ \t]+$/, "", v)
-        if (v != "") printf "alt\t%s\t%s\n", n, v }' "$1"
-  fi
+seat_models() {
+  local f
+  for f in "$1"/sage-claude/codex/*.md; do
+    if [ -f "$f" ]; then
+      awk -v name="$(basename "$f" .md)" '
+        /^---[ \t]*$/ { fence++; if (fence == 2) exit; next }
+        fence == 1 && /^(model|effort):/ { v = $0; sub(/^[a-z]+:[ \t]*/, "", v); sub(/[ \t\r]*$/, "", v)
+                                           if ($0 ~ /^model:/) m = v; else e = v }
+        END { if (m != "") printf "alt\t%s\t%s %s\n", name, m, e }' "$f"
+    fi
+  done
 }
 
 price_ratio() {
@@ -269,21 +268,24 @@ build_fixture() {
   printf -- '---\nname: explorer\nmodel: sonnet\n---\nbody\n' > "$d/repo/claude-agents/explorer.md"
   printf -- '---\nname: verifier\nmodel: opus\n---\nbody\n' > "$d/repo/claude-agents/verifier.md"
   printf 'Snapshot. Price ratio sonnet : opus : fable = 1 : 2 : 5, input and output\n' > "$d/repo/sage-claude/references/harness.md"
-  printf '# alts\nexplorer-alt = gpt-5\n\nverifier-alt=gemini-3\nbroken line\nempty=\n' > "$d/alt.conf"
+  mkdir -p "$d/repo/sage-claude/codex"
+  printf -- '---\nseat: refuter-alt\nmodel: gpt-5\neffort: medium\n---\nbody\n' > "$d/repo/sage-claude/codex/refuter-alt.md"
+  printf -- '---\nseat: verifier-alt\nmodel: gemini-3\neffort: xhigh\n---\nbody\n' > "$d/repo/sage-claude/codex/verifier-alt.md"
+  printf -- '---\nseat: broken\n---\nbody\n' > "$d/repo/sage-claude/codex/broken.md"
   printf '%s\n' "$d/repo" > "$d/mem/source-repo"
   printf '# Changelog\n\n## 2.1.284\n\n- Fixed a crash\n' > "$d/cl-base.md"
-  local tok; tok="$(bash "$0" --memory "$d/mem" --alt-conf "$d/alt.conf" --changelog "$d/cl-base.md" 2> /dev/null | awk '$2=="review"{print $3}')"
-  bash "$0" --ack "$tok" --memory "$d/mem" --alt-conf "$d/alt.conf" --changelog "$d/cl-base.md" 2> /dev/null
+  local tok; tok="$(bash "$0" --memory "$d/mem" --changelog "$d/cl-base.md" 2> /dev/null | awk '$2=="review"{print $3}')"
+  bash "$0" --ack "$tok" --memory "$d/mem" --changelog "$d/cl-base.md" 2> /dev/null
 }
 
 run_check_in() {
   local d="$1"; shift
-  bash "$0" --memory "$d/mem" --alt-conf "$d/alt.conf" "$@" 2> /dev/null
+  bash "$0" --memory "$d/mem" "$@" 2> /dev/null
 }
 
 case_snapshot_written_with_cursor() {
   local d="$1/a"; build_fixture "$d"
-  [ "$(jq -c . "$d/mem/lineup.json")" = '{"pinned":{"explorer":"sonnet","verifier":"opus"},"alt":{"explorer-alt":"gpt-5","verifier-alt":"gemini-3"},"price_ratio":"1 : 2 : 5","changelog_cursor":"2.1.284"}' ]
+  [ "$(jq -c . "$d/mem/lineup.json")" = '{"pinned":{"explorer":"sonnet","verifier":"opus"},"alt":{"refuter-alt":"gpt-5 medium","verifier-alt":"gemini-3 xhigh"},"price_ratio":"1 : 2 : 5","changelog_cursor":"2.1.284"}' ]
 }
 
 case_unchanged_is_silent() {
@@ -305,14 +307,14 @@ case_pinned_edit_is_one_line() {
 
 case_alt_edit_is_one_line() {
   local d="$1/e"; build_fixture "$d"
-  sed -i.bak 's/gpt-5/gpt-6/' "$d/alt.conf"
-  [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup alt explorer-alt: gpt-5 -> gpt-6" ]
+  sed -i.bak 's/^effort: medium/effort: high/' "$d/repo/sage-claude/codex/refuter-alt.md"
+  [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup alt refuter-alt: gpt-5 medium -> gpt-5 high" ]
 }
 
 case_alt_added_uses_none() {
   local d="$1/f"; build_fixture "$d"
-  printf 'web-researcher-alt = m1\n' >> "$d/alt.conf"
-  [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup alt web-researcher-alt: (none) -> m1" ]
+  printf -- '---\nmodel: m1\neffort: low\n---\n' > "$d/repo/sage-claude/codex/extra-alt.md"
+  [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup alt extra-alt: (none) -> m1 low" ]
 }
 
 case_ratio_change_is_one_line() {
@@ -353,7 +355,7 @@ case_model_announcement_survives_until_ack() {
   [ "$(run_check_in "$d" --changelog "$d/cl.md" | grep -v "^lineup review ")" = "$want" ] || return 1
   [ "$(run_check_in "$d" --changelog "$d/cl.md" | grep -v "^lineup review ")" = "$want" ] || return 1
   local tok; tok="$(run_check_in "$d" --changelog "$d/cl.md" | awk '$2=="review"{print $3}')"
-  bash "$0" --ack "$tok" --memory "$d/mem" --alt-conf "$d/alt.conf" --changelog "$d/cl.md" 2> /dev/null
+  bash "$0" --ack "$tok" --memory "$d/mem" --changelog "$d/cl.md" 2> /dev/null
   [ -z "$(run_check_in "$d" --changelog "$d/cl.md")" ]
 }
 
@@ -363,7 +365,7 @@ case_ack_refuses_a_change_nobody_saw() {
   [ -z "$(run_check_in "$d" --changelog "$d/cl.md")" ] || return 1
   printf '## 2.1.285\n\n- Added Claude Opus 6\n\n## 2.1.284\n\n- Fixed a crash\n' > "$d/cl.md"
   cp "$d/mem/lineup.json" "$d/before.json"
-  bash "$0" --ack none --memory "$d/mem" --alt-conf "$d/alt.conf" --changelog "$d/cl.md" 2> /dev/null && return 1
+  bash "$0" --ack none --memory "$d/mem" --changelog "$d/cl.md" 2> /dev/null && return 1
   cmp -s "$d/before.json" "$d/mem/lineup.json" || return 1
   [ -n "$(run_check_in "$d" --changelog "$d/cl.md" | grep 'Opus 6')" ]
 }
@@ -372,13 +374,13 @@ case_first_ack_refuses_a_pin_changed_after_the_check() {
   local d="$1/m"; build_fixture "$d"; rm "$d/mem/lineup.json"
   local tok; tok="$(run_check_in "$d" --no-changelog | awk '$2=="review"{print $3}')"
   sed -i.bak 's/^model: opus/model: UNREVIEWED/' "$d/repo/claude-agents/verifier.md"
-  bash "$0" --ack "$tok" --memory "$d/mem" --alt-conf "$d/alt.conf" --no-changelog 2> /dev/null && return 1
+  bash "$0" --ack "$tok" --memory "$d/mem" --no-changelog 2> /dev/null && return 1
   [ ! -e "$d/mem/lineup.json" ]
 }
 
 case_ack_without_scan_keeps_cursor() {
   local d="$1/j"; build_fixture "$d"
-  bash "$0" --ack none --memory "$d/mem" --alt-conf "$d/alt.conf" --changelog "$d/missing.md" 2> /dev/null
+  bash "$0" --ack none --memory "$d/mem" --changelog "$d/missing.md" 2> /dev/null
   [ "$(jq -r .changelog_cursor "$d/mem/lineup.json")" = "2.1.284" ]
 }
 
@@ -401,8 +403,8 @@ run_self_test() {
   check "E4 unchanged snapshot prints nothing" case_unchanged_is_silent "$dir"
   check "E4 build change only prints nothing" case_build_change_only_is_silent "$dir"
   check "E4 one pinned model edit prints one line" case_pinned_edit_is_one_line "$dir"
-  check "E4 one alt value edit prints one line" case_alt_edit_is_one_line "$dir"
-  check "added alt name prints (none)" case_alt_added_uses_none "$dir"
+  check "E4 one seat effort edit prints one line" case_alt_edit_is_one_line "$dir"
+  check "an added seat prints (none)" case_alt_added_uses_none "$dir"
   check "price ratio change prints one line" case_ratio_change_is_one_line "$dir"
   check "no snapshot prints one line" case_no_snapshot_one_line "$dir"
   check "a BSD-style sed (\\t written as t) still reads the price ratio" case_bsd_style_sed_reads_the_ratio "$dir"

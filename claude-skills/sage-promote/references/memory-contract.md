@@ -14,7 +14,7 @@ The layout, the ownership rules, the lessons contract, the structural invariants
 | `<mem>/lessons.md` | the installed copy of the repo file | `install.sh` (the template always wins) and the landing step of `/sage-promote` |
 | `<mem>/runs.log` | run lines only, never drained | every run appends one line; `/sage-promote` appends its own |
 | `<mem>/inbox.log` | observation lines, append-only; the lines after the last batch wait for triage | every run appends; nothing rewrites it |
-| `<mem>/lineup.json` | the lineup snapshot: pinned agent models, alt models, price ratio, changelog cursor | `sage-lineup-check.sh --ack <token>` only |
+| `<mem>/lineup.json` | the lineup snapshot: pinned agent models, codex seat models and efforts, price ratio, changelog cursor | `sage-lineup-check.sh --ack <token>` only |
 | `<mem>/archive/inbox-lines-<from>.log` | one batch of drained inbox lines, from inbox line `<from>` | `sage-promote-prep.sh --drain` only |
 | `<mem>/archive/v3/` | the whole v3 memory, moved once | `sage-memory-migrate.sh`, run by the installer |
 | `<mem>/source-repo` | one line: the repo's absolute path | `install.sh` |

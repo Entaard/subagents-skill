@@ -25,23 +25,23 @@ fi
 # The installed sage-claude/bin scripts are text tools built on the base POSIX toolchain, not on
 # rsync: sage-lint.sh states "awk/sed/grep only, no jq" and carries its own preflight over
 # awk/sed/grep/sort/cut/head (sage-claude/bin/sage-lint.sh, the "Core-tool preflight" comment) --
-# sage-watch.sh and sage-alt-guard.sh call a subset of that same set (awk, sed, cut). These ship
+# sage-watch.sh and sage-codex.sh call a subset of that same set (awk, sed, grep). These ship
 # with the base OS on macOS and virtually every Linux distribution, so a preflight here rarely
 # fires, but a minimal or container PATH can be missing one, and unlike jq below there is no
 # fallback: sage-lint.sh's own answer to a missing core tool is to print one stderr line and skip
 # the check entirely (exit 0, "the ledger was NOT checked") rather than fabricate a result, so an
 # installer that says nothing here just ships a linter that silently never runs. jq is NOT in this
-# list on purpose: sage-watch.sh and sage-alt-guard.sh both fail OPEN without it (a probe that
-# names the missing tool and skips the check, a guard that allows), and the two hook sections
-# further below already guard it and degrade gracefully -- jq being unavailable is not a reason to abort an
-# install that does not touch either of those optional features.
+# list on purpose: sage-watch.sh fails OPEN without it (a probe that names the missing tool and
+# skips the check), and the hook sections further below already guard it and degrade gracefully --
+# jq being unavailable is not a reason to abort an install that does not touch those optional
+# features.
 missing_hard_tools=()
 for _tool in awk sed grep sort cut head; do
   command -v "$_tool" >/dev/null 2>&1 || missing_hard_tools+=("$_tool")
 done
 if [ "${#missing_hard_tools[@]}" -gt 0 ]; then
   echo "ERROR: missing required tool(s) on PATH: ${missing_hard_tools[*]}" >&2
-  echo "  sage-lint.sh (and parts of sage-watch.sh, sage-alt-guard.sh) cannot run without them." >&2
+  echo "  sage-lint.sh (and parts of sage-watch.sh, sage-codex.sh) cannot run without them." >&2
   echo "  Nothing has been installed or modified. Install the missing tool(s) and re-run:" >&2
   # awk/sed/grep/sort/cut/head ship in macOS's own /usr/bin and are essentially never actually
   # absent there -- unlike rsync (a separate, real, uninstalled binary on a bare macOS), a miss
@@ -56,22 +56,21 @@ if [ "${#missing_hard_tools[@]}" -gt 0 ]; then
   exit 1
 fi
 
-# SOFT: jq is not required by any hard install path, and both scripts that use it fail open
+# SOFT: jq is not required by any hard install path, and the script that uses it fails open
 # without it (sage-watch.sh's --status probe names the miss and skips the check rather than
-# alarming; sage-alt-guard.sh allows rather than blocks) -- so its absence must never abort this
-# installer, and the two existing guards at the alt-lane guard hook offer and the compaction hook
-# install below already handle that at the point each optional feature would be applied. This is a
+# alarming) -- so its absence must never abort this installer, and the guards at the clock hook
+# offer and the compaction hook install below already handle that at the point each optional feature would be applied. This is a
 # SEPARATE, additional report: the whole point of an install-time preflight is that a user learns
 # once, up front, what degrades, instead of meeting the same fact three sentences at a time as
 # each optional feature quietly skips itself later in this run.
-# Probe jq the way its two consumers do, not just on PATH: sage-watch.sh:235 and
-# sage-alt-guard.sh:122 both fall back to /usr/bin/jq for exactly the stripped-PATH case the
+# Probe jq the way its consumers do, not just on PATH: sage-watch.sh and sage-clock.sh both
+# fall back to /usr/bin/jq for exactly the stripped-PATH case the
 # hard-tool comment above calls the realistic one. Testing PATH alone reports a degradation
 # that is not one on any macOS box whose PATH omits /usr/bin but still has jq where it ships.
 if ! command -v jq >/dev/null 2>&1 && ! [ -x /usr/bin/jq ]; then
   echo "NOTE: jq was not found on PATH or at /usr/bin/jq. Four optional features degrade without it:" >&2
   echo "  - the sage-watch.sh occupancy watchdog probe (fails open: reports it cannot run, fires no rungs)" >&2
-  echo "  - the sage-alt-guard.sh alt-lane guard hook: this installer SKIPS OFFERING it (the guard needs jq)" >&2
+  echo "  - the sage-codex.sh alt checker seats: they refuse to start, so sage uses in-family checkers" >&2
   echo "  - the sage-clock.sh elapsed-time hook: this installer SKIPS OFFERING it" >&2
   echo "  - the SessionStart(compact) hook: this installer SKIPS INSTALLING it; a manual TIP prints instead" >&2
   echo "  Install jq for all four to work fully; the install continues without it either way:" >&2
@@ -343,7 +342,7 @@ if [ -d "$sage_src" ]; then
   # rsync -a carries the source mode across, so this only matters when the repo's copy lost its
   # executable bit (a zip download, a checkout with no exec support). The watchdog is spawned as a
   # command, so a probe that is not executable disables the watchdog on every run.
-  for _sage_bin in sage-watch.sh sage-lint.sh sage-alt-guard.sh sage-ledger.sh sage-clock.sh \
+  for _sage_bin in sage-watch.sh sage-lint.sh sage-codex.sh sage-ledger.sh sage-clock.sh \
                    sage-lineup-check.sh sage-memory-migrate.sh sage-promote-prep.sh; do
     if [ -f "${sage_dest}bin/$_sage_bin" ]; then
       chmod +x "${sage_dest}bin/$_sage_bin"
@@ -356,8 +355,8 @@ fi
 # directory. No --delete here: other agents in that directory are not this script's to remove.
 # Two narrow exceptions, both of which identify this script's own output before deleting it and
 # both of which back it up first: the retired-orchestrator removal below, keyed on the description
-# this repo shipped, and the alt-agent removal pass further down, keyed on the generated-file
-# marker this script wrote.
+# this repo shipped, and the retired alt-agent removal further down, keyed on the generated-file
+# marker earlier versions of this script wrote.
 #
 # NOTE: ~/.claude/agents/ is GLOBAL. Claude Code watches it and can auto-delegate to these agents in
 # any project, based on their `description` field. All the descriptions are written to say they are
@@ -410,232 +409,20 @@ if [ -e "$orchestrator_dest" ] || [ -L "$orchestrator_dest" ]; then
   fi
 fi
 
-# Alt agents are the three reader roles, on a model outside this harness's own family when the
-# machine serves one, plus refuter-alt, the refuting half of the verifier role. Never a role the
-# base agents lack. Never a name this repo hardcodes.
-# The templates live in claude-agents-alt/, a SIBLING of claude-agents/, never a subdirectory of it.
-# The rsync above has no exclude for a subdirectory. The backup guard above it globs only
-# "$agents_src"*.md. A subdirectory file would be copied to ~/.claude/agents/ wholesale, with no
-# backup. A sibling directory sits outside both and cannot be reached by either.
-#
-# No model name is hardcoded anywhere here or in a template's frontmatter. The machine supplies the
-# name through a config file this script only reads. The repo ships `__ALT_MODEL__` placeholders.
-# That placeholder is the only thing that keeps a checkout installable on a machine served by a
-# different gateway. `/v1/models` cannot be probed for candidates either. The gateway this design
-# was built against returns a single placeholder id for every machine, so auto-detection is not
-# attempted.
-alt_src="$repo_dir/claude-agents-alt/"
-
-if [ -d "$alt_src" ]; then
-  alt_conf="${SUBAGENTS_ALT_CONF:-$HOME/.claude/subagents-alt-models.conf}"
-  alt_installed=0
-  # Every template name this run could have installed. The removal pass below can then tell
-  # "opted out" from "never offered", without re-globbing $alt_src a second time.
-  alt_names=()
-  for tpl in "$alt_src"*.md.in; do
-    [ -e "$tpl" ] || continue
-    alt_names+=("$(basename "$tpl" .md.in)")
-  done
-
-  # Config present -> render the enabled roles. Absent -> install none. Both are DECIDED states, so
-  # the removal pass below runs on either: turning the config off, or never having had one, means
-  # no alt agent survives on this machine.
-  #
-  # A directory, an unreadable file, or a dangling symlink at the config path is NOT a decided
-  # state. It is a config this run could not read, and the two must never collapse into one
-  # outcome. They did: the branches below printed NOTE-and-skip while `enabled_names` stayed unset,
-  # and the removal pass then deleted every installed alt agent and reported them as "no longer
-  # enabled" — they were still enabled; the file was just unreachable. An unmounted path, a
-  # permissions slip, or a mistyped SUBAGENTS_ALT_CONF silently uninstalled the whole lane. So
-  # `alt_conf_known` separates "the config says none" from "the config could not be read", and the
-  # removal pass runs only on the first. One bad path here still cannot abort the install; it now
-  # cannot delete anything either.
-  alt_conf_known=1
-  alt_conf_dir="$(dirname "$alt_conf")"
-  if [ -L "$alt_conf" ] && [ ! -e "$alt_conf" ]; then
-    echo "NOTE: $alt_conf is a symlink to a path that does not exist; skipping the alt-model config."
-    alt_conf_known=0
-  elif [ -e "$alt_conf" ] && [ ! -f "$alt_conf" ]; then
-    echo "NOTE: $alt_conf is not a regular file; skipping the alt-model config."
-    alt_conf_known=0
-  elif [ -f "$alt_conf" ] && [ ! -r "$alt_conf" ]; then
-    echo "NOTE: $alt_conf is not readable; skipping the alt-model config."
-    alt_conf_known=0
-  elif [ ! -e "$alt_conf" ] && { [ ! -d "$alt_conf_dir" ] || [ ! -x "$alt_conf_dir" ]; }; then
-    # An absent config is normally a decided opt-out, and the removal pass below is meant to run on
-    # it. But "absent" and "unreachable" look identical to `[ -f ]`, and only one of them is a
-    # decision. A path on an unmounted volume, a typo in SUBAGENTS_ALT_CONF, or a home directory
-    # this run cannot traverse all report the file as absent, and treating that as an opt-out
-    # deleted the whole lane — the very scenario the flag above was added to prevent, still open
-    # because the check tested the file and never its directory. So an absent file counts as a
-    # decision only when the directory that would hold it exists and can be entered.
-    echo "NOTE: $alt_conf_dir does not exist or cannot be entered, so $alt_conf cannot be read"
-    echo "      (an unmounted path or a typo in SUBAGENTS_ALT_CONF looks exactly like an absent"
-    echo "      config). Skipping the alt-model config."
-    alt_conf_known=0
-  elif [ -f "$alt_conf" ]; then
-    enabled_names=()
-    # Names already claimed by an earlier line in this same config. A role named twice must not
-    # render and back up over its own first render. Its second backup() call would overwrite the
-    # first saved copy with this run's own output, and that loses the user's real file for good.
-    seen_names=()
-    is_alt_checker_role() {
-      case "$1" in
-        verifier-alt|refuter-alt) return 0 ;;
-        *) return 1 ;;
-      esac
-    }
-    while IFS= read -r line || [ -n "$line" ]; do
-      # Trim first, then classify. Classifying the raw line made a whitespace-only line and an
-      # indented '# comment' both fall through to the "has no '='" NOTE, contradicting the tip this
-      # same script prints ("Blank lines and '#' comments are ignored"). The trim also strips a
-      # trailing CR, so a CRLF config needs no separate handling.
-      line="${line#"${line%%[![:space:]]*}"}"; line="${line%"${line##*[![:space:]]}"}"
-      case "$line" in
-        ''|'#'*) continue ;;
-      esac
-      case "$line" in
-        *=*) ;;
-        *) echo "NOTE: $alt_conf: '$line' has no '=', skipping."; continue ;;
-      esac
-      name="${line%%=*}"
-      model="${line#*=}"
-      # Trim surrounding whitespace from both halves.
-      name="${name#"${name%%[![:space:]]*}"}"; name="${name%"${name##*[![:space:]]}"}"
-      model="${model#"${model%%[![:space:]]*}"}"; model="${model%"${model##*[![:space:]]}"}"
-
-      if [ -z "$model" ]; then
-        echo "NOTE: $alt_conf: '$name' has no model, skipping."
-        continue
-      fi
-      # A name carrying '/' can still match a template by accident (./explorer-alt). The
-      # removal pass below then compares against the bare template name, never recognizes this
-      # enabled name, and deletes the file this same run just wrote. Reject it here, before the
-      # template lookup.
-      case "$name" in
-        */*) echo "NOTE: $alt_conf: '$name' contains '/', skipping."; continue ;;
-      esac
-      tpl="$alt_src$name.md.in"
-      if [ ! -f "$tpl" ]; then
-        echo "NOTE: $alt_conf: '$name' names no matching template ($tpl); skipping."
-        continue
-      fi
-      dup=0
-      for sn in ${seen_names[@]+"${seen_names[@]}"}; do
-        [ "$sn" = "$name" ] && dup=1 && break
-      done
-      if [ "$dup" -eq 1 ]; then
-        echo "NOTE: $alt_conf: '$name' is named more than once; using the first line, skipping this one."
-        continue
-      fi
-      seen_names+=("$name")
-      enabled_names+=("$name")
-
-      # A checker twin's only value is a second model family, so an Anthropic model makes its own
-      # description false. The other twins buy price and window headroom, where one is fine.
-      #
-      # It warns and installs anyway rather than skipping. The config is the user's call, this
-      # pattern cannot know every non-Anthropic model name, and refusing to install would turn a
-      # questionable model choice into no checker at all. The run that would be misled by a
-      # same-family checker is a later one, and it has the report's MODEL-FAMILY: line to catch it.
-      if is_alt_checker_role "$name"; then
-        case "$model" in
-          claude*|*haiku*|*sonnet*|*opus*)
-            echo "NOTE: $alt_conf: $name is set to '$model', which looks like an Anthropic"
-            echo "      model. $name exists to be a checker from a different model family, so"
-            echo "      that setting gives it no diversity to offer. Installing it as configured;"
-            echo "      set a non-Anthropic model if you want the maker/checker diversity."
-            ;;
-        esac
-      fi
-
-      dest="$agents_dest$name.md"
-      if [ -e "$dest" ] && [ ! -f "$dest" ]; then
-        echo "NOTE: $dest is not a regular file; skipping $name."
-        continue
-      fi
-
-      # Index-based substitution, not sed or awk's sub(). A model name can carry / [ ] & or \.
-      # A regex-replacement tool treats every one of those specially in the replacement text.
-      # `awk -v` is not safe here either: `-v` runs escape-sequence processing on the value it
-      # assigns, so a `\` in a model name is consumed before `index()` ever runs. Passing the model
-      # through the environment, and reading it back with `ENVIRON`, does no escape processing. So
-      # `\` and every other character in the model string reach the substitution literally. This
-      # form is also POSIX awk, not a GNU-only extension.
-      rendered="$(mktemp "${dest}.XXXXXX")" || {
-        echo "NOTE: could not create a temp file to render $name; skipping."
-        continue
-      }
-      if ! m="$model" awk '{
-             i = index($0, "__ALT_MODEL__")
-             if (i) print substr($0,1,i-1) ENVIRON["m"] substr($0, i+length("__ALT_MODEL__"))
-             else print
-           }' "$tpl" > "$rendered"; then
-        echo "NOTE: failed to render $tpl for '$name'; skipping."
-        rm -f "$rendered"
-        continue
-      fi
-
-      if [ -f "$dest" ]; then
-        if cmp -s "$rendered" "$dest"; then
-          rm -f "$rendered" # identical content already installed; no backup, nothing to move
-          alt_installed=$((alt_installed + 1))
-          continue
-        fi
-        backup "$dest" agents
-      fi
-      # mktemp creates its file 0600, and mv keeps that mode. Every other file this installer
-      # places is 0644. Match that mode before the move, rather than leaving alt agents oddly
-      # locked down.
-      chmod 644 "$rendered"
-      mv "$rendered" "$dest"
-      alt_installed=$((alt_installed + 1))
-    done < "$alt_conf"
-    if [ "$alt_installed" -eq 0 ]; then
-      echo "NOTE: $alt_conf exists but enables no alt agent. Uncomment a role and set its model to"
-      echo "      turn one on: $alt_conf"
-    fi
+# The alt checker seats run through the Codex CLI now (sage-claude/bin/sage-codex.sh), so no alt
+# agent file is rendered any more. The ones earlier versions rendered from claude-agents-alt/ are
+# removed here, and only when they carry the generated-file marker those versions stamped: an agent
+# of the user's own at the same name has no marker and is left alone.
+retired_alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
+for _alt in explorer-alt verifier-alt refuter-alt web-researcher-alt; do
+  _alt_dest="$agents_dest$_alt.md"
+  if [ -f "$_alt_dest" ] && [ ! -L "$_alt_dest" ] && grep -qxF "$retired_alt_marker" "$_alt_dest"; then
+    backup "$_alt_dest" agents
+    rm -f "$_alt_dest"
+    echo "Removed the retired alt agent -> $_alt_dest (the seat now runs through sage-codex.sh)"
   fi
-
-  # Removal pass: a template name with no enabled config line loses its installed agent, but only
-  # the copy this installer generated. A marker-carrying file is this installer's own output,
-  # safe to remove after a backup. A file with no marker is the user's. It is left alone in
-  # silence. This rule is narrower than install.sh's usual "no --delete in agents/" rule, not wider.
-  alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
-  if [ "$alt_conf_known" -eq 0 ]; then
-    echo "NOTE: leaving any installed alt agent in place, since $alt_conf could not be read."
-    echo "      Fix the path and re-run to apply what the config actually says."
-  else
-  for name in ${alt_names[@]+"${alt_names[@]}"}; do
-    keep=0
-    for en in ${enabled_names[@]+"${enabled_names[@]}"}; do
-      [ "$en" = "$name" ] && keep=1 && break
-    done
-    [ "$keep" -eq 1 ] && continue
-
-    dest="$agents_dest$name.md"
-    if [ -f "$dest" ] && grep -qxF "$alt_marker" "$dest"; then
-      mkdir -p "$backup_root/agents"
-      cp "$dest" "$backup_root/agents/"
-      rm -f "$dest"
-      echo "Removed alt agent no longer enabled -> $dest (previous version saved to $backup_root/agents/$(basename "$dest"))"
-    fi
-  done
-  fi
-
-fi
-
-# This decides whether the TIP heredoc's alt-lane paragraph is worth printing. A machine with no
-# config file, and no alt agent installed, sees nothing new. Criterion 1 stays true byte-for-byte
-# on that machine: behavior is exactly as before. ANTHROPIC_BASE_URL is not part of this test. It
-# marks any Anthropic-compatible proxy, including a corporate proxy in front of the plain API.
-# Most machines that set it serve no alt model at all.
-alt_lane_relevant=0
-if [ -d "$alt_src" ]; then
-  if [ -f "$alt_conf" ] || [ "${alt_installed:-0}" -gt 0 ]; then
-    alt_lane_relevant=1
-  fi
-fi
+done
+unset _alt _alt_dest
 
 # An installed skill directory holds two kinds of thing: the files this repo ships, and whatever the
 # skill itself wrote there at runtime. The two are told apart structurally — no filename this script
@@ -876,118 +663,36 @@ done
 
 rsync -av ${skip_styles[@]+"${skip_styles[@]}"} "$styles_src" "$styles_dest"
 
-# offer_alt_guard_hook: the one sage rule with a deterministic predicate and zero legitimate
-# exceptions — an alt-lane dispatch must carry NO model parameter, because the parameter wins over
-# the agent file and silently deletes the outside-family model the row exists to buy. Prose has
-# stated it three times and a measured run broke it anyway (figure and full account:
-# sage-claude/references/alt-lane.md). Offered, never imposed, and offered with
-# the same care as the compaction hook this installer writes:
-# ~/.claude/settings.json holds arbitrary other config that this script does not own.
-# The guard itself fails OPEN on every unrecognised payload — see sage-claude/bin/sage-alt-guard.sh.
-offer_alt_guard_hook() {
+# remove_retired_alt_guard_hook: earlier versions offered a PreToolUse hook that blocked an alt
+# agent dispatch carrying a model parameter. No alt agent exists now, and the hook's script is gone
+# from the skill, so the entry would run a missing file on every Agent call. Only the entry whose
+# command is exactly that script's path is removed.
+remove_retired_alt_guard_hook() {
   local settings="$HOME/.claude/settings.json"
   local guard="${sage_dest}bin/sage-alt-guard.sh"
-  local marker="sage-alt-guard.sh"
-  local tmp reply
+  local filter
 
-  # No guard installed (partial tree, or a source checkout without it) -> nothing to offer.
-  if [ ! -f "$guard" ]; then
-    return 0
-  fi
-  # A symlinked settings file belongs to something else; never edit through it.
-  if [ -L "$settings" ]; then
-    echo "NOTE: $settings is a symlink; skipping the alt-lane guard hook offer."
-    return 0
-  fi
-  if ! command -v jq >/dev/null 2>&1; then
-    echo "NOTE: jq is not installed; skipping the alt-lane guard hook offer (the guard needs jq too)."
-    return 0
-  fi
-  if [ -e "$settings" ]; then
-    # The same invalid-JSON pre-check as install_compact_hook: a settings file that does not
-    # parse is bailed on BEFORE the prompt, not discovered at merge time after a backup.
-    if ! jq empty "$settings" >/dev/null 2>&1; then
-      echo "NOTE: $settings does not parse as JSON; leaving it untouched — no alt-lane guard hook offered."
-      return 0
-    fi
-    # Already present -> say nothing and change nothing. This is what makes re-running safe.
-    if jq -e --arg m "$marker" '[.hooks.PreToolUse // [] | .[] | .hooks // [] | .[] | .command // ""] | any(contains($m))' \
-         "$settings" >/dev/null 2>&1; then
-      return 0
-    fi
-  fi
-  # Non-interactive install -> never prompt, never write.
-  if [ ! -t 0 ]; then
-    return 0
-  fi
-
-  printf 'Add a PreToolUse hook to %s that blocks an alt-lane subagent dispatch carrying a model parameter? [y/N] ' "$settings"
-  read -r reply || reply=""
-  case "$reply" in
-    y|Y|yes|YES|Yes) : ;;
-    *) return 0 ;;
-  esac
-
-  # Past this point the user has answered `y`, so every bailout says why. A silent `return 0`
-  # here reads as "installed" and is not: the same guard shape install_compact_hook uses, and for
-  # the same reason — this function runs under `set -euo pipefail`, so an unguarded failure
-  # would abort the whole installer after the already-printed sync results.
-  if [ -e "$settings" ]; then
-    # A DISTINCT backup category from install_compact_hook's `settings`: both can write in
-    # one install, backup() names the saved copy by basename inside its category, and a
-    # shared category made the second edit's backup overwrite the first's — leaving the
-    # only restore point post-first-edit, which is not the file the user started with.
-    backup "$settings" settings-alt-guard || {
-      echo "NOTE: could not back up $settings; leaving it untouched, no alt-lane guard hook added."
-      return 0
-    }
-  else
-    mkdir -p "$(dirname "$settings")" || {
-      echo "NOTE: could not create $(dirname "$settings"); skipping the alt-lane guard hook."
-      return 0
-    }
-    printf '{}\n' > "$settings" || {
-      echo "NOTE: could not write $settings; skipping the alt-lane guard hook."
-      return 0
-    }
-  fi
-
-  # Beside the target, not in /tmp: same filesystem as the file it will be written into.
-  tmp="$(mktemp "${settings}.XXXXXX")" || {
-    echo "NOTE: could not create a temp file beside $settings; leaving it untouched."
+  [ -f "$settings" ] && [ ! -L "$settings" ] || return 0
+  command -v jq >/dev/null 2>&1 || return 0
+  jq -e --arg g "$guard" '[.hooks.PreToolUse | arrays | .[] | objects | .hooks | arrays | .[] | objects | .command] | any(. == $g)' \
+    "$settings" >/dev/null 2>&1 || return 0
+  backup "$settings" settings-alt-guard || {
+    echo "NOTE: could not back up $settings; the retired alt-lane guard hook is still in it."
     return 0
   }
-  if ! jq --arg cmd "$guard" \
-       '.hooks.PreToolUse = ((.hooks.PreToolUse // []) + [{"matcher": "Agent", "hooks": [{"type": "command", "command": $cmd}]}])' \
-       "$settings" > "$tmp"; then
-    echo "NOTE: could not merge the alt-lane guard hook into $settings; left it unchanged."
-    rm -f "$tmp"
-    return 0
-  fi
-  if ! jq -e . "$tmp" >/dev/null 2>&1; then
-    echo "NOTE: the merged settings did not parse; left $settings unchanged."
-    rm -f "$tmp"
-    return 0
-  fi
-  # An in-place write, not `mv`: $settings already exists by this point, and writing through
-  # it keeps its original mode and ownership rather than inheriting mktemp's 0600. Guarded,
-  # because the redirection truncates $settings BEFORE `cat` runs — an unguarded failure here
-  # would leave the user with an empty settings file, silently, and abort the installer under
-  # `set -euo pipefail` before anything could say so.
-  if ! cat "$tmp" > "$settings"; then
-    echo "NOTE: could not write the merged settings into $settings; it may now be truncated."
-    echo "      If a backup path for settings.json was printed above, restore from there"
-    echo "      ($backups_dir/...); if not, this installer created $settings itself this run"
-    echo "      and an empty one can simply be deleted."
-    rm -f "$tmp"
-    return 0
-  fi
-  rm -f "$tmp"
-  echo "Added the alt-lane guard hook to $settings. Check it with: $guard --selftest"
+  # An entry or a key that was already empty is the user's, so only one this filter emptied goes.
+  filter='def is_guard: (type == "object") and (.command == $cmd);
+          .hooks.PreToolUse |= map(
+            if (type == "object") and ((.hooks | type) == "array") and any(.hooks[]; is_guard)
+            then .hooks |= map(select(is_guard | not)) | if (.hooks | length) == 0 then empty else . end
+            else . end)
+          | if (.hooks.PreToolUse | length) == 0 then del(.hooks.PreToolUse) else . end'
+  merge_into_settings "$settings" "sage-alt-guard.sh" "$guard" "$filter" || return 0
+  echo "Removed the retired alt-lane guard hook from $settings."
 }
 
 # offer_clock_hook: an advisory clock, so offered and never imposed, with the same guards as
-# offer_alt_guard_hook. The clock never blocks and always exits 0 — see sage-claude/bin/sage-clock.sh.
+# install_compact_hook. The clock never blocks and always exits 0 — see sage-claude/bin/sage-clock.sh.
 offer_clock_hook() {
   local settings="$HOME/.claude/settings.json"
   local clock="${sage_dest}bin/sage-clock.sh"
@@ -1201,7 +906,7 @@ print_pinned_models() { # print_pinned_models <agents-dir>
 
 if [ -d "$sage_src" ]; then
   install_compact_hook
-  offer_alt_guard_hook
+  remove_retired_alt_guard_hook
   offer_clock_hook
 fi
 
@@ -1212,11 +917,16 @@ if [ -d "$sage_src" ]; then
 fi
 echo "Installed subagent agents  -> $agents_dest"
 print_pinned_models "$agents_dest"
-if [ "${alt_installed:-0}" -gt 0 ]; then
-  echo "Installed alt agents       -> $alt_installed of ${#alt_names[@]}, at $agents_dest"
-  echo "  Start a new Claude Code session before an alt agent can be dispatched."
-  echo "  The agent registry resolves once at session start. One added mid-session is not yet"
-  echo "  visible."
+if command -v codex >/dev/null 2>&1; then
+  echo "Codex alt seats            -> ${sage_dest}codex/ (probe one: ${sage_dest}bin/sage-codex.sh --probe refuter-alt <new-dir>)"
+  if ! command -v jq >/dev/null 2>&1 && [ ! -x /usr/bin/jq ]; then
+    echo "  NOTE: jq is not on PATH, so sage-codex.sh refuses every seat until it is installed."
+  fi
+  if ! command -v timeout >/dev/null 2>&1; then
+    echo "  NOTE: timeout is not on PATH, so sage-codex.sh refuses every seat until it is installed."
+  fi
+else
+  echo "Codex alt seats            -> off: the codex CLI is not on PATH, so sage uses in-family checkers"
 fi
 if [ -d "$eco_src" ]; then
   echo "Installed ecosystem skills -> $eco_dest (from claude-skills/)"
@@ -1245,18 +955,3 @@ For long orchestration runs:
       ]
     }
 TIP
-
-if [ "$alt_lane_relevant" -eq 1 ]; then
-cat <<'ALTTIP'
-
-Optional, to place orchestration units on an external model:
-
-  Write ~/.claude/subagents-alt-models.conf (SUBAGENTS_ALT_CONF overrides this path). One role per
-  line, as <name>=<model>: explorer-alt, verifier-alt, refuter-alt, web-researcher-alt. Blank
-  lines and '#' comments are ignored. No model name is guessed for you. Put in the model your own
-  gateway serves. Give refuter-alt your strongest outside model: it takes the adversarial checks.
-  Without a refuter-alt line, verifier-alt takes them.
-  Re-run this installer after editing the file. Removing a line removes that agent on the next run.
-  Then start a new session. A file added mid-session is not yet dispatchable.
-ALTTIP
-fi

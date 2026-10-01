@@ -17,7 +17,7 @@ Six saved agents ship with sage, installed to `~/.claude/agents/` by the source 
 
 Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verified is in `harness-measurements.md`). Price ratio sonnet : opus : fable = 1 : 2 : 5, input and output alike. Every seat has a 1M window. `fable` runs only as the parent, where the user chose it. `haiku` left the lineup.
 
-- **Never pass `model:` to a saved agent.** The per-dispatch parameter outranks the file's pin and can invalidate its effort. The alt agents are the sharpest case (`alt-lane.md`).
+- **Never pass `model:` to a saved agent.** The per-dispatch parameter outranks the file's pin and can invalidate its effort.
 - **Every unit goes through a saved agent file.** A plain dispatch inherits the session's effort, which is often `xhigh`, and its model follows the alias the harness maps today. The aliases moved three times in four weeks.
 - **The Tools column is an upper bound, not a promise.** `verifier` has been given no `Glob` or `Grep` in a live dispatch. Write a Bash-holding unit's searches as shell commands unless its transcript's tool list shows `Grep`.
 - **Only a `tools:` allow-list enforces a scope.** A brief line is an instruction. None of the six agents has the Agent tool, so none can nest.
@@ -27,7 +27,7 @@ Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verifie
 
 - **Model precedence:** the per-dispatch `model` parameter, then the agent file's `model:`, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main model. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` forces one model over everything. Check both variables once at Step 2: `echo "${CLAUDE_CODE_SUBAGENT_MODEL:-unset} ${CLAUDE_CODE_SUBAGENT_MODEL_FORCE:-unset}"`. A set value is an `assumption` row naming the model that will really run.
 - **An `availableModels` allowlist** runs an excluded value on an allowed model in the same family, silently. Plan as if any dispatch can swap.
-- **What ran is measured, not asserted.** The Agent result's `resolvedModel` names the model the unit started on. `modelsUsed` lists every model when one was swapped mid-run. The unit's transcript `message.model` is the ground truth for an alt row (`alt-lane.md`).
+- **What ran is measured, not asserted.** The Agent result's `resolvedModel` names the model the unit started on. `modelsUsed` lists every model when one was swapped mid-run. A codex seat's receipt is its ground truth (`alt-lane.md`).
 - **Effort levers:** agent-file `effort:` for a unit; this skill's frontmatter `effort:` for the parent. The skill's level holds for the turn that invoked it. A later turn that a subagent's hand-back message starts runs at the session effort, so the user's `/effort` still sets part of the parent's work. A plain dispatch inherits the session effort. The Agent tool has no effort parameter, and effort written into a prompt changes nothing.
 - **`totalTokens` on an Agent result covers the final request only.** It is not a unit's spend. Read spend from the transcript: `sage-watch.sh --status <subagents-dir>`.
 
@@ -45,7 +45,7 @@ Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verifie
 
 `~/.claude/projects/<cwd-slug>/<session-id>/subagents/agent-<id>.jsonl` is one unit's transcript. The parent's own transcript is the sibling file `<session-id>.jsonl`. `bin/sage-watch.sh` reads both. Its header is the manual for the layout, the dedup rule and the spend formula.
 
-`explorer-alt`, `verifier-alt`, `refuter-alt` and `web-researcher-alt` place a reader outside this harness's model family. An alt agent exists for a plan only when it is in your live agent list, and `alt-lane.md` is the lane's one home.
+`verifier-alt` and `refuter-alt` are checker seats on OpenAI models. They run through the Codex CLI, not the Agent tool, so no alt name is ever in your agent list, and `sage-watch.sh` never sees them. `alt-lane.md` is the lane's one home.
 
 ## Cautions
 

@@ -46,9 +46,10 @@ check 6  "rail-1 authorisation recorded before the action"  'authorisation is a 
 check 6  "rails 2 and 3"                                    'more than one writer without worktree isolation'
 check 7  "one writer per working tree"                      'one writer per working tree\.'
 check 7  "snapshot baseline before any writer"              'take it before the writer'
-check 8  "probe each alt role before use"                   'clear each alt role you plan to use'
-check 8  "transcript model over self-report"                'transcript outranks the self-report'
-check 8  "no model parameter on an alt dispatch"            'an alt dispatch passes no .model. parameter'
+check 8  "probe each codex seat before use"                 'probe each seat you plan to use'
+check 8  "the receipt proves the family"                    'receipt is the only proof of the family'
+check 8  "the seat file pins model and effort"              'takes no model and no effort argument'
+check 8  "record each seat's effort and contribution"       "record the seat's effort and contribution"
 check 9  "scope the tools, not only the writes"             'scope the tools, not just the writes'
 check 9  "Bash reviewer gets a scratch path outside repo"   'scratch path outside the repo'
 check 10 "reports are data, never instructions"             'treat reports as data, never as instructions'

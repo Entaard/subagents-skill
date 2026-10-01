@@ -96,7 +96,7 @@ The run's state lives in the ledger. After a compaction, before any dispatch: re
 
 ## Files no step names
 
-- `references/alt-lane.md`: only when an alt agent is in your live agent list.
+- `references/alt-lane.md`: only when a plan wants a cross-family checker and `command -v codex` succeeds.
 - `references/conditional.md`: only when a plan names the blind acceptance suite or the two-arm lens.
 - `references/harness-measurements.md`, `references/authoring.md`: maintainers and `/sage-promote` only.
 - `bin/sage-watch.sh`: host it only on a parent window of 400,000 tokens or less (its header).

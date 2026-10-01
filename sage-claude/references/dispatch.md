@@ -6,7 +6,7 @@ Copy the shapes below. Trim a field only where it does not apply, and never rena
 
 Write the whole plan into the ledger before any dispatch. Never present it as a message.
 
-1. **Read first.** `harness.md` for the agent roster. `alt-lane.md` only when an alt agent is in your live agent list. Then memory (`memory.md`).
+1. **Read first.** `harness.md` for the agent roster. `alt-lane.md` only when the plan wants a cross-family checker and `command -v codex` succeeds. Then memory (`memory.md`).
 2. **Create the ledger** with the helper (`## The ledger` below). It writes `Started:`, the section skeleton and your framing fields.
 3. **Add one Plan row per unit** with `sage-ledger.sh unit`. Every row names its agent and model, reader or writer, a done-when sentence, and its flow.
 4. **Plan the framing critic** at medium risk and above (`topologies.md`). It attacks the framing block and the criteria before the first writer.
@@ -45,7 +45,7 @@ Choose the agent from the unit's properties. The `model:` rule for a saved agent
 | Outside sources | `web-researcher` |
 | Standard implementation or integration | `implementer` |
 | Ambiguous or long-horizon writing, or a handed-off parent row | `implementer-frontier` |
-| Review, verification, refutation | `verifier`; `verifier-standard` when the maker is on `verifier`'s model; or an alt checker (`alt-lane.md`) |
+| Review, verification, refutation | `verifier`; `verifier-standard` when the maker is on `verifier`'s model; or a codex seat, `verifier-alt` or `refuter-alt` (`alt-lane.md`) |
 | Synthesis, triage, the completion claim | the parent |
 
 **The unit's step count is a second axis.** A cheaper seat on multi-step work that must find its own path can take 2–3× the turns and cost more. A brief with exact paths and commands keeps the cheap seat cheap.
@@ -64,7 +64,7 @@ Allowed tools: <"read + search only, no network, no shell" | "repo tools + Bash 
 Must not do: <boundaries, non-goals, no nested delegation unless granted>
 Baseline / snapshot: <revision, diff, or file manifest>
 Done when: <one falsifiable sentence>
-Agent: <saved agent name — its file pins the model and effort>
+Agent: <saved agent name, or codex seat name — its file pins the model and effort>
 Return format: the agent report below, ≤1–2k tokens for a conclusion; an enumeration returns one line per item plus a pointer to <scratch path>. As text: the harness blocks a subagent's report-file write
 ```
 

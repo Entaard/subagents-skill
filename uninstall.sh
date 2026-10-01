@@ -15,9 +15,9 @@ backup_root=""
 manifests_dir="$backups_dir/.manifests"
 alt_conf="${SUBAGENTS_ALT_CONF:-$claude_dir/subagents-alt-models.conf}"
 
-# install.sh stamps this exact line into every alt agent it renders. It is the only thing that
-# tells its own output from an agent of the same name that the user wrote, so removal is gated
-# on it — the same narrow rule install.sh applies when a config line goes away.
+# Earlier versions of install.sh stamped this exact line into every alt agent they rendered. It is
+# the only thing that tells that output from an agent of the same name that the user wrote, so
+# removal is gated on it.
 alt_marker="<!-- subagents-skill: generated alt agent — regenerate with install.sh, do not hand-edit -->"
 guard_hook_command="$skills_dest/sage/bin/sage-alt-guard.sh"
 clock_hook_command="$skills_dest/sage/bin/sage-clock.sh"
@@ -156,7 +156,7 @@ collect_targets() {
     collect_eco_skills
     collect_output_styles "$repo_dir/output-styles" "$styles_dest"
   fi
-  collect_sage_agents "$repo_dir/claude-agents" "$repo_dir/claude-agents-alt" "$agents_dest"
+  collect_sage_agents "$repo_dir/claude-agents" "$agents_dest"
 }
 
 collect_output_styles() { # collect_output_styles <source-dir> <destination-dir>
@@ -167,13 +167,13 @@ collect_output_styles() { # collect_output_styles <source-dir> <destination-dir>
   done
 }
 
-collect_sage_agents() { # collect_sage_agents <source-dir> <alt-source-dir> <destination-dir>
-  local source_dir="$1" alt_source_dir="$2" destination_dir="$3" src
+collect_sage_agents() { # collect_sage_agents <source-dir> <destination-dir>
+  local source_dir="$1" destination_dir="$2" src
   for src in "$source_dir"/*.md; do
     [ -f "$src" ] || continue
     collect_shipped_file "$src" "$destination_dir/$(basename "$src")" agents
   done
-  collect_generated_alt_agents "$alt_source_dir" "$destination_dir"
+  collect_generated_alt_agents "$destination_dir"
 }
 
 collect_primary_skill() { # collect_primary_skill <name>
@@ -316,11 +316,10 @@ collect_eco_skill() { # collect_eco_skill <name>
   add_target "$dir" skills
 }
 
-collect_generated_alt_agents() { # collect_generated_alt_agents <template-dir> <destination-dir>
-  local template_dir="$1" destination_dir="$2" tpl dest
-  for tpl in "$template_dir"/*.md.in; do
-    [ -f "$tpl" ] || continue
-    dest="$destination_dir/$(basename "$tpl" .md.in).md"
+collect_generated_alt_agents() { # collect_generated_alt_agents <destination-dir>
+  local destination_dir="$1" name dest
+  for name in explorer-alt verifier-alt refuter-alt web-researcher-alt; do
+    dest="$destination_dir/$name.md"
     if [ -L "$dest" ]; then
       echo "NOTE: $dest is a symlink you made after installing; leaving it."
       left_standing+=("$dest — a symlink this repo did not create")
@@ -330,7 +329,7 @@ collect_generated_alt_agents() { # collect_generated_alt_agents <template-dir> <
       add_target "$dest" agents
     elif [ -e "$dest" ]; then
       echo "NOTE: $dest carries no generated-by marker, so install.sh did not write it; leaving it."
-      left_standing+=("$dest — an alt agent of your own at a name install.sh also renders")
+      left_standing+=("$dest — an alt agent of your own at a name install.sh once rendered")
     fi
   done
 }
@@ -511,9 +510,10 @@ remove_settings_hooks() {
 # Drops the hook objects install.sh added, then an entry this filter emptied, then a key this
 # filter emptied. An entry that already held no hooks, and a key that was already an empty array,
 # are the user's and come through untouched — which is why every prune checks the original too.
-# The guard command is matched whole because it is an absolute path; the compaction hook is matched
-# by a marker substring, which is loose enough to hit a hook of the user's that merely mentions the
-# marker, so that half is confined to the matcher install.sh writes it under.
+# The guard command is matched whole: install.sh only ever wrote its bare path, so a longer command
+# is the user's. The compaction hook is matched by a marker substring, which is loose enough to hit
+# a hook of the user's that merely mentions the marker, so that half is confined to the matcher
+# install.sh writes it under.
 strip_sage_hooks() { # strip_sage_hooks <settings-file>
   jq --arg guard "$guard_hook_command" --arg clock "$clock_hook_command" --arg compact "$compact_hook_marker" '
     def is_command(f):
@@ -537,7 +537,7 @@ strip_sage_hooks() { # strip_sage_hooks <settings-file>
       elif (.hooks | type) != "object" then .
       else
         (if (.hooks.PreToolUse | type) == "array"
-           then .hooks.PreToolUse |= strip(true; . == $guard or startswith($guard + " "))
+           then .hooks.PreToolUse |= strip(true; . == $guard)
            else . end)
         | (if (.hooks.PostToolBatch | type) == "array"
              then .hooks.PostToolBatch |= strip(true; . == $clock or startswith($clock + " "))

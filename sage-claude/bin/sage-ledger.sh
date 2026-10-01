@@ -661,10 +661,42 @@ self_test_close() {
 
 self_test_negative_fixtures() {
   local dir=$1 fixtures=$HERE/tests id
-  for id in state-enum triage-state triage-orphan frame sections findings-shape disclosure-home; do
+  for id in state-enum triage-state triage-orphan frame sections findings-shape disclosure-home alt-record; do
     lint_says "$fixtures/neg-$id.md" "$id"
     check "negative: neg-$id.md fires $id" $?
   done
+  { cat "$fixtures/neg-alt-record.md"; printf 'Notes: an earlier draft said pending — written at Step 6.\n'; } \
+    >"$dir/neg-alt-pending-note.md"
+  lint_says "$dir/neg-alt-pending-note.md" alt-record
+  check "negative: a pending note below OUTCOME: done still fires alt-record" $?
+  sed 's/^OUTCOME: done/OUTCOME: pending — written at Step 6/' "$fixtures/neg-alt-record.md" >"$dir/alt-pending.md"
+  ! "$HERE/sage-lint.sh" "$dir/alt-pending.md" 2>/dev/null | grep -q '^sage-lint alt-record '
+  check "alt-record is silent while OUTCOME: is pending" $?
+  sed 's/^OUTCOME: done/OUTCOME: done — replaced the pending — written at Step 6 skeleton/' \
+    "$fixtures/neg-alt-record.md" >"$dir/alt-done-quotes-pending.md"
+  lint_says "$dir/alt-done-quotes-pending.md" alt-record
+  check "negative: OUTCOME: done that quotes the pending text still fires alt-record" $?
+  sed 's/^Alt lane: none recorded/Alt lane: refuter-alt model= effort= outcome= spend= nothing/' \
+    "$fixtures/neg-alt-record.md" >"$dir/alt-empty-fields.md"
+  lint_says "$dir/alt-empty-fields.md" alt-record
+  check "negative: receipt fields with no value fire alt-record" $?
+  sed -e 's/^Alt lane: none recorded/Alt lane: verifier-alt nothing; refuter-alt model=gpt-6-astra effort=medium outcome=done spend=9k survives C1/' \
+      -e 's/^| U1 | fix | green | rw | implementer |/| U1 | review | reviewed | R | verifier-alt (gpt-6.1-sol xhigh, codex) |/' \
+    "$fixtures/neg-alt-record.md" >"$dir/alt-two-seats.md"
+  lint_says "$dir/alt-two-seats.md" alt-record
+  check "negative: one seat's receipt fields do not cover the other seat" $?
+  sed 's/^Alt lane: none recorded/Alt lane: refuter-alt model= effort= outcome= spend=; expected_model=x expected_effort=y expected_outcome=z expected_spend=1/' \
+    "$fixtures/neg-alt-record.md" >"$dir/alt-suffix-keys.md"
+  lint_says "$dir/alt-suffix-keys.md" alt-record
+  check "negative: a key that ends in model= does not fill model=" $?
+  sed -e 's/^Alt lane: none recorded/Alt lane: refuter-alt model=/' -e 's/$/\r/' "$fixtures/neg-alt-record.md" \
+    | awk '{ print } /^Alt lane:/ { printf "  effort=\r\n  outcome=\r\n  spend=\r\n" }' >"$dir/alt-crlf-empty.md"
+  lint_says "$dir/alt-crlf-empty.md" alt-record
+  check "negative: a carriage return is not a field value" $?
+  sed 's/^Alt lane: none recorded/Alt lane: refuter-alt model=gpt-6-astra effort=medium outcome=done spend=9k, survives C1/' \
+    "$fixtures/neg-alt-record.md" >"$dir/alt-complete.md"
+  ! "$HERE/sage-lint.sh" "$dir/alt-complete.md" 2>/dev/null | grep -q '^sage-lint alt-record '
+  check "alt-record is silent on a complete entry per seat" $?
   { cat "$dir/plans/ledger.md"; printf 'token %s%s\n' 'AKIA' 'ABCDEFGHIJKLMNOP'; } >"$dir/neg-secret.md"
   lint_says "$dir/neg-secret.md" secret-shape
   check "negative: a secret-shaped string fires secret-shape" $?

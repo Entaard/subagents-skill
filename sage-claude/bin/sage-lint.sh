@@ -15,8 +15,8 @@
 # directory, is not a ledger at all, or is an old-format ledger (this lint checks the
 # four-section schema only).
 #
-# The nine ledger check ids: state-enum triage-orphan triage-state findings-shape
-# disclosure-home sections frame splice secret-shape.
+# The ten ledger check ids: state-enum triage-orphan triage-state findings-shape
+# disclosure-home sections frame splice secret-shape alt-record.
 #
 # Empty stdout WITH a line on stderr is not a clean file: a core tool (awk, sed, grep, sort,
 # cut, head) is missing. Install it and run again. Never disable this lint — not for that,
@@ -43,7 +43,7 @@
 #
 #   <ledger-path>       The one file to check. Required, exactly one.
 #   --corpus <dir>      A SECOND, INDEPENDENT MODE (see CORPUS MODE below), never a
-#                        tenth ledger check: it checks a sage skill DIRECTORY's own
+#                        eleventh ledger check: it checks a sage skill DIRECTORY's own
 #                        corpus for dangling `.md` citations, credential shapes in its
 #                        memory, and machine-local facts in its portable memory template,
 #                        not a ledger. `<dir>` must carry a
@@ -83,7 +83,7 @@
 # writer (`sage-ledger.sh`) always escapes it.
 #
 # ---------------------------------------------------------------------------
-# THE CHECKS — exactly nine, each with a short stable id. Every check reads ONLY the text
+# THE CHECKS — exactly ten, each with a short stable id. Every check reads ONLY the text
 # named below and states what it therefore cannot see; that blind spot is not a bug in the
 # check, it is the check's honest shape.
 #
@@ -230,6 +230,22 @@
 #       is then reported. Read a long run of splice findings as "find the stray backtick above
 #       the first one", never as that many separate defects.
 #
+#   alt-record
+#     Reads: the Plan unit table's `agent` column, and the Run record's `Alt lane:` line, the
+#       first line under `Run record` whose text starts with `Alt lane:` (after optional `-`
+#       or `**`) plus any indented lines that continue it.
+#     Fires: a Plan row's agent cell names `verifier-alt` or `refuter-alt` while the Run
+#       record has no `Alt lane:` line, or that line never names the seat. Or the line has fewer
+#       complete entries for a seat than the Plan has rows for it. An entry runs from a seat's
+#       name to the next seat name. It is complete when `model=`, `effort=`, `outcome=` and
+#       `spend=` each carry a value. A codex seat is invisible to `sage-watch.sh`, so this line
+#       is the only place its effort and contribution land. Silent while the Run record's first
+#       `OUTCOME:` line is exactly `OUTCOME: pending — written at Step 6`: the record is written
+#       at Step 6. The same words anywhere else do not count.
+#     Cannot see: whether the figures were copied from the receipt or invented, or whether the
+#       line names any contribution at all, or a true one. It checks that the line exists and
+#       carries the fields.
+#
 #   secret-shape
 #     Reads: every line of the ledger outside a fenced (```) code block — $SANITIZED, the same
 #       fence-blanked text every check above reads.
@@ -251,8 +267,8 @@
 #       vendor's spelling, nothing inside a fence, and nothing split across two lines.
 #
 # ---------------------------------------------------------------------------
-# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not a tenth ledger check.
-# It never reads a ledger and the nine checks above never run in it. `corpus-citation` exists
+# CORPUS MODE (`--corpus <dir>`) — a SECOND, INDEPENDENT mode, not an eleventh ledger check.
+# It never reads a ledger and the ten checks above never run in it. `corpus-citation` exists
 # because the live corpus cited a document that was deleted, sage-plan-integrity-round3.md, and
 # nothing caught it for weeks — the citation just sat there, dead. `corpus-figure` and
 # `cortex-budget` exist because `/sage-promote`'s own text names two rules nothing ever checked:
@@ -271,8 +287,8 @@
 #       the directory, and ONLY these six basenames are read from it:
 #       explorer.md, implementer.md, implementer-frontier.md, verifier.md, verifier-standard.md,
 #       web-researcher.md.
-#       The alt agent templates `<dir>/../claude-agents-alt/*.md.in` are read too, resolved
-#       corpus-relative like the agent files; no such directory → none read.
+#       The codex seat files `<dir>/codex/*.md` are read too, resolved corpus-relative like the
+#       agent files; no such directory → none read.
 #       `~/.claude/agents/` is the user's own directory and holds agents unrelated to this
 #       corpus, so nothing else there is read. No directory found in that order → scan none of
 #       all of them and stay silent, the same FAIL-QUIET spirit as a missing `references/`.
@@ -318,7 +334,7 @@
 #       one violation per citation SITE, so the same dangling filename cited three times (as
 #       it is, live, for sage-plan-integrity-round3.md) is three violation lines, not one
 #       collapsed line, because each site is a separate promise that broke.
-#     Cannot see (stated plainly, the same convention as the nine checks above):
+#     Cannot see (stated plainly, the same convention as the ten checks above):
 #       - a path cited inside a fenced code block as an example — deliberately not a citation;
 #       - a path built by string interpolation or otherwise assembled at read time, since this
 #         is a text scan of the literal backtick span, never an interpreter;
@@ -390,7 +406,7 @@
 #     Cannot see: a comma-grouped raw count (`466,802`), a plain unscaled integer used as a
 #       cost or a count, a spelled-out number ("twenty-eight runs"), or a population phrase
 #       whose noun is not on the list above — all silence, the same miss-over-false-alarm trade
-#       the nine ledger checks make throughout this file. It also cannot tell a genuine
+#       the ten ledger checks make throughout this file. It also cannot tell a genuine
 #       citation-by-date (naming a specific dated design note) from a bare measurement date;
 #       both shapes read identically to a line scan, and only the exception list or a human
 #       tells them apart.
@@ -404,7 +420,7 @@
 #       TWO rows — `Cortex word budget | <N> words` and `Run-loaded word budget | <N> words`,
 #       each `<N>` a bare positive integer (commas allowed, e.g. `12,500`). **No such row →
 #       silent, always**, per row and independently — the same fail-quiet spirit
-#       `corpus-citation` and the nine ledger checks already carry: an undeclared budget is not
+#       `corpus-citation` and the ten ledger checks already carry: an undeclared budget is not
 #       a violation, it is a knob nobody has turned yet. One check id covers both rows: they
 #       bound the same thing, what a run has to read, at two radii.
 #     The cortex row bounds `wc -w <dir>/SKILL.md` alone — the router a run always loads.
@@ -418,7 +434,7 @@
 #       `corpus-citation` already reports it and two lines about one defect say nothing new.
 #     A file no step section names is OUTSIDE this total even when the corpus ships it and
 #       `## References` lists it — `references/authoring.md`,
-#       `references/harness-measurements.md`, `bin/sage-alt-guard.sh` are the live examples. A run never loads them; a maintainer
+#       `references/harness-measurements.md`, `bin/sage-watch.sh` are the live examples. A run never loads them; a maintainer
 #       and `/sage-promote` do, and the budget bounds runs.
 #     Fires: at most once per row — `<check-id>` `cortex-budget` both times, the cortex line
 #       naming the measured word count and the declared budget, the run-loaded line naming the
@@ -493,7 +509,7 @@
 #       means `<dir>` is unreadable, not a directory, or has no readable `SKILL.md`.
 #
 # ---------------------------------------------------------------------------
-# BLIND SPOTS, stated rather than hidden — none of the nine checks above can see:
+# BLIND SPOTS, stated rather than hidden — none of the ten checks above can see:
 #   - a briefing error (a unit given the wrong instructions can still fill every cell out
 #     legally);
 #   - a wrong-path reproduction (a command that measured the wrong thing but is quoted
@@ -553,7 +569,7 @@ usage() {
     'The ledger schema is four sections: Plan, Resume state, Decisions, Findings, Run record.' \
     'Output: sage-lint <check-id> <path>:<line> <message>' \
     'Checks: state-enum triage-orphan triage-state findings-shape disclosure-home' \
-    '        sections frame splice secret-shape  (ledger mode, all nine)' \
+    '        sections frame splice secret-shape alt-record  (ledger mode, all ten)' \
     '        corpus-citation corpus-figure cortex-budget secret-shape shared-leak' \
     '                                                     (--corpus mode, its five checks)'
 }
@@ -698,10 +714,10 @@ $_af"
     done
   fi
 
-  # The alt agent templates sit beside the agent directory, corpus-relative like it.
-  ALT_DIR="$CORPUS_DIR/../claude-agents-alt"
+  # The codex seat files are system prompts for a unit, corpus-relative like the agent files.
+  ALT_DIR="$CORPUS_DIR/codex"
   if [ -d "$ALT_DIR" ]; then
-    for _tf in "$ALT_DIR"/*.md.in; do
+    for _tf in "$ALT_DIR"/*.md; do
       [ -e "$_tf" ] && CORPUS_FILES="$CORPUS_FILES
 $_tf"
     done
@@ -1598,6 +1614,80 @@ CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
     # finding -- only the structure that follows it is. $SANITIZED has already blanked every
     # fenced line, so a ``` block cannot move this parity.
     if (gsub(/`/, "`") % 2 == 1) open = !open
+  }
+' <<<"$SANITIZED")
+add "$CHK"
+
+# ---------------------------------------------------------------------------
+# alt-record
+
+CHK=$(awk -v FILE="$FILE" "$AWK_LIB"'
+  function seat_in(text,   t) {
+    t = tolower(text)
+    if (index(t, "verifier-alt")) rows["verifier-alt"]++
+    if (index(t, "refuter-alt")) rows["refuter-alt"]++
+  }
+  # Splits the Alt lane text at every seat name. Each piece is one entry for the seat it starts
+  # with; complete[seat] counts the entries whose four receipt fields all carry a value.
+  function count_entries(text,   rest, p, s, best, at, seat, entry, i, ok) {
+    rest = text
+    while (1) {
+      best = 0
+      for (s in SEAT_NAMES) { p = index(rest, s); if (p && (!best || p < best)) { best = p; at = s } }
+      if (!best) break
+      if (seat != "") count_entry(seat, substr(rest, 1, best - 1))
+      seat = at; rest = substr(rest, best + length(at))
+    }
+    if (seat != "") count_entry(seat, rest)
+  }
+  function count_entry(seat, entry,   i, ok) {
+    named[seat] = 1; ok = 1
+    for (i = 1; i <= 4; i++)
+      if (entry !~ ("(^|[^a-z0-9_-])" NEED[i] "[^ \t\r\n;,]")) { ok = 0; gaps[seat] = gaps[seat] " " NEED[i] }
+    if (ok) complete[seat]++
+  }
+  BEGIN { SEAT_NAMES["verifier-alt"]; SEAT_NAMES["refuter-alt"]; split("model= effort= outcome= spend=", NEED, " ") }
+  {
+    line = $0
+    if (is_heading(line)) {
+      heading = heading_of(line); in_table = 0; in_alt = 0
+      if (heading == "Run record") record_seen = 1
+      next
+    }
+    if (heading == "Plan" && line ~ /^\|/) {
+      n = split_cells(line, cells)
+      if (!in_table) {
+        in_table = 1; agent_idx = 0; plan_line = NR
+        for (i = 2; i < n; i++) if (tolower(trim(cells[i])) == "agent") agent_idx = i
+        next
+      }
+      if (agent_idx > 0 && agent_idx < n && trim(cells[agent_idx]) !~ /^:?-+:?$/) seat_in(cells[agent_idx])
+      next
+    }
+    if (heading != "Run record") next
+    t = line
+    sub(/^[ \t]*(-[ \t]+)?(\*\*)?/, "", t)
+    if (!outcome_seen && t ~ /^OUTCOME:/) {
+      outcome_seen = 1; v = t; sub(/^OUTCOME:[ \t]*/, "", v); sub(/[ \t]+$/, "", v)
+      pending = (v == "pending — written at Step 6")
+    }
+    if (!alt_line && t ~ /^Alt lane:/) { alt_line = NR; alt_text = t; in_alt = 1; next }
+    if (in_alt && line ~ /^[ \t]+[^ \t]/) { alt_text = alt_text " " line; next }
+    in_alt = 0
+  }
+  END {
+    if (!record_seen || pending || !(("verifier-alt" in rows) || ("refuter-alt" in rows))) exit
+    if (!alt_line) {
+      printf "sage-lint alt-record %s:%d the Plan names a codex seat but the Run record has no Alt lane: line (its effort and contribution have no other home)\n", FILE, plan_line
+      exit
+    }
+    count_entries(tolower(alt_text))
+    for (s in rows) {
+      if (!(s in named))
+        printf "sage-lint alt-record %s:%d the Alt lane: line never names %s, which the Plan dispatched\n", FILE, alt_line, s
+      else if (complete[s] + 0 < rows[s])
+        printf "sage-lint alt-record %s:%d the Alt lane: line has %d complete entr%s for %s, and the Plan has %d row%s for it: each entry needs model= effort= outcome= spend= with values copied from its receipt (missing:%s)\n", FILE, alt_line, complete[s], (complete[s] == 1 ? "y" : "ies"), s, rows[s], (rows[s] == 1 ? "" : "s"), gaps[s]
+    }
   }
 ' <<<"$SANITIZED")
 add "$CHK"

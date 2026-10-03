@@ -24,7 +24,7 @@ Each JSONL event has exactly `v,event_id,run_id,seq,at,actor,type,payload`. Vers
 
 | Type | Fields |
 | --- | --- |
-| `run.opened` | `objective,criteria:[{id,text}],constraints,next_action` |
+| `run.opened` | `objective,criteria:[{id,text}],constraints,next_action`; new runs also set `dependency_policy:"revision-bound-v1"` |
 | `run.amended` | `kind,value,reason,corrects_event_id` |
 | `criteria.revised` | `revision,authority_event_id,reason,added:[{id,text}],replaced:[{id,text,supersedes}],retired` |
 | `note.recorded` | `category` (`assumption|decision`), `text,evidence_ids,corrects_event_id` |
@@ -46,6 +46,10 @@ Each JSONL event has exactly `v,event_id,run_id,seq,at,actor,type,payload`. Vers
 | `run.closed` | `status,criterion_evidence,scope_reconciled,remaining_human_items` |
 
 A task has `id,revision,objective,completion,dependencies,owner,effect,scope,inputs,returns,risk,verification,requested_model,requested_effort,fork_turns`. Effects are `read`, `write`, `external`, or `unknown`. Plan reasons are `initial`, `failure`, `user_amendment`, `evidence_change`, or `approach_renewal`; failure and renewal revisions also supply `unmet_criterion,failure_evidence_ids,cause,strategy_change`. Causes are `missing_input_or_authority`, `ambiguous_brief`, `decomposition`, `capability`, `environment_or_tool`, or `candidate_defect`.
+
+`init` enables the immutable `revision-bound-v1` dependency policy. Every plan must be acyclic, regardless of task declaration order. When an admitted task's own work or any direct dependency revision changes, its next task revision must increase by exactly one. Propagate these revision increases through admitted dependents: changing A in A→B→C requires fresh B and C execution, even if their instructions are unchanged. Never-admitted tasks retain their revision because they have no result to invalidate. Unaffected branches retain their results, and every new admission still consumes the existing cumulative attempt allowance. Late results remain attached to their historical revision; all historical effects must still reconcile before closure.
+
+Logs without `run.opened.payload.dependency_policy` keep their legacy replay, report, and promotion semantics. Snapshot and context output label these `dependency_policy:"legacy"`; new runs show `"revision-bound-v1"`. Unknown or malformed explicit policies reject rather than silently disabling guards. Do not rewrite an old opening event to upgrade it. On a legacy resume, explicitly check acyclicity and the freshness of dependent work; historical validation alone does not establish those newer invariants.
 
 Acceptance changes are append-only. `criteria.revised` must cite a prior user decision, amendment, or decision note; replacements use a new ID and `supersedes`, and historical IDs cannot be reused. Current closure covers only the resulting current criteria, so evidence for a replaced criterion cannot satisfy its successor. Historical criteria, evidence, and checks remain in the projection.
 
@@ -117,7 +121,7 @@ Resolve `SAGE_STATE` and `ROOT`; use run ID `tiny-1` in the commands and events 
 Run `init`, then create `wave.jsonl` with these complete lines:
 
 ```jsonl
-{"v":1,"event_id":"e-2","run_id":"tiny-1","seq":2,"at":"2026-09-07T00:00:02Z","actor":"root","type":"plan.revised","payload":{"revision":1,"reason":"initial","attempt_limit":1,"revision_limit":1,"no_progress":"one bounded attempt","trigger_event_ids":["e-1"],"tasks":[{"id":"read-1","revision":1,"objective":"inspect the bounded input","completion":"one observation is recorded","dependencies":[],"owner":"root","effect":"read","scope":["input.txt"],"inputs":["input.txt"],"returns":["observation"],"risk":"low","verification":"check-1","requested_model":"gpt-5.6-sol","requested_effort":"high","fork_turns":"none"}]}}
+{"v":1,"event_id":"e-2","run_id":"tiny-1","seq":2,"at":"2026-09-07T00:00:02Z","actor":"root","type":"plan.revised","payload":{"revision":1,"reason":"initial","attempt_limit":1,"revision_limit":1,"no_progress":"one bounded attempt","trigger_event_ids":["e-1"],"tasks":[{"id":"read-1","revision":1,"objective":"inspect the bounded input","completion":"one observation is recorded","dependencies":[],"owner":"root","effect":"read","scope":["input.txt"],"inputs":["input.txt"],"returns":["observation"],"risk":"low","verification":"check-1","requested_model":"gpt-6.1-sol","requested_effort":"high","fork_turns":"none"}]}}
 {"v":1,"event_id":"e-3","run_id":"tiny-1","seq":3,"at":"2026-09-07T00:00:03Z","actor":"root","type":"task.admitted","payload":{"task_id":"read-1","task_revision":1,"plan_revision":1}}
 {"v":1,"event_id":"e-4","run_id":"tiny-1","seq":4,"at":"2026-09-07T00:00:04Z","actor":"root","type":"evidence.recorded","payload":{"evidence_id":"ev-1","criterion_ids":["c-1"],"kind":"observation","locator":"input.txt#observation","sha256":null}}
 {"v":1,"event_id":"e-5","run_id":"tiny-1","seq":5,"at":"2026-09-07T00:00:05Z","actor":"root","type":"task.result","payload":{"task_id":"read-1","task_revision":1,"outcome":"passed","effect_status":"none","evidence_ids":["ev-1"]}}

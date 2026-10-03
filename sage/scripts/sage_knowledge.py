@@ -388,6 +388,19 @@ def validate_generation(path: Path, expected_id: str | None = None, *, staging: 
     return {"generation_id": actual_id, "parent_generation_id": parent_id, "manifest": manifest, "manifest_sha256": sha256(manifest_path), "records": records}
 
 
+def validate_store_layout(store: Path) -> None:
+    """Check shared store paths, including inert scratch from older pointer writes."""
+    fail(store.is_symlink(), "invalid_store", "store must be a directory")
+    if not store.exists(): return
+    fail(not store.is_dir(), "invalid_store", "store must be a directory")
+    allowed = {"current.json", "generations", ".staging"}
+    for child in store.iterdir():
+        if child.name in allowed: continue
+        legacy_pointer_scratch = re.fullmatch(r'\.current\.json\.[a-z0-9_]{8}', child.name)
+        fail(not legacy_pointer_scratch or not stat.S_ISREG(child.lstat().st_mode),
+             "invalid_store", f"store contains an unexpected or unsafe path: {child.name}")
+
+
 def validate_staging(store: Path) -> None:
     """Recognize scratch paths without treating partial bytes as published history."""
     root = store / '.staging'
@@ -395,27 +408,33 @@ def validate_staging(store: Path) -> None:
     if not root.exists(): return
     fail(not root.is_dir(), 'invalid_staging', 'staging must be a directory')
     for operation in root.iterdir():
-        fail(operation.is_symlink() or not operation.is_dir() or re.fullmatch(r'stage-[a-z0-9_]{8}', operation.name) is None,
+        shape = re.fullmatch(r'(stage|pointer)-[a-z0-9_]{8}', operation.name)
+        fail(operation.is_symlink() or not operation.is_dir() or shape is None,
              'invalid_staging', f'unrecognized staging operation: {operation.name}')
+        pointer_operation = shape.group(1) == 'pointer'
         for child in operation.rglob('*'):
             mode = child.lstat().st_mode
             relative = child.relative_to(operation)
             fail(stat.S_ISLNK(mode) or not (stat.S_ISREG(mode) or stat.S_ISDIR(mode)),
                  'invalid_staging', f'unsafe staging path: {relative}')
             if stat.S_ISDIR(mode):
-                valid = relative.as_posix() == 'records'
+                valid = not pointer_operation and relative.as_posix() == 'records'
             else:
                 name = child.name
                 # atomic_write may itself be interrupted before replacing a JSON file.
                 temporary = re.fullmatch(r'\.(.+\.json)\.[a-z0-9_]{8}', name)
                 if temporary: name = temporary.group(1)
-                valid = ((len(relative.parts) == 1 and name in {'index.json', 'manifest.json'}) or
-                         (len(relative.parts) == 2 and relative.parts[0] == 'records' and
-                          name.endswith('.json') and ID.fullmatch(name[:-5]) is not None))
+                if pointer_operation:
+                    valid = len(relative.parts) == 1 and name == 'current.json'
+                else:
+                    valid = ((len(relative.parts) == 1 and name in {'index.json', 'manifest.json'}) or
+                             (len(relative.parts) == 2 and relative.parts[0] == 'records' and
+                              name.endswith('.json') and ID.fullmatch(name[:-5]) is not None))
             fail(not valid, 'invalid_staging', f'unrecognized staging path: {relative}')
 
 
 def validated_generations(store: Path) -> dict[str, dict[str, Any]]:
+    validate_store_layout(store)
     validate_staging(store)
     root = store / "generations"
     fail(root.is_symlink(), "invalid_store", "generations must not be a symlink")
@@ -495,10 +514,6 @@ def write_generation(path: Path, generation: str, parent: str, records: dict[str
 
 def command_validate(args: argparse.Namespace) -> dict[str, Any]:
     store = Path(args.store_dir).resolve()
-    if not store.exists(): return {"ok": True, "current": EMPTY_GENERATION, "generation_count": 0}
-    fail(not store.is_dir() or store.is_symlink(), "invalid_store", "store must be a directory")
-    allowed = {"current.json", "generations", ".staging"}
-    fail(any(child.name not in allowed for child in store.iterdir()), "invalid_store", "store contains unexpected paths")
     generations = validated_generations(store); count = len(generations)
     active, _, _ = current_pointer(store)
     return {"ok": True, "current": active, "generation_count": count}
@@ -688,7 +703,8 @@ def retained_lineage_prior(store: Path, candidate: dict[str, Any]) -> dict[str, 
 
 def command_stage(args: argparse.Namespace) -> dict[str, Any]:
     new_id = generation_id(args.generation_id); expected = expected_generation(args.expected_current, allow_none=True)
-    store = Path(args.store_dir).resolve(); token, current = require_expected(store, expected)
+    store = Path(args.store_dir).resolve(); validate_store_layout(store)
+    token, current = require_expected(store, expected)
     proposal = validate_proposal(read_json(Path(args.proposal).resolve()))
     catalog, source_ids = source_catalog(proposal["source_runs"]); validate_record_references(proposal["record"], catalog, source_ids)
     runtime_root = getattr(args, "runtime_root", None)
@@ -725,16 +741,39 @@ def command_stage(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def publish_pointer(store: Path, pointer: dict[str, Any], expected: str, token: bytes | None) -> None:
+    """Publish a pointer without leaving unrecognized scratch after process death."""
+    staging = store / '.staging'; staging.mkdir(exist_ok=True)
+    fail(staging.stat().st_dev != store.stat().st_dev, 'invalid_staging', 'pointer staging and store must share a filesystem')
+    fsync_directory(store)
+    temporary = Path(tempfile.mkdtemp(prefix='pointer-', dir=staging))
+    try:
+        candidate = temporary / 'current.json'
+        atomic_write(candidate, encode(pointer)); fsync_directory(temporary)
+        require_expected(store, expected, token)
+        os.replace(candidate, store / 'current.json')
+        fsync_directory(store); fsync_directory(temporary)
+    finally:
+        if temporary.exists(): shutil.rmtree(temporary)
+        fsync_directory(staging)
+
+
 def replace_pointer(store: Path, target_id: str, expected: str, *, rollback: bool) -> dict[str, Any]:
     generations = validated_generations(store)
-    fail(target_id not in generations, "invalid_generation", f"generation is missing: {target_id}")
-    target = generations[target_id]; token, _ = require_expected(store, expected)
+    empty_rollback = rollback and target_id == EMPTY_GENERATION
+    fail(not empty_rollback and target_id not in generations, "invalid_generation", f"generation is missing: {target_id}")
+    target = None if empty_rollback else generations[target_id]
+    token, _ = require_expected(store, expected)
     if not rollback: fail(target["parent_generation_id"] != expected, "stale_generation", "target was staged from a different active generation")
     if rollback: fail(expected == EMPTY_GENERATION or target_id == expected, "invalid_transition", "rollback requires a different active generation")
-    require_expected(store, expected, token)
-    pointer = {"v": 1, "generation_id": target_id, "manifest_sha256": target["manifest_sha256"]}
-    atomic_write(store / "current.json", encode(pointer)); fsync_directory(store)
-    return {"ok": True, "generation_id": target_id, "previous_generation_id": expected, "manifest_sha256": target["manifest_sha256"]}
+    manifest_sha256 = target["manifest_sha256"] if target else None
+    if empty_rollback:
+        require_expected(store, expected, token)
+        (store / 'current.json').unlink(); fsync_directory(store)
+    else:
+        pointer = {"v": 1, "generation_id": target_id, "manifest_sha256": manifest_sha256}
+        publish_pointer(store, pointer, expected, token)
+    return {"ok": True, "generation_id": target_id, "previous_generation_id": expected, "manifest_sha256": manifest_sha256}
 
 
 def command_activate(args: argparse.Namespace) -> dict[str, Any]:
@@ -742,7 +781,7 @@ def command_activate(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def command_rollback(args: argparse.Namespace) -> dict[str, Any]:
-    return replace_pointer(Path(args.store_dir).resolve(), generation_id(args.generation_id), expected_generation(args.expected_current, allow_none=False), rollback=True)
+    return replace_pointer(Path(args.store_dir).resolve(), expected_generation(args.generation_id, allow_none=True), expected_generation(args.expected_current, allow_none=False), rollback=True)
 
 
 class CliParser(argparse.ArgumentParser):

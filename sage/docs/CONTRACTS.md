@@ -35,6 +35,10 @@ Assignment projection and resume share the execution validator's frozen release 
 
 ## Run state helper
 
+### Dependency policy extension (2026-10-03)
+
+New `init` calls add `run.opened.payload.dependency_policy: "revision-bound-v1"`. The installed [state contract](../skills/sage/references/state.md) defines its acyclic-plan and dependency-revision rules. A changed dependency revision requires an admitted dependent to advance exactly one revision and execute again; this propagates through admitted downstream tasks while preserving unadmitted revisions, unrelated results, historical effect reconciliation, and attempt limits. Snapshot and context output expose the policy. An absent opening policy reports `legacy` and retains the historical replay semantics below; old logs are never rewritten or silently upgraded. An unknown or malformed explicit policy is an error.
+
 Invocation:
 
 ```text
@@ -109,7 +113,7 @@ python3 sage/scripts/sage_knowledge.py retrieve --store-dir STORE_DIR --cues CUE
 python3 sage/scripts/sage_knowledge.py revalidate --store-dir STORE_DIR --previous PREVIOUS_JSON --cues CUES_JSON
 python3 sage/scripts/sage_knowledge.py stage --store-dir STORE_DIR --proposal PROPOSAL_JSON --generation-id ID --expected-current ID_OR_NONE
 python3 sage/scripts/sage_knowledge.py activate --store-dir STORE_DIR --generation-id ID --expected-current ID_OR_NONE
-python3 sage/scripts/sage_knowledge.py rollback --store-dir STORE_DIR --generation-id ID --expected-current ID
+python3 sage/scripts/sage_knowledge.py rollback --store-dir STORE_DIR --generation-id ID_OR_NONE --expected-current ID
 ```
 
 The store layout is the one in `ARCHITECTURE.md`. `current.json` is `{v:1,generation_id,manifest_sha256}`. A truly absent pointer is the empty store; any present pointer path, including a dangling symlink, must be a regular file. A generation manifest lists every relative file and SHA-256; validation rejects missing, extra, malformed, duplicate-ID, hash-mismatched, path-escaping, or non-finite content. A structurally valid file whose bytes differ from its manifest entry is rejected with code `generation_hash_mismatch`, allowing integrity tests to distinguish it from schema rejection.

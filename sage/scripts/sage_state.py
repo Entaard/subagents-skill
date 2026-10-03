@@ -40,6 +40,7 @@ OPERATIONAL_TASK_FIELDS = TASK_FIELDS - {"id", "revision"}
 TERMINAL_LIFECYCLES = {"completed", "failed"}
 CAUSES = {"missing_input_or_authority", "ambiguous_brief", "decomposition", "capability", "environment_or_tool", "candidate_defect"}
 CUE_KEYS = ("task", "domain", "artifact", "environment", "risk", "operation", "failure")
+DEPENDENCY_POLICY = "revision-bound-v1"
 
 
 class ContractError(Exception):
@@ -162,6 +163,23 @@ def task_signature(item: dict[str, Any]) -> str:
     return json.dumps({key: item[key] for key in sorted(OPERATIONAL_TASK_FIELDS)}, sort_keys=True, separators=(",", ":"))
 
 
+def check_acyclic(tasks: list[dict[str, Any]]) -> None:
+    """Reject a blocked dependency graph without recursion or declaration-order assumptions."""
+    remaining = {task["id"]: len(task["dependencies"]) for task in tasks}
+    dependents: dict[str, list[str]] = {task_id: [] for task_id in remaining}
+    for task in tasks:
+        for dependency in task["dependencies"]:
+            dependents[dependency].append(task["id"])
+    ready = [task_id for task_id, count in remaining.items() if count == 0]
+    visited = 0
+    while ready:
+        task_id = ready.pop(); visited += 1
+        for dependent in dependents[task_id]:
+            remaining[dependent] -= 1
+            if remaining[dependent] == 0: ready.append(dependent)
+    fail(visited != len(tasks), "invalid_dependency", "plan contains a dependency cycle")
+
+
 def check_criterion(item: Any, where: str, *, replacement: bool = False) -> dict[str, Any]:
     fail(not isinstance(item, dict), "invalid_event", f"{where} must be an object")
     fields = {"id", "text"}
@@ -208,6 +226,8 @@ def validate_payload(row: dict[str, Any]) -> None:
     need(p, required, row["event_id"])
     if kind == "run.opened":
         text(p["objective"], "objective"); text(p["next_action"], "next_action"); strings(p["constraints"], "constraints")
+        if "dependency_policy" in p:
+            choice(p["dependency_policy"], {DEPENDENCY_POLICY}, "dependency policy")
         fail(not isinstance(p["criteria"], list) or not p["criteria"], "invalid_event", "criteria must be a nonempty array")
         ids = []
         for criterion in p["criteria"]:
@@ -350,6 +370,7 @@ def validate_payload(row: dict[str, Any]) -> None:
 
 def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, Any]:
     event_ids: set[str] = set(); run_id = None; closed = False
+    guarded_dependencies = False
     criteria: set[str] = set(); known_criteria: set[str] = set(); criteria_revision = 0
     evidence: dict[str, dict[str, Any]] = {}; checks: dict[str, dict[str, Any]] = {}
     plans: dict[int, dict[str, Any]] = {}; current_tasks: dict[str, dict[str, Any]] = {}
@@ -379,6 +400,7 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
         fail(correction is not None and correction not in event_ids, "invalid_reference", "correction must reference an earlier event")
         if kind == "run.opened":
             criteria = {x["id"] for x in p["criteria"]}; known_criteria = set(criteria); criteria_revision = 1
+            guarded_dependencies = p.get("dependency_policy") == DEPENDENCY_POLICY
         elif kind == "run.amended":
             amendments.add(row["event_id"]); authority_events.add(row["event_id"])
         elif kind == "criteria.revised":
@@ -407,6 +429,7 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
                     fail(current_cap is not None and proposed > current_cap, "limit_exceeded", f"user hard cap {cap_name} cannot be relaxed")
                     hard_caps[cap_name] = proposed
         elif kind == "plan.revised":
+            if guarded_dependencies: check_acyclic(p["tasks"])
             revision = p["revision"]; fail(revision != len(plans) + 1, "invalid_revision", "plan revisions must be contiguous")
             hard_revision_cap = hard_caps["plan_revision_limit"]
             fail(hard_revision_cap is not None and revision > hard_revision_cap, "limit_exceeded", "plan revision exceeds the user hard cap")
@@ -450,7 +473,10 @@ def validate(rows: list[dict[str, Any]], terminal: bool = False) -> dict[str, An
                     if task_id in old:
                         before = old[task_id]
                         same_ops = all(task_value[k] == before[k] for k in OPERATIONAL_TASK_FIELDS)
-                        if same_ops:
+                        dependency_changed = guarded_dependencies and (
+                            {dep: old[dep]["revision"] for dep in before["dependencies"]} !=
+                            {dep: new[dep]["revision"] for dep in task_value["dependencies"]})
+                        if same_ops and not dependency_changed:
                             fail(task_value["revision"] != before["revision"], "immutable_history", f"unchanged task {task_id} must retain revision")
                         else:
                             was_admitted = (task_id, before["revision"]) in admitted
@@ -754,6 +780,7 @@ def execution_facts(rows: list[dict[str, Any]]) -> dict[str, Any]:
 def project(rows: list[dict[str, Any]]) -> dict[str, Any]:
     opened = rows[0]["payload"]; objective = opened["objective"]; constraints = list(opened["constraints"]); next_action = opened["next_action"]
     state: dict[str, Any] = {"v": 1, "run_id": rows[0]["run_id"], "last_seq": rows[-1]["seq"], "terminal": None,
+        "dependency_policy": opened.get("dependency_policy", "legacy"),
         "objective": objective, "constraints": constraints, "criteria": copy.deepcopy(opened["criteria"]),
         "criteria_history": [{"revision": 1, "event_id": rows[0]["event_id"], "authority_event_id": None,
                               "reason": "run opened", "added": copy.deepcopy(opened["criteria"]), "replaced": [],
@@ -1012,7 +1039,7 @@ def command_init(args: argparse.Namespace) -> dict[str, Any]:
     fail(run_dir.exists() and any(run_dir.iterdir()), "state_exists", "run directory already contains state")
     criteria = read_json(Path(args.criteria).resolve()); fail(not isinstance(criteria, list), "invalid_event", "criteria file must contain an array")
     now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
-    row = {"v": 1, "event_id": "e-1", "run_id": args.run_id, "seq": 1, "at": now, "actor": "root", "type": "run.opened", "payload": {"objective": args.objective, "criteria": criteria, "constraints": [], "next_action": "plan"}}
+    row = {"v": 1, "event_id": "e-1", "run_id": args.run_id, "seq": 1, "at": now, "actor": "root", "type": "run.opened", "payload": {"objective": args.objective, "criteria": criteria, "constraints": [], "next_action": "plan", "dependency_policy": DEPENDENCY_POLICY}}
     validate([row]); atomic_write(run_dir / "events.jsonl", encode(row))
     result = {"ok": True, "run_id": args.run_id, "event_id": "e-1", "run_dir": str(run_dir), "discoverable": args.canonical}
     if not args.canonical:
@@ -1106,6 +1133,7 @@ def command_snapshot(args: argparse.Namespace) -> dict[str, Any]:
     if not args.summary: return {"ok": True, **state}
     rows, _ = read_events(run_dir / "events.jsonl")
     return {"ok": True, "run_id": state["run_id"], "last_seq": state["last_seq"],
+            "dependency_policy": state["dependency_policy"],
             "events_sha256": state["events_sha256"], "snapshot": str(run_dir / "snapshot.json"),
             "working_items": len(decision_items(state, rows)),
             "status": state["terminal"]["status"] if state["terminal"] else "active"}
@@ -1140,6 +1168,7 @@ def command_context(args: argparse.Namespace) -> dict[str, Any]:
     else: items = decision_items(state, rows)
     page = items[args.offset:args.offset + args.limit]; end = args.offset + len(page)
     return {"ok": True, "view_version": 1, "run_id": state["run_id"], "events_sha256": digest,
+            "dependency_policy": state["dependency_policy"],
             "last_seq": state["last_seq"], "objective": state["objective"],
             "criteria_revision": state["criteria_history"][-1]["revision"],
             "plan_revision": state["current_plan_revision"], "hard_caps": state["hard_caps"],

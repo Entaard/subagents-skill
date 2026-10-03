@@ -1,5 +1,7 @@
 # Codex Sage rebuild architecture
 
+Current maintenance: the [2026-10-03 modernization plan](docs/2026-10-03-modernization-plan.md) adds purpose-level framing, native supervision/handoff, targeted adversarial verification, current-capability source maintenance, and bounded state/store/lifecycle repairs. The checkpoint scores below describe the historical rebuild, not new evaluation results. Installed references and `docs/CONTRACTS.md` describe the current operational contracts.
+
 Status: all seven current module gates passed. The original live evaluation is complete: recovery passed, while six delivered reports and all four scored paired arms across two pairs failed their reporting gate; creative orchestration scored 7 and the six reports scored 7. Live-repairs-a1 rounds 1 and 2 failed; round 3 passed independent review at 8.5–9.0 in every dimension with zero open errors. LIVE-01 through LIVE-04 and DOC-01 are verified fixed. The assembled whole-skill final-a1 round 1 failed on one standalone-promotion documentation seam; round 2 passed at 8.5–9.0 in every dimension with zero open errors after its instruction-only repair. Historical live observations remain final and are not rescored by these repairs. See the [final handoff](docs/FINAL-REPORT.md) for verified results and limits.
 
 ### Final round-2 repair boundary
@@ -144,7 +146,7 @@ When an allowance or no-progress bound fires, diagnose and materially revise the
 
 The planner assigns a narrow role such as scout, researcher, builder, reviewer, interaction tester, or refuter. Roles are brief contracts rather than hidden agent profiles. Delegation is allowed only when the unit is bounded, sufficiently independent, packageable, falsifiable, and safe in its effect scope.
 
-Initial routing priors are deliberately uncalibrated:
+The historical rebuild used the uncalibrated priors below. Current routing follows the user's exact [model allowlist and adaptive effort policy](skills/sage/references/delegation.md#model-eligibility); these old effort presets are not active defaults.
 
 | Situation | Initial request | Status |
 | --- | --- | --- |

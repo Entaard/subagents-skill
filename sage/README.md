@@ -2,6 +2,10 @@
 
 Sage is an explicit Codex workflow for demanding tasks: define observable quality, use the smallest useful team, preserve durable run facts, verify independently, and report evidence honestly. `$sage-promote` reviews closed runs, updates runtime knowledge, and prepares evidence-backed improvements to Sage's source. There is no active Claude adapter, managed scheduler, or background promotion in this rebuild.
 
+Sage challenges whether its criteria satisfy the user's purpose before consequential work, delegates through scoped artifacts, supervises native workers, and tests both the candidate and its own repairs through the delivery boundary. Promotion checks current source capabilities even with empty run history; runtime knowledge still requires eligible closed-run evidence. The [2026-10-03 plan](docs/2026-10-03-modernization-plan.md) and [implementation report](docs/2026-10-03-modernization-report.md) record the scoped modernization, review decisions, and verification. These mechanisms improve error detection; they do not guarantee the quality of every possible task.
+
+Both skills enforce the user's exact [model allowlist](skills/sage/references/delegation.md#model-eligibility), including inherited and resumed work. Effort remains adaptive within the selected model's supported levels.
+
 The active package is deliberately small:
 
 - `skills/sage/` and `skills/sage-promote/` contain the two explicit-only skill packages and their linked references.
@@ -32,6 +36,8 @@ Run the same install command to update. Update proceeds only when every previous
 
 Promoted knowledge is not installer-owned: updating the package does not merge, reset, overwrite, or retire its records, change its active generation, or remove rollback history. This also holds when runtime data lives alongside package helpers. Keep the same runtime-root configuration to continue reading the same store. Source promotions that change helpers must verify backward compatibility with existing generations; data migrations are separate explicit work.
 
+Caught install/update I/O failures restore package preimages and the previous receipt when affected paths still match this operation. Divergent user edits are preserved; incomplete recovery reports retained private backup evidence for inspection. This does not make multi-file installation crash-atomic.
+
 Uninstall preflights predictable parent/type conflicts, removes only unchanged receipt-owned files, reports edited or replaced paths it retained, and leaves runtime runs and knowledge stores alone. The operation is conservative but is not a crash-atomic multi-file transaction; unexpected I/O can still interrupt it:
 
 ```sh
@@ -39,6 +45,8 @@ bash sage/uninstall.sh --target-root "$HOME/.agents"
 ```
 
 ## Run and resume
+
+New runs record `dependency_policy: revision-bound-v1`: cyclic plans reject, and changed producer revisions require affected admitted consumers to advance revisions and run again. Historical logs retain their original dependency semantics and are labeled `legacy` in snapshots/context. The root still checks actual artifact freshness.
 
 Invoke `$sage` explicitly for a new task. Every work invocation, including inline work, opens a discoverable run. Both helpers resolve the same root: `--state-root`, `SAGE_STATE_ROOT`, `$CODEX_HOME/sage`, then `~/.codex/sage`. Overrides must be absolute. Inspect the path before use; a missing root is created on the first run, not by installation:
 
@@ -75,6 +83,8 @@ Registration retains a path and log-hash binding in `run-references/`. Keep the 
 ## Promote closed-run evidence
 
 Invoke `$sage-promote` separately. It discovers canonical and registered history with `list-runs`, then accepts only integrity-valid terminal run directories with reconciled effects. By default it assesses two destinations: the runtime knowledge store and the Sage source checkout. Missing or unreviewed inputs/destinations are reported separately from `no_change`. Distinct author, refuter, and reviewer actors check every real change.
+
+Empty history reports `no_sources` for knowledge while source inspection continues using repeatable current evidence. Rolling knowledge back to `none` restores an absent active pointer without deleting retained generations or revision lineage. Interrupted pointer-write scratch remains inert and is never adopted as committed knowledge.
 
 Runtime knowledge uses the existing stage/activate/rollback commands. Source promotion can add or correct instructions and helper code, or remove obsolete behavior, leaving verified edits **unstaged and uncommitted** with a review note under `sage/docs/promotions/`. It never commits, pushes, or installs those changes into your real environments. You review and commit the diff, synchronize it to other machines or Docker build contexts, then run `install.sh` yourself.
 

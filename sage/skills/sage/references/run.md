@@ -13,9 +13,15 @@ Define each criterion as an observable outcome and add the excellence conditions
 
 Stage a large outcome into dependency-ordered milestones without shrinking its declared target. Report milestones not built or observed as unsupported scope.
 
+For substantive work, record a compact framing packet in the run's decision/evidence records: the original request, the user's intended use (label inference when unstated), deliverable, acceptance criteria, and load-bearing premises. Each uncertain premise gets a cheap falsifier or an explicit unknown. Test decision-changing premises before committing expensive work. Passing criteria must imply the intended use is possible; a build, polished report, or successful tool call alone may not establish that.
+
+Before the first writer, use a fresh framing critic when ambiguity could change the deliverable, coupling is broad, effects are consequential, or the acceptance oracle is weak. Give it the request, packet, primary evidence, and alternatives; ask it to refute that passing these criteria would satisfy the purpose. Root resolves findings with evidence and revises the criteria/plan where warranted. Reuse an already planned reviewer for this bounded stage when its later independence can be preserved. Tiny, obvious, reversible work needs no extra actor. This is an internal quality gate, not a request for user approval.
+
 ## Plan and record
 
 Use a compact graph. Every task records the fields in the installed [state contract](state.md): stable ID/revision, objective, falsifiable completion, dependencies, owner, effect/scope, inputs/returns, risk, verification, requested model/effort, and fork. Source builders may additionally consult `sage/docs/CONTRACTS.md`. Commit finite, task-specific attempt and revision allowances plus a no-progress condition. A retry records the unmet criterion, evidence, failure cause, and strategy change. Never use an automatic model ladder after a retry count.
+
+Record the initial revision, dirty/untracked task-adjacent files, and recoverable before-bytes before mutation. Preserve unrelated work. When a producer changes, replan affected consumers and their checks through the transitive dependency graph; old downstream success cannot certify new inputs. New runs enforce revision-bound dependencies as described in the state contract; legacy runs still require this judgment from the root.
 
 Keep every unmet current criterion active until evidence satisfies it or applicable user authority changes the scope. For an acceptance change, first persist the existing user decision or amendment authority, then append `criteria.revised` with explicit additions, new-ID replacements, and retirements. Existing standing authority may be referenced without asking again. A root-authored decision note is structurally acceptable for a non-relaxing clarification; it does not authorize a substantive scope relaxation. Preserve prior criteria/evidence, disposition obsolete tasks only after their effects are reconciled, enumerate every dependent edge, and commit the resulting task removals/replans in the next plan revision.
 

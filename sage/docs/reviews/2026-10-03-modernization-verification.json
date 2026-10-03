@@ -1,0 +1,96 @@
+{
+  "baseline_commit": "1a2aa6714daeac3b1e324681ebec938ca49eac1c",
+  "baseline_tests": 136,
+  "errors": 0,
+  "evidence_directory": "/var/folders/hy/lxt7qgw939j7ms1pf_mcxd3w0000gn/T/sage-20261003-gate-uyr5crxo/last-red",
+  "exit_code": 0,
+  "failures": 0,
+  "independent_reviews": {
+    "adversarial": {
+      "additional_unsafe_store_probes_passed": 50,
+      "agent": "/root/adversarial_review",
+      "scoped_tests_passed": 57,
+      "stale_consumer_completion": "rejected"
+    },
+    "implementation": {
+      "additional_write_failure_cases_passed": 36,
+      "agent": "/root/implementation_review",
+      "baseline_update_compatibility": "passed",
+      "scoped_tests_passed": 66
+    },
+    "workflow": {
+      "agent": "/root/workflow_forward_review",
+      "decision_scenarios": 5,
+      "round2_actual_task": "stopped: inherited identity gate",
+      "round3_actual_task": "completed: verified TSV"
+    }
+  },
+  "installed_forward_test": {
+    "artifact": "unpaid-balances.tsv",
+    "artifact_sha256": "eaf032fb93cfed678d3022367acc2b3fdac2033c7de536fb0d6417051814cb13",
+    "effective_identity": "unknown",
+    "events_sha256": "0678ab784f88ac40d6d6e43cb9d14a5b085d26f6b1655ae9e1a145315b14fcc2",
+    "native_excel_import": "untested",
+    "root_terminal_validation": "passed",
+    "run_dir": "/private/tmp/sage-final-forward-review-buT0Zn/state/runs/balance-report-final",
+    "status": "completed"
+  },
+  "limits": [
+    "No comparative model-quality or cost trial",
+    "No full live three-actor promotion",
+    "No arbitrary concurrent-writer or power-loss guarantee",
+    "Legacy task logs retain original dependency semantics"
+  ],
+  "live_trials_run": false,
+  "missing_installed_links": 0,
+  "mode": "red",
+  "network_used": false,
+  "passed": true,
+  "product_sha256": {
+    "sage/scripts/sage-lifecycle.py": "6e914b587d3f1dea5dec25ee47eb30bab18552f3418d75b4ca45ba9e4a7f763a",
+    "sage/scripts/sage_knowledge.py": "fee111e96afddbe19578c8928c481fc1154b66bdfc07e8c1d72049e89be54e32",
+    "sage/scripts/sage_state.py": "5d9a3c1819b3a981163ba734cca516343924636b2d414cd42e007a11140f7a10",
+    "sage/skills/sage-promote/SKILL.md": "ab91df3f135d8080955decb12855c8a415e00760682616dfc8a7e163ab5a8c03",
+    "sage/skills/sage-promote/agents/openai.yaml": "42b7465acfc5d04b4731c608a722fc95d247a0f66b3d8c80682d1b1d4295d992",
+    "sage/skills/sage-promote/references/knowledge.md": "2a34f62d20f4aa613ad90951e82163b9b22f242b0db27f19ee451385f0c23f39",
+    "sage/skills/sage-promote/references/promotion.md": "45b540f7652018c892b7772972a9995fc61360dd2fcf09e598bad009a9fe3d5d",
+    "sage/skills/sage-promote/references/source.md": "261f70f8083ece7e90107e65880d3e603ad4c85bdddbb9c657a33ac384d7d3ce",
+    "sage/skills/sage/SKILL.md": "7e6be08bb210c5394af136df3eb0a660798a237d4e0bdcfa44e32e3c8209f3e1",
+    "sage/skills/sage/agents/openai.yaml": "8055c65c605032c55d46582fffbbbcb88323103769ff22ab6d6de0bad485558e",
+    "sage/skills/sage/references/delegation.md": "ddd614c617df4f65d1b539b6320b32e511ec68072a31740acf66f86cd48a74e6",
+    "sage/skills/sage/references/knowledge.md": "e6bec13e8782e9462364d8e9bdf4f2bf4e3afae9523af44c7048d29dde254f9c",
+    "sage/skills/sage/references/recovery.md": "c480d01a081634313c6b50aa7ab646dac4c027059ccc35d0b8c6f918e3457ccd",
+    "sage/skills/sage/references/run.md": "1deb783eda51c7eb58470b23dfafc2e137e537baf04e0d9dd18e046dd19708a2",
+    "sage/skills/sage/references/runtime.md": "d10b390362eaa7c987b4bf5385d1082b78f7d8d7548e1403bf151785811c8995",
+    "sage/skills/sage/references/state.md": "c682a77d47cbfadcfa29fc609f98bf79c46f00b55fff86d6834cd8488566093f",
+    "sage/skills/sage/references/supervision.md": "6e5d9d674783336b59a42fdd68b8b897bde2f47980cdba60371f776761b196f0",
+    "sage/skills/sage/references/verification.md": "91b8c55a1cddd307595b93b9ec473ece8fcd86eae98c7ac3eee2390eb1e35729"
+  },
+  "protected_changed": 0,
+  "protected_files": 171,
+  "protected_manifest_sha256": "51f597a979696bde85d186cd6f27ca03b56f33f5c746ef8da7e7a8c7184b4bd1",
+  "rounds": [
+    {
+      "kind": "plan review and adversarial audit",
+      "round": 1,
+      "status": "passed with adopted clarifications"
+    },
+    {
+      "kind": "implementation review and adversarial verification",
+      "round": 2,
+      "status": "code passed; one instruction defect reproduced and repaired"
+    },
+    {
+      "kind": "final repair verification",
+      "round": 3,
+      "status": "passed: final adversary and installed task"
+    }
+  ],
+  "schema_version": "sage-modernization-verification-v1",
+  "skill_validators": {
+    "sage": "passed",
+    "sage-promote": "passed"
+  },
+  "skipped": 0,
+  "tests": 161
+}

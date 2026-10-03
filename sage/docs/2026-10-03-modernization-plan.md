@@ -2,6 +2,8 @@
 
 Date: 2026-10-03. Baseline: `1a2aa6714daeac3b1e324681ebec938ca49eac1c`.
 
+Current routing amendment: the user later selected the exact [model allowlist](../skills/sage/references/delegation.md#model-eligibility), documented in the [implementation report](2026-10-03-modernization-report.md). It supersedes B1's generation floors and the round-2/3 unknown-configured-root behavior below. Those sections and their receipts remain the historical record of the original candidate.
+
 ## Outcome and scope
 
 Make Sage better at delivering the user's intended result through effective teams, decisive verification, recoverable execution, and evidence-backed improvement. Quality is an observed outcome, not a guarantee inferred from model strength or reviewer agreement. Include both `$sage` and `$sage-promote`.

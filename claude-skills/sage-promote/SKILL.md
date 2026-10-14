@@ -59,7 +59,7 @@ Then run the prep script. It writes nothing:
 cmp <repo>/sage-claude/memory/lessons.md <mem>/lessons.md
 ```
 
-It prints four blocks: `== inbox (<n> lines, drain with --drain <to>)`, `== lineup`, `== corpus lint`, `== trees`. Keep `<to>` for Step 5.
+It prints five blocks: `== inbox (<n> lines, drain with --drain <to>)`, `== effort overrides`, `== lineup`, `== corpus lint`, `== trees`. Keep `<to>` for Step 5.
 
 - **`cmp` differs** → stop and tell the user to run `install.sh`. The template always wins.
 - **`== trees` shows a difference** → write nothing to the sage corpus or the agent files. File those fixes as issues. Merges into `lessons.md` still run. The landing proof cannot tell this pass's edits from earlier drift.
@@ -78,7 +78,7 @@ For each inbox line and each lint failure, pick **exactly one** action. Record i
 | Action | Use it when | Target |
 | --- | --- | --- |
 | **merge** | a `lesson`, `confirm` or `contradiction` line on a rule that holds on any machine | one bullet in `lessons.md` |
-| **fix** | a `defect` whose repair is small and the trees agree | the corpus file |
+| **fix** | a `defect` whose repair is small, or a record a `retire` line names, and the trees agree | the corpus file |
 | **issue** | a `gap`, a large `defect`, or a fix this pass may not write | a GitHub issue, label `sage-corpus` |
 | **drop** | anything else | a reason in one line |
 
@@ -87,6 +87,7 @@ Rules for the choice:
 - **What each kind does, and when a line may land in `lessons.md`**, is `memory-contract.md`, `## From inbox line to lesson`. A line it keeps out is a `drop` with its reason, for example `no falsifier`.
 - **A `correction` line is not triaged by itself.** Triage the line it corrects once, on the corrected text, and record both against that one action.
 - **A removal names its observation** in the triage table.
+- **An `effort-override` record is a count, never a lesson.** Step 1's `== effort overrides` block decides its action. A `retire <case>` line makes the record it names a `fix` that removes that case from `dispatch.md`, "Effort overrides, provisional", with every pointer to it. Every other record is a `drop` with the reason `count record`. The block never reads a `correction` line, so a correction of a record voids the block's line for that case: recount the case by hand on the corrected text.
 - **Re-verify a `defect` before you fix it.** It is a lead, not a spec. Check it against its file with one command. It no longer reproduces → drop it.
 - **Search before you open an issue:** `gh issue list -l sage-corpus --search '<subject words>'`. A match → drop the line with the issue number.
 

@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 # RUN BLOCK
-#   sage-promote-prep.sh [--memory <mem>] [--repo <dir>]   print the four prep blocks, write nothing
+#   sage-promote-prep.sh [--memory <mem>] [--repo <dir>]   print the five prep blocks, write nothing
 #   sage-promote-prep.sh --drain <to> [--memory <mem>]     archive pending lines up to line <to>
 #   sage-promote-prep.sh --pending [--memory <mem>]        print the pending line count, write nothing
 #   sage-promote-prep.sh --self-test                       fixtures, one ok/FAIL line each
-# Blocks: "== inbox (<n> lines)", "== lineup", "== corpus lint", "== trees". A clean block
-# prints (no changes) / (clean) / (match). The inbox block names its drain boundary <to>.
+# Blocks: "== inbox (<n> lines)", "== effort overrides", "== lineup", "== corpus lint",
+# "== trees". A clean block prints (none pending) / (no changes) / (clean) / (match). The inbox
+# block names its drain boundary <to>. The effort-overrides block prints one line per override
+# case with a pending record: "retire <case>: ...; fix on line <n>: <line>" when the newest
+# RETIRE_AFTER_NO_GAIN records all hold gain=no, else "keep <case>: <k> of the newest <m> ...".
 # inbox.log is append-only and never rewritten. --drain <to> publishes payload lines
 # <from>..<to> as one batch, archive/inbox-lines-<from>.log. A failed check or a lost race
 # writes nothing, exit 1. Exit 2 bad args.
@@ -31,6 +34,8 @@ set -u
 export LC_ALL=C
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
+EFFORT_OVERRIDE_CASES="ladder checker"
+RETIRE_AFTER_NO_GAIN=5
 
 main() {
   if [ "${1:-}" = "--self-test" ]; then run_self_test; exit $?; fi
@@ -64,6 +69,7 @@ usage_error() {
 print_prep() {
   local mem="$1" repo="$2"
   print_inbox_block "$mem"
+  print_effort_override_block "$mem"
   print_block "lineup" "(no changes)" "$HERE/sage-lineup-check.sh" --memory "$mem" --repo "$repo"
   print_block "corpus lint" "(clean)" "$HERE/sage-lint.sh" --corpus "$repo/sage-claude"
   print_block "trees" "(match)" diff -rq "$repo/sage-claude/" "$(dirname "$mem")/" -x memory
@@ -76,6 +82,39 @@ print_inbox_block() {
   if [ -n "$payload" ]; then n="$(printf '%s\n' "$payload" | wc -l | tr -d ' ')"; fi
   echo "== inbox ($n lines, drain with --drain $((done_n + n)))"
   if [ -n "$payload" ]; then printf '%s\n' "$payload"; fi
+}
+
+# Reads inbox.log alone: it holds every line ever appended, and the archive batches are copies of
+# its prefix, so reading both would count a drained record twice.
+print_effort_override_block() {  # print_effort_override_block <mem>
+  local done_n verdicts c
+  done_n="$(drained_count "$1")" || { echo "== effort overrides (unreadable: see stderr)"; return 0; }
+  verdicts="$(for c in $EFFORT_OVERRIDE_CASES; do payload_lines "$1" | override_verdict "$c" "$done_n"; done)"
+  echo "== effort overrides"
+  if [ -n "$verdicts" ]; then printf '%s\n' "$verdicts"; else echo "(none pending)"; fi
+}
+
+# override_verdict <case> <drained-count> — stdin: the payload lines, in append order, which is
+# time order. A record is a line whose second field is exactly `lesson portable` and whose third
+# starts `effort-override <case> <level> gain=<yes|no>: `, so a line that only quotes one never counts.
+override_verdict() {
+  awk -F' [|] ' -v want="$1" -v drained="$2" -v window="$RETIRE_AFTER_NO_GAIN" '
+    $1 ~ /^[0-9-]+ obs [^ ]+$/ && $2 == "lesson portable" {
+      record = "^effort-override " want " (low|medium|high|xhigh|max) gain="
+      if ($3 ~ (record "no: ")) gain[++records] = "no"
+      else if ($3 ~ (record "yes: ")) gain[++records] = "yes"
+      else next
+      newest_text = $0; newest_line = NR
+    }
+    END {
+      if (records == 0 || newest_line <= drained) exit
+      recent = (records < window) ? records : window
+      for (i = records - recent + 1; i <= records; i++) if (gain[i] == "no") no_gain++
+      if (recent == window && no_gain == window)
+        printf "retire %s: the newest %d records hold gain=no; fix on line %d: %s\n", want, window, newest_line, newest_text
+      else
+        printf "keep %s: %d of the newest %d records hold gain=no\n", want, no_gain, recent
+    }'
 }
 
 print_block() {
@@ -181,7 +220,7 @@ case_failed_verify_with_unwritable_archive_dir() {
   [ "$rc" -eq 1 ] && cmp -s "$m/inbox.log" "$1/d-before.log"
 }
 
-case_prep_prints_four_blocks_and_writes_nothing() {
+case_prep_prints_five_blocks_and_writes_nothing() {
   local d="$1/e" out
   mkdir -p "$d/skill/memory" "$d/repo/sage-claude/bin"
   build_mem "$d/skill/memory"
@@ -189,7 +228,7 @@ case_prep_prints_four_blocks_and_writes_nothing() {
   cp "$d/skill/memory/inbox.log" "$d/before.log"
   out="$(bash "$0" --memory "$d/skill/memory" --repo "$d/repo" 2> /dev/null)"
   printf '%s\n' "$out" | grep -q '^== inbox (2 lines, drain with --drain 2)$' || return 1
-  for t in lineup 'corpus lint' trees; do printf '%s\n' "$out" | grep -q "^== $t\$" || return 1; done
+  for t in 'effort overrides' lineup 'corpus lint' trees; do printf '%s\n' "$out" | grep -q "^== $t\$" || return 1; done
   printf '%s\n' "$out" | grep -q '2026-09-05 obs s4 | two' || return 1
   cmp -s "$d/skill/memory/inbox.log" "$d/before.log"
 }
@@ -219,6 +258,75 @@ case_a_gap_between_batches_is_refused() {
   return 0
 }
 
+# override_mem <dir> <drained-count> <line...> — an inbox of these lines, the first <drained-count> archived.
+override_mem() {
+  local m="$1" drained="$2"; shift 2
+  mkdir -p "$m/archive"
+  { echo "$INBOX_SENTINEL"; printf '%s\n' "$@"; } > "$m/inbox.log"
+  if [ "$drained" -gt 0 ]; then payload_lines "$m" | head -n "$drained" > "$m/archive/inbox-lines-1.log"; fi
+}
+
+override_block_is() {  # override_block_is <mem> <line...> — the block prints its header, then these lines
+  local mem=$1; shift
+  [ "$(print_effort_override_block "$mem")" = "$(printf '%s\n' '== effort overrides' "$@")" ]
+}
+
+override_record() {  # override_record <session> <case> <yes|no>
+  echo "2026-10-15 obs $1 | lesson portable | effort-override $2 xhigh gain=$3: unit $1 | falsifier: none, a count record"
+}
+
+case_drained_records_count_once() {
+  local m="$1/ovr-drained"
+  override_mem "$m" 3 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder no)" "$(override_record s4 ladder no)"
+  override_block_is "$m" 'keep ladder: 4 of the newest 4 records hold gain=no'
+}
+
+case_five_distinct_no_records_retire_the_case() {
+  local m="$1/ovr-five"
+  override_mem "$m" 2 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder no)" \
+    "$(override_record s4 ladder no)" "$(override_record s5 ladder no)" "$(override_record s6 checker no)"
+  override_block_is "$m" "retire ladder: the newest 5 records hold gain=no; fix on line 5: $(override_record s5 ladder no)" 'keep checker: 1 of the newest 1 records hold gain=no'
+}
+
+case_a_line_quoting_the_record_does_not_count() {
+  local m="$1/ovr-quote"
+  override_mem "$m" 0 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder no)" "$(override_record s4 ladder no)" \
+    '2026-10-15 obs s5 | defect portable | the line "effort-override ladder xhigh gain=no:" lacks a level | falsifier: none'
+  override_block_is "$m" 'keep ladder: 4 of the newest 4 records hold gain=no'
+}
+
+case_a_recent_gain_blocks_retirement() {
+  local m="$1/ovr-gain"
+  override_mem "$m" 0 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder yes)" \
+    "$(override_record s4 ladder no)" "$(override_record s5 ladder no)" "$(override_record s6 ladder no)"
+  override_block_is "$m" 'keep ladder: 4 of the newest 5 records hold gain=no'
+}
+
+case_the_newest_record_is_the_last_appended_and_free_text_decides_nothing() {
+  local m="$1/ovr-order" decoy=' | lesson portable | effort-override ladder xhigh gain=no: a quoted gain=yes: changed nothing | falsifier: none, a count record'
+  override_mem "$m" 0 "2026-10-15 obs s9$decoy" "2026-10-15 obs s8$decoy" "2026-10-15 obs s7$decoy" \
+    "2026-10-15 obs s6$decoy" "2026-10-15 obs s5$decoy"
+  override_block_is "$m" "retire ladder: the newest 5 records hold gain=no; fix on line 5: 2026-10-15 obs s5$decoy"
+}
+
+case_a_record_off_the_exact_shape_does_not_count() {
+  local m="$1/ovr-shape" tail=': changed nothing | falsifier: none, a count record'
+  override_mem "$m" 0 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder no)" "$(override_record s4 ladder no)" \
+    "2026-10-15 obs s5 | lesson portable | effort-override	ladder xhigh gain=no$tail" \
+    "2026-10-15 obs s6 | lesson portable | effort-override ladder  xhigh gain=no$tail" \
+    "2026-10-15 obs s7 | lesson portable |  effort-override ladder xhigh gain=no$tail" \
+    "2026-10-15 obs s8 | lesson portable | effort-override ladder gain=no: gain=no$tail" \
+    "2026-10-15 obs s9 | lesson portable | effort-override ladder xhigh gain=NO$tail"
+  override_block_is "$m" 'keep ladder: 4 of the newest 4 records hold gain=no'
+}
+
+case_a_case_with_nothing_pending_prints_nothing() {
+  local m="$1/ovr-none"
+  override_mem "$m" 5 "$(override_record s1 ladder no)" "$(override_record s2 ladder no)" "$(override_record s3 ladder no)" \
+    "$(override_record s4 ladder no)" "$(override_record s5 ladder no)"
+  override_block_is "$m" '(none pending)'
+}
+
 case_bad_argument_exits_2() {
   bash "$0" --bogus > /dev/null 2>&1
   [ $? -eq 2 ]
@@ -229,11 +337,18 @@ run_self_test() {
   check "drain archives the lines and never rewrites inbox.log" case_drain_archives_lines_and_leaves_the_inbox_alone "$dir"
   check "a retried drain writes the same batch once" case_a_retried_drain_writes_the_same_batch_once "$dir"
   check "failed verify (archive is not a directory) leaves inbox.log byte-identical" case_failed_verify_with_unwritable_archive_dir "$dir"
-  check "prep prints four blocks and writes nothing" case_prep_prints_four_blocks_and_writes_nothing "$dir"
+  check "prep prints five blocks and writes nothing" case_prep_prints_five_blocks_and_writes_nothing "$dir"
   check "a line appended after prep stays pending past the drain" case_a_line_appended_after_prep_stays_pending "$dir"
   check "an edited drained prefix is refused" case_an_edited_drained_prefix_is_refused "$dir"
   check "a gap between batches is refused" case_a_gap_between_batches_is_refused "$dir"
   check "bad argument exits 2" case_bad_argument_exits_2
+  check "a drained record counts once, not again from the archive" case_drained_records_count_once "$dir"
+  check "five distinct gain=no records retire the case, on the newest" case_five_distinct_no_records_retire_the_case "$dir"
+  check "a line that quotes the record does not count" case_a_line_quoting_the_record_does_not_count "$dir"
+  check "a gain=yes among the newest five blocks retirement" case_a_recent_gain_blocks_retirement "$dir"
+  check "a case with no pending record prints nothing" case_a_case_with_nothing_pending_prints_nothing "$dir"
+  check "the newest record is the last appended; free text decides nothing" case_the_newest_record_is_the_last_appended_and_free_text_decides_nothing "$dir"
+  check "a record off the exact shape does not count" case_a_record_off_the_exact_shape_does_not_count "$dir"
   rm -rf "$dir"
   [ "$T_FAILS" -eq 0 ]
 }

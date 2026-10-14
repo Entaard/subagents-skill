@@ -8,8 +8,8 @@ Six saved agents ship with sage, installed to `~/.claude/agents/` by the source 
 
 | Agent | Model | Effort | Tools | What it cannot do |
 | --- | --- | --- | --- | --- |
-| `explorer` | `claude-haiku-5-5` | `low` | `Read`, `Glob`, `Grep` | write, run shell, reach the network |
-| `web-researcher` | `claude-haiku-5-5` | `low` | `WebSearch`, `WebFetch`, `Read` | write, run shell, edit the repo |
+| `explorer` | `claude-haiku-5-5` | `medium` | `Read`, `Glob`, `Grep` | write, run shell, reach the network |
+| `web-researcher` | `claude-haiku-5-5` | `high` | `WebSearch`, `WebFetch`, `Read` | write, run shell, edit the repo |
 | `implementer` | `claude-sonnet-5-5` | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` | spawn agents, load a skill other than its preloaded `clean-code` |
 | `implementer-frontier` | `claude-opus-5-5` | `medium` | the same as `implementer` | the same as `implementer` |
 | `verifier` | `claude-opus-5-5` | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; edit tools denied | edit through an edit tool. Its Bash can still write and reach the network, so the brief must say when it must not |

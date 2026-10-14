@@ -4,20 +4,20 @@ Your job here: know which agent a unit goes to, what that agent can do, and how 
 
 ## The roster
 
-Six saved agents ship with sage, installed to `~/.claude/agents/` by the source repo's `install.sh`. Each file pins a full model ID and an effort level, so a dispatch of it runs exactly that pair.
+Six saved agents ship with sage, installed to `~/.claude/agents/` by the source repo's `install.sh`. Each file pins a full model ID and an effort level, so a dispatch of it runs exactly that pair, as the session loaded it (`## Spawning`).
 
 | Agent | Model | Effort | Tools | What it cannot do |
 | --- | --- | --- | --- | --- |
-| `explorer` | `claude-sonnet-5-5` | `low` | `Read`, `Glob`, `Grep` | write, run shell, reach the network |
-| `web-researcher` | `claude-sonnet-5-5` | `low` | `WebSearch`, `WebFetch`, `Read` | write, run shell, edit the repo |
+| `explorer` | `claude-haiku-5-5` | `low` | `Read`, `Glob`, `Grep` | write, run shell, reach the network |
+| `web-researcher` | `claude-haiku-5-5` | `low` | `WebSearch`, `WebFetch`, `Read` | write, run shell, edit the repo |
 | `implementer` | `claude-sonnet-5-5` | `medium` | `Read`, `Glob`, `Grep`, `Edit`, `Write`, `NotebookEdit`, `Bash` | spawn agents, load a skill other than its preloaded `clean-code` |
 | `implementer-frontier` | `claude-opus-5-5` | `medium` | the same as `implementer` | the same as `implementer` |
 | `verifier` | `claude-opus-5-5` | `high` | `Read`, `Glob`, `Grep`, `Bash`, `WebFetch`, `WebSearch`; edit tools denied | edit through an edit tool. Its Bash can still write and reach the network, so the brief must say when it must not |
 | `verifier-standard` | `claude-sonnet-5-5` | `high` | the same as `verifier` | the same as `verifier`. It is the checker seat when the maker runs on `verifier`'s model |
 
-Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verified is in `harness-measurements.md`). Price ratio sonnet : opus : fable = 1 : 2 : 5, input and output alike. Every seat has a 1M window. `fable` runs only as the parent, where the user chose it. `haiku` left the lineup.
+Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verified is in `harness-measurements.md`). Three tiers dispatch: light (`haiku`: `explorer` and `web-researcher`), standard (`sonnet`) and frontier (`opus`). Price ratio sonnet : opus : fable = 1 : 2 : 5, input and output alike. `haiku` costs a twentieth of `sonnet` on input and output for a prompt up to 100K tokens, and a quarter above that. Every seat has a 1M window. `fable` runs only as the parent, where the user chose it.
 
-- **Never pass `model:` to a saved agent.** The per-dispatch parameter outranks the file's pin and can invalidate its effort.
+- **Never pass `model` or `effort` to a saved agent** unless a step file names the case. Each per-dispatch parameter outranks the file's pin: `model` can invalidate the file's effort, and `effort` stays in force when the unit is resumed.
 - **Every unit goes through a saved agent file.** A plain dispatch inherits the session's effort, which is often `xhigh`, and its model follows the alias the harness maps today. The aliases moved three times in four weeks.
 - **The Tools column is an upper bound, not a promise.** `verifier` has been given no `Glob` or `Grep` in a live dispatch. Write a Bash-holding unit's searches as shell commands unless its transcript's tool list shows `Grep`.
 - **Only a `tools:` allow-list enforces a scope.** A brief line is an instruction. None of the six agents has the Agent tool, so none can nest.
@@ -25,17 +25,17 @@ Snapshot (`sage-lineup-check.sh` watches it for change; when it was last verifie
 
 ## Models and effort
 
-- **Model precedence:** the per-dispatch `model` parameter, then the agent file's `model:`, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main model. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` forces one model over everything. Check both variables once at Step 2: `echo "${CLAUDE_CODE_SUBAGENT_MODEL:-unset} ${CLAUDE_CODE_SUBAGENT_MODEL_FORCE:-unset}"`. A set value is an `assumption` row naming the model that will really run.
+- **Model precedence:** the per-dispatch `model` parameter, then the agent file's `model:`, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main model. `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` forces one model over everything. Check these variables and `CLAUDE_CODE_EFFORT_LEVEL` once at Step 2: `echo "${CLAUDE_CODE_SUBAGENT_MODEL:-unset} ${CLAUDE_CODE_SUBAGENT_MODEL_FORCE:-unset} ${CLAUDE_CODE_EFFORT_LEVEL:-unset}"`. A set value is an `assumption` row naming the model or effort that will really run.
 - **An `availableModels` allowlist** runs an excluded value on an allowed model in the same family, silently. Plan as if any dispatch can swap.
 - **What ran is measured, not asserted.** The Agent result's `resolvedModel` names the model the unit started on. `modelsUsed` lists every model when one was swapped mid-run. A codex seat's receipt is its ground truth (`alt-lane.md`).
-- **Effort levers:** agent-file `effort:` for a unit; this skill's frontmatter `effort:` for the parent. The skill's level holds for the turn that invoked it. A later turn that a subagent's hand-back message starts runs at the session effort, so the user's `/effort` still sets part of the parent's work. A plain dispatch inherits the session effort. The Agent tool has no effort parameter, and effort written into a prompt changes nothing.
+- **Effort levers:** agent-file `effort:` for a unit; this skill's frontmatter `effort:` for the parent. The skill's level holds for the turn that invoked it. A later turn that a subagent's hand-back message starts runs at the session effort, so the user's `/effort` still sets part of the parent's work. A plain dispatch inherits the session effort. **Effort precedence for a unit:** `CLAUDE_CODE_EFFORT_LEVEL`, then the Agent tool's per-dispatch `effort` parameter, then the agent file's `effort:`, then the session effort. Levels run `low` to `max`, and the model decides which it accepts. Effort written into a prompt changes nothing.
 - **`totalTokens` on an Agent result covers the final request only.** It is not a unit's spend. Read spend from the transcript: `sage-watch.sh --status <subagents-dir>`.
 
 ## Spawning
 
 - **The `agentId` is the handle, never the `description`.** `TaskStop` accepts an agent ID. `ListAgents` recovers an ID you lost.
 - **A report can arrive through `SubagentHandback`** in auto mode. The Agent result's `content` is then a short note, and the report arrives as a message from that agent. Read the message, not the note.
-- **The agents directory is watched.** An edited or new agent file applies to the next dispatch, except where the directory itself was created after the session started.
+- **An edited agent file can wait for the next session.** The vendor docs say the next delegation uses an edit within seconds, but a changed `model:` pin has failed to reach later dispatches in the same session, whether the file was rewritten in place or replaced. After any edit, probe the agent and read `message.model` from its transcript before a run relies on the new pin.
 - **`isolation: "worktree"`** gives a writer its own tree, auto-cleaned when unchanged. It branches from the repository's **default branch, not HEAD**, unless `worktree.baseRef` is `"head"`. So brief a worktree writer with the baseline revision to check out, or set that key in the repo's `.claude/settings.json`. Prune changed worktrees after each wave.
 - **`omitClaudeMd: true`** in an agent file skips the CLAUDE.md files at boot, for a unit that takes everything from its brief.
 - **Custom roles live in `~/.claude/agents/` or `.claude/agents/`**, never inside a skill directory.

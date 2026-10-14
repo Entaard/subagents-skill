@@ -10,6 +10,8 @@
 # Only `--ack <token>` writes lineup.json, and only while the differences still hash to that
 # token: a change that arrived after the check was printed makes --ack refuse (exit 1).
 # `--ack none` accepts a check that printed nothing. Run --ack ONLY after the study is done.
+# SAGE_CODEX=off skips the codex seats in both the check and the ack; the ack keeps the
+# snapshot's seat rows, so a seat change made while the lane was off prints once it is back on.
 # Exit 0; 1 a refused --ack; 2 bad arguments. Needs jq; without it: one stderr line, exit 0.
 # END RUN BLOCK
 #
@@ -80,6 +82,17 @@ run_check() {
     have_snapshot=1
     cursor="$(awk -F'\t' '$1=="cursor"{print $3}' "$work/snapshot.tsv")"
   fi
+  # SAGE_CODEX=off switches the alt lane off: its seats are neither compared nor acknowledged,
+  # and an ack keeps the snapshot's alt rows for the day the lane comes back. Silent on purpose:
+  # sage-promote-prep.sh reads any output here, stderr included, as a lineup change.
+  : > "$work/kept-alt.tsv"
+  if switched_off; then
+    without_alt "$work/current.tsv"
+    if [ "$have_snapshot" = 1 ]; then
+      awk -F'\t' '$1=="alt"' "$work/snapshot.tsv" > "$work/kept-alt.tsv"
+      without_alt "$work/snapshot.tsv"
+    fi
+  fi
   local scanned=0
   if [ "$scan" = 1 ] && fetch_changelog "$changelog" > "$work/changelog.md"; then scanned=1; fi
   if [ "$scanned" = 1 ]; then scan_changelog "$cursor" < "$work/changelog.md" > "$work/scan.tsv"; else : > "$work/scan.tsv"; fi
@@ -129,8 +142,17 @@ acknowledge() {
   fi
   mkdir -p "$mem" || return 1
   local tmp; tmp="$(mktemp "$mem/.lineup.json.XXXXXX")" || return 1
-  { cat "$work/current.tsv"; printf 'cursor\t\t%s\n' "$cursor"; } | tsv_to_json > "$tmp" \
+  { cat "$work/current.tsv" "$work/kept-alt.tsv"; printf 'cursor\t\t%s\n' "$cursor"; } | tsv_to_json > "$tmp" \
     && mv "$tmp" "$mem/lineup.json" || { rm -f "$tmp"; return 1; }
+}
+
+# SAGE_CODEX=off switches the alt lane off. sage-codex.sh holds the same test.
+switched_off() {
+  [ "${SAGE_CODEX-}" = off ]
+}
+
+without_alt() {  # without_alt <tsv-file> — drops its alt rows in place
+  awk -F'\t' '$1!="alt"' "$1" > "$1.tmp" && mv "$1.tmp" "$1"
 }
 
 newer_version() {
@@ -311,6 +333,20 @@ case_alt_edit_is_one_line() {
   [ "$(run_check_in "$d" --no-changelog | grep -v "^lineup review ")" = "lineup alt refuter-alt: gpt-5 medium -> gpt-5 high" ]
 }
 
+case_switched_off_skips_alt_and_ack_keeps_it() {
+  local d="$1/off"; build_fixture "$d"
+  sed -i.bak 's/^effort: medium/effort: high/' "$d/repo/sage-claude/codex/refuter-alt.md"
+  sed -i.bak 's/^model: sonnet/model: haiku/' "$d/repo/claude-agents/explorer.md"
+  local out tok
+  out="$(SAGE_CODEX=off bash "$0" --memory "$d/mem" --no-changelog 2>&1)"
+  [ "$(printf '%s\n' "$out" | grep -v '^lineup review ')" = "lineup pinned explorer: sonnet -> haiku" ] || return 1
+  tok="$(printf '%s\n' "$out" | awk '$2=="review"{print $3}')"
+  SAGE_CODEX=off bash "$0" --ack "$tok" --memory "$d/mem" --no-changelog 2> /dev/null || return 1
+  [ "$(jq -c .alt "$d/mem/lineup.json")" = '{"refuter-alt":"gpt-5 medium","verifier-alt":"gemini-3 xhigh"}' ] || return 1
+  [ -z "$(SAGE_CODEX=off bash "$0" --memory "$d/mem" --no-changelog 2>&1)" ] || return 1
+  [ "$(run_check_in "$d" --no-changelog | grep -v '^lineup review ')" = "lineup alt refuter-alt: gpt-5 medium -> gpt-5 high" ]
+}
+
 case_alt_added_uses_none() {
   local d="$1/f"; build_fixture "$d"
   printf -- '---\nmodel: m1\neffort: low\n---\n' > "$d/repo/sage-claude/codex/extra-alt.md"
@@ -399,12 +435,15 @@ run_self_test() {
   if ! find_jq > /dev/null; then echo "FAIL jq is required for the self-test"; return 1; fi
   JQ="$(find_jq)"
   local dir; dir="$(mktemp -d)" || return 1
+  # A user who switched the alt lane off must not fail the cases that compare alt seats.
+  unset SAGE_CODEX
   check "ack writes the snapshot with a cursor" case_snapshot_written_with_cursor "$dir"
   check "E4 unchanged snapshot prints nothing" case_unchanged_is_silent "$dir"
   check "E4 build change only prints nothing" case_build_change_only_is_silent "$dir"
   check "E4 one pinned model edit prints one line" case_pinned_edit_is_one_line "$dir"
   check "E4 one seat effort edit prints one line" case_alt_edit_is_one_line "$dir"
   check "an added seat prints (none)" case_alt_added_uses_none "$dir"
+  check "SAGE_CODEX=off skips alt seats, and an ack keeps them" case_switched_off_skips_alt_and_ack_keeps_it "$dir"
   check "price ratio change prints one line" case_ratio_change_is_one_line "$dir"
   check "no snapshot prints one line" case_no_snapshot_one_line "$dir"
   check "a BSD-style sed (\\t written as t) still reads the price ratio" case_bsd_style_sed_reads_the_ratio "$dir"

@@ -2,7 +2,7 @@
 name: web-researcher
 description: Outside-sources research unit for /sage orchestration, dispatched by name from an orchestration plan. NOT a general web-search agent — for ordinary lookups, search directly or use the built-in Explore agent for codebase questions. Fetches primary sources on a fixed question and reports findings with a URL and a fetch date per claim. Web and read only, no writes, no shell.
 tools: WebSearch, WebFetch, Read
-model: claude-sonnet-5-5
+model: claude-haiku-5-5
 effort: low
 color: green
 ---

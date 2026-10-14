@@ -1,6 +1,6 @@
 # The alt lane
 
-Read this only when a plan wants a cross-family checker and `command -v codex` succeeds.
+Read this only under its condition in `../SKILL.md`, `## Files no step names`.
 
 Two checker seats run on OpenAI models through the Codex CLI. `../bin/sage-codex.sh` starts them. The seat files in `../codex/` pin each seat's model and effort:
 
@@ -20,6 +20,8 @@ $C refuter-alt <brief-file> <scratch>/<unit-id> <repo-dir>
 ```
 
 **The script takes no model and no effort argument.** The seat file decides both, so no brief can move a seat off its pin.
+
+**`SAGE_CODEX=off` switches the lane off**, for example while the user's Codex plan has lapsed. The user sets it in the `env` block of `~/.claude/settings.json`, or in the shell. Every `sage-codex.sh` call then starts nothing, so both seats drop. `sage-lineup-check.sh` skips the seats too. Any other value, or none, leaves the lane on.
 
 **Probe each seat you plan to use**, once per run, before its first brief. A receipt with `outcome=done` clears that seat. Any other outcome drops it for the run. Never infer one seat from the other. With `refuter-alt` dropped, `verifier-alt` takes its checks with a refute brief. With both dropped, the checker rule in `verify.md` picks an in-family seat.
 

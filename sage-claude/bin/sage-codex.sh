@@ -20,8 +20,10 @@
 #       spend=48k input=212k cached=170k output=6k reasoning=4k wall=312s exit=0
 #       thread=<id> session=<codex-session-file>
 #
-#   outcome is done, failed, auth-failed, rate-limited, timeout or no-codex. Only a done report is
-#   a verdict; another outcome can leave a partial report.md behind. model= and effort= come from
+#   outcome is done, failed, auth-failed, rate-limited, timeout, no-codex or disabled. Only a done
+#   report is a verdict; another outcome can leave a partial report.md behind.
+#   SAGE_CODEX=off turns the lane off: codex is never started, and the receipt says
+#   outcome=disabled exit=none. Any other value, or none, leaves it on. model= and effort= come from
 #   the Codex session file of this unit dir (source=session).
 #   source=unverified means no such file was found, so the family is unproven: count the unit as
 #   same-family.
@@ -137,6 +139,10 @@ run_unit() {  # run_unit <seat> <brief-file> <unit-dir> <repo-dir, empty for a p
   prepare_unit_dir "$unit"
   write_prompt "$brief" "$unit/prompt.md" "$repo" || usage_error "cannot read the brief '$brief'"
 
+  if switched_off; then
+    write_receipt "$seat" "$unit" disabled "$model" "$effort" 0 none
+    exit 1
+  fi
   if ! command -v "$CODEX_BIN" >/dev/null 2>&1; then
     write_receipt "$seat" "$unit" no-codex "$model" "$effort" 0 127
     exit 1
@@ -147,6 +153,11 @@ run_unit() {  # run_unit <seat> <brief-file> <unit-dir> <repo-dir, empty for a p
   outcome=$(outcome_of "$status" "$unit")
   write_receipt "$seat" "$unit" "$outcome" "$model" "$effort" $(( $(date +%s) - started )) "$status"
   [ "$outcome" = done ]
+}
+
+# SAGE_CODEX=off switches the alt lane off. sage-lineup-check.sh holds the same test.
+switched_off() {
+  [ "${SAGE_CODEX-}" = off ]
 }
 
 require_seat() {  # require_seat <seat>
@@ -515,6 +526,13 @@ case_no_codex() {
   grep -q ' outcome=no-codex model=gpt-6.1-sol effort=xhigh source=unverified ' "$d/unit/receipt.txt"
 }
 
+case_switched_off() {
+  local d=$1/off; mkdir -p "$d"; write_fake_codex "$d/codex"
+  ( export SAGE_CODEX=off; run_fake "$d" done ) && return 1
+  grep -q ' outcome=disabled model=gpt-6.1-sol effort=xhigh source=unverified ' "$d/unit/receipt.txt" \
+    && grep -q ' exit=none ' "$d/unit/receipt.txt" && [ ! -e "$d/args" ]
+}
+
 case_a_directory_brief_exits_2_and_writes_nothing() {
   local d=$1/dirbrief; mkdir -p "$d/brief-dir"; write_fake_codex "$d/codex"
   printf 'x\n' > "$d/brief-dir/f"
@@ -594,6 +612,8 @@ case_reused_unit_dir_exits_2() {
 self_test() {
   local dir
   dir=$(mktemp -d) && dir=$(cd -P "$dir" && pwd -P) || return 1
+  # A user who switched the lane off must not fail every case below.
+  unset SAGE_CODEX
   check "a done unit writes the measured receipt" case_done_receipt "$dir"
   check "model and effort come from the seat file" case_pins_come_from_the_seat_file "$dir"
   check "the sandbox and isolation flags are passed" case_isolation_flags "$dir"
@@ -609,6 +629,7 @@ self_test() {
   check "a 401 -> auth-failed, exit 1" case_auth_failure "$dir"
   check "past the time limit -> timeout, exit 1" case_timeout "$dir"
   check "codex not on PATH -> no-codex, exit 1" case_no_codex "$dir"
+  check "SAGE_CODEX=off -> disabled, exit 1, codex never starts" case_switched_off "$dir"
   check "an unknown seat exits 2 and writes nothing" case_unknown_seat_exits_2 "$dir"
   check "a directory as the brief exits 2 and writes nothing" case_a_directory_brief_exits_2_and_writes_nothing "$dir"
   check "a used unit dir is refused" case_reused_unit_dir_exits_2 "$dir"

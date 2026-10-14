@@ -6,7 +6,7 @@ Copy the shapes below. Trim a field only where it does not apply, and never rena
 
 Write the whole plan into the ledger before any dispatch. Never present it as a message.
 
-1. **Read first.** `harness.md` for the agent roster. `alt-lane.md` only when the plan wants a cross-family checker and `command -v codex` succeeds. Then memory (`memory.md`).
+1. **Read first.** `harness.md` for the agent roster. `alt-lane.md` only under its condition in `../SKILL.md`, `## Files no step names`; test it with `echo "${SAGE_CODEX:-on}"; command -v codex`. Then memory (`memory.md`).
 2. **Create the ledger** with the helper (`## The ledger` below). It writes `Started:`, the section skeleton and your framing fields.
 3. **Add one Plan row per unit** with `sage-ledger.sh unit`. Every row names its agent and model, reader or writer, a done-when sentence, and its flow.
 4. **Plan the framing critic** at medium risk and above (`topologies.md`). It attacks the framing block and the criteria before the first writer.
@@ -123,7 +123,7 @@ L=$($H next-path .claude/plans <session-id>)
 printf '%s\n' "ASK: <verbatim>" "PURPOSE: ..." "PREMISES: ..." "DELIVERABLE: ..." "APPROACHES: ..." \
   "RISK: ..." "TOPOLOGY: ..." "PARENT: <your model>" "Wall target: <n> min" "Acceptance suite: ..." "Criteria: R1 ...; R2 ..." \
   | $H init "$L" "<one-line task>"
-$H unit "$L" 1 unit="<unit>" done-when="<sentence>" rw=R agent="explorer (claude-sonnet-5-5)" flow="bg, batch1" state=planned
+$H unit "$L" 1 unit="<unit>" done-when="<sentence>" rw=R agent="explorer (claude-haiku-5-5)" flow="bg, batch1" state=planned
 $H decision "$L" assumption "<what I chose>" "<what else was plausible; how it would show if wrong>"
 $H restamp "$L" step="4 — execute.md" next="<one line>" lease="<holder|frozen|none>" baseline="<rev>" -- <task-owned files>
 $H finding "$L" F1 severity=major stage=r1 author=parent location="<file:line>" evidence="<text>"

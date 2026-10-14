@@ -895,12 +895,17 @@ merge_into_settings() { # merge_into_settings <settings> <marker> <command> <jq-
 
 # Prints only: an install that dispatched a probe would spend the user's money unasked. A skipped
 # agent has no file to read, so a missing one is silent rather than fatal under set -e.
+# A plain loop over the names, never a brace expansion inside `< <(...)`: macOS's /bin/bash 3.2
+# reads that construct as "ambiguous redirect" and printed no list at all. One awk per file and
+# no pipe, so `set -o pipefail` has no early-exit reader to trip on.
 print_pinned_models() { # print_pinned_models <agents-dir>
-  local dir="$1" hit
+  local dir="$1" name model
   echo "Pinned agent models (a probe dispatch settles access; nothing is dispatched here):"
-  while IFS= read -r hit; do
-    printf '  %s  %s\n' "$(basename "${hit%%:*}" .md)" "${hit#*:model: }"
-  done < <(grep -H '^model:' "$dir"{explorer,implementer,implementer-frontier,verifier,verifier-standard,web-researcher}.md 2>/dev/null || true)
+  for name in explorer implementer implementer-frontier verifier verifier-standard web-researcher; do
+    [ -f "$dir$name.md" ] || continue
+    model="$(awk '/^model:/ { sub(/^model:[ \t]*/, ""); print; exit }' "$dir$name.md")"
+    if [ -n "$model" ]; then printf '  %s  %s\n' "$name" "$model"; fi
+  done
   echo '  Probe one: claude -p --model <model> "Reply OK"'
 }
 

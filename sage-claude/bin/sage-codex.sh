@@ -3,7 +3,7 @@
 #
 # RUN BLOCK
 #   sage-codex.sh <seat> <brief-file> <unit-dir> [<repo-dir>]
-#   sage-codex.sh --probe <seat> <unit-dir>
+#   sage-codex.sh --probe <seat> <unit-dir>      a one-word reply, under a far shorter time limit
 #   sage-codex.sh --self-test | --help
 #
 #   <seat>       verifier-alt or refuter-alt. The seat file `../codex/<seat>.md` pins the model
@@ -64,9 +64,10 @@
 # Every event and record is parsed with jq, so key order and spacing do not matter. This replaces
 # the `MODEL-FAMILY:` self-report, which disagreed with the transcript twice.
 #
-# TRUST. SAGE_CODEX_BIN, SAGE_CODEX_SESSIONS and SAGE_CODEX_TIMEOUT are test seams for
-# --self-test. Whoever sets them can run another program or point at forged session files, so the
-# pin and the receipt hold only against the brief and the command line, never against the caller.
+# TRUST. SAGE_CODEX_BIN, SAGE_CODEX_SESSIONS, SAGE_CODEX_TIMEOUT, SAGE_CODEX_PROBE_TIMEOUT and
+# SAGE_CODEX_KILL_AFTER are test seams for --self-test. Whoever sets them can run another program
+# or point at forged session files, so the pin and the receipt hold only against the brief and the
+# command line, never against the caller.
 # The same is true of the rest of the caller's environment, such as PATH or an exported function.
 # Codex writes the events and the session file with a strict JSON writer, and every text the model
 # writes sits inside a JSON string. So the script checks each record's structure, never its syntax:
@@ -87,6 +88,8 @@ SELF="$HERE/$(basename "$0")"
 SEAT_DIR="$HERE/../codex"
 SEATS='verifier-alt refuter-alt'
 TIMEOUT_S=${SAGE_CODEX_TIMEOUT:-5400}
+PROBE_TIMEOUT_S=${SAGE_CODEX_PROBE_TIMEOUT:-120}
+KILL_AFTER_S=${SAGE_CODEX_KILL_AFTER:-10}
 CODEX_BIN=${SAGE_CODEX_BIN:-codex}
 CODEX_SESSIONS=${SAGE_CODEX_SESSIONS:-${CODEX_HOME:-$HOME/.codex}/sessions}
 PROBE_BRIEF='Reply with exactly the word OK.'
@@ -100,7 +103,7 @@ main() {
     --probe) shift; [ $# -eq 2 ] || usage_error "--probe needs <seat> <unit-dir>"; run_probe "$@" ;;
     ''|-*) usage_error "unknown or missing argument ${1-}" ;;
     *) [ $# -ge 3 ] && [ $# -le 4 ] || usage_error "needs <seat> <brief-file> <unit-dir> [<repo-dir>]"
-       run_unit "$1" "$2" "$3" "${4:-$PWD}" ;;
+       run_unit "$1" "$2" "$3" "${4:-$PWD}" "$TIMEOUT_S" ;;
   esac
 }
 
@@ -113,19 +116,23 @@ usage_error() {
   exit 2
 }
 
-# A probe has no repo under review, so its prompt carries no repo line.
+# A probe has no repo under review, so its prompt carries no repo line. Live probes answer in
+# seconds, so its limit is far below a unit's: a codex that hangs at start ends in minutes.
 run_probe() {  # run_probe <seat> <unit-dir>
   PROBE_BRIEF_FILE=$(mktemp) || usage_error "cannot create a temp file for the probe brief"
   trap 'rm -f "$PROBE_BRIEF_FILE"' EXIT
   printf '%s\n' "$PROBE_BRIEF" > "$PROBE_BRIEF_FILE"
-  run_unit "$1" "$PROBE_BRIEF_FILE" "$2" ""
+  run_unit "$1" "$PROBE_BRIEF_FILE" "$2" "" "$PROBE_TIMEOUT_S"
 }
 
-run_unit() {  # run_unit <seat> <brief-file> <unit-dir> <repo-dir, empty for a probe>
-  local seat=$1 brief=$2 unit repo="" seat_file=$SEAT_DIR/$1.md model effort started status outcome
+run_unit() {  # run_unit <seat> <brief-file> <unit-dir> <repo-dir, empty for a probe> <time-limit-s>
+  local seat=$1 brief=$2 unit repo="" limit=$5 seat_file=$SEAT_DIR/$1.md model effort started status wall outcome
   require_seat "$seat"
   command -v "$JQ" >/dev/null 2>&1 || usage_error "jq is required to read the Codex events"
   command -v timeout >/dev/null 2>&1 || usage_error "timeout is required to stop a unit that hangs"
+  # outcome_of compares the wall with the limit as integers.
+  is_whole_seconds "$limit" && is_whole_seconds "$KILL_AFTER_S" \
+    || usage_error "SAGE_CODEX_TIMEOUT, SAGE_CODEX_PROBE_TIMEOUT and SAGE_CODEX_KILL_AFTER take whole seconds"
   [ -f "$brief" ] && [ -r "$brief" ] && [ -s "$brief" ] || usage_error "brief file '$brief' is missing or empty"
   if [ -n "$4" ]; then
     [ -d "$4" ] || usage_error "repo dir '$4' is not a directory"
@@ -148,10 +155,11 @@ run_unit() {  # run_unit <seat> <brief-file> <unit-dir> <repo-dir, empty for a p
     exit 1
   fi
   started=$(date +%s)
-  run_codex "$seat_file" "$model" "$effort" "$unit"
+  run_codex "$seat_file" "$model" "$effort" "$unit" "$limit"
   status=$?
-  outcome=$(outcome_of "$status" "$unit")
-  write_receipt "$seat" "$unit" "$outcome" "$model" "$effort" $(( $(date +%s) - started )) "$status"
+  wall=$(( $(date +%s) - started ))
+  outcome=$(outcome_of "$status" "$unit" "$wall" "$limit")
+  write_receipt "$seat" "$unit" "$outcome" "$model" "$effort" "$wall" "$status"
   [ "$outcome" = done ]
 }
 
@@ -213,11 +221,15 @@ seat_body() {  # seat_body <file> — everything after the closing front-matter 
   awk '/^---[ \t]*$/ && fence < 2 { fence++; next } fence >= 2 && (started || NF) { started = 1; print }' "$1"
 }
 
-run_codex() {  # run_codex <seat-file> <model> <effort> <unit-dir>
-  local unit=$4 instructions tmpdir
+is_whole_seconds() {
+  case "$1" in ''|*[!0-9]*) return 1 ;; esac
+}
+
+run_codex() {  # run_codex <seat-file> <model> <effort> <unit-dir> <time-limit-s>
+  local unit=$4 limit=$5 instructions tmpdir
   instructions=$(seat_body "$1" | toml_string)
   tmpdir=$(printf '%s' "$unit/tmp" | toml_string)
-  TMPDIR="$unit/tmp" timeout "$TIMEOUT_S" "$CODEX_BIN" exec \
+  TMPDIR="$unit/tmp" timeout -k "$KILL_AFTER_S" "$limit" "$CODEX_BIN" exec \
     --cd "$unit" --skip-git-repo-check --ignore-rules \
     -m "$2" -c "model_reasoning_effort=\"$3\"" -c 'approval_policy="never"' \
     -s workspace-write \
@@ -242,9 +254,11 @@ toml_string() {
 
 # An `error` event alone is not a failure: Codex emits one for a retry that later succeeds.
 # A `turn.failed` event is final, so it rules out done whatever follows it.
-outcome_of() {  # outcome_of <exit-status> <unit-dir>
+outcome_of() {  # outcome_of <exit-status> <unit-dir> <wall-s> <time-limit-s>
   local unit=$2 events=$2/events.jsonl
-  [ "$1" -eq 124 ] && { echo timeout; return; }
+  # 124: timeout's TERM ended the unit. 137 is timeout's KILL only once the limit has passed; a
+  # KILL from elsewhere falls through to the events.
+  if [ "$1" -eq 124 ] || { [ "$1" -eq 137 ] && [ "$3" -ge "$4" ]; }; then echo timeout; return; fi
   if [ "$1" -eq 0 ] && [ -s "$unit/report.md" ] && has_event turn.completed "$events" \
      && ! has_event turn.failed "$events"; then
     echo done; return
@@ -389,6 +403,10 @@ case "$FAKE_MODE" in
     printf '{"type":"thread.started","thread_id":"%s"}\n' "$tid"
     printf '{"type":"turn.failed","error":{"message":"exceeded retry limit, last status: 429 Too Many Requests"}}\n'
     exit 1 ;;
+  rate-then-killed)
+    printf '{"type":"thread.started","thread_id":"%s"}\n' "$tid"
+    printf '{"type":"turn.failed","error":{"message":"exceeded retry limit, last status: 429 Too Many Requests"}}\n'
+    kill -9 $$ ;;
   auth)
     echo 'Error: 401 Unauthorized' >&2; exit 1 ;;
   replay)
@@ -400,6 +418,7 @@ case "$FAKE_MODE" in
     printf 'Status: completed\n' > "$out"
     exit "$(cat "$FAKE_DIR/exit.in" 2>/dev/null || echo 0)" ;;
   hang) sleep 5 ;;
+  deaf-hang) trap '' TERM; sleep 15 ;;
 esac
 FAKE
   chmod +x "$1"
@@ -502,6 +521,12 @@ case_missing_session_is_unverified() {
   grep -q ' outcome=done model=gpt-6.1-sol effort=xhigh source=unverified ' "$d/unit/receipt.txt"
 }
 
+case_a_kill_before_the_limit_is_not_a_timeout() {
+  local d=$1/killed; mkdir -p "$d"; write_fake_codex "$d/codex"
+  run_fake "$d" rate-then-killed && return 1
+  grep -q ' outcome=rate-limited ' "$d/unit/receipt.txt" && grep -q ' exit=137' "$d/unit/receipt.txt"
+}
+
 case_rate_limit_exits_1() {
   local d=$1/rate; mkdir -p "$d"; write_fake_codex "$d/codex"
   run_fake "$d" rate && return 1
@@ -518,6 +543,22 @@ case_timeout() {
   local d=$1/hang; mkdir -p "$d"; write_fake_codex "$d/codex"
   run_fake "$d" hang && return 1
   grep -q ' outcome=timeout ' "$d/unit/receipt.txt"
+}
+
+case_a_hung_probe_ends_at_the_probe_limit() {
+  local d=$1/probehang; mkdir -p "$d"; write_fake_codex "$d/codex"
+  FAKE_MODE=hang FAKE_DIR="$d" FAKE_ARGS="$d/args" SAGE_CODEX_SESSIONS="$d/sessions" \
+    SAGE_CODEX_BIN="$d/codex" SAGE_CODEX_TIMEOUT=30 SAGE_CODEX_PROBE_TIMEOUT=1 \
+    "$SELF" --probe verifier-alt "$d/unit" > "$d/stdout" 2>&1 && return 1
+  grep -q ' outcome=timeout ' "$d/unit/receipt.txt"
+}
+
+case_a_hang_that_ignores_term_is_killed() {
+  local d=$1/deafhang started=$SECONDS; mkdir -p "$d"; write_fake_codex "$d/codex"
+  FAKE_MODE=deaf-hang FAKE_DIR="$d" FAKE_ARGS="$d/args" SAGE_CODEX_SESSIONS="$d/sessions" \
+    SAGE_CODEX_BIN="$d/codex" SAGE_CODEX_TIMEOUT=30 SAGE_CODEX_PROBE_TIMEOUT=1 SAGE_CODEX_KILL_AFTER=1 \
+    "$SELF" --probe verifier-alt "$d/unit" > "$d/stdout" 2>&1 && return 1
+  grep -q ' outcome=timeout ' "$d/unit/receipt.txt" && [ $((SECONDS - started)) -lt 10 ]
 }
 
 case_no_codex() {
@@ -584,6 +625,14 @@ case_the_exit_status_comes_from_the_outcome() {
   grep -q ' outcome=failed ' "$d/unit/receipt.txt"
 }
 
+case_a_limit_that_is_not_whole_seconds_exits_2() {
+  local d=$1/fraclimit; mkdir -p "$d"; write_fake_codex "$d/codex"
+  FAKE_MODE=done FAKE_DIR="$d" FAKE_ARGS="$d/args" SAGE_CODEX_SESSIONS="$d/sessions" \
+    SAGE_CODEX_BIN="$d/codex" SAGE_CODEX_PROBE_TIMEOUT=1.5 \
+    "$SELF" --probe verifier-alt "$d/unit" > "$d/stdout" 2>&1
+  [ $? -eq 2 ] && [ ! -e "$d/args" ] && [ ! -e "$d/unit" ]
+}
+
 case_no_timeout_exits_2() {
   local d=$1/notimeout bin=$1/notimeout/bin tool
   mkdir -p "$bin"; write_fake_codex "$d/codex"
@@ -628,6 +677,9 @@ self_test() {
   check "a 429 -> rate-limited, exit 1" case_rate_limit_exits_1 "$dir"
   check "a 401 -> auth-failed, exit 1" case_auth_failure "$dir"
   check "past the time limit -> timeout, exit 1" case_timeout "$dir"
+  check "a hung probe ends at the probe limit, not the unit limit" case_a_hung_probe_ends_at_the_probe_limit "$dir"
+  check "a hang that ignores TERM is killed -> timeout" case_a_hang_that_ignores_term_is_killed "$dir"
+  check "a KILL from elsewhere before the limit is not a timeout" case_a_kill_before_the_limit_is_not_a_timeout "$dir"
   check "codex not on PATH -> no-codex, exit 1" case_no_codex "$dir"
   check "SAGE_CODEX=off -> disabled, exit 1, codex never starts" case_switched_off "$dir"
   check "an unknown seat exits 2 and writes nothing" case_unknown_seat_exits_2 "$dir"
@@ -640,6 +692,7 @@ self_test() {
   check "the exit status comes from the outcome, not the receipt text" case_the_exit_status_comes_from_the_outcome "$dir"
   check "a blank in the session path is encoded, one field" case_a_blank_in_the_session_path_is_encoded "$dir"
   check "no timeout on PATH exits 2 and starts nothing" case_no_timeout_exits_2 "$dir"
+  check "a time limit that is not whole seconds exits 2 and starts nothing" case_a_limit_that_is_not_whole_seconds_exits_2 "$dir"
   rm -rf "$dir"
   [ "$T_FAILS" -eq 0 ]
 }

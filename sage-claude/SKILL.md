@@ -90,7 +90,7 @@ Stop when every criterion has objective evidence, required checks pass, no accep
 
 ## Compaction and resume
 
-The run's state lives in the ledger. After a compaction, before any dispatch: re-read the ledger's `### Resume state`, then this file, then the step file it names, and continue at its next action. The installed `SessionStart(compact)` hook says the same.
+The run's state lives in the ledger. After a compaction, before any dispatch: re-read the ledger's `### Resume state`, then this file, then the step file it names, and continue at its next action.
 
 `/sage resume [ledger-path]`: read the ledger (default: the newest `.claude/plans/sage-ledger-*.md`), re-run its `sha256sum` lines against the tree, and continue. A missing ledger or a changed baseline is said plainly and stops.
 
